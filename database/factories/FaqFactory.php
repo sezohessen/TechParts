@@ -21,12 +21,13 @@ class FaqFactory extends Factory
      */
     public function definition()
     {
-        $faker_ar=$this->faker->locale("ar_AA");
+        $faker_ar = \Faker\Factory::create('ar_AR');
+       // $this->faker->locale="ar_AA";
         return [
-            'question' => $this->faker->name,
-            'question_ar' => $faker_ar->name,
+            'question' => $this->faker->sentence,
+            'question_ar' => $faker_ar->sentence,
             'answer' => $this->faker->name,
-            'answer_ar' =>$faker_ar->name,
+            'answer_ar' =>$faker_ar->sentence,
         ];
     }
 }
