@@ -13,8 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PagesController@index');
 
+Route::group(['prefix' => 'faqs','namespace'=>"Dashboard"], function () {
+
+    Route::get('/', 'FaqController@index');
+});
+
+Route::get('/', 'PagesController@index');
 
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');
