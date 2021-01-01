@@ -115,7 +115,7 @@ eval("// Cropper -  A simple jQuery image cropping plugin: https://fengyuanchen.
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\keenthemes\themes\metronic\theme\html_laravel\demo1\skeleton\resources\plugins\custom\cropper\cropper.js */"./resources/plugins/custom/cropper/cropper.js");
+module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/plugins/custom/cropper/cropper.js */"./resources/plugins/custom/cropper/cropper.js");
 
 
 /***/ })

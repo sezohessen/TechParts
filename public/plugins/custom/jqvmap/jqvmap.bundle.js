@@ -170,7 +170,7 @@ eval("// JQVMap - JQVMap is a jQuery plugin that renders Interactive, Clickable 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\keenthemes\themes\metronic\theme\html_laravel\demo1\skeleton\resources\plugins\custom\jqvmap\jqvmap.js */"./resources/plugins/custom/jqvmap/jqvmap.js");
+module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/plugins/custom/jqvmap/jqvmap.js */"./resources/plugins/custom/jqvmap/jqvmap.js");
 
 
 /***/ })

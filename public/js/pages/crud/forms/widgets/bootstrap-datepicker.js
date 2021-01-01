@@ -104,7 +104,7 @@ eval("// Class definition\nvar KTBootstrapDatepicker = function () {\n  var arro
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\keenthemes\themes\metronic\theme\html_laravel\demo1\skeleton\resources\metronic\js\pages\crud\forms\widgets\bootstrap-datepicker.js */"./resources/metronic/js/pages/crud/forms/widgets/bootstrap-datepicker.js");
+module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/crud/forms/widgets/bootstrap-datepicker.js */"./resources/metronic/js/pages/crud/forms/widgets/bootstrap-datepicker.js");
 
 
 /***/ })

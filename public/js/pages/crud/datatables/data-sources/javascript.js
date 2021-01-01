@@ -105,7 +105,7 @@ eval("\n\nvar KTDatatablesDataSourceHtml = function () {\n  var dataJSONArray = 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\keenthemes\themes\metronic\theme\html_laravel\demo1\skeleton\resources\metronic\js\pages\crud\datatables\data-sources\javascript.js */"./resources/metronic/js/pages/crud/datatables/data-sources/javascript.js");
+module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/crud/datatables/data-sources/javascript.js */"./resources/metronic/js/pages/crud/datatables/data-sources/javascript.js");
 
 
 /***/ })

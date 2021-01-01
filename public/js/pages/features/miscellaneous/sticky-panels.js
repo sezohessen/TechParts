@@ -105,7 +105,7 @@ eval(" // Class definition\n// Based on:  https://github.com/rgalus/sticky-js\n\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\keenthemes\themes\metronic\theme\html_laravel\demo1\skeleton\resources\metronic\js\pages\features\miscellaneous\sticky-panels.js */"./resources/metronic/js/pages/features/miscellaneous/sticky-panels.js");
+module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/features/miscellaneous/sticky-panels.js */"./resources/metronic/js/pages/features/miscellaneous/sticky-panels.js");
 
 
 /***/ })

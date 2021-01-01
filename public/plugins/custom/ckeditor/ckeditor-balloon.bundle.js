@@ -115,7 +115,7 @@ eval("// CKEditor  - Rock-solid, free WYSIWYG editor with collaborative editing,
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\keenthemes\themes\metronic\theme\html_laravel\demo1\skeleton\resources\plugins\custom\ckeditor\ckeditor-balloon.js */"./resources/plugins/custom/ckeditor/ckeditor-balloon.js");
+module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/plugins/custom/ckeditor/ckeditor-balloon.js */"./resources/plugins/custom/ckeditor/ckeditor-balloon.js");
 
 
 /***/ })

@@ -105,7 +105,7 @@ eval(" // Class definition\n\nvar KTDatatableTranslationDemo = function () {\n  
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\keenthemes\themes\metronic\theme\html_laravel\demo1\skeleton\resources\metronic\js\pages\crud\ktdatatable\base\translation.js */"./resources/metronic/js/pages/crud/ktdatatable/base/translation.js");
+module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/crud/ktdatatable/base/translation.js */"./resources/metronic/js/pages/crud/ktdatatable/base/translation.js");
 
 
 /***/ })

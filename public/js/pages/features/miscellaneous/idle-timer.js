@@ -105,7 +105,7 @@ eval("\n\nvar KTIdleTimerDemo = function () {\n  var _initDemo1 = function _init
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\keenthemes\themes\metronic\theme\html_laravel\demo1\skeleton\resources\metronic\js\pages\features\miscellaneous\idle-timer.js */"./resources/metronic/js/pages/features/miscellaneous/idle-timer.js");
+module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/features/miscellaneous/idle-timer.js */"./resources/metronic/js/pages/features/miscellaneous/idle-timer.js");
 
 
 /***/ })
