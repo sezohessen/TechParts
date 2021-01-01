@@ -115,7 +115,7 @@ eval("// CKEditor  - Rock-solid, free WYSIWYG editor with collaborative editing,
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/plugins/custom/ckeditor/ckeditor-classic.js */"./resources/plugins/custom/ckeditor/ckeditor-classic.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\plugins\custom\ckeditor\ckeditor-classic.js */"./resources/plugins/custom/ckeditor/ckeditor-classic.js");
 
 
 /***/ })

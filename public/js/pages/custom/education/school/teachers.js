@@ -105,7 +105,7 @@ eval(" // Class definition\n\nvar KTAppsEducationSchoolTeacher = function () {\n
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/custom/education/school/teachers.js */"./resources/metronic/js/pages/custom/education/school/teachers.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\custom\education\school\teachers.js */"./resources/metronic/js/pages/custom/education/school/teachers.js");
 
 
 /***/ })

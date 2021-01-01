@@ -105,7 +105,7 @@ eval(" // Class Definition\n\nvar KTLogin = function () {\n  var _buttonSpinnerC
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/custom/login/login-4.js */"./resources/metronic/js/pages/custom/login/login-4.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\custom\login\login-4.js */"./resources/metronic/js/pages/custom/login/login-4.js");
 
 
 /***/ })

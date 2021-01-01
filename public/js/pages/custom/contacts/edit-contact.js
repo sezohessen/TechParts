@@ -105,7 +105,7 @@ eval(" // Class definition\n\nvar KTContactsEdit = function () {\n  // Base elem
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/custom/contacts/edit-contact.js */"./resources/metronic/js/pages/custom/contacts/edit-contact.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\custom\contacts\edit-contact.js */"./resources/metronic/js/pages/custom/contacts/edit-contact.js");
 
 
 /***/ })

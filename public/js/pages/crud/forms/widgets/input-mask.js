@@ -104,7 +104,7 @@ eval("// Class definition\nvar KTInputmask = function () {\n  // Private functio
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/crud/forms/widgets/input-mask.js */"./resources/metronic/js/pages/crud/forms/widgets/input-mask.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\crud\forms\widgets\input-mask.js */"./resources/metronic/js/pages/crud/forms/widgets/input-mask.js");
 
 
 /***/ })

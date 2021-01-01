@@ -105,7 +105,7 @@ eval("// Class definition\nvar KTDatatableChildDataLocalDemo=function(){// Priva
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/crud/ktdatatable/child/data-local.js */"./resources/metronic/js/pages/crud/ktdatatable/child/data-local.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\crud\ktdatatable\child\data-local.js */"./resources/metronic/js/pages/crud/ktdatatable/child/data-local.js");
 
 
 /***/ })

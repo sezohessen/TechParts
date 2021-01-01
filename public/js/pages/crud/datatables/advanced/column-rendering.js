@@ -105,7 +105,7 @@ eval("\n\nvar KTDatatablesAdvancedColumnRendering = function () {\n  var _init =
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/crud/datatables/advanced/column-rendering.js */"./resources/metronic/js/pages/crud/datatables/advanced/column-rendering.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\crud\datatables\advanced\column-rendering.js */"./resources/metronic/js/pages/crud/datatables/advanced/column-rendering.js");
 
 
 /***/ })

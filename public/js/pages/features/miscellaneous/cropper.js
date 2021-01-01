@@ -105,7 +105,7 @@ eval(" // Class definition\n\nvar KTCropperDemo = function () {\n  // Private fu
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/features/miscellaneous/cropper.js */"./resources/metronic/js/pages/features/miscellaneous/cropper.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\features\miscellaneous\cropper.js */"./resources/metronic/js/pages/features/miscellaneous/cropper.js");
 
 
 /***/ })
