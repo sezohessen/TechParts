@@ -17,8 +17,8 @@ class CreateFaqsTable extends Migration
             $table->id();
             $table->string("question");
             $table->string("question_ar");
-            $table->longText("answer");
-            $table->longText("answer_ar");
+            $table->text("answer");
+            $table->text("answer_ar");
             $table->timestamps();
         });
     }
