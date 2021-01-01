@@ -30,3 +30,7 @@ Route::get('/icons/svg', 'PagesController@svg');
 
 // Quick search dummy route to display html elements in search dropdown (header search)
 Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
+
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('/', 'Dashboard\DashboardController@index');
+});
