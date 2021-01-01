@@ -34,6 +34,9 @@ npm install
 ```bash
 npm run dev
 ```
+```bash
+npm php artisan migrate
+```
 
 ```bash
 php artisan serve
