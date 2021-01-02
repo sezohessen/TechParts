@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [FaqSeeder::class],
         );
+        // \App\Models\User::factory(10)->create();
+        $this->call(LaratrustSeeder::class);
     }
 }
