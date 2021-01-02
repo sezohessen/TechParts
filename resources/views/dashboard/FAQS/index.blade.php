@@ -18,7 +18,8 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-<script src="{{asset("js/pages/crud/datatables/basic/basic.js?v=7.1.8")}}"></script>
-<script src="{{asset("plugins/custom/datatables/datatables.bundle.js?v=7.1.8")}}"></script>
+
+@endsection
+@section('styles')
 
 @endsection
