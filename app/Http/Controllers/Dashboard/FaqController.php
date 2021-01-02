@@ -41,7 +41,7 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-
+        dd($request->all());
         $data=$this->validate(request(),[
             'question'       => 'required|min:3|max:1000',
             'question_ar'    => 'required|min:3|max:1000',
