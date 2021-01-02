@@ -14,10 +14,22 @@ class FaqController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $propertyName;
+    public $question;
+    public $question_ar;
+    public $answer;
+    public $answer_ar;
+    protected $rules=[
+        'question'       => 'required|min:3|max:1000',
+        'question_ar'    => 'required|min:3|max:1000',
+        'answer'         => 'required|min:3|max:1000',
+        'answer_ar'      => 'required|min:3|max:1000',
+    ];
     public function index()
     {
-        $page_title = __('faqs__FAQS');
-        $page_description = __('faqs__description');
+
+        $page_title = __('faqs FAQS');
+        $page_description =__('faqs description');
 
         return view('dashboard.FAQS.index', compact('page_title', 'page_description'));
     }
@@ -42,17 +54,24 @@ class FaqController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
-        $data=$this->validate(request(),[
+    public function updated($propertyName){
+        $this->validateOnly($propertyName,[
             'question'       => 'required|min:3|max:1000',
             'question_ar'    => 'required|min:3|max:1000',
             'answer'         => 'required|min:3|max:1000',
             'answer_ar'      => 'required|min:3|max:1000',
+        ]);
+    }
+    public function store(Request $request)
+    {
+       $this->validate($request,[
+        'question'       => 'required|min:3|max:1000',
+        'question_ar'    => 'required|min:3|max:1000',
+        'answer'         => 'required|min:3|max:1000',
+        'answer_ar'      => 'required|min:3|max:1000',
        ]);
 
-       $faq=Faq::create($data);
+       $faq=Faq::create();
        session()->flash('success',__("faqs__create_success"));
        return redirect()->route("faqs.index");
 

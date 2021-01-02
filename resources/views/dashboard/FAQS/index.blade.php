@@ -18,21 +18,7 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-<script src="{{asset("js/pages/crud/ktdatatable/base/data-local.js?v=7.1.8")}}"></script>
-<script type="text/javascript">
+<script src="{{asset("js/pages/crud/datatables/basic/basic.js?v=7.1.8")}}"></script>
+<script src="{{asset("plugins/custom/datatables/datatables.bundle.js?v=7.1.8")}}"></script>
 
-   /* var datatable = $('.my_datatable').KTDatatable({
-        extensions: {
-            checkbox: {
-                vars: {
-                    selectedAllRows: 'selectedAllRows',
-                    requestIds: 'requestIds',
-                    rowIds: 'meta.rowIds',
-                },
-            },
-        }
-   });
-   */
-
-</script>
 @endsection
