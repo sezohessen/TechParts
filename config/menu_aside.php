@@ -19,7 +19,28 @@ return [
         [
             'section' => 'Layout',
         ],
+/*
+|--------------------------------------------------------------------------
+| FAQS (Frequently Asked Questions Section)
+|--------------------------------------------------------------------------
+*/
+        [
+            'title' => 'FAQS',
+            'icon' => 'media/svg/icons/Communication/Group-chat.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add FAQ',
+                    'page' => "/dashboard/faqs/create"
+                ],
+                [
+                    'title' => 'View FAQS',
+                    'page' => '/dashboard/faqs'
+                ],
 
+            ]
+        ],
         [
             'title' => 'General',
             'icon' => 'media/svg/icons/General/Settings-1.svg',
@@ -28,7 +49,8 @@ return [
             'submenu' => [
                 [
                     'title' => 'Fixed Content',
-                    'page' => 'layout/general/fixed-content'
+                    'page' => 'layout/general/fixed-content',
+
                 ],
                 [
                     'title' => 'Minimized Aside',

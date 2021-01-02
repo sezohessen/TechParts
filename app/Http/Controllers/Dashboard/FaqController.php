@@ -15,9 +15,10 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $faq=Faq::all();
-        dd($faq);
-        return 1;
+        $page_title = __('faqs__FAQS');
+        $page_description = __('faqs__description');
+
+        return view('dashboard.FAQS.index', compact('page_title', 'page_description'));
     }
 
     /**
@@ -27,7 +28,10 @@ class FaqController extends Controller
      */
     public function create()
     {
-        //
+        $page_title =__('faqs__create_FAQS');
+        $page_description =  __('faqs__create_description');
+
+        return view('dashboard.FAQS.create', compact('page_title', 'page_description'));
     }
 
     /**
@@ -38,7 +42,18 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data=$this->validate(request(),[
+            'question'       => 'required|min:3|max:1000',
+            'question_ar'    => 'required|min:3|max:1000',
+            'answer'         => 'required|min:3|max:1000',
+            'answer_ar'      => 'required|min:3|max:1000',
+       ]);
+
+       $faq=Faq::create($data);
+       session()->flash('success',__("faqs__create_success"));
+       return redirect()->route("faqs.index");
+
     }
 
     /**
