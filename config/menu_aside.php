@@ -92,7 +92,40 @@ return [
 
             ]
         ],
+        [
+            'title' => 'News',
+            'icon' => 'far fa-newspaper',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add news',
+                    'page' => "/dashboard/news/create"
+                ],
+                [
+                    'title' => 'View news',
+                    'page' => '/dashboard/news'
+                ],
 
+            ]
+        ],
+        [
+            'title' => 'Categories',
+            'icon' => 'fas fa-pager',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add category',
+                    'page' => "/dashboard/category/create"
+                ],
+                [
+                    'title' => 'View news',
+                    'page' => '/dashboard/category'
+                ],
+
+            ]
+        ],
         [
             'title' => 'General',
             'icon' => 'media/svg/icons/General/Settings-1.svg',

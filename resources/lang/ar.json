@@ -99,5 +99,8 @@
   "Please enter country name":"رجاء ادخل اسم البلد",
   "Please select country": "رجاء اختر البلد",
   "Please select governorate": "رجاء اختر المحافظة",
-  "Please enter code":"رجاء ادخل الكود"
+  "Please enter code":"رجاء ادخل الكود",
+  "Category Name(ENG)":"اسم الصنف (بالانجليزية)",
+  "Category Name(AR)":"اسم الصنف (بالعربية)",
+  "Please enter category name":"رجاء ادخل اسم الصنف"
 }

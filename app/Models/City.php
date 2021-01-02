@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
+    use HasFactory;
+    
     protected $table    = 'cities';
     protected $fillable=[
         'title',
@@ -14,7 +16,7 @@ class City extends Model
         'country_id',
         'governorate_id',
     ];
-    use HasFactory;
+
     public static function rules($request)
     {
         $rules = [

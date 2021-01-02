@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label>@lang('City Name (ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('CityEnglish') ? 'is-invalid' : '' }}"
-                            name="CityEnglish"  placeholder="@lang('Name(ENG)')" autofocus required/>
+                            name="CityEnglish"  placeholder="@lang('Name(ENG)')" autofocus />
                             @if ($errors->has('CityEnglish'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label>@lang('City Name (AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('CityArabic') ? 'is-invalid' : '' }}"
-                            name="CityArabic"  placeholder="@lang('Name(AR)')" required/>
+                            name="CityArabic"  placeholder="@lang('Name(AR)')" />
                             @if ($errors->has('CityArabic'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label for="country">@lang('Select Country') <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('country_id') ? 'is-invalid' : '' }}" id="country"
-                            name="country_id" required>
+                            name="country_id" >
                                 <option value="">@lang('--Select country first--')</option>
                                 @foreach ($countries as $country)
                                     <option value="{{$country->id}}">{{$country->name}} - {{ $country->name_ar }}</option>
@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label for="governorate">@lang('Select Governorate') <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('governorate') ? 'is-invalid' : '' }}" id="governorate"
-                            name="governorate" required>
+                            name="governorate" >
                                 <option value="">@lang('--Select governorate first--')</option>
                             </select>
                             @if ($errors->has('governorate'))

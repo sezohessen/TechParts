@@ -35,6 +35,8 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');
     Route::resource('/city','CityController');
+    Route::resource('/category','CategoryController');
+    Route::resource('/news','NewsController');
 });
 Auth::routes();
 
