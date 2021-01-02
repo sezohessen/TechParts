@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         App\Providers\MetronicServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Application Service Providers...

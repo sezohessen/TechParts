@@ -9,7 +9,11 @@
     <div class="card card-custom ">
             @include('dashboard/message')
         <div class="row">
-            <div class="my_datatable" id="kt_datatable"></div>
+            {!! Form::open(['id'=>'form_data','url'=>"dashboard",'method'=>'delete']) !!}
+                {!! $dataTable->table([
+                    'class'=>'dataTable table table-bordered table-hover'
+                ],true)!!}
+            {!! Form::close() !!}
         </div>
     </div>
 
@@ -18,21 +22,20 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-<script src="{{asset("js/pages/crud/ktdatatable/base/data-local.js?v=7.1.8")}}"></script>
-<script type="text/javascript">
+{!! $dataTable->scripts() !!}
 
-   /* var datatable = $('.my_datatable').KTDatatable({
-        extensions: {
-            checkbox: {
-                vars: {
-                    selectedAllRows: 'selectedAllRows',
-                    requestIds: 'requestIds',
-                    rowIds: 'meta.rowIds',
-                },
-            },
-        }
-   });
-   */
+<!-- Datatables buttons -->
 
-</script>
+<script src="{{asset("plugins/datatables/jquery.dataTables.min.js")}}"></script>
+<script src="{{asset("plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")}}"></script>
+<script src="{{asset("plugins/datatables-responsive/js/dataTables.responsive.min.js")}}"></script>
+<script src="{{asset("plugins/datatables-responsive/js/responsive.bootstrap4.min.js")}}"></script>
+<script src="{{asset("plugins/vendor/datatables/buttons.server-side.js")}}"></script>
+<script src="{{asset("plugins/datatables-buttons/dataTables.buttons.min.js")}}"></script>
+<script src="{{asset("plugins/vendor/datatables/buttons.server-side.js")}}"></script>
+@endsection
+@section('styles')
+<link rel="stylesheet" href="{{asset("plugins/datatables-buttons/css/buttons.bootstrap4.min.css")}}">
+<link rel="stylesheet" href="{{asset("plugins/datatables-bs4/css/dataTables.bootstrap4.min.css")}}">
+<link rel="stylesheet" href="{{asset("plugins/datatables-responsive/css/responsive.bootstrap4.min.css")}}">
 @endsection
