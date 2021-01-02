@@ -126,7 +126,7 @@ eval("// jKanban Board - Vanilla Javascript plugin for manage kanban boards: htt
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/plugins/custom/kanban/kanban.js */"./resources/plugins/custom/kanban/kanban.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\plugins\custom\kanban\kanban.js */"./resources/plugins/custom/kanban/kanban.js");
 
 
 /***/ })

@@ -126,7 +126,7 @@ eval("// Uppy - Uppy fetches files locally and from remote places like Dropbox o
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/plugins/custom/uppy/uppy.js */"./resources/plugins/custom/uppy/uppy.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\plugins\custom\uppy\uppy.js */"./resources/plugins/custom/uppy/uppy.js");
 
 
 /***/ })

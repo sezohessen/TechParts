@@ -225,7 +225,7 @@ eval("// Draggable - a lightweight, responsive, modern drag & drop library: http
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/plugins/custom/draggable/draggable.js */"./resources/plugins/custom/draggable/draggable.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\plugins\custom\draggable\draggable.js */"./resources/plugins/custom/draggable/draggable.js");
 
 
 /***/ })

@@ -105,7 +105,7 @@ eval(" // Class definition\n\nvar KTImageInputDemo = function () {\n  // Private
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/crud/file-upload/image-input.js */"./resources/metronic/js/pages/crud/file-upload/image-input.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\crud\file-upload\image-input.js */"./resources/metronic/js/pages/crud/file-upload/image-input.js");
 
 
 /***/ })

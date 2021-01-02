@@ -105,7 +105,7 @@ eval(" // Class definition\n\nvar KTWidgets = function () {\n  // Private proper
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/widgets.js */"./resources/metronic/js/pages/widgets.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\widgets.js */"./resources/metronic/js/pages/widgets.js");
 
 
 /***/ })

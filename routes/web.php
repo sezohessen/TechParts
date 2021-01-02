@@ -33,3 +33,6 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::get('/', 'DashboardController@index');
     Route::resource('/faqs','FaqController');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

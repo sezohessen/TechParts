@@ -105,7 +105,7 @@ eval("\n\nvar KTDatatablesDataSourceAjaxClient = function () {\n  var initTable1
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/crud/datatables/data-sources/ajax-client-side.js */"./resources/metronic/js/pages/crud/datatables/data-sources/ajax-client-side.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\crud\datatables\data-sources\ajax-client-side.js */"./resources/metronic/js/pages/crud/datatables/data-sources/ajax-client-side.js");
 
 
 /***/ })

@@ -105,7 +105,7 @@ eval(" // Class definition\n\nvar KTEcommerceMyOrders = function () {\n  // Priv
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mohamedelshazly/Documents/3arabiat/resources/metronic/js/pages/custom/ecommerce/my-orders.js */"./resources/metronic/js/pages/custom/ecommerce/my-orders.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\3arabiat\resources\metronic\js\pages\custom\ecommerce\my-orders.js */"./resources/metronic/js/pages/custom/ecommerce/my-orders.js");
 
 
 /***/ })
