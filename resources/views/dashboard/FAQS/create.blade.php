@@ -11,17 +11,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <div class="container mr-4 pr-4 mt-4 pt-4">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
+        @include('dashboard/message')
         <form action="{{route("faqs.store")}}" method="POST">
             @csrf
             <div class="card-body">

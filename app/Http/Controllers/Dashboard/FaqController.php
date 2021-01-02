@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
@@ -41,13 +42,17 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
         $data=$this->validate(request(),[
             'question'       => 'required|min:3|max:1000',
             'question_ar'    => 'required|min:3|max:1000',
             'answer'         => 'required|min:3|max:1000',
             'answer_ar'      => 'required|min:3|max:1000',
        ]);
+
+       $faq=Faq::create($data);
+       session()->flash('success',__("faqs__create_success"));
+       return redirect()->route("faqs.index");
 
     }
 
