@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\Faq;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
 
 class FaqController extends Controller
 {
@@ -28,6 +29,7 @@ class FaqController extends Controller
      */
     public function create()
     {
+        App::setLocale('ar');
         $page_title =__('faqs__create_FAQS');
         $page_description =  __('faqs__create_description');
 

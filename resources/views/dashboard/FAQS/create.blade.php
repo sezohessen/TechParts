@@ -17,7 +17,7 @@
             <div class="card-body">
                 <!-- EN Form -->
                     <div class="form-group">
-                        <label>{{__("faq__create_question")}} <span class="text-danger">*</span></label>
+                        <label>@lang('faq creat question') <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="question"  placeholder="Ask Question"/>
                     </div>
                     <div class="form-group mb-1">
