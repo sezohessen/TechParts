@@ -6,7 +6,7 @@ use App\Models\Faq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
-
+use App\DataTables\FaqDatatable;
 class FaqController extends Controller
 {
     /**
@@ -14,12 +14,11 @@ class FaqController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(FaqDatatable $faq)
     {
         $page_title = __('faqs__FAQS');
         $page_description = __('faqs__description');
-
-        return view('dashboard.FAQS.index', compact('page_title', 'page_description'));
+        return  $faq->render("dashboard.FAQS.index", compact('page_title', 'page_description'));
     }
 
     /**
