@@ -127,6 +127,18 @@ return [
             ]
         ],
         [
+            'title' => 'Terms',
+            'icon' => 'far fa-address-book',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'View Terms',
+                    'page' => "/dashboard/terms"
+                ],
+            ]
+        ],
+        [
             'title' => 'General',
             'icon' => 'media/svg/icons/General/Settings-1.svg',
             'bullet' => 'dot',
