@@ -35,7 +35,16 @@ npm install
 npm run dev
 ```
 ```bash
-npm php artisan migrate
+php artisan migrate
+```
+```bash
+php artisan db:seed
+```
+```bash
+php artisan cache:clear
+```
+```bash
+php artisan config:cache
 ```
 
 ```bash
