@@ -42,6 +42,58 @@ return [
             ]
         ],
         [
+            'title' => 'Countries',
+            'icon' => 'media/svg/icons/Map/Location-arrow.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add Country',
+                    'page' => "/dashboard/country/create"
+                ],
+                [
+                    'title' => 'View Countries',
+                    'page' => '/dashboard/country'
+                ],
+
+            ]
+        ],
+        [
+            'title' => 'Governorates',
+            'icon' => 'media/svg/icons/Map/Location-arrow.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add governorate',
+                    'page' => "/dashboard/governorate/create"
+                ],
+                [
+                    'title' => 'View governorates',
+                    'page' => '/dashboard/governorate'
+                ],
+
+            ]
+        ],
+        [
+            'title' => 'Cities',
+            'icon' => 'media/svg/icons/Map/Location-arrow.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add city',
+                    'page' => "/dashboard/city/create"
+                ],
+                [
+                    'title' => 'View cities',
+                    'page' => '/dashboard/city'
+                ],
+
+            ]
+        ],
+
+        [
             'title' => 'General',
             'icon' => 'media/svg/icons/General/Settings-1.svg',
             'bullet' => 'dot',

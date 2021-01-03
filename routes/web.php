@@ -32,6 +32,9 @@ Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search')
 Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::get('/', 'DashboardController@index');
     Route::resource('/faqs','FaqController');
+    Route::resource('/country','CountryController');
+    Route::resource('/governorate','GovernorateController');
+    Route::resource('/city','CityController');
 });
 Auth::routes();
 
