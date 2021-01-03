@@ -42,7 +42,7 @@ License: You must have a valid license purchased only from themeforest(the above
          @yield('styles')
      </head>
 
-     <body class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable">
+     <body class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
         @yield('content')
 
          {{-- Global Config (global config for global JS scripts) --}}
