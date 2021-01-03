@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -32,8 +34,8 @@ class NewsController extends Controller
         } */
         $page_title = "Add News";
         $page_description = "Add new news";
-
-        return view('dashboard.News.add', compact('page_title', 'page_description'));
+        $categories = Category::all();
+        return view('dashboard.News.add', compact('page_title', 'page_description','categories'));
     }
 
     /**
@@ -44,7 +46,17 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = News::rules($request);
+        $request->validate($rules);
+        $credentials = News::credentials($request);
+        $News = News::create($credentials);
+        /* if (Session::get('app_locale') == 'ar') {
+            session()->flash('success',__("تم اضافة منشور"));
+        } else {
+            session()->flash('success',__("news has been added!"));
+        } */
+       session()->flash('success',__("news has been added!"));
+       return redirect()->route("news.index");
     }
 
     /**

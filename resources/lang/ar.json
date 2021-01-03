@@ -102,5 +102,22 @@
   "Please enter code":"رجاء ادخل الكود",
   "Category Name(ENG)":"اسم الصنف (بالانجليزية)",
   "Category Name(AR)":"اسم الصنف (بالعربية)",
-  "Please enter category name":"رجاء ادخل اسم الصنف"
+  "Please enter category name":"رجاء ادخل اسم الصنف",
+  "--Select country first--":"اختر البلد اولا",
+  "--Select governorate first--":"اختر المحافظة اولا",
+  "--Select category first--":"اختر الصنف اولا",
+  "Author Name":"اسم المؤلف",
+  "Please enter author name":"رجاء ادخل اسم المؤلف",
+  "Author Image":"صورة المؤلف",
+  "Please enter author image":"رجاء ادخل صورة المؤلف",
+  "Title(ENG)":"العنوان (بالانجليزية)",
+  "Title(AR)":"العنوان (بالعربية)",
+  "title name":"اسم العنوان",
+  "News Image":"صورة الخبر",
+  "Please enter news image":"رجاء ادخل صورة الخبر",
+  "Write description":"اكتب الوصف",
+  "Please enter description":"رجاء ادخل الوصف",
+  "Description(ENG)":"الوصف (بالانجليزية)",
+  "Description(AR)":"الوصف (بالعربية)",
+  "Select Category":"اختر صنف"
 }
