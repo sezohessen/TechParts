@@ -36,3 +36,10 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', function ()
+{
+    $page_title = __('login');
+    $page_description = __('login page');
+    return view('auth.login',  compact('page_title', 'page_description'));
+});
+
