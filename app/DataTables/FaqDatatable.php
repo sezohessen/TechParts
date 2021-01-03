@@ -23,9 +23,8 @@ class FaqDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('checkbox', 'dashboard.FAQS.btn.checkbox')
-            ->addColumn('edit', 'dashboard.FAQS.btn.edit')
-            ->addColumn('delete', 'dashboard.FAQS.btn.delete')
-            ->rawColumns(['edit','delete','checkbox']);
+            ->addColumn('action', 'dashboard.FAQS.btn.action')
+            ->rawColumns(['checkbox','action']);
     }
 
     /**
@@ -49,16 +48,32 @@ class FaqDatatable extends DataTable
         return $this->builder()
                     ->setTableId('faqs-table')
                     ->columns($this->getColumns())
+                    ->parameters([
+                        'buttons'      => [
+                            'pageLength',
+                            //old way
+                            [
+                                'text'=>
+                                '<i class="fa fa-trash"></i> '.__('admin.admin_table_delete_all'),
+                                'className'=>'dt-button buttons-collection delBtn buttons-page-length'
+                            ],
+                            'export',
+                            'print',
+                            ],
+                            'lengthMenu' =>
+                            [
+                                [ 10, 25, 50, -1 ],
+                                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+                            ],
+
+                        ])
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+                    ->search([
+
+                    ]);
+
     }
 
     /**
@@ -86,6 +101,13 @@ class FaqDatatable extends DataTable
             Column::make('answer_ar'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::computed('action')
+            ->title(__('edit'))
+            ->exportable(false)
+            ->printable(false)
+            ->searchable(false)
+            ->width(120)
+            ->addClass('text-center')
         ];
     }
 
