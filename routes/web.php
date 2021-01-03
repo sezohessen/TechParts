@@ -39,6 +39,7 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::resource('/news','NewsController');
     Route::resource('/terms','TermsController');
 });
+Route::get('/terms', 'Dashboard\TermsController@show');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

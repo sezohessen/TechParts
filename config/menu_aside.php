@@ -42,56 +42,63 @@ return [
             ]
         ],
         [
-            'title' => 'Countries',
+            'title' => 'Location',
             'icon' => 'fas fa-map-marked-alt',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
                 [
-                    'title' => 'Add Country',
-                    'page' => "/dashboard/country/create"
+                    'title' => 'Countries',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add Country',
+                            'page' => "/dashboard/country/create"
+                        ],
+                        [
+                            'title' => 'View Countries',
+                            'page' => '/dashboard/country'
+                        ],
+
+                    ]
                 ],
                 [
-                    'title' => 'View Countries',
-                    'page' => '/dashboard/country'
+                    'title' => 'Governorates',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add governorate',
+                            'page' => "/dashboard/governorate/create"
+                        ],
+                        [
+                            'title' => 'View governorates',
+                            'page' => '/dashboard/governorate'
+                        ],
+
+                    ]
+                ],
+                [
+                    'title' => 'Cities',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add city',
+                            'page' => "/dashboard/city/create"
+                        ],
+                        [
+                            'title' => 'View cities',
+                            'page' => '/dashboard/city'
+                        ],
+
+                    ]
                 ],
 
             ]
         ],
-        [
-            'title' => 'Governorates',
-            'icon' => 'fas fa-map-marked-alt',
-            'bullet' => 'dot',
-            'root' => true,
-            'submenu' => [
-                [
-                    'title' => 'Add governorate',
-                    'page' => "/dashboard/governorate/create"
-                ],
-                [
-                    'title' => 'View governorates',
-                    'page' => '/dashboard/governorate'
-                ],
 
-            ]
-        ],
-        [
-            'title' => 'Cities',
-            'icon' => 'fas fa-map-marked-alt',
-            'bullet' => 'dot',
-            'root' => true,
-            'submenu' => [
-                [
-                    'title' => 'Add city',
-                    'page' => "/dashboard/city/create"
-                ],
-                [
-                    'title' => 'View cities',
-                    'page' => '/dashboard/city'
-                ],
-
-            ]
-        ],
         [
             'title' => 'News',
             'icon' => 'far fa-newspaper',

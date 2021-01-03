@@ -136,7 +136,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="description">@lang('Description(ENG)')</label>
-                            <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="description" rows="3"
+                            <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
                             placeholder="@lang('Write description')" >{{ old('description') }}</textarea>
                             @if ($errors->has('description'))
                                 <div class="fv-plugins-message-container">
@@ -150,7 +150,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="description">@lang('Description(AR)')</label>
-                            <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="description" rows="3"
+                            <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
                             placeholder="@lang('Write description')" >{{ old('description_ar') }}</textarea>
                             @if ($errors->has('description_ar'))
                                 <div class="fv-plugins-message-container">
@@ -175,6 +175,8 @@
 {{-- Scripts Section --}}
 @section('scripts')
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
+<script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
+<script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script>
 
 "use strict";
