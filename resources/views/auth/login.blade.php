@@ -30,7 +30,7 @@
             <!--begin::Content body-->
             <div class="d-flex flex-column-fluid flex-center">
                 <!--begin::Signin-->
-                <div class="login-form login-signin">
+                <div class="login-form login-signin" >
                     <!--begin::Form-->
                     <!--begin::Title-->
                     <div class="pb-13 pt-lg-0 pt-5">
@@ -38,11 +38,11 @@
                         <span class="text-muted font-weight-bold font-size-h4">{{ __('New Here?') }}
                         <a href="javascript:;" id="kt_login_signup" class="text-primary font-weight-bolder">{{ __('Create an Account') }}</a></span>
                     </div>
-                    <form method="POST" action="{{ route('login') }}" class="form" id="kt_login_signin_form">
+                    <form method="POST" action="{{ route('login') }}" class="form" id="kt_login_signin_form" novalidate="novalidate">
                         @csrf
                         <div class="form-group">
                             <label for="email" class="font-size-h6 font-weight-bolder text-dark">{{ __('E-Mail Address') }}</label>
-                            <input id="email" type="email" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input id="email" type="email" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus >
 
                             @error('email')
                                 <div class="fv-plugins-message-container">
