@@ -42,6 +42,103 @@ return [
             ]
         ],
         [
+            'title' => 'Countries',
+            'icon' => 'fas fa-map-marked-alt',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add Country',
+                    'page' => "/dashboard/country/create"
+                ],
+                [
+                    'title' => 'View Countries',
+                    'page' => '/dashboard/country'
+                ],
+
+            ]
+        ],
+        [
+            'title' => 'Governorates',
+            'icon' => 'fas fa-map-marked-alt',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add governorate',
+                    'page' => "/dashboard/governorate/create"
+                ],
+                [
+                    'title' => 'View governorates',
+                    'page' => '/dashboard/governorate'
+                ],
+
+            ]
+        ],
+        [
+            'title' => 'Cities',
+            'icon' => 'fas fa-map-marked-alt',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add city',
+                    'page' => "/dashboard/city/create"
+                ],
+                [
+                    'title' => 'View cities',
+                    'page' => '/dashboard/city'
+                ],
+
+            ]
+        ],
+        [
+            'title' => 'News',
+            'icon' => 'far fa-newspaper',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add news',
+                    'page' => "/dashboard/news/create"
+                ],
+                [
+                    'title' => 'View news',
+                    'page' => '/dashboard/news'
+                ],
+
+            ]
+        ],
+        [
+            'title' => 'Categories',
+            'icon' => 'fas fa-pager',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add category',
+                    'page' => "/dashboard/category/create"
+                ],
+                [
+                    'title' => 'View news',
+                    'page' => '/dashboard/category'
+                ],
+
+            ]
+        ],
+        [
+            'title' => 'Terms',
+            'icon' => 'far fa-address-book',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'View Terms',
+                    'page' => "/dashboard/terms"
+                ],
+            ]
+        ],
+        [
             'title' => 'General',
             'icon' => 'media/svg/icons/General/Settings-1.svg',
             'bullet' => 'dot',

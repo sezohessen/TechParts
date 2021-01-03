@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-use App\Models\City;
-use App\Models\Country;
-use App\Models\Governorate;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +15,16 @@ class CityController extends Controller
     public function index()
     {
         /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'المدن';
-            $page_description = 'عرض جميع المدن';
+            $page_title = 'التصنيفات';
+            $page_description = 'عرض جميع التصنيفات';
         } else {
-            $page_title = 'Cities';
-            $page_description = 'View all Cities';
+            $page_title = 'Categories';
+            $page_description = 'View all Categories';
         } */
-        $page_title = 'Cities';
-        $page_description = 'View all Cities';
+        $page_title = 'Categories';
+        $page_description = 'View all Categories';
 
-        return view('dashboard.City.index', compact('page_title', 'page_description'));
+        return view('dashboard.Country.index', compact('page_title', 'page_description'));
     }
 
     /**
@@ -37,16 +35,16 @@ class CityController extends Controller
     public function create()
     {
         /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة مدينة";
-            $page_description = "اضافة مدينة جديدة";
+            $page_title = "اضافة صنف";
+            $page_description = "اضافة صنف جديد";
         } else {
-            $page_title = "Add City";
-            $page_description = "Add new City";
+            $page_title = "Add Category";
+            $page_description = "Add new Category";
         } */
-        $page_title = "Add City";
-        $page_description = "Add new City";
-        $countries = Country::all();
-        return view('dashboard.City.add', compact('page_title', 'page_description','countries'));
+        $page_title = "Add Category";
+        $page_description = "Add new Category";
+
+        return view('dashboard.Category.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -57,18 +55,17 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = City::rules($request);
+        $rules = Category::rules($request);
         $request->validate($rules);
-        $credentials = City::credentials($request);
-        $City = City::create($credentials);
-
+        $credentials = Category::credentials($request);
+        $Category = Category::create($credentials);
         /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة المدينة"));
+            session()->flash('success',__("تم اضافة الصنف"));
         } else {
-            session()->flash('success',__("City has been added!"));
+            session()->flash('success',__("Category has been added!"));
         } */
-       session()->flash('success',__("City has been added!"));
-       return redirect()->route("city.index");
+       session()->flash('success',__("Category has been added!"));
+       return redirect()->route("category.index");
     }
 
     /**

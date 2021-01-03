@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-use App\Models\City;
-use App\Models\Country;
-use App\Models\Governorate;
+use App\Models\Terms;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class TermsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +15,16 @@ class CityController extends Controller
     public function index()
     {
         /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'المدن';
-            $page_description = 'عرض جميع المدن';
+            $page_title = 'الشروط';
+            $page_description = 'عرض الشروط';
         } else {
-            $page_title = 'Cities';
-            $page_description = 'View all Cities';
+            $page_title = 'Terms';
+            $page_description = 'View all terms';
         } */
-        $page_title = 'Cities';
-        $page_description = 'View all Cities';
-
-        return view('dashboard.City.index', compact('page_title', 'page_description'));
+        $page_title = 'Terms';
+        $page_description = 'View all terms';
+        $terms = Terms::first();
+        return view('dashboard.Terms.show', compact('page_title', 'page_description','terms'));
     }
 
     /**
@@ -36,17 +34,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة مدينة";
-            $page_description = "اضافة مدينة جديدة";
-        } else {
-            $page_title = "Add City";
-            $page_description = "Add new City";
-        } */
-        $page_title = "Add City";
-        $page_description = "Add new City";
-        $countries = Country::all();
-        return view('dashboard.City.add', compact('page_title', 'page_description','countries'));
+        //
     }
 
     /**
@@ -57,18 +45,7 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = City::rules($request);
-        $request->validate($rules);
-        $credentials = City::credentials($request);
-        $City = City::create($credentials);
-
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة المدينة"));
-        } else {
-            session()->flash('success',__("City has been added!"));
-        } */
-       session()->flash('success',__("City has been added!"));
-       return redirect()->route("city.index");
+        //
     }
 
     /**
@@ -102,7 +79,21 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $term = Terms::find($id);
+        $this->validate($request,[
+            'description'       => 'required|min:3|max:1000',
+            'description_ar'    => 'required|min:3|max:1000'
+        ]);
+        $term->description       = $request->description;
+        $term->description_ar   = $request->description_ar;
+        $term->save();
+        /* if (Session::get('app_locale') == 'ar') {
+            session()->flash('success',__("تم تعديل الشروط"));
+        } else {
+            session()->flash('success',__("Terms has been updated!"));
+        } */
+        session()->flash('success',__("Terms has been upated!"));
+        return redirect()->back();
     }
 
     /**

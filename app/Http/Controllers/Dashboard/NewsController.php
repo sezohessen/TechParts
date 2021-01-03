@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-use App\Models\City;
-use App\Models\Country;
-use App\Models\Governorate;
+use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,17 +15,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'المدن';
-            $page_description = 'عرض جميع المدن';
-        } else {
-            $page_title = 'Cities';
-            $page_description = 'View all Cities';
-        } */
-        $page_title = 'Cities';
-        $page_description = 'View all Cities';
-
-        return view('dashboard.City.index', compact('page_title', 'page_description'));
+        //
     }
 
     /**
@@ -37,16 +26,16 @@ class CityController extends Controller
     public function create()
     {
         /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة مدينة";
-            $page_description = "اضافة مدينة جديدة";
+            $page_title = "اضافة خبر";
+            $page_description = "اضافة خبر جديدة";
         } else {
-            $page_title = "Add City";
-            $page_description = "Add new City";
+            $page_title = "Add News";
+            $page_description = "Add new news";
         } */
-        $page_title = "Add City";
-        $page_description = "Add new City";
-        $countries = Country::all();
-        return view('dashboard.City.add', compact('page_title', 'page_description','countries'));
+        $page_title = "Add News";
+        $page_description = "Add new news";
+        $categories = Category::all();
+        return view('dashboard.News.add', compact('page_title', 'page_description','categories'));
     }
 
     /**
@@ -57,18 +46,20 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = City::rules($request);
+        $rules = News::rules($request);
         $request->validate($rules);
-        $credentials = City::credentials($request);
-        $City = City::create($credentials);
+        $credentials = News::credentials($request);
+        $New = News::create($credentials);
+        $New->save();
+
 
         /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة المدينة"));
+            session()->flash('success',__("تم اضافة منشور"));
         } else {
-            session()->flash('success',__("City has been added!"));
+            session()->flash('success',__("news has been added!"));
         } */
-       session()->flash('success',__("City has been added!"));
-       return redirect()->route("city.index");
+       session()->flash('success',__("news has been added!"));
+       return redirect()->route("news.index");
     }
 
     /**

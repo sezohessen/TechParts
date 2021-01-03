@@ -32,7 +32,20 @@ Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search')
 Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::get('/', 'DashboardController@index');
     Route::resource('/faqs','FaqController');
+    Route::resource('/country','CountryController');
+    Route::resource('/governorate','GovernorateController');
+    Route::resource('/city','CityController');
+    Route::resource('/category','CategoryController');
+    Route::resource('/news','NewsController');
+    Route::resource('/terms','TermsController');
 });
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', function ()
+{
+    $page_title = __('login');
+    $page_description = __('login page');
+    return view('auth.login',  compact('page_title', 'page_description'));
+});
+
