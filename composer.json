@@ -19,7 +19,8 @@
         "laravelcollective/html": "^6.2",
         "santigarcor/laratrust": "^6.3",
         "yajra/laravel-datatables": "^1.5",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "livewire/livewire": "^2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -58,7 +59,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
