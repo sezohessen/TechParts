@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Terms;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,9 +18,10 @@ class DatabaseSeeder extends Seeder
             [FaqSeeder::class],
         );
         // \App\Models\User::factory(10)->create();
-        $this->call(LaratrustSeeder::class);
+        /* $this->call(LaratrustSeeder::class); */
         $this->call(CountrySeeder::class);
         $this->call(GovernorateSeeder::class);
         $this->call(CitySeeder::class);
+        $this->call(Terms::class);
     }
 }
