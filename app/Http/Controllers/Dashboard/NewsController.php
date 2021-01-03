@@ -49,7 +49,10 @@ class NewsController extends Controller
         $rules = News::rules($request);
         $request->validate($rules);
         $credentials = News::credentials($request);
-        $News = News::create($credentials);
+        $New = News::create($credentials);
+        $New->save();
+
+
         /* if (Session::get('app_locale') == 'ar') {
             session()->flash('success',__("تم اضافة منشور"));
         } else {

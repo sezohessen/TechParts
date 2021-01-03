@@ -28,8 +28,8 @@ class News extends Model
             'category_id'       => 'required',
             'description'       => 'required|min:3|max:1000',
             'description_ar'    => 'required|min:3|max:1000',
-            'authorImg'         => '',
-            'Image'             => ''
+            'authorImg'         => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',// 2m
+            'Image'             => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ];
         return $rules;
     }
@@ -42,10 +42,25 @@ class News extends Model
             'category_id'       => $request->category_id,
             'description'       => $request->description,
             'description_ar'    => $request->description_ar,
-            'authorImg'         => '',
-            'Image'             => ''
         ];
-
+        if($request->file('Image')){
+            $Image_id = self::file($request->file('Image'));
+            $credentials['image_id'] = $Image_id;
+        }
+        if($request->file('authorImg')){
+            $authorImg_id = self::file($request->file('authorImg'));
+            $credentials['authorImg_id'] = $authorImg_id;
+        }
         return $credentials;
+    }
+
+    public static function file($file)
+    {
+        $extension = $file->getClientOriginalExtension();
+        $fileName = time() . rand(11111, 99999) . '.' . $extension;
+        $destinationPath = public_path() . '/img/news/';
+        $file->move($destinationPath, $fileName);
+        $Image = Image::create(['name' => $fileName]);
+        return $Image->id;
     }
 }
