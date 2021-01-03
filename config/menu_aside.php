@@ -43,7 +43,7 @@ return [
         ],
         [
             'title' => 'Countries',
-            'icon' => 'media/svg/icons/Map/Location-arrow.svg',
+            'icon' => 'fas fa-map-marked-alt',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
@@ -60,7 +60,7 @@ return [
         ],
         [
             'title' => 'Governorates',
-            'icon' => 'media/svg/icons/Map/Location-arrow.svg',
+            'icon' => 'fas fa-map-marked-alt',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
@@ -77,7 +77,7 @@ return [
         ],
         [
             'title' => 'Cities',
-            'icon' => 'media/svg/icons/Map/Location-arrow.svg',
+            'icon' => 'fas fa-map-marked-alt',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
