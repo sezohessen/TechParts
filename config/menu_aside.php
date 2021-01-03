@@ -163,6 +163,20 @@ return [
 
             ]
         ],
+        [
+            'title' => 'Settings',
+            'icon' => 'media/svg/icons/General/settings-2.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'View Setting',
+                    'page' => '/dashboard/settings',
+
+                ]
+
+            ]
+        ],
 
     ]
 
