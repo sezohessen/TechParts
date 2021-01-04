@@ -110,7 +110,6 @@ class BadgesController extends Controller
        session()->flash('success',__("Badge has been updated!"));
        return redirect()->back();
     }
-
     /**
      * Remove the specified resource from storage.
      *
