@@ -15,7 +15,7 @@
         <!--begin::Form-->
         <form action="{{route("insurance.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
-            
+
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">

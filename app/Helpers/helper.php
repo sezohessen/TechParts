@@ -2,29 +2,28 @@
    if(!function_exists('datatable_lang')){
     function datatable_lang(){
       return [
-            'sProcessing'     => __('admin.sProcessing'),
-            'sLengthMenu'     => __('admin.sLengthMenu'),
-            'sZeroRecords'    => __('admin.sZeroRecords'),
-            'sEmptyTable'     => __('admin.sEmptyTable'),
-            'sInfo'           => __('admin.sInfo'),
-            'sInfoEmpty'      => __('admin.sInfoEmpty'),
-            'sInfoFiltered'   => __('admin.sInfoFiltered'),
-            'sInfoPostFix'    => __('admin.sInfoPostFix'),
-            'sSearch'         => __('admin.sSearch'),
-            'sUrl'            => __('admin.sUrl'),
-            'sInfoThousands'  => __('admin.sInfoThousands'),
-            'sLoadingRecords' => __('admin.sLoadingRecords'),
+            'sProcessing'     => __('Processing...'),
+            'sLengthMenu'     => __('Show _MENU_ entries'),
+            'sZeroRecords'    => __('No matching records found'),
+            'sEmptyTable'     => __('No data available in table'),
+            'sInfo'           => __('Showing _START_ to _END_ of _TOTAL_ entries'),
+            'sInfoEmpty'      => __('Showing 0 to 0 of 0 entries'),
+            'sInfoFiltered'   => __('(filtered from _MAX_ total entries)'),
+            'sSearch'         => __('Search:'),
+            'sUrl'            => __('Url'),
+            'sInfoThousands'  => __(','),
+            'sLoadingRecords' => __('Loading...'),
             'oPaginate'       => [
-            'sFirst'         => __('admin.sFirst'),
-            'sLast'          => __('admin.sLast'),
-            'sNext'          => __('admin.sNext'),
-            'sPrevious'      => __('admin.sPrevious'),
+                'sFirst'         => __('First'),
+                'sLast'          => __('Last'),
+                'sNext'          => __('Next'),
+                'sPrevious'      => __('Previous'),
             ],
             'oAria'            => [
-            'sSortAscending'  => __('admin.sSortAscending'),
-            'sSortDescending' => __('admin.sSortDescending'),
+                'sSortAscending'  => __('Activate to sort column ascending'),
+                'sSortDescending' => __('Activate to sort column descending'),
             ],
 
-    ];
+        ];
     }
 }

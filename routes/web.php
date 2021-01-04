@@ -32,6 +32,7 @@ Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search')
 Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::get('/', 'DashboardController@index');
     Route::resource('/faqs','FaqController');
+    Route::delete("faqs/destroy/all","FaqController@multi_delete");
     Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');
     Route::resource('/city','CityController');

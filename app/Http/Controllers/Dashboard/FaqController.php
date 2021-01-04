@@ -16,8 +16,9 @@ class FaqController extends Controller
      */
     public function index(FaqDatatable $faq)
     {
-        $page_title = __('faqs__FAQS');
-        $page_description = __('faqs__description');
+        App::setLocale('ar');
+        $page_title = __('FAQS');
+        $page_description = __('Frequently Asked Questions');
         return  $faq->render("dashboard.FAQS.index", compact('page_title', 'page_description'));
     }
 
@@ -28,9 +29,9 @@ class FaqController extends Controller
      */
     public function create()
     {
-        App::setLocale('ar');
-        $page_title =__('faqs__create_FAQS');
-        $page_description =  __('faqs__create_description');
+
+        $page_title = __('FAQS');
+        $page_description = __('Frequently Asked Questions');
 
         return view('dashboard.FAQS.create', compact('page_title', 'page_description'));
     }
@@ -38,31 +39,9 @@ class FaqController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $req\uest
      * @return \Illuminate\Http\Response
      */
-    public function updated($propertyName){
-        $this->validateOnly($propertyName,[
-            'question'       => 'required|min:3|max:1000',
-            'question_ar'    => 'required|min:3|max:1000',
-            'answer'         => 'required|min:3|max:1000',
-            'answer_ar'      => 'required|min:3|max:1000',
-        ]);
-    }
-    public function store(Request $request)
-    {
-       $this->validate($request,[
-        'question'       => 'required|min:3|max:1000',
-        'question_ar'    => 'required|min:3|max:1000',
-        'answer'         => 'required|min:3|max:1000',
-        'answer_ar'      => 'required|min:3|max:1000',
-       ]);
-
-       $faq=Faq::create();
-       session()->flash('success',__("faqs__create_success"));
-       return redirect()->route("faqs.index");
-
-    }
 
     /**
      * Display the specified resource.
@@ -104,8 +83,23 @@ class FaqController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Faq $faq)
     {
-        //
+        $faq->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("faqs.index");
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$cities = Faq::find($id);
+				$cities->delete();
+			}
+		} else {
+			$cities = Faq::find(request('item'));
+			$cities->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("faqs.index");
     }
 }

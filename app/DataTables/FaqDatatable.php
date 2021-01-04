@@ -48,13 +48,14 @@ class FaqDatatable extends DataTable
         return $this->builder()
                     ->setTableId('faqs-table')
                     ->columns($this->getColumns())
+                    ->dom('Bfrtip')
                     ->parameters([
                         'buttons'      => [
                             'pageLength',
                             //old way
                             [
                                 'text'=>
-                                '<i class="fa fa-trash"></i> '.__('admin.admin_table_delete_all'),
+                                '<i class="fa fa-trash"></i> '.__('Delete All'),
                                 'className'=>'dt-button buttons-collection delBtn buttons-page-length'
                             ],
                             'export',
@@ -65,10 +66,10 @@ class FaqDatatable extends DataTable
                                 [ 10, 25, 50, -1 ],
                                 [ '10 rows', '25 rows', '50 rows', 'Show all' ]
                             ],
+                            'language' => datatable_lang(),
 
                         ])
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
                     ->orderBy(1)
                     ->search([
 
@@ -88,7 +89,13 @@ class FaqDatatable extends DataTable
             [
                 'name'=>"checkbox",
                 'data'=>"checkbox",
-                'title'=>"<input type='checkbox'class='check_all' onclick='check_all()'/> ",
+                'title'=>
+                "
+                <label class='checkbox checkbox-single'>
+                    <input type='checkbox'class='check_all' onclick='check_all()'/>
+                    <span></span>
+                </label>
+                ",
                 "exportable"=>false,
                 "printable"=>false,
                 "orderable"=>false,

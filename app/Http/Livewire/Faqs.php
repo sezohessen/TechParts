@@ -18,6 +18,9 @@ class Faqs extends Component
         'answer'         => 'required|min:3|max:1000',
         'answer_ar'      => 'required|min:3|max:1000',
     ];
+    protected $validationAttributes = [
+        'email' => 'email address'
+    ];
     public function render()
     {
         return view('livewire.faqs');
@@ -36,9 +39,12 @@ class Faqs extends Component
     {
        $data=$this->validate();
        $faq=Faq::create($data);
-       session()->flash('success',__("faqs__create_success"));
+       session()->flash('created',__("Changes has been Created Successfully"));
        return redirect()->route("faqs.index");
 
     }
+    public function dehydrate() {
+        $this->emit('initializeCkEditor');
+   }
 
 }
