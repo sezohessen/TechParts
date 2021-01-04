@@ -27,8 +27,8 @@ class CountryController extends Controller
         } */
         $page_title = 'Countries';
         $page_description = 'View all countries';
-
-        return view('dashboard.Country.index', compact('page_title', 'page_description'));
+        $countries = Country::orderBy('created_at', 'desc')->paginate(10);
+        return view('dashboard.Country.index', compact('page_title', 'page_description','countries'));
     }
 
     /**
@@ -70,7 +70,7 @@ class CountryController extends Controller
             session()->flash('success',__("Country has been added!"));
         } */
        session()->flash('success',__("Country has been added!"));
-       return redirect()->route("country.index");
+       return redirect()->back();
     }
 
     /**
@@ -100,7 +100,17 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        //
+        /* if (Session::get('app_locale') == 'ar') {
+            $page_title = "تعديل بلد";
+            $page_description = "تعديل";
+        } else {
+            $page_title = "Edit country";
+            $page_description = "Edit";
+        } */
+        $page_title = "Edit country";
+        $page_description = "Edit";
+        $country = Country::find($id);
+        return view('dashboard.Country.edit', compact('page_title', 'page_description','country'));
     }
 
     /**
@@ -112,7 +122,17 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = Country::rules($request);
+        $request->validate($rules);
+        $credentials = Country::credentials($request);
+        $Country = Country::where('id',$id)->update($credentials);
+        /* if (Session::get('app_locale') == 'ar') {
+            session()->flash('success',__("تم تعديل التغيرات بنجاح"));
+        } else {
+            session()->flash('success',__("Changed has been updated successfully!"));
+        } */
+       session()->flash('success',__("Changed has been updated successfully!"));
+       return redirect()->back();
     }
 
     /**
@@ -123,6 +143,18 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $country = Country::find($id);
+        if($country!=null){
+            $country->delete($id);
+            /* if (Session::get('app_locale') == 'ar') {
+            session()->flash('delete',__(" تم الحذف بنجاح!  "));
+            } else {
+                session()->flash('delete',__("Row has been deleted successfully!"));
+            } */
+            session()->flash('delete', 'Row has been deleted successfully!');
+            return redirect()->route('country.index');
+        }else{
+            return redirect()->back();
+        }
     }
 }

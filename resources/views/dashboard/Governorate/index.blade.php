@@ -86,7 +86,7 @@
                             </div>
                             <!--end::Dropdown-->
                             <!--begin::Button-->
-                            <a href="{{  route('country.create') }}" class="btn btn-primary font-weight-bolder">
+                            <a href="{{  route('governorate.create') }}" class="btn btn-primary font-weight-bolder">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Flatten.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -130,23 +130,23 @@
                                         <table class="table align-items-center table-striped">
                                             <thead class="thead-dark">
                                                 <tr>
+                                                    <th scope="col">@lang('Governorate Name(ENG)')</th>
+                                                    <th scope="col">@lang('Governorate Name(AR)')</th>
                                                     <th scope="col">@lang('Country Name (ENG)')</th>
-                                                    <th scope="col">@lang('Country Name (AR)')</th>
-                                                    <th scope="col">@lang('Country Code')</th>
                                                     <th scope="col">@lang('Action')</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($countries as $country)
+                                                @foreach ($governorates as $governorate)
                                                     <tr>
                                                         <td>
-                                                            <p>{{$country->name}}</p>
+                                                            <p>{{$governorate->title}}</p>
                                                         </td>
                                                         <td>
-                                                            <p>{{$country->name_ar}}</p>
+                                                            <p>{{$governorate->title_ar}}</p>
                                                         </td>
                                                         <td>
-                                                            <p>{{$country->code}}</p>
+                                                            <p>{{$governorate->country->name}}</p>
                                                         </td>
                                                         <td class="text-right">
                                                             <div class="dropdown">
@@ -154,8 +154,8 @@
                                                                     <i class="fas fa-ellipsis-v"></i>
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                                    <a class="dropdown-item" href="{{ route('country.edit', $country->id) }}">@lang('Edit')</a>
-                                                                    <form action="{{ route('country.destroy', $country->id) }}" method="POST">
+                                                                    <a class="dropdown-item" href="{{ route('governorate.edit', $governorate->id) }}">@lang('Edit')</a>
+                                                                    <form action="{{ route('governorate.destroy', $governorate->id) }}" method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button class="dropdown-item" type="submit" onclick="return confirm('@lang('Are you sure?')')">@lang('Delete')</button>
@@ -168,7 +168,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    {{ $countries->links() }}
+                                    {{ $governorates->links() }}
                                 </div>
                             </div>
                         </div>

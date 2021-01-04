@@ -13,17 +13,30 @@
                 <a href="{{ route('governorate.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
+
         <!--begin::Form-->
-        <form action="{{route("governorate.store")}}" method="POST">
+        <form action="{{route("governorate.update",$governorate->id)}}" method="POST">
             @csrf
+            @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
+                <div class="col-12">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Governorate Name(ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('GovernorateEnglish') ? 'is-invalid' : '' }}"
-                             name="GovernorateEnglish" value="{{ old('GovernorateEnglish') }}"  placeholder="@lang('Name(ENG)')" required autofocus  />
+                             name="GovernorateEnglish" value="{{ old('GovernorateEnglish') ? old('GovernorateEnglish'): $governorate->title }}"
+                              placeholder="@lang('Name(ENG)')" required autofocus  />
                             @if ($errors->has('GovernorateEnglish'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -37,7 +50,8 @@
                         <div class="form-group">
                             <label>@lang('Governorate Name (AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('GovernorateArabic') ? 'is-invalid' : '' }}"
-                             name="GovernorateArabic" value="{{ old('GovernorateArabic') }}" placeholder="@lang('Name(AR)')" required />
+                             name="GovernorateArabic" value="{{ old('GovernorateArabic') ? old('GovernorateArabic'): $governorate->title_ar }}"
+                              placeholder="@lang('Name(AR)')" required />
                             @if ($errors->has('GovernorateArabic'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -52,9 +66,12 @@
                             <label for="country">@lang('Select Country')</label>
                             <select class="form-control {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
                                  id="country" name="country_id" required>
-                                <option value="">@lang('--Select country first--')</option>
                                 @foreach ($countries as $country)
-                                    <option value="{{$country->id}}">{{$country->name}} - {{ $country->name_ar }}</option>
+                                    @if ($country->id == $governorate->country_id)
+                                        <option value="{{$country->id}}" selected>{{$country->name}} - {{ $country->name_ar }}</option>
+                                    @else
+                                        <option value="{{$country->id}}">{{$country->name}} - {{ $country->name_ar }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             @if ($errors->has('country_id'))
@@ -69,7 +86,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('create')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('update') </button>
             </div>
         </form>
         <!--end::Form-->
@@ -79,5 +96,5 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-<script src="/metronic/theme/html/demo1/dist/assets/js/pages/crud/forms/validation/form-controls.js?v=7.1.8"></script>
+    <script src="/metronic/theme/html/demo1/dist/assets/js/pages/crud/forms/validation/form-controls.js?v=7.1.8"></script>
 @endsection

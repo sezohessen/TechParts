@@ -14,7 +14,7 @@ class Governorate extends Model
         'title_ar',
         'country_id'
     ];
-    public function governorates() {
+    public function country() {
         return $this->belongsTo(Country::class);
     }
     public static function rules($request)

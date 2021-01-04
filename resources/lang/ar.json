@@ -148,5 +148,12 @@
   "--Select insurance company--":"--اختر اسم شركة التأمين --",
   "Select Insurance company name":"اختر اسم شركة التأمين",
   "Select Offer company":"اختر عرض الشركة",
-  "Select Insurance company first":"اختر شركة التأمين اولا"
+  "Select Insurance company first":"اختر شركة التأمين اولا",
+  "Add New Record":"اضافة حقل جديد",
+  "Export":"استخراج",
+  "Action":"العمل",
+  "Edit":"تعديل",
+  "Are you sure?":"هل انت متاكد ؟",
+  "Delete":"خذف",
+  "Back":"رجوع"
 }
