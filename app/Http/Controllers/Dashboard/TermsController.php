@@ -54,9 +54,20 @@ class TermsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        /* if (Session::get('app_locale') == 'ar') {
+            $page_title = "الاحكام والشروط";
+            $page_description = "عرض الاحكام والشروط";
+        } else {
+            $page_title = "Terms and condition";
+            $page_description = "View terms description";
+        } */
+        $page_title = "Terms and condition";
+        $page_description = "View terms description";
+        $terms = Terms::first();
+        $term = $terms->description;
+        return view('Terms.index',compact('page_title','page_description','term'));
     }
 
     /**
