@@ -39,6 +39,9 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::resource('/news','NewsController');
     Route::resource('/terms','TermsController');
     Route::resource('/settings','SettingsController');
+    Route::resource('/insurance','InsuranceController');
+    Route::resource('/insurance-offer','InsuranceOfferController');
+    Route::resource('/offer-plan','OfferPlanController');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Auth::routes();

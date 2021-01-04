@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-use App\Models\Country;
-use App\Models\Governorate;
-use Illuminate\Contracts\Session\Session;
+use App\Models\Insurance;
+use App\Models\Insurance_offer;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Lang;
 
-class CountryController extends Controller
+class InsuranceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,17 +16,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'البلدان';
-            $page_description = 'عرض جميع البلدن';
-        } else {
-            $page_title = 'Countries';
-            $page_description = 'View all countries';
-        } */
-        $page_title = 'Countries';
-        $page_description = 'View all countries';
-
-        return view('dashboard.Country.index', compact('page_title', 'page_description'));
+        //
     }
 
     /**
@@ -39,16 +27,16 @@ class CountryController extends Controller
     public function create()
     {
         /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة بلد";
-            $page_description = "اضافة بلد جديدة";
+            $page_title = "اضافة شركة تأمين";
+            $page_description = " اضافة شركة تأمين جديدة";
         } else {
-            $page_title = "Add country";
-            $page_description = "Add new country";
+            $page_title = "Add insurance company";
+            $page_description = "Add new insurance company";
         } */
-        $page_title = "Add country";
-        $page_description = "Add new country";
-
-        return view('dashboard.Country.add', compact('page_title', 'page_description'));
+        $page_title = "Add insurance company";
+        $page_description = "Add new insurance company";
+        $users = User::all();
+        return view('dashboard.Insurance.add', compact('page_title', 'page_description','users'));
     }
 
     /**
@@ -59,18 +47,17 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-
-        $rules = Country::rules($request);
+        $rules = Insurance::rules($request);
         $request->validate($rules);
-        $credentials = Country::credentials($request);
-        $Country = Country::create($credentials);
+        $credentials = Insurance::credentials($request);
+        $Insurance = Insurance::create($credentials);
         /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة البلد"));
+            session()->flash('success',__("تم اضافة شركة التأمين"));
         } else {
-            session()->flash('success',__("Country has been added!"));
+            session()->flash('success',__("Insurance company has been added!"));
         } */
-       session()->flash('success',__("Country has been added!"));
-       return redirect()->route("country.index");
+       session()->flash('success',__("Insurance company has been added!"));
+       return redirect()->back();
     }
 
     /**
@@ -81,14 +68,15 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        $governorates = Governorate::where('country_id', $id)->get();
-        if($governorates->count() > 0 ){
+        //
+        $offers = Insurance_offer::where('insurance_id', $id)->get();
+        if($offers->count() > 0 ){
             return response()->json([
-                'governorates' => $governorates
+                'insurance_offers' => $offers
             ]);
         }
         return response()->json([
-            'governorates' => null
+            'insurance_offers' => null
         ]);
     }
 
