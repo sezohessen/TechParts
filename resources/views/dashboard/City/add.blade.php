@@ -92,7 +92,7 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-<script src="/metronic/theme/html/demo1/dist/assets/js/pages/crud/forms/validation/form-controls.js?v=7.1.8"></script>
+<script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
 <script>
     $('#country').on('change', function() {
         var id = this.value ;
@@ -100,9 +100,14 @@
         $.ajax({
             url: '/dashboard/country/'+id,
             success: data => {
-                data.governorates.forEach(governorate =>
+                if(data.governorates){
+                    data.governorates.forEach(governorate =>
                     $('#governorate').append(`<option value="${governorate.id}">${governorate.title}-${governorate.title_ar}</option>`)
-                )
+                    )
+                }else{
+                    $('#governorate').append(`<option value="">No Results</option>`)
+                }
+
             }
         });
     });

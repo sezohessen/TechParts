@@ -42,6 +42,63 @@ return [
             ]
         ],
         [
+            'title' => 'Insurances',
+            'icon' => 'media/svg/icons/General/Shield-check.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Insurance companies',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add Insurance',
+                            'page' => "/dashboard/insurance/create"
+                        ],
+                        [
+                            'title' => 'View Insurance',
+                            'page' => '/dashboard/insurance'
+                        ],
+
+                    ]
+                ],
+                [
+                    'title' => 'Insurance offers',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add offer',
+                            'page' => "/dashboard/insurance-offer/create"
+                        ],
+                        [
+                            'title' => 'View offers',
+                            'page' => '/dashboard/insurance-offer'
+                        ],
+
+                    ]
+                ],
+                [
+                    'title' => 'Offers plan',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add Plan',
+                            'page' => "/dashboard/offer-plan/create"
+                        ],
+                        [
+                            'title' => 'View Plans',
+                            'page' => '/dashboard/offer-plan'
+                        ],
+
+                    ]
+                ],
+
+            ]
+        ],
+        [
             'title' => 'Location',
             'icon' => 'fas fa-map-marked-alt',
             'bullet' => 'dot',

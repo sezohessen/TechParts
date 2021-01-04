@@ -134,5 +134,19 @@
   "Terms Details":"تفاصيل الشروط",
   "App Name(ENG)":"اسم التطبيق(بالانجليزية)",
   "App Name(AR)":"اسم التطبيق(بالعربية)",
-  "Logo image":"صورة الشعار"
+  "Logo image":"صورة الشعار",
+  "Insurance company Name(ENG)":"اسم شركة التأمين (بالانجليزية)",
+  "Insurance company Name(AR)":"اسم شركة التأمين (بالعربية)",
+  "Select User":"اختر مستخدم",
+  "--Select user--":"--اختر مستخدم--",
+  "Insurance offer title(ENG)":"(بالانجليزية) عنوان عرض التأمين",
+  "Insurance offer title(AR)":"(بالعربية) عنوان عرض التأمين",
+  "Select Insurance Company Name":"اختر اسم شركة التأمين",
+  "Offer Plan title(ENG)":"(بالانجليزية) عنوان خطة العرض",
+  "Offer Plan title(AR)":"(بالعربية) عنوان خطة العرض",
+  "Price":"السعر",
+  "--Select insurance company--":"--اختر اسم شركة التأمين --",
+  "Select Insurance company name":"اختر اسم شركة التأمين",
+  "Select Offer company":"اختر عرض الشركة",
+  "Select Insurance company first":"اختر شركة التأمين اولا"
 }

@@ -13,21 +13,21 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("settings.update",$settings->id)}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("insurance.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PATCH')
+            
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('App Name(ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('appName') ? 'is-invalid' : '' }}"
-                             name="appName"  placeholder="@lang('title name')" value="{{ old('appName')? old('appName') :$settings->appName }}" required autofocus  />
-                            @if ($errors->has('appName'))
+                            <label>@lang('Insurance company Name(ENG)') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                             name="name"  placeholder="@lang('Name(ENG)')" value="{{ old('name')}}" required autofocus  />
+                            @if ($errors->has('name'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
-                                        <strong>{{ $errors->first('appName')  }}</strong>
+                                        <strong>{{ $errors->first('name')  }}</strong>
                                     </div>
                                 </div>
                             @endif
@@ -35,26 +35,47 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('App Name(AR)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('appName_ar') ? 'is-invalid' : '' }}"
-                             name="appName_ar"  placeholder="@lang('title name')" value="{{ old('appName_ar')? old('appName_ar') :$settings->appName_ar }}" required  />
-                            @if ($errors->has('appName_ar'))
+                            <label>@lang('Insurance company Name(AR)') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
+                             name="name_ar"  placeholder="@lang('Name(AR)')" value="{{ old('name_ar') }}" required   />
+                            @if ($errors->has('name_ar'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
-                                        <strong>{{ $errors->first('appName_ar')  }}</strong>
+                                        <strong>{{ $errors->first('name_ar')  }}</strong>
                                     </div>
                                 </div>
                             @endif
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-form-label text-right col-lg-3 col-sm-12">@lang('Select User')</label>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                             <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
+                                 id="kt_select2_1" name="user_id" required>
+                                <option value="">@lang('--Select user--')</option>
+                                @foreach ($users as $user)
+                                    <option value="{{$user->id}}">{{$user->name}} - {{ $user->email }}</option>
+                                @endforeach
+                             </select>
+                             @if ($errors->has('user_id'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('user_id')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label>
-                            <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{ $settings->logo_id ? asset('img/settings/'.$settings->logo->name) : asset('media/users/blank.png') }})">
+                            <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg" />
+                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg" required/>
                                     <input type="hidden" name="logo_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -76,7 +97,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('update')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('create')  </button>
             </div>
         </form>
         <!--end::Form-->
@@ -88,7 +109,8 @@
 @section('scripts')
 <script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
-<script src="/metronic/theme/html/demo1/dist/assets/js/pages/crud/forms/validation/form-controls.js?v=7.1.8"></script>
+<script src="{{ asset("js/pages/crud/forms/widgets/select2.js") }}"></script>
+<script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
 <script>
 "use strict";
 var KTUserEdit={
