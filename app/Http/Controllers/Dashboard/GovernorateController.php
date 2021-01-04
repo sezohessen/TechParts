@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Constraint\Count;
 
 class GovernorateController extends Controller
 {
@@ -24,8 +25,8 @@ class GovernorateController extends Controller
         } */
         $page_title = 'Governorates';
         $page_description = 'View all Governorates';
-
-        return view('dashboard.Governorate.index', compact('page_title', 'page_description'));
+        $governorates = Governorate::orderBy('created_at', 'desc')->paginate(10);
+        return view('dashboard.Governorate.index', compact('page_title', 'page_description','governorates'));
     }
 
     /**
@@ -88,7 +89,18 @@ class GovernorateController extends Controller
      */
     public function edit($id)
     {
-        //
+        /* if (Session::get('app_locale') == 'ar') {
+            $page_title = "تعديل المحافظة";
+            $page_description = "تعديل";
+        } else {
+            $page_title = "Edit governorate";
+            $page_description = "Edit";
+        } */
+        $page_title = "Edit governorate";
+        $page_description = "Edit";
+        $governorate = Governorate::find($id);
+        $countries = Country::all();
+        return view('dashboard.governorate.edit', compact('page_title', 'page_description','governorate','countries'));
     }
 
     /**

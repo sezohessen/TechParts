@@ -13,9 +13,11 @@
                 <a href="{{ route('country.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
+
         <!--begin::Form-->
-        <form action="{{route("country.store")}}" method="POST">
+        <form action="{{route("country.update",$country->id)}}" method="POST">
             @csrf
+            @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="col-12">
@@ -33,7 +35,8 @@
                         <div class="form-group">
                             <label>@lang('Country Name (ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('CountryEnglish') ? 'is-invalid' : '' }}"
-                             name="CountryEnglish" value="{{ old('CountryEnglish') }}" required placeholder="@lang('Name(ENG)')"autofocus/>
+                             name="CountryEnglish" value="{{ old('CountryEnglish') ? old('CountryEnglish'): $country->name }}"
+                            placeholder="@lang('Name(ENG)')" required autofocus/>
                             @if ($errors->has('CountryEnglish'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -47,7 +50,7 @@
                         <div class="form-group">
                             <label>@lang('Country Name (AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('CountryArabic') ? 'is-invalid' : '' }}"
-                             name="CountryArabic" value="{{ old('CountryArabic') }}"required placeholder="@lang('Name(AR)')"/>
+                             name="CountryArabic" value="{{ old('CountryArabic') ? old('CountryArabic'): $country->name_ar }}" required placeholder="@lang('Name(AR)')"/>
                              @if ($errors->has('CountryArabic'))
                              <div class="fv-plugins-message-container">
                                  <div class="fv-help-block">
@@ -61,22 +64,8 @@
                         <div class="form-group">
                             <label>@lang('Country Code') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('CountryCode') ? 'is-invalid' : '' }}"
-                             name="CountryCode"  value="{{ old('CountryCode') }}" required placeholder="@lang('Code')"/>
+                             name="CountryCode"  value="{{ old('CountryCode') ? old('CountryCode'): $country->code }}" required placeholder="@lang('Code')"/>
                              @if ($errors->has('CountryCode'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                     @lang('Please enter code')
-                                 </div>
-                             </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>@lang('country phone') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('country_phone') ? 'is-invalid' : '' }}"
-                             name="country_phone"  value="{{ old('country_phone') }}" required placeholder="@lang('country phone')"/>
-                             @if ($errors->has('country_phone'))
                              <div class="fv-plugins-message-container">
                                  <div class="fv-help-block">
                                      @lang('Please enter code')
@@ -88,7 +77,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('create')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('update') </button>
             </div>
         </form>
         <!--end::Form-->
