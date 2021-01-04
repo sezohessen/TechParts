@@ -89,7 +89,13 @@ class FaqDatatable extends DataTable
             [
                 'name'=>"checkbox",
                 'data'=>"checkbox",
-                'title'=>"<input type='checkbox'class='check_all' onclick='check_all()'/> ",
+                'title'=>
+                "
+                <label class='checkbox checkbox-single'>
+                    <input type='checkbox'class='check_all' onclick='check_all()'/>
+                    <span></span>
+                </label>
+                ",
                 "exportable"=>false,
                 "printable"=>false,
                 "orderable"=>false,

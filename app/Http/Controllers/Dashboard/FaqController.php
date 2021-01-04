@@ -16,6 +16,7 @@ class FaqController extends Controller
      */
     public function index(FaqDatatable $faq)
     {
+        App::setLocale('ar');
         $page_title = __('FAQS');
         $page_description = __('Frequently Asked Questions');
         return  $faq->render("dashboard.FAQS.index", compact('page_title', 'page_description'));
@@ -28,7 +29,7 @@ class FaqController extends Controller
      */
     public function create()
     {
-        App::setLocale('ar');
+
         $page_title = __('FAQS');
         $page_description = __('Frequently Asked Questions');
 

@@ -22,12 +22,18 @@
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <livewire:scripts />
 <script type="text/javascript">
+
     Livewire.on('initializeCkEditor', function () {
-        ClassicEditor.create(document.getElementById('kt-ckeditor-1')).then(editor => { thisEditor = editor });
+        ClassicEditor.create(document.getElementById('kt-ckeditor-1'))
+        .then(editor => { editor.setData(getDataFromTheEditor())})
+        .catch( error => {
+            console.error( error );
+        });
     });
     Livewire.on('initializeCkEditor', function () {
         ClassicEditor.create(document.getElementById('kt-ckeditor-2')).then(editor => { thisEditor = editor });
     });
+
 </script>
 @endsection
 
