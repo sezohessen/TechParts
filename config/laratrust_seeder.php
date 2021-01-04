@@ -14,19 +14,41 @@ return [
     'roles_structure' => [
         'superadministrator' => [
             'users' => 'c,r,u,d',
-            'payments' => 'c,r,u,d',
+            'categories' => 'c,r,u,d',
+            'cities' => 'c,r,u,d',
+            'countries' => 'c,r,u,d',
+            'faqs' => 'c,r,u,d',
+            'governorates' => 'c,r,u,d',
+            'insurances' => 'c,r,u,d',
+            'insurance_offers' => 'c,r,u,d',
+            'news' => 'c,r,u,d',
+            'offer_plans' => 'c,r,u,d',
+            'settings' => 'c,r,u,d',
+            'terms' => 'c,r,u,d',
+            'acl' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
         'administrator' => [
             'users' => 'c,r,u,d',
+            'cities' => 'c,r,u,d',
+            'countries' => 'c,r,u,d',
+            'faqs' => 'c,r,u,d',
+            'governorates' => 'c,r,u,d',
+            'insurances' => 'c,r,u,d',
+            'insurance_offers' => 'c,r,u,d',
+            'news' => 'c,r,u,d',
+            'offer_plans' => 'c,r,u,d',
             'profile' => 'r,u'
+        ],
+        'insurance' => [
+            'insurances' => 'r,u',
+            'insurance_offers' => 'c,r,u,d',
+            'offer_plans' => 'c,r,u,d',
+            'profile' => 'r,u',
         ],
         'user' => [
             'profile' => 'r,u',
         ],
-        'role_name' => [
-            'module_1_name' => 'c,r,u,d',
-        ]
     ],
 
     'permissions_map' => [

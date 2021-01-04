@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call( [FaqSeeder::class] );
-        /* $this->call(LaratrustSeeder::class); */
-        $this->call(CountrySeeder::class);
-        $this->call(GovernorateSeeder::class);
-        $this->call(CitySeeder::class);
-        $this->call(TermsSeeder::class);
-        \App\Models\User::factory(10)->create();
+        //$this->call( [FaqSeeder::class] );
+        $this->call(LaratrustSeeder::class);
+        //$this->call(CountrySeeder::class);
+        //$this->call(GovernorateSeeder::class);
+        //$this->call(CitySeeder::class);
+        //$this->call(TermsSeeder::class);
+        //\App\Models\User::factory(10)->create();
     }
 }

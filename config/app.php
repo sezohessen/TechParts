@@ -228,6 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
+        'Laratrust'   => Laratrust\LaratrustFacade::class,
 
         // Metronic Aliases
         'Metronic' => App\Classes\Theme\Metronic::class,

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,21 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-// Demo routes
-Route::get('/datatables', 'PagesController@datatables');
-Route::get('/ktdatatables', 'PagesController@ktDatatables');
-Route::get('/select2', 'PagesController@select2');
-Route::get('/jquerymask', 'PagesController@jQueryMask');
-Route::get('/icons/custom-icons', 'PagesController@customIcons');
-Route::get('/icons/flaticon', 'PagesController@flaticon');
-Route::get('/icons/fontawesome', 'PagesController@fontawesome');
-Route::get('/icons/lineawesome', 'PagesController@lineawesome');
-Route::get('/icons/socicons', 'PagesController@socicons');
-Route::get('/icons/svg', 'PagesController@svg');
-
-// Quick search dummy route to display html elements in search dropdown (header search)
-Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
 
 Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::get('/', 'DashboardController@index');
@@ -52,5 +39,37 @@ Route::get('/', function ()
     $page_title = __('login');
     $page_description = __('login page');
     return view('auth.login',  compact('page_title', 'page_description'));
+});
+Route::group(['middleware' => ['role:superadministrator']], function () {
+    Route::resource('/users','UsersController');
+    Route::resource('/permissions','PermissionsController');
+    Route::resource('/roles','RoleController');
+});
+
+Route::get('/test', function ()
+{
+    $owner = Role::create([
+        'name' => 'owner',
+        'display_name' => 'Project Owner', // optional
+        'description' => 'User is the owner of a given project', // optional
+    ]);
+
+    $admin = Role::create([
+        'name' => 'admin',
+        'display_name' => 'User Administrator', // optional
+        'description' => 'User is allowed to manage and edit other users', // optional
+    ]);
+
+    $createPost = Permission::create([
+        'name' => 'create-post',
+        'display_name' => 'Create Posts', // optional
+        'description' => 'create new blog posts', // optional
+    ]);
+
+    $editUser = Permission::create([
+        'name' => 'edit-user',
+        'display_name' => 'Edit Users', // optional
+        'description' => 'edit existing users', // optional
+    ]);
 });
 
