@@ -195,6 +195,9 @@
     "please Use some records to delete":"من فضلك اختر بعض السجلات ",
     "Are you sure to delete":"هل انت متأكد من حذف ",
     "New Record":"اضافة سجل",
-    "Elements":"العناصر"
-
+    "Elements":"العناصر",
+    "Badge Name (ENG)":"اسم العلامة (بالانجليزية)",
+    "Badge Name (AR)":"اسم العلامة (بالعربية)",
+    "Feature Name (ENG)":"اسم الميزة (بالانجليزية)",
+    "Feature Name (AR)":"اسم الميزة (بالعربية)"
     }

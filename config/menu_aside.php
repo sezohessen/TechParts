@@ -148,7 +148,40 @@ return [
 
             ]
         ],
+        [
+            'title' => 'Badges',
+            'icon' => 'media/svg/icons/General/Star.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add Badge',
+                    'page' => "/dashboard/badge/create"
+                ],
+                [
+                    'title' => 'View Badges',
+                    'page' => '/dashboard/badge'
+                ],
 
+            ]
+        ],
+        [
+            'title' => 'Features',
+            'icon' => 'fas fa-feather',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add Feature',
+                    'page' => "/dashboard/feature/create"
+                ],
+                [
+                    'title' => 'View Features',
+                    'page' => '/dashboard/feature'
+                ],
+
+            ]
+        ],
         [
             'title' => 'News',
             'icon' => 'far fa-newspaper',
