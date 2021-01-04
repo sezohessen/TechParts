@@ -37,7 +37,6 @@ class Faqs extends Component
     }
     public function store(Request $request)
     {
-       dd($request->all());
        $data=$this->validate();
        $faq=Faq::create($data);
        session()->flash('created',__("Changes has been Created Successfully"));
