@@ -12,7 +12,8 @@ class Country extends Model
     protected $fillable=[
         'name',
         'name_ar',
-        'code'
+        'code',
+        'country_phone'
     ];
 
     public function governorates() {
@@ -24,6 +25,7 @@ class Country extends Model
             'CountryArabic'        => 'required|string|max:255',
             'CountryEnglish'       => 'required|string|max:255',
             'CountryCode'          => 'required|string|max:50',
+            'country_phone'          => 'required|string|max:50',
         ];
         return $rules;
     }
@@ -33,6 +35,7 @@ class Country extends Model
             'name_ar'           =>  $request->CountryArabic,
             'name'              =>  $request->CountryEnglish,
             'code'              =>  $request->CountryCode,
+            'country_phone'              =>  $request->country_phone,
         ];
         return $credentials;
     }

@@ -5,20 +5,13 @@ return [
     'items' => [
         // Dashboard
         [
-            'title' => 'Dashboard',
+            'title' => 'Web Site',
             'root' => true,
             'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
-            'page' => '/dashboard',
+            'page' => '/',
             'new-tab' => false,
         ],
 
-
-
-
-        // Layout
-        [
-            'section' => 'Layout',
-        ],
 /*
 |--------------------------------------------------------------------------
 | FAQS (Frequently Asked Questions Section)

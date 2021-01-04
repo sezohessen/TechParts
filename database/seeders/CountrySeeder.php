@@ -16,13 +16,34 @@ class CountrySeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        $array = [
+            [
+                'name'                  =>   'egypt',
+                'name_ar'               =>   'مصر',
+                'code'                  =>   'EG',
+                'country_phone'         =>   '+20',
+            ],
+            [
+                'name'                  =>   'Saudi Arabia',
+                'name_ar'               =>   'السعودية',
+                'code'                  =>   'KSA',
+                'country_phone'         =>   '+966',
+            ],
+            [
+                'name'                  =>   'United Arab Emirates',
+                'name_ar'               =>   'الإمارات العربية المتحدة',
+                'code'                  =>   'UAE',
+                'country_phone'         =>   '‎+971',
+            ],
+        ];
+        foreach ($array as $value){
             DB::table('countries')->insert([
-                'name'      =>   $faker->country,
-                'name_ar'   =>   $faker->country,
-                'code'      =>   $faker->name,
-                'created_at' =>  now(),
-                'updated_at' =>  now(),
+                'name'                  =>   $value['name'],
+                'name_ar'               =>   $value['name_ar'],
+                'code'                  =>   $value['code'],
+                'country_phone'         =>   $value['country_phone'],
+                'created_at'            =>  now(),
+                'updated_at'            =>  now(),
             ]);
         }
     }
