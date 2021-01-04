@@ -129,5 +129,41 @@
   "Description(ENG)":"الوصف (بالانجليزية)",
   "Description(AR)":"الوصف (بالعربية)",
   "Select Category":"اختر صنف",
-  "update":"تحديث"
+  "update":"تحديث",
+  "Processing": "جارٍ التحميل...",
+  "Show _MENU_ entries":"أظهر _MENU_ مدخلات",
+  "No matching records found":"لم يعثر على أية سجلات",
+  "No data available in table":"ليست هناك بيانات متاحة في الجدول",
+  "Showing _START_ to _END_ of _TOTAL_ entries":"إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+  "Showing 0 to 0 of 0 entries":"عرض 0 إلى 0 من أصل 0 سجل",
+  "(filtered from _MAX_ total entries)":"(منتقاة من مجموع _MAX_ مُدخل)",
+  "Search:":"ابحث:",
+  "Url":"الرابط",
+  ",":",",
+  "Loading....":"جارٍ التحميل...",
+  "oPaginate":{
+        "First": "الأول",
+        "Previous": "السابق",
+        "Next": "التالي",
+        "Last": "الأخير"
+    },
+  "oAria":{
+    "Activate to sort column ascending": ": تفعيل لترتيب العمود تصاعدياً",
+    "Activate to sort column descending": ": تفعيل لترتيب العمود تنازلياً"
+    },
+    "Delete Record":"حذف سجل ",
+    "Are you sure you want delete this item  ? ":"هل انت متأكد من حذف :name",
+    "Yes":"حسنا",
+    "NO":"لا",
+    "Close":"غلق",
+    "Frequently Asked Questions":"الاسئلة الشائعة",
+    "FAQS":"أسئلة وأجوبة",
+    "Changes has been Created Successfully":"تم إنشاء التعديلات بنجاح",
+    "Changes has been Updated Successfully":"تم تحديث التعديلات بنجاح",
+    "Changes has been Deleted Successfully":"تم حذف التعديلات بنجاح",
+    "Delete All":"حذف الكل",
+    "please Use some records to delete":"من فضلك اختر بعض السجلات ",
+    "Are you sure to delete":"هل انت متأكد من حذف ",
+    "New Record":"اضافة سجل"
+
 }

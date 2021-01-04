@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bde4e648d2b5e037047c77a2df19c10",
+    "content-hash": "4cde9b41b9a96976c58aaa4faba3f864",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1706,8 +1706,8 @@
             "time": "2020-12-01T20:51:29+00:00"
         },
         {
-            "name": "monolog/monolog",
-            "version": "2.2.0",
+            "name": "maatwebsite/excel",
+            "version": "3.1.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",

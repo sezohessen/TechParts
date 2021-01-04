@@ -3,6 +3,9 @@
 
 {{-- Content --}}
 @section('content')
+    <div class="container">
+        @include('dashboard/message')
+    </div>
 
     {{-- Dashboard 1 --}}
     <div class="card card-custom gutter-b">
@@ -19,17 +22,46 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                New Record
+                @lang("New Record")
             </a>
-            @include('dashboard/message')
             <div class="row">
-                {!! Form::open(['id'=>'form_data','url'=>"dashboard",'method'=>'delete']) !!}
-                    {!! $dataTable->table([
-                        'class'=>'table table-separate table-head-custom table-checkable'
-                    ],true)!!}
-                {!! Form::close() !!}
+                <div class="table-responsive">
+                    {!! Form::open(['id'=>'form_data','url'=>"dashboard/faqs/destroy/all",'method'=>'delete']) !!}
+                        {!! $dataTable->table([
+                            'class'=>'table table-separate table-head-custom table-checkable'
+                        ],true)!!}
+                    {!! Form::close() !!}
+                </div>
             </div>
-        -</div>
+        </div>
+    </div>
+    <!-- Modal Alert  -->
+    <div id="multipleDelete" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@lang("Delete All")</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <div class="empty_record d-none">
+                        <p>@lang("please Use some records to delete")</p>
+                    </div>
+                    <div class="not_empty_record d-none">
+                        <p>@lang("Are you sure to delete") <span class="record_count"></span> @lang("Elements")?</p>
+                    </div>
+                </div>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">@lang("Close")</button>
+                    {!! Form::submit(__("Yes"),['class'=>'btn btn-danger'])!!}
+                </div>
+            </div>
+
+        </div>
     </div>
 
 
@@ -42,6 +74,10 @@
 
 <!-- Datatables buttons -->
 
+<script src="{{asset("plugins/datatables/checkbox.js")}}"></script>
+<script>
+    delete_all();
+</script>
 <script src="{{asset("plugins/datatables/jquery.dataTables.min.js")}}"></script>
 <script src="{{asset("plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")}}"></script>
 <script src="{{asset("plugins/datatables-responsive/js/dataTables.responsive.min.js")}}"></script>
@@ -49,7 +85,6 @@
 <script src="{{asset("plugins/vendor/datatables/buttons.server-side.js")}}"></script>
 <script src="{{asset("plugins/datatables-buttons/dataTables.buttons.min.js")}}"></script>
 <script src="{{asset("plugins/vendor/datatables/buttons.server-side.js")}}"></script>
-
 
 @endsection
 @section('styles')

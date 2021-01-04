@@ -8,14 +8,20 @@
     </div>
 @endif
 
-@if(session()->has('success'))
+@if(session()->has('created'))
     <div class="alert alert-success  m-4 p-4 ">
-        <h4>{{ session('success') }}</h4>
+        <h4>{{ session('created') }}</h4>
     </div>
 @endif
 
-@if(session()->has('success'))
-    <div class="alert alert-success  m-4 p-4 ">
-        <h4>{{ session('success') }}</h4>
+@if(session()->has('updated'))
+    <div class="alert alert-primary  m-4 p-4 ">
+        <h4>{{ session('updated') }}</h4>
     </div>
 @endif
+@if(session()->has('deleted'))
+    <div class="alert alert-danger  m-4 p-4 ">
+        <h4>{{ session('deleted') }}</h4>
+    </div>
+@endif
+
