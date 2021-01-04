@@ -109,7 +109,7 @@
                         <div class="form-group">
                             <label>@lang('Title(ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
-                             name="title"  placeholder="@lang('title name')" value="{{ old('description') }}" required autofocus  />
+                             name="title"  placeholder="@lang('title name')" value="{{ old('title') }}" required autofocus  />
                             @if ($errors->has('title'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">

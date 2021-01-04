@@ -12,4 +12,8 @@ class Image extends Model
     protected $fillable=[
         'name',
     ];
+    public function Setting()
+    {
+        return $this->hasOne(Settings::class);
+    }
 }

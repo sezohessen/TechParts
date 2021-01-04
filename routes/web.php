@@ -38,6 +38,7 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::resource('/category','CategoryController');
     Route::resource('/news','NewsController');
     Route::resource('/terms','TermsController');
+    Route::resource('/settings','SettingsController');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Auth::routes();
