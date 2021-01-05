@@ -11,7 +11,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("terms.update",$terms->id)}}" method="POST">
+        <form action="{{route("PPolicy.update",$PPolicy->id)}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">
@@ -32,7 +32,7 @@
                             <label for="description">@lang('Description(ENG)')</label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="8"
                             placeholder="@lang('Write description')" required>
-                            {{ old('description') ? old('description') :$terms->description }}
+                            {{ old('description') ? old('description') : $PPolicy->description }}
                             </textarea>
                             @if ($errors->has('description'))
                                 <div class="fv-plugins-message-container">
@@ -48,7 +48,7 @@
                             <label for="description">@lang('Description(AR)')</label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="8"
                             placeholder="@lang('Write description')" required>
-                            {{ old('description_ar') ? old('description_ar') :$terms->description_ar }}
+                            {{ old('description_ar') ? old('description_ar') :$PPolicy->description_ar }}
                             </textarea>
                             @if ($errors->has('description_ar'))
                                 <div class="fv-plugins-message-container">

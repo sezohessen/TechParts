@@ -39,6 +39,7 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::resource('/category','CategoryController');
     Route::resource('/news','NewsController');
     Route::resource('/terms','TermsController');
+    Route::resource('/PPolicy','PrivacyPolicyController');
     Route::resource('/settings','SettingsController');
     Route::resource('/insurance','InsuranceController');
     Route::resource('/insurance-offer','InsuranceOfferController');
@@ -47,6 +48,7 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::resource('/badge','BadgesController');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
+Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

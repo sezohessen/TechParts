@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GovernorateSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(TermsSeeder::class);
+        $this->call(PPolicySeeder::class);
         \App\Models\User::factory(10)->create();
     }
 }

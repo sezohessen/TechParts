@@ -217,14 +217,42 @@ return [
             ]
         ],
         [
-            'title' => 'Terms',
-            'icon' => 'far fa-address-book',
-            'bullet' => 'dot',
+            'title' => 'Pages',
+            'icon' => 'fas fa-scroll',
+            'bullet' => 'line',
             'root' => true,
             'submenu' => [
                 [
-                    'title' => 'View Terms',
-                    'page' => "/dashboard/terms"
+                    [
+                        'title' => 'Terms',
+                        'bullet' => 'dot',
+                        'root' => true,
+                        'submenu' => [
+                            [
+                                'title' => 'Update Terms',
+                                'page' => "/dashboard/terms"
+                            ],
+                            [
+                                'title' => 'View Terms',
+                                'page' => "terms"
+                            ]
+                        ]
+                    ],
+                    [
+                        'title' => 'Privacy&Policy',
+                        'bullet' => 'dot',
+                        'root' => true,
+                        'submenu' => [
+                            [
+                                'title' => 'Update Privacy&Policy',
+                                'page' => "/dashboard/PPolicy"
+                            ],
+                            [
+                                'title' => 'View Privacy&Policy',
+                                'page' => "PPolicy"
+                            ]
+                        ]
+                    ],
                 ],
             ]
         ],

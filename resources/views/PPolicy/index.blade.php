@@ -27,12 +27,12 @@
         <div class="card card-custom card-stretch" style="width: 60%;height: auto;margin: 30px auto;" id="kt_page_stretched_card">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">@lang('Terms And Conditions') <small>@lang('Terms Details')</small></h3>
+                    <h3 class="card-label">@lang('Privcay and policy') <small>@lang('Privcay and policy details')</small></h3>
                 </div>
             </div>
             <div class="card-body">
                 <div class="card-scroll">
-                    {!!$term !!}
+                    {!!$PPolicy !!}
                 </div>
             </div>
         </div>
