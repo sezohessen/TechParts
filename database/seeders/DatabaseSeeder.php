@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PPolicySeeder::class);
         $this->call(AskExpertSeeder::class);
         $this->call(ContactUsSeeder::class);
+        $this->call(BadgeSeeder::class);
+        $this->call(FeatureSeeder::class);
         \App\Models\User::factory(10)->create();
     }
 }
