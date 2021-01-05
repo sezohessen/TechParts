@@ -46,6 +46,8 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::resource('/offer-plan','OfferPlanController');
     Route::resource('/feature','FeaturesController');
     Route::resource('/badge','BadgesController');
+    Route::resource('/contact','ContactController');
+    Route::resource('/AskExpert','AskExpertController');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');

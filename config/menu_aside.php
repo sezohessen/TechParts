@@ -257,6 +257,38 @@ return [
             ]
         ],
         [
+            'title' => 'Contact',
+            'icon' => 'fas fa-phone-square-alt',
+            'bullet' => 'line',
+            'root' => true,
+            'submenu' => [
+                [
+                    [
+                        'title' => 'Ask An Expert',
+                        'bullet' => 'dot',
+                        'root' => true,
+                        'submenu' => [
+                            [
+                                'title' => 'View questions',
+                                'page' => "/dashboard/AskExpert"
+                            ],
+                        ]
+                    ],
+                    [
+                        'title' => 'Contact Us',
+                        'bullet' => 'dot',
+                        'root' => true,
+                        'submenu' => [
+                            [
+                                'title' => 'View Contacts',
+                                'page' => "/dashboard/contact"
+                            ],
+                        ]
+                    ],
+                ],
+            ]
+        ],
+        [
             'title' => 'General',
             'icon' => 'media/svg/icons/General/Settings-1.svg',
             'bullet' => 'dot',
