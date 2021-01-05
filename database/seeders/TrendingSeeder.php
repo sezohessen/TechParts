@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use App\Models\Car;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
-class BadgeSeeder extends Seeder
+use Illuminate\Database\Seeder;
+
+class TrendingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,11 +18,11 @@ class BadgeSeeder extends Seeder
     {
         $faker = Faker::create();
         foreach (range(1,5) as $value){
-            DB::table('badges')->insert([
-                'name'          => $faker->name,
-                'name_ar'       => $faker->name,
+            DB::table('trendings')->insert([
+                'car_id'        => Car::all()->random()->id,
+                'day'           => now(),
                 'created_at'    => now(),
-                'updated_at'    => now(),
+                'updated_at'    => now()
             ]);
         }
     }
