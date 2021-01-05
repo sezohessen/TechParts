@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Terms;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use PhpOffice\PhpSpreadsheet\Writer\Ods\Content;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GovernorateSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(TermsSeeder::class);
+        $this->call(AskExpertSeeder::class);
+        $this->call(ContactUsSeeder::class);
         \App\Models\User::factory(10)->create();
     }
 }
