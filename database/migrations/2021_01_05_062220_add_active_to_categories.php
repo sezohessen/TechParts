@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCountryPhoneToCountriesTable extends Migration
+class AddActiveToCategories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddCountryPhoneToCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('countries', function (Blueprint $table) {
-            //
-            $table->string('country_phone');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->boolean("active")->default(1);
         });
     }
 
@@ -26,9 +25,8 @@ class AddCountryPhoneToCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('countries', function (Blueprint $table) {
-            //
-            $table->dropColumn('country_phone');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropColumn('active');
         });
     }
 }

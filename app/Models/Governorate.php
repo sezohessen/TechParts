@@ -12,10 +12,14 @@ class Governorate extends Model
     protected $fillable=[
         'title',
         'title_ar',
-        'country_id'
+        'country_id',
+        "active"
     ];
     public function country() {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class,'country_id','id');
+    }
+    public function cities() {
+        return $this->hasMany(City::class);
     }
     public static function rules($request)
     {
@@ -32,6 +36,7 @@ class Governorate extends Model
             'title'             =>  $request->GovernorateEnglish,
             'title_ar'          =>  $request->GovernorateArabic,
             'country_id'        =>  $request->country_id,
+            'active'            => 1
         ];
 
         return $credentials;

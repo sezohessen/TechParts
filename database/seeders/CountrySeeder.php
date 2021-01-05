@@ -44,6 +44,7 @@ class CountrySeeder extends Seeder
                 'country_phone'         =>   $value['country_phone'],
                 'created_at'            =>  now(),
                 'updated_at'            =>  now(),
+                'active'                =>  1,
             ]);
         }
     }

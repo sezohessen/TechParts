@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Constraint\Count;
+use App\DataTables\GovernorateDatatable;
 
 class GovernorateController extends Controller
 {
@@ -14,19 +15,11 @@ class GovernorateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GovernorateDatatable $governorate)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'المحافظات';
-            $page_description = 'عرض جميع المحافظات';
-        } else {
-            $page_title = 'Governorates';
-            $page_description = 'View all Governorates';
-        } */
-        $page_title = 'Governorates';
-        $page_description = 'View all Governorates';
-        $governorates = Governorate::orderBy('created_at', 'desc')->paginate(10);
-        return view('dashboard.Governorate.index', compact('page_title', 'page_description','governorates'));
+        $page_title = __('Governorates');
+        $page_description = __('View Governorates');
+        return  $governorate->render("dashboard.Governorate.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -36,13 +29,7 @@ class GovernorateController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة محافظة";
-            $page_description = "اضافة محافظة جديدة";
-        } else {
-            $page_title = "Add Governorate";
-            $page_description = "Add new Governorate";
-        } */
+
         $page_title = "Add Governorate";
         $page_description = "Add new Governorate";
         $countries = Country::all();
@@ -61,11 +48,7 @@ class GovernorateController extends Controller
         $request->validate($rules);
         $credentials = Governorate::credentials($request);
         $Governorate = Governorate::create($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة المحافظة"));
-        } else {
-            session()->flash('success',__("Governorate has been added!"));
-        } */
+
        session()->flash('success',__("Governorate has been added!"));
        return redirect()->route("governorate.index");
     }
@@ -89,13 +72,7 @@ class GovernorateController extends Controller
      */
     public function edit($id)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "تعديل المحافظة";
-            $page_description = "تعديل";
-        } else {
-            $page_title = "Edit governorate";
-            $page_description = "Edit";
-        } */
+
         $page_title = "Edit governorate";
         $page_description = "Edit";
         $governorate = Governorate::find($id);
@@ -124,5 +101,12 @@ class GovernorateController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function Activity(Request $request){
+        $country = Governorate::find($request->id);
+        $country->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
     }
 }

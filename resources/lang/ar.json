@@ -195,6 +195,11 @@
     "please Use some records to delete":"من فضلك اختر بعض السجلات ",
     "Are you sure to delete":"هل انت متأكد من حذف ",
     "New Record":"اضافة سجل",
-    "Elements":"العناصر"
+    "Elements":"العناصر",
+    "Create A Question":"انشاء سؤال",
+    "Write an Answer":"اجابة عن السؤال",
+    "Create A Question (AR)":"انشاء سؤال باللغة العربية",
+    "Write A Answer (EN)":"اجابة عن السؤال باللغة العربية",
+    "Ask a Question":"اسأل سؤال"
 
     }

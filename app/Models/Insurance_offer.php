@@ -17,7 +17,9 @@ class Insurance_offer extends Model
         'img_id',
         'insurance_id',
     ];
-
+    public function insurance(){
+        return $this->belongsTo(Insurance::class,"insurance_id","id");
+    }
     public static function rules($request)
     {
         $rules = [

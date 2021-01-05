@@ -18,6 +18,12 @@ class offer_plan extends Model
         'offer_id',
         'insurance_id',
     ];
+    public function offer_plan(){
+        return $this->belongsTo(offer_plan::class,"offer_id","id");
+    }
+    public function insurance(){
+        return $this->belongsTo(Insurance::class,"insurance_id","id");
+    }
     public static function rules($request)
     {
         $rules = [

@@ -19,56 +19,36 @@
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="col-12">
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Country Name (ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CountryEnglish') ? 'is-invalid' : '' }}"
-                             name="CountryEnglish" value="{{ old('CountryEnglish') }}" required placeholder="@lang('Name(ENG)')"autofocus/>
-                            @if ($errors->has('CountryEnglish'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please enter country name')
-                                    </div>
-                                </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                             name="name" value="{{ old('name') }}" required placeholder="@lang('Name(ENG)')" autofocus/>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Country Name (AR)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CountryArabic') ? 'is-invalid' : '' }}"
-                             name="CountryArabic" value="{{ old('CountryArabic') }}"required placeholder="@lang('Name(AR)')"/>
-                             @if ($errors->has('CountryArabic'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                     @lang('Please enter country name')
-                                 </div>
-                             </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
+                             name="name_ar" value="{{ old('name_ar') }}"required placeholder="@lang('Name(AR)')"/>
+                            @error('name_ar')
+                                <div class="invalid-feedback">{{ $errors->first('name_ar') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Country Code') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CountryCode') ? 'is-invalid' : '' }}"
-                             name="CountryCode"  value="{{ old('CountryCode') }}" required placeholder="@lang('Code')"/>
-                             @if ($errors->has('CountryCode'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                     @lang('Please enter code')
-                                 </div>
-                             </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}"
+                             name="code"  value="{{ old('code') }}" required placeholder="@lang('Code')"/>
+                            @error('code')
+                                <div class="invalid-feedback">{{ $errors->first('code') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -76,13 +56,9 @@
                             <label>@lang('country phone') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('country_phone') ? 'is-invalid' : '' }}"
                              name="country_phone"  value="{{ old('country_phone') }}" required placeholder="@lang('country phone')"/>
-                             @if ($errors->has('country_phone'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                     @lang('Please enter code')
-                                 </div>
-                             </div>
-                            @endif
+                             @error('country_phone')
+                             <div class="invalid-feedback">{{ $errors->first('country_phone') }}</div>
+                             @enderror
                         </div>
                     </div>
                 </div>

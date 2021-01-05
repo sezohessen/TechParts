@@ -25,6 +25,7 @@ class CitySeeder extends Seeder
                 'governorate_id'    =>   Governorate::all()->random()->id,
                 'created_at'        =>  now(),
                 'updated_at'        =>  now(),
+                'active'            =>  1,
             ]);
         }
     }

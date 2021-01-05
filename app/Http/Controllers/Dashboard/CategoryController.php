@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use App\DataTables\CountryDatatable;
 class CategoryController extends Controller
 {
     /**
@@ -12,19 +12,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CountryDatatable $country)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'التصنيفات';
-            $page_description = 'عرض جميع التصنيفات';
-        } else {
-            $page_title = 'Categories';
-            $page_description = 'View all Categories';
-        } */
-        $page_title = 'Categories';
-        $page_description = 'View all Categories';
 
-        return view('dashboard.Country.index', compact('page_title', 'page_description'));
+        $page_title = __('Categories');
+        $page_description = __('View Categories');
+        return  $country->render("dashboard.Country.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -34,13 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة صنف";
-            $page_description = "اضافة صنف جديد";
-        } else {
-            $page_title = "Add Category";
-            $page_description = "Add new Category";
-        } */
+
         $page_title = "Add Category";
         $page_description = "Add new Category";
 
@@ -59,11 +46,7 @@ class CategoryController extends Controller
         $request->validate($rules);
         $credentials = Category::credentials($request);
         $Category = Category::create($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة الصنف"));
-        } else {
-            session()->flash('success',__("Category has been added!"));
-        } */
+
        session()->flash('success',__("Category has been added!"));
        return redirect()->route("category.index");
     }

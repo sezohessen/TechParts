@@ -22,6 +22,7 @@ class GovernorateSeeder extends Seeder
                 'country_id'        =>   Country::all()->random()->id,
                 'created_at'        =>  now(),
                 'updated_at'        =>  now(),
+                'active'            =>  1
             ]);
         }
     }
