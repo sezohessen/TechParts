@@ -60,6 +60,7 @@ class User extends Authenticatable
             'image'             => 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240',
             'first_name'        => 'required|string|max:255',
             'last_name'         => 'required|string|max:255',
+            'provider'          => 'nullable|string|max:255',
             'email'             => 'required|string|email|max:255|unique:users',
             'country_id'        => 'required|integer',
             'is_phone_virefied' => 'nullable|integer',
@@ -95,8 +96,8 @@ class User extends Authenticatable
         if (isset($request->interest_country) ) {
             $credentials['interest_country'] = $request->interest_country;
         }
-        if (isset($request->whats_app)) {
-            $credentials['whats_app'] = $request->whats_app;
+        if (isset($request->provider)) {
+            $credentials['provider'] = $request->provider;
         }
         return $credentials;
     }

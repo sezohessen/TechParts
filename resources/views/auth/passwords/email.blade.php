@@ -39,6 +39,11 @@
                         <div class="pb-13 pt-lg-0 pt-5">
                             <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">@lang('Forgotten Password ?')</h3>
                             <p class="text-muted font-weight-bold font-size-h4">@lang('Enter your email to reset your password')</p>
+                            @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                         </div>
                         <!--end::Title-->
                         <!--begin::Form group-->

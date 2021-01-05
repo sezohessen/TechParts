@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard"], function () {
+Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|admin']], function () {
     Route::get('/', 'DashboardController@index');
     Route::resource('/faqs','FaqController');
     Route::resource('/country','CountryController');
@@ -32,18 +32,15 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
-
     // Roles
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
-
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function ()
 {
@@ -51,7 +48,6 @@ Route::get('/', function ()
     $page_description = __('login page');
     return view('auth.login',  compact('page_title', 'page_description'));
 });
-Route::group(['middleware' => ['role:superadministrator']], function () {
-
+Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insurance", 'middleware' => ['role:insurance']], function () {
+    Route::get('/','InsuranceController@index');
 });
-
