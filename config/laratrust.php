@@ -172,7 +172,7 @@ return [
          * Method to be called in the middleware return case.
          * Available: abort|redirect
          */
-        'handling' => 'abort',
+        'handling' => 'redirect',
 
         /**
          * Handlers for the unauthorized method in the middlewares.
@@ -194,10 +194,10 @@ return [
              * If the message content is empty it won't be added to the redirection.
              */
             'redirect' => [
-                'url' => '/home',
+                'url' => '/',
                 'message' => [
                     'key' => 'error',
-                    'content' => ''
+                    'content' => 'User does not have any of the necessary access rights.'
                 ]
             ]
         ]
@@ -258,7 +258,7 @@ return [
         | Turn this value to false if you don't want to use Laratrust admin panel
         |
         */
-        'register' => false,
+        'register' => true,
 
         /*
         |--------------------------------------------------------------------------

@@ -50,7 +50,6 @@ License: You must have a valid license purchased only from themeforest(the above
 
         @include('layout.master._layout')
 
-        <script>var HOST_URL = "{{ route('quick-search') }}";</script>
 
         {{-- Global Config (global config for global JS scripts) --}}
         <script>

@@ -81,10 +81,12 @@
                                 $countries = \App\Models\Country::all();
                             @endphp
                             <select class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
-                                 id="country" name="country_id" required>
+                                 id="country_id" name="country_id" required>
                                 <option value="">@lang('--Select country first--')</option>
                                 @foreach ($countries as $country)
-                                    <option value="{{$country->id}}">{{$country->code}} {{ $country->country_phone }}</option>
+                                    <option value="{{$country->id}}" {{ old('country_id') == $country->id ? 'selected' : '' }}>
+                                    {{$country->code}} {{ $country->country_phone }}
+                                    </option>
                                 @endforeach
                             </select>
                             @if ($errors->has('country_id'))
@@ -120,17 +122,46 @@
                             @enderror
                         </div>
                         <!--end::Form group-->
+                        <div class="form-group">
+
+                            <select id="provider" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('provider') is-invalid @enderror" name="provider" required>
+                                <option value="" >@lang('--Select Acount Type--')</option>
+                                {{--
+                                <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
+                                    @lang('new user')
+                                </option>
+                                --}}
+                                <option value="insurance" {{ old('provider') == 'insurance' ? 'selected' : '' }}>
+                                    @lang('Insurance Company')
+                                </option>
+                            </select>
+                            @error('provider')
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                </div>
+                            @enderror
+                        </div>
+                        <!--end::Form group-->
 
                         <!--begin::Form group-->
                         <div class="form-group  fv-plugins-icon-container">
                             <label class="checkbox mb-0">
-                                <input type="checkbox" name="agree" />
+                                <input type="checkbox" name="agree" {{ old('agree') == 'on' ? 'checked' : '' }} />
                                 <span></span>
                                 <div class="ml-2">
                                     @lang('I Agree the ')
                                     <a href="{{ url('/terms') }}">@lang('terms and conditions')</a>.
                                 </div>
                             </label>
+                            @error('agree')
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                </div>
+                            @enderror
                         </div>
                         <!--end::Form group-->
                         <!--begin::Form group-->

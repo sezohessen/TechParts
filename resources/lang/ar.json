@@ -1,5 +1,4 @@
-    {
-
+{
     "country phone": "هاتف البلد",
     "terms and conditions": "الأحكام والشروط",
     "I Agree the ": " أوافق على ",
@@ -201,5 +200,8 @@
     "Feature Name (ENG)":"اسم الميزة (بالانجليزية)",
     "Feature Name (AR)":"اسم الميزة (بالعربية)",
     "Privcay and policy":"سياسية الخصوصية",
-    "Privcay and policy details":"تفاصيل سياسية الخصوصية"
-    }
+    "Privcay and policy details":"تفاصيل سياسية الخصوصية",
+    "new user": "مستخدم جديد",
+    "Insurance Company": "شركة تأمين",
+    "--Select Acount Type--": "- اختر نوع الحساب -",
+}

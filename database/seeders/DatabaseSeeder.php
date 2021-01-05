@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call( [FaqSeeder::class] );
-        /* $this->call(LaratrustSeeder::class); */
         $this->call(CountrySeeder::class);
         $this->call(GovernorateSeeder::class);
         $this->call(CitySeeder::class);
@@ -25,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PPolicySeeder::class);
         $this->call(AskExpertSeeder::class);
         $this->call(ContactUsSeeder::class);
-        \App\Models\User::factory(10)->create();
+        $this->call(LaratrustSeeder::class);
+        //\App\Models\User::factory(10)->create();
     }
 }

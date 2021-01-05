@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
 
 class LaratrustSeeder extends Seeder
 {
@@ -64,9 +65,19 @@ class LaratrustSeeder extends Seeder
                 $this->command->info("Creating '{$key}' user");
                 // Create default user for each role
                 $user = \App\Models\User::create([
-                    'name' => ucwords(str_replace('_', ' ', $key)),
+                    'image_id' => null,
+                    'interest_country' => \App\Models\Country::all()->random()->id,
+                    'first_name' => ucwords(str_replace('_', ' ', $key)),
+                    'last_name' => ucwords(str_replace('_', ' ', $key)),
+                    'country_code' => \App\Models\Country::all()->random()->code,
+                    'country_phone' => \App\Models\Country::all()->random()->country_phone,
+                    'whats_app' => \App\Models\Country::all()->random()->country_phone . rand(1000000, 10000000),
                     'email' => $key.'@app.com',
-                    'password' => bcrypt('password')
+                    'email_verified_at' => now(),
+                    'is_phone_virefied' => 1,
+                    'phone' => rand(1000000, 10000000),
+                    'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                    'remember_token' => Str::random(10)
                 ]);
                 $user->attachRole($role);
             }
@@ -91,7 +102,7 @@ class LaratrustSeeder extends Seeder
         if (Config::get('laratrust_seeder.truncate_tables')) {
             DB::table('roles')->truncate();
             DB::table('permissions')->truncate();
-            
+
             if (Config::get('laratrust_seeder.create_users')) {
                 $usersTable = (new \App\Models\User)->getTable();
                 DB::table($usersTable)->truncate();

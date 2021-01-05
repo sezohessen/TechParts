@@ -112,7 +112,7 @@ class SettingsController extends Controller
         //Delete Old image
         if($Image->name != ''  && $Image->name != null){
             $file_old = $destinationPath.$Image->name;
-            unlink($file_old);
+            @unlink($file_old);
         }
         //Update new image
         $Image->name = $fileName;

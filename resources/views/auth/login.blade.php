@@ -29,6 +29,7 @@
         <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
             <!--begin::Content body-->
             <div class="d-flex flex-column-fluid flex-center">
+                @guest
                 <!--begin::Signin-->
                 <div class="login-form login-signin" >
                     <!--begin::Form-->
@@ -83,6 +84,20 @@
                     <!--end::Form-->
                 </div>
                 <!--end::Signin-->
+                @else
+                    <div class="card">
+
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
+                            <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ __('Welcome to ') }}{{ config('app.name') }}</h3>
+                        </div>
+                    </div>
+                @endguest
             </div>
             <!--end::Content body-->
             <!--begin::Content footer-->

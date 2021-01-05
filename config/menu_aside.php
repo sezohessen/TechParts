@@ -289,19 +289,19 @@ return [
             ]
         ],
         [
-            'title' => 'General',
+            'title' => 'roles & permissions',
             'icon' => 'media/svg/icons/General/Settings-1.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
                 [
-                    'title' => 'Fixed Content',
-                    'page' => 'layout/general/fixed-content',
+                    'title' => 'roles',
+                    'page' => '/dashboard/roles',
 
                 ],
                 [
-                    'title' => 'Minimized Aside',
-                    'page' => 'layout/general/minimized-aside'
+                    'title' => 'permissions',
+                    'page' => '/dashboard/permissions'
                 ],
 
             ]
