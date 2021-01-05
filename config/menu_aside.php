@@ -308,7 +308,7 @@ return [
         ],
         [
             'title' => 'Settings',
-            'icon' => 'media/svg/icons/General/settings-2.svg',
+            'icon' => 'media/svg/icons/General/Settings-2.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
