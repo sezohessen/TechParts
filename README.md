@@ -34,15 +34,11 @@ npm install
 ```bash
 npm run dev
 ```
-```bash
-php artisan migrate
-```
-```bash
-php artisan db:seed
-```
+
 ```bash
 php artisan cache:clear
 ```
+
 ```bash
 php artisan config:cache
 ```
@@ -50,6 +46,11 @@ php artisan config:cache
 ```bash
 composer dump-autoload
 ```
+
+```bash
+php artisan migrate:fresh --seed
+```
+
 ```bash
 php artisan serve
 ```

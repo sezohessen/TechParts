@@ -196,14 +196,14 @@ return [
             ]
         ],
         [
-            'title' => 'General',
+            'title' => 'permissions',
             'icon' => 'media/svg/icons/General/Settings-1.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
                 [
-                    'title' => 'Fixed Content',
-                    'page' => 'layout/general/fixed-content',
+                    'title' => 'view',
+                    'page' => '/dashboard/permissions',
 
                 ],
                 [

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
+Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard"], function () {
     Route::get('/', 'DashboardController@index');
     Route::resource('/faqs','FaqController');
     Route::resource('/country','CountryController');
@@ -29,6 +29,17 @@ Route::group(['prefix' => 'dashboard','namespace'=>"Dashboard"], function () {
     Route::resource('/insurance','InsuranceController');
     Route::resource('/insurance-offer','InsuranceOfferController');
     Route::resource('/offer-plan','OfferPlanController');
+    // Permissions
+    Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
+    Route::resource('permissions', 'PermissionsController');
+
+    // Roles
+    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
+    Route::resource('roles', 'RolesController');
+
+    // Users
+    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+    Route::resource('users', 'UsersController');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Auth::routes();
@@ -41,35 +52,6 @@ Route::get('/', function ()
     return view('auth.login',  compact('page_title', 'page_description'));
 });
 Route::group(['middleware' => ['role:superadministrator']], function () {
-    Route::resource('/users','UsersController');
-    Route::resource('/permissions','PermissionsController');
-    Route::resource('/roles','RoleController');
-});
 
-Route::get('/test', function ()
-{
-    $owner = Role::create([
-        'name' => 'owner',
-        'display_name' => 'Project Owner', // optional
-        'description' => 'User is the owner of a given project', // optional
-    ]);
-
-    $admin = Role::create([
-        'name' => 'admin',
-        'display_name' => 'User Administrator', // optional
-        'description' => 'User is allowed to manage and edit other users', // optional
-    ]);
-
-    $createPost = Permission::create([
-        'name' => 'create-post',
-        'display_name' => 'Create Posts', // optional
-        'description' => 'create new blog posts', // optional
-    ]);
-
-    $editUser = Permission::create([
-        'name' => 'edit-user',
-        'display_name' => 'Edit Users', // optional
-        'description' => 'edit existing users', // optional
-    ]);
 });
 
