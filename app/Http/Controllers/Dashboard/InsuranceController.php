@@ -6,7 +6,7 @@ use App\Models\Insurance;
 use App\Models\Insurance_offer;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use App\DataTables\InsuranceDatatable;
 class InsuranceController extends Controller
 {
     /**
@@ -14,9 +14,11 @@ class InsuranceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(InsuranceDatatable  $insurance )
     {
-        //
+        $page_title = __('Insurance company');
+        $page_description = __('View Insurances');
+        return  $insurance->render("dashboard.Insurance.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -26,13 +28,7 @@ class InsuranceController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة شركة تأمين";
-            $page_description = " اضافة شركة تأمين جديدة";
-        } else {
-            $page_title = "Add insurance company";
-            $page_description = "Add new insurance company";
-        } */
+
         $page_title = "Add insurance company";
         $page_description = "Add new insurance company";
         $users = User::all();
@@ -51,11 +47,6 @@ class InsuranceController extends Controller
         $request->validate($rules);
         $credentials = Insurance::credentials($request);
         $Insurance = Insurance::create($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة شركة التأمين"));
-        } else {
-            session()->flash('success',__("Insurance company has been added!"));
-        } */
        session()->flash('success',__("Insurance company has been added!"));
        return redirect()->back();
     }

@@ -33,7 +33,7 @@
                         {!! $dataTable->table([
                             'class'=>'table table-separate table-head-custom table-checkable table-responsive'
                         ],true)!!}
-                    {!! Form::close() !!}
+
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
                     {!! Form::submit(__("Yes"),['class'=>'btn btn-danger'])!!}
                 </div>
             </div>
-
+            {!! Form::close() !!}
         </div>
     </div>
 
@@ -93,15 +93,4 @@
 <link rel="stylesheet" href="{{asset("plugins/datatables-buttons/css/buttons.bootstrap4.min.css")}}">
 <link rel="stylesheet" href="{{asset("plugins/datatables-responsive/css/responsive.bootstrap4.min.css")}}">
 <link rel="stylesheet" href="{{asset("plugins/datatables-bs4/css/dataTables.bootstrap4.min.css")}}">
-<style >
-
-@media only screen and (max-width: 600px)
-  {
-      .table {
-          display: none;
-      }
-  }
-
-</style>
 @endsection
-    

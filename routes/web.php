@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|admin']], function () {
     Route::get('/', 'DashboardController@index');
     Route::resource('/faqs','FaqController');
-    Route::delete("faqs/destroy/all","FaqController@multi_delete");
     Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');
     Route::resource('/city','CityController');
@@ -44,6 +43,24 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
+    /* Datatable deleteAll request */
+    Route::delete("faqs/destroy/all","FaqController@multi_delete");
+    Route::delete('/country/destroy/all','CountryController@multi_delete"');
+    Route::delete('/governorate/destroy/all','GovernorateController@multi_delete"');
+    Route::delete('/city/destroy/all','CityController@multi_delete"');
+    Route::delete('/category/destroy/all','CategoryController@multi_delete"');
+    Route::delete('/news/destroy/all','NewsController@multi_delete"');
+    Route::delete('/terms/destroy/all','TermsController@multi_delete"');
+    Route::delete('/settings/destroy/all','SettingsController@multi_delete"');
+    Route::delete('/insurance/destroy/all','InsuranceController@multi_delete"');
+    Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete"');
+    Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete"');
+    /* Datatable Activity request */
+    Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
+    Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
+    Route::post('/city/{city}/activity',"CityController@Activity")->name('City.Activity');
+    Route::post('/category/{category}/activity',"CategoryController@Activity")->name('Category.Activity');
+
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');

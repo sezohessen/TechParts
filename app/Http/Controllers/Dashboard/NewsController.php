@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
-
+use App\DataTables\NewsDatatable;
 class NewsController extends Controller
 {
     /**
@@ -13,9 +13,11 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(NewsDatatable $new)
     {
-        //
+        $page_title = __("News");
+        $page_description =__( "View News");
+        return  $new->render("dashboard.News.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -25,13 +27,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة خبر";
-            $page_description = "اضافة خبر جديدة";
-        } else {
-            $page_title = "Add News";
-            $page_description = "Add new news";
-        } */
+
         $page_title = "Add News";
         $page_description = "Add new news";
         $categories = Category::all();
@@ -52,12 +48,6 @@ class NewsController extends Controller
         $New = News::create($credentials);
         $New->save();
 
-
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة منشور"));
-        } else {
-            session()->flash('success',__("news has been added!"));
-        } */
        session()->flash('success',__("news has been added!"));
        return redirect()->route("news.index");
     }

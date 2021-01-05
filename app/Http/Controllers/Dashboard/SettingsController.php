@@ -6,7 +6,7 @@ use App\Models\Image;
 use App\Models\News;
 use App\Models\Settings;
 use Illuminate\Http\Request;
-
+use App\DataTables\SettingDatatable;
 class SettingsController extends Controller
 {
     /**
@@ -14,19 +14,12 @@ class SettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SettingDatatable $setting)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'الاعدادات';
-            $page_description = 'عرض الاعدادات';
-        } else {
-            $page_title = 'Settings';
-            $page_description = 'View all Settings';
-        } */
-        $page_title = 'Settings';
-        $page_description = 'View all Settings';
-        $settings = Settings::first();
-        return view('dashboard.Setting.index', compact('page_title', 'page_description','settings'));
+
+        $page_title = __('Settings');
+        $page_description = __('View  Settings');
+        return  $setting->render("dashboard.Setting.index", compact('page_title', 'page_description'));
     }
 
     /**

@@ -137,6 +137,20 @@
         aoColumns: [ { sWidth: "45%" }, { sWidth: "45%" }, { sWidth: "10%", bSearchable: false, bSortable: false } ],
         data:data
     } );
+
+  /*  Livewire.on('initializeCkEditor', function () {
+        ClassicEditor.create(document.getElementById('kt-ckeditor-1'))
+        .then(editor => { editor.setData(getDataFromTheEditor())})
+        .catch( error => {
+            console.error( error );
+        });
+    });
+    <livewire:scripts />
+    <livewire:styles />
+    Livewire.on('initializeCkEditor', function () {
+        ClassicEditor.create(document.getElementById('kt-ckeditor-2')).then(editor => { thisEditor = editor });
+    });
+    */
     </script>
 @endsection
 @section('styles')

@@ -203,5 +203,10 @@
     "Privcay and policy details":"تفاصيل سياسية الخصوصية",
     "new user": "مستخدم جديد",
     "Insurance Company": "شركة تأمين",
-    "--Select Acount Type--": "- اختر نوع الحساب -"
+    "--Select Acount Type--": "- اختر نوع الحساب -",
+    "Create A Question":"انشاء سؤال",
+    "Write an Answer":"اجابة عن السؤال",
+    "Create A Question (AR)":"انشاء سؤال باللغة العربية",
+    "Write A Answer (EN)":"اجابة عن السؤال باللغة العربية",
+    "Ask a Question":"اسأل سؤال"
 }

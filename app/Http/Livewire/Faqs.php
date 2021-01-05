@@ -13,8 +13,8 @@ class Faqs extends Component
     public $answer;
     public $answer_ar;
     protected $rules=[
-        'question'       => 'required|min:3|max:1000',
-        'question_ar'    => 'required|min:3|max:1000',
+        'question'       => 'required|min:3|max:254',
+        'question_ar'    => 'required|min:3|max:254',
         'answer'         => 'required|min:3|max:1000',
         'answer_ar'      => 'required|min:3|max:1000',
     ];

@@ -8,7 +8,6 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-
 class FaqDatatable extends DataTable
 {
 
@@ -22,9 +21,13 @@ class FaqDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('question', '{{Str::limit($question, 100)}}')
+            ->editColumn('question_ar', '{{Str::limit($question_ar, 100)}}')
+            ->editColumn('answer', '{!! Str::limit($answer, 100) !!}')
+            ->editColumn('answer_ar', '{!! Str::limit($answer_ar, 100) !!}')
             ->addColumn('checkbox', 'dashboard.FAQS.btn.checkbox')
             ->addColumn('action', 'dashboard.FAQS.btn.action')
-            ->rawColumns(['checkbox','action']);
+            ->rawColumns(['checkbox','action','answer','answer_ar']);
     }
 
     /**
@@ -35,6 +38,7 @@ class FaqDatatable extends DataTable
      */
     public function query()
     {
+
         return Faq::query();
     }
 
@@ -106,10 +110,8 @@ class FaqDatatable extends DataTable
             Column::make('answer'),
             Column::make('question_ar'),
             Column::make('answer_ar'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
             Column::computed('action')
-            ->title(__('edit'))
+            ->title(__('Action'))
             ->exportable(false)
             ->printable(false)
             ->searchable(false)

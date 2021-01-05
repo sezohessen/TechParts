@@ -16,7 +16,6 @@ class FaqController extends Controller
      */
     public function index(FaqDatatable $faq)
     {
-        App::setLocale('ar');
         $page_title = __('FAQS');
         $page_description = __('Frequently Asked Questions');
         return  $faq->render("dashboard.FAQS.index", compact('page_title', 'page_description'));
@@ -29,11 +28,10 @@ class FaqController extends Controller
      */
     public function create()
     {
-
         $page_title = __('FAQS');
         $page_description = __('Frequently Asked Questions');
 
-        return view('dashboard.FAQS.create', compact('page_title', 'page_description'));
+        return view('dashboard.FAQS.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -42,7 +40,16 @@ class FaqController extends Controller
      * @param  \Illuminate\Http\Request  $req\uest
      * @return \Illuminate\Http\Response
      */
+    public function store(Request $request)
+    {
+        $rules = Faq::rules($request);
+        $request->validate($rules);
+        $credentials = Faq::credentials($request);
+        Faq::create($credentials);
+        session()->flash('created',__("Changes has been Created Successfully"));
+        return redirect()->route("faqs.index");
 
+    }
     /**
      * Display the specified resource.
      *
@@ -60,9 +67,11 @@ class FaqController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Faq $faq)
     {
-        //
+        $page_title = __('FAQS');
+        $page_description = __('Frequently Asked Questions');
+        return view('dashboard.FAQS.edit', compact('page_title', 'page_description','faq'));
     }
 
     /**
@@ -72,9 +81,14 @@ class FaqController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Faq $faq)
     {
-        //
+        $rules =$faq->rules($request);
+        $request->validate($rules);
+        $credentials = $faq->credentials($request);
+        $faq->update($credentials);
+        session()->flash('updated',__("Changed has been updated successfully!"));
+        return  redirect()->route("faqs.index");
     }
 
     /**

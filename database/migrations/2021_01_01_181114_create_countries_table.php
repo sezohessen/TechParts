@@ -18,6 +18,8 @@ class CreateCountriesTable extends Migration
             $table->string('name');
             $table->string('name_ar');
             $table->string('code');
+            $table->boolean("active")->default(1);
+            $table->string('country_phone');
             $table->timestamps();
         });
     }

@@ -8,7 +8,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
-
+use App\DataTables\CountryDatatable;
 class CountryController extends Controller
 {
     /**
@@ -16,19 +16,11 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CountryDatatable $country)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'البلدان';
-            $page_description = 'عرض جميع البلدن';
-        } else {
-            $page_title = 'Countries';
-            $page_description = 'View all countries';
-        } */
-        $page_title = 'Countries';
-        $page_description = 'View all countries';
-        $countries = Country::orderBy('created_at', 'desc')->paginate(10);
-        return view('dashboard.Country.index', compact('page_title', 'page_description','countries'));
+        $page_title = __('Countries');
+        $page_description = __('View countries');
+        return  $country->render("dashboard.Country.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -38,13 +30,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة بلد";
-            $page_description = "اضافة بلد جديدة";
-        } else {
-            $page_title = "Add country";
-            $page_description = "Add new country";
-        } */
+
         $page_title = "Add country";
         $page_description = "Add new country";
 
@@ -59,18 +45,12 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = Country::rules($request);
         $request->validate($rules);
         $credentials = Country::credentials($request);
         $Country = Country::create($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة البلد"));
-        } else {
-            session()->flash('success',__("Country has been added!"));
-        } */
-       session()->flash('success',__("Country has been added!"));
-       return redirect()->back();
+        session()->flash('created',__("Changes has been Created Successfully"));
+        return  redirect()->route("country.index");
     }
 
     /**
@@ -100,13 +80,7 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "تعديل بلد";
-            $page_description = "تعديل";
-        } else {
-            $page_title = "Edit country";
-            $page_description = "Edit";
-        } */
+
         $page_title = "Edit country";
         $page_description = "Edit";
         $country = Country::find($id);
@@ -120,19 +94,14 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Country $country)
     {
-        $rules = Country::rules($request);
+        $rules =$country->rules($request);
         $request->validate($rules);
-        $credentials = Country::credentials($request);
-        $Country = Country::where('id',$id)->update($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم تعديل التغيرات بنجاح"));
-        } else {
-            session()->flash('success',__("Changed has been updated successfully!"));
-        } */
-       session()->flash('success',__("Changed has been updated successfully!"));
-       return redirect()->back();
+        $credentials = $country->credentials($request);
+        $country->update($credentials);
+        session()->flash('updated',__("Changed has been updated successfully!"));
+        return  redirect()->route("country.index");
     }
 
     /**
@@ -146,15 +115,17 @@ class CountryController extends Controller
         $country = Country::find($id);
         if($country!=null){
             $country->delete($id);
-            /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('delete',__(" تم الحذف بنجاح!  "));
-            } else {
-                session()->flash('delete',__("Row has been deleted successfully!"));
-            } */
             session()->flash('delete', 'Row has been deleted successfully!');
             return redirect()->route('country.index');
         }else{
             return redirect()->back();
         }
+    }
+    public function Activity(Request $request){
+        $country = Country::find($request->id);
+        $country->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
     }
 }

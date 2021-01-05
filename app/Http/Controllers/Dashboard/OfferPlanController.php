@@ -6,7 +6,7 @@ use App\Models\Insurance;
 use App\Models\Insurance_offer;
 use App\Models\offer_plan;
 use Illuminate\Http\Request;
-
+use App\DataTables\Offer_planDatatable;
 class OfferPlanController extends Controller
 {
     /**
@@ -14,9 +14,11 @@ class OfferPlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Offer_planDatatable $offer_plan)
     {
-        //
+        $page_title = __("Offer plan");
+        $page_description =__( "View Offer plan  for Insurance ");
+        return  $offer_plan->render("dashboard.offer-plan.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -26,13 +28,7 @@ class OfferPlanController extends Controller
      */
     public function create()
     {
-          /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة خطة عرض للتأمين";
-            $page_description = " اضافة  خطة عرض للتأمين جديدة";
-        } else {
-            $page_title = "Add offer plan for insurance";
-            $page_description = "Add new offer plan for insurance;
-        } */
+
         $page_title = "Add offer plan for insurance";
         $page_description = "Add offer plan for insurance";
         $Insurances = Insurance::all();
@@ -51,11 +47,7 @@ class OfferPlanController extends Controller
         $request->validate($rules);
         $credentials = offer_plan::credentials($request);
         $offer_plan = offer_plan::create($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة خطة عرض شركة التأمين"));
-        } else {
-            session()->flash('success',__("Plan offer company has been added!"));
-        } */
+
        session()->flash('success',__("Plan offer company has been added!"));
        return redirect()->back();
     }

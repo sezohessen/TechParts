@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Insurance;
 use App\Models\Insurance_offer;
 use Illuminate\Http\Request;
-
+use App\DataTables\Insurance_offerDatatable;
 class InsuranceOfferController extends Controller
 {
     /**
@@ -13,9 +13,11 @@ class InsuranceOfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Insurance_offerDatatable $insurance_offer)
     {
-        //
+        $page_title = __("Insurance Offer");
+        $page_description = __("View Insurance Offer");
+        return  $insurance_offer->render("dashboard.Insurance-offer.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -25,13 +27,6 @@ class InsuranceOfferController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة عرض تأمين";
-            $page_description = " اضافة عرض تأمين جديد";
-        } else {
-            $page_title = "Add insurance offer";
-            $page_description = "Add new insurance offer;
-        } */
         $page_title = "Add insurance offer";
         $page_description = "Add new insurance offer";
         $Insurances = Insurance::all();
@@ -50,11 +45,6 @@ class InsuranceOfferController extends Controller
         $request->validate($rules);
         $credentials = Insurance_offer::credentials($request);
         $Insurance_offer = Insurance_offer::create($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة عرض شركة التأمين"));
-        } else {
-            session()->flash('success',__("Offer insurance company has been added!"));
-        } */
        session()->flash('success',__("Offer insurance company has been added!"));
        return redirect()->back();
     }

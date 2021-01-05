@@ -13,29 +13,32 @@ class Country extends Model
         'name',
         'name_ar',
         'code',
-        'country_phone'
+        'country_phone',
+        'active'
     ];
 
     public function governorates() {
         return $this->hasMany(Governorate::class);
     }
+
     public static function rules($request)
     {
         $rules = [
-            'CountryArabic'        => 'required|string|max:255',
-            'CountryEnglish'       => 'required|string|max:255',
-            'CountryCode'          => 'required|string|max:50',
-            'country_phone'          => 'required|string|max:50',
+            'name_ar'        => 'required|string|max:255',
+            'name'           => 'required|string|max:255',
+            'code'           => 'required|string|max:50',
+            'country_phone'  => 'required|string|max:50',
         ];
         return $rules;
     }
     public static function credentials($request)
     {
         $credentials = [
-            'name_ar'           =>  $request->CountryArabic,
-            'name'              =>  $request->CountryEnglish,
-            'code'              =>  $request->CountryCode,
-            'country_phone'              =>  $request->country_phone,
+            'name_ar'           =>  $request->name_ar,
+            'name'              =>  $request->name,
+            'code'              =>  $request->code,
+            'country_phone'     =>  $request->country_phone,
+            'active'            => 1
         ];
         return $credentials;
     }

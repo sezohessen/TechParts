@@ -6,7 +6,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
-
+use App\DataTables\CityDatatable;
 class CityController extends Controller
 {
     /**
@@ -14,19 +14,11 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CityDatatable $city)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'المدن';
-            $page_description = 'عرض جميع المدن';
-        } else {
-            $page_title = 'Cities';
-            $page_description = 'View all Cities';
-        } */
-        $page_title = 'Cities';
-        $page_description = 'View all Cities';
-
-        return view('dashboard.City.index', compact('page_title', 'page_description'));
+        $page_title = __('Cities');
+        $page_description = __('View Cities');
+        return  $city->render("dashboard.City.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -36,13 +28,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة مدينة";
-            $page_description = "اضافة مدينة جديدة";
-        } else {
-            $page_title = "Add City";
-            $page_description = "Add new City";
-        } */
+
         $page_title = "Add City";
         $page_description = "Add new City";
         $countries = Country::all();
@@ -61,12 +47,6 @@ class CityController extends Controller
         $request->validate($rules);
         $credentials = City::credentials($request);
         $City = City::create($credentials);
-
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة المدينة"));
-        } else {
-            session()->flash('success',__("City has been added!"));
-        } */
        session()->flash('success',__("City has been added!"));
        return redirect()->route("city.index");
     }
@@ -114,5 +94,12 @@ class CityController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function Activity(Request $request){
+        $country = City::find($request->id);
+        $country->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
     }
 }
