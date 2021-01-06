@@ -20,4 +20,8 @@ class Image extends Model
     {
         return $this->hasOne(Insurance::class);
     }
+    public function offer()
+    {
+        return $this->hasOne(Insurance_offer::class);
+    }
 }

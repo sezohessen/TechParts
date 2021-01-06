@@ -32,7 +32,7 @@ class OfferPlanController extends Controller
         $insurance  = Insurance::where('user_id',Auth::id())
         ->first()
         ->id;
-        $offers = Insurance_offer::where('insurance_id',$insurance);
+        $offers = Insurance_offer::where('insurance_id',$insurance)->get();
         if($offers->count()){
             $page_title = "Add offer plan for insurance";
             $page_description = "Add offer plan for insurance";
@@ -54,7 +54,14 @@ class OfferPlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $insurance  = Insurance::where('user_id',Auth::id())->first();
+        $id         = $insurance->id;
+        $rules      = offer_plan::rules($request,$id);
+        $request->validate($rules);
+        $credentials = offer_plan::credentials($request,$id);
+        $offer_plan = offer_plan::create($credentials);
+       session()->flash('success',__("Plan offer company has been added!"));
+       return redirect()->back();
     }
 
     /**

@@ -79,7 +79,21 @@ class InsuranceOfferController extends Controller
      */
     public function edit($id)
     {
-        //
+        $offer = Insurance_offer::find($id);
+        $insurance = Insurance::where('user_id',Auth::id())->first();
+        //User can access only his Insurance campony offer
+        if($offer==NULL){
+            return redirect('/insurance');
+        }else{
+            if($offer->insurance_id==$insurance->id){
+                $page_title = "Edit insurance offer";
+                $page_description = "Edit insurance offer record";
+                return view('InsuranceDashboard.Insurance-offer.edit', compact('page_title', 'page_description','offer'));
+            }else{
+                return redirect('/insurance');
+            }
+        }
+
     }
 
     /**
@@ -91,7 +105,12 @@ class InsuranceOfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = Insurance_offer::rules($request,$id);
+        $request->validate($rules);
+        $credentials = Insurance_offer::credentials($request,$id);
+        $Insurance_offer = Insurance_offer::create($credentials);
+        session()->flash('success',__("Offer insurance company has been updated!"));
+        return redirect()->back();
     }
 
     /**

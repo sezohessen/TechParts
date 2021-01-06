@@ -1,7 +1,7 @@
 {{-- Extends layout --}}
 @extends('layout.insurance')
 @section('styles')
-<link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
+
 @endsection
 {{-- Content --}}
 @section('content')
@@ -13,8 +13,9 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("insurance.offer-plan.store")}}" method="POST">
+        <form action="{{route("insurance.insurance-offer.update",$offer->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="card-body">
@@ -27,9 +28,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Offer Plan title(ENG)') <span class="text-danger">*</span></label>
+                            <label>@lang('Insurance offer title(ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                             name="name"  placeholder="@lang('Title(ENG)')" value="{{ old('name')}}" required autofocus  />
+                             name="name"  placeholder="@lang('Title(ENG)')" value="{{ old('name') ? old('name') : $offer->title}}" required autofocus  />
                             @if ($errors->has('name'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -41,9 +42,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Offer Plan title(AR)') <span class="text-danger">*</span></label>
+                            <label>@lang('Insurance offer title(AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
-                             name="name_ar"  placeholder="@lang('Title(AR)')" value="{{ old('name_ar') }}" required   />
+                             name="name_ar"  placeholder="@lang('Title(AR)')"  value="{{ old('name_ar') ? old('name_ar') : $offer->title_ar}}" required   />
                             @if ($errors->has('name_ar'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -57,7 +58,7 @@
                         <div class="form-group">
                             <label for="description">@lang('Description(ENG)')</label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
-                            placeholder="@lang('Write description')" >{{ old('description') }}</textarea>
+                            placeholder="@lang('Write description')" >{{ old('description') ?  old('description') : $offer->description}}</textarea>
                             @if ($errors->has('description'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -71,7 +72,7 @@
                         <div class="form-group">
                             <label for="description">@lang('Description(AR)')</label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
-                            placeholder="@lang('Write description')">{{ old('description_ar') }}</textarea>
+                            placeholder="@lang('Write description')" >{{ old('description_ar') ?  old('description_ar') : $offer->description_ar}}</textarea>
                             @if ($errors->has('description_ar'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -83,43 +84,34 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="offer_id">@lang('Select Offer company') <span class="text-danger">*</span></label>
-                            <select class="form-control {{ $errors->has('offer_id') ? 'is-invalid' : '' }}" id="offer_id"
-                            name="offer_id" required>
-                                <option value="">@lang('--Select insurance offer--')</option>
-                                @foreach ($offers as $offer)
-                                    <option value="{{$offer->id}}">{{$offer->title}} - {{ $offer->title_ar }}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('offer_id'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('offer_id')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
-                          </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Price">@lang('Price')</label>
-                            <div class="col-10">
-                            <input type="number" name="price" min="0" step="1"
-                             id="Price" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" placeholder="0.00" required>
-                            @if ($errors->has('price'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('price')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                            <label for="Image">@lang('Logo image')</label>
+                            <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('img/insurance/offer/'.$offer->img->name) }})">
+                                <div class="image-input-wrapper"></div>
+                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg" required/>
+                                    <input type="hidden" name="logo_remove" />
+                                </label>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
                             </div>
+                             @if ($errors->has('logo'))
+                             <div class="fv-plugins-message-container">
+                                 <div class="fv-help-block">
+                                    <strong>{{ $errors->first('logo')  }}</strong>
+                                 </div>
+                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('create')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('update')</button>
             </div>
         </form>
         <!--end::Form-->
@@ -130,6 +122,14 @@
 {{-- Scripts Section --}}
 @section('scripts')
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
-<script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
+<script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
+<script>
+"use strict";
+var KTUserEdit={
+    init:function(){
+        new KTImageInput("logo");
+        }
+        };jQuery(document).ready((function(){KTUserEdit.init()}));
+</script>
 @endsection

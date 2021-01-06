@@ -7,6 +7,8 @@ use App\Models\News;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\DataTables\SettingDatatable;
+use Exception;
+
 class SettingsController extends Controller
 {
     /**
@@ -103,9 +105,11 @@ class SettingsController extends Controller
         $file->move($destinationPath, $fileName);
         $Image = Image::find($id);
         //Delete Old image
-        if($Image->name != ''  && $Image->name != null){
+        try {
             $file_old = $destinationPath.$Image->name;
-            @unlink($file_old);
+            unlink($file_old);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         //Update new image
         $Image->name = $fileName;

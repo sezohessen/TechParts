@@ -24,7 +24,7 @@ class offer_plan extends Model
     public function insurance(){
         return $this->belongsTo(Insurance::class,"insurance_id","id");
     }
-    public static function rules($request)
+    public static function rules($request,$id = NULL)
     {
         $rules = [
             'name'              => 'required|string|max:255',
@@ -35,19 +35,26 @@ class offer_plan extends Model
             'description'       => 'required|min:3|max:1000',
             'description_ar'    => 'required|min:3|max:1000',
         ];
+        if($id){
+            unset($rules['insurance_id']);
+        }
         return $rules;
     }
-    public static function credentials($request)
+    public static function credentials($request,$id = NULL)
     {
         $credentials = [
             'title'           =>  $request->name,
             'title_ar'        =>  $request->name_ar,
-            'insurance_id'    =>  $request->insurance_id,
             'offer_id'        =>  $request->offer_id,
             'price'           =>  $request->price,
             'description'     =>  $request->description,
             'description_ar'  =>  $request->description_ar,
         ];
+        if($id){
+            $credentials['insurance_id'] = $id;
+        }else{
+            $credentials['insurance_id'] = $request->insurance_id;
+        }
         return $credentials;
     }
 }
