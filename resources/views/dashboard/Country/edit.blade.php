@@ -10,12 +10,12 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('country.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route('dashboard.country.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
 
         <!--begin::Form-->
-        <form action="{{route("country.update",$country->id)}}" method="POST">
+        <form action="{{route("dashboard.country.update",$country->id)}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">

@@ -50,7 +50,7 @@ class GovernorateController extends Controller
         $Governorate = Governorate::create($credentials);
 
        session()->flash('success',__("Governorate has been added!"));
-       return redirect()->route("governorate.index");
+       return redirect()->route("dashboard.governorate.index");
     }
 
     /**

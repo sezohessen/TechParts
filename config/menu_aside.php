@@ -210,7 +210,7 @@ return [
                     'page' => "/dashboard/category/create"
                 ],
                 [
-                    'title' => 'View news',
+                    'title' => 'View Categories',
                     'page' => '/dashboard/category'
                 ],
 

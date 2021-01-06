@@ -48,7 +48,7 @@ class CityController extends Controller
         $credentials = City::credentials($request);
         $City = City::create($credentials);
        session()->flash('success',__("City has been added!"));
-       return redirect()->route("city.index");
+       return redirect()->route("dashboard.city.index");
     }
 
     /**

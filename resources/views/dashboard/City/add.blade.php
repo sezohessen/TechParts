@@ -11,7 +11,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("city.store")}}" method="POST">
+        <form action="{{route("dashboard.city.store")}}" method="POST">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -98,7 +98,7 @@
         var id = this.value ;
         $('#governorate').empty();
         $.ajax({
-            url: '/dashboard/country/'+id,
+            url: '/dashboard/city/'+id,
             success: data => {
                 if(data.governorates){
                     data.governorates.forEach(governorate =>

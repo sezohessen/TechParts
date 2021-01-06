@@ -12,20 +12,21 @@ class Category extends Model
     protected $fillable=[
         'name',
         'name_ar',
+        'active'
     ];
     public static function rules($request)
     {
         $rules = [
-            'CategoryEnglish'         => 'required|string|max:255',
-            'CategoryArabic'          => 'required|string|max:255',
+            'name'         => 'required|string|max:255|min:3',
+            'name_ar'          => 'required|string|max:255|min:3',
         ];
         return $rules;
     }
     public static function credentials($request)
     {
         $credentials = [
-            'name'         =>  $request->CategoryEnglish,
-            'name_ar'      =>  $request->CategoryArabic,
+            'name'         =>  $request->name,
+            'name_ar'      =>  $request->name,
         ];
         return $credentials;
     }

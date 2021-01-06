@@ -80483,3 +80483,6 @@ body {
     left: 70px;
   }
 }
+.invalid-feedback {
+    display:block;
+}

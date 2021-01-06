@@ -50,7 +50,7 @@ class CountryController extends Controller
         $credentials = Country::credentials($request);
         $Country = Country::create($credentials);
         session()->flash('created',__("Changes has been Created Successfully"));
-        return  redirect()->route("country.index");
+        return  redirect()->route("dashboard.country.index");
     }
 
     /**
@@ -101,7 +101,7 @@ class CountryController extends Controller
         $credentials = $country->credentials($request);
         $country->update($credentials);
         session()->flash('updated',__("Changed has been updated successfully!"));
-        return  redirect()->route("country.index");
+        return  redirect()->route("dashboard.country.index");
     }
 
     /**

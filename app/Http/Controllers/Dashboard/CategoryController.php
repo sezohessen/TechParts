@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\DataTables\CountryDatatable;
+use App\DataTables\CategoryDatatable;
 class CategoryController extends Controller
 {
     /**
@@ -12,12 +12,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CountryDatatable $country)
+    public function index(CategoryDatatable $category)
     {
 
         $page_title = __('Categories');
         $page_description = __('View Categories');
-        return  $country->render("dashboard.Country.index", compact('page_title', 'page_description'));
+        return  $category->render("dashboard.Category.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -28,8 +28,8 @@ class CategoryController extends Controller
     public function create()
     {
 
-        $page_title = "Add Category";
-        $page_description = "Add new Category";
+        $page_title = __("Add Category");
+        $page_description = __("Add new Category");
 
         return view('dashboard.Category.add', compact('page_title', 'page_description'));
     }
@@ -48,7 +48,7 @@ class CategoryController extends Controller
         $Category = Category::create($credentials);
 
        session()->flash('success',__("Category has been added!"));
-       return redirect()->route("category.index");
+       return redirect()->route("dashboard.category.index");
     }
 
     /**
@@ -70,7 +70,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $page_title = __('Category');
+        $page_description = __('Edit Category');
+        $category = Category::find($id);
+        return view('dashboard.Category.edit', compact('page_title', 'page_description','category'));
     }
 
     /**
@@ -80,9 +83,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $rules =$category->rules($request);
+        $request->validate($rules);
+        $credentials = $category->credentials($request);
+        $category->update($credentials);
+        session()->flash('updated',__("Changed has been updated successfully!"));
+        return  redirect()->route("dashboard.category.index");
     }
 
     /**
@@ -94,5 +102,12 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function Activity(Request $request){
+        $category = Category::find($request->id);
+        $category->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
     }
 }
