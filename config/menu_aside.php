@@ -257,6 +257,19 @@ return [
             ]
         ],
         [
+            'title' => 'Finacne Requests',
+            'icon' => 'fas fa-pencil-alt',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'View requests',
+                    'page' => "/dashboard/finance-request"
+                ],
+
+            ]
+        ],
+        [
             'title' => 'Contact',
             'icon' => 'fas fa-phone-square-alt',
             'bullet' => 'line',

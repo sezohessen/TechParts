@@ -34,6 +34,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/badge','BadgesController');
     Route::resource('/contact','ContactController');
     Route::resource('/AskExpert','AskExpertController');
+    Route::resource('/finance-request','FinanceRequestController');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
@@ -45,16 +46,17 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('users', 'UsersController');
     /* Datatable deleteAll request */
     Route::delete("faqs/destroy/all","FaqController@multi_delete");
-    Route::delete('/country/destroy/all','CountryController@multi_delete"');
-    Route::delete('/governorate/destroy/all','GovernorateController@multi_delete"');
-    Route::delete('/city/destroy/all','CityController@multi_delete"');
-    Route::delete('/category/destroy/all','CategoryController@multi_delete"');
-    Route::delete('/news/destroy/all','NewsController@multi_delete"');
-    Route::delete('/terms/destroy/all','TermsController@multi_delete"');
-    Route::delete('/settings/destroy/all','SettingsController@multi_delete"');
-    Route::delete('/insurance/destroy/all','InsuranceController@multi_delete"');
-    Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete"');
-    Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete"');
+    Route::delete('/country/destroy/all','CountryController@multi_delete');
+    Route::delete('/governorate/destroy/all','GovernorateController@multi_delete');
+    Route::delete('/city/destroy/all','CityController@multi_delete');
+    Route::delete('/category/destroy/all','CategoryController@multi_delete');
+    Route::delete('/news/destroy/all','NewsController@multi_delete');
+    Route::delete('/terms/destroy/all','TermsController@multi_delete');
+    Route::delete('/settings/destroy/all','SettingsController@multi_delete');
+    Route::delete('/insurance/destroy/all','InsuranceController@multi_delete');
+    Route::delete('/finance-request/destroy/all','InsuranceController@multi_delete');
+    Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
+    Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete');
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
