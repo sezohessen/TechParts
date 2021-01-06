@@ -20,8 +20,14 @@ class InsuranceController extends Controller
     public function index()
     {
         $insurance      = Insurance::where('user_id',Auth::id())->first();
-        $offers         = Insurance_offer::where('insurance_id',$insurance->id)->get();
-        $offers_plan    = offer_plan::where('insurance_id',$insurance->id)->get();
+        if ($insurance) {
+            $offers         = Insurance_offer::where('insurance_id',$insurance->id)->get();
+            $offers_plan    = offer_plan::where('insurance_id',$insurance->id)->get();
+        }else {
+            $offers         = null;
+            $offers_plan    = null;
+        }
+
         $page_title = __('Insurance Dashborad');
         $page_description = __('View insurance record');
         return  view("insurance.index", compact('page_title', 'page_description','offers','offers_plan'));

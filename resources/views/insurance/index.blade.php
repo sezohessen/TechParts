@@ -21,7 +21,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">{{ $offers->count() }}</div>
+                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">{{ null !== $offers  ?  $offers->count() : 0 }}</div>
                     <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1">يبقي عدل لينك الجدول</a>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <div class="text-dark font-weight-bolder font-size-h2 mt-3">{{ $offers_plan->count() }}</div>
+                    <div class="text-dark font-weight-bolder font-size-h2 mt-3">{{ null !== $offers_plan ? $offers_plan->count() : 0}}</div>
                     <a href="#" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1">متنساش تربطهم بالجدول ياحيوان</a>
                 </div>
             </div>

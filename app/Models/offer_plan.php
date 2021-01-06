@@ -31,7 +31,7 @@ class offer_plan extends Model
             'name_ar'           => 'required|string|max:255',
             'insurance_id'      => 'required',
             'offer_id'          => 'required',
-            'price'             => 'required|numeric',
+            'price'             => 'required|numeric|digits_between:1,10',
             'description'       => 'required|min:3|max:1000',
             'description_ar'    => 'required|min:3|max:1000',
         ];
