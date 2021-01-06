@@ -28,7 +28,7 @@ function changeUserStatus(_this, id) {
     var status = $(_this).prop('checked') == true ? 1 : 0;
     var id =id;
     $.ajax({
-        url:"{{ route('Country.Activity',"${id}") }}",
+        url:"{{ route('dashboard.Country.Activity',"${id}") }}",
         type: 'post',
         data: {
             _token: '{{csrf_token()}}',

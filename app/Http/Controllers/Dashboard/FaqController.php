@@ -18,7 +18,7 @@ class FaqController extends Controller
     {
         $page_title = __('FAQS');
         $page_description = __('Frequently Asked Questions');
-        return  $faq->render("dashboard.FAQS.index", compact('page_title', 'page_description'));
+        return  $faq->render("dashboard.Faqs.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -31,7 +31,7 @@ class FaqController extends Controller
         $page_title = __('FAQS');
         $page_description = __('Frequently Asked Questions');
 
-        return view('dashboard.FAQS.add', compact('page_title', 'page_description'));
+        return view('dashboard.Faqs.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -47,7 +47,7 @@ class FaqController extends Controller
         $credentials = Faq::credentials($request);
         Faq::create($credentials);
         session()->flash('created',__("Changes has been Created Successfully"));
-        return redirect()->route("faqs.index");
+        return redirect()->route("dashboard.faqs.index");
 
     }
     /**
@@ -71,7 +71,7 @@ class FaqController extends Controller
     {
         $page_title = __('FAQS');
         $page_description = __('Frequently Asked Questions');
-        return view('dashboard.FAQS.edit', compact('page_title', 'page_description','faq'));
+        return view('dashboard.Faqs.edit', compact('page_title', 'page_description','faq'));
     }
 
     /**
@@ -88,7 +88,7 @@ class FaqController extends Controller
         $credentials = $faq->credentials($request);
         $faq->update($credentials);
         session()->flash('updated',__("Changed has been updated successfully!"));
-        return  redirect()->route("faqs.index");
+        return  redirect()->route("dashboard.faqs.index");
     }
 
     /**
@@ -101,7 +101,7 @@ class FaqController extends Controller
     {
         $faq->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("faqs.index");
+        return redirect()->route("dashboard.faqs.index");
     }
     public function multi_delete(){
         if (is_array(request('item'))) {
@@ -114,6 +114,6 @@ class FaqController extends Controller
 			$cities->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("faqs.index");
+        return redirect()->route("dashboard.faqs.index");
     }
 }
