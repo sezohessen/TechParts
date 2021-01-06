@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $credentials = Category::credentials($request);
         $Category = Category::create($credentials);
 
-       session()->flash('success',__("Category has been added!"));
+       session()->flash('created',__("Changed has been Created successfully!"));
        return redirect()->route("dashboard.category.index");
     }
 
@@ -99,9 +99,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.category.index");
     }
     public function Activity(Request $request){
         $category = Category::find($request->id);
@@ -109,5 +111,18 @@ class CategoryController extends Controller
         return response()->json([
             'status' => true
         ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$category = Category::find($id);
+				$category->delete();
+			}
+		} else {
+			$category = Category::find(request('item'));
+			$category->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.category.index");
     }
 }

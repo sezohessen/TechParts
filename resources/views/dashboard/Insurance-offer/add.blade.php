@@ -13,7 +13,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("insurance-offer.store")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("dashboard.insurance-offer.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -21,29 +21,21 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Insurance offer title(ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                             name="name"  placeholder="@lang('Title(ENG)')" value="{{ old('name')}}" required autofocus  />
-                            @if ($errors->has('name'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('name')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
+                             name="title"  placeholder="@lang('Title(ENG)')" value="{{ old('title')}}" required autofocus  />
+                             @error('title')
+                                <div class="invalid-feedback">{{ $errors->first('title') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Insurance offer title(AR)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
-                             name="name_ar"  placeholder="@lang('Title(AR)')" value="{{ old('name_ar') }}" required   />
-                            @if ($errors->has('name_ar'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('name_ar')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('title_ar') ? 'is-invalid' : '' }}"
+                             name="title_ar"  placeholder="@lang('Title(AR)')" value="{{ old('title_ar') }}" required   />
+                             @error('title_ar')
+                                <div class="invalid-feedback">{{ $errors->first('title_ar') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -51,13 +43,9 @@
                             <label for="description">@lang('Description(ENG)')</label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
                             placeholder="@lang('Write description')" required>{{ old('description') }}</textarea>
-                            @if ($errors->has('description'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('description')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                            @error('description')
+                                <div class="invalid-feedback">{{ $errors->first('description') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -65,13 +53,9 @@
                             <label for="description">@lang('Description(AR)')</label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
                             placeholder="@lang('Write description')" required>{{ old('description_ar') }}</textarea>
-                            @if ($errors->has('description_ar'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('description_ar')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                            @error('description_ar')
+                                <div class="invalid-feedback">{{ $errors->first('description_ar') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -82,16 +66,12 @@
                                  id="kt_select2_1" name="insurance_id" required>
                                 <option value="">@lang('--Select user--')</option>
                                 @foreach ($Insurances as $Insurance)
-                                    <option value="{{$Insurance->id}}">{{$Insurance->name}} - {{ $Insurance->name_ar }}</option>
+                                    <option value="{{$Insurance->id}}">{{$Insurance->name}} - {{ $Insurance->title_ar }}</option>
                                 @endforeach
                              </select>
-                             @if ($errors->has('insurance_id'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('insurance_id')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                             @error('insurance_id')
+                                <div class="invalid-feedback">{{ $errors->first('insurance_id') }}</div>
+                            @enderror
                             </div>
                         </div>
                     </div>
@@ -112,13 +92,9 @@
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
                             </div>
-                             @if ($errors->has('logo'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                    <strong>{{ $errors->first('logo')  }}</strong>
-                                 </div>
-                             </div>
-                            @endif
+                            @error('logo')
+                                <div class="invalid-feedback">{{ $errors->first('logo') }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>

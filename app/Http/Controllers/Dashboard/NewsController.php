@@ -17,7 +17,7 @@ class NewsController extends Controller
     {
         $page_title = __("News");
         $page_description =__( "View News");
-        return  $new->render("dashboard.News.index", compact('page_title', 'page_description'));
+        return  $new->render("dashboard.news.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -95,5 +95,18 @@ class NewsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$new = News::find($id);
+				$new->delete();
+			}
+		} else {
+			$new = News::find(request('item'));
+			$new->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.news.index");
     }
 }

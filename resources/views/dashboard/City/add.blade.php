@@ -19,29 +19,21 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('City Name (ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CityEnglish') ? 'is-invalid' : '' }}"
-                            name="CityEnglish"  placeholder="@lang('Name(ENG)')" autofocus />
-                            @if ($errors->has('CityEnglish'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please enter city name')
-                                    </div>
-                                </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
+                            name="title"  placeholder="@lang('Name(ENG)')" autofocus  value="{{old("title")}}"/>
+                            @error('title')
+                                <div class="invalid-feedback">{{ $errors->first('title') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('City Name (AR)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CityArabic') ? 'is-invalid' : '' }}"
-                            name="CityArabic"  placeholder="@lang('Name(AR)')" />
-                            @if ($errors->has('CityArabic'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please enter city name')
-                                    </div>
-                                </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('title_ar') ? 'is-invalid' : '' }}"
+                            name="title_ar"  placeholder="@lang('Name(AR)')" value="{{old("title_ar")}}" />
+                            @error('title_ar')
+                                <div class="invalid-feedback">{{ $errors->first('title_ar') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -54,29 +46,21 @@
                                     <option value="{{$country->id}}">{{$country->name}} - {{ $country->name_ar }}</option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('country_id'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please select country')
-                                    </div>
-                                </div>
-                            @endif
+                            @error('country_id')
+                                <div class="invalid-feedback">{{ $errors->first('title_ar') }}</div>
+                            @enderror
                           </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="governorate">@lang('Select Governorate') <span class="text-danger">*</span></label>
-                            <select class="form-control {{ $errors->has('governorate') ? 'is-invalid' : '' }}" id="governorate"
-                            name="governorate" >
+                            <select class="form-control {{ $errors->has('governorate_id') ? 'is-invalid' : '' }}" id="governorate"
+                            name="governorate_id" >
                                 <option value="">@lang('--Select governorate first--')</option>
                             </select>
-                            @if ($errors->has('governorate'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please select governorate')
-                                    </div>
-                                </div>
-                            @endif
+                            @error('governorate_id')
+                                <div class="invalid-feedback">{{ $errors->first('governorate_id') }}</div>
+                            @enderror
                           </div>
                     </div>
                 </div>
@@ -98,7 +82,7 @@
         var id = this.value ;
         $('#governorate').empty();
         $.ajax({
-            url: '/dashboard/city/'+id,
+            url: '/dashboard/country/'+id,
             success: data => {
                 if(data.governorates){
                     data.governorates.forEach(governorate =>

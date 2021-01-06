@@ -100,4 +100,17 @@ class TermsController extends Controller
     {
         //
     }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$terms = Terms::find($id);
+				$terms->delete();
+			}
+		} else {
+			$terms = Terms::find(request('item'));
+			$terms->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.terms.index");
+    }
 }

@@ -143,5 +143,6 @@ return [
         ],
 
     ],
+    'pdf_generator' => 'snappy'
 
 ];

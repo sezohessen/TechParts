@@ -10,7 +10,7 @@
     {{-- Dashboard 1 --}}
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3" style="min-height: 50px">
-            <a href="{{route("faqs.create")}}" class="btn btn-primary font-weight-bolder">
+            <a href="{{route("dashboard.insurance.create")}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="20px" viewBox="0 0 24 24" version="1.1">

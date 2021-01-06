@@ -27,8 +27,8 @@ class Insurance_offer extends Model
     public static function rules($request,$id = NULL)
     {
         $rules = [
-            'name'              => 'required|string|max:255',
-            'name_ar'           => 'required|string|max:255',
+            'title'              => 'required|string|max:255',
+            'title_ar'           => 'required|string|max:255',
             'logo'              => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'insurance_id'      => 'required',
             'description'       => 'required|min:3|max:1000',
@@ -42,8 +42,9 @@ class Insurance_offer extends Model
     public static function credentials($request,$id = NULL,$img_id = NULL)
     {
         $credentials = [
-            'title'           =>  $request->name,
-            'title_ar'        =>  $request->name_ar,
+            'title'           =>  $request->title,
+            'title_ar'        =>  $request->title_ar,
+            'insurance_id'    =>  $request->insurance_id,
             'description'     =>  $request->description,
             'description_ar'  =>  $request->description_ar,
         ];

@@ -47,8 +47,8 @@ class CityController extends Controller
         $request->validate($rules);
         $credentials = City::credentials($request);
         $City = City::create($credentials);
-       session()->flash('success',__("City has been added!"));
-       return redirect()->route("dashboard.city.index");
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.city.index");
     }
 
     /**
@@ -70,7 +70,14 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $page_title =__("Edit country");
+        $page_description = __("Edit");
+        $city = City::find($id);
+        $governorate=Governorate::find($city->governorate_id);
+        $countries = Country::all();
+        return view('dashboard.City.edit', compact('page_title', 'page_description','city',"countries","governorate"));
+
     }
 
     /**
@@ -80,9 +87,14 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, City $city)
     {
-        //
+        $rules =$city->rules($request);
+        $request->validate($rules);
+        $credentials = $city->credentials($request);
+        $city->update($credentials);
+        session()->flash('updated',__("Changed has been updated successfully!"));
+        return  redirect()->route("dashboard.city.index");
     }
 
     /**
@@ -91,9 +103,11 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(City $city)
     {
-        //
+        $city->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.city.index");
     }
     public function Activity(Request $request){
         $country = City::find($request->id);
@@ -101,5 +115,18 @@ class CityController extends Controller
         return response()->json([
             'status' => true
         ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$city = City::find($id);
+				$city->delete();
+			}
+		} else {
+			$city = City::find(request('item'));
+			$city->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.city.index");
     }
 }

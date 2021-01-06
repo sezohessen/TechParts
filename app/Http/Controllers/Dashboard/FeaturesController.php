@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Feature;
 use Illuminate\Http\Request;
-
+use App\DataTables\FeatureDatatable;
 class FeaturesController extends Controller
 {
     /**
@@ -12,9 +12,11 @@ class FeaturesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(FeatureDatatable $feature)
     {
-        //
+        $page_title = __('Features');
+        $page_description = __('View Features');
+        return  $feature->render("dashboard.Feature.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -96,19 +98,19 @@ class FeaturesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Feature $feature)
     {
         $rules = Feature::rules($request);
         $request->validate($rules);
         $credentials = Feature::credentials($request);
-        $Feature = Feature::where('id',$id)->update($credentials);
+        $Feature = $feature->update($credentials);
         /* if (Session::get('app_locale') == 'ar') {
             session()->flash('success',__("تم تعديل الخاصية"));
         } else {
             session()->flash('success',__("Feature has been updated!"));
         } */
-       session()->flash('success',__("Feature has been updated!"));
-       return redirect()->back();
+      session()->flash('updated',__("Changed has been updated successfully!"));
+       return redirect()->route("dashboard.feature.index");
     }
 
     /**
@@ -117,8 +119,11 @@ class FeaturesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Feature $feature)
     {
+        $feature->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.feature.index");
         /* $Feature = Feature::find($id);
         if($Feature->count()!=0){
             $Feature->delete($id);
@@ -132,5 +137,25 @@ class FeaturesController extends Controller
         }else{
             return redirect()->back();
         } */
+    }
+    public function Activity(Request $request){
+        $category = Feature::find($request->id);
+        $category->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$feature = Feature::find($id);
+				$feature->delete();
+			}
+		} else {
+			$feature = Feature::find(request('item'));
+			$feature->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.feature.index");
     }
 }

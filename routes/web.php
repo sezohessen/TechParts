@@ -55,6 +55,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/settings/destroy/all','SettingsController@multi_delete');
     Route::delete('/insurance/destroy/all','InsuranceController@multi_delete');
     Route::delete('/finance-request/destroy/all','InsuranceController@multi_delete');
+    Route::delete('/feature/destroy/all','FeaturesController@multi_delete');
+    Route::delete('/badge/destroy/all','BadgesController@multi_delete');
     Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
     Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete');
     /* Datatable Activity request */
@@ -62,6 +64,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
     Route::post('/city/{city}/activity',"CityController@Activity")->name('City.Activity');
     Route::post('/category/{category}/activity',"CategoryController@Activity")->name('Category.Activity');
+    Route::post('/feature/{feature}/activity',"FeaturesController@Activity")->name('Features.Activity');
+    Route::post('/badge/{badge}/activity',"BadgesController@Activity")->name('Badge.Activity');
 
 });
 Route::get('/terms', 'Dashboard\TermsController@show');

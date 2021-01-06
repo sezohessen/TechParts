@@ -10,11 +10,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('governorate.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route('dashboard.governorate.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("governorate.store")}}" method="POST">
+        <form action="{{route("dashboard.governorate.store")}}" method="POST">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -22,29 +22,21 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Governorate Name(ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('GovernorateEnglish') ? 'is-invalid' : '' }}"
-                             name="GovernorateEnglish" value="{{ old('GovernorateEnglish') }}"  placeholder="@lang('Name(ENG)')" required autofocus  />
-                            @if ($errors->has('GovernorateEnglish'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please enter governorate name')
-                                    </div>
-                                </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
+                             name="title" value="{{ old('title') }}"  placeholder="@lang('Name(ENG)')" required autofocus  />
+                             @error('title')
+                                <div class="invalid-feedback">{{ $errors->first('title') }}</div>
+                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Governorate Name (AR)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('GovernorateArabic') ? 'is-invalid' : '' }}"
-                             name="GovernorateArabic" value="{{ old('GovernorateArabic') }}" placeholder="@lang('Name(AR)')" required />
-                            @if ($errors->has('GovernorateArabic'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please enter governorate name')
-                                    </div>
-                                </div>
-                            @endif
+                            <input type="text" class="form-control {{ $errors->has('title_ar') ? 'is-invalid' : '' }}"
+                             name="title_ar" value="{{ old('title_ar') }}" placeholder="@lang('Name(AR)')" required />
+                             @error('title_ar')
+                                <div class="invalid-feedback">{{ $errors->first('title_ar') }}</div>
+                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -57,13 +49,9 @@
                                     <option value="{{$country->id}}">{{$country->name}} - {{ $country->name_ar }}</option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('country_id'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please select country')
-                                    </div>
-                                </div>
-                            @endif
+                            @error('country_id')
+                                <div class="invalid-feedback">{{ $errors->first('country_id') }}</div>
+                            @enderror
                           </div>
                     </div>
                 </div>

@@ -47,8 +47,8 @@ class InsuranceController extends Controller
         $request->validate($rules);
         $credentials = Insurance::credentials($request);
         $Insurance = Insurance::create($credentials);
-       session()->flash('success',__("Insurance company has been added!"));
-       return redirect()->back();
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.insurance.index");
     }
 
     /**
@@ -79,7 +79,9 @@ class InsuranceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $page_title = __("Edit Insurance");
+        $page_description = __("Edit");
+        return view('dashboard.Insurance.edit', compact('page_title', 'page_description'));
     }
 
     /**
@@ -89,9 +91,14 @@ class InsuranceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Insurance $insurance)
     {
-        //
+        $rules =$insurance->rules($request);
+        $request->validate($rules);
+        $credentials = $insurance->credentials($request);
+        $insurance->update($credentials);
+        session()->flash('updated',__("Changed has been updated successfully!"));
+        return  redirect()->route("dashboard.insurance.index");
     }
 
     /**
@@ -100,8 +107,23 @@ class InsuranceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Insurance $insurance)
     {
-        //
+        $insurance->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.insurance.index");
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$insurance = Insurance::find($id);
+				$insurance->delete();
+			}
+		} else {
+			$insurance = Insurance::find(request('item'));
+			$insurance->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.insurance.index");
     }
 }

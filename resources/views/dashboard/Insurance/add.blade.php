@@ -13,7 +13,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("insurance.store")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("dashboard.insurance.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="card-body">
@@ -24,13 +24,9 @@
                             <label>@lang('Insurance company Name(ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                              name="name"  placeholder="@lang('Name(ENG)')" value="{{ old('name')}}" required autofocus  />
-                            @if ($errors->has('name'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('name')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                             @error('name')
+                             <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -38,13 +34,9 @@
                             <label>@lang('Insurance company Name(AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
                              name="name_ar"  placeholder="@lang('Name(AR)')" value="{{ old('name_ar') }}" required   />
-                            @if ($errors->has('name_ar'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('name_ar')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                             @error('name_ar')
+                             <div class="invalid-feedback">{{ $errors->first('name_ar') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -58,13 +50,9 @@
                                     <option value="{{$user->id}}">{{$user->name}} - {{ $user->email }}</option>
                                 @endforeach
                              </select>
-                             @if ($errors->has('user_id'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('user_id')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                            @error('user_id')
+                             <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
+                            @enderror
                             </div>
                         </div>
                     </div>
@@ -75,7 +63,7 @@
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg" required/>
+                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg"  required />
                                     <input type="hidden" name="logo_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -85,13 +73,9 @@
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
                             </div>
-                             @if ($errors->has('logo'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                    <strong>{{ $errors->first('logo')  }}</strong>
-                                 </div>
-                             </div>
-                            @endif
+                            @error('logo')
+                                <div class="invalid-feedback">{{ $errors->first('logo') }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>

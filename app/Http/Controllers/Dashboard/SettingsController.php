@@ -21,7 +21,7 @@ class SettingsController extends Controller
 
         $page_title = __('Settings');
         $page_description = __('View  Settings');
-        return  $setting->render("dashboard.Setting.index", compact('page_title', 'page_description'));
+        return  $setting->render("dashboard.settings.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -125,5 +125,18 @@ class SettingsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$setting = Settings::find($id);
+				$setting->delete();
+			}
+		} else {
+			$setting = Settings::find(request('item'));
+			$setting->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.settings.index");
     }
 }

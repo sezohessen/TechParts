@@ -110,16 +110,11 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Country $country)
     {
-        $country = Country::find($id);
-        if($country!=null){
-            $country->delete($id);
-            session()->flash('delete', 'Row has been deleted successfully!');
-            return redirect()->route('country.index');
-        }else{
-            return redirect()->back();
-        }
+        $country->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.country.index");
     }
     public function Activity(Request $request){
         $country = Country::find($request->id);
@@ -127,5 +122,18 @@ class CountryController extends Controller
         return response()->json([
             'status' => true
         ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$country = Country::find($id);
+				$country->delete();
+			}
+		} else {
+			$country = Country::find(request('item'));
+			$country->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.country.index");
     }
 }

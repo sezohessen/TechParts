@@ -48,9 +48,8 @@ class GovernorateController extends Controller
         $request->validate($rules);
         $credentials = Governorate::credentials($request);
         $Governorate = Governorate::create($credentials);
-
-       session()->flash('success',__("Governorate has been added!"));
-       return redirect()->route("dashboard.governorate.index");
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.governorate.index");
     }
 
     /**
@@ -62,6 +61,7 @@ class GovernorateController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -77,7 +77,7 @@ class GovernorateController extends Controller
         $page_description = "Edit";
         $governorate = Governorate::find($id);
         $countries = Country::all();
-        return view('dashboard.governorate.edit', compact('page_title', 'page_description','governorate','countries'));
+        return view('dashboard.Governorate.edit', compact('page_title', 'page_description','governorate','countries'));
     }
 
     /**
@@ -87,9 +87,14 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Governorate $governorate)
     {
-        //
+        $rules =$governorate->rules($request);
+        $request->validate($rules);
+        $credentials = $governorate->credentials($request);
+        $governorate->update($credentials);
+        session()->flash('updated',__("Changed has been updated successfully!"));
+        return  redirect()->route("dashboard.governorate.index");
     }
 
     /**
@@ -98,9 +103,11 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Governorate $governorate)
     {
-        //
+        $governorate->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.governorate.index");
     }
     public function Activity(Request $request){
         $country = Governorate::find($request->id);
@@ -108,5 +115,18 @@ class GovernorateController extends Controller
         return response()->json([
             'status' => true
         ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$governorate = Governorate::find($id);
+				$governorate->delete();
+			}
+		} else {
+			$governorate = Governorate::find(request('item'));
+			$governorate->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.governorate.index");
     }
 }

@@ -24,8 +24,8 @@ class Governorate extends Model
     public static function rules($request)
     {
         $rules = [
-            'GovernorateEnglish'        => 'required|string|max:255',
-            'GovernorateArabic'         => 'required|string|max:255',
+            'title'        => 'required|string|max:255',
+            'title_ar'         => 'required|string|max:255',
             'country_id'                => 'required',
         ];
         return $rules;
@@ -33,8 +33,8 @@ class Governorate extends Model
     public static function credentials($request)
     {
         $credentials = [
-            'title'             =>  $request->GovernorateEnglish,
-            'title_ar'          =>  $request->GovernorateArabic,
+            'title'             =>  $request->title,
+            'title_ar'          =>  $request->title_ar,
             'country_id'        =>  $request->country_id,
             'active'            => 1
         ];

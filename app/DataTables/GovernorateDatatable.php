@@ -25,7 +25,7 @@ class GovernorateDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('title', '{{Str::limit($title, 100)}}')
             ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
-            ->editColumn('country.name_ar', '{{ Str::limit($country->name_ar, 100) }}')
+            ->editColumn('country.name_ar', '{{ Str::limit($country["name_ar"], 100) }}')
             ->addColumn('checkbox', 'dashboard.Governorate.btn.checkbox')
             ->addColumn('action', 'dashboard.Governorate.btn.action')
             ->addColumn('active', 'dashboard.Governorate.btn.active')
@@ -109,7 +109,8 @@ class GovernorateDatatable extends DataTable
             Column::make('id'),
             Column::make('title'),
             Column::make('title_ar'),
-            Column::make('country.name_ar'),
+            Column::make('country.name_ar')
+            ->title(__("Country")),
             Column::computed('active')
             ->title(__('Active'))
             ->exportable(false)

@@ -2,13 +2,16 @@
 
 namespace App\DataTables;
 
-use App\Models\Insurance;
+use App\Models\Country;
+use App\Models\Feature;
+use App\Models\Governorate;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-class InsuranceDatatable extends DataTable
+
+class FeatureDatatable extends DataTable
 {
 
      /**
@@ -23,10 +26,10 @@ class InsuranceDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
             ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
-            ->editColumn('user.email', '{{ Str::limit($user->email, 100) }}')
-            ->addColumn('checkbox', 'dashboard.Insurance.btn.checkbox')
-            ->addColumn('action', 'dashboard.Insurance.btn.action')
-            ->rawColumns(['checkbox','action']);
+            ->addColumn('checkbox', 'dashboard.Feature.btn.checkbox')
+            ->addColumn('action', 'dashboard.Feature.btn.action')
+            ->addColumn('active', 'dashboard.Feature.btn.active')
+            ->rawColumns(['checkbox','action',"active"]);
     }
 
     /**
@@ -37,8 +40,7 @@ class InsuranceDatatable extends DataTable
      */
     public function query()
     {
-
-        return Insurance::query()->with("user")->select("insurances.*");
+        return Feature::query();
     }
 
     /**
@@ -49,7 +51,7 @@ class InsuranceDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('insurances-table')
+                    ->setTableId('features-table')
                     ->columns($this->getColumns())
                     ->dom('Bfrtip')
                     ->parameters([
@@ -107,7 +109,13 @@ class InsuranceDatatable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('name_ar'),
-            Column::make('user.email'),
+            Column::computed('active')
+            ->title(__('Active'))
+            ->exportable(false)
+            ->printable(false)
+            ->searchable(false)
+            ->width(120)
+            ->addClass('text-center'),
             Column::computed('action')
             ->title(__('Action'))
             ->exportable(false)
@@ -115,6 +123,7 @@ class InsuranceDatatable extends DataTable
             ->searchable(false)
             ->width(120)
             ->addClass('text-center')
+
         ];
     }
 
@@ -125,6 +134,6 @@ class InsuranceDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Insurances_' . date('YmdHis');
+        return 'Features_' . date('YmdHis');
     }
 }
