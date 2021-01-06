@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Badges;
 use Illuminate\Http\Request;
-
+use App\DataTables\BadgesDatatable;
 class BadgesController extends Controller
 {
     /**
@@ -12,9 +12,11 @@ class BadgesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(BadgesDatatable $badge)
     {
-        //
+        $page_title = __('Bagdes');
+        $page_description = __('View Bagdes');
+        return  $badge->render("dashboard.Badge.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -53,8 +55,8 @@ class BadgesController extends Controller
         } else {
             session()->flash('success',__("Badge has been added!"));
         } */
-       session()->flash('success',__("Badge has been added!"));
-       return redirect()->back();
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.category.index");
     }
 
     /**
@@ -96,19 +98,19 @@ class BadgesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Badges $badge)
     {
         $rules = Badges::rules($request);
         $request->validate($rules);
         $credentials = Badges::credentials($request);
-        $Badges = Badges::where('id',$id)->update($credentials);
+        $Badges = $badge->update($credentials);
         /* if (Session::get('app_locale') == 'ar') {
             session()->flash('success',__("تم تعديل الميزة"));
         } else {
             session()->flash('success',__("Badge has been updated!"));
         } */
-       session()->flash('success',__("Badge has been updated!"));
-       return redirect()->back();
+        session()->flash('updated',__("Changed has been updated successfully!"));
+        return  redirect()->route("dashboard.badge.index");
     }
     /**
      * Remove the specified resource from storage.
@@ -116,8 +118,11 @@ class BadgesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Badges $badge)
     {
+        $badge->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.badge.index");
        /*  $badge = Badges::find($id);
         if($badge!=null){
             $badge->delete($id);
@@ -131,5 +136,25 @@ class BadgesController extends Controller
         }else{
             return redirect()->back();
         } */
+    }
+    public function Activity(Request $request){
+        $country = Badges::find($request->id);
+        $country->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$badge = Badges::find($id);
+				$badge->delete();
+			}
+		} else {
+			$badge = Badges::find(request('item'));
+			$badge->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.badge.index");
     }
 }

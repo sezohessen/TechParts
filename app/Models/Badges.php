@@ -12,6 +12,7 @@ class Badges extends Model
     protected $fillable=[
         'name',
         'name_ar',
+        'active'
     ];
     public static function rules($request)
     {

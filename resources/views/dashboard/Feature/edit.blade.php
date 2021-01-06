@@ -10,24 +10,16 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('feature.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route('dashboard.feature.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("feature.update",$feature->id)}}" method="POST">
+        <form action="{{route("dashboard.feature.update",$feature->id)}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="col-12">
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -36,13 +28,9 @@
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                              name="name" value="{{ old('name') ? old('name'): $feature->name }}"
                               required placeholder="@lang('Name(ENG)')"autofocus/>
-                            @if ($errors->has('name'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $errors->first('name')  }}</strong>
-                                    </div>
-                                </div>
-                            @endif
+                            @error('name')
+                                <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -51,13 +39,9 @@
                             <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
                              name="name_ar" value="{{ old('name_ar') ? old('name_ar'): $feature->name_ar }}"
                              required placeholder="@lang('Name(AR)')"/>
-                             @if ($errors->has('name_ar'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                    <strong>{{ $errors->first('name_ar')  }}</strong>
-                                 </div>
-                             </div>
-                            @endif
+                            @error('name_ar')
+                             <div class="invalid-feedback">{{ $errors->first('name_ar') }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>

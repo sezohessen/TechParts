@@ -2,15 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Country;
-use App\Models\Governorate;
+use App\Models\Badges;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class GovernorateDatatable extends DataTable
+class BadgesDatatable extends DataTable
 {
 
      /**
@@ -23,12 +22,11 @@ class GovernorateDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('title', '{{Str::limit($title, 100)}}')
-            ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
-            ->editColumn('country.name_ar', '{{ Str::limit($country["name_ar"], 100) }}')
-            ->addColumn('checkbox', 'dashboard.Governorate.btn.checkbox')
-            ->addColumn('action', 'dashboard.Governorate.btn.action')
-            ->addColumn('active', 'dashboard.Governorate.btn.active')
+            ->editColumn('name', '{{Str::limit($name, 100)}}')
+            ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
+            ->addColumn('checkbox', 'dashboard.Badge.btn.checkbox')
+            ->addColumn('action', 'dashboard.Badge.btn.action')
+            ->addColumn('active', 'dashboard.Badge.btn.active')
             ->rawColumns(['checkbox','action',"active"]);
     }
 
@@ -40,7 +38,7 @@ class GovernorateDatatable extends DataTable
      */
     public function query()
     {
-        return Governorate::query()->with("country")->select("governorates.*");
+        return Badges::query();
     }
 
     /**
@@ -51,7 +49,7 @@ class GovernorateDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('governorates-table')
+                    ->setTableId('badges-table')
                     ->columns($this->getColumns())
                     ->dom('Bfrtip')
                     ->parameters([
@@ -107,10 +105,8 @@ class GovernorateDatatable extends DataTable
                 "searchable"=>false,
             ],
             Column::make('id'),
-            Column::make('title'),
-            Column::make('title_ar'),
-            Column::make('country.name_ar')
-            ->title(__("Country")),
+            Column::make('name'),
+            Column::make('name_ar'),
             Column::computed('active')
             ->title(__('Active'))
             ->exportable(false)
@@ -136,6 +132,6 @@ class GovernorateDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Governorates_' . date('YmdHis');
+        return 'Badges_' . date('YmdHis');
     }
 }

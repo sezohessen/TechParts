@@ -9,7 +9,7 @@
        </svg>
    </span>
 </a>
-<a href="{{route("dashboard.governorate.edit",['governorate'=>$id])}}" class="btn btn-md btn-success btn-icon mr-2" title="Edit details">
+<a href="{{route("dashboard.feature.edit",['feature'=>$id])}}" class="btn btn-md btn-success btn-icon mr-2" title="Edit details">
     <span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="mt-1">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -31,7 +31,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">@lang("Delete Record")</h4>
         </div>
-        {!! Form::open(['route'=>['dashboard.governorate.destroy',$id],'method'=>'delete']) !!}
+        {!! Form::open(['route'=>['dashboard.feature.destroy',$id],'method'=>'delete']) !!}
         <div class="modal-body">
             <p>@lang("Are you sure you want delete this item  ? ")</p>
         </div>

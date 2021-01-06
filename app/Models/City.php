@@ -24,17 +24,17 @@ class City extends Model
             'title'         => 'required|string|max:255',
             'title_ar'          => 'required|string|max:255',
             'country_id'          => 'required',
-            'governorate'         => 'required'
+            'governorate_id'         => 'required'
         ];
         return $rules;
     }
     public static function credentials($request)
     {
         $credentials = [
-            'title'         =>  $request->CityEnglish,
-            'title_ar'      =>  $request->CityArabic,
+            'title'         =>  $request->title,
+            'title_ar'      =>  $request->title_ar,
             'country_id'    =>  $request->country_id,
-            'governorate_id'=>  $request->governorate,
+            'governorate_id'=>  $request->governorate_id,
             'active'         => 1
         ];
 

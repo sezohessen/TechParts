@@ -54,12 +54,12 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="governorate">@lang('Select Governorate') <span class="text-danger">*</span></label>
-                            <select class="form-control {{ $errors->has('governorate') ? 'is-invalid' : '' }}" id="governorate"
-                            name="governorate" >
+                            <select class="form-control {{ $errors->has('governorate_id') ? 'is-invalid' : '' }}" id="governorate"
+                            name="governorate_id" >
                                 <option value="">@lang('--Select governorate first--')</option>
                             </select>
-                            @error('governorate')
-                                <div class="invalid-feedback">{{ $errors->first('governorate') }}</div>
+                            @error('governorate_id')
+                                <div class="invalid-feedback">{{ $errors->first('governorate_id') }}</div>
                             @enderror
                           </div>
                     </div>
