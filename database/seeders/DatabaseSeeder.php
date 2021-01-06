@@ -35,5 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call(car_badgeSeeder::class);
         $this->call(car_featureSeeder::class);
         $this->call(car_userFavSeeder::class);
+        $this->call(InsuranceSeeder::class);
+        $this->call(InsuranceOfferSeeder::class);
+
     }
 }

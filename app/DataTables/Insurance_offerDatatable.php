@@ -25,7 +25,7 @@ class Insurance_offerDatatable extends DataTable
             ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
             ->editColumn('description', '{{ Str::limit($description, 100) }}')
             ->editColumn('description_ar', '{{ Str::limit($description_ar, 100) }}')
-            ->editColumn('insurance.name_ar', '{{ Str::limit($insurance->name_ar, 100) }}')
+            ->editColumn('insurance.name_ar', '{{ Str::limit($insurance["name_ar"], 100) }}')
             ->addColumn('checkbox', 'dashboard.Insurance-offer.btn.checkbox')
             ->addColumn('action', 'dashboard.Insurance-offer.btn.action')
             ->rawColumns(['checkbox','action']);
@@ -111,7 +111,8 @@ class Insurance_offerDatatable extends DataTable
             Column::make('title_ar'),
             Column::make('description'),
             Column::make('description_ar'),
-            Column::make('insurance.name_ar'),
+            Column::make('insurance.name_ar')
+            ->title(__("Insurance")),
             Column::computed('action')
             ->title(__('Action'))
             ->exportable(false)

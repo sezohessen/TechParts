@@ -17,7 +17,7 @@ class InsuranceOfferController extends Controller
     {
         $page_title = __("Insurance Offer");
         $page_description = __("View Insurance Offer");
-        return  $insurance_offer->render("dashboard.insurance-offer.index", compact('page_title', 'page_description'));
+        return  $insurance_offer->render("dashboard.Insurance-offer.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -45,8 +45,8 @@ class InsuranceOfferController extends Controller
         $request->validate($rules);
         $credentials = Insurance_offer::credentials($request);
         $Insurance_offer = Insurance_offer::create($credentials);
-       session()->flash('success',__("Offer insurance company has been added!"));
-       return redirect()->back();
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.insurance-offer.index");
     }
 
     /**
@@ -89,9 +89,11 @@ class InsuranceOfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Insurance_offer $insurance_offer)
     {
-        //
+        $insurance_offer->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.insurance-offer.index");
     }
     public function multi_delete(){
         if (is_array(request('item'))) {

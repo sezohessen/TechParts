@@ -23,7 +23,7 @@ class InsuranceDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
             ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
-            ->editColumn('user.email', '{{ Str::limit($user->email, 100) }}')
+            ->editColumn('user.email', '{{ Str::limit($user["email"], 100) }}')
             ->addColumn('checkbox', 'dashboard.Insurance.btn.checkbox')
             ->addColumn('action', 'dashboard.Insurance.btn.action')
             ->rawColumns(['checkbox','action']);
@@ -107,7 +107,8 @@ class InsuranceDatatable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('name_ar'),
-            Column::make('user.email'),
+            Column::make('user.email')
+            ->title(__("User")),
             Column::computed('action')
             ->title(__('Action'))
             ->exportable(false)
