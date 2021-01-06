@@ -120,7 +120,7 @@ class FeaturesController extends Controller
     public function destroy($id)
     {
         /* $Feature = Feature::find($id);
-        if($Feature!=null){
+        if($Feature->count()!=0){
             $Feature->delete($id);
              if (Session::get('app_locale') == 'ar') {
             session()->flash('delete',__(" تم الحذف بنجاح!  "));

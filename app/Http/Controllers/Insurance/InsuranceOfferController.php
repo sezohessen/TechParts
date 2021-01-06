@@ -123,6 +123,18 @@ class InsuranceOfferController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /*$offer = Insurance_offer::find($id);
+        if($offer->count()!=0){
+            $offer->delete($id);
+            if (Session::get('app_locale') == 'ar') {
+            session()->flash('delete',__(" تم الحذف بنجاح!  "));
+            } else {
+                session()->flash('delete',__("Row has been deleted successfully!"));
+            }
+            session()->flash('delete', 'Row has been deleted successfully!');
+            return redirect()->route('###########');
+        }else{
+            return redirect()->back();
+        }*/
     }
 }

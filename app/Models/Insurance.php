@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,7 +35,7 @@ class Insurance extends Model
         }
         return $rules;
     }
-    public static function credentials($request,$id = NULL)
+    public static function credentials($request,$id = NULL,$img_id = NULL)
     {
         $credentials = [
             'name_ar'           =>  $request->name_ar,
@@ -45,19 +46,39 @@ class Insurance extends Model
         }else{
             $credentials['user_id'] = $request->user_id;
         }
+
         if($request->file('logo')){
-            $Image_id = self::file($request->file('logo'));
+            if($id){
+                $Image_id = self::file($request->file('logo'),$img_id);
+            }else{
+                $Image_id = self::file($request->file('logo'));
+            }
             $credentials['img_id'] = $Image_id;
         }
         return $credentials;
     }
-    public static function file($file)
+    public static function file($file,$id = NULL)
     {
         $extension = $file->getClientOriginalExtension();
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
         $destinationPath = public_path() . '/img/insurance/';
         $file->move($destinationPath, $fileName);
-        $Image = Image::create(['name' => $fileName]);
-        return $Image->id;
+        if($id){//For update
+            $Image = Image::find($id);
+            //Delete Old image
+            try {
+                $file_old = $destinationPath.$Image->name;
+                unlink($file_old);
+            } catch (Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+            //Update new image
+            $Image->name = $fileName;
+            $Image->save();
+            return $Image->id;
+        }else{
+            $Image = Image::create(['name' => $fileName]);
+            return $Image->id;
+        }
     }
 }

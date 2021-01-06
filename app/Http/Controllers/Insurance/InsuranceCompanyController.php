@@ -91,7 +91,13 @@ class InsuranceCompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Insurance      = Insurance::find($id);
+        $rules          = Insurance::rules($request,Auth::id());
+        $request->validate($rules);
+        $credentials = Insurance::credentials($request,Auth::id(),$Insurance->img_id);
+        $Insurance_offer = Insurance::where('id',$id)->update($credentials);
+        session()->flash('success',__("Offer insurance company has been updated!"));
+        return redirect()->back();
     }
 
     /**
