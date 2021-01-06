@@ -105,10 +105,12 @@ class InsuranceOfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = Insurance_offer::rules($request,$id);
+        $insurance  = Insurance::where('user_id',Auth::id())->first();
+        $offer      = Insurance_offer::find($id);
+        $rules      = Insurance_offer::rules($request,$insurance->id);//Request,Insurance,offer img
         $request->validate($rules);
-        $credentials = Insurance_offer::credentials($request,$id);
-        $Insurance_offer = Insurance_offer::create($credentials);
+        $credentials = Insurance_offer::credentials($request,$insurance->id,$offer->img_id);
+        $Insurance_offer = Insurance_offer::where('id',$id)->update($credentials);
         session()->flash('success',__("Offer insurance company has been updated!"));
         return redirect()->back();
     }

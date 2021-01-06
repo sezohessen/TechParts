@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,7 +39,7 @@ class Insurance_offer extends Model
         }
         return $rules;
     }
-    public static function credentials($request,$id = NULL)
+    public static function credentials($request,$id = NULL,$img_id = NULL)
     {
         $credentials = [
             'title'           =>  $request->name,
@@ -53,7 +54,7 @@ class Insurance_offer extends Model
         }
         if($request->file('logo')){
             if($id){//For update
-                $Image_id = self::file($request->file('logo'),$id);
+                $Image_id = self::file($request->file('logo'),$img_id);
             }else{
                 $Image_id = self::file($request->file('logo'));
             }
@@ -79,8 +80,11 @@ class Insurance_offer extends Model
             //Update new image
             $Image->name = $fileName;
             $Image->save();
+            return $Image->id;
+        }else{
+            $Image = Image::create(['name' => $fileName]);
+            return $Image->id;
         }
-        $Image = Image::create(['name' => $fileName]);
-        return $Image->id;
+
     }
 }
