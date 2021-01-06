@@ -25,8 +25,8 @@ class FaqDatatable extends DataTable
             ->editColumn('question_ar', '{{Str::limit($question_ar, 100)}}')
             ->editColumn('answer', '{!! Str::limit($answer, 100) !!}')
             ->editColumn('answer_ar', '{!! Str::limit($answer_ar, 100) !!}')
-            ->addColumn('checkbox', 'dashboard.FAQS.btn.checkbox')
-            ->addColumn('action', 'dashboard.FAQS.btn.action')
+            ->addColumn('checkbox', 'dashboard.Faqs.btn.checkbox')
+            ->addColumn('action', 'dashboard.Faqs.btn.action')
             ->rawColumns(['checkbox','action','answer','answer_ar']);
     }
 

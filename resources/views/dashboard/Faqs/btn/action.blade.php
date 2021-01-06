@@ -1,5 +1,5 @@
 <!-- Trigger the modal with a button -->
-<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete" data-toggle="modal" data-target="#myModal{{$id}}">
+<a href="javascript:;" class="btn btn-md btn-danger btn-icon" title="Delete" data-toggle="modal" data-target="#myModal{{$id}}">
     <span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <rect x="0" y="0" width="24" height="24"/>
@@ -9,7 +9,7 @@
        </svg>
    </span>
 </a>
-<a href="{{route("dashboard.faqs.edit",['faq'=>$id])}}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
+<a href="{{route("dashboard.faqs.edit",['faq'=>$id])}}" class="btn btn-md btn-success btn-icon mr-2" title="Edit details">
     <span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="mt-1">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -20,6 +20,7 @@
         </svg>
     </span>
 </a>
+
 
 <!-- Modal -->
 <div id="myModal{{$id}}" class="modal fade" role="dialog">

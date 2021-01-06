@@ -26,7 +26,7 @@ class Category extends Model
     {
         $credentials = [
             'name'         =>  $request->name,
-            'name_ar'      =>  $request->name,
+            'name_ar'      =>  $request->name_ar,
         ];
         return $credentials;
     }

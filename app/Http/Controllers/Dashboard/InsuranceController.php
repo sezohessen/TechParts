@@ -32,7 +32,7 @@ class InsuranceController extends Controller
         $page_title = "Add insurance company";
         $page_description = "Add new insurance company";
         $users = User::all();
-        return view('dashboard.Insurance.add', compact('page_title', 'page_description','users'));
+        return view('dashboard.insurance.add', compact('page_title', 'page_description','users'));
     }
 
     /**
@@ -103,5 +103,18 @@ class InsuranceController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$insurance = Insurance::find($id);
+				$insurance->delete();
+			}
+		} else {
+			$insurance = Insurance::find(request('item'));
+			$insurance->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.insurance.index");
     }
 }

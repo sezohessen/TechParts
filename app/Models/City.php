@@ -21,8 +21,8 @@ class City extends Model
     public static function rules($request)
     {
         $rules = [
-            'CityEnglish'         => 'required|string|max:255',
-            'CityArabic'          => 'required|string|max:255',
+            'title'         => 'required|string|max:255',
+            'title_ar'          => 'required|string|max:255',
             'country_id'          => 'required',
             'governorate'         => 'required'
         ];

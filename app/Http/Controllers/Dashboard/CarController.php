@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-
+use App\Models\Car;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -81,5 +81,18 @@ class CarController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$car = Car::find($id);
+				$car->delete();
+			}
+		} else {
+			$car = Car::find(request('item'));
+			$car->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.car.index");
     }
 }

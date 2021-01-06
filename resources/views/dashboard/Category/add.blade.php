@@ -29,10 +29,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Category Name(AR)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CategoryArabic') ? 'is-invalid' : '' }}"
-                             name="CategoryArabic"  placeholder="@lang('Name(AR)')"  required/>
-                            @error('name')
-                             <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                            <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
+                            name="name_ar"  placeholder="@lang('Name(AR)')"  required/>
+                            @error('name_ar')
+                                <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @enderror
                         </div>
                     </div>

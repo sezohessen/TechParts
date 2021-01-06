@@ -70,7 +70,13 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $page_title =__("Edit country");
+        $page_description = __("Edit");
+        $city = City::find($id);
+        $countries = Country::all();
+        return view('dashboard.City.edit', compact('page_title', 'page_description','city',"countries"));
+    
     }
 
     /**
@@ -91,9 +97,11 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(City $city)
     {
-        //
+        $city->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.city.index");
     }
     public function Activity(Request $request){
         $country = City::find($request->id);
@@ -101,5 +109,18 @@ class CityController extends Controller
         return response()->json([
             'status' => true
         ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$city = City::find($id);
+				$city->delete();
+			}
+		} else {
+			$city = City::find(request('item'));
+			$city->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.city.index");
     }
 }

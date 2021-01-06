@@ -8,7 +8,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-
+use Str;
 class CityDatatable extends DataTable
 {
 
@@ -22,10 +22,11 @@ class CityDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+
             ->editColumn('title', '{{Str::limit($title, 100)}}')
-            ->editColumn('title_ar', '{{Str::limit($name_ar, 100)}}')
-            ->editColumn('country.name_ar', '{{ Str::limit($country->name_ar, 100) }}')
-            ->editColumn('governorate.title_ar', '{{ Str::limit($governorate->title_ar, 100) }}')
+            ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
+            ->editColumn('country.name_ar', '{{ Str::limit($country["name_ar"], 100) }}')
+            ->editColumn('governorate.title_ar', '{{ Str::limit($governorate["title_ar"], 100) }}')
             ->addColumn('checkbox', 'dashboard.City.btn.checkbox')
             ->addColumn('action', 'dashboard.City.btn.action')
             ->addColumn('active', 'dashboard.City.btn.active')
@@ -109,8 +110,10 @@ class CityDatatable extends DataTable
             Column::make('id'),
             Column::make('title'),
             Column::make('title_ar'),
-            Column::make('country.name_ar'),
-            Column::make('governorate.title_ar'),
+            Column::make('country.name_ar')
+            ->title(__("Country")),
+            Column::make('governorate.title_ar')
+            ->title(__("Governorate")),
             Column::computed('active')
             ->title(__('Active'))
             ->exportable(false)

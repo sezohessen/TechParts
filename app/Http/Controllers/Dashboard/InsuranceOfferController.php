@@ -17,7 +17,7 @@ class InsuranceOfferController extends Controller
     {
         $page_title = __("Insurance Offer");
         $page_description = __("View Insurance Offer");
-        return  $insurance_offer->render("dashboard.Insurance-offer.index", compact('page_title', 'page_description'));
+        return  $insurance_offer->render("dashboard.insurance-offer.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -92,5 +92,18 @@ class InsuranceOfferController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$insurance_offer = Insurance_offer::find($id);
+				$insurance_offer->delete();
+			}
+		} else {
+			$insurance_offer = Insurance_offer::find(request('item'));
+			$insurance_offer->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.insurance-offer.index");
     }
 }

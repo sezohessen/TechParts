@@ -133,4 +133,17 @@ class FeaturesController extends Controller
             return redirect()->back();
         } */
     }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$feature = Feature::find($id);
+				$feature->delete();
+			}
+		} else {
+			$feature = Feature::find(request('item'));
+			$feature->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.feature.index");
+    }
 }

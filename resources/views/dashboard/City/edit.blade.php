@@ -11,7 +11,8 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.city.store")}}" method="POST">
+        <form action="{{route("dashboard.city.update")}}" method="POST">
+            @method('PATCH')
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -20,17 +21,17 @@
                         <div class="form-group">
                             <label>@lang('City Name (ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
-                            name="title"  placeholder="@lang('Name(ENG)')" autofocus  value="{{old("title")}}"/>
+                            name="title"  placeholder="@lang('Name(ENG)')" autofocus />
                             @error('title')
-                                <div class="invalid-feedback">{{ $errors->first('title') }}</div>
-                            @enderror
+                                <div class="invalid-feedback">{{ $errors->first('governorate') }}</div>
+                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('City Name (AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('title_ar') ? 'is-invalid' : '' }}"
-                            name="title_ar"  placeholder="@lang('Name(AR)')" value="{{old("title_ar")}}" />
+                            name="title_ar"  placeholder="@lang('Name(AR)')" />
                             @error('title_ar')
                                 <div class="invalid-feedback">{{ $errors->first('title_ar') }}</div>
                             @enderror
@@ -43,11 +44,11 @@
                             name="country_id" >
                                 <option value="">@lang('--Select country first--')</option>
                                 @foreach ($countries as $country)
-                                    <option value="{{$country->id}}">{{$country->name}} - {{ $country->name_ar }}</option>
+                                    <option value="{{$country->id}}" {{ ($country->id==$city->country_id) ? 'selected' : '' }}>{{$country->name}} - {{ $country->name_ar }}</option>
                                 @endforeach
                             </select>
                             @error('country_id')
-                                <div class="invalid-feedback">{{ $errors->first('title_ar') }}</div>
+                                <div class="invalid-feedback">{{ $errors->first('country_id') }}</div>
                             @enderror
                           </div>
                     </div>
@@ -56,10 +57,10 @@
                             <label for="governorate">@lang('Select Governorate') <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('governorate') ? 'is-invalid' : '' }}" id="governorate"
                             name="governorate" >
-                                <option value="">@lang('--Select governorate first--')</option>
+                                <option value="{{old("governorate") ?? $city->id}}">@lang('--Select governorate first--')</option>
                             </select>
-                            @error('governorate')
-                                <div class="invalid-feedback">{{ $errors->first('governorate') }}</div>
+                            @error('country_id')
+                                <div class="invalid-feedback">{{ $errors->first('country_id') }}</div>
                             @enderror
                           </div>
                     </div>
