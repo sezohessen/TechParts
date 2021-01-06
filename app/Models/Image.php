@@ -16,4 +16,8 @@ class Image extends Model
     {
         return $this->hasOne(Settings::class);
     }
+    public function Insurance()
+    {
+        return $this->hasOne(Insurance::class);
+    }
 }

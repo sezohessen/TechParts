@@ -20,7 +20,7 @@ class Insurance_offer extends Model
     public function insurance(){
         return $this->belongsTo(Insurance::class,"insurance_id","id");
     }
-    public static function rules($request)
+    public static function rules($request,$id = NULL)
     {
         $rules = [
             'name'              => 'required|string|max:255',
@@ -30,17 +30,24 @@ class Insurance_offer extends Model
             'description'       => 'required|min:3|max:1000',
             'description_ar'    => 'required|min:3|max:1000',
         ];
+        if($id){
+            unset($rules['insurance_id']);
+        }
         return $rules;
     }
-    public static function credentials($request)
+    public static function credentials($request,$id = NULL)
     {
         $credentials = [
             'title'           =>  $request->name,
             'title_ar'        =>  $request->name_ar,
-            'insurance_id'    =>  $request->insurance_id,
             'description'     =>  $request->description,
             'description_ar'  =>  $request->description_ar,
         ];
+        if($id){
+            $credentials['insurance_id'] = $id;
+        }else{
+            $credentials['insurance_id'] = $request->insurance_id;
+        }
         if($request->file('logo')){
             $Image_id = self::file($request->file('logo'));
             $credentials['img_id'] = $Image_id;

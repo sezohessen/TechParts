@@ -18,7 +18,10 @@ class Insurance extends Model
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
     }
-    public static function rules($request)
+    public function img(){
+        return $this->belongsTo(Image::class,'img_id','id');
+    }
+    public static function rules($request,$id = NULL)
     {
         $rules = [
             'name'          => 'required|string|max:255',
@@ -26,15 +29,22 @@ class Insurance extends Model
             'logo'          => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'user_id'       => 'required'
         ];
+        if($id){
+            unset($rules['user_id']);
+        }
         return $rules;
     }
-    public static function credentials($request)
+    public static function credentials($request,$id = NULL)
     {
         $credentials = [
             'name_ar'           =>  $request->name_ar,
             'name'              =>  $request->name,
-            'user_id'           =>  $request->user_id,
         ];
+        if($id){
+            $credentials['user_id'] = $id;
+        }else{
+            $credentials['user_id'] = $request->user_id;
+        }
         if($request->file('logo')){
             $Image_id = self::file($request->file('logo'));
             $credentials['img_id'] = $Image_id;

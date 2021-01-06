@@ -74,4 +74,7 @@ Route::get('/', function ()
 });
 Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insurance", 'middleware' => ['role:insurance']], function () {
     Route::get('/','InsuranceController@index');
+    Route::resource('/company','InsuranceCompanyController');
+    Route::resource('/insurance-offer','InsuranceOfferController');
+    Route::resource('/offer-plan','OfferPlanController');
 });
