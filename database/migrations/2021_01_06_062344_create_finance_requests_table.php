@@ -23,6 +23,11 @@ class CreateFinanceRequestsTable extends Migration
             $table->string('provide_amount')->nullable();
             $table->boolean('existing_credit')->default(0);
             $table->string('status');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

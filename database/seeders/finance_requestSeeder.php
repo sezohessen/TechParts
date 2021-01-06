@@ -1,9 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class finance_requestSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class finance_requestSeeder extends Seeder
                 'existing_loans'            => $faker->boolean,
                 'provide_amount'            => $faker->numberBetween(4000,10000),
                 'existing_credit'           => $faker->boolean,
+                'user_id'                   => User::all()->random()->id,
                 'status'                    => $faker->randomElement(['pending', 'approved', 'canceled']),
                 'created_at'                => now(),
                 'updated_at'                => now(),

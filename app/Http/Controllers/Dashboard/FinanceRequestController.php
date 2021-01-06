@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-
+use App\Models\Finance_request;
 use Illuminate\Http\Request;
-
+use App\DataTables\Finance_requestDatatable;
 class FinanceRequestController extends Controller
 {
     /**
@@ -12,9 +12,11 @@ class FinanceRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Finance_requestDatatable $Finance_request)
     {
-        dd(1);
+        $page_title = __('Finance Request');
+        $page_description = __('Finance Request');
+        return  $Finance_request->render("dashboard.Finance-request.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -55,7 +57,7 @@ class FinanceRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Finance_request $Finance_request)
     {
         //
     }
@@ -81,5 +83,18 @@ class FinanceRequestController extends Controller
     public function destroy($id)
     {
         //
+    }
+     public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$Finance_request = Finance_request::find($id);
+				$Finance_request->delete();
+			}
+		} else {
+			$Finance_request = Finance_request::find(request('item'));
+			$Finance_request->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.finance-request.index");
     }
 }
