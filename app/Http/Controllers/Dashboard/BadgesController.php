@@ -119,7 +119,7 @@ class BadgesController extends Controller
     public function destroy($id)
     {
        /*  $badge = Badges::find($id);
-        if($badge!=null){
+        if($badge->count()!=0){
             $badge->delete($id);
              if (Session::get('app_locale') == 'ar') {
             session()->flash('delete',__(" تم الحذف بنجاح!  "));

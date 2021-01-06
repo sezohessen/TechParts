@@ -91,7 +91,13 @@ class InsuranceCompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Insurance      = Insurance::find($id);
+        $rules          = Insurance::rules($request,Auth::id());
+        $request->validate($rules);
+        $credentials = Insurance::credentials($request,Auth::id(),$Insurance->img_id);
+        $Insurance_offer = Insurance::where('id',$id)->update($credentials);
+        session()->flash('success',__("Offer insurance company has been updated!"));
+        return redirect()->back();
     }
 
     /**
@@ -102,6 +108,18 @@ class InsuranceCompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /*$insurance = Insurance::find($id);
+        if($insurance->count()!=0){
+            $insurance->delete($id);
+            if (Session::get('app_locale') == 'ar') {
+            session()->flash('delete',__(" تم الحذف بنجاح!  "));
+            } else {
+                session()->flash('delete',__("Row has been deleted successfully!"));
+            }
+            session()->flash('delete', 'Row has been deleted successfully!');
+            return redirect()->route('###########');
+        }else{
+            return redirect()->back();
+        }*/
     }
 }

@@ -83,7 +83,22 @@ class OfferPlanController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $offer_plan = offer_plan::find($id);
+        $insurance  = Insurance::where('user_id',Auth::id())->first();
+        $offers     = Insurance_offer::where('insurance_id',$insurance->id)->get();
+        //User can access only his Insurance campony offer
+        if($offer_plan==NULL||$offers->count()==0){
+            return redirect('/insurance');
+        }else{
+            if($offer_plan->insurance_id==$insurance->id){
+                $page_title = "Edit offer plan";
+                $page_description = "Edit offer plan record";
+                return view('InsuranceDashboard.offer-plan.edit', compact('page_title', 'page_description','offer_plan','offers'));
+            }else{
+                return redirect('/insurance');
+            }
+        }
     }
 
     /**
@@ -95,7 +110,13 @@ class OfferPlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $insurance  = Insurance::where('user_id',Auth::id())->first();
+        $rules      = offer_plan::rules($request,$insurance->id);//Request,Insurance,offer img
+        $request->validate($rules);
+        $credentials = offer_plan::credentials($request,$insurance->id);
+        $offer_plan = offer_plan::where('id',$id)->update($credentials);
+        session()->flash('success',__("Offer plan has been updated!"));
+        return redirect()->back();
     }
 
     /**
@@ -106,6 +127,18 @@ class OfferPlanController extends Controller
      */
     public function destroy($id)
     {
-        //
+       /* $offer_plan = offer_plan::find($id);
+        if($offer_plan->count()!=0){
+            $offer_plan->delete($id);
+            if (Session::get('app_locale') == 'ar') {
+            session()->flash('delete',__(" تم الحذف بنجاح!  "));
+            } else {
+                session()->flash('delete',__("Row has been deleted successfully!"));
+            }
+            session()->flash('delete', 'Row has been deleted successfully!');
+            return redirect()->route('###########');
+        }else{
+            return redirect()->back();
+        }*/
     }
 }
