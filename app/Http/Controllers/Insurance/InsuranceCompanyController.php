@@ -108,6 +108,18 @@ class InsuranceCompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /*$insurance = Insurance::find($id);
+        if($insurance->count()!=0){
+            $insurance->delete($id);
+            if (Session::get('app_locale') == 'ar') {
+            session()->flash('delete',__(" تم الحذف بنجاح!  "));
+            } else {
+                session()->flash('delete',__("Row has been deleted successfully!"));
+            }
+            session()->flash('delete', 'Row has been deleted successfully!');
+            return redirect()->route('###########');
+        }else{
+            return redirect()->back();
+        }*/
     }
 }
