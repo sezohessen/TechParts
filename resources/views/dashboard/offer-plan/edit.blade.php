@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.insurance')
+@extends('layout.master')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
 @endsection
@@ -11,9 +11,12 @@
             <h3 class="card-title">
                 {{$page_title}}
             </h3>
+            <div class="text-right">
+                <a href="{{ route('dashboard.offer-plan.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+            </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("insurance.offer-plan.update",$offer_plan->id)}}" method="POST">
+        <form action="{{route("dashboard.offer-plan.update",$offer_plan->id)}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">
@@ -84,25 +87,48 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label for="insurance_id">@lang('Select Insurance company name') <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-control {{ $errors->has('insurance_id') ? 'is-invalid' : '' }}"
+                                id="insurance_id" name="insurance_id" required>
+                                <option value="">@lang('--Select insurance company--')</option>
+                                @foreach ($Insurances as $Insurance)
+                                    <option value="{{ $Insurance->id }}"
+                                    @if(old('insurance_id') == $Insurance->id)
+                                        {{ 'selected' }}
+                                    @elseif($Insurance->id == $offer_plan->insurance_id )
+                                        {{ 'selected' }}
+                                    @endif
+                                    >{{ $Insurance->name }} - {{ $Insurance->name_ar }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('insurance_id'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('insurance_id') }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label for="offer_id">@lang('Select Offer company') <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('offer_id') ? 'is-invalid' : '' }}" id="offer_id"
-                            name="offer_id" required>
-                                @foreach ($offers as $offer)
-                                    @if ($offer->id==$offer_plan->offer_id)
-                                        <option value="{{$offer->id}}" selected>{{$offer->title}} - {{ $offer->title_ar }}</option>
-                                    @else
-                                        <option value="{{$offer->id}}">{{$offer->title}} - {{ $offer->title_ar }}</option>
-                                    @endif
-                                @endforeach
+                                name="offer_id" required>
+                                <option value="{{ $offer_plan->offer_plan->id }}">
+                                    {{ $offer_plan->offer_plan->title}} - {{ $offer_plan->offer_plan->title_ar}}
+                                </option>
                             </select>
                             @if ($errors->has('offer_id'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
-                                        <strong>{{ $errors->first('offer_id')  }}</strong>
+                                        <strong>{{ $errors->first('offer_id') }}</strong>
                                     </div>
                                 </div>
                             @endif
-                          </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -136,4 +162,27 @@
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
+<script>
+
+    $('#insurance_id').on('change', function() {
+        var id = this.value;
+        $('#offer_id').empty();
+        $.ajax({
+            url: '/dashboard/insurance/' + id,
+            success: data => {
+                if (data.insurance_offers) {
+                    data.insurance_offers.forEach(insurance_offer =>
+                        $('#offer_id').append(
+                            `<option value="${insurance_offer.id}">${insurance_offer.title}-${insurance_offer.title_ar}</option>`
+                        )
+                    )
+                } else {
+                    $('#offer_id').append(`<option value="">No Results</option>`)
+                }
+
+            }
+        });
+    });
+
+</script>
 @endsection

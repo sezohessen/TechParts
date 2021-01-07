@@ -7,6 +7,8 @@ use App\Models\Insurance_offer;
 use App\Models\offer_plan;
 use Illuminate\Http\Request;
 use App\DataTables\Offer_planDatatable;
+use Illuminate\Support\Facades\Auth;
+
 class OfferPlanController extends Controller
 {
     /**
@@ -49,7 +51,7 @@ class OfferPlanController extends Controller
         $offer_plan = offer_plan::create($credentials);
 
        session()->flash('success',__("Plan offer company has been added!"));
-       return redirect()->back();
+       return redirect()->route('dashboard.offer-plan.index');
     }
 
     /**
@@ -71,7 +73,16 @@ class OfferPlanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $offer_plan = offer_plan::find($id);
+        $Insurances = Insurance::all();
+        //User can access only his Insurance campony offer
+        if(!$offer_plan->count()){
+            return redirect('/dashboard');
+        }else{
+            $page_title = "Edit offer plan";
+            $page_description = "Edit offer plan record";
+            return view('dashboard.offer-plan.edit', compact('page_title', 'page_description','offer_plan','Insurances'));
+        }
     }
 
     /**
@@ -83,7 +94,12 @@ class OfferPlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules      = offer_plan::rules($request);
+        $request->validate($rules);
+        $credentials = offer_plan::credentials($request);
+        $offer_plan = offer_plan::where('id',$id)->update($credentials);
+        session()->flash('success',__("Offer plan has been updated!"));
+        return redirect()->route('dashboard.offer-plan.index');
     }
 
     /**
@@ -92,9 +108,11 @@ class OfferPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(offer_plan $offer_plan)
     {
-        //
+        $offer_plan->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.offer-plan.index");
     }
     public function multi_delete(){
         if (is_array(request('item'))) {

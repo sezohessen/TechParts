@@ -24,6 +24,10 @@ class Insurance_offer extends Model
     public function img(){
         return $this->belongsTo(Image::class,'img_id','id');
     }
+    public function plans()
+    {
+        return $this->hasMany(offer_plan::class);
+    }
     public static function rules($request,$id = NULL)
     {
         $rules = [

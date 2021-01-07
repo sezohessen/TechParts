@@ -19,7 +19,7 @@ class offer_plan extends Model
         'insurance_id',
     ];
     public function offer_plan(){
-        return $this->belongsTo(offer_plan::class,"offer_id","id");
+        return $this->belongsTo(Insurance_offer::class,"offer_id","id");
     }
     public function insurance(){
         return $this->belongsTo(Insurance::class,"insurance_id","id");
@@ -31,7 +31,7 @@ class offer_plan extends Model
             'name_ar'           => 'required|string|max:255',
             'insurance_id'      => 'required',
             'offer_id'          => 'required',
-            'price'             => 'required|numeric|digits_between:1,10',
+            'price'             => 'required|numeric|digits_between:1,8',
             'description'       => 'required|min:3|max:1000',
             'description_ar'    => 'required|min:3|max:1000',
         ];

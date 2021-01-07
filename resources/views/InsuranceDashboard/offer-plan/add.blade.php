@@ -102,7 +102,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Price">@lang('Price')</label>
+                            <label for="Price">@lang('Price')<span class="text-danger">*</span></label>
                             <div class="col-10">
                             <input type="number" name="price" min="0" step="1" value="{{ old('price') }}"
                              id="Price" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" placeholder="0.00" required>

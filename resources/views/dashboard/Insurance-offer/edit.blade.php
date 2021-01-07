@@ -11,6 +11,9 @@
             <h3 class="card-title">
                 {{$page_title}}
             </h3>
+            <div class="text-right">
+                <a href="{{ route('dashboard.insurance-offer.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+            </div>
         </div>
         <!--begin::Form-->
         <form action="{{route("dashboard.insurance-offer.update",$offer->id)}}" method="POST" enctype="multipart/form-data">

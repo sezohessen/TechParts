@@ -24,10 +24,10 @@ class Offer_planDatatable extends DataTable
             ->editColumn('title', '{{Str::limit($title, 100)}}')
             ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
             ->editColumn('price', '{{Str::limit($price, 100)}}')
-            ->editColumn('offer_plan.title_ar', '{{Str::limit($offer_plan->title_ar, 100)}}')
-            ->editColumn('insurance.name_ar', '{{ Str::limit($insurance->name_ar, 100) }}')
-            ->editColumn('description', '{{Str::limit($description, 100) !!}')
-            ->editColumn('description_ar', '{{Str::limit($description_ar, 100) !!}')
+            ->editColumn('offer_plan.title_ar', '{{Str::limit($offer_plan["title_ar"], 100)}}')
+            ->editColumn('insurance.name_ar', '{{ Str::limit($insurance["name_ar"], 100) }}')
+            ->editColumn('description', '{!! Str::limit($description, 100) !!}')
+            ->editColumn('description_ar', '{!! Str::limit($description_ar, 100) !!}')
             ->addColumn('checkbox', 'dashboard.offer-plan.btn.checkbox')
             ->addColumn('action', 'dashboard.offer-plan.btn.action')
             ->rawColumns(['checkbox','action','description','description_ar']);
@@ -42,7 +42,7 @@ class Offer_planDatatable extends DataTable
     public function query()
     {
 
-        return offer_plan::query()->with("offer_plan","insurance")->select("offer_plans.*");;
+        return offer_plan::query()->with("offer_plan","insurance")->select("offer_plans.*");
     }
 
     /**
@@ -79,7 +79,6 @@ class Offer_planDatatable extends DataTable
                     ->minifiedAjax()
                     ->orderBy(1)
                     ->search([
-
                     ]);
 
     }
@@ -111,8 +110,10 @@ class Offer_planDatatable extends DataTable
             Column::make('id'),
             Column::make('title'),
             Column::make('title_ar'),
-            Column::make('offer_plan.title_ar'),
-            Column::make('insurance.name_ar'),
+            Column::make('offer_plan.title_ar')
+            ->title(__("Offer Name")),
+            Column::make('insurance.name_ar')
+            ->title(__("Insurance Name")),
             Column::make('description'),
             Column::make('description_ar'),
             Column::computed('action')

@@ -11,6 +11,9 @@
             <h3 class="card-title">
                 {{ $page_title }}
             </h3>
+            <div class="text-right">
+                <a href="{{ route('dashboard.offer-plan.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+            </div>
         </div>
         <!--begin::Form-->
         <form action="{{ route('dashboard.offer-plan.store') }}" method="POST">
@@ -122,7 +125,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label for="Price" class="col-2 col-form-label">@lang('Price')</label>
+                            <label for="Price" class="col-2 col-form-label">@lang('Price')<span class="text-danger">*</span></label>
                             <div class="col-10">
                                 <input type="number" name="price" min="0" step="1" value="{{ old('price') }}" id="Price"
                                     class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" placeholder="0.00"
