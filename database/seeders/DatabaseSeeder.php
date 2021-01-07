@@ -29,9 +29,15 @@ class DatabaseSeeder extends Seeder
         //\App\Models\User::factory(10)->create();
         $this->call(BadgeSeeder::class);
         $this->call(FeatureSeeder::class);
+        $this->call(imagesSeeder::class);
+        $this->call(CarBodySeeder::class);
+        $this->call(CarMakerSeeder::class);
+        $this->call(CarModelSeeder::class);
+        $this->call(CarYearSeeder::class);
+        $this->call(CarColorSeeder::class);
+        $this->call(CarCapacitySeeder::class);
         $this->call(CarSeeder::class);
         $this->call(TrendingSeeder::class);
-        $this->call(imagesSeeder::class);
         $this->call(car_imgSeeder::class);
         $this->call(car_badgeSeeder::class);
         $this->call(car_featureSeeder::class);

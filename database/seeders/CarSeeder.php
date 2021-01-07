@@ -2,6 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Badges;
+use App\Models\CarBody;
+use App\Models\CarCapacity;
+use App\Models\CarColor;
+use App\Models\CarMaker;
+use App\Models\CarModel;
+use App\Models\CarYear;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Feature;
+use App\Models\Governorate;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
@@ -17,14 +28,36 @@ class CarSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1,5) as $value){
             DB::table('cars')->insert([
-                'makerName'             => $faker->name,
-                'modelName'             => $faker->company,
-                'price'                 => $faker->numberBetween(1,10000),
+
+                'ServiceHistory'        => $faker->sentence,
+                'lat'                   => $faker->longitude,
+                'lng'                   => $faker->latitude,
+                'phone'                 => $faker->phoneNumber,
+                'InstallmentMonth'      => $faker->month,
+                'InstallmentPrice'      => $faker->numberBetween(1,10000),
+                'InstallmentCurrency'   => $faker->currencyCode,
+                'Deposit'               => rand(0,1),
+                'DepositPrice'          => $faker->numberBetween(1,10000),
+                'DepositCurrency'       => $faker->currencyCode,
+                'Country_id'            => Country::all()->random()->id,
+                'City_id'               => City::all()->random()->id,
+                'Governorate_id'        => Governorate::all()->random()->id,
+                'CarModel_id'           => CarModel::all()->random()->id,
+                'CarMaker_id'           => CarMaker::all()->random()->id,
+                'CarBody_id'            => CarBody::all()->random()->id,
+                'CarYear_id'            => CarYear::all()->random()->id,
+                'CarCapacity_id'        => CarCapacity::all()->random()->id,
+                'CarColor_id'           => CarColor::all()->random()->id,
+                'views'                 => $faker->numberBetween(1,100),
+                'AccidentBefore'        => rand(0,1),
+                'transmission'          => rand(0,2),
+                'payment'               => rand(0,2),
+                'SellerType'            => rand(0,2),
                 'PrePrice'              => $faker->numberBetween(1,10000),
-                'ManufacturingYear'     => $faker->year,
-                'status'                => $faker->colorName,
+                'price'                 => $faker->numberBetween(1,10000),
+                'status'                => rand(0,4),
                 'currency'              => $faker->currencyCode,
-                'kiloUsed'              => $faker->numberBetween(1,10000),
+                'kiloUsed'              => $faker->numberBetween(1,100),
                 'created_at'            => now(),
                 'updated_at'            => now()
             ]);
