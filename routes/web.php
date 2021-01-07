@@ -83,4 +83,6 @@ Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insuran
     Route::resource('/company','InsuranceCompanyController');
     Route::resource('/insurance-offer','InsuranceOfferController');
     Route::resource('/offer-plan','OfferPlanController');
+    Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
+    Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete');
 });

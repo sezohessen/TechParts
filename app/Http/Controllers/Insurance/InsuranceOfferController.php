@@ -7,7 +7,7 @@ use App\Models\Insurance;
 use App\Models\Insurance_offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\DataTables\Insurance\Insurance_offerDatatable;
 class InsuranceOfferController extends Controller
 {
     /**
@@ -15,9 +15,11 @@ class InsuranceOfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Insurance_offerDatatable $insurance_offer)
     {
-        //
+        $page_title = __("Insurance Offer");
+        $page_description = __("View Insurance Offer");
+        return  $insurance_offer->render("InsuranceDashboard.Insurance-offer.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -57,7 +59,7 @@ class InsuranceOfferController extends Controller
         $credentials = Insurance_offer::credentials($request,$id);
         $Insurance_offer = Insurance_offer::create($credentials);
         session()->flash('success',__("Offer insurance company has been added!"));
-        return redirect()->back();
+        return redirect()->route('insurance.insurance-offer.index');
     }
 
     /**
@@ -112,7 +114,7 @@ class InsuranceOfferController extends Controller
         $credentials = Insurance_offer::credentials($request,$insurance->id,$offer->img_id);
         $Insurance_offer = Insurance_offer::where('id',$id)->update($credentials);
         session()->flash('success',__("Offer insurance company has been updated!"));
-        return redirect()->back();
+        return redirect()->route('insurance.insurance-offer.index');
     }
 
     /**
@@ -121,20 +123,10 @@ class InsuranceOfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Insurance_offer $insurance_offer)
     {
-        /*$offer = Insurance_offer::find($id);
-        if($offer->count()!=0){
-            $offer->delete($id);
-            if (Session::get('app_locale') == 'ar') {
-            session()->flash('delete',__(" تم الحذف بنجاح!  "));
-            } else {
-                session()->flash('delete',__("Row has been deleted successfully!"));
-            }
-            session()->flash('delete', 'Row has been deleted successfully!');
-            return redirect()->route('###########');
-        }else{
-            return redirect()->back();
-        }*/
+        $insurance_offer->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("insurance.insurance-offer.index");
     }
 }

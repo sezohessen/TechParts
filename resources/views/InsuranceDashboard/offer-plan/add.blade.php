@@ -11,6 +11,9 @@
             <h3 class="card-title">
                 {{$page_title}}
             </h3>
+            <div class="text-right">
+                <a href="{{ route('insurance.offer-plan.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+            </div>
         </div>
         <!--begin::Form-->
         <form action="{{route("insurance.offer-plan.store")}}" method="POST">
