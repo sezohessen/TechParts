@@ -13,7 +13,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("news.store")}}" method="POST"  enctype="multipart/form-data">
+        <form action="{{route("dashboard.news.store")}}" method="POST"  enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
