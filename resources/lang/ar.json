@@ -209,5 +209,17 @@
     "Create A Question (AR)":"انشاء سؤال باللغة العربية",
     "Write A Answer (EN)":"اجابة عن السؤال باللغة العربية",
     "Ask a Question":"اسأل سؤال",
-    "--Select insurance offer--":"-- اختر عرض التأمين--"
+    "--Select insurance offer--":"-- اختر عرض التأمين--",
+    "Agency Name (ENG)":"اسم الوكالة (بالانجليزية)",
+    "Agency Name (AR)":"اسم الوكالة (بالعربية)",
+    "Show in home":"اظهره في الصفحة الرئيسية",
+    "Show in car show rooms":"اظهره في معارض السيارات",
+    "Center type":"نوع المركز",
+    "Distributor":"موزع",
+    "Agency":"وكالة",
+    "Individual":"فردي",
+    "Payment Method":"طريقة الدفع او السداد",
+    "Cash":"نقدي",
+    "Installment":"تقسيط",
+    "Financial":"مالي"
 }

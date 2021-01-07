@@ -35,6 +35,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/contact','ContactController');
     Route::resource('/AskExpert','AskExpertController');
     Route::resource('/finance-request','FinanceRequestController');
+    Route::resource('/agency','AgencyController');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');

@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AskExpert extends Model
+class AgencyContact extends Model
 {
     use HasFactory;
-    protected $table    = 'ask_experts';
+    protected $table    = 'agency_contacts';
     protected $fillable=[
-        'message',
-        'email',
-        'phone',
-        'country_phone',
+        'facebook',
+        'whatsapp',
+        'instagram',
+        'messenger',
     ];
 }

@@ -92,6 +92,31 @@ return [
             ]
         ],
         [
+            'title' => 'Agences',
+            'icon' => 'fas fa-landmark',
+            'bullet' => 'dot',
+            'root' => true, 
+            'submenu' => [
+                [
+                    'title' => 'Agency companies',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add agency',
+                            'page' => "/dashboard/agency/create"
+                        ],
+                        [
+                            'title' => 'View agences',
+                            'page' => '/dashboard/agency'
+                        ],
+
+                    ]
+                ],
+
+            ]
+        ],
+        [
             'title' => 'Location',
             'icon' => 'fas fa-map-marked-alt',
             'bullet' => 'dot',

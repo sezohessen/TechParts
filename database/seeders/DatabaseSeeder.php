@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AgentCar;
 use App\Models\Terms;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -38,6 +39,9 @@ class DatabaseSeeder extends Seeder
         $this->call(car_userFavSeeder::class);
         $this->call(InsuranceSeeder::class);
         $this->call(InsuranceOfferSeeder::class);
-
+        $this->call(AgencySeeder::class);
+        $this->call(AgencyCarSeeder::class);
+        $this->call(AgencyContactSeeder::class);
+        $this->call(AgencyReviewSeeder::class);
     }
 }
