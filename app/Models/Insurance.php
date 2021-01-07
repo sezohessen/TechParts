@@ -31,11 +31,12 @@ class Insurance extends Model
             'user_id'       => 'required'
         ];
         if($id){
+            $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             unset($rules['user_id']);
         }
         return $rules;
     }
-    public static function credentials($request,$id = NULL,$img_id = NULL)
+    public static function  credentials($request,$id = NULL,$img_id = NULL)
     {
         $credentials = [
             'name_ar'           =>  $request->name_ar,
@@ -54,6 +55,10 @@ class Insurance extends Model
                 $Image_id = self::file($request->file('logo'));
             }
             $credentials['img_id'] = $Image_id;
+        }else{
+            if($id){
+                $credentials['img_id'] = $img_id;
+                }
         }
         return $credentials;
     }

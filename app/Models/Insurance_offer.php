@@ -27,14 +27,15 @@ class Insurance_offer extends Model
     public static function rules($request,$id = NULL)
     {
         $rules = [
-            'title'              => 'required|string|max:255',
-            'title_ar'           => 'required|string|max:255',
+            'title'             => 'required|string|max:255',
+            'title_ar'          => 'required|string|max:255',
             'logo'              => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'insurance_id'      => 'required',
             'description'       => 'required|min:3|max:1000',
             'description_ar'    => 'required|min:3|max:1000',
         ];
         if($id){//For update
+            $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             unset($rules['insurance_id']);
         }
         return $rules;
@@ -60,6 +61,10 @@ class Insurance_offer extends Model
                 $Image_id = self::file($request->file('logo'));
             }
             $credentials['img_id'] = $Image_id;
+        }else{
+            if($id){
+            $credentials['img_id'] = $img_id;
+            }
         }
         return $credentials;
     }

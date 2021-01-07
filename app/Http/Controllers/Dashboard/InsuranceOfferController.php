@@ -68,7 +68,15 @@ class InsuranceOfferController extends Controller
      */
     public function edit($id)
     {
-        //
+        $offer      = Insurance_offer::find($id);
+        $Insurances = Insurance::all();
+        if($offer->count()){
+        $page_title = __("Edit Insurance offer");
+        $page_description = __("Edit");
+        return view('dashboard.Insurance-offer.edit', compact('page_title', 'page_description','offer','Insurances'));
+        }else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -80,7 +88,13 @@ class InsuranceOfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $offer = Insurance_offer::find($id);
+        $rules = Insurance_offer::rules($request,$id);
+        $request->validate($rules);
+        $credentials = Insurance_offer::credentials($request,$request->insurance_id,$offer->img_id);
+        $Insurance_offer = Insurance_offer::where('id',$id)->update($credentials);
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.insurance-offer.index");
     }
 
     /**

@@ -23,12 +23,12 @@ class Insurance_offerDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('title', '{{Str::limit($title, 100)}}')
             ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
-            ->editColumn('description', '{{ Str::limit($description, 100) }}')
-            ->editColumn('description_ar', '{{ Str::limit($description_ar, 100) }}')
+            ->editColumn('description', '{!! Str::limit($description, 100)!!}')
+            ->editColumn('description_ar', '{!! Str::limit($description_ar, 100)!!}')
             ->editColumn('insurance.name_ar', '{{ Str::limit($insurance["name_ar"], 100) }}')
             ->addColumn('checkbox', 'dashboard.Insurance-offer.btn.checkbox')
             ->addColumn('action', 'dashboard.Insurance-offer.btn.action')
-            ->rawColumns(['checkbox','action']);
+            ->rawColumns(['checkbox','action', 'description', 'description_ar']);
     }
 
     /**

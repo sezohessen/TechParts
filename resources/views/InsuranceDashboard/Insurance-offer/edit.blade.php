@@ -18,23 +18,16 @@
             @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
-                <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Insurance offer title(ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                             name="name"  placeholder="@lang('Title(ENG)')" value="{{ old('name') ? old('name') : $offer->title}}" required autofocus  />
-                            @if ($errors->has('name'))
+                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
+                             name="title"  placeholder="@lang('Title(ENG)')" value="{{ old('title') ? old('title') : $offer->title}}" required autofocus  />
+                            @if ($errors->has('title'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
-                                        <strong>{{ $errors->first('name')  }}</strong>
+                                        <strong>{{ $errors->first('title')  }}</strong>
                                     </div>
                                 </div>
                             @endif
@@ -43,12 +36,12 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Insurance offer title(AR)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
-                             name="name_ar"  placeholder="@lang('Title(AR)')"  value="{{ old('name_ar') ? old('name_ar') : $offer->title_ar}}" required   />
-                            @if ($errors->has('name_ar'))
+                            <input type="text" class="form-control {{ $errors->has('title_ar') ? 'is-invalid' : '' }}"
+                             name="title_ar"  placeholder="@lang('Title(AR)')"  value="{{ old('title_ar') ? old('title_ar') : $offer->title_ar}}" required   />
+                            @if ($errors->has('title_ar'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
-                                        <strong>{{ $errors->first('name_ar')  }}</strong>
+                                        <strong>{{ $errors->first('title_ar')  }}</strong>
                                     </div>
                                 </div>
                             @endif
@@ -89,7 +82,7 @@
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg" required/>
+                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg"/>
                                     <input type="hidden" name="logo_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">

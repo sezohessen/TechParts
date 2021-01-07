@@ -7,6 +7,8 @@ use App\Models\Insurance_offer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\DataTables\InsuranceDatatable;
+use Illuminate\Support\Facades\Auth;
+
 class InsuranceController extends Controller
 {
     /**
@@ -79,9 +81,15 @@ class InsuranceController extends Controller
      */
     public function edit($id)
     {
+        $insurance = Insurance::find($id);
+        if($insurance->count()){
+        $users = User::all();
         $page_title = __("Edit Insurance");
         $page_description = __("Edit");
-        return view('dashboard.Insurance.edit', compact('page_title', 'page_description'));
+        return view('dashboard.Insurance.edit', compact('page_title', 'page_description','users','insurance'));
+        }else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -91,12 +99,13 @@ class InsuranceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Insurance $insurance)
+    public function update(Request $request, $id)
     {
-        $rules =$insurance->rules($request);
+        $insurance = Insurance::find($id);
+        $rules = Insurance::rules($request,$id);
         $request->validate($rules);
-        $credentials = $insurance->credentials($request);
-        $insurance->update($credentials);
+        $credentials = Insurance::credentials($request,Auth::id(),$insurance->img_id);
+        $Insurance = Insurance::where('id',$id)->update($credentials);
         session()->flash('updated',__("Changed has been updated successfully!"));
         return  redirect()->route("dashboard.insurance.index");
     }

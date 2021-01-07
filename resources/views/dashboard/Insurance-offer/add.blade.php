@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label for="description">@lang('Description(ENG)')</label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
-                            placeholder="@lang('Write description')" required>{{ old('description') }}</textarea>
+                            placeholder="@lang('Write description')" >{{ old('description') }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback">{{ $errors->first('description') }}</div>
                             @enderror
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label for="description">@lang('Description(AR)')</label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
-                            placeholder="@lang('Write description')" required>{{ old('description_ar') }}</textarea>
+                            placeholder="@lang('Write description')" >{{ old('description_ar') }}</textarea>
                             @error('description_ar')
                                 <div class="invalid-feedback">{{ $errors->first('description_ar') }}</div>
                             @enderror
