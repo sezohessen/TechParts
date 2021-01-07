@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Settings extends Model
 {
+    use HasFactory;
     protected $table    = 'settings';
     protected $fillable=[
         'appName',
@@ -17,5 +18,5 @@ class Settings extends Model
     {
         return $this->belongsTo(Image::class);
     }
-    use HasFactory;
+
 }
