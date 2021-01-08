@@ -15,4 +15,23 @@ class CarModel extends Model
         'active'
     ];
 
+    public static function rules($request)
+    {
+        $rules = [
+            'name'             => 'required|string|max:255',
+            'CarMaker_id'      => 'required'
+        ];
+        return $rules;
+    }
+    public static function credentials($request)
+    {
+        $credentials = [
+            'name'              => $request->name,
+            'CarMaker_id'       => $request->CarMaker_id,
+        ];
+
+        return $credentials;
+    }
+
+
 }

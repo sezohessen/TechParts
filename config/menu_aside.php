@@ -149,6 +149,68 @@ return [
             ]
         ],
         [
+            'title' => 'Cars Settings',
+            'icon' => 'fas fa-car',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Car Make',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add Car Make',
+                            'page' => "/dashboard/car/maker/create"
+                        ],
+                        [
+                            'title' => 'View Car Makers',
+                            'page' => '/dashboard/car/maker'
+                        ],
+
+                    ]
+
+                ],
+                [
+                    'title' => 'Car Model',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add Car Model',
+                            'page' => "/dashboard/car/model/create"
+                        ],
+                        [
+                            'title' => 'View Car Models',
+                            'page' => '/dashboard/car/model'
+                        ],
+
+                    ]
+
+                ],
+                [
+                    'title' => 'Car Options',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Sell A car ',
+                            'page' => "/dashboard/car/create"
+                        ],
+                        [
+                            'title' => 'View Cars',
+                            'page' => '/dashboard/car'
+                        ],
+
+                    ]
+                ],
+                [
+
+                ],
+
+            ]
+        ],
+        [
             'title' => 'Badges',
             'icon' => 'media/svg/icons/General/Star.svg',
             'bullet' => 'dot',

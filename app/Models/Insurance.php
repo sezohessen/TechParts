@@ -22,7 +22,7 @@ class Insurance extends Model
     public function img(){
         return $this->belongsTo(Image::class,'img_id','id');
     }
-    public static function rules($request,$id = NULL)
+    public static function  rules($request,$id = NULL)
     {
         $rules = [
             'name'          => 'required|string|max:255',
