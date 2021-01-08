@@ -50,7 +50,7 @@
                                  id="kt_select2_1" name="user_id" required>
                                 <option value="">@lang('--Select user--')</option>
                                 @foreach ($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}} - {{ $user->email }}</option>
+                                    <option value="{{$user->id}}">{{ $user->email }}</option>
                                 @endforeach
                              </select>
                             @error('user_id')

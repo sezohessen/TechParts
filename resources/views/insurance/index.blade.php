@@ -22,7 +22,7 @@
                         <!--end::Svg Icon-->
                     </span>
                     <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">{{ null !== $offers  ?  $offers->count() : 0 }}</div>
-                    <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1">يبقي عدل لينك الجدول</a>
+                    <a href="{{ route('insurance.insurance-offer.index') }}" class="text-inverse-success font-weight-bold font-size-lg mt-1">@lang("Insurance's offers")</a>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                         <!--end::Svg Icon-->
                     </span>
                     <div class="text-dark font-weight-bolder font-size-h2 mt-3">{{ null !== $offers_plan ? $offers_plan->count() : 0}}</div>
-                    <a href="#" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1">متنساش تربطهم بالجدول ياحيوان</a>
+                    <a href="{{ route('insurance.offer-plan.index') }}" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1">@lang("Insurance Offers's plans")</a>
                 </div>
             </div>
         </div>

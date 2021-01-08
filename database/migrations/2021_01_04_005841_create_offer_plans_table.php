@@ -19,7 +19,7 @@ class CreateOfferPlansTable extends Migration
             $table->string('title_ar');
             $table->text('description');
             $table->text('description_ar');
-            $table->decimal('price',10,2);
+            $table->integer('price');
 
             $table->bigInteger('insurance_id')->unsigned();
             $table->foreign('insurance_id')

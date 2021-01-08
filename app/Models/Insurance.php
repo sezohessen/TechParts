@@ -30,7 +30,9 @@ class Insurance extends Model
             'logo'          => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'user_id'       => 'required'
         ];
-        if($id){
+        if($id == 'Insurance'){//For update in Dashborad
+            $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+        }elseif($id){//For update in Insurance Dashboard
             $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             unset($rules['user_id']);
         }
@@ -42,6 +44,7 @@ class Insurance extends Model
             'name_ar'           =>  $request->name_ar,
             'name'              =>  $request->name,
         ];
+
         if($id){
             $credentials['user_id'] = $id;
         }else{
@@ -58,7 +61,7 @@ class Insurance extends Model
         }else{
             if($id){
                 $credentials['img_id'] = $img_id;
-                }
+            }
         }
         return $credentials;
     }

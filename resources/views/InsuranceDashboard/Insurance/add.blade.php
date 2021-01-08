@@ -14,7 +14,7 @@
         </div>
         <!--begin::Form-->
         <form action="{{route("insurance.company.store")}}" method="POST" enctype="multipart/form-data">
-            @csrf   
+            @csrf
 
             <div class="card-body">
                 <!-- EN Form -->
@@ -57,6 +57,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label>
+                            <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">

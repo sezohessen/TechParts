@@ -49,8 +49,8 @@ class AgencyController extends Controller
         $request->validate($rules);
         $credentials = Agency::credentials($request);
         $Agency = Agency::create($credentials);
-       session()->flash('created',__("Agency has been Created successfully!"));
-       return redirect()->route('dashboard.agency.index');
+        session()->flash('created',__("Agency has been Created successfully!"));
+        return redirect()->route('dashboard.agency.index');
     }
 
     /**
@@ -72,7 +72,16 @@ class AgencyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $agency     = Agency::find($id);
+        if($agency->count()){
+        $countries  = Country::all();
+        $users      = User::all();
+        $page_title = __("Edit Agency");
+        $page_description = __("Edit");
+        return view('dashboard.agency.edit', compact('page_title', 'page_description','users','countries','agency'));
+        }else{
+            return redirect()->route('dashboard.agency.index');
+        }
     }
 
     /**
@@ -84,7 +93,13 @@ class AgencyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $agency = Agency::find($id);
+        $rules  = Agency::rules($request,'Agency');
+        $request->validate($rules);
+        $credentials = Agency::credentials($request,$request->user_id,$agency->img_id);
+        $Agency = Agency::where('id',$id)->update($credentials);
+        session()->flash('updated',__("Agency has been Updated successfully!"));
+        return redirect()->route('dashboard.agency.index');
     }
 
     /**
@@ -93,8 +108,23 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Agency $agency)
     {
-        //
+        $agency->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.agency.index");
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$agency = Agency::find($id);
+				$agency->delete();
+			}
+		} else {
+			$agency = Agency::find(request('item'));
+			$agency->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.agency.index");
     }
 }

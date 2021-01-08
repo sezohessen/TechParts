@@ -88,7 +88,7 @@ class InsuranceController extends Controller
         $page_description = __("Edit");
         return view('dashboard.Insurance.edit', compact('page_title', 'page_description','users','insurance'));
         }else{
-            return redirect()->back();
+            return redirect()->route('dashboard.insurance.index');
         }
     }
 
@@ -102,9 +102,9 @@ class InsuranceController extends Controller
     public function update(Request $request, $id)
     {
         $insurance = Insurance::find($id);
-        $rules = Insurance::rules($request,$id);
+        $rules = Insurance::rules($request,'Insurance');
         $request->validate($rules);
-        $credentials = Insurance::credentials($request,Auth::id(),$insurance->img_id);
+        $credentials = Insurance::credentials($request,$request->user_id,$insurance->img_id);
         $Insurance = Insurance::where('id',$id)->update($credentials);
         session()->flash('updated',__("Changed has been updated successfully!"));
         return  redirect()->route("dashboard.insurance.index");
