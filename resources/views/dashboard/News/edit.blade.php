@@ -1,8 +1,6 @@
 {{-- Extends layout --}}
 @extends('layout.master')
-@section('styles')
-<link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
-@endsection
+
 {{-- Content --}}
 @section('content')
 
@@ -15,9 +13,11 @@
                 <a href="{{ route('dashboard.news.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
+
         <!--begin::Form-->
-        <form action="{{route("dashboard.news.store")}}" method="POST"  enctype="multipart/form-data">
+        <form action="{{route("dashboard.news.update", $news->id) }}" method="POST">
             @csrf
+            @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
@@ -28,7 +28,14 @@
                                  id="country" name="category_id" required>
                                 <option value="">@lang('--Select category first--')</option>
                                 @foreach ($categories as $key=> $category)
-                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }} >
+                                    <option value="{{ $category->id }}"
+                                    @if ()
+
+                                    @else
+
+                                    @endif
+                                    {{ old('category_id') == $category->id ? 'selected' : '' }}
+                                    >
                                         {{$category->name}} - {{ $category->name_ar }}
                                     </option>
                                 @endforeach
@@ -72,7 +79,7 @@
                         <div class="form-group">
                             <label>@lang('Author Name') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('authorName') ? 'is-invalid' : '' }}"
-                             name="authorName"  placeholder="@lang('Name')" value="{{ old('authorName') }}" required autofocus  />
+                             name="authorName"  placeholder="@lang('Name')"value="{{ old('authorName') ?? $news->authorName }}" required   />
                             @if ($errors->has('authorName'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -112,7 +119,7 @@
                         <div class="form-group">
                             <label>@lang('Title(ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
-                             name="title"  placeholder="@lang('title name')" value="{{ old('title') }}" required autofocus  />
+                             name="title"  placeholder="@lang('title name')" value="{{ old('title') ?? $news->title }}" required   />
                             @if ($errors->has('title'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -126,7 +133,7 @@
                         <div class="form-group">
                             <label>@lang('Title(AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('title_ar') ? 'is-invalid' : '' }}"
-                             name="title_ar"  placeholder="@lang('title name')" value="{{ old('title_ar') }}" required autofocus  />
+                             name="title_ar"  placeholder="@lang('title name')" value="{{ old('title_ar') ?? $news->title_ar }}" required   />
                             @if ($errors->has('title_ar'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -140,7 +147,7 @@
                         <div class="form-group">
                             <label for="description">@lang('Description(ENG)')</label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
-                            placeholder="@lang('Write description')" >{{ old('description') }}</textarea>
+                            placeholder="@lang('Write description')" >{{ old('description') ?? $news->description }}</textarea>
                             @if ($errors->has('description'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -154,7 +161,7 @@
                         <div class="form-group">
                             <label for="description">@lang('Description(AR)')</label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
-                            placeholder="@lang('Write description')" >{{ old('description_ar') }}</textarea>
+                            placeholder="@lang('Write description')" >{{ old('description_ar') ?? $news->description_ar }}</textarea>
                             @if ($errors->has('description_ar'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -167,7 +174,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('create')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('update') </button>
             </div>
         </form>
         <!--end::Form-->
@@ -177,18 +184,7 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-<script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
+
 <script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
-<script>
-
-"use strict";
-var KTUserEdit={
-    init:function(){
-        new KTImageInput("Image");
-        new KTImageInput("authorImg");
-        }
-        };jQuery(document).ready((function(){KTUserEdit.init()}));
-</script>
 @endsection
-

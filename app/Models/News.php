@@ -19,9 +19,11 @@ class News extends Model
         'description',
         'description_ar',
     ];
+
     public function category(){
         return $this->belongsTo(Category::class,'category_id','id');
     }
+    
     public static function rules($request)
     {
         $rules = [

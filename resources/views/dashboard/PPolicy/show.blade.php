@@ -11,7 +11,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("PPolicy.update",$PPolicy->id)}}" method="POST">
+        <form action="{{route("dashboard.PPolicy.update",$PPolicy->id)}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">

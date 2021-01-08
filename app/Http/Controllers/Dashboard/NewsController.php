@@ -17,7 +17,7 @@ class NewsController extends Controller
     {
         $page_title = __("News");
         $page_description =__( "View News");
-        return  $new->render("dashboard.news.index", compact('page_title', 'page_description'));
+        return  $new->render("dashboard.News.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -48,8 +48,8 @@ class NewsController extends Controller
         $New = News::create($credentials);
         $New->save();
 
-        session()->flash('created',__("Changed has been Created successfully!"));
-        return redirect()->route("dashboard.news.index");
+       session()->flash('success',__("news has been added!"));
+       return redirect()->route("dashboard.news.index");
     }
 
     /**
@@ -69,9 +69,12 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        $categories = Category::all();
+        $page_title = __('news');
+        $page_description = __('Frequently Asked Questions');
+        return view('dashboard.News.edit', compact('page_title', 'page_description','news', 'categories'));
     }
 
     /**
@@ -81,9 +84,14 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $new)
     {
-        //
+        $rules =$new->rules($request);
+        $request->validate($rules);
+        $credentials = $new->credentials($request);
+        $new->update($credentials);
+        session()->flash('updated',__("Changed has been updated successfully!"));
+        return  redirect()->route("dashboard.news.index");
     }
 
     /**

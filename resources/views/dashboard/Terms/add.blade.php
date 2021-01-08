@@ -11,7 +11,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("terms.update",$terms->id)}}" method="POST">
+        <form action="{{route("dashboard.terms.update",$terms->id)}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">

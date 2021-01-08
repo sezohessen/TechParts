@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|admin']], function () {
-    Route::get('/', 'DashboardController@index');
+Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|administrator']], function () {
+    Route::get('/', 'DashboardController@index')->name('index');
     Route::resource('/faqs','FaqController');
     Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');
@@ -91,7 +91,7 @@ Route::get('/', function ()
     return view('auth.login',  compact('page_title', 'page_description'));
 });
 Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insurance", 'middleware' => ['role:insurance']], function () {
-    Route::get('/','InsuranceController@index');
+    Route::get('/','InsuranceController@index')->name('index');
     Route::resource('/company','InsuranceCompanyController');
     Route::resource('/insurance-offer','InsuranceOfferController');
     Route::resource('/offer-plan','OfferPlanController');

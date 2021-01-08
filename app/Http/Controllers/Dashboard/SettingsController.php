@@ -18,10 +18,17 @@ class SettingsController extends Controller
      */
     public function index(SettingDatatable $setting)
     {
-
-        $page_title = __('Settings');
-        $page_description = __('View  Settings');
-        return  $setting->render("dashboard.settings.index", compact('page_title', 'page_description'));
+        /* if (Session::get('app_locale') == 'ar') {
+            $page_title = 'الاعدادات';
+            $page_description = 'عرض الاعدادات';
+        } else {
+            $page_title = 'Settings';
+            $page_description = 'View all Settings';
+        } */
+        $page_title = 'Settings';
+        $page_description = 'View all Settings';
+        $settings = Settings::first();
+        return view('dashboard.Setting.index', compact('page_title', 'page_description','settings'));
     }
 
     /**
@@ -137,6 +144,6 @@ class SettingsController extends Controller
 			$setting->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.settings.index");
+        return redirect()->route("dashboard.Setting.index");
     }
 }
