@@ -32,7 +32,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">@lang("Delete Record")</h4>
         </div>
-        {!! Form::open(['route'=>['dashboard.insurance-offer.destroy',$id],'method'=>'delete']) !!}
+        {!! Form::open(['route'=>['dashboard.offer-plan.destroy',$id],'method'=>'delete']) !!}
         <div class="modal-body">
             <p>@lang("Are you sure you want delete this item  ? ")</p>
         </div>

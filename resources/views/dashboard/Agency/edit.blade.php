@@ -14,8 +14,9 @@
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.agency.store")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("dashboard.agency.update",$agency->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
@@ -23,7 +24,7 @@
                         <div class="form-group">
                             <label>@lang('Agency Name (ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" required
-                            name="name"  placeholder="@lang('Name(ENG)')" autofocus  value="{{old("name")}}"/>
+                            name="name"  placeholder="@lang('Name(ENG)')" autofocus  value="{{old("name") ? old("name") : $agency->name}}"/>
                             @error('name')
                                 <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @enderror
@@ -33,7 +34,7 @@
                         <div class="form-group">
                             <label>@lang('Agency Name (AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}" required
-                            name="name_ar"  placeholder="@lang('Name(AR)')" value="{{old("name_ar")}}" />
+                            name="name_ar"  placeholder="@lang('Name(AR)')" value="{{old("name_ar") ? old("name_ar") : $agency->name_ar}}" />
                             @error('name_ar')
                                 <div class="invalid-feedback">{{ $errors->first('name_ar') }}</div>
                             @enderror
@@ -43,7 +44,7 @@
                         <div class="form-group">
                             <label for="description">@lang('Description(ENG)')<span class="text-danger">*</span></label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
-                            placeholder="@lang('Write description')" >{{ old('description') }}</textarea>
+                            placeholder="@lang('Write description')" >{{ old("description") ? old("description") : $agency->description }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback">{{ $errors->first('description') }}</div>
                             @enderror
@@ -53,7 +54,7 @@
                         <div class="form-group">
                             <label for="description">@lang('Description(AR)')<span class="text-danger">*</span></label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
-                            placeholder="@lang('Write description')" >{{ old('description_ar') }}</textarea>
+                            placeholder="@lang('Write description')" >{{ old("description_ar") ? old("description_ar") : $agency->description_ar }}</textarea>
                             @error('description_ar')
                                 <div class="invalid-feedback">{{ $errors->first('description_ar') }}</div>
                             @enderror
@@ -67,7 +68,7 @@
                                     <div class="checkbox-list">
                                         <label class="checkbox">
                                             <input type="checkbox" name="show_in_home"
-                                            {{ old('show_in_home')=="on" ? 'checked':'' }}/>
+                                            {{ old('show_in_home')=="on" ? 'checked': ( ($agency->show_in_home) ? 'checked': '') }}/>
                                             @error('show_in_home')
                                                 <div class="invalid-feedback">{{ $errors->first('show_in_home') }}</div>
                                             @enderror
@@ -83,7 +84,7 @@
                                     <div class="checkbox-list">
                                         <label class="checkbox">
                                             <input type="checkbox" name="car_show_rooms"
-                                            {{ old('car_show_rooms')=="on" ? 'checked':'' }}/>
+                                            {{ old('car_show_rooms')=="on" ? 'checked': (($agency->car_show_rooms) ? 'checked': '' )}}/>
                                             @error('car_show_rooms')
                                                 <div class="invalid-feedback">{{ $errors->first('car_show_rooms') }}</div>
                                             @enderror
@@ -103,19 +104,19 @@
                                     <div class="radio-inline">
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="0"
-                                             {{ old('center_type')=="0" ? 'checked':'' }} required/>
+                                             {{ old('center_type')=="0" ? 'checked':(($agency->center_type==0) ? 'checked': '' ) }} required/>
                                             <span></span>
                                             @lang('Distributor')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="1"
-                                            {{ old('center_type')=="1" ? 'checked':'' }}/>
+                                            {{ old('center_type')=="1" ? 'checked':(($agency->center_type==1) ? 'checked': '' ) }}/>
                                             <span></span>
                                             @lang('Agency')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="2"
-                                            {{ old('center_type')=="2" ? 'checked':'' }}/>
+                                            {{ old('center_type')=="2" ? 'checked':(($agency->center_type==2) ? 'checked': '' ) }}/>
                                             <span></span>
                                             @lang('Individual')
                                         </label>
@@ -131,19 +132,19 @@
                                     <div class="radio-inline">
                                         <label class="radio">
                                             <input type="radio" name="payment_method" value="0"
-                                            {{ old('payment_method')=="0" ? 'checked':'' }} required/>
+                                            {{ old('payment_method')=="0" ? 'checked':(($agency->payment_method==0) ? 'checked': '' ) }} required/>
                                             <span></span>
                                             @lang('Cash')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="payment_method" value="1"
-                                            {{ old('payment_method')=="1" ? 'checked':'' }}/>
+                                            {{ old('payment_method')=="1" ? 'checked':(($agency->payment_method==1) ? 'checked': '' ) }}/>
                                             <span></span>
                                             @lang('Installment')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="payment_method" value="2"
-                                            {{ old('payment_method')=="2" ? 'checked':'' }}/>
+                                            {{ old('payment_method')=="2" ? 'checked':(($agency->payment_method==2) ? 'checked': '' ) }}/>
                                             <span></span>
                                             @lang('Financial')
                                         </label>
@@ -163,13 +164,13 @@
                                     <div class="radio-inline">
                                         <label class="radio">
                                             <input type="radio" name="car_status" value="0"
-                                            {{ old('car_status')=="0" ? 'checked':'' }} required/>
+                                            {{ old('car_status')=="0" ? 'checked':(($agency->car_status==0) ? 'checked': '' ) }} required/>
                                             <span></span>
                                             @lang('New')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="car_status" value="1"
-                                            {{ old('car_status')=="1" ? 'checked':'' }}/>
+                                            {{ old('car_status')=="1" ? 'checked':(($agency->car_status==1) ? 'checked': '' ) }}/>
                                             <span></span>
                                             @lang('Used')
                                         </label>
@@ -185,19 +186,19 @@
                                     <div class="radio-inline">
                                         <label class="radio">
                                             <input type="radio" name="status" value="0"
-                                            {{ old('status')=="0" ? 'checked':'' }} required/>
+                                            {{ old('status')=="0" ? 'checked':(($agency->status==0) ? 'checked': '' ) }} required/>
                                             <span></span>
                                             @lang('Normal')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="status" value="1"
-                                            {{ old('status')=="1" ? 'checked':'' }} />
+                                            {{ old('status')=="1" ? 'checked':(($agency->status==1) ? 'checked': '' ) }} />
                                             <span></span>
                                             @lang('Premium')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="status" value="2"
-                                            {{ old('status')=="2" ? 'checked':'' }} />
+                                            {{ old('status')=="2" ? 'checked':(($agency->status==2) ? 'checked': '' ) }} />
                                             <span></span>
                                             @lang('Trusted')
                                         </label>
@@ -219,6 +220,8 @@
                                     <option value="{{$country->id}}"
                                         @if(old('country_id') == $country->id)
                                             {{ 'selected' }}
+                                        @elseif($country->id==$agency->country_id)
+                                            {{ 'selected' }}
                                         @endif
                                         >{{$country->name}} - {{ $country->name_ar }}</option>
                                 @endforeach
@@ -233,7 +236,9 @@
                             <label for="governorate">@lang('Select Governorate') <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('governorate_id') ? 'is-invalid' : '' }}" id="governorate"
                             name="governorate_id" required >
-                                <option value="">@lang('--Select country first--')</option>
+                            <option value="{{ $agency->governorate_id }}" selected  >
+                                {{ $agency->governorate->title }} - {{ $agency->governorate->title_ar }}
+                            </option>
                             </select>
                             @error('governorate_id')
                                 <div class="invalid-feedback">{{ $errors->first('governorate_id') }}</div>
@@ -245,7 +250,9 @@
                             <label for="city">@lang('Select City') <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('city_id') ? 'is-invalid' : '' }}" id="city"
                             name="city_id" required >
-                                <option value="">@lang('--Select governorate first--')</option>
+                                <option value="{{ $agency->governorate_id }}" selected  >
+                                    {{ $agency->city->title }} - {{ $agency->city->title_ar }}
+                                </option>
                             </select>
                             @error('city_id')
                                 <div class="invalid-feedback">{{ $errors->first('city_id') }}</div>
@@ -258,7 +265,9 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                              <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
                                  id="kt_select2_1" name="user_id" required>
-                                <option value="">@lang('--Select user--')</option>
+                                 <option value="{{ $agency->user_id }}" selected  >
+                                    {{ $agency->user->email }}
+                                </option>
                                 @foreach ($users as $user)
                                     <option value="{{$user->id}}">{{ $user->email }}</option>
                                 @endforeach
@@ -273,11 +282,11 @@
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label>
                             <br>
-                            <div class="image-input image-input-empty image-input-outline" id="img_id" style="background-image: url({{asset('media/users/blank.png') }})">
+                            <div class="image-input image-input-empty image-input-outline" id="img_id" style="background-image: url({{asset('img/agency/'.$agency->img->name) }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="img_id" accept=".png, .jpg, .jpeg ,gif,svg" required >
+                                    <input type="file" name="img_id" accept=".png, .jpg, .jpeg ,gif,svg" >
                                     <input type="hidden" name="img_id_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -295,7 +304,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('create')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('update')  </button>
             </div>
         </form>
         <!--end::Form-->

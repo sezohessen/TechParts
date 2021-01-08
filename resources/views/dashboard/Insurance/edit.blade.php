@@ -69,7 +69,7 @@
                                         @if ($user->id==$insurance->user_id)
                                         {{ 'selected' }}
                                         @endif
-                                        >{{$user->name}} - {{ $user->email }}</option>
+                                        >{{ $user->email }}</option>
                                 @endforeach
                              </select>
                             @error('user_id')
