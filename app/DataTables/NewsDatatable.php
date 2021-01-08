@@ -21,15 +21,15 @@ class NewsDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('title', '{{Str::limit($question, 100)}}')
-            ->editColumn('title_ar', '{{Str::limit($question_ar, 100)}}')
-            ->editColumn('authorName', '{{ Str::limit($answer, 100) }}')
-            ->editColumn('category.name_ar', '{{ Str::limit($category->name_ar, 100) }}')
+            ->editColumn('title', '{{Str::limit($title, 100)}}')
+            ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
+            ->editColumn('authorName', '{{ Str::limit($authorName, 100) }}')
+            ->editColumn('category.name_ar', '{!! Str::limit($category["name_ar"], 100) !!}')
             ->editColumn('description', '{!! Str::limit($description, 100) !!}')
             ->editColumn('description_ar', '{!! Str::limit($description_ar, 100) !!}')
             ->addColumn('checkbox', 'dashboard.News.btn.checkbox')
             ->addColumn('action', 'dashboard.News.btn.action')
-            ->rawColumns(['checkbox','action','description','description_ar']);
+            ->rawColumns(['checkbox','action','description','description_ar', 'category.name_ar']);
     }
 
     /**
@@ -111,7 +111,7 @@ class NewsDatatable extends DataTable
             Column::make('title'),
             Column::make('title_ar'),
             Column::make('authorName'),
-            Column::make('category.name_ar'),
+            Column::make('category.name_ar')->title(__('category')),
             Column::make('description'),
             Column::make('description_ar'),
             Column::computed('action')

@@ -16,7 +16,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <meta charset="utf-8"/>
 
         {{-- Title Section --}}
-        <title> | @yield('title', $page_title ?? '')</title>
+        <title> {{ config('app.name') }}| @yield('title', $page_title ?? '')</title>
 
         {{-- Meta Data --}}
         <meta name="description" content="@yield('page_description', $page_description ?? '')"/>
