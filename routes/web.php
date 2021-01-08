@@ -36,6 +36,16 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/AskExpert','AskExpertController');
     Route::resource('/finance-request','FinanceRequestController');
     Route::resource('/agency','AgencyController');
+    Route::group(['prefix' => 'car'],function(){
+        Route::resource('/','CarController');
+        Route::resource('/maker','CarMakerController');
+        Route::resource('/model','CarModelController');
+        Route::resource('/body','CarBodyController');
+        Route::resource('/year','CarYearController');
+        Route::resource('/capacity','CarCapacityController');
+        Route::resource('/color','CarColorController');
+    });
+
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');

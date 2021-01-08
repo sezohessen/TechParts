@@ -1,23 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
+
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\News;
 use Illuminate\Http\Request;
-use App\DataTables\NewsDatatable;
-class NewsController extends Controller
+
+class CarCapacityController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(NewsDatatable $new)
+    public function index()
     {
-        $page_title = __("News");
-        $page_description =__( "View News");
-        return  $new->render("dashboard.news.index", compact('page_title', 'page_description'));
+        //
     }
 
     /**
@@ -27,11 +24,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-
-        $page_title = "Add News";
-        $page_description = "Add new news";
-        $categories = Category::all();
-        return view('dashboard.News.add', compact('page_title', 'page_description','categories'));
+        //
     }
 
     /**
@@ -42,14 +35,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = News::rules($request);
-        $request->validate($rules);
-        $credentials = News::credentials($request);
-        $New = News::create($credentials);
-        $New->save();
-
-        session()->flash('created',__("Changed has been Created successfully!"));
-        return redirect()->route("dashboard.news.index");
+        //
     }
 
     /**
@@ -95,18 +81,5 @@ class NewsController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function multi_delete(){
-        if (is_array(request('item'))) {
-			foreach (request('item') as $id) {
-				$new = News::find($id);
-				$new->delete();
-			}
-		} else {
-			$new = News::find(request('item'));
-			$new->delete();
-		}
-        session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.news.index");
     }
 }

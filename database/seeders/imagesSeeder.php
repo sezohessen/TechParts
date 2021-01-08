@@ -17,7 +17,7 @@ class imagesSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1,10) as $value){
             DB::table('images')->insert([
-                'name'              => $faker->name,
+                'name'              =>  "https://source.unsplash.com/random",
                 'created_at'        =>  now(),
                 'updated_at'        =>  now(),
             ]);

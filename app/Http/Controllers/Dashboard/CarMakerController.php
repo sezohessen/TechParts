@@ -1,23 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
+
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\News;
+use App\Models\CarMaker;
 use Illuminate\Http\Request;
-use App\DataTables\NewsDatatable;
-class NewsController extends Controller
+
+class CarMakerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(NewsDatatable $new)
+    public function index()
     {
-        $page_title = __("News");
-        $page_description =__( "View News");
-        return  $new->render("dashboard.news.index", compact('page_title', 'page_description'));
+        //
     }
 
     /**
@@ -27,11 +25,10 @@ class NewsController extends Controller
      */
     public function create()
     {
+        $page_title = __("Add Car Make");
+        $page_description = __("Car Make");
 
-        $page_title = "Add News";
-        $page_description = "Add new news";
-        $categories = Category::all();
-        return view('dashboard.News.add', compact('page_title', 'page_description','categories'));
+        return view('dashboard.CarMaker.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -42,14 +39,12 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = News::rules($request);
+        $rules = CarMaker::rules($request);
         $request->validate($rules);
-        $credentials = News::credentials($request);
-        $New = News::create($credentials);
-        $New->save();
-
+        $credentials = CarMaker::credentials($request);
+        $CarMaker = CarMaker::create($credentials);
         session()->flash('created',__("Changed has been Created successfully!"));
-        return redirect()->route("dashboard.news.index");
+        return redirect()->route("dashboard.maker.index");
     }
 
     /**
@@ -69,9 +64,12 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CarMaker $maker)
     {
-        //
+        $page_title = __("Edit Car Make");
+        $page_description = __("Edit Make");
+
+        return view('dashboard.CarMaker.edit', compact('page_title', 'page_description','maker'));
     }
 
     /**
@@ -81,9 +79,14 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CarMaker $maker)
     {
-        //
+        $rules =$maker->rules($request);
+        $request->validate($rules);
+        $credentials = $maker->credentials($request,$maker->logo->id);
+        $maker->update($credentials);
+        session()->flash('updated',__("Changed has been Updated successfully!"));
+        return redirect()->route("dashboard.maker.index");
     }
 
     /**
@@ -95,18 +98,5 @@ class NewsController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function multi_delete(){
-        if (is_array(request('item'))) {
-			foreach (request('item') as $id) {
-				$new = News::find($id);
-				$new->delete();
-			}
-		} else {
-			$new = News::find(request('item'));
-			$new->delete();
-		}
-        session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.news.index");
     }
 }

@@ -3,6 +3,15 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\CarBody;
+use App\Models\CarCapacity;
+use App\Models\CarColor;
+use App\Models\CarMaker;
+use App\Models\CarModel;
+use App\Models\CarYear;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Governorate;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -24,7 +33,18 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        $page_title = __("Add Car");
+        $page_description = __("Add new Car");
+        $makers=CarMaker::all();
+        $models=CarModel::all();
+        $years=CarYear::all();
+        $bodies=CarBody::all();
+        $capacities=CarCapacity::all();
+        $colors=CarColor::all();
+        $countries=Country::all();
+        $cities=City::all();
+        $governorate=Governorate::all();
+        return view('dashboard.Car.add', compact('page_title', 'page_description','makers'));
     }
 
     /**
