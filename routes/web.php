@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|admin']], function () {
-    Route::get('/', 'DashboardController@index');
+Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|administrator']], function () {
+    Route::get('/', 'DashboardController@index')->name('index');
     Route::resource('/faqs','FaqController');
     Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');

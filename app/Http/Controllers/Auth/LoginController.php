@@ -31,10 +31,10 @@ class LoginController extends Controller
         if (auth()->user()->hasRole('insurance')) {
             return '/insurance';
         }
-        if (auth()->user()->hasRole('admin') or auth()->user()->hasRole('superadministrator')) {
+        if (auth()->user()->hasRole('administrator') or auth()->user()->hasRole('superadministrator')) {
             return '/dashboard';
         }
-        return '/user';
+        return '/home';
     }
 
     /**
