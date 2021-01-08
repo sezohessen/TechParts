@@ -223,5 +223,7 @@
     "Cash":"نقدي",
     "Installment":"تقسيط",
     "Financial":"مالي",
-    "Select City":"اختر مدينة"
+    "Select City":"اختر مدينة",
+    "Insurance Offers's plans":"خطط عروض التأمين",
+    "Insurance's offers":"عروض التأمين"
 }
