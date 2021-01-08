@@ -269,9 +269,54 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <h2>@lang('Contact Information')</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Whatsapp')</label>
+                                    <input type="text" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}" required
+                                    name="whatsapp"  placeholder="@lang('Phone number')" autofocus  value="{{old("whatsapp")}}"/>
+                                    @error('whatsapp')
+                                        <div class="invalid-feedback">{{ $errors->first('whatsapp') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Facebook')</label>
+                                    <input type="text" class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}" required
+                                    name="facebook"  placeholder="@lang('Link')" autofocus  value="{{old("facebook")}}"/>
+                                    @error('facebook')
+                                        <div class="invalid-feedback">{{ $errors->first('facebook') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Instagram')</label>
+                                    <input type="text" class="form-control {{ $errors->has('instagram') ? 'is-invalid' : '' }}" required
+                                    name="instagram"  placeholder="@lang('Link')" autofocus  value="{{old("instagram")}}"/>
+                                    @error('instagram')
+                                        <div class="invalid-feedback">{{ $errors->first('instagram') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Messenger')</label>
+                                    <input type="text" class="form-control {{ $errors->has('messenger') ? 'is-invalid' : '' }}" required
+                                    name="messenger"  placeholder="@lang('Link')" autofocus  value="{{old("messenger")}}"/>
+                                    @error('messenger')
+                                        <div class="invalid-feedback">{{ $errors->first('messenger') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label>
+                            <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="img_id" style="background-image: url({{asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>

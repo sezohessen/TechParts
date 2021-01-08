@@ -60,7 +60,11 @@ class Agency extends Model
             'city_id'               => 'required',
             'lat'                   => 'nullable',
             'long'                  => 'nullable',
-            'user_id'               => 'required'
+            'user_id'               => 'required',
+            'facebook'              => 'nullable',
+            'whatsapp'              => 'nullable',
+            'instagram'             => 'nullable',
+            'messenger'             => 'nullable',
         ];
         if($id == 'Agency'){//For update in Dashborad
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
@@ -93,7 +97,7 @@ class Agency extends Model
         }else{
             $credentials['user_id'] = $request->user_id;
         }
-
+        /* $this->CreateOrIgnore($product,$request->discount,'discount'); */
         if($request->show_in_home!=NULL&&$request->show_in_home=='on'){
             $credentials['show_in_home'] = 1;
         }else{
@@ -140,6 +144,13 @@ class Agency extends Model
         }else{
             $Image = Image::create(['name' => $fileName]);
             return $Image->id;
+        }
+    }
+    public function CreateOrIgnore($table,$request,$name)
+    {
+        if(!is_null($request)){
+            $table->$name = $request;
+            $table->save();
         }
     }
 }

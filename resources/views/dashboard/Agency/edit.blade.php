@@ -280,7 +280,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label>
+                            <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="img_id" style="background-image: url({{asset('img/agency/'.$agency->img->name) }})">
                                 <div class="image-input-wrapper"></div>
