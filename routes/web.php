@@ -79,7 +79,7 @@ Route::get('/', function ()
     return view('auth.login',  compact('page_title', 'page_description'));
 });
 Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insurance", 'middleware' => ['role:insurance']], function () {
-    Route::get('/','InsuranceController@index');
+    Route::get('/','InsuranceController@index')->name('index');
     Route::resource('/company','InsuranceCompanyController');
     Route::resource('/insurance-offer','InsuranceOfferController');
     Route::resource('/offer-plan','OfferPlanController');

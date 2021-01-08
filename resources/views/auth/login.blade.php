@@ -106,7 +106,12 @@
                     <span class="mr-1">2021©</span>
                     <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ config('app.name') }}</a>
                 </div>
+                <div class="mr-10">
                 <a href="{{ url('/terms') }}" class="text-primary font-weight-bolder font-size-lg">@lang('Terms')</a>
+                </div>
+                <div class="mr-10">
+                <a href="{{ url('/PPolicy') }}" class="text-primary font-weight-bolder font-size-lg">@lang('Privcay and policy')</a>
+                </div>
             </div>
             <!--end::Content footer-->
         </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Terms;
 use Illuminate\Http\Request;
-use App\DataTables\TermsDatatable;
+
 class TermsController extends Controller
 {
     /**
@@ -12,12 +12,19 @@ class TermsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(TermsDatatable $term)
+    public function index()
     {
-
-        $page_title = __('Terms');
-        $page_description = __('View all terms');
-        return  $term->render("dashboard.Terms.show", compact('page_title', 'page_description'));
+        /* if (Session::get('app_locale') == 'ar') {
+            $page_title = 'الشروط';
+            $page_description = 'عرض الشروط';
+        } else {
+            $page_title = 'Terms';
+            $page_description = 'View all terms';
+        } */
+        $page_title = 'Terms';
+        $page_description = 'View all terms';
+        $terms = Terms::first();
+        return view('dashboard.Terms.add', compact('page_title', 'page_description','terms'));
     }
 
     /**
@@ -49,7 +56,13 @@ class TermsController extends Controller
      */
     public function show()
     {
-
+        /* if (Session::get('app_locale') == 'ar') {
+            $page_title = "الاحكام والشروط";
+            $page_description = "عرض الاحكام والشروط";
+        } else {
+            $page_title = "Terms and condition";
+            $page_description = "View terms description";
+        } */
         $page_title = "Terms and condition";
         $page_description = "View terms description";
         $terms = Terms::first();
@@ -85,7 +98,11 @@ class TermsController extends Controller
         $term->description       = $request->description;
         $term->description_ar   = $request->description_ar;
         $term->save();
-
+        /* if (Session::get('app_locale') == 'ar') {
+            session()->flash('success',__("تم تعديل الشروط"));
+        } else {
+            session()->flash('success',__("Terms has been updated!"));
+        } */
         session()->flash('success',__("Terms has been upated!"));
         return redirect()->back();
     }
@@ -99,18 +116,5 @@ class TermsController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function multi_delete(){
-        if (is_array(request('item'))) {
-			foreach (request('item') as $id) {
-				$terms = Terms::find($id);
-				$terms->delete();
-			}
-		} else {
-			$terms = Terms::find(request('item'));
-			$terms->delete();
-		}
-        session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.terms.index");
     }
 }
