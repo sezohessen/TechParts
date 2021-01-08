@@ -146,6 +146,7 @@
     "Category Name(AR)":"اسم الصنف (بالعربية)",
     "Please enter category name":"رجاء ادخل اسم الصنف",
     "--Select country first--":"اختر البلد اولا",
+    "--Select country--":"اختر البلد",
     "--Select governorate first--":"اختر المحافظة اولا",
     "--Select category first--":"اختر الصنف اولا",
     "Author Name":"اسم المؤلف",
@@ -221,5 +222,6 @@
     "Payment Method":"طريقة الدفع او السداد",
     "Cash":"نقدي",
     "Installment":"تقسيط",
-    "Financial":"مالي"
+    "Financial":"مالي",
+    "Select City":"اختر مدينة"
 }

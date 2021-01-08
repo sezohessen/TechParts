@@ -7,6 +7,7 @@ use App\Models\Governorate;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Constraint\Count;
 use App\DataTables\GovernorateDatatable;
+use App\Models\City;
 
 class GovernorateController extends Controller
 {
@@ -60,7 +61,15 @@ class GovernorateController extends Controller
      */
     public function show($id)
     {
-        //
+        $cities = City::where('governorate_id', $id)->get();
+        if($cities->count() > 0 ){
+            return response()->json([
+                'cities' => $cities
+            ]);
+        }
+        return response()->json([
+            'cities' => null
+        ]);
 
     }
 

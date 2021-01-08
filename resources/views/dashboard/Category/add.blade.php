@@ -21,7 +21,7 @@
                             <label>@lang('Category Name(ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                              name="name"  placeholder="@lang('Name(ENG)')" required autofocus  />
-                             @error('name')
+                            @error('name')
                                 <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @enderror
                         </div>
