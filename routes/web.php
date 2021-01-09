@@ -43,6 +43,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
         Route::resource('/year','CarYearController');
         Route::resource('/capacity','CarCapacityController');
         Route::resource('/color','CarColorController');
+        Route::get("available_model/{id}",'CarController@available_model');
     });
 
     // Permissions

@@ -35,16 +35,12 @@ class CarController extends Controller
     {
         $page_title = __("Add Car");
         $page_description = __("Add new Car");
-        $makers=CarMaker::all();
-        $models=CarModel::all();
-        $years=CarYear::all();
+        $makers=CarMaker::where('active', '=', 1)->get();
+        $models=CarModel::where('active', '=', 1)->get();
         $bodies=CarBody::all();
-        $capacities=CarCapacity::all();
-        $colors=CarColor::all();
-        $countries=Country::all();
-        $cities=City::all();
-        $governorate=Governorate::all();
-        return view('dashboard.Car.add', compact('page_title', 'page_description','makers'));
+        $years=CarYear::all();
+        
+        return view('dashboard.Car.add', compact('page_title', 'page_description','makers','models',"years","bodies"));
     }
 
     /**
@@ -115,4 +111,16 @@ class CarController extends Controller
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.car.index");
     }
+    public function available_model($id){
+        $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get();
+        if($models->count() > 0 ){
+            return response()->json([
+                'models' => $models
+            ]);
+        }
+        return response()->json([
+            'models' => null
+        ]);
+    }
+
 }
