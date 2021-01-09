@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\CarYear;
 use Illuminate\Http\Request;
-
+use App\DataTables\CarYearDatatable;
 class CarYearController extends Controller
 {
     /**
@@ -12,9 +13,11 @@ class CarYearController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CarYearDatatable $year)
     {
-        //
+        $page_title = __('Year of manufacture ');
+        $page_description = __('View Years');
+        return  $year->render("dashboard.CarYear.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -24,7 +27,10 @@ class CarYearController extends Controller
      */
     public function create()
     {
-        //
+        $page_title = __("Add a year of manufacture ");
+        $page_description = __("Year of manufacture");
+
+        return view('dashboard.CarYear.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -35,7 +41,12 @@ class CarYearController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = CarYear::rules($request);
+        $request->validate($rules);
+        $credentials = CarYear::credentials($request);
+        $Caryear = CarYear::create($credentials);
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.year.index");
     }
 
     /**
@@ -55,9 +66,11 @@ class CarYearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CarYear $year)
     {
-        //
+        $page_title = __("Edit a year of manufacture ");
+        $page_description = __("Year of manufacture");
+        return view('dashboard.CarYear.edit', compact('page_title', 'page_description','year'));
     }
 
     /**
@@ -67,9 +80,14 @@ class CarYearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CarYear $year)
     {
-        //
+        $rules =$year->rules($request);
+        $request->validate($rules);
+        $credentials = $year->credentials($request);
+        $year->update($credentials);
+        session()->flash('updated',__("Changed has been Updated successfully!"));
+        return redirect()->route("dashboard.year.index");
     }
 
     /**
@@ -78,8 +96,30 @@ class CarYearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CarYear $year)
     {
-        //
+        $year->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.year.index");
+    }
+    public function Activity(Request $request){
+        $year = CarYear::find($request->id);
+        $year->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$year = CarYear::find($id);
+				$year->delete();
+			}
+		} else {
+			$year = CarYear::find(request('item'));
+			$year->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.year.index");
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\CarMaker;
 use Illuminate\Http\Request;
-
+use App\DataTables\CarMakeDatatable;
 class CarMakerController extends Controller
 {
     /**
@@ -13,9 +13,11 @@ class CarMakerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CarMakeDatatable $maker)
     {
-        //
+        $page_title = __('Car Maker');
+        $page_description = __('View CarMakers');
+        return  $maker->render("dashboard.CarMaker.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -81,7 +83,7 @@ class CarMakerController extends Controller
      */
     public function update(Request $request, CarMaker $maker)
     {
-        $rules =$maker->rules($request);
+        $rules =$maker->rules($request,$maker->id);
         $request->validate($rules);
         $credentials = $maker->credentials($request,$maker->logo->id);
         $maker->update($credentials);
@@ -95,8 +97,30 @@ class CarMakerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CarMaker $maker)
     {
-        //
+        $maker->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.maker.index");
+    }
+    public function Activity(Request $request){
+        $maker = CarMaker::find($request->id);
+        $maker->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$maker = CarMaker::find($id);
+				$maker->delete();
+			}
+		} else {
+			$maker = CarMaker::find(request('item'));
+			$maker->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.maker.index");
     }
 }

@@ -12,6 +12,20 @@ class CarColor extends Model
     protected $fillable=[
         'code',
     ];
+    public static function rules($request)
+    {
+        $rules = [
+            'code'             => 'required|string|max:255',
+        ];
+        return $rules;
+    }
+    public static function credentials($request)
+    {
+        $credentials = [
+            'code'              => $request->code,
+        ];
+        return $credentials;
+    }
 
 
 }

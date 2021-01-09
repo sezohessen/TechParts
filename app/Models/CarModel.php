@@ -15,6 +15,9 @@ class CarModel extends Model
         'active'
     ];
 
+    public function maker(){
+        return $this->belongsTo(CarMaker::class,'CarMaker_id','id');
+    }
     public static function rules($request)
     {
         $rules = [
