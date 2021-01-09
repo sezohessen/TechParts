@@ -61,10 +61,6 @@ class Agency extends Model
             'lat'                   => 'nullable',
             'long'                  => 'nullable',
             'user_id'               => 'required',
-            'facebook'              => 'nullable',
-            'whatsapp'              => 'nullable',
-            'instagram'             => 'nullable',
-            'messenger'             => 'nullable',
         ];
         if($id == 'Agency'){//For update in Dashborad
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
@@ -97,18 +93,17 @@ class Agency extends Model
         }else{
             $credentials['user_id'] = $request->user_id;
         }
-        /* $this->CreateOrIgnore($product,$request->discount,'discount'); */
-        if($request->show_in_home!=NULL&&$request->show_in_home=='on'){
+        if($request->show_in_home!=NULL&&$request->show_in_home=='on'){//Check Box
             $credentials['show_in_home'] = 1;
         }else{
             $credentials['show_in_home'] = 0;
         }
-        if($request->car_show_rooms!=NULL&&$request->car_show_rooms=='on'){
+        if($request->car_show_rooms!=NULL&&$request->car_show_rooms=='on'){//Check Box
             $credentials['car_show_rooms'] = 1;
         }else{
             $credentials['car_show_rooms'] = 0;
         }
-        if($request->file('img_id')){
+        if($request->file('img_id')){//Creating and Updating Image
             if($id){
                 $Image_id = self::file($request->file('img_id'),$img_id);
             }else{
@@ -144,13 +139,6 @@ class Agency extends Model
         }else{
             $Image = Image::create(['name' => $fileName]);
             return $Image->id;
-        }
-    }
-    public function CreateOrIgnore($table,$request,$name)
-    {
-        if(!is_null($request)){
-            $table->$name = $request;
-            $table->save();
         }
     }
 }

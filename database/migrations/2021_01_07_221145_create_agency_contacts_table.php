@@ -19,7 +19,11 @@ class CreateAgencyContactsTable extends Migration
             $table->string('whatsapp')->nullable();
             $table->string('instagram')->nullable();
             $table->string('messenger')->nullable();
-
+            $table->bigInteger('agent_id')->unsigned();
+            $table->foreign('agent_id')
+            ->references('id')->on('agencies')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

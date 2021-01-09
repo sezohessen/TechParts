@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\DataTables\AgencyDatatable;
 use App\Http\Controllers\Controller;
 use App\Models\Agency;
+use App\Models\AgencyCar;
+use App\Models\AgencyContact;
+use App\Models\CarMaker;
 use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,11 +33,12 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        $page_title = __("Add Agency");
+        $page_title       = __("Add Agency");
         $page_description = __("Add new Agency");
-        $countries = Country::all();
-        $users     = User::all();
-        return view('dashboard.Agency.add', compact('page_title', 'page_description','countries','users'));
+        $countries        = Country::all();
+        $users            = User::all();
+        $car_makers       = CarMaker::all();
+        return view('dashboard.Agency.add', compact('page_title', 'page_description','countries','users','car_makers'));
     }
 
     /**
@@ -45,10 +49,26 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = Agency::rules($request);
+        //Validate and create for Agency Table
+        $rules          = Agency::rules($request);
         $request->validate($rules);
-        $credentials = Agency::credentials($request);
-        $Agency = Agency::create($credentials);
+        $credentials    = Agency::credentials($request);
+        $Agency         = Agency::create($credentials);
+        //After Creating Agency row ,Agency Contact will be created by adding the agency id
+        //Validate and create for AgencyContact Table
+        $agent_id       = $Agency->id;
+        $rules          = AgencyContact::rules($request);
+        $request->validate($rules);
+        $credentials    = AgencyContact::credentials($request,$agent_id);
+        $AgencyContact  = AgencyContact::create($credentials);
+        //Validate and create for AgencyCar Table
+        $rules          = AgencyCar::rules($request);
+        $request->validate($rules);
+        //Get car_id Array to Agency Car
+        foreach ($request->CarMaker_id as $CarMaker_id){
+            $credentials    = AgencyCar::credentials($CarMaker_id,$agent_id);
+            $AgencyCar      = AgencyCar::create($credentials);
+        }
         session()->flash('created',__("Agency has been Created successfully!"));
         return redirect()->route('dashboard.agency.index');
     }
@@ -72,13 +92,24 @@ class AgencyController extends Controller
      */
     public function edit($id)
     {
-        $agency     = Agency::find($id);
+        $agency              = Agency::find($id);
         if($agency->count()){
-        $countries  = Country::all();
-        $users      = User::all();
-        $page_title = __("Edit Agency");
-        $page_description = __("Edit");
-        return view('dashboard.agency.edit', compact('page_title', 'page_description','users','countries','agency'));
+        $countries           = Country::all();
+        $users               = User::all();
+        $agency_contact      = AgencyContact::where('agent_id',$id)->first();
+        $page_title          = __("Edit Agency");
+        $page_description    = __("Edit");
+        $car_makers          = CarMaker::all();
+        $car_makers_selected = AgencyCar::where('agent_id',$id)->get();
+        //Add Agency Cars Id in array
+        //I will Colled all selectd car to compare it
+        $SelectedCarMakers = [];
+        foreach($car_makers_selected as $carMaker)
+        {
+            $SelectedCarMakers[] = $carMaker->CarMaker_id;
+        }
+        return view('dashboard.agency.edit', compact('page_title', 'page_description','users'
+        ,'countries','agency','agency_contact','car_makers','SelectedCarMakers'));
         }else{
             return redirect()->route('dashboard.agency.index');
         }
@@ -93,11 +124,48 @@ class AgencyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $agency = Agency::find($id);
-        $rules  = Agency::rules($request,'Agency');
+        $agency         = Agency::find($id);
+        $rules          = Agency::rules($request,'Agency');
         $request->validate($rules);
-        $credentials = Agency::credentials($request,$request->user_id,$agency->img_id);
-        $Agency = Agency::where('id',$id)->update($credentials);
+        $credentials    = Agency::credentials($request,$request->user_id,$agency->img_id);
+        $Agency         = Agency::where('id',$id)->update($credentials);
+        //After Creating Agency row ,Agency Contact will be created by adding the agency id
+        $rules          = AgencyContact::rules($request);
+        $request->validate($rules);
+        $credentials    = AgencyContact::credentials($request,$id);
+        $AgencyContact  = AgencyContact::where('agent_id',$id)->update($credentials);
+        /* (Testing)
+        $a = ['1','2','3'];//Selected
+        $b = ['4','5','6','7'];//New Selected
+        $difference = array_diff($a, $b);
+        */
+
+        //Array Differnce compute difference between to arrays
+        //if Get Array diff between Selected and New select ,then It will return the array that I need to delete
+        //if Get Array diff between New select and Selected ,then It will return the array that I need to create
+        $AgencyCars     = AgencyCar::where('agent_id',$id)->get();
+        $SelectedCarMaker = [];
+        foreach($AgencyCars as $AgencyCar){
+            $SelectedCarMaker[] = $AgencyCar->CarMaker_id;
+        }
+
+        $NeedToBeDeleted = array_diff($SelectedCarMaker,$request->CarMaker_id);
+        $NeedToBeCreated = array_diff($request->CarMaker_id,$SelectedCarMaker);
+        //Validate and create for AgencyCar Table
+        $rules          = AgencyCar::rules($request);
+        $request->validate($rules);
+        //Get car_id Array to Agency Car , (Create New)
+        foreach ($NeedToBeCreated as $CarMaker_id){
+            $credentials    = AgencyCar::credentials($CarMaker_id,$id);
+            $AgencyCar      = AgencyCar::create($credentials);
+        }
+        //Delete Removed Selected
+        foreach ($NeedToBeDeleted as $CarMaker_id){
+            $AgencyCar      = AgencyCar::where([
+                ['CarMaker_id','=',$CarMaker_id],
+                ['agent_id','=',$id]
+            ])->delete();
+        }
         session()->flash('updated',__("Agency has been Updated successfully!"));
         return redirect()->route('dashboard.agency.index');
     }
