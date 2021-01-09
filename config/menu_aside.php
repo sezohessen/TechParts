@@ -95,7 +95,7 @@ return [
             'title' => 'Agences',
             'icon' => 'fas fa-landmark',
             'bullet' => 'dot',
-            'root' => true, 
+            'root' => true,
             'submenu' => [
                 [
                     'title' => 'Agency companies',
@@ -107,7 +107,7 @@ return [
                             'page' => "/dashboard/agency/create"
                         ],
                         [
-                            'title' => 'View agences',
+                            'title' => 'View agencies',
                             'page' => '/dashboard/agency'
                         ],
 
