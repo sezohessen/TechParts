@@ -5,7 +5,7 @@ return [
     // Self
     'self' => [
         'layout' => 'default', // blank, default
-        'rtl' => false, // true, false
+        'rtl' => true, // true, false
     ],
 
     // Base Layout
