@@ -3,6 +3,15 @@
 <link href="{{ asset('css/pages/login/login-1.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
+
+@php
+if (Session::get('app_locale') == 'ar') {
+App::setLocale('ar');
+} else {
+App::setLocale('en');
+Session::put(App::setLocale('en'));
+}
+@endphp
 <div class="d-flex flex-column flex-root">
     <!--begin::Login-->
     <div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">

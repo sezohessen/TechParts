@@ -131,7 +131,7 @@
     {{-- User --}}
     @if (config('layout.extras.user.display'))
         @if (config('layout.extras.user.layout') == 'offcanvas')
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav @if (App::isLocale('en')) ml-auto @endif">
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px 0 0 0;" v-pre>
                     {{ Auth::user()->first_name }}
