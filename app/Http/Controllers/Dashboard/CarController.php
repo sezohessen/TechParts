@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
+use App\Models\Badges;
 use App\Models\Car;
 use App\Models\CarBody;
 use App\Models\CarCapacity;
 use App\Models\CarColor;
 use App\Models\CarMaker;
+use App\Models\CarManufacture;
 use App\Models\CarModel;
 use App\Models\CarYear;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Feature;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
 
@@ -39,8 +42,13 @@ class CarController extends Controller
         $models=CarModel::where('active', '=', 1)->get();
         $bodies=CarBody::all();
         $years=CarYear::all();
-        
-        return view('dashboard.Car.add', compact('page_title', 'page_description','makers','models',"years","bodies"));
+        $badges=Badges::where('active', '=', 1)->get();
+        $features=Feature::where('active', '=', 1)->get();
+        $countries=Country::all();
+        $manufactures=CarManufacture::all();
+        $capacities=CarCapacity::all();
+        return view('dashboard.Car.add', compact('page_title', 'page_description','makers',
+        'models',"years","bodies","badges","features","countries","manufactures","capacities"));
     }
 
     /**
@@ -120,6 +128,28 @@ class CarController extends Controller
         }
         return response()->json([
             'models' => null
+        ]);
+    }
+    public function available_governorate($id){
+        $governorates = Governorate::where('country_id', $id)->get();
+        if($governorates->count() > 0 ){
+            return response()->json([
+                'governorates' => $governorates
+            ]);
+        }
+        return response()->json([
+            'governorates' => null
+        ]);
+    }
+    public function available_city($id){
+        $cities = City::where('governorate_id', $id)->get();
+        if($cities->count() > 0 ){
+            return response()->json([
+                'cities' => $cities
+            ]);
+        }
+        return response()->json([
+            'cities' => null
         ]);
     }
 

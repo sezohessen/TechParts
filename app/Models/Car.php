@@ -9,12 +9,28 @@ class Car extends Model
 {
     use HasFactory;
     protected $table    = 'cars';
+
     const TRANSIMSSION_MANUAL  = 0;
     const TRANSIMSSION_AUTOMATIC = 1;
+
+    const PAYMENT_CASH  = 0;
+    const PAYMENT_INSTALLMENT = 1;
+    const PAYMENT_FINANCING = 3;
+
+    const STATUS_NEW  = 0;
+    const STATUS_USED = 1;
+
+    const SELLER_AGENCY=0;
+    const SELLER_DISTRIBUTOR=1;
+    const SELLER_INDIVIDUAL=2;
+
+
     protected $fillable=[
         'price',
-        'PrePrice',
-        'currency',
+        'price_after_discount',
+        'Description',
+        'Description_ar',
+        'CarManufacture_id',
         'status',
         'kiloUsed',
         'ServiceHistory' ,
@@ -23,10 +39,7 @@ class Car extends Model
         'phone',
         'InstallmentMonth',
         'InstallmentPrice',
-        'InstallmentCurrency' ,
-        'Deposit' ,
         'DepositPrice' ,
-        'DepositCurrency' ,
         'Country_id' ,
         'City_id' ,
         'Governorate_id' ,

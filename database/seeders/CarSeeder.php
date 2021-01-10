@@ -38,10 +38,7 @@ class CarSeeder extends Seeder
                 'phone'                 => $faker->phoneNumber,
                 'InstallmentMonth'      => $faker->month,
                 'InstallmentPrice'      => $faker->numberBetween(1,10000),
-                'InstallmentCurrency'   => $faker->currencyCode,
-                'Deposit'               => rand(0,1),
                 'DepositPrice'          => $faker->numberBetween(1,10000),
-                'DepositCurrency'       => $faker->currencyCode,
                 'Country_id'            => Country::all()->random()->id,
                 'City_id'               => City::all()->random()->id,
                 'Governorate_id'        => Governorate::all()->random()->id,
@@ -60,7 +57,6 @@ class CarSeeder extends Seeder
                 'price_after_discount'  => $faker->numberBetween(1,100),
                 'price'                 => $faker->numberBetween(1,10000),
                 'status'                => rand(0,4),
-                'currency'              => $faker->currencyCode,
                 'kiloUsed'              => $faker->numberBetween(1,100),
                 'created_at'            => now(),
                 'updated_at'            => now()

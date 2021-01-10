@@ -47,7 +47,7 @@
                                 @endforeach
                             </select>
                             @error('country_id')
-                                <div class="invalid-feedback">{{ $errors->first('title_ar') }}</div>
+                                <div class="invalid-feedback">{{ $errors->first('country_id') }}</div>
                             @enderror
                           </div>
                     </div>
