@@ -27,7 +27,7 @@ class InsuranceCompanyController extends Controller
     public function create()
     {
         $insurance = Insurance::where('user_id',Auth::id());
-        if($insurance->count()){
+        if($insurance!=NULL){
             $insurance = $insurance->first();
             $page_title = "Edit insurance company";
             $page_description = "Edit company";

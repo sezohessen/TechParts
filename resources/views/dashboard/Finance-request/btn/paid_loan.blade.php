@@ -1,4 +1,4 @@
-@if($self_employed==1)
+@if($paid_loan==1)
     <span>Yes</span>
 @else
    <span>No</span>

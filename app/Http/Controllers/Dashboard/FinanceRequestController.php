@@ -59,7 +59,10 @@ class FinanceRequestController extends Controller
      */
     public function edit(Finance_request $Finance_request)
     {
-        //
+        $page_title = "View  Finance Request";
+        $page_description = "Finance Request Information";
+        $request = Finance_request::find($Finance_request->id);
+        return view('dashboard.Finance-request.edit', compact('page_title', 'page_description','request'));
     }
 
     /**
@@ -71,7 +74,19 @@ class FinanceRequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Finance_request = Finance_request::find($id);
+        $this->validate($request,[
+            'status'       => 'required',
+        ]);
+        $Finance_request->status          = $request->status;
+        $Finance_request->save();
+        /* if (Session::get('app_locale') == 'ar') {
+            session()->flash('success',__("تم تعديل التعديلات"));
+        } else {
+            session()->flash('success',__("Settings has been updated!"));
+        } */
+        session()->flash('updated',__("Finacne request has been upated!"));
+        return redirect()->route('dashboard.finance-request.index');
     }
 
     /**

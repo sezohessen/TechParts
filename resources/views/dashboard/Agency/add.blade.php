@@ -4,6 +4,10 @@
 {{-- Content --}}
 @section('content')
 
+<?php
+    $lat=!empty(old("lat"))?old("lat"):'30.044352632821397';
+    $long=!empty(old("long"))?old("long"):'31.24011230468745';
+?>
     <div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
@@ -105,25 +109,65 @@
                                             <input type="radio" name="center_type" value="0"
                                              {{ old('center_type')=="0" ? 'checked':'' }} required/>
                                             <span></span>
-                                            @lang('Distributor')
+                                            @lang('Agency')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="1"
                                             {{ old('center_type')=="1" ? 'checked':'' }}/>
                                             <span></span>
-                                            @lang('Agency')
+                                            @lang('Maintenance')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="2"
                                             {{ old('center_type')=="2" ? 'checked':'' }}/>
                                             <span></span>
-                                            @lang('Individual')
+                                            @lang('Spare')
                                         </label>
                                         @error('center_type')
                                             <div class="invalid-feedback">{{ $errors->first('center_type') }}</div>
                                         @enderror
                                     </div>
                                 </div>
+                                {{-- <div class="form-group center_type" id="center_type0" style="display: none">
+                                    <label>@lang('Center type categorization')<span class="text-danger">*</span></label>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="user_id">@lang('Select User') <span class="text-danger">*</span></label>
+                                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                             <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
+                                                 id="kt_select2_2" name="user_id" required>
+                                                <option value="">@lang('--Select user--')</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{$user->id}}">{{ $user->email }}</option>
+                                                @endforeach
+                                             </select>
+                                            @error('user_id')
+                                             <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
+                                            @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group center_type" id="center_type1" style="display: none">
+                                    <label>@lang('Center type categorization')<span class="text-danger">*</span></label>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="user_id">@lang('Select User') <span class="text-danger">*</span></label>
+                                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                             <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
+                                                 id="kt_select2_1" name="user_id" required>
+                                                <option value="">@lang('--Select user--')</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{$user->id}}">{{ $user->email }}</option>
+                                                @endforeach
+                                             </select>
+                                            @error('user_id')
+                                             <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
+                                            @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -270,6 +314,21 @@
                         </div>
                     </div>
                     <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="hidden" value="{{$lat}}" id="lat" name="lat"  required>
+                            <input type="hidden" value="{{$long}}" id="long" name="long" required>
+                            <input type="text" class="form-control" id="address" placeholder="Search ..."/>
+                            <div id="map" style="height: 300px;">
+                                @error('lat')
+                                <div class="invalid-feedback">{{ $errors->first('lat') }}</div>
+                                @enderror
+                                @error('long')
+                                <div class="invalid-feedback">{{ $errors->first('long') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <h2>@lang('Contact Information')</h2>
                         <div class="row">
                             <div class="col-md-6">
@@ -340,7 +399,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="kt_select2_3">@lang('Companies Working in')</label>
+                            <label for="kt_select2_3">@lang('Car Maker Working in')</label>
                             <select class="form-control select2" id="kt_select2_3"
                              name="CarMaker_id[]" multiple="multiple" required>
                                 @foreach ($car_makers as $car_maker)
@@ -411,5 +470,36 @@
             new KTImageInput("img_id");
             }
             };jQuery(document).ready((function(){KTUserEdit.init()}));
-    </script>
+</script>
+{{-- <script>
+    $(document).ready(function() {
+    $("input[name$='center_type']").click(function() {
+        var test = $(this).val();
+
+        $("div.center_type").hide();
+        $("#center_type" + test).show();
+    });
+    });
+</script> --}}
+
+<script src="{{ asset('js/googlemaps.js?'.MapTOken()) }}"></script>
+<script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
+<script>
+    $('#map').locationpicker({
+        location: {
+            latitude: {{$lat}},
+            longitude:  {{$long}}
+        },
+        radius: 300,
+        zoom:13,
+        markerIcon: "{{url('/media/svg/icons/Map/google-maps.png')}}",
+        inputBinding: {
+            latitudeInput: $('#lat'),
+            longitudeInput: $('#long'),
+            locationNameInput:$("#address")
+        },
+        enableAutocomplete: true
+
+    });
+</script>
 @endsection
