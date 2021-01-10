@@ -126,15 +126,24 @@
     {{-- User --}}
     @if (config('layout.extras.user.display'))
         @if (config('layout.extras.user.layout') == 'offcanvas')
-            <div class="topbar-item">
-                <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
-                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
-                    <span class="symbol symbol-35 symbol-light-success">
-                        <span class="symbol-label font-size-h5 font-weight-bold">S</span>
-                    </span>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px 0 0 0;" v-pre>
+                    {{ Auth::user()->first_name }}
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
-            </div>
+            </li>
+        </ul>
+
         @else
             <div class="dropdown">
                 {{-- Toggle --}}

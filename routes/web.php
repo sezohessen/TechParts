@@ -107,7 +107,7 @@ Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insuran
     Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
     Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete');
 });
-Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency"], function () {
+Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
 });

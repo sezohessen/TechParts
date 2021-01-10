@@ -31,6 +31,9 @@ class LoginController extends Controller
         if (auth()->user()->hasRole('insurance')) {
             return '/insurance';
         }
+        if (auth()->user()->hasRole('agency')) {
+            return '/agency';
+        }
         if (auth()->user()->hasRole('administrator') or auth()->user()->hasRole('superadministrator')) {
             return '/dashboard';
         }

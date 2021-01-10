@@ -79,6 +79,8 @@ class RegisterController extends Controller
         if (isset($data['provider'])) {
             if ($data['provider'] == 'insurance') {
                 $provider = 'insurance';
+            }elseif ($data['provider'] == 'agency') {
+                $provider = 'agency';
             }else {
                 $provider = 'user';
             }
