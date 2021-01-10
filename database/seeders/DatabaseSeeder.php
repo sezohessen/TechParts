@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TermsSeeder::class);
         $this->call(PPolicySeeder::class);
         $this->call(AskExpertSeeder::class);
+        $this->call(FinanceRequestSeeder::class);
         $this->call(ContactUsSeeder::class);
         $this->call(LaratrustSeeder::class);
         //\App\Models\User::factory(10)->create();
@@ -49,5 +50,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AgencyCarSeeder::class);
         $this->call(AgencyContactSeeder::class);
         $this->call(AgencyReviewSeeder::class);
+        $this->call(MaintenanceSpecialtiesSeeder::class);
     }
 }

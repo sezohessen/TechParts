@@ -27,13 +27,14 @@ class CreateAgenciesTable extends Migration
             $table->boolean('car_status')->default(0);
             $table->integer('payment_method')->default(0);
             $table->integer('status')->default(0);
-
+            $table->boolean('active')->default(1);
+            
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
             ->references('id')->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            
+
             $table->bigInteger('img_id')->unsigned();
             $table->foreign('img_id')
             ->references('id')->on('images')

@@ -15,7 +15,7 @@ class AskExpertSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        foreach (range(1,10) as $value){
             DB::table('ask_experts')->insert([
                 'message'           =>  $faker->sentence,
                 'email'             =>  $faker->email,

@@ -217,6 +217,7 @@
     "Show in home":"اظهره في الصفحة الرئيسية",
     "Show in car show rooms":"اظهره في معارض السيارات",
     "Center type":"نوع المركز",
+    "Center type categorization":"تصنيف نوع المركز",
     "Distributor":"موزع",
     "Agency":"وكالة",
     "Individual":"فردي",
@@ -234,7 +235,21 @@
     "Link":"الرابط",
     "Instagram":"اسنتقرام",
     "Messenger":"ماسنجر",
-    "Companies Working in":"الشركات العاملة فيها",
+    "Car Maker Working in":"شركات تصنيع السيارات العاملة بها",
     "You can choose more than one company":"يمكن اختيار اكثر من شركة",
-    "Agency companies":"شركات الوكالة"
+    "Agency Cars":"سيارات الوكالة",
+    "Status":"الحالة",
+    "User Email":"البريد الالكتروني للمستخدم",
+    "User Phone":"هاتف المستخدم",
+    "Are you self-Employed ?":"هل أنت صاحب عمل؟",
+    "Is your salary paid through Bank transfer ?":"هل يتم دفع راتبك عن طريق التحويل المصرفي؟",
+    "What is your monthly salary ?":"ما هو راتبك الشهري؟",
+    "Have you ever not paid any loan ?":"هل لم تدفع أي قرض من قبل؟",
+    "Do you have any existing loans ?":"هل لديك أي قروض موجودة؟",
+    "Do you have any existing credit cards ?":"هل لديك أي بطاقات ائتمان موجودة؟",
+    "Change Status":"تغيير الوضع",
+    "Pending":"قيد الانتظار",
+    "Approved":"موافق عليه",
+    "Canceled":"ألغيت"
+
 }

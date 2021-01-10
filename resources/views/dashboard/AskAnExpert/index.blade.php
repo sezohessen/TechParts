@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="card-custom" style="width: 100%;">
-                    {!! Form::open(['id' => 'form_data', 'url' => 'dashboard/finance-request/destroy/all', 'method' =>
+                    {!! Form::open(['id' => 'form_data', 'url' => 'dashboard/AskExpert/destroy/all', 'method' =>
                     'delete']) !!}
                     <div class="table-responsive">
                         {!! $dataTable->table(

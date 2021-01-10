@@ -23,14 +23,9 @@ return [
                     'root' => true,
                     'submenu' => [
                         [
-                            'title' => 'Add agency',
+                            'title' => 'Edit agency',
                             'page' => "/agency/company/create"
                         ],
-                        [
-                            'title' => 'View agencies',
-                            'page' => '/agency/company'
-                        ],
-
                     ]
                 ],
 

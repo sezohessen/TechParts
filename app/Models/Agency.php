@@ -28,7 +28,8 @@ class Agency extends Model
         'country_id',
         'governorate_id',
         'city_id',
-        'user_id'
+        'user_id',
+        'active'
     ];
     public function user() {
         return $this->belongsTo(User::class,'user_id','id');
@@ -58,9 +59,10 @@ class Agency extends Model
             'country_id'            => 'required',
             'governorate_id'        => 'required',
             'city_id'               => 'required',
-            'lat'                   => 'nullable',
-            'long'                  => 'nullable',
+            'lat'                   => 'required',
+            'long'                  => 'required',
             'user_id'               => 'required',
+            'active'                => 'nullable'
         ];
         if($id == 'Agency'){//For update in Dashborad
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
@@ -93,8 +95,9 @@ class Agency extends Model
             'country_id'        =>  $request->country_id,
             'governorate_id'    =>  $request->governorate_id,
             'city_id'           =>  $request->city_id,
-            'lat'               =>  '12.222',//Will edit this after (Faker)
-            'long'              =>  '12.222',
+            'lat'               =>  $request->lat,
+            'long'              =>  $request->long,
+            'active'            =>  1
         ];
 
         if($id){//For updating

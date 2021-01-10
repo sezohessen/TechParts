@@ -2,13 +2,15 @@
 
 namespace App\DataTables;
 
-use App\Models\Finance_request;
+use App\Models\ContactUs;
+use App\Models\Badges;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-class Finance_requestDatatable extends DataTable
+
+class ContactDatatable extends DataTable
 {
 
      /**
@@ -21,17 +23,13 @@ class Finance_requestDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('salary_through_bank', 'dashboard.Finance-request.btn.salary_through_bank')
-            ->editColumn('paid_loan', 'dashboard.Finance-request.btn.paid_loan')
-            ->editColumn('existing_loans', 'dashboard.Finance-request.btn.existing_loans')
-            ->editColumn('existing_credit', 'dashboard.Finance-request.btn.existing_credit')
-            ->editColumn('user.phone', '{{Str::limit($user["phone"], 100)}}')
-            ->editColumn('self_employed', 'dashboard.Finance-request.btn.self_employed')
-            ->editColumn('status', '{{Str::limit($status, 100)}}')
-            ->addColumn('checkbox', 'dashboard.Finance-request.btn.checkbox')
-            ->addColumn('action', 'dashboard.Finance-request.btn.action')
-            ->rawColumns(['checkbox','action','status',"self_employed",'salary_through_bank',
-            'paid_loan','existing_loans','existing_credit']);
+            ->editColumn('message', '{{Str::limit($message, 100)}}')
+            ->editColumn('email', '{{Str::limit($email, 100)}}')
+            ->editColumn('phone', '{{Str::limit($phone, 100)}}')
+            ->editColumn('country_phone', '{{Str::limit($country_phone, 100)}}')
+            ->addColumn('checkbox', 'dashboard.Contact.btn.checkbox')
+            ->addColumn('action', 'dashboard.Contact.btn.action')
+            ->rawColumns(['checkbox','action']);
     }
 
     /**
@@ -42,8 +40,7 @@ class Finance_requestDatatable extends DataTable
      */
     public function query()
     {
-
-        return Finance_request::query()->with("user")->select("finance_requests.*");
+        return ContactUs::query();
     }
 
     /**
@@ -54,7 +51,7 @@ class Finance_requestDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('Finance_requests-table')
+                    ->setTableId('badges-table')
                     ->columns($this->getColumns())
                     ->dom('Bfrtip')
                     ->parameters([
@@ -110,27 +107,19 @@ class Finance_requestDatatable extends DataTable
                 "searchable"=>false,
             ],
             Column::make('id'),
-            Column::make('self_employed'),
-            Column::make('salary_through_bank'),
-            Column::make('paid_loan'),
-            Column::make('existing_loans'),
-            Column::make('existing_credit'),
-            Column::make('user.phone')
-            ->title(__("User Phone")),
-            Column::computed('status')
-            ->title(__('Status'))
-            ->exportable(true)
-            ->printable(true)
-            ->searchable(true)
-            ->width(120)
-            ->addClass('text-center'),
+            Column::make('message'),
+            Column::make('email'),
+            Column::make('phone'),
+            Column::make('country_phone')
+            ->title(__('Country Phone Code')),
             Column::computed('action')
             ->title(__('Action'))
             ->exportable(false)
             ->printable(false)
             ->searchable(false)
             ->width(120)
-            ->addClass('text-center'),
+            ->addClass('text-center')
+
         ];
     }
 
@@ -141,6 +130,6 @@ class Finance_requestDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Finance-requests_' . date('YmdHis');
+        return 'AskAnExpert_' . date('YmdHis');
     }
 }

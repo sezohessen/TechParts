@@ -21,9 +21,9 @@ class AgencyController extends Controller
      */
     public function index(AgencyDatatable $agency)
     {
-        $page_title = __('Agency companies');
+        /* $page_title = __('Agency companies');
         $page_description = __('View Insurances');
-        return  $agency->render("AgencyDashboard.Agency.index", compact('page_title', 'page_description'));
+        return  $agency->render("AgencyDashboard.Agency.index", compact('page_title', 'page_description')); */
     }
 
     /**
@@ -33,11 +33,16 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        $page_title       = __("Add Agency");
-        $page_description = __("Add new Agency");
-        $countries        = Country::all();
-        $car_makers       = CarMaker::all();
-        return view('AgencyDashboard.Agency.add', compact('page_title', 'page_description','countries','car_makers'));
+        $agency           = Agency::where('user_id',Auth::id())->first();
+        if($agency!=NULL){
+            return $this->edit($agency->id);
+        }else{
+            $page_title       = __("Add Agency");
+            $page_description = __("Add new Agency");
+            $countries        = Country::all();
+            $car_makers       = CarMaker::all();
+            return view('AgencyDashboard.Agency.add', compact('page_title', 'page_description','countries','car_makers'));
+        }
     }
 
     /**
@@ -70,7 +75,7 @@ class AgencyController extends Controller
             $AgencyCar      = AgencyCar::create($credentials);
         }
         session()->flash('created',__("Agency has been Created successfully!"));
-        return redirect()->route('agency.company.index');
+        return redirect()->route('agency.index');
     }
 
     /**
@@ -93,7 +98,7 @@ class AgencyController extends Controller
     public function edit($id)
     {
         $agency              = Agency::find($id);
-        if($agency->count() && Auth::id() ==$agency->user_id) {
+        if($agency!=NULL && Auth::id() ==$agency->user_id){
         $countries           = Country::all();
         $agency_contact      = AgencyContact::where('agent_id',$id)->first();
         $page_title          = __("Edit Agency");
@@ -110,7 +115,7 @@ class AgencyController extends Controller
         return view('AgencyDashboard.Agency.edit', compact('page_title', 'page_description'
         ,'countries','agency','agency_contact','car_makers','SelectedCarMakers'));
         }else{
-            return redirect()->route('agency.company.index');
+            return redirect()->route('agency.index');
         }
     }
 
@@ -167,7 +172,7 @@ class AgencyController extends Controller
             ])->delete();
         }
         session()->flash('updated',__("Agency has been Updated successfully!"));
-        return redirect()->route('agency.company.index');
+        return redirect()->back();
     }
 
     /**

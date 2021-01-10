@@ -3,20 +3,29 @@
 
 {{-- Content --}}
 @section('content')
+<?php
+    $lat=!empty(old("lat"))?old("lat"):'30.044352632821397';
+    $long=!empty(old("long"))?old("long"):'31.24011230468745';
+?>
     <div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
                 {{$page_title}}
             </h3>
-            <div class="text-right">
-                <a href="{{ route('agency.company.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
-            </div>
         </div>
         <!--begin::Form-->
         <form action="{{route("agency.company.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
+                @if (session('created'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -188,6 +197,21 @@
                           </div>
                     </div>
                     <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="hidden" value="{{$lat}}" id="lat" name="lat"  required>
+                            <input type="hidden" value="{{$long}}" id="long" name="long" required>
+                            <input type="text" class="form-control" id="address" placeholder="Search ..."/>
+                            <div id="map" style="height: 300px;">
+                                @error('lat')
+                                <div class="invalid-feedback">{{ $errors->first('lat') }}</div>
+                                @enderror
+                                @error('long')
+                                <div class="invalid-feedback">{{ $errors->first('long') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <h2>@lang('Contact Information')</h2>
                         <div class="row">
                             <div class="col-md-6">
@@ -258,7 +282,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="kt_select2_3">@lang('Companies Working in')</label>
+                            <label for="kt_select2_3">@lang('Car Maker Working in')</label>
                             <select class="form-control select2" id="kt_select2_3"
                              name="CarMaker_id[]" multiple="multiple" required>
                                 @foreach ($car_makers as $car_maker)
@@ -329,5 +353,25 @@
             new KTImageInput("img_id");
             }
             };jQuery(document).ready((function(){KTUserEdit.init()}));
-    </script>
+</script>
+<script src="{{ asset('js/googlemaps.js?'.MapTOken()) }}"></script>
+<script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
+<script>
+    $('#map').locationpicker({
+        location: {
+            latitude: {{$lat}},
+            longitude:  {{$long}}
+        },
+        radius: 300,
+        zoom:13,
+        markerIcon: "{{url('/media/svg/icons/Map/google-maps.png')}}",
+        inputBinding: {
+            latitudeInput: $('#lat'),
+            longitudeInput: $('#long'),
+            locationNameInput:$("#address")
+        },
+        enableAutocomplete: true
+
+    });
+</script>
 @endsection
