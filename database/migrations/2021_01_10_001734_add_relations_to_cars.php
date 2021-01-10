@@ -18,8 +18,12 @@ class AddRelationsToCars extends Migration
             $table->dropColumn('makerName');
             $table->dropColumn('modelName');
             $table->dropColumn('ManufacturingYear');
+            $table->dropColumn('PrePrice');
 
             $table->text('ServiceHistory');
+            $table->text('Description');
+            $table->text('Description_ar');
+            
             $table->string('lat')->default(null);
             $table->string('lng')->default(null);
             $table->string('phone')->nullable();
@@ -87,6 +91,12 @@ class AddRelationsToCars extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
+            $table->bigInteger('CarManufacture_id')->unsigned();
+            $table->foreign('CarManufacture_id')
+            ->references('id')->on('car_manufactures')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
 
             $table->integer('views');
 
@@ -95,7 +105,7 @@ class AddRelationsToCars extends Migration
             $table->integer("transmission")->default(0);
 
             $table->integer('price')->change();
-            $table->integer('PrePrice')->change();
+            $table->integer('price_after_discount');
             $table->integer('payment')->default(0);
             $table->integer('status')->change()->default(0);
             $table->integer('SellerType')->default(0);

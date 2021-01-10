@@ -154,7 +154,6 @@
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-select.js') }}"></script>
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-touchspin.js') }}"></script>
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-switch.js') }}"></script>
-<script src="{{ asset('js/pages/crud/forms/widgets/nouislider.js') }}"></script>
 <script>
     $('#maker').on('change', function() {
         var id = this.value ;
@@ -183,31 +182,7 @@
             buttondown_class: "btn btn-secondary bootstrap-touchspin-down",
             buttonup_class: "btn btn-secondary bootstrap-touchspin-up"
     });
-    // init slider
-    var slider = document.getElementById('kt_nouislider_1');
 
-        noUiSlider.create(slider, {
-            start: [ 0 ],
-            step: 1,
-            range: {
-                'min': [ 0 ],
-                'max': [ 10000 ]
-            },
-            format: wNumb({
-                decimals: 0
-            })
-        });
-
-    // init slider input
-    var sliderInput = document.getElementById('kt_nouislider_1_input');
-
-        slider.noUiSlider.on('update', function( values, handle ) {
-            sliderInput.value = values[handle];
-        });
-
-        sliderInput.addEventListener('change', function(){
-            slider.noUiSlider.set(this.value);
-        });
 
 </script>
 @endsection

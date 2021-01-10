@@ -160,7 +160,7 @@ return [
                     'root' => true,
                     'submenu' => [
                         [
-                            'title' => 'Sell A car ',
+                            'title' => 'Add A car ',
                             'page' => "/dashboard/car/create"
                         ],
                         [
