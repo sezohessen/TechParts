@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\CarCapacity;
 use Illuminate\Http\Request;
-
+use App\DataTables\CarCapacityDatatable;
 class CarCapacityController extends Controller
 {
     /**
@@ -12,9 +13,11 @@ class CarCapacityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CarCapacityDatatable $capacity)
     {
-        //
+        $page_title = __('Car Capacity ');
+        $page_description = __('View Capacities');
+        return  $capacity->render("dashboard.CarCapacity.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -24,7 +27,10 @@ class CarCapacityController extends Controller
      */
     public function create()
     {
-        //
+        $page_title = __("Add Car Capacity");
+        $page_description = __("Car Capacity");
+
+        return view('dashboard.CarCapacity.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -35,7 +41,12 @@ class CarCapacityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = CarCapacity::rules($request);
+        $request->validate($rules);
+        $credentials = CarCapacity::credentials($request);
+        $Carcapacity = CarCapacity::create($credentials);
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.capacity.index");
     }
 
     /**
@@ -55,9 +66,12 @@ class CarCapacityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CarCapacity $capacity)
     {
-        //
+        $page_title = __("Edit Car Capacity");
+        $page_description = __("Edit Capacity");
+
+        return view('dashboard.CarCapacity.edit', compact('page_title', 'page_description','capacity'));
     }
 
     /**
@@ -67,9 +81,14 @@ class CarCapacityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CarCapacity $capacity)
     {
-        //
+        $rules =$capacity->rules($request);
+        $request->validate($rules);
+        $credentials = $capacity->credentials($request);
+        $capacity->update($credentials);
+        session()->flash('updated',__("Changed has been Updated successfully!"));
+        return redirect()->route("dashboard.capacity.index");
     }
 
     /**
@@ -78,8 +97,30 @@ class CarCapacityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CarCapacity $capacity)
     {
-        //
+        $capacity->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.capacity.index");
+    }
+    public function Activity(Request $request){
+        $capacity = CarCapacity::find($request->id);
+        $capacity->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$capacity = CarCapacity::find($id);
+				$capacity->delete();
+			}
+		} else {
+			$capacity = CarCapacity::find(request('item'));
+			$capacity->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.capacity.index");
     }
 }

@@ -61,7 +61,7 @@
                             @error('governorate_id')
                                 <div class="invalid-feedback">{{ $errors->first('governorate_id') }}</div>
                             @enderror
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
             url: '/dashboard/country/'+id,
             success: data => {
                 if(data.governorates){
-                    data.governorates.forEach(governorate =>
+                    data.governorates.forEach(governormodelsate =>
                     $('#governorate').append(`<option value="${governorate.id}">${governorate.title}-${governorate.title_ar}</option>`)
                     )
                 }else{

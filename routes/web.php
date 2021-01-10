@@ -44,6 +44,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
         Route::resource('/year','CarYearController');
         Route::resource('/capacity','CarCapacityController');
         Route::resource('/color','CarColorController');
+        Route::get("available_model/{id}",'CarController@available_model');
     });
 
     // Permissions
@@ -71,6 +72,12 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
     Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete');
     Route::delete('/agency/destroy/all','AgencyController@multi_delete');
+    Route::delete('/maker/destroy/all','CarMakerController@multi_delete');
+    Route::delete('/model/destroy/all','CarModelController@multi_delete');
+    Route::delete('/body/destroy/all','CarBodyController@multi_delete');
+    Route::delete('/year/destroy/all','CarYearController@multi_delete');
+    Route::delete('/capacity/destroy/all','CarCapacityController@multi_delete');
+    Route::delete('/color/destroy/all','CarColorController@multi_delete');
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
@@ -78,7 +85,9 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::post('/category/{category}/activity',"CategoryController@Activity")->name('Category.Activity');
     Route::post('/feature/{feature}/activity',"FeaturesController@Activity")->name('Features.Activity');
     Route::post('/badge/{badge}/activity',"BadgesController@Activity")->name('Badge.Activity');
-
+    Route::post('/maker/{maker}/activity',"CarMakerController@Activity")->name('CarMaker.Activity');
+    Route::post('/model/{model}/activity',"CarModelController@Activity")->name('CarModel.Activity');
+    Route::post('/body/{body}/activity',"CarBodyController@Activity")->name('CarBody.Activity');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');

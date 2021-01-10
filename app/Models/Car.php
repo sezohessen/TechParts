@@ -9,6 +9,8 @@ class Car extends Model
 {
     use HasFactory;
     protected $table    = 'cars';
+    const TRANSIMSSION_MANUAL  = 0;
+    const TRANSIMSSION_AUTOMATIC = 1;
     protected $fillable=[
         'price',
         'PrePrice',

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CarMaker;
 use App\Models\CarModel;
 use Illuminate\Http\Request;
-
+use App\DataTables\CarModelDatatable;
 class CarModelController extends Controller
 {
     /**
@@ -14,9 +14,11 @@ class CarModelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CarModelDatatable $model)
     {
-        //
+        $page_title = __('Car Models');
+        $page_description = __('View Car Models');
+        return  $model->render("dashboard.CarModel.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -26,8 +28,8 @@ class CarModelController extends Controller
      */
     public function create()
     {
-        $page_title = __("Add Car Make");
-        $page_description = __("Car Make");
+        $page_title = __("Add Car Model");
+        $page_description = __("Car Model");
         $makers=CarMaker::all();
         return view('dashboard.CarModel.add', compact('page_title', 'page_description',"makers"));
     }
@@ -69,8 +71,8 @@ class CarModelController extends Controller
     {
         $page_title = __("Edit Car Model");
         $page_description = __("Edit Model");
-        $makers=CarMaker::all();
-        return view('dashboard.CarModel.edit', compact('page_title', 'page_description','model','makers'));
+        $models=Carmodel::all();
+        return view('dashboard.CarModel.edit', compact('page_title', 'page_description','model','models'));
     }
 
     /**
@@ -82,7 +84,7 @@ class CarModelController extends Controller
      */
     public function update(Request $request, CarModel $model)
     {
-        $rules =$model->rules($request);
+        $rules =$model->rules($request,$model->id);
         $request->validate($rules);
         $credentials = $model->credentials($request);
         $model->update($credentials);
@@ -96,8 +98,30 @@ class CarModelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CarModel $model)
     {
-        //
+        $model->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.model.index");
+    }
+    public function Activity(Request $request){
+        $model = CarModel::find($request->id);
+        $model->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$model = CarModel::find($id);
+				$model->delete();
+			}
+		} else {
+			$model = CarModel::find(request('item'));
+			$model->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.model.index");
     }
 }

@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CarYearSeeder::class);
         $this->call(CarColorSeeder::class);
         $this->call(CarCapacitySeeder::class);
+        $this->call(CarManufactureSeeder::class);
         $this->call(CarSeeder::class);
         $this->call(TrendingSeeder::class);
         $this->call(car_imgSeeder::class);
@@ -49,5 +50,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AgencyCarSeeder::class);
         $this->call(AgencyContactSeeder::class);
         $this->call(AgencyReviewSeeder::class);
+        $this->call(PromoteCarSeeder::class);
+        $this->call(ListCarUsersSeeder::class);
     }
 }

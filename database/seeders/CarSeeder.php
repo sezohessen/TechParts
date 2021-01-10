@@ -7,6 +7,7 @@ use App\Models\CarBody;
 use App\Models\CarCapacity;
 use App\Models\CarColor;
 use App\Models\CarMaker;
+use App\Models\CarManufacture;
 use App\Models\CarModel;
 use App\Models\CarYear;
 use App\Models\City;
@@ -30,6 +31,8 @@ class CarSeeder extends Seeder
             DB::table('cars')->insert([
 
                 'ServiceHistory'        => $faker->sentence,
+                'Description'        => $faker->sentence,
+                'Description_ar'        => $faker->sentence,
                 'lat'                   => $faker->longitude,
                 'lng'                   => $faker->latitude,
                 'phone'                 => $faker->phoneNumber,
@@ -42,6 +45,7 @@ class CarSeeder extends Seeder
                 'Country_id'            => Country::all()->random()->id,
                 'City_id'               => City::all()->random()->id,
                 'Governorate_id'        => Governorate::all()->random()->id,
+                'CarManufacture_id'     => CarManufacture::all()->random()->id,
                 'CarModel_id'           => CarModel::all()->random()->id,
                 'CarMaker_id'           => CarMaker::all()->random()->id,
                 'CarBody_id'            => CarBody::all()->random()->id,
@@ -53,7 +57,7 @@ class CarSeeder extends Seeder
                 'transmission'          => rand(0,2),
                 'payment'               => rand(0,2),
                 'SellerType'            => rand(0,2),
-                'PrePrice'              => $faker->numberBetween(1,10000),
+                'price_after_discount'  => $faker->numberBetween(1,100),
                 'price'                 => $faker->numberBetween(1,10000),
                 'status'                => rand(0,4),
                 'currency'              => $faker->currencyCode,
