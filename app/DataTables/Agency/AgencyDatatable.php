@@ -1,8 +1,10 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Agency;
 
 use App\Models\Agency;
+use App\Models\AgencyCar;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -24,10 +26,9 @@ class AgencyDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
             ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
-            ->editColumn('user.email', '{{Str::limit($user["email"], 100)}}')
-            ->editColumn('center_type', 'dashboard.Agency.btn.center_type')
-            ->addColumn('checkbox', 'dashboard.Agency.btn.checkbox')
-            ->addColumn('action', 'dashboard.Agency.btn.action')
+            ->editColumn('center_type', 'AgencyDashboard.Agency.btn.center_type')
+            ->addColumn('checkbox', 'AgencyDashboard.Agency.btn.checkbox')
+            ->addColumn('action', 'AgencyDashboard.Agency.btn.action')
             ->rawColumns(['checkbox','action','center_type']);
     }
 
@@ -39,7 +40,7 @@ class AgencyDatatable extends DataTable
      */
     public function query()
     {
-        return Agency::query()->with("user")->select("agencies.*");
+        return Agency::query()->where('user_id',Auth::id())->select("agencies.*");
     }
 
     /**
@@ -108,8 +109,6 @@ class AgencyDatatable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('name_ar'),
-            Column::make('user.email')
-            ->title(__("User Email")),
             Column::make('center_type'),
             Column::computed('action')
             ->title(__('Action'))

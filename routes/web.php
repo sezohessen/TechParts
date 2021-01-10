@@ -101,5 +101,4 @@ Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insuran
 Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency"], function () {
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
-    App\Http\Controllers\Agency\AgencyController
 });

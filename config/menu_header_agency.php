@@ -5,7 +5,7 @@ return [
     'items' => [
         [],
         [
-            'title' => 'Agencu',
+            'title' => 'Agency',
             'root' => true,
             'page' => '/agency',
             'new-tab' => false,

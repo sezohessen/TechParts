@@ -64,13 +64,21 @@ class Agency extends Model
         ];
         if($id == 'Agency'){//For update in Dashborad
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
-        }elseif($id){//For update in Insurance Dashboard
+        }elseif($id = 'AgencyDash'){//For Create in Agency Dashboard
+            unset($rules['show_in_home']);
+            unset($rules['car_show_rooms']);
+            unset($rules['status']);
+            unset($rules['user_id']);
+        }elseif($id){
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            unset($rules['show_in_home']);
+            unset($rules['car_show_rooms']);
+            unset($rules['status']);
             unset($rules['user_id']);
         }
         return $rules;
     }
-    public static function credentials($request,$id = NULL,$img_id = NULL)
+    public static function credentials($request,$id = NULL,$img_id = NULL,$specialCase = 1)
     {
         $credentials = [
             'name'              =>  $request->name,
@@ -93,12 +101,12 @@ class Agency extends Model
         }else{
             $credentials['user_id'] = $request->user_id;
         }
-        if($request->show_in_home!=NULL&&$request->show_in_home=='on'){//Check Box
+        if($request->show_in_home!=NULL&&$request->show_in_home=='on'&&$specialCase){//Check Box
             $credentials['show_in_home'] = 1;
         }else{
             $credentials['show_in_home'] = 0;
         }
-        if($request->car_show_rooms!=NULL&&$request->car_show_rooms=='on'){//Check Box
+        if($request->car_show_rooms!=NULL&&$request->car_show_rooms=='on'&&$specialCase){//Check Box
             $credentials['car_show_rooms'] = 1;
         }else{
             $credentials['car_show_rooms'] = 0;
