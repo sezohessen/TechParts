@@ -129,6 +129,6 @@ class AgencyDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Badges_' . date('YmdHis');
+        return 'Agency_' . date('YmdHis');
     }
 }

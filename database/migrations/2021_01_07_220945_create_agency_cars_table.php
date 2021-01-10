@@ -16,9 +16,9 @@ class CreateAgencyCarsTable extends Migration
         Schema::create('agency_cars', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('car_id')->unsigned();
-            $table->foreign('car_id')
-            ->references('id')->on('cars')
+            $table->bigInteger('CarMaker_id')->unsigned();
+            $table->foreign('CarMaker_id')
+            ->references('id')->on('car_makers')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 

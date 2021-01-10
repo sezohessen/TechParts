@@ -12,5 +12,19 @@ class CarYear extends Model
     protected $fillable=[
         'year',
     ];
+    public static function rules($request)
+    {
+        $rules = [
+            'year'             => 'required|numeric|digits_between:4,4',
+        ];
+        return $rules;
+    }
+    public static function credentials($request)
+    {
+        $credentials = [
+            'year'              => $request->year,
+        ];
+        return $credentials;
+    }
 }
 

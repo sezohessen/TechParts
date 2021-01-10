@@ -20,12 +20,15 @@ class CarMaker extends Model
         return $this->belongsTo(Image::class);
     }
 
-    public static function rules($request)
+    public static function rules($request,$id=NULL)
     {
         $rules = [
             'name'             => 'required|string|max:255',
             'logo'             => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ];
+        if($id){
+            $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+        }
         return $rules;
     }
     public static function credentials($request,$img_id = NULL)

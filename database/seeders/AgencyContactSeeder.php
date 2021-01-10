@@ -1,6 +1,8 @@
 <?php
 
 namespace Database\Seeders;
+
+use App\Models\Agency;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -21,6 +23,7 @@ class AgencyContactSeeder extends Seeder
                 'whatsapp'          => $faker->url,
                 'instagram'         => $faker->url,
                 'messenger'         => $faker->url,
+                'agent_id'          => Agency::all()->random()->id,
                 'created_at'        => now(),
                 'updated_at'        => now()
             ]);

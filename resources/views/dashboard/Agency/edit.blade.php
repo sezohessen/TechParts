@@ -278,6 +278,55 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <h2>@lang('Contact Information')</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Whatsapp')</label>
+                                    <input type="text" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}"
+                                    name="whatsapp"  placeholder="@lang('Phone number')"
+                                    value="{{old("whatsapp") ? old("whatsapp") : $agency_contact->whatsapp}}"/>
+                                    @error('whatsapp')
+                                        <div class="invalid-feedback">{{ $errors->first('whatsapp') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Facebook')</label>
+                                    <input type="text" class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}"
+                                    name="facebook"  placeholder="@lang('Link')"
+                                    value="{{old("facebook") ? old("facebook") : $agency_contact->facebook}}"/>
+                                    @error('facebook')
+                                        <div class="invalid-feedback">{{ $errors->first('facebook') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Instagram')</label>
+                                    <input type="text" class="form-control {{ $errors->has('instagram') ? 'is-invalid' : '' }}"
+                                    name="instagram"  placeholder="@lang('Link')"
+                                    value="{{old("instagram") ? old("instagram") : $agency_contact->instagram}}"/>
+                                    @error('instagram')
+                                        <div class="invalid-feedback">{{ $errors->first('instagram') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Messenger')</label>
+                                    <input type="text" class="form-control {{ $errors->has('messenger') ? 'is-invalid' : '' }}"
+                                    name="messenger"  placeholder="@lang('Link')"
+                                    value="{{old("messenger") ? old("messenger") : $agency_contact->messenger}}"/>
+                                    @error('messenger')
+                                        <div class="invalid-feedback">{{ $errors->first('messenger') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
@@ -299,6 +348,25 @@
                             @error('img_id')
                             <div class="invalid-feedback">{{ $errors->first('img_id') }}</div>
                             @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="kt_select2_3">@lang('Companies Working in')</label>
+                            <select class="form-control select2" id="kt_select2_3"
+                             name="CarMaker_id[]" multiple="multiple" required>
+                                @foreach ($car_makers as $car_maker)
+                                    @if(in_array($car_maker->id, $SelectedCarMakers)){{-- Check if Car maker in Selected car makers --}}
+                                    <option value="{{$car_maker->id}}" selected>{{ $car_maker->name }}</option>
+                                    @else
+                                    <option value="{{$car_maker->id}}">{{ $car_maker->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('CarMaker_id')
+                             <div class="invalid-feedback">{{ $errors->first('CarMaker_id') }}</div>
+                            @enderror
+                            <span class="form-text text-muted">@lang('You can choose more than one company')</span>
                         </div>
                     </div>
                 </div>

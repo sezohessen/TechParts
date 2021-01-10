@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\CarColor;
 use Illuminate\Http\Request;
-
+use App\DataTables\CarColorDatatable;
 class CarColorController extends Controller
 {
     /**
@@ -12,9 +13,11 @@ class CarColorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CarColorDatatable $color)
     {
-        //
+        $page_title = __('Car Color ');
+        $page_description = __('View Colors Codes');
+        return  $color->render("dashboard.CarColor.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -24,7 +27,10 @@ class CarColorController extends Controller
      */
     public function create()
     {
-        //
+        $page_title = __("Add Car Color ");
+        $page_description = __("Car Color");
+
+        return view('dashboard.CarColor.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -35,7 +41,12 @@ class CarColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = CarColor::rules($request);
+        $request->validate($rules);
+        $credentials = CarColor::credentials($request);
+        $CarColor = CarColor::create($credentials);
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.color.index");
     }
 
     /**
@@ -55,9 +66,12 @@ class CarColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CarColor $color)
     {
-        //
+        $page_title = __("Edit Car Color");
+        $page_description = __("Edit Color");
+
+        return view('dashboard.CarColor.edit', compact('page_title', 'page_description','color'));
     }
 
     /**
@@ -67,9 +81,14 @@ class CarColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CarColor $color)
     {
-        //
+        $rules =$color->rules($request);
+        $request->validate($rules);
+        $credentials = $color->credentials($request);
+        $color->update($credentials);
+        session()->flash('updated',__("Changed has been Updated successfully!"));
+        return redirect()->route("dashboard.color.index");
     }
 
     /**
@@ -78,8 +97,30 @@ class CarColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CarColor $color)
     {
-        //
+        $color->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.color.index");
+    }
+    public function Activity(Request $request){
+        $color = CarColor::find($request->id);
+        $color->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+    public function multi_delete(){
+        if (is_array(request('item'))) {
+			foreach (request('item') as $id) {
+				$color = CarColor::find($id);
+				$color->delete();
+			}
+		} else {
+			$color = CarColor::find(request('item'));
+			$color->delete();
+		}
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.color.index");
     }
 }

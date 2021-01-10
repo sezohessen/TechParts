@@ -275,7 +275,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>@lang('Whatsapp')</label>
-                                    <input type="text" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}" required
+                                    <input type="text" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}"
                                     name="whatsapp"  placeholder="@lang('Phone number')" autofocus  value="{{old("whatsapp")}}"/>
                                     @error('whatsapp')
                                         <div class="invalid-feedback">{{ $errors->first('whatsapp') }}</div>
@@ -285,7 +285,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>@lang('Facebook')</label>
-                                    <input type="text" class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}" required
+                                    <input type="text" class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}"
                                     name="facebook"  placeholder="@lang('Link')" autofocus  value="{{old("facebook")}}"/>
                                     @error('facebook')
                                         <div class="invalid-feedback">{{ $errors->first('facebook') }}</div>
@@ -295,7 +295,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>@lang('Instagram')</label>
-                                    <input type="text" class="form-control {{ $errors->has('instagram') ? 'is-invalid' : '' }}" required
+                                    <input type="text" class="form-control {{ $errors->has('instagram') ? 'is-invalid' : '' }}"
                                     name="instagram"  placeholder="@lang('Link')" autofocus  value="{{old("instagram")}}"/>
                                     @error('instagram')
                                         <div class="invalid-feedback">{{ $errors->first('instagram') }}</div>
@@ -305,7 +305,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>@lang('Messenger')</label>
-                                    <input type="text" class="form-control {{ $errors->has('messenger') ? 'is-invalid' : '' }}" required
+                                    <input type="text" class="form-control {{ $errors->has('messenger') ? 'is-invalid' : '' }}"
                                     name="messenger"  placeholder="@lang('Link')" autofocus  value="{{old("messenger")}}"/>
                                     @error('messenger')
                                         <div class="invalid-feedback">{{ $errors->first('messenger') }}</div>
@@ -314,6 +314,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
@@ -337,10 +338,25 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="kt_select2_3">@lang('Companies Working in')</label>
+                            <select class="form-control select2" id="kt_select2_3"
+                             name="CarMaker_id[]" multiple="multiple" required>
+                                @foreach ($car_makers as $car_maker)
+                                    <option value="{{$car_maker->id}}">{{ $car_maker->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('CarMaker_id')
+                             <div class="invalid-feedback">{{ $errors->first('CarMaker_id') }}</div>
+                            @enderror
+                            <span class="form-text text-muted">@lang('You can choose more than one company')</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('create')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('create')</button>
             </div>
         </form>
         <!--end::Form-->
