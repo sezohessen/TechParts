@@ -2,6 +2,7 @@
 
 use App\Models\Role;
 use App\Models\Permission;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|administrator']], function () {
-    Route::get('/', 'DashboardController@index')->name('index');
+    Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::resource('/faqs','FaqController');
     Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');
@@ -110,4 +111,18 @@ Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insuran
 Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
+});
+Route::get('/lang/{locale}', function (Request $request) {
+    $locale = @$request->lang;
+    if ($locale == 'ar' or $locale == 'en') {
+        if ($locale === 'ar' ) {
+            App::setLocale($locale);
+            Session::put('app_locale', $locale);
+        }else {
+            App::setLocale('en');
+            Session::put('app_locale', 'en');
+        }
+        return redirect()->back();
+    }
+    return view('errors.404');
 });
