@@ -15,7 +15,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.category.store")}}" method="POST">
+        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -72,20 +72,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Transmission')</label><br>
-                            <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <input data-switch="true" type="checkbox"  data-off-color="primary"
-                                data-on-text="<img src='{{asset('media/svg/icons/Electric/automatic.png')}}' width='20' height='20'> Automatic"
-                                data-handle-width="100" name="transmission"
-                                data-off-text="<img src='{{asset('media/svg/icons/Electric/manual.png')}}' width='20' height='20'> Manual" data-on-color="warning"/>
-                                @error('transmission')
-                                    <div class="invalid-feedback">{{ $errors->first('transmission') }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
+
+
+
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Car Manufacture')</label><br>
@@ -120,7 +109,6 @@
                                </div>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label  col-sm-12">@lang('Price ')</label>
@@ -141,6 +129,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("Accidents")</label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <span class="switch switch-icon">
+                                    <label>
+                                        <input type="hidden" name="AccidentBefore" id='AccidentBefore' value="1">
+                                        <input type="checkbox" onclick="changeSwitchStatus(event.target);"  checked="checked" />
+                                        <span></span>
+                                    </label>
+                                </span>
+                                @error('AccidentBefore')
+                                    <div class="invalid-feedback">{{ $errors->first('AccidentBefore') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="col-md-6">
                         <div class="form-group row ">
                             <label class="col-form-label  col-sm-12">@lang("Kilometers")</label><br>
@@ -321,21 +328,30 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Accidents")</label><br>
+                        <div class="form-group row">
+                            <label class="col-form-label  col-sm-12">@lang("Car Transmission")</label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                <span class="switch switch-icon">
-                                    <label>
-                                        <input type="checkbox" checked="checked" name="AccidentBefore"/>
+                                <div class="radio-inline">
+                                    <label class="radio">
+                                        <input type="radio" name="transmission" value="0"
+                                        {{ old('transmission')=="0" ? 'checked':'' }} required/>
                                         <span></span>
+                                        <img src='{{asset('media/svg/icons/Electric/automatic.png')}}' width='20' height='20'>  @lang('Automatic')
                                     </label>
-                                </span>
-                                @error('AccidentBefore')
-                                    <div class="invalid-feedback">{{ $errors->first('AccidentBefore') }}</div>
-                                @enderror
+                                    <label class="radio">
+                                        <input type="radio" name="transmission" value="1"
+                                        {{ old('transmission')=="1" ? 'checked':'' }}/>
+                                        <span></span>
+                                        <img src='{{asset('media/svg/icons/Electric/manual.png')}}' width='20' height='20'> &nbsp; @lang('Manual')
+                                    </label>
+                                    @error('transmission')
+                                         <div class="invalid-feedback">{{ $errors->first('transmission') }}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label  col-sm-12">@lang("Car Status")</label><br>
@@ -467,7 +483,18 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("Car Photos")</label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <input type="file" class="custom-file-input" name="CarPhotos[]" id="customFile" multiple/>
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                @error('CarPhotos')
+                                    <div class="invalid-feedback">{{ $errors->first('CarPhotos') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">@lang('Sell')  </button>
@@ -479,6 +506,9 @@
 @endsection
 
 {{-- Scripts Section --}}
+@section('styles')
+<link href="{{asset('plugins/custom/uppy/uppy.bundle.css')}}" rel="stylesheet" type="text/css" />
+@endsection
 
 @section('scripts')
 <script src="{{ asset("js/pages/crud/forms/widgets/select2.js") }}"></script>
@@ -489,7 +519,6 @@
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src='{{ asset('js/googlemaps.js?'.MapTOken()) }}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
-<script src="{{ asset('js/pages/crud/file-upload/dropzonejs.js') }}"></script>
 
 <script>
     $('#maker').on('change', function() {
@@ -571,6 +600,11 @@
         enableAutocomplete: true
 
     });
+    function changeSwitchStatus(_this) {
+        var status = $(_this).prop('checked') == true ? 1 : 0;
+        $("#AccidentBefore").val(status);
+    }
+
 </script>
 
 @endsection

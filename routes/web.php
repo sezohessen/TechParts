@@ -35,8 +35,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/contact','ContactController');
     Route::resource('/AskExpert','AskExpertController');
     Route::resource('/finance-request','FinanceRequestController');
+    Route::resource('/car','CarController');
     Route::group(['prefix' => 'car'],function(){
-        Route::resource('/','CarController');
         Route::resource('/maker','CarMakerController');
         Route::resource('/model','CarModelController');
         Route::resource('/body','CarBodyController');

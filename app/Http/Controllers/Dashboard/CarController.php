@@ -59,7 +59,12 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = Car::rules($request);
+        $request->validate($rules);
+        $credentials = Car::credentials($request);
+        $car = Car::create($credentials);
+        session()->flash('created',__("Changed has been Created successfully!"));
+        return redirect()->route("dashboard.car.index");
     }
 
     /**
