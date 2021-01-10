@@ -78,6 +78,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/year/destroy/all','CarYearController@multi_delete');
     Route::delete('/capacity/destroy/all','CarCapacityController@multi_delete');
     Route::delete('/color/destroy/all','CarColorController@multi_delete');
+    Route::delete('/car/destroy/all','CarController@multi_delete');
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');

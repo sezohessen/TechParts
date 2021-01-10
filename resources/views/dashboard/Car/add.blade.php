@@ -185,7 +185,18 @@
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Color')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <input class="form-control" type="color" name="CarColor_id" value="{{old("CarColor_id")}}" id="example-color-input"/>
+                                <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarColor_id" id="maker" required>
+                                    @foreach ($colors as $key=>$color)
+                                        <option value="{{$color->id}}"
+                                            data-content="<div class='symbol-list d-flex flex-wrap'>
+                                                <div class='symbol  mr-3'  >
+                                                    <span class='symbol-label font-size-h5' style='background-color:{{$color->code}}'></span>
+                                                </div>
+                                            </div>
+                                            ">
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -194,7 +205,7 @@
                             <label class="col-form-label col-sm-12">@lang('Badges')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('badge_id') ? 'is-invalid' : '' }}"
-                                    id="kt_select2_11" name="badge_id" required multiple name="param">
+                                    id="kt_select2_11" name="badge_id[]" required multiple name="param">
                                    <option value="">@lang('--Badges--')</option>
                                    @foreach ($badges as $badge)
                                        <option value="{{$badge->id}}">{{$badge->name}} - {{$badge->name_ar}}</option>
@@ -211,7 +222,7 @@
                             <label class="col-form-label col-sm-12">@lang('Extra Features')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('feature_id') ? 'is-invalid' : '' }}"
-                                    id="kt_select2_12" name="feature_id" required multiple name="param">
+                                    id="kt_select2_12" name="feature_id[]" required multiple name="param">
                                    <option value="">@lang('--Badges--')</option>
                                    @foreach ($features as $feature)
                                        <option value="{{$feature->id}}">{{$feature->name}}- {{$feature->name_ar}}</option>
@@ -442,7 +453,7 @@
                             <label class="col-form-label  col-sm-12">@lang("Phone")</label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                     <input class="form-control" type="text" value="{{old("phone") ?? Auth::user()->phone}}"  placeholder="{{__("Your Phone")}}" name="phone" />
-                                    <span class="form-text text-muted">This is your phone number </span>
+                                    <span class="form-text text-muted">@lang("This is your phone number ")</span>
                                 @error('phone')
                                     <div class="invalid-feedback">{{ $errors->first('phone') }}</div>
                                 @enderror
@@ -477,7 +488,8 @@
                             <label class="col-form-label  col-sm-12">@lang("Installment Month")</label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                     <input class="form-control" type="text" value="{{old("InstallmentMonth")}}"  placeholder="{{__("Installment Month")}}" name="InstallmentMonth" />
-                                @error('InstallmentMonth')
+                                    <span class="form-text text-muted">@lang("Type numeric numbers only")</span>
+                                    @error('InstallmentMonth')
                                     <div class="invalid-feedback">{{ $errors->first('InstallmentMonth') }}</div>
                                 @enderror
                             </div>

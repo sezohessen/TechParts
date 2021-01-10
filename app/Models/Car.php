@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Car extends Model
 {
@@ -59,26 +60,88 @@ class Car extends Model
     public static function rules($request,$id = NULL)
     {
         $rules = [
-            'name'             => 'required|string|max:255',
-            'logo'             => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
+            'CarMaker_id'                 => 'required|integer',
+            'CarModel_id'                 => 'required|integer',
+            'CarYear_id'                  => 'required|integer',
+            'CarManufacture_id'           => 'required|integer',
+            'CarCapacity_id'              => 'required|integer',
+            'price'                       => 'required|integer',
+            'price_after_discount'        => 'required|integer|between:1,100',
+            'AccidentBefore'              => 'required|integer',
+            'kiloUsed'                    => 'required|integer',
+            'CarBody_id'                  => 'required|integer',
+            'CarColor_id'                 => 'required|integer',
+            'badge_id'                    => 'required|array|min:1',
+            'feature_id'                  => 'required|array|min:1',
+            'Description'                 => 'required|string|min:3|max:1000',
+            'Description_ar'              => 'required|string|min:3|max:1000',
+            'Country_id'                  => 'required|integer',
+            'Governorate_id'              => 'required|integer',
+            'City_id'                     => 'required|integer',
+            'lat'                         => 'required|numeric',
+            'lng'                         => 'required|numeric',
+            'ServiceHistory'              => 'required|string|min:3|max:1000',
+            'transmission'                => 'required|integer',
+            'status'                      => 'required|integer',
+            'SellerType'                  => 'required|integer',
+            'payment'                     => 'required|integer',
+            'phone'                       => 'required|integer',
+            'DepositPrice'                => 'required|integer',
+            'InstallmentPrice'            => 'required|integer',
+            'InstallmentMonth'            => 'required|integer',
+            'CarPhotos'                   => 'required|max:5',
+            'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ];
         if($id){
-            $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['CarPhotos'] = 'nullable';
+            $rules['CarPhotos.*'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
         }
         return $rules;
     }
     public static function credentials($request,$img_id = NULL)
     {
         $credentials = [
-            'name'              => $request->name,
+
+            'CarMaker_id'                 => $request->CarMaker_id,
+            'CarModel_id'                 => $request->CarModel_id,
+            'CarYear_id'                  => $request->CarYear_id,
+            'CarManufacture_id'           => $request->CarManufacture_id,
+            'CarCapacity_id'              => $request->CarCapacity_id,
+            'price'                       => $request->price,
+            'price_after_discount'        => $request->price_after_discount,
+            'AccidentBefore'              => $request->AccidentBefore,
+            'kiloUsed'                    => $request->kiloUsed,
+            'CarBody_id'                  => $request->CarBody_id,
+            'CarColor_id'                 => $request->CarColor_id,
+            'Description'                 => $request->Description,
+            'Description_ar'              => $request->Description_ar,
+            'Country_id'                  => $request->Country_id,
+            'Governorate_id'              => $request->Governorate_id,
+            'City_id'                     => $request->City_id,
+            'lat'                         => $request->lat,
+            'lng'                         => $request->lng,
+            'ServiceHistory'              => $request->ServiceHistory,
+            'transmission'                => $request->transmission,
+            'status'                      => $request->status,
+            'SellerType'                  => $request->SellerType,
+            'payment'                     => $request->payment,
+            'phone'                       => $request->phone,
+            'DepositPrice'                => $request->DepositPrice,
+            'InstallmentPrice'            => $request->InstallmentPrice,
+            'InstallmentMonth'            => $request->InstallmentMonth,
+            'views'                       => 0
         ];
-        if($request->file('logo')){
+        if($photos=$request->file('CarPhotos')){
             if($img_id){
-                $Image_id = self::file($request->file('logo'),$img_id);
+                foreach($photos as $photo){
+                    $Image_id[] = self::file($photo,$img_id);
+                }
             }else {
-                $Image_id = self::file($request->file('logo'));
+                foreach($photos as $photo){
+                    $Image_id[] = self::file($photo);
+                }
             }
-            $credentials['logo_id'] = $Image_id;
+            $credentials['CarPhotos'] = $Image_id;
         }
         return $credentials;
     }
@@ -86,7 +149,7 @@ class Car extends Model
     {
         $extension = $file->getClientOriginalExtension();
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
-        $destinationPath = public_path() . '/img/CarBodies/';
+        $destinationPath = public_path() . '/img/Cars/';
         $file->move($destinationPath, $fileName);
         if($id){//For update
             $Image = Image::find($id);
@@ -106,4 +169,26 @@ class Car extends Model
             return $Image->id;
         }
     }
+    public function maker()
+    {
+        return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
+    }
+    public function country()
+    {
+        return $this->belongsTo(Country::class,"Country_id","id");
+    }
+    public static function unlink_img($images)
+    {
+        $destinationPath = public_path() . '/img/Cars/';
+        foreach($images as $key=>$image){
+            $Image = Image::find($image->img_id);
+            //Delete Old image
+            try {
+                $file_old = $destinationPath.$Image->name;
+                unlink($file_old);
+            } catch (Exception $e) {}
+        }
+        return true;
+    }
+
 }
