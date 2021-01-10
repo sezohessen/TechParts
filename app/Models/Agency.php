@@ -64,12 +64,13 @@ class Agency extends Model
         ];
         if($id == 'Agency'){//For update in Dashborad
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
-        }elseif($id = 'AgencyDash'){//For Create in Agency Dashboard
+        }elseif($id == 'AgencyDash'){//For Create in Agency Dashboard
             unset($rules['show_in_home']);
             unset($rules['car_show_rooms']);
             unset($rules['status']);
             unset($rules['user_id']);
-        }elseif($id){
+        }elseif($id){//For Update in Agency Dashboard
+
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             unset($rules['show_in_home']);
             unset($rules['car_show_rooms']);
@@ -100,6 +101,9 @@ class Agency extends Model
             $credentials['user_id'] = $id;
         }else{
             $credentials['user_id'] = $request->user_id;
+        }
+        if(!$specialCase&&$img_id){
+            unset($credentials['status']);
         }
         if($request->show_in_home!=NULL&&$request->show_in_home=='on'&&$specialCase){//Check Box
             $credentials['show_in_home'] = 1;
