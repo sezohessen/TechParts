@@ -23,7 +23,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Agency Name (ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" required
+                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" 
                             name="name"  placeholder="@lang('Name(ENG)')" autofocus  value="{{old("name") ? old("name") : $agency->name}}"/>
                             @error('name')
                                 <div class="invalid-feedback">{{ $errors->first('name') }}</div>

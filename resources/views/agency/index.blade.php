@@ -21,8 +21,8 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">{{-- {{ null !== $offers  ?  $offers->count() : 0 }} --}} 0</div>
-                    <a href="{{-- {{ route('insurance.insurance-offer.index') }} --}}" class="text-inverse-success font-weight-bold font-size-lg mt-1">@lang("Agency companies")</a>
+                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">{{ null !== $agencies  ?  $agencies->count() : 0 }}</div>
+                    <a href="{{ route('agency.company.index') }}" class="text-inverse-success font-weight-bold font-size-lg mt-1">@lang("Agency companies")</a>
                 </div>
             </div>
         </div>
