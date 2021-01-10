@@ -127,9 +127,9 @@ class AgencyController extends Controller
         $rules          = Agency::rules($request,$id);
         $request->validate($rules);
         //Forth parameter to avoid check box that in agency dashboad
-        $credentials    = Agency::credentials($request,$request->user_id,$agency->img_id,0);
+        $credentials    = Agency::credentials($request,Auth::id(),$agency->img_id,0);
         $Agency         = Agency::where('id',$id)->update($credentials);
-        //After Creating Agency row ,Agency Contact will be created by adding the agency id
+        //After Creating Agency row ,Agency Contact will be created by adding the dagency id
         $rules          = AgencyContact::rules($request);
         $request->validate($rules);
         $credentials    = AgencyContact::credentials($request,$id);
