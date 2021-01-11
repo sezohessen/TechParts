@@ -82,7 +82,7 @@ class InsuranceController extends Controller
     public function edit($id)
     {
         $insurance = Insurance::find($id);
-        if($insurance->count()){
+        if($insurance){
         $users = User::all();
         $page_title = __("Edit Insurance");
         $page_description = __("Edit");

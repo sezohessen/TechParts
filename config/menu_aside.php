@@ -92,6 +92,46 @@ return [
             ]
         ],
         [
+            'title' => 'Banks',
+            'icon' => 'fas fa-synagogue',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Bank companies',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add Bank',
+                            'page' => "/dashboard/bank/create"
+                        ],
+                        [
+                            'title' => 'View Banks',
+                            'page' => '/dashboard/bank'
+                        ],
+
+                    ]
+                ],
+                [
+                    'title' => "Bank's offers",
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add offer',
+                            'page' => "/dashboard/bank-offer/create"
+                        ],
+                        [
+                            'title' => 'View offers',
+                            'page' => '/dashboard/bank-offer'
+                        ],
+
+                    ]
+                ],
+            ]
+        ],
+        [
             'title' => 'Agences',
             'icon' => 'fas fa-landmark',
             'bullet' => 'dot',

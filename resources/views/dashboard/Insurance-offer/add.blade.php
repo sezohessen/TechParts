@@ -72,7 +72,7 @@
                             <div class="col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('insurance_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_1" name="insurance_id" required>
-                                    <option value="">@lang('--Select user--')</option>
+                                    <option value="">@lang('--Select Insurance--')</option>
                                     @foreach ($Insurances as $Insurance)
                                         <option value="{{ $Insurance->id }}">{{ $Insurance->name }} -
                                             {{ $Insurance->title_ar }}
@@ -88,6 +88,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label>
+                            <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo"
                                 style="background-image: url({{ asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>

@@ -127,7 +127,7 @@
                         <div class="form-group row">
                             <label for="Price" class="col-2 col-form-label">@lang('Price')<span class="text-danger">*</span></label>
                             <div class="col-10">
-                                <input type="number" name="price" min="0" step="1" value="{{ old('price') }}" id="Price"
+                                <input type="number" name="price" min="0" step="0.01" value="{{ old('price') }}" id="Price"
                                     class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" placeholder="0.00"
                                     required>
                                 @if ($errors->has('price'))
