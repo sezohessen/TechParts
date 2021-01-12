@@ -32,7 +32,6 @@
             return "sensor=false&libraries=places&key=AIzaSyDcl_4E5iBaAR4bUuZePK3MIL-pO_oDoCA";
         }
     }
-}
 if(!function_exists('MapTOken')){
     function MapTOken(){
         return "sensor=false&libraries=places&key=AIzaSyDcl_4E5iBaAR4bUuZePK3MIL-pO_oDoCA";
