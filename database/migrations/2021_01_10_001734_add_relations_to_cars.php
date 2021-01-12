@@ -17,24 +17,22 @@ class AddRelationsToCars extends Migration
 
             $table->dropColumn('makerName');
             $table->dropColumn('modelName');
+            $table->dropColumn('currency');
             $table->dropColumn('ManufacturingYear');
             $table->dropColumn('PrePrice');
 
             $table->text('ServiceHistory');
             $table->text('Description');
             $table->text('Description_ar');
-            
+
             $table->string('lat')->default(null);
             $table->string('lng')->default(null);
             $table->string('phone')->nullable();
 
             $table->string('InstallmentMonth');
             $table->string('InstallmentPrice');
-            $table->string('InstallmentCurrency');
 
-            $table->boolean("Deposit")->default(0);
             $table->string('DepositPrice');
-            $table->string('DepositCurrency');
 
 
             $table->bigInteger('Country_id')->unsigned();
@@ -98,14 +96,14 @@ class AddRelationsToCars extends Migration
             ->onUpdate('cascade');
 
 
-            $table->integer('views');
+            $table->integer('views')->nullable();
 
             $table->boolean('AccidentBefore')->default(0);
 
             $table->integer("transmission")->default(0);
 
-            $table->integer('price')->change();
-            $table->integer('price_after_discount');
+            $table->integer('price')->nullable()->change();
+            $table->integer('price_after_discount')->nullable();;
             $table->integer('payment')->default(0);
             $table->integer('status')->change()->default(0);
             $table->integer('SellerType')->default(0);
@@ -130,8 +128,7 @@ class AddRelationsToCars extends Migration
             $table->dropForeign(['CarModel_id']);
             $table->dropForeign(['CarBody_id']);
             $table->dropForeign(['CarMaker_id']);
-            $table->dropForeign(['Feature_id']);
-            $table->dropForeign(['Badge_id']);
+            $table->dropForeign(['CarManufacture_id']);
 
             // 2. Drop the column
 
@@ -142,17 +139,14 @@ class AddRelationsToCars extends Migration
             $table->dropColumn('transmission');
             $table->dropColumn('AccidentBefore');
             $table->dropColumn('views');
-            $table->dropColumn('PrePrice');
+            $table->dropColumn('price_after_discount');
             $table->dropColumn('price');
             $table->dropColumn('phone');
             $table->dropColumn('lng');
             $table->dropColumn('lat');
-            $table->dropColumn('DepositCurrency');
             $table->dropColumn('DepositPrice');
-            $table->dropColumn('Deposit');
             $table->dropColumn('InstallmentMonth');
             $table->dropColumn('InstallmentPrice');
-            $table->dropColumn('InstallmentCurrency');
 
 
         });

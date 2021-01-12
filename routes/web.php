@@ -36,9 +36,12 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/contact','ContactController');
     Route::resource('/AskExpert','AskExpertController');
     Route::resource('/finance-request','FinanceRequestController');
+<<<<<<< HEAD
     Route::resource('/agency','AgencyController');
+=======
+    Route::resource('/car','CarController');
+>>>>>>> feature/Cars
     Route::group(['prefix' => 'car'],function(){
-        Route::resource('/','CarController');
         Route::resource('/maker','CarMakerController');
         Route::resource('/model','CarModelController');
         Route::resource('/body','CarBodyController');
@@ -46,6 +49,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
         Route::resource('/capacity','CarCapacityController');
         Route::resource('/color','CarColorController');
         Route::get("available_model/{id}",'CarController@available_model');
+        Route::get("available_governorate/{id}",'CarController@available_governorate');
+        Route::get("available_city/{id}",'CarController@available_city');
     });
 
     // Permissions
@@ -81,6 +86,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/color/destroy/all','CarColorController@multi_delete');
     Route::delete('/AskExpert/destroy/all','AskExpertController@multi_delete');
     Route::delete('/contact/destroy/all','ContactController@multi_delete');
+    Route::delete('/car/destroy/all','CarController@multi_delete');
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
