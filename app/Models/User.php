@@ -6,6 +6,7 @@ use App\Models\Country;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +15,9 @@ class User extends Authenticatable
 {
     use LaratrustUserTrait;
     use HasFactory, Notifiable;
-
+    use LogsActivity;
+    protected static $logAttributes = ['first_name',"phone","email"];
+    protected static $recordEvents = ['created'];
     /**
      * The attributes that are mass assignable.
      *
@@ -33,7 +36,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "User has been {$eventName}";
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -79,10 +85,10 @@ class User extends Authenticatable
             'phone'                             => $request->phone,
             'password'                          => Hash::make($request->password)
         ];
-        /*if($request->file('image')){
+        if($request->file('image')){
             $Image_id = self::file($request->file('Image'));
             $credentials['image_id'] = $Image_id;
-        }*/
+        }
         if ( isset($request->is_phone_virefied) ) {
             $credentials['is_phone_virefied'] = $request->is_phone_virefied;
         }

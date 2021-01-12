@@ -16,11 +16,11 @@ class UsersController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('user-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+       // abort_if(Gate::denies('user-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $users = User::with(['roles'])->get();
 
-        return view('admin.users.index', compact('users'));
+        return view('dashboard.users.index', compact('users'));
     }
 
     public function create()

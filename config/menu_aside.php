@@ -336,6 +336,23 @@ return [
             ]
         ],
         [
+            'title' => 'Manage Users',
+            'icon' => 'media/svg/icons/Communication/Group.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add User',
+                    'page' => "/dashboard/users/create"
+                ],
+                [
+                    'title' => 'View Users',
+                    'page' => '/dashboard/users'
+                ],
+
+            ]
+        ],
+        [
             'title' => 'Badges',
             'icon' => 'media/svg/icons/General/Star.svg',
             'bullet' => 'dot',
@@ -503,6 +520,20 @@ return [
                     'title' => 'permissions',
                     'page' => '/dashboard/permissions'
                 ],
+
+            ]
+        ],
+        [
+            'title' => 'Logs Activiy',
+            'icon' => 'media/svg/icons/Tools/Tools.svg',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'View Activities',
+                    'page' => '/dashboard/log',
+
+                ]
 
             ]
         ],
