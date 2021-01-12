@@ -36,6 +36,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/AskExpert','AskExpertController');
     Route::resource('/finance-request','FinanceRequestController');
     Route::resource('/car','CarController');
+    Route::resource('/log','LogsController');
     Route::group(['prefix' => 'car'],function(){
         Route::resource('/maker','CarMakerController');
         Route::resource('/model','CarModelController');
@@ -55,8 +56,9 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
     // Users
-    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
-    Route::resource('users', 'UsersController');
+  //  Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+  //  Route::resource('users', 'UsersController');
+    Route::resource('users', 'UserController');
     /* Datatable deleteAll request */
     Route::delete("faqs/destroy/all","FaqController@multi_delete");
     Route::delete('/country/destroy/all','CountryController@multi_delete');
@@ -79,6 +81,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/capacity/destroy/all','CarCapacityController@multi_delete');
     Route::delete('/color/destroy/all','CarColorController@multi_delete');
     Route::delete('/car/destroy/all','CarController@multi_delete');
+    Route::delete('/log/destroy/all','LogsController@multi_delete');
+    Route::delete('/users/destroy/all','UserController@multi_delete');
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');

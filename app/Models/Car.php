@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Car extends Model
 {
     use HasFactory;
+    use LogsActivity;
     protected $table    = 'cars';
 
     const TRANSIMSSION_MANUAL  = 0;
@@ -25,38 +27,21 @@ class Car extends Model
     const SELLER_DISTRIBUTOR=1;
     const SELLER_INDIVIDUAL=2;
 
-
+    protected static $logAttributes = ['phone','Country_id', 'SellerType'];
     protected $fillable=[
-        'price',
-        'price_after_discount',
-        'Description',
-        'Description_ar',
-        'CarManufacture_id',
-        'status',
-        'kiloUsed',
-        'ServiceHistory' ,
-        'lat',
-        'lng',
-        'phone',
-        'InstallmentMonth',
-        'InstallmentPrice',
-        'DepositPrice' ,
-        'Country_id' ,
-        'City_id' ,
-        'Governorate_id' ,
-        'CarModel_id' ,
-        'CarMaker_id' ,
-        'CarBody_id' ,
-        'CarYear_id' ,
-        'CarCapacity_id' ,
-        'CarColor_id' ,
-        'views' ,
-        'AccidentBefore' ,
-        'transmission' ,
-        'payment',
-        'SellerType',
-
+        'price', 'price_after_discount','Description', 'Description_ar',
+        'CarManufacture_id', 'status', 'kiloUsed','ServiceHistory' ,
+        'lat','lng','phone','InstallmentMonth', 'InstallmentPrice',
+        'DepositPrice' ,'Country_id' ,'City_id' ,'Governorate_id' ,
+        'CarModel_id' ,'CarMaker_id' ,'CarBody_id' ,'CarYear_id' ,
+        'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' ,
+        'transmission' ,'payment', 'SellerType',
     ];
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "A car has been {$eventName}";
+    }
+
     public static function rules($request,$id = NULL)
     {
         $rules = [
@@ -85,7 +70,7 @@ class Car extends Model
             'status'                      => 'required|integer',
             'SellerType'                  => 'required|integer',
             'payment'                     => 'required|integer',
-            'phone'                       => 'required|integer',
+            'phone'                       => 'required|numeric',
             'DepositPrice'                => 'required|integer',
             'InstallmentPrice'            => 'required|integer',
             'InstallmentMonth'            => 'required|integer',
