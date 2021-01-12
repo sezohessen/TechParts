@@ -335,7 +335,7 @@
                                 <div class="form-group">
                                     <label>@lang('Whatsapp')</label>
                                     <input type="text" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}"
-                                    name="whatsapp"  placeholder="@lang('Phone number')" autofocus  value="{{old("whatsapp")}}"/>
+                                    name="whatsapp"  placeholder="@lang('Phone number')"   value="{{old("whatsapp")}}"/>
                                     @error('whatsapp')
                                         <div class="invalid-feedback">{{ $errors->first('whatsapp') }}</div>
                                     @enderror
@@ -345,7 +345,7 @@
                                 <div class="form-group">
                                     <label>@lang('Facebook')</label>
                                     <input type="text" class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}"
-                                    name="facebook"  placeholder="@lang('Link')" autofocus  value="{{old("facebook")}}"/>
+                                    name="facebook"  placeholder="@lang('Link')"   value="{{old("facebook")}}"/>
                                     @error('facebook')
                                         <div class="invalid-feedback">{{ $errors->first('facebook') }}</div>
                                     @enderror
@@ -355,7 +355,7 @@
                                 <div class="form-group">
                                     <label>@lang('Instagram')</label>
                                     <input type="text" class="form-control {{ $errors->has('instagram') ? 'is-invalid' : '' }}"
-                                    name="instagram"  placeholder="@lang('Link')" autofocus  value="{{old("instagram")}}"/>
+                                    name="instagram"  placeholder="@lang('Link')"   value="{{old("instagram")}}"/>
                                     @error('instagram')
                                         <div class="invalid-feedback">{{ $errors->first('instagram') }}</div>
                                     @enderror
@@ -365,7 +365,7 @@
                                 <div class="form-group">
                                     <label>@lang('Messenger')</label>
                                     <input type="text" class="form-control {{ $errors->has('messenger') ? 'is-invalid' : '' }}"
-                                    name="messenger"  placeholder="@lang('Link')" autofocus  value="{{old("messenger")}}"/>
+                                    name="messenger"  placeholder="@lang('Link')"   value="{{old("messenger")}}"/>
                                     @error('messenger')
                                         <div class="invalid-feedback">{{ $errors->first('messenger') }}</div>
                                     @enderror

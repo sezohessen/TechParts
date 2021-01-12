@@ -2,7 +2,9 @@
 
 use App\Models\Role;
 use App\Models\Permission;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,9 +40,14 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/finance-request','FinanceRequestController');
 <<<<<<< HEAD
     Route::resource('/agency','AgencyController');
+<<<<<<< HEAD
 =======
     Route::resource('/car','CarController');
 >>>>>>> feature/Cars
+=======
+    Route::resource('/bank','BankController');
+    Route::resource('/bank-offer','BankOfferController');
+>>>>>>> feature/banks
     Route::group(['prefix' => 'car'],function(){
         Route::resource('/maker','CarMakerController');
         Route::resource('/model','CarModelController');
@@ -86,7 +93,12 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/color/destroy/all','CarColorController@multi_delete');
     Route::delete('/AskExpert/destroy/all','AskExpertController@multi_delete');
     Route::delete('/contact/destroy/all','ContactController@multi_delete');
+<<<<<<< HEAD
     Route::delete('/car/destroy/all','CarController@multi_delete');
+=======
+    Route::delete('/bank/destroy/all','BankController@multi_delete');
+    Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
+>>>>>>> feature/banks
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
