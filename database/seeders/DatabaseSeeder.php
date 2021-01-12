@@ -55,5 +55,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ListCarUsersSeeder::class);
         $this->call(MaintenanceSpecialtiesSeeder::class);
         $this->call(FinanceRequestSeeder::class);
+        $this->call(SettingsSeeder::class);
     }
 }

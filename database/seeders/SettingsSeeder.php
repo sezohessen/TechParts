@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Image;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class SettingsSeeder extends Seeder
 {
@@ -17,6 +21,7 @@ class SettingsSeeder extends Seeder
         DB::table('settings')->insert([
             'appName'       => '3arabiat',
             'appName_ar'    => 'عربيات',
+            'logo_id'        => Image::all()->random()->id
         ]);
     }
 }
