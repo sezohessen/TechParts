@@ -24,5 +24,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        app()->singleton('app_locale', function ()
+        {
+            if (session()->has('app_locale')) {
+                //$language = session('app_locale');
+                $language = session()->get('app_locale');
+            } else {
+                $language = 'ar';
+            }
+            return $language;
+        });
     }
 }

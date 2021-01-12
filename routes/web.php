@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, ['ar', 'en']) ) {
+        session()->put('app_locale', $locale);
+        return back();
+    }
+    return view('errors.404');
+});
+//Route::group(['middleware' => 'SetLocale'], function () {
 
 
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|administrator']], function () {
@@ -119,17 +126,5 @@ Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'mid
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
 });
-Route::get('/lang/{locale}', function (Request $request) {
-    $locale = @$request->lang;
-    if ($locale == 'ar' or $locale == 'en') {
-        if ($locale === 'ar' ) {
-            App::setLocale($locale);
-            Session::put('app_locale', $locale);
-        }else {
-            App::setLocale('en');
-            Session::put('app_locale', 'en');
-        }
-        return redirect()->back();
-    }
-    return view('errors.404');
-});
+//});
+

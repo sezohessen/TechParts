@@ -11,14 +11,7 @@ Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-t
 License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme
 for your project.
 --}}
-@php
-if (Session::get('app_locale') == 'ar') {
-App::setLocale('ar');
-} else {
-App::setLocale('en');
-Session::put(App::setLocale('en'));
-}
-@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {{ Metronic::printAttrs('html') }}
     {{ Metronic::printClasses('html') }} @if(App::isLocale('ar')) direction="rtl" dir="rtl" style="direction: rtl" @endif>
