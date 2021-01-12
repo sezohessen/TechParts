@@ -134,9 +134,6 @@
                                 <option value="insurance" {{ old('provider') == 'insurance' ? 'selected' : '' }}>
                                     @lang('Insurance Company')
                                 </option>
-                                <option value="insurance" {{ old('provider') == 'insurance' ? 'selected' : '' }}>
-                                    @lang('Insurance Company')
-                                </option>
                                 <option value="agency" {{ old('provider') == 'agency' ? 'selected' : '' }}>
                                     @lang('Agency')
                                 </option>
