@@ -35,6 +35,9 @@ class RegisterController extends Controller
         if (auth()->user()->hasRole('insurance')) {
             return '/insurance';
         }
+        if (auth()->user()->hasRole('agency')) {
+            return '/agency';
+        }
         return '/user';
     }
     /**

@@ -10,7 +10,7 @@
             <div class="form-group">
                 <div class="form-group">
                     <a class="btn btn-default" href="{{ route('dashboard.roles.index') }}">
-                        {{ lang('back to list') }}
+                        {{ __('back to list') }}
                     </a>
                 </div>
                 <table class="table table-bordered table-striped">
@@ -45,7 +45,7 @@
                 </table>
                 <div class="form-group">
                     <a class="btn btn-default" href="{{ route('dashboard.roles.index') }}">
-                        {{ lang('back to list') }}
+                        {{ __('back to list') }}
                     </a>
                 </div>
             </div>
