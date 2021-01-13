@@ -29,7 +29,7 @@
             </div>
             {!! Form::open(['route' => ['dashboard.AskExpert.destroy', $id], 'method' => 'delete']) !!}
             <div class="modal-body">
-                <p>@lang("Are you sure you want delete this item ? ")</p>
+                <p>{{ __('Are you sure you want delete this item  ? ') }}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">@lang("Close")</button>
