@@ -12,7 +12,7 @@ use Yajra\DataTables\Services\DataTable;
 class Bank_offerDatatable extends DataTable
 {
 
-     /**
+    /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
@@ -31,7 +31,7 @@ class Bank_offerDatatable extends DataTable
             ->editColumn('installment_months', '{!! Str::limit($installment_months, 100)!!}')
             ->addColumn('checkbox', 'dashboard.Bank-offer.btn.checkbox')
             ->addColumn('action', 'dashboard.Bank-offer.btn.action')
-            ->rawColumns(['checkbox','action', ]);
+            ->rawColumns(['checkbox', 'action',]);
     }
 
     /**
@@ -54,35 +54,32 @@ class Bank_offerDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('banks-table')
-                    ->columns($this->getColumns())
-                    ->dom('Bfrtip')
-                    ->parameters([
-                        'buttons'      => [
-                            'pageLength',
-                            //old way
-                            [
-                                'text'=>
-                                '<i class="fa fa-trash"></i> '.__('Delete All'),
-                                'className'=>'dt-button buttons-collection delBtn buttons-page-length'
-                            ],
-                            'export',
-                            'print',
-                            ],
-                            'lengthMenu' =>
-                            [
-                                [ 10, 25, 50, -1 ],
-                                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-                            ],
-                            'language' => datatable_lang(),
+            ->setTableId('banks-table')
+            ->columns($this->getColumns())
+            ->dom('Bfrtip')
+            ->parameters([
+                'buttons'      => [
+                    'pageLength',
+                    //old way
+                    [
+                        'text' =>
+                        '<i class="fa fa-trash"></i> ' . __('Delete All'),
+                        'className' => 'dt-button buttons-collection delBtn buttons-page-length'
+                    ],
+                    'export',
+                    'print',
+                ],
+                'lengthMenu' =>
+                [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                'language' => datatable_lang(),
 
-                        ])
-                    ->minifiedAjax()
-                    ->orderBy(1)
-                    ->search([
-
-                    ]);
-
+            ])
+            ->minifiedAjax()
+            ->orderBy(1)
+            ->search([]);
     }
 
     /**
@@ -95,41 +92,41 @@ class Bank_offerDatatable extends DataTable
         return [
 
             [
-                'name'=>"checkbox",
-                'data'=>"checkbox",
-                'title'=>
+                'name' => "checkbox",
+                'data' => "checkbox",
+                'title' =>
                 "
                 <label class='checkbox checkbox-single'>
                     <input type='checkbox'class='check_all' onclick='check_all()'/>
                     <span></span>
                 </label>
                 ",
-                "exportable"=>false,
-                "printable"=>false,
-                "orderable"=>false,
-                "searchable"=>false,
+                "exportable" => false,
+                "printable" => false,
+                "orderable" => false,
+                "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('name'),
+            Column::make('name')->title(__('Name')),
             Column::make('bank.name')
-            ->title(__("Bank Name")),
+                ->title(__("Bank Name")),
             Column::make('valid_till')
-            ->title(__("Valid till")),
+                ->title(__("Valid till")),
             Column::make('down_payment_percentage')
-            ->title(__("Down payment(%)")),
+                ->title(__("Down payment(%)")),
             Column::make('interest_rate')
-            ->title(__("Interest rate(%)")),
+                ->title(__("Interest rate(%)")),
             Column::make('number_of_years')
-            ->title(__("N. Years")),
+                ->title(__("N. Years")),
             Column::make('installment_months')
-            ->title(__("Installment months")),
+                ->title(__("Installment months")),
             Column::computed('action')
-            ->title(__('Action'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center')
+                ->title(__('Action'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center')
         ];
     }
 

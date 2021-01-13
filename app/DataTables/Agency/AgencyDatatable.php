@@ -14,7 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 class AgencyDatatable extends DataTable
 {
 
-     /**
+    /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
@@ -29,7 +29,7 @@ class AgencyDatatable extends DataTable
             ->editColumn('center_type', 'AgencyDashboard.Agency.btn.center_type')
             ->addColumn('checkbox', 'AgencyDashboard.Agency.btn.checkbox')
             ->addColumn('action', 'AgencyDashboard.Agency.btn.action')
-            ->rawColumns(['checkbox','action','center_type']);
+            ->rawColumns(['checkbox', 'action', 'center_type']);
     }
 
     /**
@@ -40,7 +40,7 @@ class AgencyDatatable extends DataTable
      */
     public function query()
     {
-        return Agency::query()->where('user_id',Auth::id())->select("agencies.*");
+        return Agency::query()->where('user_id', Auth::id())->select("agencies.*");
     }
 
     /**
@@ -51,35 +51,32 @@ class AgencyDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('badges-table')
-                    ->columns($this->getColumns())
-                    ->dom('Bfrtip')
-                    ->parameters([
-                        'buttons'      => [
-                            'pageLength',
-                            //old way
-                            [
-                                'text'=>
-                                '<i class="fa fa-trash"></i> '.__('Delete All'),
-                                'className'=>'dt-button buttons-collection delBtn buttons-page-length'
-                            ],
-                            'export',
-                            'print',
-                            ],
-                            'lengthMenu' =>
-                            [
-                                [ 10, 25, 50, -1 ],
-                                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-                            ],
-                            'language' => datatable_lang(),
+            ->setTableId('badges-table')
+            ->columns($this->getColumns())
+            ->dom('Bfrtip')
+            ->parameters([
+                'buttons'      => [
+                    'pageLength',
+                    //old way
+                    [
+                        'text' =>
+                        '<i class="fa fa-trash"></i> ' . __('Delete All'),
+                        'className' => 'dt-button buttons-collection delBtn buttons-page-length'
+                    ],
+                    'export',
+                    'print',
+                ],
+                'lengthMenu' =>
+                [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                'language' => datatable_lang(),
 
-                        ])
-                    ->minifiedAjax()
-                    ->orderBy(1)
-                    ->search([
-
-                    ]);
-
+            ])
+            ->minifiedAjax()
+            ->orderBy(1)
+            ->search([]);
     }
 
     /**
@@ -92,31 +89,31 @@ class AgencyDatatable extends DataTable
         return [
 
             [
-                'name'=>"checkbox",
-                'data'=>"checkbox",
-                'title'=>
+                'name' => "checkbox",
+                'data' => "checkbox",
+                'title' =>
                 "
                 <label class='checkbox checkbox-single'>
                     <input type='checkbox'class='check_all' onclick='check_all()'/>
                     <span></span>
                 </label>
                 ",
-                "exportable"=>false,
-                "printable"=>false,
-                "orderable"=>false,
-                "searchable"=>false,
+                "exportable" => false,
+                "printable" => false,
+                "orderable" => false,
+                "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('name'),
+            Column::make('name')->title(__('Name')),
             Column::make('name_ar'),
             Column::make('center_type'),
             Column::computed('action')
-            ->title(__('Action'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center')
+                ->title(__('Action'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center')
 
         ];
     }
