@@ -481,8 +481,7 @@
     });
     });
 </script> --}}
-
-<script src="{{ asset('js/googlemaps.js?'.MapTOken()) }}"></script>
+<script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 <script>
     $('#map').locationpicker({

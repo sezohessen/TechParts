@@ -105,7 +105,7 @@ class BankDatatable extends DataTable
             Column::make('name')->title(__('Name')),
             Column::make('user.email')
                 ->title(__("User Email")),
-            Column::make('status'),
+            Column::make('status')->title(__('status')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

@@ -12,7 +12,7 @@ use Yajra\DataTables\Services\DataTable;
 class UserDatatable extends DataTable
 {
 
-     /**
+    /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
@@ -28,7 +28,7 @@ class UserDatatable extends DataTable
             ->editColumn('phone', '{{Str::limit($phone, 100)}}')
             ->addColumn('checkbox', 'dashboard.CarColor.btn.checkbox')
             ->addColumn('action', 'dashboard.CarColor.btn.action')
-            ->rawColumns(['checkbox','action']);
+            ->rawColumns(['checkbox', 'action']);
     }
 
     /**
@@ -50,35 +50,32 @@ class UserDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('Users-table')
-                    ->columns($this->getColumns())
-                    ->dom('Bfrtip')
-                    ->parameters([
-                        'buttons'      => [
-                            'pageLength',
-                            //old way
-                            [
-                                'text'=>
-                                '<i class="fa fa-trash"></i> '.__('Delete All'),
-                                'className'=>'dt-button buttons-collection delBtn buttons-page-length'
-                            ],
-                            'export',
-                            'print',
-                            ],
-                            'lengthMenu' =>
-                            [
-                                [ 10, 25, 50, -1 ],
-                                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-                            ],
-                            'language' => datatable_lang(),
+            ->setTableId('Users-table')
+            ->columns($this->getColumns())
+            ->dom('Bfrtip')
+            ->parameters([
+                'buttons'      => [
+                    'pageLength',
+                    //old way
+                    [
+                        'text' =>
+                        '<i class="fa fa-trash"></i> ' . __('Delete All'),
+                        'className' => 'dt-button buttons-collection delBtn buttons-page-length'
+                    ],
+                    'export',
+                    'print',
+                ],
+                'lengthMenu' =>
+                [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                'language' => datatable_lang(),
 
-                        ])
-                    ->minifiedAjax()
-                    ->orderBy(1)
-                    ->search([
-
-                    ]);
-
+            ])
+            ->minifiedAjax()
+            ->orderBy(1)
+            ->search([]);
     }
 
     /**
@@ -91,19 +88,19 @@ class UserDatatable extends DataTable
         return [
 
             [
-                'name'=>"checkbox",
-                'data'=>"checkbox",
-                'title'=>
+                'name' => "checkbox",
+                'data' => "checkbox",
+                'title' =>
                 "
                 <label class='checkbox checkbox-single'>
                     <input type='checkbox'class='check_all' onclick='check_all()'/>
                     <span></span>
                 </label>
                 ",
-                "exportable"=>false,
-                "printable"=>false,
-                "orderable"=>false,
-                "searchable"=>false,
+                "exportable" => false,
+                "printable" => false,
+                "orderable" => false,
+                "searchable" => false,
             ],
             Column::make('id'),
             Column::make('email'),
@@ -111,12 +108,12 @@ class UserDatatable extends DataTable
             Column::make('last_name'),
             Column::make('phone'),
             Column::computed('action')
-            ->title(__('Action'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center')
+                ->title(__('Action'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center')
 
         ];
     }

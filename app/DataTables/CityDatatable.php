@@ -9,10 +9,11 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Str;
+
 class CityDatatable extends DataTable
 {
 
-     /**
+    /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
@@ -30,8 +31,7 @@ class CityDatatable extends DataTable
             ->addColumn('checkbox', 'dashboard.City.btn.checkbox')
             ->addColumn('action', 'dashboard.City.btn.action')
             ->addColumn('active', 'dashboard.City.btn.active')
-            ->rawColumns(['checkbox','action',"active"]);
-
+            ->rawColumns(['checkbox', 'action', "active"]);
     }
     /**
      * Get query source of dataTable.
@@ -41,7 +41,7 @@ class CityDatatable extends DataTable
      */
     public function query()
     {
-        return City::query()->with("country","governorate")->select("cities.*");
+        return City::query()->with("country", "governorate")->select("cities.*");
     }
 
     /**
@@ -52,35 +52,32 @@ class CityDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('Cities-table')
-                    ->columns($this->getColumns())
-                    ->dom('Bfrtip')
-                    ->parameters([
-                        'buttons'      => [
-                            'pageLength',
-                            //old way
-                            [
-                                'text'=>
-                                '<i class="fa fa-trash"></i> '.__('Delete All'),
-                                'className'=>'dt-button buttons-collection delBtn buttons-page-length'
-                            ],
-                            'export',
-                            'print',
-                            ],
-                            'lengthMenu' =>
-                            [
-                                [ 10, 25, 50, -1 ],
-                                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-                            ],
-                            'language' => datatable_lang(),
+            ->setTableId('Cities-table')
+            ->columns($this->getColumns())
+            ->dom('Bfrtip')
+            ->parameters([
+                'buttons'      => [
+                    'pageLength',
+                    //old way
+                    [
+                        'text' =>
+                        '<i class="fa fa-trash"></i> ' . __('Delete All'),
+                        'className' => 'dt-button buttons-collection delBtn buttons-page-length'
+                    ],
+                    'export',
+                    'print',
+                ],
+                'lengthMenu' =>
+                [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                'language' => datatable_lang(),
 
-                        ])
-                    ->minifiedAjax()
-                    ->orderBy(1)
-                    ->search([
-
-                    ]);
-
+            ])
+            ->minifiedAjax()
+            ->orderBy(1)
+            ->search([]);
     }
 
     /**
@@ -93,41 +90,41 @@ class CityDatatable extends DataTable
         return [
 
             [
-                'name'=>"checkbox",
-                'data'=>"checkbox",
-                'title'=>
+                'name' => "checkbox",
+                'data' => "checkbox",
+                'title' =>
                 "
                 <label class='checkbox checkbox-single'>
                     <input type='checkbox'class='check_all' onclick='check_all()'/>
                     <span></span>
                 </label>
                 ",
-                "exportable"=>false,
-                "printable"=>false,
-                "orderable"=>false,
-                "searchable"=>false,
+                "exportable" => false,
+                "printable" => false,
+                "orderable" => false,
+                "searchable" => false,
             ],
             Column::make('id'),
             Column::make('title'),
             Column::make('title_ar'),
             Column::make('country.name_ar')
-            ->title(__("Country")),
+                ->title(__("Country")),
             Column::make('governorate.title_ar')
-            ->title(__("Governorate")),
+                ->title(__("Governorate")),
             Column::computed('active')
-            ->title(__('Active'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center'),
+                ->title(__('Active'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center'),
             Column::computed('action')
-            ->title(__('Action'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center')
+                ->title(__('Action'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center')
 
         ];
     }

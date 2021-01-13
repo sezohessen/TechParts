@@ -529,7 +529,7 @@
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-switch.js') }}"></script>
 <script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
-<script src='{{ asset('js/googlemaps.js?'.MapTOken()) }}'></script>
+<script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 
 <script>

@@ -8,10 +8,11 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+
 class Finance_requestDatatable extends DataTable
 {
 
-     /**
+    /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
@@ -30,8 +31,10 @@ class Finance_requestDatatable extends DataTable
             ->editColumn('status', '{{Str::limit($status, 100)}}')
             ->addColumn('checkbox', 'dashboard.Finance-request.btn.checkbox')
             ->addColumn('action', 'dashboard.Finance-request.btn.action')
-            ->rawColumns(['checkbox','action','status',"self_employed",'salary_through_bank',
-            'paid_loan','existing_loans','existing_credit']);
+            ->rawColumns([
+                'checkbox', 'action', 'status', "self_employed", 'salary_through_bank',
+                'paid_loan', 'existing_loans', 'existing_credit'
+            ]);
     }
 
     /**
@@ -54,35 +57,32 @@ class Finance_requestDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('Finance_requests-table')
-                    ->columns($this->getColumns())
-                    ->dom('Bfrtip')
-                    ->parameters([
-                        'buttons'      => [
-                            'pageLength',
-                            //old way
-                            [
-                                'text'=>
-                                '<i class="fa fa-trash"></i> '.__('Delete All'),
-                                'className'=>'dt-button buttons-collection delBtn buttons-page-length'
-                            ],
-                            'export',
-                            'print',
-                            ],
-                            'lengthMenu' =>
-                            [
-                                [ 10, 25, 50, -1 ],
-                                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-                            ],
-                            'language' => datatable_lang(),
+            ->setTableId('Finance_requests-table')
+            ->columns($this->getColumns())
+            ->dom('Bfrtip')
+            ->parameters([
+                'buttons'      => [
+                    'pageLength',
+                    //old way
+                    [
+                        'text' =>
+                        '<i class="fa fa-trash"></i> ' . __('Delete All'),
+                        'className' => 'dt-button buttons-collection delBtn buttons-page-length'
+                    ],
+                    'export',
+                    'print',
+                ],
+                'lengthMenu' =>
+                [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                'language' => datatable_lang(),
 
-                        ])
-                    ->minifiedAjax()
-                    ->orderBy(1)
-                    ->search([
-
-                    ]);
-
+            ])
+            ->minifiedAjax()
+            ->orderBy(1)
+            ->search([]);
     }
 
     /**
@@ -95,19 +95,19 @@ class Finance_requestDatatable extends DataTable
         return [
 
             [
-                'name'=>"checkbox",
-                'data'=>"checkbox",
-                'title'=>
+                'name' => "checkbox",
+                'data' => "checkbox",
+                'title' =>
                 "
                 <label class='checkbox checkbox-single'>
                     <input type='checkbox'class='check_all' onclick='check_all()'/>
                     <span></span>
                 </label>
                 ",
-                "exportable"=>false,
-                "printable"=>false,
-                "orderable"=>false,
-                "searchable"=>false,
+                "exportable" => false,
+                "printable" => false,
+                "orderable" => false,
+                "searchable" => false,
             ],
             Column::make('id'),
             Column::make('self_employed'),
@@ -116,21 +116,21 @@ class Finance_requestDatatable extends DataTable
             Column::make('existing_loans'),
             Column::make('existing_credit'),
             Column::make('user.phone')
-            ->title(__("User Phone")),
+                ->title(__("User Phone")),
             Column::computed('status')
-            ->title(__('Status'))
-            ->exportable(true)
-            ->printable(true)
-            ->searchable(true)
-            ->width(120)
-            ->addClass('text-center'),
+                ->title(__('Status'))
+                ->exportable(true)
+                ->printable(true)
+                ->searchable(true)
+                ->width(120)
+                ->addClass('text-center'),
             Column::computed('action')
-            ->title(__('Action'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center'),
+                ->title(__('Action'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center'),
         ];
     }
 
