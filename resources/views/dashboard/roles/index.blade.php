@@ -46,27 +46,27 @@
                                     {{ $role->id ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $role->title ?? '' }}
+                                    {{ $role->name ?? '' }}
                                 </td>
                                 <td>
                                     @foreach ($role->permissions as $key => $item)
-                                        <span class="badge badge-info">{{ $item->title }}</span>
+                                        <span class="badge badge-info">{{ $item->name }}</span>
                                     @endforeach
                                 </td>
                                 <td>
-                                    @can('role_show')
+                                    @can('role-read')
                                         <a class="btn btn-xs btn-primary" href="{{ route('dashboard.roles.show', $role->id) }}">
                                             {{ trans('view') }}
                                         </a>
                                     @endcan
 
-                                    @can('role_edit')
+                                    @can('role-update')
                                         <a class="btn btn-xs btn-info" href="{{ route('dashboard.roles.edit', $role->id) }}">
                                             {{ trans('edit') }}
                                         </a>
                                     @endcan
 
-                                    @can('role_delete')
+                                    @can('role-delete')
                                         <form action="{{ route('dashboard.roles.destroy', $role->id) }}" method="POST"
                                             onsubmit="return confirm('{{ trans('areYouSure') }}');"
                                             style="display: inline-block;">
@@ -94,7 +94,7 @@
     <script>
         $(function() {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            @can('role_delete')
+            @can('role-delete')
                 let deleteButtonTrans = '{{ trans('
                 datatables.delete ') }}'
                 let deleteButton = {

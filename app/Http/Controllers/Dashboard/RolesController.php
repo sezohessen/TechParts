@@ -20,7 +20,7 @@ class RolesController extends Controller
 
         $roles = Role::with(['permissions'])->get();
 
-        return view('admin.roles.index', compact('roles'));
+        return view('dashboard.roles.index', compact('roles'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class RolesController extends Controller
 
         $permissions = Permission::all()->pluck('title', 'id');
 
-        return view('admin.roles.create', compact('permissions'));
+        return view('dashboard.roles.create', compact('permissions'));
     }
 
     public function store(StoreRoleRequest $request)
@@ -37,7 +37,7 @@ class RolesController extends Controller
         $role = Role::create($request->all());
         $role->permissions()->sync($request->input('permissions', []));
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('dashboard.roles.index');
     }
 
     public function edit(Role $role)
@@ -48,7 +48,7 @@ class RolesController extends Controller
 
         $role->load('permissions');
 
-        return view('admin.roles.edit', compact('permissions', 'role'));
+        return view('dashboard.roles.edit', compact('permissions', 'role'));
     }
 
     public function update(UpdateRoleRequest $request, Role $role)
@@ -56,7 +56,7 @@ class RolesController extends Controller
         $role->update($request->all());
         $role->permissions()->sync($request->input('permissions', []));
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('dashboard.roles.index');
     }
 
     public function show(Role $role)
@@ -65,7 +65,7 @@ class RolesController extends Controller
 
         $role->load('permissions');
 
-        return view('admin.roles.show', compact('role'));
+        return view('dashboard.roles.show', compact('role'));
     }
 
     public function destroy(Role $role)

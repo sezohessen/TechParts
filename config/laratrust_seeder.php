@@ -30,6 +30,7 @@ return [
             'terms' => 'c,r,u,d',
             'acl' => 'c,r,u,d',
             'permission' => 'c,r,u,d',
+            'role' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
         'administrator' => [
