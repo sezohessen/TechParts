@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <a href="#" class="card card-custom bg-dark bg-hover-state-dark card-stretch gutter-b">
+            <a href="{{ route('dashboard.users.index') }}" class="card card-custom bg-dark bg-hover-state-dark card-stretch gutter-b">
                 <!--begin::Body-->
                 <div class="card-body">
                     <span class="svg-icon svg-icon-2x svg-icon-danger">

@@ -27,7 +27,15 @@
 
                 <div id="kt_header_menu" class="header-menu header-menu-mobile {{ Metronic::printClasses('header_menu', false) }}" {{ Metronic::printAttrs('header_menu') }}>
                     <ul class="menu-nav {{ Metronic::printClasses('header_menu_nav', false) }}">
-                        {{ Menu::renderHorMenu(config('menu_header.items')) }}
+                    @php
+                        $array = config('menu_header.items');
+                        try {
+                            $array[0]['title'] = __($array[0]['title']);
+                        } catch (\Throwable $th) {
+                            //throw $th;
+                        }
+                    @endphp
+                        {{ Menu::renderHorMenu($array) }}
                     </ul>
                 </div>
             </div>
