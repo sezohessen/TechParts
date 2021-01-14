@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
-use App\DataTables\Bank_offerDatatable;
+namespace App\Http\Controllers\Bank;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\BankOffer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BankOfferController extends Controller
 {
-    /**
+      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Bank_offerDatatable $bank_offer)
+    public function index(/* Bank_offerDatatable $bank_offer */)
     {
-        $page_title = __('Bank offers companies');
+       /*  $page_title = __('Bank offers companies');
         $page_description = __('View offers');
-        return  $bank_offer->render("dashboard.Bank-offer.index", compact('page_title', 'page_description'));
+        return  $bank_offer->render("dashboard.Bank-offer.index", compact('page_title', 'page_description')); */
     }
 
     /**
@@ -28,10 +28,14 @@ class BankOfferController extends Controller
      */
     public function create()
     {
-        $banks = Bank::all();
-        $page_title = "Add Bank offer";
-        $page_description = "Add new offer";
-        return view('dashboard.Bank-offer.add', compact('page_title', 'page_description','banks'));
+        $bank  = Bank::where('user_id',Auth::id())->first();
+        if($bank){
+            $page_title = "Add Bank offer";
+            $page_description = "Add new offer";
+            return view('BankDashboard.Bank-offer.add', compact('page_title', 'page_description'));
+        }else{
+            return redirect()->route('bank.company.create');
+        }
     }
 
     /**
@@ -42,12 +46,13 @@ class BankOfferController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = BankOffer::rules($request);
+        $bank   = Bank::where('user_id',Auth::id())->first();
+        $rules  = BankOffer::rules($request,'Offer');
         $request->validate($rules);
-        $credentials = BankOffer::credentials($request);
-        $Bank_offer = BankOffer::create($credentials);
+        $credentials    = BankOffer::credentials($request,$bank->id,NULL);
+        $Bank_offer     = BankOffer::create($credentials);
         session()->flash('created',__("Changes has been Created Successfully"));
-        return  redirect()->route("dashboard.bank-offer.index");
+        return  redirect()->route('BankDashboard.bank-offer.index');
     }
 
     /**
@@ -71,12 +76,11 @@ class BankOfferController extends Controller
     {
         $bank_offer  = BankOffer::find($id);
         if($bank_offer){
-            $banks = Bank::all();
             $page_title = "Edit offer bank";
             $page_description = "Edit";
-            return view('dashboard.Bank-offer.edit', compact('page_title', 'page_description','banks','bank_offer'));
+            return view('BankDashboard.Bank-offer.edit', compact('page_title', 'page_description','bank_offer'));
         }else{
-            return redirect()->route('dashboard.bank-offer.index');
+            return redirect()->route('BankDashboard.bank-offer.index');
         }
     }
 

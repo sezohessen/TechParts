@@ -28,23 +28,34 @@ class Bank extends Model
     public static function  rules($request,$id = NULL)
     {
         $rules = [
-            'name'          => 'required|string|max:255',
-            'logo_id'       => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
-            'user_id'       => 'required'
+            'name'                  => 'required|string|max:255',
+            'logo_id'               => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'user_id'               => 'required',
+            'order'                 => 'nullable|numeric',
+            'color'                 => 'required'
         ];
         if($id == 'Bank'){//For update in Dashborad
             $rules['logo_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             $rules['status'] = 'required';
-        }elseif($id){//For update in Insurance Dashboard
+        }elseif($id == 'BankDash'){//For Create in Bank Dashboard
+            unset($rules['show_finance_services']);
+            unset($rules['order']);
+            unset($rules['status']);
+            unset($rules['user_id']);
+        }elseif($id){//For update in Bank Dashboard
             $rules['logo_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            unset($rules['show_finance_services']);
+            unset($rules['order']);
+            unset($rules['status']);
             unset($rules['user_id']);
         }
         return $rules;
     }
-    public static function  credentials($request,$id = NULL,$img_id = NULL)
+    public static function  credentials($request,$id = NULL,$img_id = NULL,$specialCase = 1)
     {
         $credentials = [
             'name'              =>  $request->name,
+            'color'             =>  $request->color,
         ];
 
         if($id){
@@ -52,7 +63,14 @@ class Bank extends Model
         }else{
             $credentials['user_id'] = $request->user_id;
         }
-
+        if($request->order&&!$specialCase){
+            $credentials['order']   = $request->order;
+        }
+        if($request->show_finance_services!=NULL&&$request->show_finance_services=='on'&&$specialCase){//Check Box
+            $credentials['show_finance_services'] = 1;
+        }else{
+            $credentials['show_finance_services'] = 0;
+        }
         if($request->file('logo_id')){
             if($id){
                 $Image_id = self::file($request->file('logo_id'),$img_id);

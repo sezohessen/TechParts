@@ -31,7 +31,7 @@ class CarSeeder extends Seeder
             DB::table('cars')->insert([
 
                 'ServiceHistory'        => $faker->sentence,
-                'Description'        => $faker->sentence,
+                'Description'           => $faker->sentence,
                 'Description_ar'        => $faker->sentence,
                 'lat'                   => $faker->longitude,
                 'lng'                   => $faker->latitude,

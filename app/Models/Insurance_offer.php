@@ -39,7 +39,11 @@ class Insurance_offer extends Model
             'description'       => 'required|min:3|max:1000',
             'description_ar'    => 'required|min:3|max:1000',
         ];
-        if($id){//For update
+        if($id == 'InsuranceOffer'){
+            unset($rules['insurance_id']);
+        }elseif($id=='Offer'){//For update in dashboard
+            $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+        }elseif($id){//For update
             $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             unset($rules['insurance_id']);
         }

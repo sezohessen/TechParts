@@ -130,5 +130,11 @@ Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'mid
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
 });
+Route::group(['prefix' => 'bank','as' => 'bank.','namespace'=>"Bank", 'middleware' => ['role:bank']], function () {
+    Route::get('/','BankDashController@index')->name('index');
+    Route::resource('/company','BankController');
+    Route::resource('/bank-offer','BankOfferController');
+
+});
 //});
 

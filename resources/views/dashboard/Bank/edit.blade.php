@@ -64,6 +64,74 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Bank order')</label>
+                                    <input type="number" class="form-control {{ $errors->has('order') ? 'is-invalid' : '' }}"
+                                     name="order"  placeholder="@lang('Order')" value="{{ old('order') ? old('order'):$bank->order}}" required  />
+                                     @error('order')
+                                     <div class="invalid-feedback">{{ $errors->first('order') }}</div>
+                                     @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="color">@lang("Color Code") <span class="text-danger">*</span></label>
+                                    <div class="col-md-12">
+                                     <input class="form-control" type="color" name="color" value="{{ old('color') ? old('color'):$bank->color}}" id="color" required/>
+                                    </div>
+                                    @error('color')
+                                        <div class="invalid-feedback">{{ $errors->first('color') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>@lang('Show in finance services')</label>
+                                <div class="checkbox-list">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="show_finance_services"
+                                        {{ old('show_finance_services')=="on" ? 'checked':( ($bank->show_finance_services) ? 'checked': '') }}/>
+                                        @error('show_finance_services')
+                                            <div class="invalid-feedback">{{ $errors->first('show_finance_services') }}</div>
+                                        @enderror
+                                        <span></span>
+                                        @lang('Show')
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Image">@lang('Logo image')</label>
+                            <br>
+                            <div class="image-input image-input-empty image-input-outline" id="logo_id" style="background-image: url({{asset('img/bank/'.$bank->img->name) }})">
+                                <div class="image-input-wrapper"></div>
+                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                    <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg" />
+                                    <input type="hidden" name="logo_id_remove" />
+                                </label>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                            </div>
+                             @if ($errors->has('logo_id'))
+                             <div class="fv-plugins-message-container">
+                                 <div class="fv-help-block">
+                                    <strong>{{ $errors->first('logo_id')  }}</strong>
+                                 </div>
+                             </div>
+                            @endif
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <h2>@lang('Contact Information')</h2>
                         <div class="row">
@@ -132,34 +200,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label>
-                            <br>
-                            <div class="image-input image-input-empty image-input-outline" id="logo_id" style="background-image: url({{asset('img/bank/'.$bank->img->name) }})">
-                                <div class="image-input-wrapper"></div>
-                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                    <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg" />
-                                    <input type="hidden" name="logo_id_remove" />
-                                </label>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                            </div>
-                             @if ($errors->has('logo_id'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                    <strong>{{ $errors->first('logo_id')  }}</strong>
-                                 </div>
-                             </div>
-                            @endif
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <div class="card-footer">

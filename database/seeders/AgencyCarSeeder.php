@@ -19,7 +19,7 @@ class AgencyCarSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1,10) as $value){
             DB::table('agency_cars')->insert([
-                'CarMaker_id'            => Car::all()->random()->id,
+                'CarMaker_id'       => Car::all()->random()->id,
                 'agent_id'          => Agency::all()->random()->id,
                 'created_at'        => now(),
                 'updated_at'        => now()

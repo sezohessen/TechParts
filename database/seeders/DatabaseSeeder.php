@@ -56,5 +56,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MaintenanceSpecialtiesSeeder::class);
         $this->call(FinanceRequestSeeder::class);
         $this->call(SettingsSeeder::class);
+        $this->call(BankSeeder::class);//Also contain Bank contact seedr ;)
     }
 }

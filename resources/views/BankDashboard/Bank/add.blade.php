@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.master')
+@extends('layout.bank')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
 @endsection
@@ -11,11 +11,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.bank.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route('bank.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.bank.store")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("bank.company.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -31,34 +31,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="kt_select2_1">@lang('Select User') <span class="text-danger">*</span></label>
-                            <div class=" col-lg-9 col-md-9 col-sm-12">
-                             <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
-                                 id="kt_select2_1" name="user_id" required>
-                                <option value="">@lang('--Select user--')</option>
-                                @foreach ($users as $user)
-                                    <option value="{{$user->id}}">{{ $user->email }}</option>
-                                @endforeach
-                             </select>
-                            @error('user_id')
-                             <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
-                            @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>@lang('Bank order')</label>
-                                    <input type="number" class="form-control {{ $errors->has('order') ? 'is-invalid' : '' }}"
-                                     name="order"  placeholder="@lang('Order')" value="{{ old('order')}}" required  />
-                                     @error('order')
-                                     <div class="invalid-feedback">{{ $errors->first('order') }}</div>
-                                     @enderror
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="color">@lang("Color Code") <span class="text-danger">*</span></label>
@@ -70,45 +43,29 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>@lang('Show in finance services')</label>
-                                <div class="checkbox-list">
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="show_finance_services"
-                                        {{ old('show_finance_services')=="on" ? 'checked':'' }}/>
-                                        @error('show_finance_services')
-                                            <div class="invalid-feedback">{{ $errors->first('show_finance_services') }}</div>
-                                        @enderror
-                                        <span></span>
-                                        @lang('Show')
-                                    </label>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
+                                    <br>
+                                    <div class="image-input image-input-empty image-input-outline" id="logo_id" style="background-image: url({{asset('media/users/blank.png') }})">
+                                        <div class="image-input-wrapper"></div>
+                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                            <i class="fa fa-pen icon-sm text-muted"></i>
+                                            <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg"  required />
+                                            <input type="hidden" name="logo_id_remove" />
+                                        </label>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                    </div>
+                                    @error('logo_id')
+                                        <div class="invalid-feedback">{{ $errors->first('logo_id') }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
-                            <br>
-                            <div class="image-input image-input-empty image-input-outline" id="logo_id" style="background-image: url({{asset('media/users/blank.png') }})">
-                                <div class="image-input-wrapper"></div>
-                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                    <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg"  required />
-                                    <input type="hidden" name="logo_id_remove" />
-                                </label>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                            </div>
-                            @error('logo_id')
-                                <div class="invalid-feedback">{{ $errors->first('logo_id') }}</div>
-                            @enderror
                         </div>
                     </div>
                     <div class="col-md-12">
