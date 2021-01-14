@@ -26,9 +26,18 @@ class UserDatatable extends DataTable
             ->editColumn('first_name', '{{Str::limit($first_name, 100)}}')
             ->editColumn('last_name', '{{Str::limit($last_name, 100)}}')
             ->editColumn('phone', '{{Str::limit($phone, 100)}}')
-            ->addColumn('checkbox', 'dashboard.CarColor.btn.checkbox')
-            ->addColumn('action', 'dashboard.CarColor.btn.action')
-            ->rawColumns(['checkbox', 'action']);
+            ->editColumn('role', function ($role)
+            {
+                $return = '';
+                foreach ($role as $value) {
+                    $return .=$value["name"];
+                }
+               //$role[0]["name"]
+               return $return;
+            })
+            ->addColumn('checkbox', 'dashboard.User.btn.checkbox')
+            ->addColumn('action', 'dashboard.User.btn.action')
+            ->rawColumns(['checkbox', 'action', 'role']);
     }
 
     /**
@@ -39,7 +48,7 @@ class UserDatatable extends DataTable
      */
     public function query()
     {
-        return User::query();
+        return User::query()->with("role")->select("users.*");
     }
 
     /**
@@ -107,6 +116,7 @@ class UserDatatable extends DataTable
             Column::make('first_name'),
             Column::make('last_name'),
             Column::make('phone'),
+            Column::make('role')->title(__('role')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

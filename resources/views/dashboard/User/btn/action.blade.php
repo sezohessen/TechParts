@@ -1,5 +1,5 @@
 <!-- Trigger the modal with a button -->
-<a href="javascript:;" class="btn btn-md btn-danger btn-icon" title="Delete" data-toggle="modal"
+<a href="javascript:;" class="btn btn-md btn-danger btn-icon mb-2" title="Delete" data-toggle="modal"
     data-target="#myModal{{ $id }}">
     <span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -16,7 +16,7 @@
         </svg>
     </span>
 </a>
-<a href="{{ route('dashboard.users.edit', ['users' => $id]) }}" class="btn btn-md btn-success btn-icon mr-2"
+<a href="{{ route('dashboard.users.edit', ['user' => $id]) }}" class="btn btn-md btn-success btn-icon mb-2"
     title="Edit details">
     <span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"

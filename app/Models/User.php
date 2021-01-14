@@ -117,4 +117,9 @@ class User extends Authenticatable
         $Image = Image::create(['name' => $fileName]);
         return $Image->id;
     }
+
+    public function role()
+    {
+      return $this->belongsToMany(Role::class);
+    }
 }

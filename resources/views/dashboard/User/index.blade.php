@@ -30,9 +30,11 @@
             <div class="row">
                 <div class="card-custom" style="width: 100%;">
                     {!! Form::open(['id'=>'form_data','url'=>"dashboard/users/destroy/all",'method'=>'delete']) !!}
+                    <div class="table-responsive">
                         {!! $dataTable->table([
                             'class'=>'table table-separate table-head-custom table-checkable '
                         ],true)!!}
+                    </div>
 
                 </div>
             </div>
