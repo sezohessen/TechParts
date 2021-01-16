@@ -16,7 +16,7 @@
         </svg>
     </span>
 </a>
-<a href="{{ route('dashboard.bank-offer.edit', ['bank_offer' => $id]) }}" class="btn btn-md btn-success btn-icon mb-2"
+<a href="{{ route('bank.bank-offer.edit', ['bank_offer' => $id]) }}" class="btn btn-md btn-success btn-icon mb-2"
     title="Edit details">
     <span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -42,7 +42,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">@lang("Delete Record")</h4>
             </div>
-            {!! Form::open(['route' => ['dashboard.bank-offer.destroy', $id], 'method' => 'delete']) !!}
+            {!! Form::open(['route' => ['bank.bank-offer.destroy', $id], 'method' => 'delete']) !!}
             <div class="modal-body">
                 <p>{{ __('Are you sure you want delete this item  ? ') }}</p>
             </div>

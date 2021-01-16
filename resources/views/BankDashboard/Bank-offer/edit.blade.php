@@ -11,11 +11,11 @@
                 {{ $page_title }}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.bank-offer.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route("bank.bank-offer.index") }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{ route('dashboard.bank-offer.update',$bank_offer->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("bank.bank-offer.update",$bank_offer->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="card-body">
