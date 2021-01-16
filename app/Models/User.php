@@ -10,11 +10,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+
 
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
     use LogsActivity;
     protected static $logAttributes = ['first_name',"phone","email"];
     protected static $recordEvents = ['created'];
@@ -121,5 +123,15 @@ class User extends Authenticatable
     public function role()
     {
       return $this->belongsToMany(Role::class);
+    }
+
+    public function interestCountry()
+    {
+        return $this->belongsTo(Country::class, 'interest_country', 'id');
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
     }
 }
