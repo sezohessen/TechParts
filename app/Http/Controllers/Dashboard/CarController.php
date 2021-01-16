@@ -22,6 +22,8 @@ use App\Models\car_badge;
 use App\Models\car_feature;
 use Illuminate\Support\Facades\Auth;
 use App\DataTables\CarDatatable;
+use App\Models\Image;
+
 class CarController extends Controller
 {
     /**
@@ -46,7 +48,6 @@ class CarController extends Controller
         $page_title = __("Add Car");
         $page_description = __("Add new Car");
         $makers=CarMaker::where('active', '=', 1)->get();
-        $models=CarModel::where('active', '=', 1)->get();
         $bodies=CarBody::all();
         $years=CarYear::all();
         $badges=Badges::where('active', '=', 1)->get();
@@ -56,7 +57,7 @@ class CarController extends Controller
         $capacities=CarCapacity::all();
         $colors=CarColor::all();
         return view('dashboard.Car.add', compact('page_title', 'page_description','makers',
-        'models',"years","bodies","badges","features","countries","manufactures","capacities","colors"));
+        "years","bodies","badges","features","countries","manufactures","capacities","colors"));
     }
 
     /**
@@ -115,9 +116,23 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Car $car)
     {
-        //
+        $page_title = __("Edit Car");
+        $page_description = __("Edit Car");
+        $makers=CarMaker::where('active', '=', 1)->get();
+        $bodies=CarBody::all();
+        $years=CarYear::all();
+        $badges=Badges::where('active', '=', 1)->get();
+        $features=Feature::where('active', '=', 1)->get();
+        $countries=Country::all();
+        $manufactures=CarManufacture::all();
+        $capacities=CarCapacity::all();
+        $colors=CarColor::all();
+        $CarPhotos=car_img::where('car_id', '=', $car->id)->get();
+
+        return view('dashboard.Car.edit', compact('page_title', 'page_description','car','makers',
+        "years","bodies","badges","features","countries","manufactures","capacities","colors","CarPhotos"));
     }
 
     /**

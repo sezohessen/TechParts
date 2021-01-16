@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Role;
 use App\Models\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -26,18 +27,13 @@ class UserDatatable extends DataTable
             ->editColumn('first_name', '{{Str::limit($first_name, 100)}}')
             ->editColumn('last_name', '{{Str::limit($last_name, 100)}}')
             ->editColumn('phone', '{{Str::limit($phone, 100)}}')
-            ->editColumn('role', function ($role)
+            ->editColumn('role', function (User $user)
             {
-                $return = '';
-                foreach ($role as $value) {
-                    $return .=$value["name"];
-                }
-               //$role[0]["name"]
-               return $return;
+                return implode(', ', $user->roles->pluck('name')->toArray());
             })
-            ->addColumn('checkbox', 'dashboard.User.btn.checkbox')
-            ->addColumn('action', 'dashboard.User.btn.action')
-            ->rawColumns(['checkbox', 'action', 'role']);
+            ->addColumn('checkbox', 'dashboard.CarColor.btn.checkbox')
+            ->addColumn('action', 'dashboard.CarColor.btn.action')
+            ->rawColumns(['checkbox','action','role']);
     }
 
     /**
@@ -48,7 +44,7 @@ class UserDatatable extends DataTable
      */
     public function query()
     {
-        return User::query()->with("role")->select("users.*");
+        return User::query()->with(['role'])->select("users.*");
     }
 
     /**
@@ -116,7 +112,7 @@ class UserDatatable extends DataTable
             Column::make('first_name'),
             Column::make('last_name'),
             Column::make('phone'),
-            Column::make('role')->title(__('role')),
+            Column::make('role'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
