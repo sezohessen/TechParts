@@ -19,4 +19,5 @@ class Settings extends Model
         return $this->belongsTo(Image::class);
     }
 
+
 }
