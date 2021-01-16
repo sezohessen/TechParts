@@ -20,32 +20,6 @@
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    @foreach ($CarPhotos as $key=>$item)
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$item->id}}"></li>
-                                    @endif
-                                </ol>        dd(Image::where("id",'=',$CarPhotos[0]->img_id)->get());
-                                <div class="carousel-inner">
-                                    @foreach ($CarPhotos as $key=>$item)
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="https://formoid.com/articles/data/upload/2017/04/onlyslides1.jpg" alt="Car slider">
-                                        </div>
-                                    @endif
-                                </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Car Make')</label><br>
@@ -279,7 +253,7 @@
                                 <select class="form-control select2 {{ $errors->has('badge_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_11" name="badge_id[]"   required multiple >
                                    @foreach ($badges as $badge)
-                                       <option value="{{$badge->id}}" data-select2-id="{{$badge->id}}">{{$badge->name}} - {{$badge->name_ar}}</option>
+                                       <option value="{{$badge->id}}"  {{ (old('badge_id')[$c]==$badge->id) ?  'selected':'' }}  {{(old('badge_id')[$c]==$badge->id && $c+1 <$count) ? $c++:''}} >{{$badge->name}} - {{$badge->name_ar}}</option>
                                    @endforeach
                                 </select>
                                 @error('badge_id')
@@ -294,9 +268,16 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('feature_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_12" name="feature_id[]" required multiple >
-
+                                    @php
+                                        $c=0;
+                                        $count=count(old('feature_id') ?? array());
+                                    @endphp
                                    @foreach ($features as $feature)
-                                       <option value="{{$feature->id}}" data-select2-id="{{$feature->id}}">{{$feature->name}}- {{$feature->name_ar}}</option>
+                                       <option value="{{$feature->id}}"
+                                        
+                                        {{ (old('feature_id')[$c]==$feature->id) ?  'selected':'' }}
+                                        {{(old('feature_id')[$c]==$feature->id && $c+1 <$count) ? $c++:''}}
+                                        >{{$feature->name}}- {{$feature->name_ar}}</option>
                                    @endforeach
                                 </select>
                                 @error('feature_id')
@@ -628,6 +609,27 @@
                                     <div class="invalid-feedback">{{ $errors->first('CarPhotos') }}</div>
                                 @enderror
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    @foreach ($images as $key=>$item)
+                                        <div class="carousel-item {{$key==0 ? 'active' :''}}">
+                                            <img class="d-block w-100 img-thumbnail " src="{{asset("img/Cars/$item->name")}}"  style="width:500px !important" alt="First slide">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a>
+                              </div>
                         </div>
                     </div>
             </div>
