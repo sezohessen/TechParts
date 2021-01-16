@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(ENG)')</label>
+                            <label for="description">@lang('Description(ENG)') <span class="text-danger">*</span></label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
                             placeholder="@lang('Write description')" >{{ old('description') }}</textarea>
                             @if ($errors->has('description'))
@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(AR)')</label>
+                            <label for="description">@lang('Description(AR)') <span class="text-danger">*</span></label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
                             placeholder="@lang('Write description')" >{{ old('description_ar') }}</textarea>
                             @if ($errors->has('description_ar'))
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label>
+                            <label for="logo">@lang('Logo image') <span class="text-danger">*</span></label>
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>
@@ -98,7 +98,7 @@
                              @if ($errors->has('logo'))
                              <div class="fv-plugins-message-container">
                                  <div class="fv-help-block">
-                                    <strong>{{ $errors->first('logo')  }}</strong>
+                                    <strong>{{ $errors->first('logo')}}</strong>
                                  </div>
                              </div>
                             @endif

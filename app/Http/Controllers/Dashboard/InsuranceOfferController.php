@@ -89,7 +89,7 @@ class InsuranceOfferController extends Controller
     public function update(Request $request, $id)
     {
         $offer = Insurance_offer::find($id);
-        $rules = Insurance_offer::rules($request,$id);
+        $rules = Insurance_offer::rules($request,'Offer');
         $request->validate($rules);
         $credentials = Insurance_offer::credentials($request,$request->insurance_id,$offer->img_id);
         $Insurance_offer = Insurance_offer::where('id',$id)->update($credentials);

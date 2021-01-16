@@ -36,7 +36,7 @@ class OfferPlanController extends Controller
         ->first()
         ->id;
         $offers = Insurance_offer::where('insurance_id',$insurance)->get();
-        if($offers->count()){
+        if($offers){
             $page_title = "Add offer plan for insurance";
             $page_description = "Add offer plan for insurance";
             return view('InsuranceDashboard.offer-plan.add', compact('page_title', 'page_description','offers'));

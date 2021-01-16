@@ -172,7 +172,7 @@ class AgencyController extends Controller
             ])->delete();
         }
         session()->flash('updated',__("Agency has been Updated successfully!"));
-        return redirect()->back();
+        return redirect()->route('agency.index');
     }
 
     /**

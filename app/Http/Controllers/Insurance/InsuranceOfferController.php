@@ -31,7 +31,7 @@ class InsuranceOfferController extends Controller
     {
 
         $insurance  = Insurance::where('user_id',Auth::id())->first();
-        if($insurance->count()){
+        if($insurance){
             $page_title = "Add insurance offer";
             $page_description = "Add new insurance offer";
             return view('InsuranceDashboard.Insurance-offer.add', compact('page_title', 'page_description'));
@@ -40,8 +40,6 @@ class InsuranceOfferController extends Controller
             $page_description = "Add new insurance company";
             return view('InsuranceDashboard.Insurance.add', compact('page_title', 'page_description'));
         }
-
-
     }
 
     /**
@@ -54,7 +52,7 @@ class InsuranceOfferController extends Controller
     {
         $insurance  = Insurance::where('user_id',Auth::id())->first();
         $id         = $insurance->id;
-        $rules      = Insurance_offer::rules($request,$id);
+        $rules      = Insurance_offer::rules($request,'InsuranceOffer');
         $request->validate($rules);
         $credentials = Insurance_offer::credentials($request,$id);
         $Insurance_offer = Insurance_offer::create($credentials);

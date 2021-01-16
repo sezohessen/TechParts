@@ -46,9 +46,11 @@ class BankOffer extends Model
         ];
         if($id == 'Bank-offer'){//For update in Dashborad
             $rules['logo_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
-        }elseif($id){//For update in Insurance Dashboard
+        }elseif($id == 'Offer'){//For create in Bank Dashboard
+            unset($rules['bank_id']);
+        }elseif($id){//For update in Bank Dashboard
             $rules['logo_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
-            unset($rules['user_id']);
+            unset($rules['bank_id']);
         }
         return $rules;
     }
