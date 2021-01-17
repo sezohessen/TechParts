@@ -213,7 +213,7 @@
                                 <select class="form-control select2 {{ $errors->has('badge_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_11" name="badge_id[]"   required multiple >
                                    @foreach ($badges as $badge)
-                                       <option value="{{$badge->id}}" data-select2-id="{{$badge->id}}">{{$badge->name}} - {{$badge->name_ar}}</option>
+                                       <option value="{{$badge->id}}" >{{$badge->name}} - {{$badge->name_ar}}</option>
                                    @endforeach
                                 </select>
                                 @error('badge_id')
@@ -228,9 +228,8 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('feature_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_12" name="feature_id[]" required multiple >
-
                                    @foreach ($features as $feature)
-                                       <option value="{{$feature->id}}" data-select2-id="{{$feature->id}}">{{$feature->name}}- {{$feature->name_ar}}</option>
+                                       <option value="{{$feature->id}}" >{{$feature->name}}- {{$feature->name_ar}}</option>
                                    @endforeach
                                 </select>
                                 @error('feature_id')

@@ -281,5 +281,8 @@
     "Bank order":"ترتيب البنك",
     "Order":"الترتيب",
     "Show in finance services":"تظهر في الخدمات المالية",
-    "Bank Offers":"عروض البنك"
+    "Bank Offers":"عروض البنك",
+    "Car ID required":"ID السيارة مطلوب",
+    "Car not found":"السيارة غير موجودة",
+    "Successfully":"تمت العملية بنجاح"
 }

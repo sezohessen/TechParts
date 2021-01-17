@@ -15,14 +15,14 @@ class UserController extends Controller
     //
     public function login(Request $request)
     {
-        if (!$request->lang) {
-            return $this->errorField('lang');
-        }else {
-            $locale = $request->lang;
+        if ($locale = $request->lang) {
             if (in_array($locale, ['ar', 'en']) ) {
-                session()->put('app_locale', $locale);
-                App::setLocale($locale);
+                default_lang($locale);
+            }else {
+                default_lang();
             }
+        }else {
+            default_lang();
         }
         if (!$request->phone) {
             return $this->errorField('phone');
@@ -31,7 +31,7 @@ class UserController extends Controller
             return $this->errorField('password');
         }
         $user = User::where('phone' ,$request->phone)->first();
-        if (!$user or Hash::check($request->password, $user->password)) {
+        if (!$user or !Hash::check($request->password, $user->password)) {
             return $this->errorMessage('unauthorized');
         }
         $token = $user->createToken('my-app-token')->plainTextToken;
