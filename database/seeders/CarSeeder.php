@@ -56,7 +56,7 @@ class CarSeeder extends Seeder
                 'SellerType'            => rand(0,2),
                 'price_after_discount'  => $faker->numberBetween(1,100),
                 'price'                 => $faker->numberBetween(1,10000),
-                'status'                => rand(0,4),
+                'status'                => rand(0,1),
                 'kiloUsed'              => $faker->numberBetween(1,100),
                 'created_at'            => now(),
                 'updated_at'            => now()

@@ -33,6 +33,14 @@ trait GeneralTrait {
             "msg"=>$msg
         ]);
     }
+    public function returnMultipleData($key,$value,$msg=""){
+        return response()->json([
+            array_combine($key,$value),
+            'status'=>true,
+            "msg"=>$msg
+        ]);
+    }
+
 
     public function returnValidationError($validator){
         return $this->returnError($validator->errors()->first());

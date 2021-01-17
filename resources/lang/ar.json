@@ -284,5 +284,9 @@
     "Bank Offers":"عروض البنك",
     "Car ID required":"ID السيارة مطلوب",
     "Car not found":"السيارة غير موجودة",
-    "Successfully":"تمت العملية بنجاح"
+    "Successfully":"تمت العملية بنجاح",
+    "New":"جديدة",
+    "Used":"مستعملة",
+    "Manual":"يدوي",
+    "Automatic":"أوتوماتيكي"
 }

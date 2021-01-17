@@ -73,7 +73,7 @@ class Car extends Model
             'phone'                       => 'required|numeric',
             'DepositPrice'                => 'required|integer',
             'InstallmentPrice'            => 'required|integer',
-            'InstallmentMonth'            => 'required|integer',
+            'InstallmentMonth'            => 'required|integer|between:1,12',
             'CarPhotos'                   => 'required|max:5',
             'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ];
