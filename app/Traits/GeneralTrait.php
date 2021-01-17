@@ -8,7 +8,7 @@ trait GeneralTrait {
         ]);
     }
     public function errorField($field){
-        $massage = __($field.' field is required');
+        $massage = __($field.'required');
         return response()->json([
             "msg" => $massage,
             "status" => false
