@@ -130,9 +130,22 @@ class CarController extends Controller
         $capacities=CarCapacity::all();
         $colors=CarColor::all();
         $CarPhotos=car_img::where('car_id', '=', $car->id)->get();
-
+        $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+        $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+        $images=[];
+        foreach($CarPhotos as $item){
+            $images[]=Image::find($item->img_id);
+        }
+        $car_badges=[];
+        foreach($CarBadges as $item){
+            $car_badges[]=Badges::find($item->badge_id);
+        }
+        $car_features=[];
+        foreach($CarFeatures as $item){
+            $car_features[]=Feature::find($item->feature_id);
+        }
         return view('dashboard.Car.edit', compact('page_title', 'page_description','car','makers',
-        "years","bodies","badges","features","countries","manufactures","capacities","colors","CarPhotos"));
+        "years","bodies","badges","features","countries","manufactures","capacities","colors","images"));
     }
 
     /**
