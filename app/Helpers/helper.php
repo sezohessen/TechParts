@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
    if(!function_exists('datatable_lang')){
         function datatable_lang(){
         return [
@@ -32,3 +34,19 @@
             return "sensor=false&libraries=places&key=AIzaSyDcl_4E5iBaAR4bUuZePK3MIL-pO_oDoCA";
         }
     }
+    if(!function_exists('default_lang')){
+        function default_lang($lang='en'){
+            session()->put('app_locale', $lang);
+            App::setLocale($lang);
+            return true;
+        }
+    }
+    if(!function_exists('attr_lang')){
+        function attr_lang($attr){
+            return  (Session::get('app_locale')=='ar') ?
+                $attr->name_ar
+                :
+                $attr->name;
+        }
+    }
+
