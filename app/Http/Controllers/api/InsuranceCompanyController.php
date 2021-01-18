@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
 use App\Models\Country;
 use App\Models\Insurance;
+use App\Models\Insurance_offer;
+use App\Models\offer_plan;
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -58,6 +60,82 @@ class InsuranceCompanyController extends Controller
                 ];
             }
             return $this->returnData("insuranceCompanyList",$insurances,"Successfully");
+        }else{
+            $response->status = $response::status_failed;
+            $response->code = $response::code_failed;
+            foreach ($validator->errors()->getMessages() as $item) {
+                array_push($response->messages, $item);
+            }
+            return Response::json(
+                $response
+            );
+        }
+    }
+    public function offer(Request $request)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        $data       = $request->all();
+        $response   = new Responseobject();
+        $array_data = (array)$data;
+        $validator  = Validator::make($array_data, [
+            'interest_country'  => 'required|integer',//Will be updated
+            'company_id'        => 'required|integer',
+            'token'             => 'nullable',
+        ]);
+
+        if (!$validator->fails()) {
+            $id                 = $request->company_id;
+            $InsuranceCompany   = Insurance::find($id);//Will be updated
+            $InsuranceOffers    = Insurance_offer::where('insurance_id',$id)->get();
+            if($InsuranceCompany){
+                $insurances = [];
+                foreach ($InsuranceOffers as $offer) {
+                    /* Insurance Contact */
+                    $mContact = [ //Will be updated
+                        "phone" => "00219600",
+                        "whats" => "00201012345678"
+                    ];
+                    /* Insurance Company */
+                    $insurance  = [
+                        "color"     => '#000000',//Will be updated
+                        "id"        => $InsuranceCompany->id,
+                        "logo"      => $InsuranceCompany->img->name,
+                        "name"      => Session::get('app_locale')=='ar'? $InsuranceCompany->name_ar : $InsuranceCompany->name,
+                    ];
+                    /* Insurance Offers's plans */
+                    $offer_plans    = offer_plan::where("offer_id",$offer->id)->get();
+                    $offer_plan = [];
+                    foreach ($offer_plans as $plan) {
+                        $offer_plan[] = [
+                            "description"   => Session::get('app_locale')=='ar'? $plan->description_ar : $plan->description,
+                            "id"            => $plan->id,
+                            "money"         => $plan->price,
+                            "name"          => Session::get('app_locale')=='ar'? $plan->title_ar : $plan->title,
+                        ];
+                    }
+                    /* Insurance Offers */
+                    $insurances[] = [
+                        "description"   => Session::get('app_locale')=='ar'? $offer->description_ar : $offer->description,
+                        "id"            => $offer->id,
+                        "photo"         => $offer->img->name,
+                        "title"         => Session::get('app_locale')=='ar'? $offer->title_ar : $offer->title,
+                        "mCompany"      => $insurance,
+                        "mContact"      => $mContact,
+                        "planList"      => $offer_plan,
+                    ];
+                }
+                return $this->returnData("insuranceOfferList",$insurances,"Successfully");
+            }else{
+                return $this->errorMessage(__("No such company id found"));
+            }
         }else{
             $response->status = $response::status_failed;
             $response->code = $response::code_failed;

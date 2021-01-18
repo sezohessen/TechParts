@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
 });
 Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
     Route::post("insuranceCompanyList",'InsuranceCompanyController@show');
+    Route::post("offer_company",'InsuranceCompanyController@offer');
 });
 Route::group(['prefix' => 'auth'], function () {
     Route::post("login",'api\UserController@login');
