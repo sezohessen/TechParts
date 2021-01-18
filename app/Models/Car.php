@@ -156,12 +156,57 @@ class Car extends Model
     }
     public function maker()
     {
-        return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
+        return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
     }
+    public function year()
+    {
+        return $this->belongsTo(CarYear::class,"CarYear_id","id");
+    }
+    public function color()
+    {
+        return $this->belongsTo(CarColor::class,"CarColor_id","id");
+    }
+
     public function country()
     {
         return $this->belongsTo(Country::class,"Country_id","id");
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class,"City_id","id");
+    }
+    public function governorate()
+    {
+        return $this->belongsTo(Governorate::class,"Governorate_id","id");
+    }
+
+    public function badges()
+    {
+        return $this->hasMany(car_badge::class,"car_id","id");
+    }
+    public function features()
+    {
+        return $this->hasMany(car_feature::class,"car_id","id");
+    }
+    public function images()
+    {
+        return $this->hasMany(car_img::class,"car_id","id");
+    }
+    public function manufacture()
+    {
+        return $this->belongsTo(CarManufacture::class,"CarManufacture_id","id");
+    }
+    public function body()
+    {
+        return $this->belongsTo(CarBody::class,"CarBody_id","id");
+    }
+    public function model()
+    {
+        return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
+    }
+
+
     public static function unlink_img($images)
     {
         $destinationPath = public_path() . '/img/Cars/';
@@ -175,5 +220,6 @@ class Car extends Model
         }
         return true;
     }
+
 
 }

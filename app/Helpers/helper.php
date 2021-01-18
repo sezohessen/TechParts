@@ -42,27 +42,27 @@ use Illuminate\Support\Facades\Session;
         }
     }
     if(!function_exists('attr_lang_name')){
-        function attr_lang_name($attr){
+        function attr_lang_name($attr_ar,$attr){
             return  (Session::get('app_locale')=='ar') ?
-                $attr->name_ar
+                $attr_ar
                 :
-                $attr->name;
+                $attr;
         }
     }
     if(!function_exists('attr_lang_title')){
-        function attr_lang_title($attr){
+        function attr_lang_title($attr_ar,$attr){
             return  (Session::get('app_locale')=='ar') ?
-                $attr->title_ar
+                $attr_ar
                 :
-                $attr->title;
+                $attr;
         }
     }
     if(!function_exists('attr_lang_desc')){
-        function attr_lang_desc($attr){
+        function attr_lang_desc($attr_ar,$attr){
             return  (Session::get('app_locale')=='ar') ?
-                $attr->Description_ar
+                $attr_ar
                 :
-                $attr->Description;
+                $attr;
         }
     }
 

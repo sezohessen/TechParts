@@ -13,4 +13,8 @@ class car_badge extends Model
         'car_id',
         'badge_id',
     ];
+
+    public function badge(){
+        return $this->belongsTo(Badges::class,'badge_id','id')->where('active', '=', 1);
+    }
 }
