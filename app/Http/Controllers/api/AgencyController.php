@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\api;
-
 use App\Http\Controllers\Controller;
-use App\Models\ContactUs;
-use App\Models\Country;
+use App\Models\Agency;
+use App\Models\AgencyReview;
+use App\Models\AskExpert;
+use Illuminate\Support\Facades\Response;
+use App\Models\News;
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator as Validator;
 class Responseobject
 {
@@ -23,10 +24,10 @@ class Responseobject
     public $code;
     public $messages = array();
 }
-class FinanceContactController extends Controller
+class AgencyController extends Controller
 {
     use GeneralTrait;
-    public function create(Request $request)
+    public function review(Request $request)
     {
         if ($locale = $request->lang) {
             if (in_array($locale, ['ar', 'en']) ) {
@@ -41,30 +42,28 @@ class FinanceContactController extends Controller
         $response   = new Responseobject();
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
-            'message'           => 'required|min:3|max:1000',
-            'name'              => 'required',
-            'email'             => 'required|email',
-            'phone'             => 'string',
-            'interest_country'  => 'nullable|integer',//Will be updated
+            'rate'          => 'in:1,2,3,4,5',
+            'price_type'    => 'in:1,2,3',
+            'comment'       => 'required|min:3|max:1000',
+            'center_id'     => 'required|integer',
+            'token'         => 'nullable'
         ]);
-
         if (!$validator->fails()) {
-            if($request->interest_country){
-                $country    = Country::find($request->interest_country);
-                if(!$country){
-                    return $this->errorMessage(__('Not found Country id'));
-                }
+            $agency     = Agency::find($request->center_id);
+            if(!$agency){
+                return $this->errorMessage(__("No such Center id exist"));
             }
-            $ContactUs = ContactUs::create([
-                'message'       => $request->message,
-                'email'         => $request->email,
-                'phone'         => $request->phone,
+            $askExpert  = AgencyReview::create([
+                'rate'          => $request->rate,
+                'price'         => $request->price_type,
+                'review'        => $request->comment,
+                'agency_id'     => $request->center_id,
             ]);
-            if($country){
-                $ContactUs->country_phone = $country->country_phone;
-                $ContactUs->save();
+            if($request->token){
+                $askExpert->user_id = auth()->user();
+                $askExpert->save();
             }
-            return $this->returnSuccess(__("We will contact you soon"));
+            return $this->returnSuccess(__("Your Review Have been created Successfully, Wait for Admin to Apply your review"));
         }else{
             $response->status = $response::status_failed;
             $response->code = $response::code_failed;
@@ -75,5 +74,6 @@ class FinanceContactController extends Controller
                 $response
             );
         }
+
     }
 }

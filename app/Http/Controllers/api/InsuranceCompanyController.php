@@ -100,8 +100,8 @@ class InsuranceCompanyController extends Controller
                 foreach ($InsuranceOffers as $offer) {
                     /* Insurance Contact */
                     $mContact = [ //Will be updated
-                        "phone" => "00219600",
-                        "whats" => "00201012345678"
+                        "phone" => $InsuranceCompany->user->phone,
+                        "whats" => $InsuranceCompany->user->whats_app
                     ];
                     /* Insurance Company */
                     $insurance  = [
@@ -136,6 +136,57 @@ class InsuranceCompanyController extends Controller
             }else{
                 return $this->errorMessage(__("No such company id found"));
             }
+        }else{
+            $response->status = $response::status_failed;
+            $response->code = $response::code_failed;
+            foreach ($validator->errors()->getMessages() as $item) {
+                array_push($response->messages, $item);
+            }
+            return Response::json(
+                $response
+            );
+        }
+    }
+    public function askHelp(Request $request)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        $data       = $request->all();
+        $response   = new Responseobject();
+        $array_data = (array)$data;
+        $validator  = Validator::make($array_data, [
+            'message'           => 'required|min:3|max:1000',
+            'name'              => 'required',
+            'email'             => 'required|email',
+            'phone'             => 'string',
+            'interest_country'  => 'nullable|integer',//Will be updated
+            'token'             => 'nullable',//Will be updated
+        ]);
+
+        if (!$validator->fails()) {
+            if($request->interest_country){
+                $country    = Country::find($request->interest_country);
+                if(!$country){
+                    return $this->errorMessage(__('Not found Country id'));
+                }
+            }
+            $ContactUs = ContactUs::create([
+                'message'       => $request->message,
+                'email'         => $request->email,
+                'phone'         => $request->phone,
+            ]);
+            if($country){
+                $ContactUs->country_phone = $country->country_phone;
+                $ContactUs->save();
+            }
+            return $this->returnSuccess(__("Will call you back soon"));
         }else{
             $response->status = $response::status_failed;
             $response->code = $response::code_failed;

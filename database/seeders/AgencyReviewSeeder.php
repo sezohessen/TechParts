@@ -21,9 +21,9 @@ class AgencyReviewSeeder extends Seeder
         foreach (range(1,10) as $value){
             DB::table('agency_reviews')->insert([
                 'rate'              => $faker->randomElement(['1', '2', '3','4','5']),
-                'price'             => $faker->numberBetween(1000,10000),
+                'price'             => $faker->randomElement(['1', '2', '3']),
                 'review'            => $faker->text,
-                'agent_id'          => Agency::all()->random()->id,
+                'agency_id'         => Agency::all()->random()->id,
                 'user_id'           => User::all()->random()->id,
                 'created_at'        => now(),
                 'updated_at'        => now()

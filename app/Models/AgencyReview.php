@@ -13,7 +13,7 @@ class AgencyReview extends Model
         'rate',
         'price',
         'review',
-        'agent_id',
+        'agency_id',
         'user_id',
     ];
 }

@@ -16,16 +16,16 @@ class CreateAgencyReviewsTable extends Migration
         Schema::create('agency_reviews', function (Blueprint $table) {
             $table->id();
             $table->enum ('rate', ['1', ' 2', ' 3', ' 4', ' 5'] );
-            $table->integer('price');
+            $table->enum ('price', ['1', ' 2', ' 3'] );
             $table->text('review');
 
-            $table->bigInteger('agent_id')->unsigned();
-            $table->foreign('agent_id')
+            $table->bigInteger('agency_id')->unsigned();
+            $table->foreign('agency_id')
             ->references('id')->on('agencies')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')
             ->references('id')->on('users')
             ->onDelete('cascade')
