@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\api;
+
 use App\Http\Controllers\Controller;
-use App\Models\AskExpert;
-use Illuminate\Http\Response;
-use App\Models\News;
+use App\Models\ContactUs;
+use App\Models\Country;
+use App\Models\Insurance;
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator as Validator;
 class Responseobject
 {
@@ -22,10 +24,10 @@ class Responseobject
     public $code;
     public $messages = array();
 }
-class AskExpertController extends Controller
+class InsuranceCompanyController extends Controller
 {
     use GeneralTrait;
-    public function create(Request $request)
+    public function show(Request $request)
     {
         if ($locale = $request->lang) {
             if (in_array($locale, ['ar', 'en']) ) {
@@ -40,17 +42,22 @@ class AskExpertController extends Controller
         $response   = new Responseobject();
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
-            'question'       => 'required|min:3|max:1000',
+            'interest_country'  => 'required|integer',//Will be updated
+            'token'             => 'nullable',
         ]);
 
         if (!$validator->fails()) {
-            $askExpert = AskExpert::create([
-                'message'       => $request->question,
-                'email'         => auth()->user()->email,
-                'phone'         => auth()->user()->phone,
-                'country_phone' => auth()->user()->country_phone,
-            ]);
-            return $this->returnSuccess(__("We will contact you soon"));
+            $InsuranceCompanies = Insurance::all();//Will be updated
+            $insurances = [];
+            foreach ($InsuranceCompanies as $insurance) {
+                $insurances[] = [
+                    "color"     => '#000000',//Will be updated
+                    "id"        => $insurance->id,
+                    "logo"      => $insurance->img->name,
+                    "name"      => Session::get('app_locale')=='ar'? $insurance->name_ar : $insurance->name,
+                ];
+            }
+            return $this->returnData("insuranceCompanyList",$insurances,"Successfully");
         }else{
             $response->status = $response::status_failed;
             $response->code = $response::code_failed;
@@ -61,6 +68,5 @@ class AskExpertController extends Controller
                 $response
             );
         }
-
     }
 }

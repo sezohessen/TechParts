@@ -22,16 +22,19 @@ Route::get("/test",function(){
 });
 Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
 
-    Route::post("ask_expoert",'api\AskExpertController@create');
+    Route::post("ask_expoert",'AskExpertController@create');
     Route::group(['prefix' => 'car'], function () {
         Route::post("details",'CarsController@show');
     });
 
 });
-
+Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
+    Route::post("insuranceCompanyList",'InsuranceCompanyController@show');
+});
 Route::group(['prefix' => 'auth'], function () {
     Route::post("login",'api\UserController@login');
 });
-
 Route::post("news",'api\NewsController@show');
+/* Route::post("news/home",'api\NewsController@filter'); */
+Route::post("finance/ask_help",'api\FinanceContactController@create');
 
