@@ -41,6 +41,7 @@ class UserController extends Controller
                     "email" => $user->email,
                     "first_name" => $user->first_name,
                     "image" => @$user->image->name,
+                    "custom" => @$user->custom,
 
                     "is_phone_verified" => $user->is_phone_virefied,
                     "last_name" => $user->last_name,
@@ -50,7 +51,7 @@ class UserController extends Controller
                     "userId"=> $user->id
                 ];
                 if ($user->interestCountry) {
-                     $data["interest_country"] = @$user->interestCountry->name
+                     $data["interest_country"] = @$user->interestCountry->name;
                 }
         return $this->returnData('mUser',$data,__('Success login'));
     }
