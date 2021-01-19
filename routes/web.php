@@ -129,12 +129,13 @@ Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insuran
 Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
+    Route::get('/governorate/{id}','AgencyController@governorate');//Ajax Request
+    Route::get('/country/{id}','AgencyController@country');//Ajax Request
 });
 Route::group(['prefix' => 'bank','as' => 'bank.','namespace'=>"Bank", 'middleware' => ['role:bank']], function () {
     Route::get('/','BankDashController@index')->name('index');
     Route::resource('/company','BankController');
     Route::resource('/bank-offer','BankOfferController');
-
 });
 //});
 
