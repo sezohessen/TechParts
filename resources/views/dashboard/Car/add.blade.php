@@ -382,19 +382,19 @@
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <div class="radio-inline">
                                     <label class="radio">
-                                        <input type="radio" name="status" value="0"
-                                        {{ old('status')=="0" ? 'checked':'' }} required/>
+                                        <input type="radio" name="isNew" value="0"
+                                        {{ old('isNew')=="0" ? 'checked':'' }} required/>
                                         <span></span>
                                         @lang('New')
                                     </label>
                                     <label class="radio">
-                                        <input type="radio" name="status" value="1"
-                                        {{ old('status')=="1" ? 'checked':'' }}/>
+                                        <input type="radio" name="isNew" value="1"
+                                        {{ old('isNew')=="1" ? 'checked':'' }}/>
                                         <span></span>
                                         @lang('Used')
                                     </label>
-                                    @error('status')
-                                        <div class="invalid-feedback">{{ $errors->first('status') }}</div>
+                                    @error('isNew')
+                                        <div class="invalid-feedback">{{ $errors->first('isNew') }}</div>
                                     @enderror
                                 </div>
                             </div>

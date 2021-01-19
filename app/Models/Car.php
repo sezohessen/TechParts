@@ -20,8 +20,11 @@ class Car extends Model
     const PAYMENT_INSTALLMENT = 1;
     const PAYMENT_FINANCING = 3;
 
-    const STATUS_NEW  = 0;
-    const STATUS_USED = 1;
+    const STATUS_ACTIVE  = 0;
+    const STATUS_DISABLE = 1;
+
+    const IS_NEW  = 0;
+    const IS_USED = 1;
 
     const SELLER_AGENCY=0;
     const SELLER_DISTRIBUTOR=1;
@@ -35,7 +38,7 @@ class Car extends Model
         'DepositPrice' ,'Country_id' ,'City_id' ,'Governorate_id' ,
         'CarModel_id' ,'CarMaker_id' ,'CarBody_id' ,'CarYear_id' ,
         'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' ,
-        'transmission' ,'payment', 'SellerType',
+        'transmission' ,'payment', 'SellerType','isNew'
     ];
     public function getDescriptionForEvent(string $eventName): string
     {
@@ -67,13 +70,13 @@ class Car extends Model
             'lng'                         => 'required|numeric',
             'ServiceHistory'              => 'required|string|min:3|max:1000',
             'transmission'                => 'required|integer',
-            'status'                      => 'required|integer',
+            'isNew'                       => 'required|integer',
             'SellerType'                  => 'required|integer',
             'payment'                     => 'required|integer',
             'phone'                       => 'required|numeric',
             'DepositPrice'                => 'required|integer',
             'InstallmentPrice'            => 'required|integer',
-            'InstallmentMonth'            => 'required|integer',
+            'InstallmentMonth'            => 'required|integer|between:1,12',
             'CarPhotos'                   => 'required|max:5',
             'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ];
@@ -107,14 +110,15 @@ class Car extends Model
             'lng'                         => $request->lng,
             'ServiceHistory'              => $request->ServiceHistory,
             'transmission'                => $request->transmission,
-            'status'                      => $request->status,
+            'isNew'                       => $request->status,
             'SellerType'                  => $request->SellerType,
             'payment'                     => $request->payment,
             'phone'                       => $request->phone,
             'DepositPrice'                => $request->DepositPrice,
             'InstallmentPrice'            => $request->InstallmentPrice,
             'InstallmentMonth'            => $request->InstallmentMonth,
-            'views'                       => 0
+            'views'                       => 0,
+            'status'                      => Car::STATUS_ACTIVE
         ];
         if($photos=$request->file('CarPhotos')){
             if($img_id){
@@ -156,12 +160,57 @@ class Car extends Model
     }
     public function maker()
     {
-        return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
+        return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
     }
+    public function year()
+    {
+        return $this->belongsTo(CarYear::class,"CarYear_id","id");
+    }
+    public function color()
+    {
+        return $this->belongsTo(CarColor::class,"CarColor_id","id");
+    }
+
     public function country()
     {
         return $this->belongsTo(Country::class,"Country_id","id");
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class,"City_id","id");
+    }
+    public function governorate()
+    {
+        return $this->belongsTo(Governorate::class,"Governorate_id","id");
+    }
+
+    public function badges()
+    {
+        return $this->hasMany(car_badge::class,"car_id","id");
+    }
+    public function features()
+    {
+        return $this->hasMany(car_feature::class,"car_id","id");
+    }
+    public function images()
+    {
+        return $this->hasMany(car_img::class,"car_id","id");
+    }
+    public function manufacture()
+    {
+        return $this->belongsTo(CarManufacture::class,"CarManufacture_id","id");
+    }
+    public function body()
+    {
+        return $this->belongsTo(CarBody::class,"CarBody_id","id");
+    }
+    public function model()
+    {
+        return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
+    }
+
+
     public static function unlink_img($images)
     {
         $destinationPath = public_path() . '/img/Cars/';
@@ -175,5 +224,6 @@ class Car extends Model
         }
         return true;
     }
+
 
 }

@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get("/test",function(){
-    return 22;
-});
+
 Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
 
     Route::post("ask_expoert",'AskExpertController@create');
@@ -27,6 +25,8 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
         Route::post("details",'CarsController@show');
     });
 
+    Route::post("news",'NewsController@filter');
+    Route::post("payment",'CarsController@deposit');
 });
 Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
     Route::post("insuranceCompanyList",'InsuranceCompanyController@show');
@@ -45,3 +45,10 @@ Route::post("news",'api\NewsController@show');
 /* Route::post("news/home",'api\NewsController@filter'); */
 Route::post("finance/ask_help",'api\FinanceContactController@create');
 
+Route::group(['prefix' => 'car','namespace'=>"api"], function () {
+    Route::post("details",'CarsController@details');
+    Route::post("list",'CarsController@search');
+    Route::post("alert",'CarsController@alert');
+    Route::post("compare",'CarsController@compare');
+
+});

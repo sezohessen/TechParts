@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\AgentCar;
-use App\Models\Terms;
-use App\Models\User;
+
 use Illuminate\Database\Seeder;
 use PhpOffice\PhpSpreadsheet\Writer\Ods\Content;
 
@@ -25,7 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TermsSeeder::class);
         $this->call(PPolicySeeder::class);
         $this->call(AskExpertSeeder::class);
-
         $this->call(ContactUsSeeder::class);
         $this->call(LaratrustSeeder::class);
         //\App\Models\User::factory(10)->create();
@@ -60,5 +57,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FinanceRequestSeeder::class);
         $this->call(SettingsSeeder::class);
         $this->call(BankSeeder::class);//Also contain Bank contact seedr ;)
+        $this->call(Car_DepositSeeder::class);
     }
 }

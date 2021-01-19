@@ -107,6 +107,7 @@ class AddRelationsToCars extends Migration
             $table->integer('payment')->default(0);
             $table->integer('status')->change()->default(0);
             $table->integer('SellerType')->default(0);
+            $table->integer('isNew')->default(0);
         });
     }
 
@@ -144,6 +145,7 @@ class AddRelationsToCars extends Migration
             $table->dropColumn('phone');
             $table->dropColumn('lng');
             $table->dropColumn('lat');
+            $table->dropColumn('isNew');
             $table->dropColumn('DepositPrice');
             $table->dropColumn('InstallmentMonth');
             $table->dropColumn('InstallmentPrice');

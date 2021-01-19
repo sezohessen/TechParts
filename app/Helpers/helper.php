@@ -41,12 +41,28 @@ use Illuminate\Support\Facades\Session;
             return true;
         }
     }
-    if(!function_exists('attr_lang')){
-        function attr_lang($attr){
+    if(!function_exists('attr_lang_name')){
+        function attr_lang_name($attr_ar,$attr){
             return  (Session::get('app_locale')=='ar') ?
-                $attr->name_ar
+                $attr_ar
                 :
-                $attr->name;
+                $attr;
+        }
+    }
+    if(!function_exists('attr_lang_title')){
+        function attr_lang_title($attr_ar,$attr){
+            return  (Session::get('app_locale')=='ar') ?
+                $attr_ar
+                :
+                $attr;
+        }
+    }
+    if(!function_exists('attr_lang_desc')){
+        function attr_lang_desc($attr_ar,$attr){
+            return  (Session::get('app_locale')=='ar') ?
+                $attr_ar
+                :
+                $attr;
         }
     }
 
