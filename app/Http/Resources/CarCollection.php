@@ -9,6 +9,7 @@ class CarCollection extends ResourceCollection
     /**
      * Transform the resource collection into an array.
      *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
@@ -19,7 +20,7 @@ class CarCollection extends ResourceCollection
     }
     public function toArray($request)
     {
- 
+
         return [
             'data' =>$this->collection->map(function(CarResource $resource) use($request){
                 return $resource->type($this->type)->toArray($request);

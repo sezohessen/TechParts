@@ -12,6 +12,11 @@ class PromoteCar extends Model
     protected $fillable=[
         'user_id',
         'car_id',
+        "subscribe_package_id",
+        "price",
+        "weaccept_order_id"
     ];
+ 
+
 
 }

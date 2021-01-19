@@ -108,6 +108,9 @@ class AddRelationsToCars extends Migration
             $table->integer('status')->change()->default(0);
             $table->integer('SellerType')->default(0);
             $table->integer('isNew')->default(0);
+            $table->timestamp('adsExpire')->useCurrent();
+            $table->timestamp('promotedExpire')->useCurrent();
+            $table->boolean('promotedStatus')->default(0);
         });
     }
 

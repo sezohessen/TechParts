@@ -25,6 +25,7 @@ class CarResource extends JsonResource
     {
 
         if($this->type==1){
+
             $carMan=attr_lang_name($this->manufacture->name_ar,$this->manufacture->name);
             if($this->payment== Car::PAYMENT_CASH ){
                 $payment=__("Cash");
@@ -64,9 +65,11 @@ class CarResource extends JsonResource
             return array_merge($this->item(),$data);
         }
         elseif($this->type==2)  {
+
             return $this->item();
         }
         elseif($this->type==3){
+
             $data=[
                 "carFuelType"=>null,
                 "transmission"=> $this->transmission== Car::TRANSIMSSION_MANUAL ? __("Manual") :  __("Automatic"),
@@ -74,7 +77,6 @@ class CarResource extends JsonResource
             ];
             return array_merge($this->item(),$data);
         }else {
-            
             return $this->type;
         }
 
@@ -89,7 +91,7 @@ class CarResource extends JsonResource
             ($feature=Feature::where('active', '=', 1)->find($item->feature_id))? $car_features[]=attr_lang_name($feature->name_ar,$feature->name):'';
         }
         $data= [
-            "adsExpire" =>date("Y-m-d",strtotime("+1 month",strtotime($this->created_at))),
+            "adsExpire" =>date("Y-m-d",strtotime($this->adsExpire)),
             "badgeList"=>$car_badges,
             "featureList"=>$car_features,
         ];
@@ -117,8 +119,11 @@ class CarResource extends JsonResource
             ],
             "price"=> (int)$price,
             "price_before_discount"=> $this->price,
-            "promotedStatus"=> null,
+            "promotedStatus"=> ($this->promotedStatus)?true:false,
         ];
+    }
+    public static function collection($resource){
+        return new CarCollection($resource);
     }
 
 }

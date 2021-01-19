@@ -29,8 +29,8 @@ class CreateCarDepositsTable extends Migration
             ->onUpdate('cascade');
 
             $table->integer('price');
-            $table->bigInteger('weaccept_order_id');
-            
+            $table->string('weaccept_order_id');
+
             $table->timestamps();
         });
     }

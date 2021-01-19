@@ -38,7 +38,8 @@ class Car extends Model
         'DepositPrice' ,'Country_id' ,'City_id' ,'Governorate_id' ,
         'CarModel_id' ,'CarMaker_id' ,'CarBody_id' ,'CarYear_id' ,
         'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' ,
-        'transmission' ,'payment', 'SellerType','isNew'
+        'transmission' ,'payment', 'SellerType','isNew',"adsExpire",
+        "promotedExpire","promotedStatus"
     ];
     public function getDescriptionForEvent(string $eventName): string
     {
@@ -89,7 +90,6 @@ class Car extends Model
     public static function credentials($request,$img_id = NULL)
     {
         $credentials = [
-
             'CarMaker_id'                 => $request->CarMaker_id,
             'CarModel_id'                 => $request->CarModel_id,
             'CarYear_id'                  => $request->CarYear_id,
@@ -110,7 +110,7 @@ class Car extends Model
             'lng'                         => $request->lng,
             'ServiceHistory'              => $request->ServiceHistory,
             'transmission'                => $request->transmission,
-            'isNew'                       => $request->status,
+            'isNew'                       => $request->isNew,
             'SellerType'                  => $request->SellerType,
             'payment'                     => $request->payment,
             'phone'                       => $request->phone,

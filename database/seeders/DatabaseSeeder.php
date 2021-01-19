@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         //\App\Models\User::factory(10)->create();
         $this->call(BadgeSeeder::class);
         $this->call(FeatureSeeder::class);
-    $this->call(imagesSeeder::class);
+        $this->call(imagesSeeder::class);
         $this->call(CarBodySeeder::class);
         $this->call(CarMakerSeeder::class);
         $this->call(CarModelSeeder::class);
@@ -48,12 +48,15 @@ class DatabaseSeeder extends Seeder
         $this->call(AgencyCarSeeder::class);
         $this->call(AgencyContactSeeder::class);
         $this->call(AgencyReviewSeeder::class);
-        $this->call(PromoteCarSeeder::class);
         $this->call(ListCarUsersSeeder::class);
         $this->call(MaintenanceSpecialtiesSeeder::class);
         $this->call(FinanceRequestSeeder::class);
         $this->call(SettingsSeeder::class);
         $this->call(BankSeeder::class);//Also contain Bank contact seedr ;)
         $this->call(Car_DepositSeeder::class);
+        $this->call(subscribe_packageSeeder::class);
+        $this->call(PromoteCarSeeder::class);
+
+
     }
 }
