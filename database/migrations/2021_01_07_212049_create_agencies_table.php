@@ -27,8 +27,11 @@ class CreateAgenciesTable extends Migration
             $table->boolean('car_status')->default(0);
             $table->integer('payment_method')->default(0);
             $table->integer('status')->default(0);
+            $table->integer('agency_type')->default(0);
+            $table->integer('maintenance_type')->default(0);
+            $table->boolean('is_authorised')->default(0);
             $table->boolean('active')->default(1);
-            
+
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
             ->references('id')->on('users')

@@ -14,13 +14,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
 Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
+
+    Route::post("ask_expoert",'AskExpertController@create');
     Route::group(['prefix' => 'car'], function () {
         Route::post("details",'CarsController@show');
     });
 
+    Route::post("news",'NewsController@filter');
+    Route::post("payment",'CarsController@deposit');
 });
-Route::post("news",'NewsController@filter');
+Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
+    Route::post("insuranceCompanyList",'InsuranceCompanyController@show');
+    Route::post("offer_company",'InsuranceCompanyController@offer');
+    Route::post("ask_help",'InsuranceCompanyController@askHelp');
+});
+Route::group(['prefix' => 'centers','namespace'=>'api'], function () {
+    Route::group(['prefix' => 'review'], function () {
+        Route::post("agency",'AgencyController@review');
+    });
+});
 Route::group(['prefix' => 'auth'], function () {
     Route::post("login",'api\UserController@login');
+});
+Route::post("news",'api\NewsController@show');
+/* Route::post("news/home",'api\NewsController@filter'); */
+Route::post("finance/ask_help",'api\FinanceContactController@create');
+
+Route::group(['prefix' => 'car','namespace'=>"api"], function () {
+    Route::post("details",'CarsController@details');
+    Route::post("list",'CarsController@search');
+    Route::post("alert",'CarsController@alert');
+    Route::post("compare",'CarsController@compare');
+
 });

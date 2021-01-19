@@ -14,4 +14,5 @@ class CarManufacture extends Model
         'name',
         'name_ar',
     ];
+
 }

@@ -29,6 +29,9 @@ class Agency extends Model
         'governorate_id',
         'city_id',
         'user_id',
+        'agency_type',
+        'maintenance_type',
+        'is_authorised',
         'active'
     ];
     public function user() {
@@ -52,6 +55,10 @@ class Agency extends Model
             'description'           => 'required|min:3|max:1000',
             'description_ar'        => 'required|min:3|max:1000',
             'center_type'           => 'required|integer',
+            "maintenance_type"      => "required_if:center_type,==,1",
+            "agency_type"           => "required_if:center_type,==,0",
+            'specialty_id'          => "required_if:center_type,==,1|array",
+            'specialty_id.*'        => "required_if:center_type,==,1|distinct",
             'car_status'            => 'required|integer',
             'payment_method'        => 'required|integer',
             'status'                => 'required|integer',
@@ -67,15 +74,10 @@ class Agency extends Model
         if($id == 'Agency'){//For update in Dashborad
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
         }elseif($id == 'AgencyDash'){//For Create in Agency Dashboard
-            unset($rules['show_in_home']);
-            unset($rules['car_show_rooms']);
             unset($rules['status']);
             unset($rules['user_id']);
         }elseif($id){//For Update in Agency Dashboard
-
             $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
-            unset($rules['show_in_home']);
-            unset($rules['car_show_rooms']);
             unset($rules['status']);
             unset($rules['user_id']);
         }
@@ -99,7 +101,16 @@ class Agency extends Model
             'long'              =>  $request->long,
             'active'            =>  1
         ];
-
+        if ($request->center_type==0) {
+            $credentials['agency_type']         = $request->agency_type;
+            $credentials['maintenance_type']    = 0;//Need it in Update
+        }elseif($request->center_type==1) {
+            $credentials['maintenance_type']    = $request->maintenance_type;
+            $credentials['agency_type']         = 0;//Need it in Update
+        }else{
+            $credentials['maintenance_type']    = 0;//Need it in Update
+            $credentials['agency_type']         = 0;//Need it in Update
+        }
         if($id){//For updating
             $credentials['user_id'] = $id;
         }else{
@@ -117,6 +128,11 @@ class Agency extends Model
             $credentials['car_show_rooms'] = 1;
         }else{
             $credentials['car_show_rooms'] = 0;
+        }
+        if($request->is_authorised!=NULL&&$request->is_authorised=='on'&&$specialCase){//Check Box
+            $credentials['is_authorised'] = 1;
+        }else{
+            $credentials['is_authorised'] = 0;
         }
         if($request->file('img_id')){//Creating and Updating Image
             if($id){

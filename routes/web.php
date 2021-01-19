@@ -107,6 +107,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::post('/maker/{maker}/activity',"CarMakerController@Activity")->name('CarMaker.Activity');
     Route::post('/model/{model}/activity',"CarModelController@Activity")->name('CarModel.Activity');
     Route::post('/body/{body}/activity',"CarBodyController@Activity")->name('CarBody.Activity');
+    Route::post('/car/{car}/status',"CarController@Status")->name('Car.Status');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');

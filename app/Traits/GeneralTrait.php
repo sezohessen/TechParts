@@ -34,6 +34,8 @@ trait GeneralTrait {
         ]);
     }
 
+
+
     public function returnValidationError($validator){
         return $this->returnError($validator->errors()->first());
     }

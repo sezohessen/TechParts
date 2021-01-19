@@ -27,7 +27,7 @@ class CarSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i=0; $i < 5 ; $i++) {
             DB::table('cars')->insert([
 
                 'ServiceHistory'        => $faker->sentence,
@@ -51,12 +51,13 @@ class CarSeeder extends Seeder
                 'CarColor_id'           => CarColor::all()->random()->id,
                 'views'                 => $faker->numberBetween(1,100),
                 'AccidentBefore'        => rand(0,1),
-                'transmission'          => rand(0,2),
+                'transmission'          => rand(0,1),
                 'payment'               => rand(0,2),
                 'SellerType'            => rand(0,2),
                 'price_after_discount'  => $faker->numberBetween(1,100),
                 'price'                 => $faker->numberBetween(1,10000),
-                'status'                => rand(0,4),
+                'isNew'                 => rand(0,1),
+                'status'                => rand(0,1),
                 'kiloUsed'              => $faker->numberBetween(1,100),
                 'created_at'            => now(),
                 'updated_at'            => now()

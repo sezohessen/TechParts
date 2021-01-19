@@ -23,7 +23,12 @@ class News extends Model
     public function category(){
         return $this->belongsTo(Category::class,'category_id','id');
     }
-    
+    public function imgAuthor(){
+        return $this->belongsTo(Image::class,'authorImg_id','id');
+    }
+    public function img(){
+        return $this->belongsTo(Image::class,'image_id','id');
+    }
     public static function rules($request)
     {
         $rules = [

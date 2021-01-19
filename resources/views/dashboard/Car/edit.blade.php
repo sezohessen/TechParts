@@ -32,12 +32,11 @@
                                             <img src='{{url('img/CarMakers/'.$maker->logo->name)}}'  class='img-thumbnail' width='30' height='30'>
                                             <span>{{$maker->name}}</span>
                                             "
-                                            {{
-                                                old('CarMaker_id') ?
-                                                    (old('CarMaker_id') ==$maker->id) ? 'selected': ''
-                                                    :
-                                                    ($car->CarMaker_id==$maker->id)  ? 'selected':''
-                                            }} >
+                                            @if(old('CarMaker_id') == $maker->id)
+                                                {{ 'selected' }}
+                                            @elseif($maker->id==$car->CarMaker_id)
+                                                {{ 'selected' }}
+                                            @endif >
                                         </option>
                                     @endforeach
                                 </select>
@@ -72,12 +71,11 @@
                                 <option value="">@lang('--Select user--')</option>
                                 @foreach ($years as $year)
                                     <option value="{{$year->id}}"
-                                        {{
-                                            old('CarYear_id') ?
-                                                (old('CarYear_id') ==$year->id) ? 'selected': ''
-                                                :
-                                                ($car->CarYear_id==$year->id)  ? 'selected':''
-                                        }}
+                                        @if(old('CarYear_id') == $year->id)
+                                            {{ 'selected' }}
+                                        @elseif($year->id==$car->CarYear_id)
+                                            {{ 'selected' }}
+                                        @endif
                                         >{{$year->year}}</option>
                                 @endforeach
                              </select>
@@ -99,12 +97,11 @@
                                    <option value="">@lang('--Select Car Manufacture --')</option>
                                    @foreach ($manufactures as $manufacture)
                                        <option value="{{$manufacture->id}}"
-                                        {{
-                                            old('CarManufacture_id') ?
-                                                (old('CarManufacture_id') ==$manufacture->id) ? 'selected': ''
-                                                :
-                                                ($car->CarManufacture_id==$manufacture->id)  ? 'selected':''
-                                        }}
+                                            @if(old('CarManufacture_id') == $manufacture->id)
+                                            {{ 'selected' }}
+                                            @elseif($manufacture->id==$car->CarManufacture_id)
+                                            {{ 'selected' }}
+                                            @endif
                                         >{{$manufacture->name}} - {{$manufacture->name_ar}}</option>
                                    @endforeach
                                 </select>
@@ -123,12 +120,11 @@
                                    <option value="">@lang('--Select Car Capacity --')</option>
                                    @foreach ($capacities as $capacity)
                                        <option value="{{$capacity->id}}"
-                                        {{
-                                            old('CarCapacity_id') ?
-                                                (old('CarCapacity_id') ==$capacity->id) ? 'selected': ''
-                                                :
-                                                ($car->CarCapacity_id==$capacity->id)  ? 'selected':''
-                                        }}
+                                        @if(old('CarCapacity_id') == $capacity->id)
+                                        {{ 'selected' }}
+                                        @elseif($capacity->id==$car->CarCapacity_id)
+                                        {{ 'selected' }}
+                                        @endif
                                        >{{$capacity->capacity}}</option>
                                    @endforeach
                                 </select>
@@ -200,12 +196,12 @@
                                             <img src='{{url('img/CarBodies/'.$body->logo->name)}}'  class='img-thumbnail' width='30' height='30'>
                                             <span>{{$body->name}}</span>
                                             "
-                                            {{
-                                                old('CarBody_id') ?
-                                                    (old('CarBody_id') ==$body->id) ? 'selected': ''
-                                                    :
-                                                    ($car->CarBody_id==$body->id)  ? 'selected':''
-                                            }}>
+                                            @if(old('CarBody_id') == $body->id)
+                                            {{ 'selected' }}
+                                            @elseif($body->id==$car->CarBody_id)
+                                            {{ 'selected' }}
+                                            @endif
+                                            >
                                         </option>
                                     @endforeach
                                 </select>
@@ -231,12 +227,11 @@
                                                 </div>
                                             </div>
                                             "
-                                            {{
-                                                old('CarColor_id') ?
-                                                    (old('CarColor_id') ==$color->id) ? 'selected': ''
-                                                    :
-                                                    ($car->CarColor_id==$color->id)  ? 'selected':''
-                                            }}>
+                                            @if(old('CarColor_id') == $color->id)
+                                            {{ 'selected' }}
+                                            @elseif($color->id==$car->CarColor_id)
+                                            {{ 'selected' }}
+                                            @endif>
                                         </option>
                                     @endforeach
                                 </select>
@@ -253,7 +248,7 @@
                                 <select class="form-control select2 {{ $errors->has('badge_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_11" name="badge_id[]"   required multiple >
                                    @foreach ($badges as $badge)
-                                       <option value="{{$badge->id}}"  {{ (old('badge_id')[$c]==$badge->id) ?  'selected':'' }}  {{(old('badge_id')[$c]==$badge->id && $c+1 <$count) ? $c++:''}} >{{$badge->name}} - {{$badge->name_ar}}</option>
+                                       <option value="{{$badge->id}}" >{{$badge->name}} - {{$badge->name_ar}}</option>
                                    @endforeach
                                 </select>
                                 @error('badge_id')
@@ -268,16 +263,8 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('feature_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_12" name="feature_id[]" required multiple >
-                                    @php
-                                        $c=0;
-                                        $count=count(old('feature_id') ?? array());
-                                    @endphp
                                    @foreach ($features as $feature)
-                                       <option value="{{$feature->id}}"
-                                        
-                                        {{ (old('feature_id')[$c]==$feature->id) ?  'selected':'' }}
-                                        {{(old('feature_id')[$c]==$feature->id && $c+1 <$count) ? $c++:''}}
-                                        >{{$feature->name}}- {{$feature->name_ar}}</option>
+                                       <option value="{{$feature->id}}">{{$feature->name}}- {{$feature->name_ar}}</option>
                                    @endforeach
                                 </select>
                                 @error('feature_id')
@@ -397,25 +384,14 @@
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="transmission" value="0"
-
-                                        {{
-                                            old('transmission') ?
-                                                (old('transmission') =="0") ? 'checked': ''
-                                                :
-                                                ($car->transmission=="0")  ? 'checked':''
-                                        }}
+                                        {{ old('transmission')=="0" ? 'checked':(($car->transmission==0) ? 'checked': '' ) }}
                                         required/>
                                         <span></span>
                                         <img src='{{asset('media/svg/icons/Electric/automatic.png')}}' width='20' height='20'>  @lang('Automatic')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="transmission" value="1"
-                                        {{
-                                            old('transmission') ?
-                                                (old('transmission') =="1") ? 'checked': ''
-                                                :
-                                                ($car->transmission=="1")  ? 'checked':''
-                                        }}  />
+                                            c  />
                                         <span></span>
                                         <img src='{{asset('media/svg/icons/Electric/manual.png')}}' width='20' height='20'> &nbsp; @lang('Manual')
                                     </label>
@@ -433,29 +409,19 @@
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <div class="radio-inline">
                                     <label class="radio">
-                                        <input type="radio" name="status" value="0"
-                                        {{
-                                            old('status') ?
-                                                (old('status') =="0") ? 'checked': ''
-                                                :
-                                                ($car->status=="0")  ? 'checked':''
-                                        }}  required/>
+                                        <input type="radio" name="isNew" value="0"
+                                        {{ old('isNew')=="0" ? 'checked':(($car->isNew==0) ? 'checked': '' ) }} required/>
                                         <span></span>
                                         @lang('New')
                                     </label>
                                     <label class="radio">
-                                        <input type="radio" name="status" value="1"
-                                        {{
-                                            old('status') ?
-                                                (old('status') =="1") ? 'checked': ''
-                                                :
-                                                ($car->status=="1")  ? 'checked':''
-                                        }}/>
+                                        <input type="radio" name="isNew" value="1"
+                                        {{ old('isNew')=="1" ? 'checked':(($car->isNew==1) ? 'checked': '' ) }}/>
                                         <span></span>
                                         @lang('Used')
                                     </label>
-                                    @error('status')
-                                        <div class="invalid-feedback">{{ $errors->first('status') }}</div>
+                                    @error('isNew')
+                                        <div class="invalid-feedback">{{ $errors->first('isNew') }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -468,34 +434,19 @@
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="SellerType" value="0"
-                                        {{
-                                            old('SellerType') ?
-                                                (old('SellerType') =="0") ? 'checked': ''
-                                                :
-                                                ($car->SellerType=="0")  ? 'checked':''
-                                        }} required/>
+                                        {{ old('SellerType')=="0" ? 'checked':(($car->SellerType==0) ? 'checked': '' ) }} required/>
                                         <span></span>
                                         @lang('Agency')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="SellerType" value="1"
-                                        {{
-                                            old('SellerType') ?
-                                                (old('SellerType') =="1") ? 'checked': ''
-                                                :
-                                                ($car->SellerType=="1")  ? 'checked':''
-                                        }}/>
+                                        {{ old('SellerType')=="1" ? 'checked':(($car->SellerType==1) ? 'checked': '' ) }}/>
                                         <span></span>
                                         @lang('Distributor')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="SellerType" value="2"
-                                        {{
-                                            old('SellerType') ?
-                                                (old('SellerType') =="2") ? 'checked': ''
-                                                :
-                                                ($car->SellerType=="2")  ? 'checked':''
-                                        }}/>
+                                        {{ old('SellerType')=="2" ? 'checked':(($car->SellerType==2) ? 'checked': '' ) }}/>
                                         <span></span>
                                         @lang('Individual')
                                     </label>
@@ -513,34 +464,19 @@
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="payment" value="0"
-                                        {{
-                                            old('payment') ?
-                                                (old('payment') =="0") ? 'checked': ''
-                                                :
-                                                ($car->payment=="0")  ? 'checked':''
-                                        }} required/>
+                                        {{ old('payment')=="0" ? 'checked':(($car->payment==0) ? 'checked': '' ) }} required/>
                                         <span></span>
                                         @lang('Cash')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="payment" value="1"
-                                        {{
-                                            old('payment') ?
-                                                (old('payment') =="1") ? 'checked': ''
-                                                :
-                                                ($car->payment=="1")  ? 'checked':''
-                                        }} />
+                                        {{ old('payment')=="1" ? 'checked':(($car->payment==1) ? 'checked': '' ) }} />
                                         <span></span>
                                         @lang('Installment')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="payment" value="2"
-                                        {{
-                                            old('payment') ?
-                                                (old('payment') =="2") ? 'checked': ''
-                                                :
-                                                ($car->payment=="2")  ? 'checked':''
-                                        }} />
+                                        {{ old('payment')=="2" ? 'checked':(($car->payment==2) ? 'checked': '' ) }}/>
                                         <span></span>
                                         @lang('Financing')
                                     </label>

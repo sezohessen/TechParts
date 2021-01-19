@@ -22,7 +22,7 @@ class CarDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('country.name_ar', '{{Str::limit($country["name_ar"], 100)}}')
+            ->editColumn('country.name_ar', '{{Str::limit($country["name_ar"] ?? 1, 100)}}')
             ->editColumn('maker.name', '{{Str::limit($maker["name"], 100)}}')
             ->editColumn('phone', '{{Str::limit($phone, 100)}}')
             ->editColumn('price', '{{Str::limit($price, 100)}}')
@@ -31,7 +31,8 @@ class CarDatatable extends DataTable
             ->addColumn('checkbox', 'dashboard.Car.btn.checkbox')
             ->addColumn('SellerType', 'dashboard.Car.btn.SellerType')
             ->addColumn('action', 'dashboard.Car.btn.action')
-            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar"]);
+            ->addColumn('status', 'dashboard.Car.btn.status')
+            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar",'status']);
     }
 
     /**
@@ -124,6 +125,13 @@ class CarDatatable extends DataTable
                 ->searchable(false)
                 ->width(120)
                 ->addClass('text-center'),
+            Column::computed('status')
+            ->title(__('Status'))
+            ->exportable(false)
+            ->printable(false)
+            ->searchable(false)
+            ->width(120)
+            ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

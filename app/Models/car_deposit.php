@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MaintenanceAgency extends Model
+class car_deposit extends Model
 {
     use HasFactory;
-    protected $table    = 'maintenance_agencies';
+    protected $table    = 'car_deposits';
     protected $fillable=[
-        'maintenance_id',
-        'agent_id',
+        'user_id',
+        'car_id',
+        'price',
+        'weaccept_order_id'
     ];
+
 }

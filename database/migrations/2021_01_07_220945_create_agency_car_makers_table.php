@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAgencyReviewsTable extends Migration
+class CreateAgencyCarMakersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateAgencyReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('agency_reviews', function (Blueprint $table) {
+        Schema::create('agency_car_makers', function (Blueprint $table) {
             $table->id();
-            $table->enum ('rate', ['1', ' 2', ' 3', ' 4', ' 5'] );
-            $table->enum ('price', ['1', ' 2', ' 3'] );
-            $table->text('review');
+
+            $table->bigInteger('CarMaker_id')->unsigned();
+            $table->foreign('CarMaker_id')
+            ->references('id')->on('car_makers')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
 
             $table->bigInteger('agency_id')->unsigned();
             $table->foreign('agency_id')
@@ -25,11 +28,6 @@ class CreateAgencyReviewsTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')
-            ->references('id')->on('users')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -41,6 +39,6 @@ class CreateAgencyReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agency_reviews');
+        Schema::dropIfExists('agency_cars');
     }
 }

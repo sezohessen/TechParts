@@ -3,7 +3,6 @@
 
 {{-- Content --}}
 @section('content')
-
 <?php
     $lat=!empty(old("lat"))?old("lat"):'30.044352632821397';
     $long=!empty(old("long"))?old("long"):'31.24011230468745';
@@ -81,7 +80,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>@lang('Show in car show rooms')</label>
                                     <div class="checkbox-list">
@@ -93,6 +92,22 @@
                                             @enderror
                                             <span></span>
                                             @lang('Show')
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>@lang('Authorized')</label>
+                                    <div class="checkbox-list">
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="is_authorised"
+                                            {{ old('is_authorised')=="on" ? 'checked':'' }}/>
+                                            @error('is_authorised')
+                                                <div class="invalid-feedback">{{ $errors->first('is_authorised') }}</div>
+                                            @enderror
+                                            <span></span>
+                                            @lang('Yes')
                                         </label>
                                     </div>
                                 </div>
@@ -121,53 +136,78 @@
                                             <input type="radio" name="center_type" value="2"
                                             {{ old('center_type')=="2" ? 'checked':'' }}/>
                                             <span></span>
-                                            @lang('Spare')
+                                            @lang('Spare parts')
                                         </label>
                                         @error('center_type')
                                             <div class="invalid-feedback">{{ $errors->first('center_type') }}</div>
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="form-group center_type" id="center_type0" style="display: none">
+                                <div class="form-group center_type" id="center_type0" style="display: none">
                                     <label>@lang('Center type categorization')<span class="text-danger">*</span></label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="user_id">@lang('Select User') <span class="text-danger">*</span></label>
-                                            <div class=" col-lg-9 col-md-9 col-sm-12">
-                                             <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
-                                                 id="kt_select2_2" name="user_id" required>
-                                                <option value="">@lang('--Select user--')</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{$user->id}}">{{ $user->email }}</option>
-                                                @endforeach
-                                             </select>
-                                            @error('user_id')
-                                             <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
-                                            @enderror
+                                            <label>@lang('Agency center type')<span class="text-danger">*</span></label>
+                                            <div class="radio-inline">
+                                                <label class="radio">
+                                                    <input type="radio" name="agency_type" value="1"
+                                                    {{ old('agency_type')=="1" ? 'checked':'' }}/>
+                                                    <span></span>
+                                                    @lang('Agency')
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="agency_type" value="2"
+                                                    {{ old('agency_type')=="2" ? 'checked':'' }}/>
+                                                    <span></span>
+                                                    @lang('Distributor')
+                                                </label>
+                                                @error('agency_type')
+                                                    <div class="invalid-feedback">{{ $errors->first('agency_type') }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group center_type" id="center_type1" style="display: none">
                                     <label>@lang('Center type categorization')<span class="text-danger">*</span></label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="user_id">@lang('Select User') <span class="text-danger">*</span></label>
-                                            <div class=" col-lg-9 col-md-9 col-sm-12">
-                                             <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
-                                                 id="kt_select2_1" name="user_id" required>
-                                                <option value="">@lang('--Select user--')</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{$user->id}}">{{ $user->email }}</option>
-                                                @endforeach
-                                             </select>
-                                            @error('user_id')
-                                             <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
-                                            @enderror
+                                            <label>@lang('Maintenance center type')<span class="text-danger">*</span></label>
+                                            <div class="radio-inline">
+                                                <label class="radio">
+                                                    <input type="radio" name="maintenance_type" value="1"
+                                                    {{ old('maintenance_type')=="1" ? 'checked':'' }}/>
+                                                    <span></span>
+                                                    @lang('Service center')
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="maintenance_type" value="2"
+                                                    {{ old('maintenance_type')=="2" ? 'checked':'' }}/>
+                                                    <span></span>
+                                                    @lang('Workshop')
+                                                </label>
+                                                @error('maintenance_type')
+                                                    <div class="invalid-feedback">{{ $errors->first('maintenance_type') }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="specialty_id">@lang('Maintenance center specialties') <span class="text-danger">*</span></label>
+                                            <select class="form-control select2 {{ $errors->has('specialty_id') ? 'is-invalid' : '' }}"
+                                                id="kt_select2_2" name="specialty_id[]" multiple="multiple" style="width: 100%">
+                                                @foreach ($specialties as $specialty)
+                                                    <option value="{{$specialty->id}}">{{ $specialty->name }} - {{ $specialty->name_ar }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('specialty_id')
+                                             <div class="invalid-feedback">{{ $errors->first('specialty_id') }}</div>
+                                            @enderror
+                                            <span class="form-text text-muted">@lang('You can choose more than one specialty')</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -471,7 +511,7 @@
             }
             };jQuery(document).ready((function(){KTUserEdit.init()}));
 </script>
-{{-- <script>
+<script>
     $(document).ready(function() {
     $("input[name$='center_type']").click(function() {
         var test = $(this).val();
@@ -480,7 +520,23 @@
         $("#center_type" + test).show();
     });
     });
-</script> --}}
+</script>
+@if (old('center_type') == "0")
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type0").show();
+        });
+    </script>
+    @endif
+@if (old('center_type') == "1")
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type1").show();
+        });
+    </script>
+@endif
 <script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 <script>

@@ -56,6 +56,7 @@ class CarController extends Controller
         $manufactures=CarManufacture::all();
         $capacities=CarCapacity::all();
         $colors=CarColor::all();
+        //dd($page_title,$page_description,$makers,$bodies,$years,$badges,$features,$countries,$manufactures,$capacities,$colors);
         return view('dashboard.Car.add', compact('page_title', 'page_description','makers',
         "years","bodies","badges","features","countries","manufactures","capacities","colors"));
     }
@@ -224,5 +225,13 @@ class CarController extends Controller
             'cities' => null
         ]);
     }
+    public function Status(Request $request){
+        $car = Car::find($request->id);
+        $car->update(["status"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+
 
 }

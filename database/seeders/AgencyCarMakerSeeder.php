@@ -4,11 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Agency;
 use App\Models\Car;
+use App\Models\CarMaker;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
-use Illuminate\Database\Seeder;
-
-class AgencyCarSeeder extends Seeder
+class AgencyCarMakerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,8 +19,8 @@ class AgencyCarSeeder extends Seeder
     {
         $faker = Faker::create();
         foreach (range(1,10) as $value){
-            DB::table('agency_cars')->insert([
-                'car_id'            => Car::all()->random()->id,
+            DB::table('agency_car_makers')->insert([
+                'CarMaker_id'       => CarMaker::all()->random()->id,
                 'agency_id'         => Agency::all()->random()->id,
                 'created_at'        => now(),
                 'updated_at'        => now()
