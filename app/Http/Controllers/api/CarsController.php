@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CarCollection;
 use App\Http\Resources\CarResource;
+use App\Models\car_deposit;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator as Validator;
@@ -36,7 +37,32 @@ class CarsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-        public function index()
+    public function failed($validator)
+    {
+        $response   = new Responseobject();
+        $response->status = $response::status_failed;
+        $response->code = $response::code_failed;
+        foreach ($validator->errors()->getMessages() as $item) {
+            array_push($response->msg, $item);
+        }
+        return Response::json(
+            $response
+        );
+    }
+    public function Validator($request,$rules)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        return Validator::make($request->all(),$rules);
+    }
+    public function index()
     {
         return 1;
 
@@ -71,17 +97,8 @@ class CarsController extends Controller
     public function show(Request $request)
     {
 
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
-                default_lang($locale);
-            }else {
-                default_lang();
-            }
-        }else {
-            default_lang();
-        }
-        $validator  = Validator::make($request->all(), [
-            'car_id'           => 'required|integer',
+        $validator=$this->Validator($request,[
+            "car_id"            => 'required|integer',
         ]);
         if (!$validator->fails()) {
             if(!$car=Car::find($request->car_id)){
@@ -90,15 +107,7 @@ class CarsController extends Controller
             $data=(new CarResource($car))->unset(true);
             return  $this->returnData('mCar',$data,__('Successfully'));
         }else {
-            $response   = new Responseobject();
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->msg, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return $this->failed($validator);
         }
 
     }
@@ -139,25 +148,16 @@ class CarsController extends Controller
     public function search(Request $request)
     {
 
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
-                default_lang($locale);
-            }else {
-                default_lang();
-            }
-        }else {
-            default_lang();
-        }
-        $validator  = Validator::make($request->all(), [
+        $validator=$this->Validator($request,[
             "interest_country" => 'required|string|max:255',
             "car_status"       => 'required|string|max:255|in:Used,New,مستعملة,جديدة',
             "word"             => 'required|string|max:255',
         ]);
         if (!$validator->fails()) {
             if(session()->get('app_locale')=="ar")
-                $status=(($request->car_status=="جديدة") ? Car::STATUS_NEW : Car::STATUS_USED);
+                $status=(($request->car_status=="جديدة") ? Car::IS_NEW : Car::IS_USED);
             else {
-                $status=(($request->car_status=="New") ? Car::STATUS_NEW : Car::STATUS_USED);
+                $status=(($request->car_status=="New") ? Car::IS_NEW : Car::IS_USED);
             }
             $data=new CarCollection(
                 Car::whereHas('country', function ($query)use($request) {
@@ -175,15 +175,50 @@ class CarsController extends Controller
             );
             return $data;
         }else {
-            $response   = new Responseobject();
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->msg, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return $this->failed($validator);
         }
     }
+    public function deposit(Request $request)
+    {
+
+        $validator=$this->Validator($request,[
+            "car_id"            => 'required|integer',
+            "price"             => 'required|integer',
+            "weaccept_order_id" => 'required|integer',
+        ]);
+        if (!$validator->fails()) {
+            if(!$car=Car::find($request->car_id)){
+                return $this->errorMessage('Car not found');
+            }
+            car_deposit::create([
+                'user_id'=> Auth()->user()->id,
+                'car_id'=> $car->id,
+                'price'=> $request->price,
+                'weaccept_order_id'=> $request->weaccept_order_id
+            ]);
+            $data=(new CarResource($car))->unset(true);
+            return  $this->returnData('mCar',$data,__('Deposit Successfully'));
+
+        }else {
+            return $this->failed($validator);
+        }
+    }
+    public function alert(Request $request)
+    {
+        $validator=$this->Validator($request,[
+            "car_id"            => 'required|integer',
+            "status"             => 'required|integer|between:0,1',
+        ]);
+        if (!$validator->fails()) {
+            if(!$car=Car::find($request->car_id)){
+                return $this->errorMessage('Car not found');
+            }
+            $car->update(["status"=>$request->status]);
+            return  $this->returnSuccess(__('Success change Status of car'));
+
+        }else {
+            return $this->failed($validator);
+        }
+    }
+
 }

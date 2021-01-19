@@ -274,7 +274,7 @@
                                     @endphp
                                    @foreach ($features as $feature)
                                        <option value="{{$feature->id}}"
-                                        
+
                                         {{ (old('feature_id')[$c]==$feature->id) ?  'selected':'' }}
                                         {{(old('feature_id')[$c]==$feature->id && $c+1 <$count) ? $c++:''}}
                                         >{{$feature->name}}- {{$feature->name_ar}}</option>
@@ -433,29 +433,29 @@
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <div class="radio-inline">
                                     <label class="radio">
-                                        <input type="radio" name="status" value="0"
+                                        <input type="radio" name="isNew" value="0"
                                         {{
-                                            old('status') ?
-                                                (old('status') =="0") ? 'checked': ''
+                                            old('isNew') ?
+                                                (old('isNew') =="0") ? 'checked': ''
                                                 :
-                                                ($car->status=="0")  ? 'checked':''
+                                                ($car->isNew=="0")  ? 'checked':''
                                         }}  required/>
                                         <span></span>
                                         @lang('New')
                                     </label>
                                     <label class="radio">
-                                        <input type="radio" name="status" value="1"
+                                        <input type="radio" name="isNew" value="1"
                                         {{
-                                            old('status') ?
-                                                (old('status') =="1") ? 'checked': ''
+                                            old('isNew') ?
+                                                (old('isNew') =="1") ? 'checked': ''
                                                 :
-                                                ($car->status=="1")  ? 'checked':''
+                                                ($car->isNew=="1")  ? 'checked':''
                                         }}/>
                                         <span></span>
                                         @lang('Used')
                                     </label>
-                                    @error('status')
-                                        <div class="invalid-feedback">{{ $errors->first('status') }}</div>
+                                    @error('isNew')
+                                        <div class="invalid-feedback">{{ $errors->first('isNew') }}</div>
                                     @enderror
                                 </div>
                             </div>

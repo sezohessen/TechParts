@@ -224,5 +224,13 @@ class CarController extends Controller
             'cities' => null
         ]);
     }
+    public function Status(Request $request){
+        $car = Car::find($request->id);
+        $car->update(["status"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+
 
 }

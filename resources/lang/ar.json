@@ -288,5 +288,8 @@
     "New":"جديدة",
     "Used":"مستعملة",
     "Manual":"يدوي",
-    "Automatic":"أوتوماتيكي"
+    "Automatic":"أوتوماتيكي",
+    "Deposit Successfully":"تم الإيداع بنجاح",
+    "Success change Status of car":"نجاح تغيير حالة السيارة"
+
 }

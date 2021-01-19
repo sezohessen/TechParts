@@ -86,7 +86,7 @@ class CarResource extends JsonResource
             "badgeList"=>$car_badges,
             "carMaker"=>@$this->model->name,
             "carModel"=>@$this->maker->name,
-            "carState"=>$this->status== Car::STATUS_NEW ? __("New") :  __("Used"),
+            "carState"=>$this->status== Car::IS_NEW ? __("New") :  __("Used"),
             "carYear"=>@$this->year->year,
             "featureList"=>$car_features,
             "id"=>$this->id,
