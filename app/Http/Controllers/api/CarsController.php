@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator as Validator;
 
+use function PHPSTORM_META\type;
+
 class Responseobject
 {
     const status_ok = true;
@@ -28,6 +30,11 @@ class Responseobject
     public $status;
     public $code;
     public $msg = array();
+}
+class DataType {
+    const single = 0;
+    const list = 1;
+    const compare = 2;
 }
 class CarsController extends Controller
 {
@@ -49,7 +56,7 @@ class CarsController extends Controller
             $response
         );
     }
-    public function Validator($request,$rules)
+    public function Validator($request,$rules,$niceNames=[])
     {
         if ($locale = $request->lang) {
             if (in_array($locale, ['ar', 'en']) ) {
@@ -60,41 +67,9 @@ class CarsController extends Controller
         }else {
             default_lang();
         }
-        return Validator::make($request->all(),$rules);
+        return Validator::make($request->all(),$rules,[],$niceNames);
     }
-    public function index()
-    {
-        return 1;
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
+    public function details(Request $request)
     {
 
         $validator=$this->Validator($request,[
@@ -104,7 +79,8 @@ class CarsController extends Controller
             if(!$car=Car::find($request->car_id)){
                 return $this->errorMessage('Car not found');
             }
-            $data=(new CarResource($car))->unset(true);
+            $type   = new DataType();
+            $data=(new CarResource($car))->type($type::single);
             return  $this->returnData('mCar',$data,__('Successfully'));
         }else {
             return $this->failed($validator);
@@ -112,39 +88,7 @@ class CarsController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
     public function search(Request $request)
     {
 
@@ -159,7 +103,8 @@ class CarsController extends Controller
             else {
                 $status=(($request->car_status=="New") ? Car::IS_NEW : Car::IS_USED);
             }
-            $data=new CarCollection(
+            $type   = new DataType();
+            $data=(new CarCollection(
                 Car::whereHas('country', function ($query)use($request) {
                     return (session()->get('app_locale')=="ar")?
                     $query->where('name_ar', 'LIKE', $request->interest_country)
@@ -172,7 +117,7 @@ class CarsController extends Controller
                 })
                 ->orWhere('status', '=', $status)
                 ->paginate(10)
-            );
+            ))->type(2);
             return $data;
         }else {
             return $this->failed($validator);
@@ -185,6 +130,8 @@ class CarsController extends Controller
             "car_id"            => 'required|integer',
             "price"             => 'required|integer',
             "weaccept_order_id" => 'required|integer',
+        ],[
+            'weaccept_order_id' => __('Order ID'),
         ]);
         if (!$validator->fails()) {
             if(!$car=Car::find($request->car_id)){
@@ -196,7 +143,8 @@ class CarsController extends Controller
                 'price'=> $request->price,
                 'weaccept_order_id'=> $request->weaccept_order_id
             ]);
-            $data=(new CarResource($car))->unset(true);
+            $type   = new DataType();
+            $data=(new CarResource($car))->type($type::single);
             return  $this->returnData('mCar',$data,__('Deposit Successfully'));
 
         }else {
@@ -220,5 +168,30 @@ class CarsController extends Controller
             return $this->failed($validator);
         }
     }
+    public function compare(Request $request)
+    {
+        $validator=$this->Validator($request,[
+            "car_id_01"            => 'required|integer',
+            "car_id_02"             => 'required|integer|different:car_id_01',
+        ],[
+            'car_id_01' => __('First Car ID'),
+            'car_id_02' => __('Second Car ID'),
+        ]);
+        if (!$validator->fails()) {
+            if(!$first_car=Car::find($request->car_id_01)){
+                return $this->errorMessage('First Car ID not found');
+            }
+            if(!$second_car=Car::find($request->car_id_02)){
+                return $this->errorMessage('Second Car ID not found');
+            }
+            $type   = new DataType();
+            $data=(new CarCollection(Car::find([$request->car_id_01,$request->car_id_02])));//->type($type::compare);
+            return  $this->returnData('carList',$data->collection,__('Successfully'));
+
+        }else {
+            return $this->failed($validator);
+        }
+    }
+
 
 }

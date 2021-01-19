@@ -27,8 +27,9 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post("login",'api\UserController@login');
 });
 Route::group(['prefix' => 'car','namespace'=>"api"], function () {
-    Route::post("details",'CarsController@show');
+    Route::post("details",'CarsController@details');
     Route::post("list",'CarsController@search');
     Route::post("alert",'CarsController@alert');
+    Route::post("compare",'CarsController@compare');
 
 });

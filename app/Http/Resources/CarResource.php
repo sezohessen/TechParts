@@ -16,14 +16,26 @@ class CarResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    protected $unset;
-    public function unset($value){
-        $this->unset = $value;
+    protected $type;
+    public function __construct($value=null) {
+        $this->type = $value;
+    }
+    public function type($value){
+        $this->type = $value;
         return $this;
     }
     public function toArray($request)
     {
-        if($this->unset){
+        return  $this->type;
+        if($this->compare){
+            $data=[
+                "carFuelType"=>null,
+                "transmission"=> $this->transmission== Car::TRANSIMSSION_MANUAL ? __("Manual") :  __("Automatic"),
+                "used_kilometers"=> $this->kiloUsed
+            ];
+            return array_merge($this->item(),$data);
+        }
+        elseif($this->single){
             $carMan=attr_lang_name($this->manufacture->name_ar,$this->manufacture->name);
                 //  return ListCarUser::where('car_id','=',$this->id)->get();
             if($this->payment== Car::PAYMENT_CASH ){
@@ -34,7 +46,7 @@ class CarResource extends JsonResource
             $payment_loan_amount=$this->InstallmentPrice." ".$this->country->code." / ".$this->InstallmentMonth." months";
             $data = [
                 "aboutCar" =>attr_lang_desc($this->Description_ar,$this->Description),
-                //carFuelType
+                "carFuelType"=>null,
                 "bodyStyle"=>$this->body->name,
                 "carManufacturing"=>$carMan,
                 "color"=>@$this->color->code,
@@ -61,14 +73,13 @@ class CarResource extends JsonResource
                 //CarCapacity_id
                 //SellerType
             ];
-            return array_merge($this->common_between(),$data);
+            return array_merge($this->item(),$data);
         }else {
-            return $this->common_between();
+            return $this->item();
         }
 
     }
-    public function common_between(){
-        $price= $this->price-($this->price_after_discount*0.01*($this->price));
+    public function item(){
         $car_badges=[];
         foreach($this->badges as $item){
             ($badge=Badges::where('active', '=', 1)->find($item->badge_id))?$car_badges[]=attr_lang_name($badge->name_ar,$badge->name):'';
@@ -77,18 +88,24 @@ class CarResource extends JsonResource
         foreach($this->features as $item){
             ($feature=Feature::where('active', '=', 1)->find($item->feature_id))? $car_features[]=attr_lang_name($feature->name_ar,$feature->name):'';
         }
+        $data= [
+            "adsExpire" =>date("Y-m-d",strtotime("+1 month",strtotime($this->created_at))),
+            "badgeList"=>$car_badges,
+            "featureList"=>$car_features,
+        ];
+        return array_merge($this->common(),$data);
+    }
+    public function common(){
+        $price= $this->price-($this->price_after_discount*0.01*($this->price));
         $images=[];
         foreach($this->images as $item){
             $images[]=url('img/Cars/'.Image::find($item->img_id)->name);
         }
         return [
-            "adsExpire" =>date("Y-m-d",strtotime("+1 month",strtotime($this->created_at))),
-            "badgeList"=>$car_badges,
             "carMaker"=>@$this->model->name,
             "carModel"=>@$this->maker->name,
             "carState"=>$this->status== Car::IS_NEW ? __("New") :  __("Used"),
             "carYear"=>@$this->year->year,
-            "featureList"=>$car_features,
             "id"=>$this->id,
             "imageList"=>$images,
             "isAccident"=>($this->AccidentBefore) ? true :false,
@@ -101,7 +118,7 @@ class CarResource extends JsonResource
             "price"=> (int)$price,
             "price_before_discount"=> $this->price,
             "promotedStatus"=> null,
-            "used_kilometers"=> $this->kiloUsed
         ];
     }
+
 }

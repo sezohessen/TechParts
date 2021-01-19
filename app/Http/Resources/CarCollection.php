@@ -12,6 +12,12 @@ class CarCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public function type($value){
+       return $value;
+    }
+    public function __construct() {
+        parent::__construct($this->type());
+    }
     public function toArray($request)
     {
         return [
