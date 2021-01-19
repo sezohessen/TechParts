@@ -41,8 +41,6 @@ class UserController extends Controller
                     "email" => $user->email,
                     "first_name" => $user->first_name,
                     "image" => @$user->image->name,
-                    "custom" => @$user->custom,
-
                     "is_phone_verified" => $user->is_phone_virefied,
                     "last_name" => $user->last_name,
                     "phone" => $user->phone,

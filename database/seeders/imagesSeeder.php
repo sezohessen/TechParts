@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 class imagesSeeder extends Seeder
@@ -14,8 +13,11 @@ class imagesSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        $array = [
+            'name'              =>  "https://source.unsplash.com/random",
+            'created_at'        =>  now(),
+        ];
+        foreach ($array as $value){
             DB::table('images')->insert([
                 'name'              =>  "https://source.unsplash.com/random",
                 'created_at'        =>  now(),
