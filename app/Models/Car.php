@@ -110,7 +110,7 @@ class Car extends Model
             'lng'                         => $request->lng,
             'ServiceHistory'              => $request->ServiceHistory,
             'transmission'                => $request->transmission,
-            'isNew'                       => $request->status,
+            'isNew'                       => $request->isNew,
             'SellerType'                  => $request->SellerType,
             'payment'                     => $request->payment,
             'phone'                       => $request->phone,
@@ -160,8 +160,13 @@ class Car extends Model
     }
     public function maker()
     {
-        return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
+        return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
     }
+    public function maker_data()
+    {
+        return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
+    }
+
     public function year()
     {
         return $this->belongsTo(CarYear::class,"CarYear_id","id");

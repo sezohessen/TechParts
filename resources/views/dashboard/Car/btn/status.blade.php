@@ -3,7 +3,7 @@
         <div class="col-3">
             <span class="switch switch-success">
             <label>
-                <input type="checkbox" =
+                <input type="checkbox"
                 id="{{$id}}" {{($status==1) ? 'checked' : ''}}
                 onclick="changeUserStatus(event.target, {{ $id }});"/>
             <span></span>

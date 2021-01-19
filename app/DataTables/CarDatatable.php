@@ -22,7 +22,7 @@ class CarDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('country.name_ar', '{{Str::limit($country["name_ar"], 100)}}')
+            ->editColumn('country.name_ar', '{{Str::limit($country["name_ar"] ?? 1, 100)}}')
             ->editColumn('maker.name', '{{Str::limit($maker["name"], 100)}}')
             ->editColumn('phone', '{{Str::limit($phone, 100)}}')
             ->editColumn('price', '{{Str::limit($price, 100)}}')

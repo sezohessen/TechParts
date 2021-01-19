@@ -212,13 +212,8 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('badge_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_11" name="badge_id[]"   required multiple >
-                                    @php
-                                        $c=0;
-                                        $count=count(old('badge_id') ?? array());
-                                    @endphp
                                     @foreach ($badges as $badge)
-                                       <option value="{{$badge->id}}"  {{ (old('badge_id')[$c]==$badge->id) ? 'selected' :'' }}
-                                         {{(old('badge_id')[$c]==$badge->id && $c+1 <$count) ? $c++:''}}>{{$badge->name}} - {{$badge->name_ar}}</option>
+                                       <option value="{{$badge->id}}">{{$badge->name}} - {{$badge->name_ar}}</option>
                                     @endforeach
                                 </select>
                                 @error('badge_id')
@@ -238,7 +233,7 @@
                                         $count=count(old('feature_id') ?? array());
                                     @endphp
                                     @foreach ($features as $feature)
-                                       <option value="{{$feature->id}}" {{ (old('feature_id')[$c]==$feature->id) ?  'selected':'' }}  {{(old('feature_id')[$c]==$feature->id && $c+1 <$count) ? $c++:''}} >{{$feature->name}}- {{$feature->name_ar}}</option>
+                                       <option value="{{$feature->id}}" >{{$feature->name}}- {{$feature->name_ar}}</option>
                                     @endforeach
                                 </select>
                                 @error('feature_id')
