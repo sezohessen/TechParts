@@ -15,7 +15,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" novalidate>
+        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
