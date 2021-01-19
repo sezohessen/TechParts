@@ -12,18 +12,21 @@ class CarCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    protected $type;
     public function type($value){
-       return $value;
-    }
-    public function __construct() {
-        parent::__construct($this->type());
+        $this->type = $value;
+        return $this;
     }
     public function toArray($request)
     {
+ 
         return [
-            'data' =>parent::toArray($request),
+            'data' =>$this->collection->map(function(CarResource $resource) use($request){
+                return $resource->type($this->type)->toArray($request);
+            })->all(),
             'status'=>true,
             "msg"=>__('Success')
         ];
+
     }
 }

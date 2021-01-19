@@ -32,9 +32,9 @@ class Responseobject
     public $msg = array();
 }
 class DataType {
-    const single = 0;
-    const list = 1;
-    const compare = 2;
+    const single = 1;
+    const list = 2;
+    const compare = 3;
 }
 class CarsController extends Controller
 {
@@ -117,7 +117,7 @@ class CarsController extends Controller
                 })
                 ->orWhere('status', '=', $status)
                 ->paginate(10)
-            ))->type(2);
+            ))->type($type::list);
             return $data;
         }else {
             return $this->failed($validator);
@@ -185,7 +185,7 @@ class CarsController extends Controller
                 return $this->errorMessage('Second Car ID not found');
             }
             $type   = new DataType();
-            $data=(new CarCollection(Car::find([$request->car_id_01,$request->car_id_02])));//->type($type::compare);
+            $data=(new CarCollection(Car::find([$request->car_id_01,$request->car_id_02])))->type($type::compare);
             return  $this->returnData('carList',$data->collection,__('Successfully'));
 
         }else {

@@ -17,27 +17,15 @@ class CarResource extends JsonResource
      * @return array
      */
     protected $type;
-    public function __construct($value=null) {
-        $this->type = $value;
-    }
     public function type($value){
         $this->type = $value;
         return $this;
     }
     public function toArray($request)
     {
-        return  $this->type;
-        if($this->compare){
-            $data=[
-                "carFuelType"=>null,
-                "transmission"=> $this->transmission== Car::TRANSIMSSION_MANUAL ? __("Manual") :  __("Automatic"),
-                "used_kilometers"=> $this->kiloUsed
-            ];
-            return array_merge($this->item(),$data);
-        }
-        elseif($this->single){
+
+        if($this->type==1){
             $carMan=attr_lang_name($this->manufacture->name_ar,$this->manufacture->name);
-                //  return ListCarUser::where('car_id','=',$this->id)->get();
             if($this->payment== Car::PAYMENT_CASH ){
                 $payment=__("Cash");
             }else {
@@ -74,8 +62,20 @@ class CarResource extends JsonResource
                 //SellerType
             ];
             return array_merge($this->item(),$data);
-        }else {
+        }
+        elseif($this->type==2)  {
             return $this->item();
+        }
+        elseif($this->type==3){
+            $data=[
+                "carFuelType"=>null,
+                "transmission"=> $this->transmission== Car::TRANSIMSSION_MANUAL ? __("Manual") :  __("Automatic"),
+                "used_kilometers"=> $this->kiloUsed
+            ];
+            return array_merge($this->item(),$data);
+        }else {
+            
+            return $this->type;
         }
 
     }
