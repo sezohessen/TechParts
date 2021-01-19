@@ -12,6 +12,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\DataTables\Agency\AgencyDatatable;
+use App\Models\AgencyCarMaker;
+use App\Models\AgencySpecialties;
+use App\Models\Specialties;
+
 class AgencyController extends Controller
 {
     /**
@@ -41,7 +45,9 @@ class AgencyController extends Controller
             $page_description = __("Add new Agency");
             $countries        = Country::all();
             $car_makers       = CarMaker::all();
-            return view('AgencyDashboard.Agency.add', compact('page_title', 'page_description','countries','car_makers'));
+            $specialties      = Specialties::all();
+            return view('AgencyDashboard.Agency.add', compact('page_title', 'page_description'
+            ,'countries','car_makers','specialties'));
         }
     }
 
@@ -53,10 +59,10 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
+        #################################
         //Validate and create for Agency Table
         $rules          = Agency::rules($request,'AgencyDash');
         $request->validate($rules);
-        //Forth parameter to avoid check box that in agency dashboad
         $credentials    = Agency::credentials($request,Auth::id(),NULL,0);
         $Agency         = Agency::create($credentials);
         //After Creating Agency row ,Agency Contact will be created by adding the agency id
@@ -67,12 +73,21 @@ class AgencyController extends Controller
         $credentials    = AgencyContact::credentials($request,$agent_id);
         $AgencyContact  = AgencyContact::create($credentials);
         //Validate and create for AgencyCar Table
-        $rules          = AgencyCar::rules($request);
+        $rules          = AgencyCarMaker::rules($request);
         $request->validate($rules);
-        //Get car_id Array to Agency Car
+        //Get car_maker Array to Agency Car
         foreach ($request->CarMaker_id as $CarMaker_id){
-            $credentials    = AgencyCar::credentials($CarMaker_id,$agent_id);
-            $AgencyCar      = AgencyCar::create($credentials);
+            $credentials    = AgencyCarMaker::credentials($CarMaker_id,$agent_id);
+            $AgencyCar      = AgencyCarMaker::create($credentials);
+        }
+        //Validation completed in Agency Depends on center_type
+
+        //Get car_id Array to Agency Car
+        if($request->center_type==1){
+            foreach ($request->specialty_id as $specialty_id){
+                $credentials    = AgencySpecialties::credentials($specialty_id,$agent_id);
+                $Specialties    = AgencySpecialties::create($credentials);
+            }
         }
         session()->flash('created',__("Agency has been Created successfully!"));
         return redirect()->route('agency.index');
@@ -104,7 +119,7 @@ class AgencyController extends Controller
         $page_title          = __("Edit Agency");
         $page_description    = __("Edit");
         $car_makers          = CarMaker::all();
-        $car_makers_selected = AgencyCar::where('agent_id',$id)->get();
+        $car_makers_selected = AgencyCarMaker::where('agency_id',$id)->get();
         //Add Agency Cars Id in array
         //I will Colled all selectd car to compare it
         $SelectedCarMakers = [];

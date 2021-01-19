@@ -1,7 +1,7 @@
 @if($center_type==0)
-    <p>Distributor</p>
+    <p>Agency</p>
 @elseif($center_type==1)
-   <p>Agency</p>
+   <p>Maintenance</p>
 @else
-    <p>Individual</p>
+    <p>Spare</p>
 @endif
