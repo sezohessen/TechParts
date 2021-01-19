@@ -160,9 +160,9 @@ class Car extends Model
     }
     public function maker()
     {
-        return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
+        return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
     }
-    public function maker_data()
+    public function make()
     {
         return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
     }

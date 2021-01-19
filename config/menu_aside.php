@@ -153,6 +153,22 @@ return [
 
                     ]
                 ],
+                [
+                    'title' => 'Agency Cars',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add car',
+                            'page' => "/dashboard/agency/car/create"
+                        ],
+                        [
+                            'title' => 'View cars',
+                            'page' => '/dashboard/agency/car'
+                        ],
+
+                    ]
+                ],
 
             ]
         ],

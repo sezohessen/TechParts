@@ -42,6 +42,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/AskExpert','AskExpertController');
     Route::resource('/finance-request','FinanceRequestController');
     Route::resource('/agency','AgencyController');
+    Route::resource('/agency/car','AgencyCarController');
     Route::resource('/car','CarController');
     Route::resource('/bank','BankController');
     Route::resource('/bank-offer','BankOfferController');
