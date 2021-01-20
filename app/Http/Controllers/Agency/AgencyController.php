@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use App\DataTables\Agency\AgencyDatatable;
 use App\Models\AgencyCarMaker;
 use App\Models\AgencySpecialties;
+use App\Models\City;
+use App\Models\Governorate;
 use App\Models\Specialties;
 
 class AgencyController extends Controller
@@ -59,12 +61,13 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-        #################################
         //Validate and create for Agency Table
         $rules          = Agency::rules($request,'AgencyDash');
         $request->validate($rules);
         $credentials    = Agency::credentials($request,Auth::id(),NULL,0);
+        $credentials['active'] = 0;
         $Agency         = Agency::create($credentials);
+
         //After Creating Agency row ,Agency Contact will be created by adding the agency id
         //Validate and create for AgencyContact Table
         $agent_id       = $Agency->id;
@@ -119,6 +122,7 @@ class AgencyController extends Controller
         $page_title          = __("Edit Agency");
         $page_description    = __("Edit");
         $car_makers          = CarMaker::all();
+        $specialties         = Specialties::all();
         $car_makers_selected = AgencyCarMaker::where('agency_id',$id)->get();
         //Add Agency Cars Id in array
         //I will Colled all selectd car to compare it
@@ -127,8 +131,16 @@ class AgencyController extends Controller
         {
             $SelectedCarMakers[] = $carMaker->CarMaker_id;
         }
-        return view('AgencyDashboard.Agency.edit', compact('page_title', 'page_description'
-        ,'countries','agency','agency_contact','car_makers','SelectedCarMakers'));
+        $agency_specialties_selected = AgencySpecialties::where('agency_id',$id)->get();
+        $agency_specialties = [];
+        if($agency_specialties_selected->count()){
+            foreach($agency_specialties_selected as $specialty)
+            {
+                $agency_specialties[] = $specialty->specialty_id;
+            }
+        }
+        return view('AgencyDashboard.Agency.edit', compact('page_title', 'page_description','agency_specialties'
+        ,'countries','agency','agency_contact','car_makers','SelectedCarMakers','specialties'));
         }else{
             return redirect()->route('agency.index');
         }
@@ -144,10 +156,12 @@ class AgencyController extends Controller
     public function update(Request $request, $id)
     {
         $agency         = Agency::find($id);
+        $OldSpecialties = $agency->maintenance_type;
         $rules          = Agency::rules($request,$id);
         $request->validate($rules);
         //Forth parameter to avoid check box that in agency dashboad
         $credentials    = Agency::credentials($request,Auth::id(),$agency->img_id,0);
+        $credentials['active'] = $agency->active;
         $Agency         = Agency::where('id',$id)->update($credentials);
         //After Creating Agency row ,Agency Contact will be created by adding the dagency id
         $rules          = AgencyContact::rules($request);
@@ -163,33 +177,96 @@ class AgencyController extends Controller
         //Array Differnce compute difference between to arrays
         //if Get Array diff between Selected and New select ,then It will return the array that I need to delete
         //if Get Array diff between New select and Selected ,then It will return the array that I need to create
-        $AgencyCars     = AgencyCar::where('agent_id',$id)->get();
+        $AgencyCarMakers     = AgencyCarMaker::where('agency_id',$id)->get();
         $SelectedCarMaker = [];
-        foreach($AgencyCars as $AgencyCar){
-            $SelectedCarMaker[] = $AgencyCar->CarMaker_id;
+        foreach($AgencyCarMakers as $AgencyMaker){
+            $SelectedCarMaker[] = $AgencyMaker->CarMaker_id;
         }
-
         $NeedToBeDeleted = array_diff($SelectedCarMaker,$request->CarMaker_id);
         $NeedToBeCreated = array_diff($request->CarMaker_id,$SelectedCarMaker);
         //Validate and create for AgencyCar Table
-        $rules          = AgencyCar::rules($request);
+        $rules          = AgencyCarMaker::rules($request);
         $request->validate($rules);
         //Get car_id Array to Agency Car , (Create New)
         foreach ($NeedToBeCreated as $CarMaker_id){
-            $credentials    = AgencyCar::credentials($CarMaker_id,$id);
-            $AgencyCar      = AgencyCar::create($credentials);
+            $credentials    = AgencyCarMaker::credentials($CarMaker_id,$id);
+            $AgencyCar      = AgencyCarMaker::create($credentials);
         }
         //Delete Removed Selected
         foreach ($NeedToBeDeleted as $CarMaker_id){
-            $AgencyCar      = AgencyCar::where([
+            $AgencyCar      = AgencyCarMaker::where([
                 ['CarMaker_id','=',$CarMaker_id],
-                ['agent_id','=',$id]
+                ['agency_id','=',$id]
             ])->delete();
+        }
+        //Center Type Update
+
+        if($request->center_type==0||$request->center_type==2){
+            $NeedToBeDeleted    = AgencySpecialties::where('agency_id',$id)->get();
+            if($NeedToBeDeleted->count()){
+                foreach ($NeedToBeDeleted as $agencySpecailty){
+                    $AgencySpecialization = AgencySpecialties::where([
+                        ['specialty_id','=',$agencySpecailty->specialty_id],
+                        ['agency_id','=',$id]
+                    ])->delete();
+                }
+            }
+        }else{
+         if($OldSpecialties){
+            $AgencySpecialization   = AgencySpecialties::where('agency_id',$id)->get();
+            $SelectedSpecialization = [];
+            foreach($AgencySpecialization as $AgencySpecialty){
+                $SelectedSpecialization[] = $AgencySpecialty->specialty_id;
+            }
+            $NeedToBeDeleted = array_diff($SelectedSpecialization,$request->specialty_id);
+            $NeedToBeCreated = array_diff($request->specialty_id,$SelectedSpecialization);
+            //Validation completed in Agency Depends on center_type
+
+            //Get Specailty Array to AgencySpecialization , (Create New)
+            foreach ($NeedToBeCreated as $specailty){
+                $credentials        = AgencySpecialties::credentials($specailty,$id);
+                $AgencySpecialties  = AgencySpecialties::create($credentials);
+            }
+            //Delete Removed Selected
+            foreach ($NeedToBeDeleted as $agencySpecailty){
+                $AgencySpecialization = AgencySpecialties::where([
+                    ['specialty_id','=',$agencySpecailty],
+                    ['agency_id','=',$id]
+                ])->delete();
+            }
+         }else{
+            foreach ($request->specialty_id as $specialty_id){
+                $credentials    = AgencySpecialties::credentials($specialty_id,$id);
+                $Specialties    = AgencySpecialties::create($credentials);
+            }
+         }
         }
         session()->flash('updated',__("Agency has been Updated successfully!"));
         return redirect()->route('agency.index');
     }
-
+    public function governorate($id)
+    {
+        $cities = City::where('governorate_id', $id)->get();
+        if($cities->count() > 0 ){
+            return response()->json([
+                'cities' => $cities
+            ]);
+        }
+        return response()->json([
+            'cities' => null
+        ]);
+    }
+    public function country($id){
+        $governorates = Governorate::where('country_id', $id)->get();
+        if($governorates->count() > 0 ){
+            return response()->json([
+                'governorates' => $governorates
+            ]);
+        }
+        return response()->json([
+            'governorates' => null
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *

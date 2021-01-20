@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.agency')
+@extends('layout.master')
 
 {{-- Content --}}
 @section('content')
@@ -12,6 +12,9 @@
             <h3 class="card-title">
                 {{$page_title}}
             </h3>
+            <div class="text-right">
+                <a href="{{ route('agency.company.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+            </div>
         </div>
         <!--begin::Form-->
         <form action="{{route("agency.company.update",$agency->id)}}" method="POST" enctype="multipart/form-data">
@@ -19,19 +22,11 @@
             @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
-                @if (session('updated'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('updated') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                @endif
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Agency Name (ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" required
                             name="name"  placeholder="@lang('Name(ENG)')" autofocus  value="{{old("name") ? old("name") : $agency->name}}"/>
                             @error('name')
                                 <div class="invalid-feedback">{{ $errors->first('name') }}</div>
@@ -78,77 +73,150 @@
                                             <input type="radio" name="center_type" value="0"
                                              {{ old('center_type')=="0" ? 'checked':(($agency->center_type==0) ? 'checked': '' ) }} required/>
                                             <span></span>
-                                            @lang('Distributor')
+                                            @lang('Agency')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="1"
                                             {{ old('center_type')=="1" ? 'checked':(($agency->center_type==1) ? 'checked': '' ) }}/>
                                             <span></span>
-                                            @lang('Agency')
+                                            @lang('Maintenance')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="2"
                                             {{ old('center_type')=="2" ? 'checked':(($agency->center_type==2) ? 'checked': '' ) }}/>
                                             <span></span>
-                                            @lang('Individual')
+                                            @lang('Spare parts')
                                         </label>
                                         @error('center_type')
                                             <div class="invalid-feedback">{{ $errors->first('center_type') }}</div>
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>@lang('Payment Method')<span class="text-danger">*</span></label>
-                                    <div class="radio-inline">
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="0"
-                                            {{ old('payment_method')=="0" ? 'checked':(($agency->payment_method==0) ? 'checked': '' ) }} required/>
-                                            <span></span>
-                                            @lang('Cash')
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="1"
-                                            {{ old('payment_method')=="1" ? 'checked':(($agency->payment_method==1) ? 'checked': '' ) }}/>
-                                            <span></span>
-                                            @lang('Installment')
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="2"
-                                            {{ old('payment_method')=="2" ? 'checked':(($agency->payment_method==2) ? 'checked': '' ) }}/>
-                                            <span></span>
-                                            @lang('Financial')
-                                        </label>
-                                        @error('payment_method')
-                                            <div class="invalid-feedback">{{ $errors->first('payment_method') }}</div>
-                                        @enderror
+                                <div class="form-group center_type" id="center_type0" style="display: none">
+                                    <label>@lang('Center type categorization')<span class="text-danger">*</span></label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>@lang('Agency center type')<span class="text-danger">*</span></label>
+                                            <div class="radio-inline">
+                                                <label class="radio">
+                                                    <input type="radio" name="agency_type" value="1"
+                                                    {{ old('agency_type')=="1" ? 'checked':(($agency->agency_type==1) ? 'checked': '' ) }}/>
+                                                    <span></span>
+                                                    @lang('Agency')
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="agency_type" value="2"
+                                                    {{ old('agency_type')=="2" ? 'checked':(($agency->agency_type==2) ? 'checked': '' ) }}/>
+                                                    <span></span>
+                                                    @lang('Distributor')
+                                                </label>
+                                                @error('agency_type')
+                                                    <div class="invalid-feedback">{{ $errors->first('agency_type') }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group center_type" id="center_type1" style="display: none">
+                                    <label>@lang('Center type categorization')<span class="text-danger">*</span></label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>@lang('Maintenance center type')<span class="text-danger">*</span></label>
+                                            <div class="radio-inline">
+                                                <label class="radio">
+                                                    <input type="radio" name="maintenance_type" value="1"
+                                                    {{ old('maintenance_type')=="1" ? 'checked':(($agency->maintenance_type==1) ? 'checked': '' ) }}/>
+                                                    <span></span>
+                                                    @lang('Service center')
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="maintenance_type" value="2"
+                                                    {{ old('maintenance_type')=="2" ? 'checked':(($agency->maintenance_type==2) ? 'checked': '' ) }}/>
+                                                    <span></span>
+                                                    @lang('Workshop')
+                                                </label>
+                                                @error('maintenance_type')
+                                                    <div class="invalid-feedback">{{ $errors->first('maintenance_type') }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="specialty_id">@lang('Maintenance center specialties') <span class="text-danger">*</span></label>
+                                            <select class="form-control select2 {{ $errors->has('specialty_id') ? 'is-invalid' : '' }}"
+                                                id="kt_select2_2" name="specialty_id[]" multiple="multiple" style="width: 100%">
+                                                @foreach ($specialties as $specialty)
+                                                    @if(in_array($specialty->id, $agency_specialties)){{-- Check if Car maker in Selected Maintance Specializations list --}}
+                                                    <option value="{{$specialty->id}}" selected>{{ $specialty->name }} - {{ $specialty->name_ar }}</option>
+                                                    @else
+                                                        <option value="{{$specialty->id}}">{{ $specialty->name }} - {{ $specialty->name_ar }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            @error('specialty_id')
+                                             <div class="invalid-feedback">{{ $errors->first('specialty_id') }}</div>
+                                            @enderror
+                                            <span class="form-text text-muted">@lang('You can choose more than one specialty')</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>@lang('Car status')<span class="text-danger">*</span></label>
-                                    <div class="radio-inline">
-                                        <label class="radio">
-                                            <input type="radio" name="car_status" value="0"
-                                            {{ old('car_status')=="0" ? 'checked':(($agency->car_status==0) ? 'checked': '' ) }} required/>
-                                            <span></span>
-                                            @lang('New')
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="car_status" value="1"
-                                            {{ old('car_status')=="1" ? 'checked':(($agency->car_status==1) ? 'checked': '' ) }}/>
-                                            <span></span>
-                                            @lang('Used')
-                                        </label>
-                                        @error('car_status')
-                                            <div class="invalid-feedback">{{ $errors->first('car_status') }}</div>
-                                        @enderror
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>@lang('Payment Method')<span class="text-danger">*</span></label>
+                                            <div class="radio-inline">
+                                                <label class="radio">
+                                                    <input type="radio" name="payment_method" value="0"
+                                                    {{ old('payment_method')=="0" ? 'checked':(($agency->payment_method==0) ? 'checked': '' ) }} required/>
+                                                    <span></span>
+                                                    @lang('Cash')
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="payment_method" value="1"
+                                                    {{ old('payment_method')=="1" ? 'checked':(($agency->payment_method==1) ? 'checked': '' ) }}/>
+                                                    <span></span>
+                                                    @lang('Installment')
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="payment_method" value="2"
+                                                    {{ old('payment_method')=="2" ? 'checked':(($agency->payment_method==2) ? 'checked': '' ) }}/>
+                                                    <span></span>
+                                                    @lang('Financial')
+                                                </label>
+                                                @error('payment_method')
+                                                    <div class="invalid-feedback">{{ $errors->first('payment_method') }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>@lang('Car status')<span class="text-danger">*</span></label>
+                                                    <div class="radio-inline">
+                                                        <label class="radio">
+                                                            <input type="radio" name="car_status" value="0"
+                                                            {{ old('car_status')=="0" ? 'checked':(($agency->car_status==0) ? 'checked': '' ) }} required/>
+                                                            <span></span>
+                                                            @lang('New')
+                                                        </label>
+                                                        <label class="radio">
+                                                            <input type="radio" name="car_status" value="1"
+                                                            {{ old('car_status')=="1" ? 'checked':(($agency->car_status==1) ? 'checked': '' ) }}/>
+                                                            <span></span>
+                                                            @lang('Used')
+                                                        </label>
+                                                        @error('car_status')
+                                                            <div class="invalid-feedback">{{ $errors->first('car_status') }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -368,6 +436,32 @@
             }
             };jQuery(document).ready((function(){KTUserEdit.init()}));
 </script>
+<script>
+    $(document).ready(function() {
+    $("input[name$='center_type']").click(function() {
+        var test = $(this).val();
+
+        $("div.center_type").hide();
+        $("#center_type" + test).show();
+    });
+    });
+</script>
+@if (old('center_type') == "0"||$agency->agency_type)
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type0").show();
+        });
+    </script>
+    @endif
+@if (old('center_type') == "1"||$agency->maintenance_type)
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type1").show();
+        });
+    </script>
+@endif
 <script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 <script>
@@ -385,7 +479,6 @@
             locationNameInput:$("#address")
         },
         enableAutocomplete: true
-
     });
 </script>
 @endsection
