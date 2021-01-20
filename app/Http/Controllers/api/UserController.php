@@ -40,7 +40,7 @@ class UserController extends Controller
                     "country_number" => $user->country_phone,
                     "email" => $user->email,
                     "first_name" => $user->first_name,
-                    "image" => @$user->image->name,
+                    "image" => @$user->image->base . @$user->image->name,
                     "is_phone_verified" => $user->is_phone_virefied,
                     "last_name" => $user->last_name,
                     "phone" => $user->phone,

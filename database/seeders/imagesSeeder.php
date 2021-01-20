@@ -14,14 +14,25 @@ class imagesSeeder extends Seeder
     public function run()
     {
         $array = [
-            'name'              =>  "https://source.unsplash.com/random",
-            'created_at'        =>  now(),
+            [
+                'name'              =>  "elonmusk.jpg",
+                'base'              =>  "http://arabiat.sydaliyat.com/api_fake/assets/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "joebiden.jpg",
+                'base'              =>  "http://arabiat.sydaliyat.com/api_fake/assets/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
         ];
         foreach ($array as $value){
             DB::table('images')->insert([
-                'name'              =>  "https://source.unsplash.com/random",
-                'created_at'        =>  now(),
-                'updated_at'        =>  now(),
+                'name'              =>  $value['name'],
+                'base'              =>  $value['base'],
+                'updated_at'        =>  $value['updated_at'],
+                'created_at'        =>  $value['created_at'],
             ]);
         }
     }
