@@ -15,7 +15,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" novalidate>
+        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -186,7 +186,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Color')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <select class="form-control selectpicker {{ $errors->has('CarColor_id') ? 'is-invalid' : '' }}" name="CarColor_id" id="maker" required>
+                                <select class="form-control selectpicker {{ $errors->has('CarColor_id') ? 'is-invalid' : '' }}" name="CarColor_id"  required>
                                     <option value="">@lang('--Select Car Color --')</option>
                                     @foreach ($colors as $key=>$color)
                                         <option value="{{$color->id}}"

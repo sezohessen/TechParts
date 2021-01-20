@@ -172,4 +172,9 @@ class Agency extends Model
             return $Image->id;
         }
     }
+
+    public function carMakers()
+    {
+        return $this->belongsToMany(CarMaker::class, 'agency_car_makers', 'agency_id','CarMaker_id');
+    }
 }

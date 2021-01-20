@@ -193,14 +193,15 @@ class CarController extends Controller
         return redirect()->route("dashboard.car.index");
     }
     public function available_model($id){
-        $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get();
+        /* $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get(); */
+        $models = CarModel::where('CarMaker_id', $id)->get();
         if($models->count() > 0 ){
             return response()->json([
                 'models' => $models
             ]);
         }
         return response()->json([
-            'models' => null
+                'models' => null
         ]);
     }
     public function available_governorate($id){

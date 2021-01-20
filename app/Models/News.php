@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,7 +30,7 @@ class News extends Model
     public function img(){
         return $this->belongsTo(Image::class,'image_id','id');
     }
-    public static function rules($request)
+    public static function rules($request,$id = NULL)
     {
         $rules = [
             'title'             => 'required|string|max:255',
@@ -38,12 +39,16 @@ class News extends Model
             'category_id'       => 'required',
             'description'       => 'required|min:3|max:1000',
             'description_ar'    => 'required|min:3|max:1000',
-            'authorImg'         => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',// 2m
-            'Image'             => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
+            'authorImg_id'         => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',// 2m
+            'image_id'             => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ];
+        if($id){
+            $rules['authorImg_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['image_id']     = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+        }
         return $rules;
     }
-    public static function credentials($request)
+    public static function credentials($request,$id1 = NULL,$id2 = NULL)
     {
         $credentials = [
             'title'             => $request->title,
@@ -53,24 +58,47 @@ class News extends Model
             'description'       => $request->description,
             'description_ar'    => $request->description_ar,
         ];
-        if($request->file('Image')){
-            $Image_id = self::file($request->file('Image'));
-            $credentials['image_id'] = $Image_id;
+        if($request->file('authorImg_id')){
+            if($id1){
+                $Image_id = self::file($request->file('authorImg_id'),$id1);
+            }else{
+                $Image_id = self::file($request->file('authorImg_id'));
+            }
+            $credentials['authorImg_id'] = $Image_id;
         }
-        if($request->file('authorImg')){
-            $authorImg_id = self::file($request->file('authorImg'));
-            $credentials['authorImg_id'] = $authorImg_id;
+        if($request->file('image_id')){
+            if($id2){
+                $Image_id = self::file($request->file('image_id'),$id2);
+            }else{
+                $Image_id = self::file($request->file('image_id'));
+            }
+            $credentials['image_id'] = $Image_id;
         }
         return $credentials;
     }
 
-    public static function file($file)
+    public static function file($file,$id = NULL)
     {
         $extension = $file->getClientOriginalExtension();
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
         $destinationPath = public_path() . '/img/news/';
         $file->move($destinationPath, $fileName);
-        $Image = Image::create(['name' => $fileName]);
-        return $Image->id;
+        if($id){//For update
+            $Image = Image::find($id);
+            //Delete Old image
+            try {
+                $file_old = $destinationPath.$Image->name;
+                unlink($file_old);
+            } catch (Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+            //Update new image
+            $Image->name = $fileName;
+            $Image->save();
+            return $Image->id;
+        }else{
+            $Image = Image::create(['name' => $fileName]);
+            return $Image->id;
+        }
     }
 }

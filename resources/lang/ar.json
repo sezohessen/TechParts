@@ -342,5 +342,10 @@
     "Select Package":"اختر حزمة اشتراك",
     "Edit Promotion":"تعديل الاشتراك",
     "Promotions":"الترويجات",
-    "View Promotions":"الترويجات"
+    "View Promotions":"الترويجات",
+    "--Select Agency--":"حدد وكالة",
+    "Select agency center":"حدد مركز الوكالة",
+    "Select car Maker":"حدد صانع السيارة",
+    "--Select car Maker--":"--حدد صانع السيارة--"
+
 }

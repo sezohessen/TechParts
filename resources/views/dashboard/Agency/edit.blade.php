@@ -123,19 +123,19 @@
                                     <div class="radio-inline">
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="0"
-                                             {{ old('center_type')=="0" ? 'checked':(($agency->center_type==0) ? 'checked': '' ) }} required/>
+                                             {{ old('center_type')=="0" ? 'checked':(($agency->center_type==0&&old('center_type')==NULL) ? 'checked': '' ) }} required/>
                                             <span></span>
                                             @lang('Agency')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="1"
-                                            {{ old('center_type')=="1" ? 'checked':(($agency->center_type==1) ? 'checked': '' ) }}/>
+                                            {{ old('center_type')=="1" ? 'checked':(($agency->center_type==1&&old('center_type')==NULL) ? 'checked': '' ) }}/>
                                             <span></span>
                                             @lang('Maintenance')
                                         </label>
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="2"
-                                            {{ old('center_type')=="2" ? 'checked':(($agency->center_type==2) ? 'checked': '' ) }}/>
+                                            {{ old('center_type')=="2" ? 'checked':(($agency->center_type==2&&old('center_type')==NULL) ? 'checked': '' ) }}/>
                                             <span></span>
                                             @lang('Spare parts')
                                         </label>
@@ -455,7 +455,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="kt_select2_3">@lang('Car Maker Working in')</label>
+                            <label for="kt_select2_3">@lang('Car Maker Working in')<span class="text-danger">*</span></label>
                             <select class="form-control select2" id="kt_select2_3"
                              name="CarMaker_id[]" multiple="multiple" required>
                                 @foreach ($car_makers as $car_maker)
@@ -541,15 +541,31 @@
     });
     });
 </script>
-@if (old('center_type') == "0"||$agency->agency_type)
+@if ($agency->agency_type)
     <script>
         $(document).ready(function() {
             $("div.center_type").hide();
             $("#center_type0").show();
         });
     </script>
-    @endif
-@if (old('center_type') == "1"||$agency->maintenance_type)
+@endif
+@if ($agency->maintenance_type)
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type1").show();
+        });
+    </script>
+@endif
+@if (old('center_type') == "0")
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type0").show();
+        });
+    </script>
+@endif
+@if (old('center_type') == "1")
     <script>
         $(document).ready(function() {
             $("div.center_type").hide();

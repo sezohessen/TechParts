@@ -15,7 +15,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" novalidate>
+        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -312,7 +312,13 @@
                                 name="Country_id" >
                                     <option value="">@lang('--Select country--')</option>
                                     @foreach ($countries as $country)
-                                        <option value="{{$country->id}}" {{ old('Country_id')==$country->id ? 'selected':'' }}>{{$country->name}} - {{ $country->name_ar }}</option>
+                                        <option value="{{$country->id}}"
+                                            @if(old('Country_id') == $country->id)
+                                            {{ 'selected' }}
+                                            @elseif($country->id==$car->Country_id)
+                                                {{ 'selected' }}
+                                            @endif
+                                            >{{$country->name}} - {{ $country->name_ar }}</option>
                                     @endforeach
                                 </select>
                                 @error('Country_id')
@@ -328,7 +334,9 @@
                                 </label><br>
                                 <select class="form-control {{ $errors->has('Governorate_id') ? 'is-invalid' : '' }}" id="governorate"
                                 name="Governorate_id" >
-                                    <option value="">@lang('--Select Country first--')</option>
+                                <option value="{{ $car->Governorate_id }}" selected  >
+                                    {{ $car->governorate->title }} - {{ $car->governorate->title_ar }}
+                                </option>
                                 </select>
                                 @error('Governorate_id')
                                     <div class="invalid-feedback">{{ $errors->first('Governorate_id') }}</div>
@@ -343,7 +351,9 @@
                                 </label><br>
                                     <select class="form-control {{ $errors->has('City_id') ? 'is-invalid' : '' }}" id="city"
                                     name="City_id" >
-                                        <option value="">@lang('--Select Governorate first--')</option>
+                                    <option value="{{ $car->City_id }}" selected  >
+                                        {{ $car->city->title }} - {{ $car->city->title_ar }}
+                                    </option>
                                     </select>
                                     @error('City_id')
                                         <div class="invalid-feedback">{{ $errors->first('City_id') }}</div>

@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label>@lang('Bank order')</label>
                                     <input type="number" class="form-control {{ $errors->has('order') ? 'is-invalid' : '' }}"
-                                     name="order"  placeholder="@lang('Order')" value="{{ old('order')}}" required  />
+                                     name="order"  placeholder="@lang('Order')" value="{{ old('order')}}"  />
                                      @error('order')
                                      <div class="invalid-feedback">{{ $errors->first('order') }}</div>
                                      @enderror
@@ -96,7 +96,7 @@
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg"  required />
+                                    <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg" />
                                     <input type="hidden" name="logo_id_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
