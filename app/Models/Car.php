@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Exception;
+use App\Rules\periodValidate;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,13 +39,14 @@ class Car extends Model
         'DepositPrice' ,'Country_id' ,'City_id' ,'Governorate_id' ,
         'CarModel_id' ,'CarMaker_id' ,'CarBody_id' ,'CarYear_id' ,
         'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' ,
-        'transmission' ,'payment', 'SellerType','isNew'
+        'transmission' ,'payment', 'SellerType','isNew',"adsExpire",
+        "promotedExpire","promotedStatus","user_id","whats"
     ];
     public function getDescriptionForEvent(string $eventName): string
     {
         return "A car has been {$eventName}";
     }
-
+  
     public static function rules($request,$id = NULL)
     {
         $rules = [
@@ -73,12 +75,13 @@ class Car extends Model
             'isNew'                       => 'required|integer',
             'SellerType'                  => 'required|integer',
             'payment'                     => 'required|integer',
-            'phone'                       => 'required|numeric',
+            'phone'                       => 'required|string',
             'DepositPrice'                => 'required|integer',
             'InstallmentPrice'            => 'required|integer',
-            'InstallmentMonth'            => 'required|integer|between:1,12',
+            'InstallmentMonth'            =>  ['required', new periodValidate],
             'CarPhotos'                   => 'required|max:5',
-            'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
+            'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            "whats"                       => 'required|string',
         ];
         if($id){
             $rules['CarPhotos'] = 'nullable';
@@ -89,7 +92,6 @@ class Car extends Model
     public static function credentials($request,$img_id = NULL)
     {
         $credentials = [
-
             'CarMaker_id'                 => $request->CarMaker_id,
             'CarModel_id'                 => $request->CarModel_id,
             'CarYear_id'                  => $request->CarYear_id,
@@ -114,6 +116,7 @@ class Car extends Model
             'SellerType'                  => $request->SellerType,
             'payment'                     => $request->payment,
             'phone'                       => $request->phone,
+            'whats'                       => $request->whats,
             'DepositPrice'                => $request->DepositPrice,
             'InstallmentPrice'            => $request->InstallmentPrice,
             'InstallmentMonth'            => $request->InstallmentMonth,

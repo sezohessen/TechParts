@@ -90,7 +90,7 @@ class NewsController extends Controller
         $request->validate($rules);
         $credentials = $new->credentials($request);
         $new->update($credentials);
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been updated successfully!"));
         return  redirect()->route("dashboard.news.index");
     }
 

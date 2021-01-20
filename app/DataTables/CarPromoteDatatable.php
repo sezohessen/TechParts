@@ -2,16 +2,15 @@
 
 namespace App\DataTables;
 
-use App\Models\Badges;
-use App\Models\Logs;
-use Illuminate\Support\Facades\Log;
+use App\Models\CarMaker;
+use App\Models\PromoteCar;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class LogsDatatable extends DataTable
+class CarPromoteDatatable extends DataTable
 {
 
     /**
@@ -24,14 +23,14 @@ class LogsDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('description', '{{Str::limit($description, 100)}}')
-            ->editColumn('causer_id', 'dashboard.Logs.btn.causer')
-            ->editColumn('subject_id', 'dashboard.Logs.btn.subject')
-            ->editColumn('properties', 'dashboard.Logs.btn.properties')
-            ->addColumn('checkbox', 'dashboard.Logs.btn.checkbox')
-            ->addColumn('action', 'dashboard.Logs.btn.action')
-            ->addColumn('active', 'dashboard.Logs.btn.active')
-            ->rawColumns(['checkbox', 'action', "active", "causer_id", "properties","subject_id"]);
+            ->editColumn('subscribe_package.period', '{{Str::limit($subscribe_package["period"], 100)}}')
+            ->editColumn('price', '{{Str::limit($price, 100)}}')
+            ->editColumn('weaccept_order_id', '{{Str::limit($weaccept_order_id, 100)}}')
+            
+            ->editColumn('user.email', '{{ Str::limit($user["email"], 100) }}')
+            ->addColumn('checkbox', 'dashboard.CarPromote.btn.checkbox')
+            ->addColumn('action', 'dashboard.CarPromote.btn.action')
+            ->rawColumns(['checkbox', 'action']);
     }
 
     /**
@@ -42,7 +41,7 @@ class LogsDatatable extends DataTable
      */
     public function query()
     {
-        return Logs::query();
+        return PromoteCar::query()->with(['user','car','subscribe_package'])->select("promote_cars.*");
     }
 
     /**
@@ -53,7 +52,7 @@ class LogsDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('logs-table')
+            ->setTableId('CarPromotes-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -106,12 +105,16 @@ class LogsDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('description'),
-            Column::make('causer_id')
-                ->title(__("Causer ID")),
-            Column::make('subject_id')
-            ->title(__("Subject ID")),
-            Column::make('properties'),
+            Column::make('subscribe_package.period')
+            ->title(__("Period")),
+            Column::make('price')
+            ->title(__("price")),
+            Column::make('weaccept_order_id')
+            ->title(__("Order ID")),
+            Column::make('car.CarMaker_id')
+            ->title(__("Car Maker")),
+            Column::make('user.email')
+            ->title(__("User Email")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
@@ -130,6 +133,6 @@ class LogsDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Logs_' . date('YmdHis');
+        return 'CarModels_' . date('YmdHis');
     }
 }

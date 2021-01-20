@@ -2,16 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Badges;
-use App\Models\Logs;
-use Illuminate\Support\Facades\Log;
+use App\Models\subscribe_package;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class LogsDatatable extends DataTable
+class SubscribeDatatable extends DataTable
 {
 
     /**
@@ -24,14 +22,14 @@ class LogsDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('description', '{{Str::limit($description, 100)}}')
-            ->editColumn('causer_id', 'dashboard.Logs.btn.causer')
-            ->editColumn('subject_id', 'dashboard.Logs.btn.subject')
-            ->editColumn('properties', 'dashboard.Logs.btn.properties')
-            ->addColumn('checkbox', 'dashboard.Logs.btn.checkbox')
-            ->addColumn('action', 'dashboard.Logs.btn.action')
-            ->addColumn('active', 'dashboard.Logs.btn.active')
-            ->rawColumns(['checkbox', 'action', "active", "causer_id", "properties","subject_id"]);
+            ->editColumn('currency_name', '{{Str::limit($currency_name, 100)}}')
+            ->editColumn('price', '{{Str::limit($price, 100)}}')
+            ->editColumn('period', '{{Str::limit($period, 100)}}')
+            ->editColumn('description', '{!! Str::limit($description, 100) !!}')
+            ->editColumn('description_ar', '{!! Str::limit($description_ar, 100) !!}')
+            ->addColumn('checkbox', 'dashboard.subscribe_package.btn.checkbox')
+            ->addColumn('action', 'dashboard.subscribe_package.btn.action')
+            ->rawColumns(['checkbox', 'action','description','description_ar']);
     }
 
     /**
@@ -42,7 +40,7 @@ class LogsDatatable extends DataTable
      */
     public function query()
     {
-        return Logs::query();
+        return subscribe_package::query();
     }
 
     /**
@@ -53,7 +51,7 @@ class LogsDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('logs-table')
+            ->setTableId('Subscribes-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -106,12 +104,16 @@ class LogsDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('description'),
-            Column::make('causer_id')
-                ->title(__("Causer ID")),
-            Column::make('subject_id')
-            ->title(__("Subject ID")),
-            Column::make('properties'),
+            Column::make('currency_name')
+            ->title(__("Currency")),
+            Column::make('period')
+            ->title(__('period')),
+            Column::make('description')
+            ->title(__('Description (EN)')),
+            Column::make('description_ar')
+            ->title(__('Description (AR)')),
+            Column::make('price')
+            ->title(__('price')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
@@ -130,6 +132,6 @@ class LogsDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Logs_' . date('YmdHis');
+        return 'CarModels_' . date('YmdHis');
     }
 }

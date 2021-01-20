@@ -247,6 +247,10 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('badge_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_11" name="badge_id[]"   required multiple >
+                                    @php
+                                        $c=0;
+                                        $count=count(old('feature_id') ?? array());
+                                    @endphp
                                    @foreach ($badges as $badge)
                                        <option value="{{$badge->id}}" >{{$badge->name}} - {{$badge->name_ar}}</option>
                                    @endforeach
