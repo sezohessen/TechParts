@@ -388,6 +388,7 @@
                 }
             }
         });
+        $('#governorate').change();
     });
     $('#governorate').on('change', function() {
         var id = this.value ;

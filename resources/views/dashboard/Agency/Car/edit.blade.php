@@ -15,16 +15,38 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" >
+        <form action="{{route("dashboard.AgencyCar.update",$car->id)}}" method="POST" enctype="multipart/form-data" >
             @csrf
+            @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="agency_id">@lang('Select agency center') <span class="text-danger">*</span></label>
+                            <select class="form-control {{ $errors->has('agency_id') ? 'is-invalid' : '' }}" id="agency_id"
+                            name="agency_id" required>
+                                <option value="">@lang('--Select Agency--')</option>
+                                @foreach ($agencies as $agency)
+                                    <option value="{{$agency->id}}"
+                                        @if(old('agency_id') == $agency->id)
+                                            {{ 'selected' }}
+                                        @elseif($agency->id==$agencyCar->agency_id)
+                                            {{ 'selected' }}
+                                        @endif
+                                        >{{$agency->name}} - {{ $agency->name_ar }}</option>
+                                @endforeach
+                            </select>
+                            @error('agency_id')
+                                <div class="invalid-feedback">{{ $errors->first('agency_id') }}</div>
+                            @enderror
+                          </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Car Make')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" id="maker" required>
+                                <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" id="CarMaker_id" required>
                                     <option value="">@lang('--Select Car Make --')</option>
                                     @foreach ($makers as $key=>$maker)
                                         <option value="{{$maker->id}}"
@@ -51,7 +73,7 @@
                              <label for="model" class="col-form-label  col-sm-12">@lang('Select Car Model')
                             </label><br>
                              <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
+                                <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="CarModel_id"
                                 name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
                                     <option value=""  >@lang('--Select Car Make first--')</option>
                                 </select>
@@ -217,7 +239,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Color')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <select class="form-control selectpicker {{ $errors->has('CarColor_id') ? 'is-invalid' : '' }}" name="CarColor_id" id="maker" required>
+                                <select class="form-control selectpicker {{ $errors->has('CarColor_id') ? 'is-invalid' : '' }}" name="CarColor_id" required>
                                     <option value="">@lang('--Select Car Color --')</option>
                                     @foreach ($colors as $key=>$color)
                                         <option value="{{$color->id}}"

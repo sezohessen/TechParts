@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="country">@lang('Select Country')</label>
+                            <label for="country">@lang('Select Country')<span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
                                  id="country" name="country_id" required>
                                 @foreach ($countries as $country)

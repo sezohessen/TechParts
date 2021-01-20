@@ -76,21 +76,21 @@
                                     <div class="radio-inline">
                                         <label class="radio">
                                             <input type="radio" name="center_type" value="0"
-                                             {{ old('center_type')=="0" ? 'checked':(($agency->center_type==0) ? 'checked': '' ) }} required/>
-                                            <span></span>
-                                            @lang('Distributor')
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="center_type" value="1"
-                                            {{ old('center_type')=="1" ? 'checked':(($agency->center_type==1) ? 'checked': '' ) }}/>
+                                             {{ old('center_type')=="0" ? 'checked':(($agency->center_type==0&&old('center_type')==NULL) ? 'checked': '' ) }} required/>
                                             <span></span>
                                             @lang('Agency')
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" name="center_type" value="2"
-                                            {{ old('center_type')=="2" ? 'checked':(($agency->center_type==2) ? 'checked': '' ) }}/>
+                                            <input type="radio" name="center_type" value="1"
+                                            {{ old('center_type')=="1" ? 'checked':(($agency->center_type==1&&old('center_type')==NULL) ? 'checked': '' ) }}/>
                                             <span></span>
-                                            @lang('Individual')
+                                            @lang('Maintenance')
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="center_type" value="2"
+                                            {{ old('center_type')=="2" ? 'checked':(($agency->center_type==2&&old('center_type')==NULL) ? 'checked': '' ) }}/>
+                                            <span></span>
+                                            @lang('Spare parts')
                                         </label>
                                         @error('center_type')
                                             <div class="invalid-feedback">{{ $errors->first('center_type') }}</div>
@@ -342,6 +342,7 @@
                 }
             }
         });
+        $('#governorate').change();
     });
     $('#governorate').on('change', function() {
         var id = this.value ;

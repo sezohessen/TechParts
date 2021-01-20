@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label text-right col-lg-3 col-sm-12">@lang('Select User')</label>
+                            <label class="col-form-label text-right col-lg-3 col-sm-12">@lang('Select User')<span class="text-danger">*</span></label>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                              <select class="form-control {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
                                  id="kt_select2_1" name="user_id" required>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label>
+                            <label for="Image">@lang('Logo image')<span class="text-danger">*</span></label>
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('img/insurance/'.$insurance->img->name) }})">
                                 <div class="image-input-wrapper"></div>

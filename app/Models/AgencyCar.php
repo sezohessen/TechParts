@@ -13,4 +13,20 @@ class AgencyCar extends Model
         'car_id',
         'agency_id',
     ];
+    public static function rules($request)
+    {
+        $rules = [
+            'agency_id'     => 'required',
+        ];
+        return $rules;
+    }
+    public static function credentials($request,$car_id)
+    {
+        $credentials = [
+            'car_id'        =>  $car_id,
+            'agency_id'     =>  $request->agency_id,
+        ];
+
+        return $credentials;
+    }
 }

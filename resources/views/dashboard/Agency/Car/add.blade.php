@@ -15,7 +15,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" >
+        <form action="{{ route('dashboard.AgencyCar.store') }}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -56,7 +56,7 @@
                              <label for="model" class="col-form-label  col-sm-12">@lang('Select Car Model')
                             </label><br>
                              <div class=" col-md-12">
-                                <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
+                                <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="CarModel_id"
                                 name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
                                     <option value=""  >@lang('--Select Car Make first--')</option>
                                 </select>
@@ -197,7 +197,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Color')</label><br>
                             <div class=" col-md-12">
-                                <select class="form-control selectpicker {{ $errors->has('CarColor_id') ? 'is-invalid' : '' }}" name="CarColor_id" id="maker" required>
+                                <select class="form-control selectpicker {{ $errors->has('CarColor_id') ? 'is-invalid' : '' }}" name="CarColor_id"  required>
                                     <option value="">@lang('--Select Car Color --')</option>
                                     @foreach ($colors as $key=>$color)
                                         <option value="{{$color->id}}"
@@ -252,7 +252,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group row">
                             <div class=" col-md-12">
                                 <label for="exampleTextarea">@lang("Write A Description (EN)")</label>
@@ -265,7 +265,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group row">
                             <div class=" col-md-12">
                                 <label for="exampleTextarea">@lang("Write A Description (AR)")</label>
@@ -326,24 +326,24 @@
                             </div>
                         </div>
                     </div>
-                     <div class="col-md-6">
+                     <div class="col-md-12">
                         <div class="form-group row">
                             <div class=" col-md-12">@lang("Location")</label><br>
-                                    <input type="hidden" value="{{$lat}}" id="lat" name="lat">
-                                    <input type="hidden" value="{{$lng}}" id="lng" name="lng">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control " id="address" placeholder="Search ..."/>
-                                        <div class="input-group-append">
-                                             <button class="btn btn-primary" type="button">
-                                                 <i class="flaticon2-search text-white"></i>
-                                            </button>
-                                        </div>
+                                <input type="hidden" value="{{$lat}}" id="lat" name="lat">
+                                <input type="hidden" value="{{$lng}}" id="lng" name="lng">
+                                <div class="input-group">
+                                    <input type="text" class="form-control " id="address" placeholder="Search ..."/>
+                                    <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="flaticon2-search text-white"></i>
+                                        </button>
                                     </div>
-                                    <div id="map" class="mt-2" style="height: 240px;"></div>
+                                </div>
+                                <div id="map" class="mt-2" style="height: 240px;"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group row">
                             <div class=" col-md-12">
                                 <label for="exampleTextarea" class="mb-10">@lang("Service History")</label>
@@ -554,7 +554,7 @@
         var id = this.value ;
         $('#CarMaker_id').empty();
         $.ajax({
-            url: '/dashboard/agency/car/'+id,
+            url: '/dashboard/AgencyCar/'+id,
             success: data => {
                 if(data.carMakers){
                     data.carMakers.forEach(carMaker =>
@@ -565,27 +565,28 @@
                 }
             }
         });
+        $('#CarMaker_id').change();
     });
 </script>
 <script>
-    function model(id ){
-        $('#models').empty();
-        old_model="<?php echo old('CarModel_id') ?  old('CarModel_id') : ""  ?>";
+    $('#CarMaker_id').on('change', function() {
+        var id = this.value ;
+        $('#CarModel_id').empty();
         $.ajax({
             url: '/dashboard/car/available_model/'+id,
             success: data => {
                 if(data.models){
-                    data.models.forEach(models =>
-                    $('#models').append(`<option value="${models.id}" ${(old_model==models.id) ? "selected" : "" } >${models.name}</option>`)
+                    data.models.forEach(model =>
+                    $('#CarModel_id').append(`<option value="${model.id}" >${model.name}</option>`)
                     )
                 }else{
-                    $('#models').append(`<option value="">No Results</option>`)
+                    $('#CarModel_id').append(`<option value="">No Results</option>`)
                 }
-
             },
-
         });
-    }
+    });
+</script>
+<script>
     function governorate(id ){
         $('#governorate').empty();
         $('#city').empty();

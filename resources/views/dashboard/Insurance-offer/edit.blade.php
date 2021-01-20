@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(ENG)')</label>
+                            <label for="description">@lang('Description(ENG)')<span class="text-danger">*</span></label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
                             placeholder="@lang('Write description')" >{{ old('description') ?  old('description') : $offer->description}}</textarea>
                             @if ($errors->has('description'))
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(AR)')</label>
+                            <label for="description">@lang('Description(AR)')<span class="text-danger">*</span></label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
                             placeholder="@lang('Write description')" >{{ old('description_ar') ?  old('description_ar') : $offer->description_ar}}</textarea>
                             @if ($errors->has('description_ar'))
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Select Insurance Company Name')</label>
+                            <label class="col-form-label col-sm-12">@lang('Select Insurance Company Name')<span class="text-danger">*</span></label>
                             <div class="col-sm-12">
                              <select class="form-control {{ $errors->has('insurance_id') ? 'is-invalid' : '' }}"
                                  id="kt_select2_1" name="insurance_id">
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label>
+                            <label for="Image">@lang('Logo image')<span class="text-danger">*</span></label>
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('img/insurance/offer/'.$offer->img->name) }})">
                                 <div class="image-input-wrapper"></div>

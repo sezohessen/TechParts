@@ -160,11 +160,11 @@ return [
                     'submenu' => [
                         [
                             'title' => 'Add car',
-                            'page' => "/dashboard/agency/car/create"
+                            'page' => "/dashboard/AgencyCar/create"
                         ],
                         [
                             'title' => 'View cars',
-                            'page' => '/dashboard/agency/car'
+                            'page' => '/dashboard/AgencyCar'
                         ],
 
                     ]

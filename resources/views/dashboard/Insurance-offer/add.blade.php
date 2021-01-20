@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(ENG)')</label>
+                            <label for="description">@lang('Description(ENG)')<span class="text-danger">*</span></label>
                             <textarea name="description"
                                 class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                 id="kt-ckeditor-1" rows="3"
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(AR)')</label>
+                            <label for="description">@lang('Description(AR)')<span class="text-danger">*</span></label>
                             <textarea name="description_ar"
                                 class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}"
                                 id="kt-ckeditor-2" rows="3"
@@ -68,14 +68,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Select Insurance Company Name')</label>
+                            <label class="col-form-label col-sm-12">@lang('Select Insurance Company Name')<span class="text-danger">*</span></label>
                             <div class="col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('insurance_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_1" name="insurance_id" required>
                                     <option value="">@lang('--Select Insurance--')</option>
                                     @foreach ($Insurances as $Insurance)
                                         <option value="{{ $Insurance->id }}">{{ $Insurance->name }} -
-                                            {{ $Insurance->title_ar }}
+                                            {{ $Insurance->name_ar }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label>
+                            <label for="Image">@lang('Logo image')<span class="text-danger">*</span></label>
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo"
                                 style="background-image: url({{ asset('media/users/blank.png') }})">
@@ -95,7 +95,7 @@
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                     data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg" required />
+                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg" />
                                     <input type="hidden" name="logo_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
