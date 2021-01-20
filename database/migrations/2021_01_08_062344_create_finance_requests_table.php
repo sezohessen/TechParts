@@ -28,6 +28,26 @@ class CreateFinanceRequestsTable extends Migration
             ->references('id')->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->string('bank_name')->nullable();
+
+            $table->bigInteger('car_id')->unsigned();
+            $table->foreign('car_id')
+            ->references('id')->on('cars')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
+            $table->bigInteger('car_makerId')->unsigned();
+            $table->foreign('car_makerId')
+            ->references('id')->on('car_makers')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
+            $table->bigInteger('car_modelId')->unsigned();
+            $table->foreign('car_modelId')
+            ->references('id')->on('car_models')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

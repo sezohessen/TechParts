@@ -87,9 +87,9 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/agency/destroy/all','AgencyController@multi_delete');
     Route::delete('/maker/destroy/all','CarMakerController@multi_delete');
     Route::delete('/model/destroy/all','CarModelController@multi_delete');
-    Route::delete('/body/destroy/all','CarBodyController@multi_delete');
-    Route::delete('/year/destroy/all','CarYearController@multi_delete');
-    Route::delete('/capacity/destroy/all','CarCapacityController@multi_delete');
+    Route::delete('/bodar/destroy/all','CarYearController@multi_delete');
+    Route::delete('/cay/destroy/all','CarBodyController@multi_delete');
+    Route::delete('/yepacity/destroy/all','CarCapacityController@multi_delete');
     Route::delete('/color/destroy/all','CarColorController@multi_delete');
     Route::delete('/AskExpert/destroy/all','AskExpertController@multi_delete');
     Route::delete('/contact/destroy/all','ContactController@multi_delete');
@@ -98,6 +98,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
     Route::delete('/log/destroy/all','LogsController@multi_delete');
     Route::delete('/users/destroy/all','UserController@multi_delete');
+    Route::delete('/news/destroy/all','NewsController@multi_delete');
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
