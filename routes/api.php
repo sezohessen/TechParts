@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
 });
 Route::post("news/home",'api\NewsController@filter');
+
 Route::post("news",'api\NewsController@show');
 Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
 
@@ -39,6 +40,11 @@ Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
 Route::group(['prefix' => 'centers','namespace'=>'api'], function () {
     Route::group(['prefix' => 'review'], function () {
         Route::post("agency",'AgencyController@review');
+    });
+    Route::group(['prefix' => 'home','namespace'=>'api'], function () {
+        Route::post("agency",'AgencyController@agency');
+        Route::post("maintenance",'AgencyController@maintenance');
+        Route::post("spare",'AgencyController@spare');
     });
 });
 Route::group(['prefix' => 'auth'], function () {

@@ -43,7 +43,10 @@ class Agency extends Model
     public function city() {
         return $this->belongsTo(City::class,'city_id','id');
     }
-
+    public function AgencyContact()
+    {
+        return $this->belongsTo(AgencyContact::class, 'id', 'agent_id');
+    }
     public function img(){
         return $this->belongsTo(Image::class,'img_id','id');
     }
