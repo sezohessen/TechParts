@@ -461,7 +461,7 @@ return [
             ]
         ],
         [
-            'title' => 'Finacne Requests',
+            'title' => 'Finance Requests',
             'icon' => 'fas fa-pencil-alt',
             'bullet' => 'dot',
             'root' => true,
@@ -472,6 +472,45 @@ return [
                 ],
 
             ]
+        ],
+        [   'title' => 'Promotion',
+            'icon' => 'media/svg/icons/Navigation/Angle-double-up.svg',
+            'bullet' => 'line',
+            'root' => true,
+            'submenu' => [
+                [
+                    [
+                        'title' => 'Subscribe Package',
+                        'bullet' => 'dot',
+                        'root' => true,
+                        'submenu' => [
+                            [
+                                'title' => 'Add Package',
+                                'page' => "/dashboard/subscribe_packages/create"
+                            ],
+                            [
+                                'title' => 'View Packages',
+                                'page' => "dashboard/subscribe_packages"
+                            ]
+                        ]
+                    ],
+                    [
+                        'title' => 'Promote A car',
+                        'bullet' => 'dot',
+                        'root' => true,
+                        'submenu' => [
+                            [
+                                'title' => 'Add Promotion',
+                                'page' => "/dashboard/promote/create"
+                            ],
+                            [
+                                'title' => 'View Promotion',
+                                'page' => "/dashboard/promote"
+                            ]
+                        ]
+                    ],
+                ],
+            ],
         ],
         [
             'title' => 'Contact',

@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('News Image')</label>
+                            <label for="Image">@lang('News Image')</label><br>
                             <div class="image-input image-input-empty image-input-outline" id="Image" style="background-image: url({{ asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Author Image')</label>
+                            <label for="Image">@lang('Author Image')</label><br>
                             <div class="image-input image-input-empty image-input-outline" id="authorImg" style="background-image: url({{ asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">

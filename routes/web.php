@@ -46,6 +46,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/bank','BankController');
     Route::resource('/bank-offer','BankOfferController');
     Route::resource('/log','LogsController');
+    Route::resource('/subscribe_packages','SubscribeController');
+    Route::resource('/promote','CarPromoteController');
     Route::group(['prefix' => 'car'],function(){
         Route::resource('/maker','CarMakerController');
         Route::resource('/model','CarModelController');
@@ -97,6 +99,9 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
     Route::delete('/log/destroy/all','LogsController@multi_delete');
     Route::delete('/users/destroy/all','UserController@multi_delete');
+    Route::delete('/subscribe_packages/destroy/all','SubscribeController@multi_delete');
+    Route::delete('/promote/destroy/all','CarPromoteController@multi_delete');
+    
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');

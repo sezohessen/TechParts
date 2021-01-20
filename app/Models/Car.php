@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Exception;
+use App\Rules\periodValidate;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -77,7 +78,7 @@ class Car extends Model
             'phone'                       => 'required|string',
             'DepositPrice'                => 'required|integer',
             'InstallmentPrice'            => 'required|integer',
-            'InstallmentMonth'            => 'required|integer|between:1,12',
+            'InstallmentMonth'            =>  ['required', new periodValidate],
             'CarPhotos'                   => 'required|max:5',
             'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             "whats"                       => 'required|string',
