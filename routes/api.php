@@ -25,13 +25,10 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
         Route::post("details",'CarsController@show');
     });
     Route::post("payment",'CarsController@deposit');
-<<<<<<< HEAD
     Route::post("car/promote/car_promote",'CarsController@promote');
 
-=======
     Route::post("insurance/create_request",'InsuranceRequestController@insurance');
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
->>>>>>> feature/AgencyAPI
 });
 Route::post("news/home",'api\NewsController@filter');
 Route::post("news",'api\NewsController@show');

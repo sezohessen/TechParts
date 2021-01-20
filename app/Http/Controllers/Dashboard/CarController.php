@@ -33,7 +33,7 @@ class CarController extends Controller
      */
     public function index(CarDatatable $car)
     {
-        $page_title = __('Cars Options ');
+        $page_title = __('Cars Options');
         $page_description = __('View Cars');
         return  $car->render("dashboard.Car.index", compact('page_title', 'page_description'));
     }
@@ -156,9 +156,38 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Car $car)
     {
-      //  array_merge($credentials,['user_id'=>Auth()->user()->id])
+        dd($car,$request->all());
+
+        $rules = Car::rules($request);
+        $request->validate($rules);
+        $credentials = Car::credentials($request);
+        $car = Car::create(array_merge($credentials,['user_id'=>Auth()->user()->id]));
+        foreach($credentials['CarPhotos'] as $key=>$img){
+            car_img::create([
+                'car_id'=>$car->id,
+                'img_id'=>$img
+            ]);
+        }
+        foreach($request->badge_id as $key=>$badge){
+            car_badge::create([
+                'car_id'=>$car->id,
+                'badge_id'=>$badge
+            ]);
+        }
+        foreach($request->feature_id as $key=>$feature){
+            car_feature::create([
+                'car_id'=>$car->id,
+                'feature_id'=>$feature
+            ]);
+        }
+        ListCarUser::create([
+            "user_id"=>Auth::user()->id,
+            "car_id"=>$car->id
+        ]);
+        session()->flash('created',__("Changed has been Updated successfully!"));
+        return redirect()->route("dashboard.car.index");
     }
 
     /**

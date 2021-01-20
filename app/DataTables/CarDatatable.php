@@ -113,10 +113,12 @@ class CarDatatable extends DataTable
                 ->title(__("Car Make")),
             Column::make('phone')
                 ->title(__("User Phone")),
-            Column::make('price'),
+            Column::make('price')->title(__("Price")),
             Column::make('Description')
+            ->title(__("Description (EN)"))
                 ->width(70),
             Column::make('Description_ar')
+            ->title(__("Description (AR)"))
                 ->width(70),
             Column::computed('SellerType')
                 ->title(__('Seller Type'))

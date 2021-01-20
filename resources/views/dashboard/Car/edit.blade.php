@@ -15,8 +15,9 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.store")}}" method="POST" enctype="multipart/form-data" >
+        <form action="{{route("dashboard.car.update",["car"=>$car->id])}}" method="POST" enctype="multipart/form-data" >
             @csrf
+            @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
@@ -25,7 +26,7 @@
                             <label class="col-form-label col-sm-12">@lang('Select Car Make')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" id="maker" required>
-                                    <option value="">@lang('--Select Car Make --')</option>
+                                    <option value="">@lang('Select Car Make')</option>
                                     @foreach ($makers as $key=>$maker)
                                         <option value="{{$maker->id}}"
                                             data-content="
@@ -53,7 +54,7 @@
                              <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
                                 name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
-                                    <option value=""  >@lang('--Select Car Make first--')</option>
+                                    <option value=""  >@lang('Select Car Make first')</option>
                                 </select>
 
                                 @error('CarModel_id')
@@ -334,7 +335,7 @@
                                 </label><br>
                                 <select class="form-control {{ $errors->has('Governorate_id') ? 'is-invalid' : '' }}" id="governorate"
                                 name="Governorate_id" >
-                                <option value="{{ $car->Governorate_id }}" selected  >
+                                <option value="{{ $car->id }}" selected  >
                                     {{ $car->governorate->title }} - {{ $car->governorate->title_ar }}
                                 </option>
                                 </select>
@@ -351,7 +352,7 @@
                                 </label><br>
                                     <select class="form-control {{ $errors->has('City_id') ? 'is-invalid' : '' }}" id="city"
                                     name="City_id" >
-                                    <option value="{{ $car->City_id }}" selected  >
+                                    <option value="{{ $car->id }}" selected  >
                                         {{ $car->city->title }} - {{ $car->city->title_ar }}
                                     </option>
                                     </select>
@@ -398,16 +399,16 @@
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="transmission" value="0"
-                                        {{ old('transmission')=="0" ? 'checked':(($car->transmission==0) ? 'checked': '' ) }}
+                                        {{ old('transmission')=="0" ? 'checked': ($car->transmission==0) ? 'checked': ''  }}
                                         required/>
                                         <span></span>
-                                        <img src='{{asset('media/svg/icons/Electric/automatic.png')}}' width='20' height='20'>  @lang('Automatic')
+                                       @lang('Automatic')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="transmission" value="1"
-                                            c  />
+                                        {{ old('transmission')=="1" ? 'checked':($car->transmission==1) ? 'checked': ''  }} />
                                         <span></span>
-                                        <img src='{{asset('media/svg/icons/Electric/manual.png')}}' width='20' height='20'> &nbsp; @lang('Manual')
+                                        @lang('Manual')
                                     </label>
                                     @error('transmission')
                                          <div class="invalid-feedback">{{ $errors->first('transmission') }}</div>
@@ -678,6 +679,7 @@
     if (old_maker != ''){
         model("<?php echo (old('CarMaker_id'))?>");
     }
+    model("<?php echo (old('CarMaker_id') ?? $car->CarMaker_id)?>");
     var old_country="<?php echo (old('Country_id')) ? old('Country_id') : null; ?>";
     if (old_country != ''){
         governorate("<?php echo (old('Country_id'))?>");

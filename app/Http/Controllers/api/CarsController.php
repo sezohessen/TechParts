@@ -22,7 +22,7 @@ use App\Models\Country;
 use App\Models\PromoteCar;
 use Illuminate\Support\Facades\Validator as Validator;
 
-class Responseobject
+class CarResponseobject
 {
     const status_ok = true;
     const status_failed = false;
@@ -65,7 +65,7 @@ class CarsController extends Controller
     }
     public function failed($validator)
     {
-        $response   = new Responseobject();
+        $response   = new CarResponseobject();
         $response->status = $response::status_failed;
         $response->code = $response::code_failed;
         foreach ($validator->errors()->getMessages() as $item) {
