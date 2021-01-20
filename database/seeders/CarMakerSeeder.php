@@ -20,7 +20,7 @@ class CarMakerSeeder extends Seeder
             DB::table('car_makers')->insert([
                 'name'          => $faker->name,
                 'logo_id'       => Image::all()->random()->id,
-                'active'        => rand(0,1),
+                'active'        => 1,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

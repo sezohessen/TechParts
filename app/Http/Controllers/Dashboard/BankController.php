@@ -47,6 +47,7 @@ class BankController extends Controller
         $request->validate($rules);
         $credentials = Bank::credentials($request);
         $credentials['status'] = 'Approved';
+        $credentials['order']  = $request->order;
         $Bank = Bank::create($credentials);
         $bank_id        = $Bank->id;
         $rules          = BankContact::rules($request);
@@ -102,6 +103,7 @@ class BankController extends Controller
         $request->validate($rules);
         $credentials = Bank::credentials($request,$request->user_id,$Bank->logo_id);
         $credentials['status'] = $request->status;
+        $credentials['order']  = $request->order;
         $bank        = Bank::where('id',$id)->update($credentials);
         $rules       = BankContact::rules($request);
         $request->validate($rules);

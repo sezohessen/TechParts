@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label>@lang('Bank order')</label>
                                     <input type="number" class="form-control {{ $errors->has('order') ? 'is-invalid' : '' }}"
-                                     name="order"  placeholder="@lang('Order')" value="{{ old('order') ? old('order'):$bank->order}}" required  />
+                                     name="order"  placeholder="@lang('Order')" value="{{ old('order') ? old('order'):$bank->order}}"  />
                                      @error('order')
                                      <div class="invalid-feedback">{{ $errors->first('order') }}</div>
                                      @enderror

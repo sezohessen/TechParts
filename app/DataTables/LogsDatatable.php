@@ -25,12 +25,13 @@ class LogsDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('description', '{{Str::limit($description, 100)}}')
-            ->editColumn('causer_id', 'dashboard.Logs.btn.type')
+            ->editColumn('causer_id', 'dashboard.Logs.btn.causer')
+            ->editColumn('subject_id', 'dashboard.Logs.btn.subject')
             ->editColumn('properties', 'dashboard.Logs.btn.properties')
             ->addColumn('checkbox', 'dashboard.Logs.btn.checkbox')
             ->addColumn('action', 'dashboard.Logs.btn.action')
             ->addColumn('active', 'dashboard.Logs.btn.active')
-            ->rawColumns(['checkbox', 'action', "active", "causer_id", "properties"]);
+            ->rawColumns(['checkbox', 'action', "active", "causer_id", "properties","subject_id"]);
     }
 
     /**
@@ -107,7 +108,9 @@ class LogsDatatable extends DataTable
             Column::make('id'),
             Column::make('description'),
             Column::make('causer_id')
-                ->title(__("Causer")),
+                ->title(__("Causer ID")),
+            Column::make('subject_id')
+            ->title(__("Subject ID")),
             Column::make('properties'),
             Column::computed('action')
                 ->title(__('Action'))

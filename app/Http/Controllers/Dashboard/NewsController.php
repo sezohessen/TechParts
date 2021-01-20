@@ -42,12 +42,11 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = News::rules($request);
+        $rules = News::rules($request,NULL);
         $request->validate($rules);
         $credentials = News::credentials($request);
         $New = News::create($credentials);
         $New->save();
-
        session()->flash('success',__("news has been added!"));
        return redirect()->route("dashboard.news.index");
     }
@@ -84,12 +83,13 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $new)
+    public function update(Request $request,$id)
     {
-        $rules =$new->rules($request);
+        $rules  = News::rules($request,$id);
         $request->validate($rules);
-        $credentials = $new->credentials($request);
-        $new->update($credentials);
+        $credentials = News::credentials($request);
+        $New = News::where('id',$id)->update($credentials);
+
         session()->flash('updated',__("Changed has been updated successfully!"));
         return  redirect()->route("dashboard.news.index");
     }
@@ -100,9 +100,11 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(News $news)
     {
-        //
+        $news->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.news.index");
     }
     public function multi_delete(){
         if (is_array(request('item'))) {

@@ -63,9 +63,6 @@ class Bank extends Model
         }else{
             $credentials['user_id'] = $request->user_id;
         }
-        if($request->order&&!$specialCase){
-            $credentials['order']   = $request->order;
-        }
         if($request->show_finance_services!=NULL&&$request->show_finance_services=='on'&&$specialCase){//Check Box
             $credentials['show_finance_services'] = 1;
         }else{

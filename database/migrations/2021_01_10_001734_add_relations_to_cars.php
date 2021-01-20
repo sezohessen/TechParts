@@ -28,6 +28,7 @@ class AddRelationsToCars extends Migration
             $table->string('lat')->default(null);
             $table->string('lng')->default(null);
             $table->string('phone')->nullable();
+            $table->string('whats')->nullable();
 
             $table->string('InstallmentMonth');
             $table->string('InstallmentPrice');
@@ -89,6 +90,12 @@ class AddRelationsToCars extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
             $table->bigInteger('CarManufacture_id')->unsigned();
             $table->foreign('CarManufacture_id')
             ->references('id')->on('car_manufactures')
@@ -108,6 +115,9 @@ class AddRelationsToCars extends Migration
             $table->integer('status')->change()->default(0);
             $table->integer('SellerType')->default(0);
             $table->integer('isNew')->default(0);
+            $table->timestamp('adsExpire')->useCurrent();
+            $table->timestamp('promotedExpire')->useCurrent();
+            $table->boolean('promotedStatus')->default(0);
         });
     }
 
@@ -130,6 +140,7 @@ class AddRelationsToCars extends Migration
             $table->dropForeign(['CarBody_id']);
             $table->dropForeign(['CarMaker_id']);
             $table->dropForeign(['CarManufacture_id']);
+            $table->dropForeign(['user_id']);
 
             // 2. Drop the column
 
@@ -141,6 +152,7 @@ class AddRelationsToCars extends Migration
             $table->dropColumn('AccidentBefore');
             $table->dropColumn('views');
             $table->dropColumn('price_after_discount');
+            $table->dropColumn('whats');
             $table->dropColumn('price');
             $table->dropColumn('phone');
             $table->dropColumn('lng');

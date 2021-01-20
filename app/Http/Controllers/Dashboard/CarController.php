@@ -73,7 +73,7 @@ class CarController extends Controller
         $rules = Car::rules($request);
         $request->validate($rules);
         $credentials = Car::credentials($request);
-        $car = Car::create($credentials);
+        $car = Car::create(array_merge($credentials,['user_id'=>Auth()->user()->id]));
         foreach($credentials['CarPhotos'] as $key=>$img){
             car_img::create([
                 'car_id'=>$car->id,
@@ -158,7 +158,7 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      //  array_merge($credentials,['user_id'=>Auth()->user()->id])
     }
 
     /**
@@ -193,14 +193,15 @@ class CarController extends Controller
         return redirect()->route("dashboard.car.index");
     }
     public function available_model($id){
-        $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get();
+        /* $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get(); */
+        $models = CarModel::where('CarMaker_id', $id)->get();
         if($models->count() > 0 ){
             return response()->json([
                 'models' => $models
             ]);
         }
         return response()->json([
-            'models' => null
+                'models' => null
         ]);
     }
     public function available_governorate($id){

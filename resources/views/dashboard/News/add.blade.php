@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="country">@lang('Select Category')</label>
+                            <label for="country">@lang('Select Category') <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
                                  id="country" name="category_id" required>
                                 <option value="">@lang('--Select category first--')</option>
@@ -44,13 +44,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('News Image')</label>
-                            <div class="image-input image-input-empty image-input-outline" id="Image" style="background-image: url({{ asset('media/users/blank.png') }})">
+                            <label for="Image">@lang('News Image') <span class="text-danger">*</span></label>
+                            <div class="image-input image-input-empty image-input-outline" id="image_id" style="background-image: url({{ asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="Image" accept=".png, .jpg, .jpeg ,gif,svg" />
-                                    <input type="hidden" name="Image_remove" />
+                                    <input type="file" name="image_id" accept=".png, .jpg, .jpeg ,gif,svg" />
+                                    <input type="hidden" name="image_id_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
@@ -59,10 +59,10 @@
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
                             </div>
-                             @if ($errors->has('Image'))
+                             @if ($errors->has('image_id'))
                              <div class="fv-plugins-message-container">
                                  <div class="fv-help-block">
-                                    <strong>{{ $errors->first('Image')  }}</strong>
+                                    <strong>{{ $errors->first('image_id')  }}</strong>
                                  </div>
                              </div>
                             @endif
@@ -84,13 +84,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Author Image')</label>
-                            <div class="image-input image-input-empty image-input-outline" id="authorImg" style="background-image: url({{ asset('media/users/blank.png') }})">
+                            <label for="Image">@lang('Author Image') <span class="text-danger">*</span></label>
+                            <div class="image-input image-input-empty image-input-outline" id="authorImg_id" style="background-image: url({{ asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="authorImg" accept=".png, .jpg, .jpeg ,gif,svg" />
-                                    <input type="hidden" name="authorImg_remove" />
+                                    <input type="file" name="authorImg_id" accept=".png, .jpg, .jpeg ,gif,svg" />
+                                    <input type="hidden" name="authorImg_id_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
@@ -99,10 +99,10 @@
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
                             </div>
-                             @if ($errors->has('authorImg'))
+                             @if ($errors->has('authorImg_id'))
                              <div class="fv-plugins-message-container">
                                  <div class="fv-help-block">
-                                    <strong>{{ $errors->first('authorImg')  }}</strong>
+                                    <strong>{{ $errors->first('authorImg_id')  }}</strong>
                                  </div>
                              </div>
                             @endif
@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(ENG)')</label>
+                            <label for="description">@lang('Description(ENG)')<span class="text-danger">*</span></label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
                             placeholder="@lang('Write description')" >{{ old('description') }}</textarea>
                             @if ($errors->has('description'))
@@ -152,7 +152,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(AR)')</label>
+                            <label for="description">@lang('Description(AR)') <span class="text-danger">*</span></label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
                             placeholder="@lang('Write description')" >{{ old('description_ar') }}</textarea>
                             @if ($errors->has('description_ar'))
@@ -185,8 +185,8 @@
 "use strict";
 var KTUserEdit={
     init:function(){
-        new KTImageInput("Image");
-        new KTImageInput("authorImg");
+        new KTImageInput("image_id");
+        new KTImageInput("authorImg_id");
         }
         };jQuery(document).ready((function(){KTUserEdit.init()}));
 </script>

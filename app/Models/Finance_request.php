@@ -18,10 +18,14 @@ class Finance_request extends Model
         'provide_amount',
         'existing_credit',
         "status",
-        "user_id"
+        "user_id",
+        "bank_name",
+        "car_makerId",
+        "car_modelId",
+        "car_id",
+
     ];
     public function user() {
         return $this->belongsTo(User::class,'user_id','id');
     }
-
 }

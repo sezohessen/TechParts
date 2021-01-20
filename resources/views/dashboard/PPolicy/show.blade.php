@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(ENG)')</label>
+                            <label for="description">@lang('Description(ENG)')<span class="text-danger">*</span></label>
                             <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="8"
                             placeholder="@lang('Write description')" required>
                             {{ old('description') ? old('description') : $PPolicy->description }}
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(AR)')</label>
+                            <label for="description">@lang('Description(AR)')<span class="text-danger">*</span></label>
                             <textarea name="description_ar" class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="8"
                             placeholder="@lang('Write description')" required>
                             {{ old('description_ar') ? old('description_ar') :$PPolicy->description_ar }}

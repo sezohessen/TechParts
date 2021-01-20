@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(ENG)')</label>
+                            <label for="description">@lang('Description(ENG)')<span class="text-danger">*</span></label>
                             <textarea name="description"
                                 class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                 id="kt-ckeditor-1" rows="3"
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(AR)')</label>
+                            <label for="description">@lang('Description(AR)')<span class="text-danger">*</span></label>
                             <textarea name="description_ar"
                                 class="form-control {{ $errors->has('description_ar') ? 'is-invalid' : '' }}"
                                 id="kt-ckeditor-2" rows="3"
@@ -84,8 +84,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="insurance_id">@lang('Select Insurance company name') <span
-                                    class="text-danger">*</span></label>
+                            <label for="insurance_id">@lang('Select Insurance company name')<span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('insurance_id') ? 'is-invalid' : '' }}"
                                 id="insurance_id" name="insurance_id" required>
                                 <option value="">@lang('--Select insurance company--')</option>

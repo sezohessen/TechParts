@@ -42,10 +42,13 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/AskExpert','AskExpertController');
     Route::resource('/finance-request','FinanceRequestController');
     Route::resource('/agency','AgencyController');
+    Route::resource('/AgencyCar','AgencyCarController');
     Route::resource('/car','CarController');
     Route::resource('/bank','BankController');
     Route::resource('/bank-offer','BankOfferController');
     Route::resource('/log','LogsController');
+    Route::resource('/subscribe_packages','SubscribeController');
+    Route::resource('/promote','CarPromoteController');
     Route::group(['prefix' => 'car'],function(){
         Route::resource('/maker','CarMakerController');
         Route::resource('/model','CarModelController');
@@ -86,9 +89,9 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/agency/destroy/all','AgencyController@multi_delete');
     Route::delete('/maker/destroy/all','CarMakerController@multi_delete');
     Route::delete('/model/destroy/all','CarModelController@multi_delete');
-    Route::delete('/body/destroy/all','CarBodyController@multi_delete');
-    Route::delete('/year/destroy/all','CarYearController@multi_delete');
-    Route::delete('/capacity/destroy/all','CarCapacityController@multi_delete');
+    Route::delete('/bodar/destroy/all','CarYearController@multi_delete');
+    Route::delete('/cay/destroy/all','CarBodyController@multi_delete');
+    Route::delete('/yepacity/destroy/all','CarCapacityController@multi_delete');
     Route::delete('/color/destroy/all','CarColorController@multi_delete');
     Route::delete('/AskExpert/destroy/all','AskExpertController@multi_delete');
     Route::delete('/contact/destroy/all','ContactController@multi_delete');
@@ -97,6 +100,10 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
     Route::delete('/log/destroy/all','LogsController@multi_delete');
     Route::delete('/users/destroy/all','UserController@multi_delete');
+    Route::delete('/subscribe_packages/destroy/all','SubscribeController@multi_delete');
+    Route::delete('/promote/destroy/all','CarPromoteController@multi_delete');
+
+    Route::delete('/news/destroy/all','NewsController@multi_delete');
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
@@ -130,12 +137,13 @@ Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insuran
 Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
+    Route::get('/governorate/{id}','AgencyController@governorate');//Ajax Request
+    Route::get('/country/{id}','AgencyController@country');//Ajax Request
 });
 Route::group(['prefix' => 'bank','as' => 'bank.','namespace'=>"Bank", 'middleware' => ['role:bank']], function () {
     Route::get('/','BankDashController@index')->name('index');
     Route::resource('/company','BankController');
     Route::resource('/bank-offer','BankOfferController');
-
 });
 //});
 

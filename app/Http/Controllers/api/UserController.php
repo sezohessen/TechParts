@@ -36,17 +36,17 @@ class UserController extends Controller
         }
         $token = $user->createToken('my-app-token')->plainTextToken;
         $data = [
-                    "country_code" => $user->country_code,
-                    "country_number" => $user->country_phone,
-                    "email" => $user->email,
-                    "first_name" => $user->first_name,
-                    "image" => @$user->image->base . @$user->image->name,
+                    "country_code"      => $user->country_code,
+                    "country_number"    => $user->country_phone,
+                    "email"             => $user->email,
+                    "first_name"        => $user->first_name,
+                    "image"             => @$user->image->base . @$user->image->name,
                     "is_phone_verified" => $user->is_phone_virefied,
-                    "last_name" => $user->last_name,
-                    "phone" => $user->phone,
-                    "role_id" => $user->role,
-                    "token"=> $token,
-                    "userId"=> $user->id
+                    "last_name"         => $user->last_name,
+                    "phone"             => $user->phone,
+                    "role_id"           => $user->role,
+                    "token"             => $token,
+                    "userId"            => $user->id
                 ];
                 if ($user->interestCountry) {
                      $data["interest_country"] = @$user->interestCountry->name;

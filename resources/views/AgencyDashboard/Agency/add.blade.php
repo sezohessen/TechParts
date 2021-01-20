@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.master')
+@extends('layout.agency')
 
 {{-- Content --}}
 @section('content')
@@ -13,11 +13,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.agency.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route('agency.company.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.agency.store")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("agency.company.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -158,61 +158,66 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>@lang('Payment Method')<span class="text-danger">*</span></label>
-                                    <div class="radio-inline">
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="0"
-                                            {{ old('payment_method')=="0" ? 'checked':'' }} required/>
-                                            <span></span>
-                                            @lang('Cash')
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="1"
-                                            {{ old('payment_method')=="1" ? 'checked':'' }}/>
-                                            <span></span>
-                                            @lang('Installment')
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="2"
-                                            {{ old('payment_method')=="2" ? 'checked':'' }}/>
-                                            <span></span>
-                                            @lang('Financial')
-                                        </label>
-                                        @error('payment_method')
-                                            <div class="invalid-feedback">{{ $errors->first('payment_method') }}</div>
-                                        @enderror
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>@lang('Payment Method')<span class="text-danger">*</span></label>
+                                            <div class="radio-inline">
+                                                <label class="radio">
+                                                    <input type="radio" name="payment_method" value="0"
+                                                    {{ old('payment_method')=="0" ? 'checked':'' }} required/>
+                                                    <span></span>
+                                                    @lang('Cash')
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="payment_method" value="1"
+                                                    {{ old('payment_method')=="1" ? 'checked':'' }}/>
+                                                    <span></span>
+                                                    @lang('Installment')
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="payment_method" value="2"
+                                                    {{ old('payment_method')=="2" ? 'checked':'' }}/>
+                                                    <span></span>
+                                                    @lang('Financial')
+                                                </label>
+                                                @error('payment_method')
+                                                    <div class="invalid-feedback">{{ $errors->first('payment_method') }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>@lang('Car status')<span class="text-danger">*</span></label>
+                                                    <div class="radio-inline">
+                                                        <label class="radio">
+                                                            <input type="radio" name="car_status" value="0"
+                                                            {{ old('car_status')=="0" ? 'checked':'' }} required/>
+                                                            <span></span>
+                                                            @lang('New')
+                                                        </label>
+                                                        <label class="radio">
+                                                            <input type="radio" name="car_status" value="1"
+                                                            {{ old('car_status')=="1" ? 'checked':'' }}/>
+                                                            <span></span>
+                                                            @lang('Used')
+                                                        </label>
+                                                        @error('car_status')
+                                                            <div class="invalid-feedback">{{ $errors->first('car_status') }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>@lang('Car status')<span class="text-danger">*</span></label>
-                                    <div class="radio-inline">
-                                        <label class="radio">
-                                            <input type="radio" name="car_status" value="0"
-                                            {{ old('car_status')=="0" ? 'checked':'' }} required/>
-                                            <span></span>
-                                            @lang('New')
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="car_status" value="1"
-                                            {{ old('car_status')=="1" ? 'checked':'' }}/>
-                                            <span></span>
-                                            @lang('Used')
-                                        </label>
-                                        @error('car_status')
-                                            <div class="invalid-feedback">{{ $errors->first('car_status') }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="country">@lang('Select Country') <span class="text-danger">*</span></label>
@@ -377,7 +382,7 @@
         var id = this.value ;
         $('#governorate').empty();
         $.ajax({
-            url: '/dashboard/country/'+id,
+            url: '/agency/country/'+id,
             success: data => {
                 if(data.governorates){
                     data.governorates.forEach(governorate =>
@@ -388,12 +393,13 @@
                 }
             }
         });
+        $('#governorate').change();
     });
     $('#governorate').on('change', function() {
         var id = this.value ;
         $('#city').empty();
         $.ajax({
-            url: '/dashboard/governorate/'+id,
+            url: '/agency/governorate/'+id,
             success: data => {
                 if(data.cities){
                     data.cities.forEach(city =>
