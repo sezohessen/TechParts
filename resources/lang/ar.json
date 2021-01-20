@@ -298,5 +298,12 @@
     "Successfully get Subscribed Packages":"تم الحصول علي الحزم بنجاح",
     "Promoted Successfully":"تم الترويج بنجاح",
     "Subscribe Package  ID not found":"Subscribe Package غير موجود",
-    "Subscribe Package invalid period":"Subscribe Package تحتوي علي فترة غير صالحة"
+    "Subscribe Package invalid period":"Subscribe Package تحتوي علي فترة غير صالحة",
+    "Select Car Make":"اختر صانع السيارة ",
+    "Select Car Model":"اختر موديل السيارة",
+    "Select Car Make first":"اختر صانع السيارة أولا",
+    "No Results":"لا توجد نتائج",
+    "Financing":"تمويل",
+    "Country not found":"البلد غير موجودة"
+
 }

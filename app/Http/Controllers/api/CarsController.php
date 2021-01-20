@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\Response;
 use App\Http\Resources\SubscribeResource;
+use App\Models\Country;
 use App\Models\PromoteCar;
 use Illuminate\Support\Facades\Validator as Validator;
 
@@ -38,6 +39,8 @@ class DataType {
     const single = 1;
     const list = 2;
     const compare = 3;
+    const promote = 4;
+
 }
 class CarsController extends Controller
 {
@@ -101,7 +104,7 @@ class CarsController extends Controller
     {
 
         $validator=$this->Validator($request,[
-            "interest_country" => 'required|string|max:255',
+            "interest_country" => 'required|integer',
             "car_status"       => 'required|string|max:255|in:Used,New,مستعملة,جديدة',
             "word"             => 'required|string|max:255',
         ]);
@@ -111,19 +114,16 @@ class CarsController extends Controller
             else {
                 $status=(($request->car_status=="New") ? Car::IS_NEW : Car::IS_USED);
             }
+            if(!$country=Country::find($request->interest_country)){
+                return $this->errorMessage('Country not found');
+            }
             $type   = new DataType();
             $data=(new CarCollection(
-                Car::whereHas('country', function ($query)use($request) {
-                    return (session()->get('app_locale')=="ar")?
-                    $query->where('name_ar', 'LIKE', $request->interest_country)
-                        :
-                    $query->where('name', 'LIKE', $request->interest_country);
-
-                })
+                Car::where("Country_id",$country->id)
                 ->orWhereHas('maker', function($query)use($request){
                     $query->where('name','LIKE',$request->word);
                 })
-                ->orWhere('status', '=', $status)
+                ->orWhere('IsNew', '=', $status)
                 ->paginate(10)
             ))->type($type::list);
             return $data;
@@ -152,7 +152,7 @@ class CarsController extends Controller
                 'weaccept_order_id'=> $request->weaccept_order_id
             ]);
             $type   = new DataType();
-            $data=(new CarResource($car))->type($type::single);
+            $data=(new CarResource($car))->type($type::list);
             return  $this->returnData('mCar',$data,__('Deposit Successfully'));
 
         }else {
@@ -238,12 +238,17 @@ class CarsController extends Controller
             if(!strtotime($subscribe_package->period)){
                 return $this->errorMessage('Subscribe Package invalid period');
             }
-            ($cat->promotedStatus)
-            date("Y-m-d",strtotime("+".$subscribe_package->period,strtotime($car->adsExpire))),
-            $car->update([
-                "promotedExpire"=>
-                'promotedStatus'=>true
-            ]);
+            if($car->promotedStatus){
+                $car->update([
+                    "promotedExpire"=> date("Y-m-d",strtotime("+".$subscribe_package->period,strtotime($car->promotedExpire))),
+                    'promotedStatus'=>true
+                ]);
+            }else {
+                $car->update([
+                    "promotedExpire"=> date("Y-m-d",strtotime("+".$subscribe_package->period,strtotime($car->adsExpire))),
+                    'promotedStatus'=>true
+                ]);
+            }
             PromoteCar::create([
                 "car_id"=>$car->id,
                 "subscribe_package_id"=>$subscribe_package->id,
@@ -252,7 +257,7 @@ class CarsController extends Controller
                 "weaccept_order_id"=>$request->weaccept_order_id
             ]);
             $type   = new DataType();
-            $data=(new CarResource($car))->type($type::single);
+            $data=(new CarResource($car))->type($type::promote);
             return  $this->returnData('mCar',$data,__('Promoted Successfully'));
 
         }else {

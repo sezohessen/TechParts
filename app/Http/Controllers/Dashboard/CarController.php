@@ -72,7 +72,7 @@ class CarController extends Controller
         $rules = Car::rules($request);
         $request->validate($rules);
         $credentials = Car::credentials($request);
-        $car = Car::create($credentials);
+        $car = Car::create(array_merge($credentials,['user_id'=>Auth()->user()->id]));
         foreach($credentials['CarPhotos'] as $key=>$img){
             car_img::create([
                 'car_id'=>$car->id,
@@ -157,7 +157,7 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      //  array_merge($credentials,['user_id'=>Auth()->user()->id])
     }
 
     /**

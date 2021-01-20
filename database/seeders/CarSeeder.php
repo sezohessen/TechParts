@@ -14,6 +14,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Feature;
 use App\Models\Governorate;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
@@ -49,6 +50,7 @@ class CarSeeder extends Seeder
                 'CarYear_id'            => CarYear::all()->random()->id,
                 'CarCapacity_id'        => CarCapacity::all()->random()->id,
                 'CarColor_id'           => CarColor::all()->random()->id,
+                'user_id'               => User::all()->random()->id,
                 'views'                 => $faker->numberBetween(1,100),
                 'AccidentBefore'        => rand(0,1),
                 'transmission'          => rand(0,1),
@@ -56,6 +58,7 @@ class CarSeeder extends Seeder
                 'SellerType'            => rand(0,2),
                 'price_after_discount'  => $faker->numberBetween(1,100),
                 'price'                 => $faker->numberBetween(1,10000),
+                'whats'                 => $faker->phoneNumber,
                 'isNew'                 => rand(0,1),
                 'status'                => rand(0,1),
                 'kiloUsed'              => $faker->numberBetween(1,100),

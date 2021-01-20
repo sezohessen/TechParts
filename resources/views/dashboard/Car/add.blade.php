@@ -25,7 +25,7 @@
                             <label class="col-form-label col-sm-12">@lang('Select Car Make')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" id="maker" required>
-                                    <option value="">@lang('--Select Car Make --')</option>
+                                    <option value="">@lang('Select Car Make')</option>
                                     @foreach ($makers as $key=>$maker)
                                         <option value="{{$maker->id}}"
                                             data-content="
@@ -48,7 +48,7 @@
                              <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
                                 name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
-                                    <option value=""  >@lang('--Select Car Make first--')</option>
+                                    <option value=""  >@lang('Select Car Make first')</option>
                                 </select>
                                 @error('CarModel_id')
                                     <div class="invalid-feedback">{{ $errors->first('CarModel_id') }}</div>
@@ -62,7 +62,6 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                              <select class="form-control select2 {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
                                  id="kt_select2_1" name="CarYear_id" required>
-                                <option value="">@lang('--Select user--')</option>
                                 @foreach ($years as $year)
                                     <option value="{{$year->id}}"{{ old('CarYear_id')==$year->id ? 'selected':'' }} >{{$year->year}}</option>
                                 @endforeach
@@ -473,6 +472,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("What's App")</label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("whats") ?? Auth::user()->whats_app}}"  placeholder="{{__("Your What's App")}}" name="whats" />
+                                    <span class="form-text text-muted">@lang("This is your phone number ")</span>
+                                @error('whats')
+                                    <div class="invalid-feedback">{{ $errors->first('whats') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                         <div class="form-group row ">
@@ -557,7 +568,7 @@
                     $('#models').append(`<option value="${models.id}" ${(old_model==models.id) ? "selected" : "" } >${models.name}</option>`)
                     )
                 }else{
-                    $('#models').append(`<option value="">No Results</option>`)
+                    $('#models').append(`<option value="">{{__("No Results")}}</option>`)
                 }
 
             },
@@ -625,7 +636,7 @@
         city("<?php echo (old('Governorate_id'))?>");
     }
 
- $('#kt_select2_12').select2({
+  $('#kt_select2_12').select2({
         tags: true,
         placeholder: "Add a feature",
   });
