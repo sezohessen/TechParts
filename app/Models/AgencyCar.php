@@ -13,6 +13,10 @@ class AgencyCar extends Model
         'car_id',
         'agency_id',
     ];
+    public function car()
+    {
+        return $this->belongsTo(Car::class,'car_id','id');
+    }
     public static function rules($request)
     {
         $rules = [
@@ -29,4 +33,6 @@ class AgencyCar extends Model
 
         return $credentials;
     }
+
+
 }

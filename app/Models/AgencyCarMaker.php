@@ -22,6 +22,10 @@ class AgencyCarMaker extends Model
         ];
         return $rules;
     }
+    public function carMaker()
+    {
+        return $this->belongsTo(CarMaker::class,'CarMaker_id','id');
+    }
     public static function credentials($CarMaker_id,$agent_id)
     {
         $credentials = [

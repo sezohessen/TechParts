@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
 });
 Route::post("news/home",'api\NewsController@filter');
+
 Route::post("news",'api\NewsController@show');
 Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
 
@@ -41,6 +42,21 @@ Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
 Route::group(['prefix' => 'centers','namespace'=>'api'], function () {
     Route::group(['prefix' => 'review'], function () {
         Route::post("agency",'AgencyController@review');
+    });
+    Route::group(['prefix' => 'home'], function () {
+        Route::post("agency",'AgencyController@agency');
+        Route::post("maintenance",'AgencyController@maintenance');
+        Route::post("spare",'AgencyController@spare');
+    });
+    Route::group(['prefix' => 'details'], function () {
+        Route::post("agency",'AgencyController@detailsAgency');
+        Route::post("maintenance",'AgencyController@detailsMaintenance');
+        Route::post("spare",'AgencyController@detailsSpare');
+    });
+    Route::group(['prefix' => 'list'], function () {
+        Route::post("agency/search",'AgencyController@agencySearch');
+        Route::post("maintenance/search",'AgencyController@maintenanceSearch');
+        Route::post("spare/search",'AgencyController@spareSearch');
     });
 });
 Route::group(['prefix' => 'auth','namespace'=>'api'], function () {
