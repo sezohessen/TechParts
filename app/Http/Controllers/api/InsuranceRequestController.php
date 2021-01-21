@@ -9,19 +9,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator as Validator;
-class Responseobject
-{
-    const status_ok = "OK";
-    const status_failed = "FAILED";
-    const code_ok = 200;
-    const code_failed = 400;
-    const code_unauthorized = 403;
-    const code_not_found = 404;
-    const code_error = 500;
-    public $status;
-    public $code;
-    public $messages = array();
-}
+use App\Classes\Responseobject;
+
 class InsuranceRequestController extends Controller
 {
     use GeneralTrait;
@@ -29,19 +18,19 @@ class InsuranceRequestController extends Controller
     public function insurance(Request $request)
     {
         if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
+            if (in_array($locale, ['ar', 'en'])) {
                 default_lang($locale);
-            }else {
+            } else {
                 default_lang();
             }
-        }else {
+        } else {
             default_lang();
         }
         $data       = $request->all();
         $response   = new Responseobject();
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
-            'interest_country'              => 'required|integer',//Will be updated
+            'interest_country'              => 'required|integer', //Will be updated
             'token'                         => 'required',
             'car_id'                        => 'required|integer',
             'car_modelId'                   => 'required|integer',
@@ -72,7 +61,7 @@ class InsuranceRequestController extends Controller
             ]);
 
             return $this->returnSuccess(__("Successfully Create Request"));
-        }else{
+        } else {
             $response->status = $response::status_failed;
             $response->code = $response::code_failed;
             foreach ($validator->errors()->getMessages() as $item) {

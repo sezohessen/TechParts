@@ -62,7 +62,7 @@ class User extends Authenticatable
     ];
 
 
-    public static function rules()
+    public static function rules($api=null)
     {
         $rules = [
             'image'             => 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240',
@@ -74,8 +74,11 @@ class User extends Authenticatable
             'is_phone_virefied' => 'nullable|integer',
             'phone'             => 'required|string|max:255|unique:users',
             'password'          => 'required|string|min:8',
-            'agree'             => 'required',
+
         ];
+        if (!$api) {
+           $rules['agree'] = 'required';
+        }
         return $rules;
     }
     public static function credentials($request)
@@ -116,7 +119,7 @@ class User extends Authenticatable
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
         $destinationPath = public_path() . '/img/users/';
         $file->move($destinationPath, $fileName);
-        $Image = Image::create(['name' => $fileName]);
+        $Image = Image::create(['name' => $fileName, 'base' => '/img/users/']);
         return $Image->id;
     }
 
@@ -135,5 +138,5 @@ class User extends Authenticatable
         return $this->belongsTo(Image::class);
     }
 
-    
+
 }

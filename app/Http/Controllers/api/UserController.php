@@ -5,9 +5,12 @@ namespace App\Http\Controllers\api;
 use App\Models\User;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
+use App\Classes\Responseobject;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -52,5 +55,54 @@ class UserController extends Controller
                      $data["interest_country"] = @$user->interestCountry;
                 }
         return $this->returnData('mUser',$data,__('Success login'));
+    }
+    public function check_phone(Request $request)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        if (!$request->phone) {
+            return $this->errorField('phone');
+        }
+
+        $user = User::where('phone' ,$request->phone)->first();
+        if ($user ) {
+            return $this->SuccessMessage('This Phone Number Already Found');
+        }else {
+            return $this->errorMessage("phone number does n't exist");
+        }
+    }
+    public function signup(Request $request)
+    {
+        $validator  = Validator::make((array) $request->all(), User::rules(true));
+        $response   = new Responseobject();
+        if ($validator->fails()) {
+            $response->status = $response::status_failed;
+            $response->code = $response::code_failed;
+            foreach ($validator->errors()->getMessages() as $item) {
+                array_push($response->messages, $item);
+            }
+            return Response::json(
+                $response
+            );
+        }
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }
+
+        $user = User::where('phone' ,$request->phone)->first();
+        if ($user ) {
+            return $this->errorMessage("This phone number used before");
+        }
     }
 }

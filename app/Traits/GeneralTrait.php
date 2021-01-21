@@ -20,6 +20,12 @@ trait GeneralTrait {
             "status" => false
         ]);
     }
+    public function SuccessMessage($massage){
+        return response()->json([
+            "msg" => __($massage),
+            "status" => false
+        ]);
+    }
     public function returnSuccess($msg=""){
         return response()->json([
             'status'=>true,
