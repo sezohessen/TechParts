@@ -27,7 +27,7 @@ class AgencyController extends Controller
     {
         $this->lang($request);
         $data       = $request->all();
-        $response   = new Responseobject();
+
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'rate'          => 'required|in:1,2,3,4,5',
@@ -53,27 +53,14 @@ class AgencyController extends Controller
             }
             return $this->returnSuccess(__("Your Review Has been created Successfully, Wait for Admin to Apply your review"));
         }else{
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return($this->ValidatorErrors($validator));
         }
 
     }
     public function agency(Request $request)
     {
         $this->lang($request);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
-            'interest_country'  => 'required|integer',//Will be updated
-            'token'             => 'nullable',
-        ]);
+        $validator  = $this->home($request);
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id',$request->interest_country)
@@ -84,45 +71,18 @@ class AgencyController extends Controller
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                list($Max,$Min) = $this->PriceRange($agency);
-
-                $agencies[] = [
-                    "centerType"    => Agency::types()[$agency->center_type],
-                    "id"            => $agency->id,
-                    "logo"          => $agency->img->name,
-                    "title"         => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
-                    "isAuthorised"  => $agency->is_authorised ? true : false,
-                    "rate"          => $this->rate($agency),
-                    "priceRangeMax" => $Max,
-                    "priceRangeMin" => $Min,
-                    "isFavorite"    => $this->isFav($agency),
-                    "mContact"      => $this->Contact($agency),
-                    "mLocation"     => $this->Location($agency),
-                    "carMakerList"  => $this->carMakerList($agency)
-                ];
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
+                $paymentMethodList = false);
             }
             return $this->returnData("offersList",$agencies,"Successfully");
         }else{
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return($this->ValidatorErrors($validator));
         }
     }
     public function maintenance(Request $request)
     {
         $this->lang($request);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
-            'interest_country'  => 'required|integer',
-            'token'             => 'nullable',
-        ]);
+        $validator  = $this->home($request);
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id',$request->interest_country)
@@ -133,46 +93,18 @@ class AgencyController extends Controller
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                list($Max,$Min) = $this->PriceRange($agency);
-
-                $agencies[] = [
-                    "centerType"            => Agency::types()[$agency->center_type],
-                    "id"                    => $agency->id,
-                    "logo"                  => $agency->img->name,
-                    "title"                 => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
-                    "isAuthorised"          => $agency->is_authorised ? true : false,
-                    "rate"                  => $this->rate($agency),
-                    "priceRangeMax"         => $Max,
-                    "priceRangeMin"         => $Min,
-                    "isFavorite"            => $this->isFav($agency),
-                    "mContact"              => $this->Contact($agency),
-                    "mLocation"             => $this->Location($agency),
-                    "carMakerList"          => $this->carMakerList($agency),
-                    "specializationList"    => $this->specializationList($agency)
-                ];
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$description = false,
+                $paymentMethodList = false);
             }
             return $this->returnData("centerList",$agencies,"Successfully");
         }else{
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return($this->ValidatorErrors($validator));
         }
     }
     public function spare(Request $request)
     {
         $this->lang($request);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
-            'interest_country'  => 'required|integer',
-            'token'             => 'nullable',
-        ]);
+        $validator  = $this->home($request);
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id',$request->interest_country)
@@ -183,46 +115,18 @@ class AgencyController extends Controller
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                list($Max,$Min) = $this->PriceRange($agency);
-
-                $agencies[] = [
-                    "centerType"            => Agency::types()[$agency->center_type],
-                    "id"                    => $agency->id,
-                    "logo"                  => $agency->img->name,
-                    "title"                 => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
-                    "isAuthorised"          => $agency->is_authorised ? true : false,
-                    "rate"                  => $this->rate($agency),
-                    "priceRangeMax"         => $Max,
-                    "priceRangeMin"         => $Min,
-                    "isFavorite"            => $this->isFav($agency),
-                    "mContact"              => $this->Contact($agency),
-                    "mLocation"             => $this->Location($agency),
-                    "carMakerList"          => $this->carMakerList($agency),
-                    "specializationList"    => $this->specializationList($agency)
-                ];
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$description = false,
+                $paymentMethodList = false);
             }
             return $this->returnData("centerList",$agencies,"Successfully");
         }else{
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return($this->ValidatorErrors($validator));
         }
     }
     public function detailsAgency(Request $request)
     {
         $this->lang($request);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
-            'center_id'         => 'required|integer',
-            'token'             => 'nullable',
-        ]);
+        $validator = $this->Details($request);
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('id',$request->center_id)
@@ -233,49 +137,18 @@ class AgencyController extends Controller
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                list($Max,$Min) = $this->PriceRange($agency);
-
-                $agencies[] = [
-                    "centerType"        => Agency::types()[$agency->center_type],
-                    "paymentMethodList" => Agency::payment()[$agency->payment_method],
-                    "workType"          => Agency::AgecnyType()[$agency->agency_type],
-                    "badgesList"        => Agency::status()[$agency->status],
-                    "id"                => $agency->id,
-                    "logo"              => $agency->img->name,
-                    "description"       => Session::get('app_locale')=='ar'? $agency->description_ar : $agency->description,
-                    "title"             => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
-                    "isAuthorised"      => $agency->is_authorised ? true : false,
-                    "rate"              => $this->rate($agency),
-                    "priceRangeMax"     => $Max,
-                    "priceRangeMin"     => $Min,
-                    "isFavorite"        => $this->isFav($agency),
-                    "mContact"          => $this->Contact($agency),
-                    "mLocation"         => $this->Location($agency),
-                    "carMakerList"      => $this->carMakerList($agency)
-                ];
+                $agencies[]     = $this->AgencyData($agency,Agency::AgecnyType()[$agency->agency_type],$specializationList = false,$badgesList = true,$description = true,
+                $paymentMethodList = true);
             }
             return $this->returnData("mCenter",$agencies,"Successfully");
         }else{
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return($this->ValidatorErrors($validator));
         }
     }
     public function detailsMaintenance(Request $request)
     {
         $this->lang($request);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
-            'center_id'         => 'required|integer',
-            'token'             => 'nullable',
-        ]);
+        $validator = $this->Details($request);
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('id',$request->center_id)
@@ -286,49 +159,18 @@ class AgencyController extends Controller
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                list($Max,$Min) = $this->PriceRange($agency);
-                $agencies[] = [
-                    "centerType"        => Agency::types()[$agency->center_type],
-                    "paymentMethodList" => Agency::payment()[$agency->payment_method],
-                    "workType"          => Agency::MaintenanceType()[$agency->maintenance_type],
-                    "badgesList"        => Agency::status()[$agency->status],
-                    "id"                => $agency->id,
-                    "logo"              => $agency->img->name,
-                    "description"       => Session::get('app_locale')=='ar'? $agency->description_ar : $agency->description,
-                    "title"             => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
-                    "isAuthorised"      => $agency->is_authorised ? true : false,
-                    "rate"              => $this->rate($agency),
-                    "priceRangeMax"     => $Max,
-                    "priceRangeMin"     => $Min,
-                    "isFavorite"        => $this->isFav($agency),
-                    "mContact"          => $this->Contact($agency),
-                    "mLocation"         => $this->Location($agency),
-                    "carMakerList"      => $this->carMakerList($agency),
-                    "specializationList"=> $this->specializationList($agency)
-                ];
+                $agencies[]     = $this->AgencyData($agency,Agency::MaintenanceType()[$agency->maintenance_type],$specializationList = true,$badgesList = true,$description = true,
+                $paymentMethodList = true);
             }
             return $this->returnData("mCenter",$agencies,"Successfully");
         }else{
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return($this->ValidatorErrors($validator));
         }
     }
     public function detailsSpare(Request $request)
     {
         $this->lang($request);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
-            'center_id'         => 'required|integer',
-            'token'             => 'nullable',
-        ]);
+        $validator = $this->Details($request);
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('id',$request->center_id)
@@ -339,52 +181,18 @@ class AgencyController extends Controller
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                list($Max,$Min) = $this->PriceRange($agency);
-
-                $agencies[] = [
-                    "centerType"        => Agency::types()[$agency->center_type],
-                    "paymentMethodList" => Agency::payment()[$agency->payment_method],
-                    "workType"          => Agency::types()[$agency->center_type],
-                    "badgesList"        => Agency::status()[$agency->status],
-                    "id"                => $agency->id,
-                    "logo"              => $agency->img->name,
-                    "description"       => Session::get('app_locale')=='ar'? $agency->description_ar : $agency->description,
-                    "title"             => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
-                    "isAuthorised"      => $agency->is_authorised ? true : false,
-                    "rate"              => $this->rate($agency),
-                    "priceRangeMax"     => $Max,
-                    "priceRangeMin"     => $Min,
-                    "isFavorite"        => $this->isFav($agency),
-                    "mContact"          => $this->Contact($agency),
-                    "mLocation"         => $this->Location($agency),
-                    "carMakerList"      => $this->carMakerList($agency),
-                    "specializationList"=> $this->specializationList($agency)
-                ];
+                $agencies[]     = $this->AgencyData($agency,Agency::types()[$agency->center_type],$specializationList = true,$badgesList = true,$description = true,
+                $paymentMethodList = true);
             }
             return $this->returnData("mCenter",$agencies,"Successfully");
         }else{
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return($this->ValidatorErrors($validator));
         }
     }
     public function agencySearch(Request $request)
     {
         $this->lang($request);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
-            'interest_country'  => 'required|integer',//Will be updated
-            'token'             => 'nullable',
-            'car_status'        => 'required|in:0,1|integer',
-            'word'              => 'required|regex:/^[a-z0-9\s]+$/i'
-        ]);
+        $validator = $this->Search($request);
 
         if (!$validator->fails()) {
             $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
@@ -399,42 +207,94 @@ class AgencyController extends Controller
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                list($Max,$Min) = $this->PriceRange($agency);
-
-                $agencies[] = [
-                    "centerType"    => Agency::types()[$agency->center_type],
-                    "id"            => $agency->id,
-                    "logo"          => $agency->img->name,
-                    "title"         => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
-                    "isAuthorised"  => $agency->is_authorised ? true : false,
-                    "rate"          => $this->rate($agency),
-                    "priceRangeMax" => $Max,
-                    "priceRangeMin" => $Min,
-                    "isFavorite"    => $this->isFav($agency),
-                    "mContact"      => $this->Contact($agency),
-                    "mLocation"     => $this->Location($agency),
-                    "carMakerList"  => $this->carMakerList($agency)
-                ];
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
+                $paymentMethodList = false,$centerType = false);
             }
             return $this->returnData("centerList",$agencies,"Successfully");
         }else{
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return($this->ValidatorErrors($validator));
         }
     }
     public function maintenanceSearch(Request $request)
     {
-        dd(1);
+        $this->lang($request);
+        $validator = $this->Search($request);
+
+        if (!$validator->fails()) {
+            $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
+            $name           = Session::get('app_locale')=='ar'? "name_ar" : "name";
+            $agencyList     = Agency::where('country_id',$request->interest_country)
+            ->where('center_type',Agency::center_type_Maintenance)
+            ->where('car_status',$carStatus)
+            ->where($name,'like','%'.$request->word.'%')
+            ->paginate();
+            if(!$agencyList->count()){
+                return $this->returnSuccess(__("No centers found"));
+            }
+            $agencies = [];
+            foreach ($agencyList as $agency) {
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$description = false,
+                $paymentMethodList = false);
+            }
+            return $this->returnData("centerList",$agencies,"Successfully");
+        }else{
+            return($this->ValidatorErrors($validator));
+
+        }
     }
     public function spareSearch(Request $request)
     {
-        dd(1);
+        $this->lang($request);
+        $validator = $this->Search($request);
+
+        if (!$validator->fails()) {
+            $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
+            $name           = Session::get('app_locale')=='ar'? "name_ar" : "name";
+            $agencyList     = Agency::where('country_id',$request->interest_country)
+            ->where('center_type',Agency::center_type_Spare)
+            ->where('car_status',$carStatus)
+            ->where($name,'like','%'.$request->word.'%')
+            ->paginate();
+            if(!$agencyList->count()){
+                return $this->returnSuccess(__("No centers found"));
+            }
+            $agencies = [];
+            foreach ($agencyList as $agency) {
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$paymentMethodList = false,$centerType = false);
+            }
+            return $this->returnData("centerList",$agencies,"Successfully");
+        }else{
+            return($this->ValidatorErrors($validator));
+
+        }
+    }
+    public function agencyFav(Request $request)
+    {
+        $this->lang($request);
+        $validator = $this->Favorite($request,'agency');
+
+        if (!$validator->fails()) {
+            if(!auth()->user()){
+                return $this->errorMessage(__('Login to see your favorite'));
+            }
+
+            if(!auth()->user()->agencyFav->count()){
+                return $this->returnSuccess(__("No centers found"));
+            }
+            $agencyList = auth()->user()->agencyFav;
+            foreach ($agencyList as $agency) {
+
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
+                $paymentMethodList = false,$centerType = false,$mContact = false,$mLocation = false,$carMakerList = false);
+            }
+            return $this->returnData("agencyList",$agencies,"Successfully");
+        }else{
+            return($this->ValidatorErrors($validator));
+        }
+    }
+    public function centerFav(Request $request)
+    {
+
     }
     public function Contact($agency)
     {
@@ -549,5 +409,97 @@ class AgencyController extends Controller
         }else {
             default_lang();
         }
+    }
+    public function ValidatorErrors($validator)
+    {
+        $response           = new Responseobject();       # $response->status   = $response::status_failed;
+        $response->code     = $response::code_failed;
+        foreach ($validator->errors()->getMessages() as $item) {
+            array_push($response->messages, $item);
+        }
+        return Response::json(
+            $response
+        );
+    }
+    public function AgencyData($agency,$workType = 1
+    ,$specializationList = 1,$badgesList = 1,$description = 1,$paymentMethodList = 1,$centerType = 1
+    ,$mContact = 1,$mLocation = 1,$carMakerList = 1)//Power Full Function :P
+    {
+        list($Max,$Min)             = $this->PriceRange($agency);
+        $agencies = [
+            "centerType"            => Agency::types()[$agency->center_type],
+            "id"                    => $agency->id,
+            "logo"                  => $agency->img->name,
+            "title"                 => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
+            "description"           => Session::get('app_locale')=='ar'? $agency->description_ar : $agency->description,
+            "isAuthorised"          => $agency->is_authorised ? true : false,
+            "priceRangeMax"         => $Max,
+            "priceRangeMin"         => $Min,
+            "rate"                  => $this->rate($agency),
+            "isFavorite"            => $this->isFav($agency),
+            "mContact"              => $this->Contact($agency),
+            "mLocation"             => $this->Location($agency),
+            "carMakerList"          => $this->carMakerList($agency),
+            "specializationList"    => $this->specializationList($agency),
+            "paymentMethodList"     => Agency::payment()[$agency->payment_method],
+            "workType"              => $workType,
+            "badgesList"            => Agency::status()[$agency->status],
+        ];
+        if(!$specializationList)unset($agencies["specializationList"]);
+        if(!$workType)unset($agencies["workType"]);
+        if(!$badgesList)unset($agencies["badgesList"]);
+        if(!$specializationList)unset($agencies["specializationList"]);
+        if(!$description)unset($agencies["description"]);
+        if(!$paymentMethodList)unset($agencies["paymentMethodList"]);
+        if(!$centerType)unset($agencies["centerType"]);
+        if(!$mContact)unset($agencies["mContact"]);
+        if(!$mLocation)unset($agencies["mLocation"]);
+        if(!$carMakerList)unset($agencies["carMakerList"]);
+        return $agencies;
+    }
+    public function Search($request)
+    {
+        $data       = $request->all();
+        $array_data = (array)$data;
+        $validator  = Validator::make($array_data, [
+            'interest_country'  => 'required|integer',//Will be updated
+            'token'             => 'nullable',
+            'car_status'        => 'required|in:0,1|integer',
+            'word'              => 'required|regex:/^[a-z0-9\s]+$/i'
+        ]);
+        return $validator;
+    }
+    public function Details($request)
+    {
+        $data       = $request->all();
+
+        $array_data = (array)$data;
+        $validator  = Validator::make($array_data, [
+            'center_id'         => 'required|integer',
+            'token'             => 'nullable',
+        ]);
+        return $validator;
+    }
+    public function home($request)
+    {
+        $data       = $request->all();
+
+        $array_data = (array)$data;
+        $validator  = Validator::make($array_data, [
+            'interest_country'  => 'required|integer',
+            'token'             => 'nullable',
+        ]);
+        return $validator;
+    }
+    public function Favorite($request,$type)
+    {
+        $data       = $request->all();
+
+        $array_data = (array)$data;
+        $validator  = Validator::make($array_data, [
+            'token'             => 'required',
+            'favorite_type'     => 'required|in:'.$type
+        ]);
+        return $validator;
     }
 }

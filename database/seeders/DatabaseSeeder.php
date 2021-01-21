@@ -60,7 +60,5 @@ class DatabaseSeeder extends Seeder
         $this->call(Car_DepositSeeder::class);
         $this->call(subscribe_packageSeeder::class);
         $this->call(PromoteCarSeeder::class);
-
-
     }
 }

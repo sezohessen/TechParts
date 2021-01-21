@@ -19,7 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
-
+    Route::group(['prefix' => 'favorite'], function () {
+        Route::post("get_agency_list",'AgencyController@agencyFav');//get agency list favorite
+        Route::post("get_center_list",'AgencyController@centerFav');//get cetner maintenance list favorite
+        Route::post("get_car_list",'AgencyController@');//get car list favorite(Not Finished)
+    });
     Route::post("ask_expoert",'AskExpertController@create');
     Route::group(['prefix' => 'car'], function () {
         Route::post("details",'CarsController@show');

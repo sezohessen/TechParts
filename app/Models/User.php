@@ -138,5 +138,15 @@ class User extends Authenticatable
         return $this->belongsTo(Image::class);
     }
 
+    public function agencyFav()
+    {
+        return $this->belongsToMany(Agency::class,'user_fav_agencies','user_id','agency_id')
+        ->where('agencies.center_type',Agency::center_type_Agency);
+    }
+    public function MaintenanceFav()
+    {
+        return $this->belongsToMany(Agency::class,'user_fav_agencies','user_id','agency_id')
+        ->where('agencies.center_type',Agency::center_type_Maintenance);
+    }
 
 }
