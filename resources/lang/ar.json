@@ -291,6 +291,7 @@
     "Workshop":"ورشة عمل",
     "Maintenance center type":"نوع مركز الصيانة",
     "Maintenance center specialties":"تخصصات مركز الصيانة",
+    "Spare center specialties":"تخصصات مركز قطع الغيار",
     "--Select a specialty--":"--اختر تخصص--",
     "Show":"اظهر",
     "Maintenance":"اعمال صيانة",
@@ -312,6 +313,14 @@
     "--Select Agency--":"حدد وكالة",
     "Select agency center":"حدد مركز الوكالة",
     "Select car Maker":"حدد صانع السيارة",
-    "--Select car Maker--":"--حدد صانع السيارة--"
+    "--Select car Maker--":"--حدد صانع السيارة--",
+    "No such Center id exist":"لا يوجد مثل هذا معرف المركز موجود",
+    "Your Review Has been created Successfully, Wait for Admin to Apply your review":"تم إنشاء مراجعتك بنجاح ، انتظر حتى يقوم المسؤول بتطبيق مراجعتك",
+    "No Agencies in this interest country":"لا توجد وكالات في بلد الاهتمام هذا",
+    "No maintenance centers in this interest country":"لا توجد مراكز صيانة في بلد الاهتمام هذا",
+    "No Spare parts centers in this interest country":"لا توجد مراكز قطع غيار في بلد الاهتمام هذا",
+    "No such center id exist":"لا يوجد مثل هذا معرف المركز موجود",
+    "Un selected work type":"نوع العمل غير المحدد",
+    "No centers found":"لم يتم العثور على مراكز"
 
 }

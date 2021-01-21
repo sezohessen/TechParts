@@ -199,7 +199,7 @@
                                             <select class="form-control select2 {{ $errors->has('specialty_id') ? 'is-invalid' : '' }}"
                                                 id="kt_select2_2" name="specialty_id[]" multiple="multiple" style="width: 100%">
                                                 @foreach ($specialties as $specialty)
-                                                    @if(in_array($specialty->id, $agency_specialties)){{-- Check if Car maker in Selected Maintance Specializations list --}}
+                                                    @if(in_array($specialty->id, $agency_specialties_Main)){{-- Check if Car maker in Selected Maintance Specializations list --}}
                                                     <option value="{{$specialty->id}}" selected>{{ $specialty->name }} - {{ $specialty->name_ar }}</option>
                                                     @else
                                                         <option value="{{$specialty->id}}">{{ $specialty->name }} - {{ $specialty->name_ar }}</option>
@@ -208,6 +208,28 @@
                                             </select>
                                             @error('specialty_id')
                                              <div class="invalid-feedback">{{ $errors->first('specialty_id') }}</div>
+                                            @enderror
+                                            <span class="form-text text-muted">@lang('You can choose more than one specialty')</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group center_type" id="center_type2" style="display: none">
+                                    <label>@lang('Center type categorization')<span class="text-danger">*</span></label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="specialty_id_spare">@lang('Spare center specialties') <span class="text-danger">*</span></label>
+                                            <select class="form-control select2 {{ $errors->has('specialty_id_spare') ? 'is-invalid' : '' }}"
+                                                id="kt_select2_4" name="specialty_id_spare[]" multiple="multiple" style="width: 100%">
+                                                @foreach ($specialties as $specialty)
+                                                    @if(in_array($specialty->id, $agency_specialties_Spare)){{-- Check if Car maker in Selected Maintance Specializations list --}}
+                                                    <option value="{{$specialty->id}}" selected>{{ $specialty->name }} - {{ $specialty->name_ar }}</option>
+                                                    @else
+                                                        <option value="{{$specialty->id}}">{{ $specialty->name }} - {{ $specialty->name_ar }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            @error('specialty_id_spare')
+                                             <div class="invalid-feedback">{{ $errors->first('specialty_id_spare') }}</div>
                                             @enderror
                                             <span class="form-text text-muted">@lang('You can choose more than one specialty')</span>
                                         </div>
@@ -548,12 +570,19 @@
             $("#center_type0").show();
         });
     </script>
-@endif
-@if ($agency->maintenance_type)
+
+@elseif ($agency->maintenance_type)
     <script>
         $(document).ready(function() {
             $("div.center_type").hide();
             $("#center_type1").show();
+        });
+    </script>
+@else
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type2").show();
         });
     </script>
 @endif
@@ -570,6 +599,14 @@
         $(document).ready(function() {
             $("div.center_type").hide();
             $("#center_type1").show();
+        });
+    </script>
+@endif
+@if (old('center_type') == "2")
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type2").show();
         });
     </script>
 @endif

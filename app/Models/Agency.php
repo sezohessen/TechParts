@@ -9,6 +9,29 @@ use Illuminate\Support\Facades\Auth;
 
 class Agency extends Model
 {
+    //Center type
+    const center_type_Agency        = 0;
+    const center_type_Maintenance   = 1;
+    const center_type_Spare         = 2;
+    // Payment Methods
+    const Cash          = 0;
+    const Installment   = 1;
+    const Financial     = 2;
+    //badgesList
+    const Status_Normal     = 0;
+    const Status_Premium    = 1;
+    const Status_Trusted    = 2;
+    // Car status
+    const NewCar     = 0;
+    const UsedCar    = 1;
+    // Work Type
+    const UnSelected            = 0;
+
+    const Ag_Agency             = 1;
+    const Ag_Distributor        = 2;
+    const Main_Service_center   = 1;
+    const Main_Workshop         = 2;
+
     use HasFactory;
     protected $table    = 'agencies';
     protected $fillable=[
@@ -34,6 +57,47 @@ class Agency extends Model
         'is_authorised',
         'active'
     ];
+    /* Agency::types()[$agency->type] */
+    public static function types()
+    {
+        return [
+            self::center_type_Agency        => __('Agency'),
+            self::center_type_Maintenance   => __('Maintenance'),
+            self::center_type_Spare         => __('Spare'),
+        ];
+    }
+    public static function payment()
+    {
+        return [
+            self::Cash          => __('Cash'),
+            self::Installment   => __('Installment'),
+            self::Financial     => __('Financial'),
+        ];
+    }
+    public static function status()
+    {
+        return [
+            self::Status_Normal     => __('Normal'),
+            self::Status_Premium    => __('Premium'),
+            self::Status_Trusted    => __('Trusted'),
+        ];
+    }
+    public static function MaintenanceType()
+    {
+        return [
+            self::UnSelected            => __('Un selected work type'),
+            self::Main_Service_center   => __('Service center'),
+            self::Main_Workshop         => __('Workshop'),
+        ];
+    }
+    public static function AgecnyType()
+    {
+        return [
+            self::UnSelected        => __('Un selected work type'),
+            self::Ag_Agency         => __('Agency'),
+            self::Ag_Distributor    => __('Distributor'),
+        ];
+    }
     public function user() {
         return $this->belongsTo(User::class,'user_id','id');
     }
@@ -50,6 +114,15 @@ class Agency extends Model
     public function img(){
         return $this->belongsTo(Image::class,'img_id','id');
     }
+    public function carMakers()
+    {
+        return $this->belongsToMany(CarMaker::class, 'agency_car_makers', 'agency_id','CarMaker_id');
+    }
+    public function agency_specialties()
+    {
+        return $this->belongsToMany(Specialties::class, 'agency_specialties', 'agency_id','specialty_id');
+    }
+
     public static function rules($request,$id = NULL)
     {
         $rules = [
@@ -62,6 +135,8 @@ class Agency extends Model
             "agency_type"           => "required_if:center_type,==,0",
             'specialty_id'          => "required_if:center_type,==,1|array",
             'specialty_id.*'        => "required_if:center_type,==,1|distinct",
+            'specialty_id_spare'    => "required_if:center_type,==,2|array",
+            'specialty_id_spare.*'  => "required_if:center_type,==,2|distinct",
             'car_status'            => 'required|integer',
             'payment_method'        => 'required|integer',
             'status'                => 'required|integer',
@@ -174,10 +249,5 @@ class Agency extends Model
             $Image = Image::create(['name' => $fileName]);
             return $Image->id;
         }
-    }
-
-    public function carMakers()
-    {
-        return $this->belongsToMany(CarMaker::class, 'agency_car_makers', 'agency_id','CarMaker_id');
     }
 }
