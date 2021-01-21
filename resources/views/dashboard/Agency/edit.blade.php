@@ -389,7 +389,7 @@
                                     <label>@lang('Whatsapp')</label>
                                     <input type="text" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}"
                                     name="whatsapp"  placeholder="@lang('Phone number')"
-                                    value="{{old("whatsapp") ? old("whatsapp") : $agency_contact->whatsapp}}"/>
+                                    value="{{old("whatsapp") ? old("whatsapp") : @$agency_contact->whatsapp}}"/>
                                     @error('whatsapp')
                                         <div class="invalid-feedback">{{ $errors->first('whatsapp') }}</div>
                                     @enderror
@@ -400,7 +400,7 @@
                                     <label>@lang('Facebook')</label>
                                     <input type="text" class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}"
                                     name="facebook"  placeholder="@lang('Link')"
-                                    value="{{old("facebook") ? old("facebook") : $agency_contact->facebook}}"/>
+                                    value="{{old("facebook") ? old("facebook") : @$agency_contact->facebook}}"/>
                                     @error('facebook')
                                         <div class="invalid-feedback">{{ $errors->first('facebook') }}</div>
                                     @enderror
@@ -411,7 +411,7 @@
                                     <label>@lang('Instagram')</label>
                                     <input type="text" class="form-control {{ $errors->has('instagram') ? 'is-invalid' : '' }}"
                                     name="instagram"  placeholder="@lang('Link')"
-                                    value="{{old("instagram") ? old("instagram") : $agency_contact->instagram}}"/>
+                                    value="{{old("instagram") ? old("instagram") : @$agency_contact->instagram}}"/>
                                     @error('instagram')
                                         <div class="invalid-feedback">{{ $errors->first('instagram') }}</div>
                                     @enderror
@@ -422,7 +422,7 @@
                                     <label>@lang('Messenger')</label>
                                     <input type="text" class="form-control {{ $errors->has('messenger') ? 'is-invalid' : '' }}"
                                     name="messenger"  placeholder="@lang('Link')"
-                                    value="{{old("messenger") ? old("messenger") : $agency_contact->messenger}}"/>
+                                    value="{{old("messenger") ? old("messenger") : @$agency_contact->messenger}}"/>
                                     @error('messenger')
                                         <div class="invalid-feedback">{{ $errors->first('messenger') }}</div>
                                     @enderror
@@ -434,7 +434,8 @@
                         <div class="form-group">
                             <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
                             <br>
-                            <div class="image-input image-input-empty image-input-outline" id="img_id" style="background-image: url({{asset('img/agency/'.$agency->img->name) }})">
+                            <div class="image-input image-input-empty image-input-outline" id="img_id" style="background-image: url({{
+                                find_image($agency->img , 'img/agency/') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>

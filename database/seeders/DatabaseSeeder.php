@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(imagesSeeder::class);
         $this->call( [FaqSeeder::class] );
         $this->call(CountrySeeder::class);
         $this->call(GovernorateSeeder::class);
@@ -28,7 +29,6 @@ class DatabaseSeeder extends Seeder
         //\App\Models\User::factory(10)->create();
         $this->call(BadgeSeeder::class);
         $this->call(FeatureSeeder::class);
-        $this->call(imagesSeeder::class);
         $this->call(CarBodySeeder::class);
         $this->call(CarMakerSeeder::class);
         $this->call(CarModelSeeder::class);

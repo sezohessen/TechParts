@@ -133,7 +133,7 @@ class AgencyController extends Controller
                 $agency_specialties[] = $specialty->specialty_id;
             }
         }
-        return view('dashboard.agency.edit', compact('page_title', 'page_description','users'
+        return view('dashboard.Agency.edit', compact('page_title', 'page_description','users'
         ,'countries','agency','agency_contact','car_makers','SelectedCarMakers'
         ,'agency_specialties','specialties'));
         }else{

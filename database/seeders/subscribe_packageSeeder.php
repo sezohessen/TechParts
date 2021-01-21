@@ -15,7 +15,7 @@ class subscribe_packageSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i=0; $i < 5; $i++) {
             DB::table('subscribe_packages')->insert([
                 'currency_name'     =>   $faker->currencyCode,
                 'description'       =>   $faker->sentence,
@@ -26,6 +26,5 @@ class subscribe_packageSeeder extends Seeder
                 'updated_at'        =>  now(),
             ]);
         }
-
     }
 }

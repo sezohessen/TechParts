@@ -65,4 +65,19 @@ use Illuminate\Support\Facades\Session;
                 $attr;
         }
     }
+    if(!function_exists('find_image')){
+        function find_image($img, $base=null){
+            $src= '';
+            if (@$img->name and @$img->base) {
+                if (strpos($img->base, 'http') !== false or strpos($img->base, 'https') !== false) {
+                    $src = $img->base . $img->name ;
+                }else{
+                    $src = url($img->base.@$img->name);
+                }
+            }elseif(@$img->name){
+                $src = url($base.@$img->name);
+            }
+            return $src;
+        }
+    }
 

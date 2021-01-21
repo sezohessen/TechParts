@@ -40,8 +40,8 @@ class UserController extends Controller
                     "country_number"    => $user->country_phone,
                     "email"             => $user->email,
                     "first_name"        => $user->first_name,
-                    "image"             => @$user->image->base . @$user->image->name,
-                    "is_phone_verified" => $user->is_phone_virefied,
+                    "image"             => find_image(@$user->image ),
+                    "is_phone_verified" => $user->is_phone_virefied ? true: false ,
                     "last_name"         => $user->last_name,
                     "phone"             => $user->phone,
                     "role_id"           => $user->role,
@@ -49,7 +49,7 @@ class UserController extends Controller
                     "userId"            => $user->id
                 ];
                 if ($user->interestCountry) {
-                     $data["interest_country"] = @$user->interestCountry->name;
+                     $data["interest_country"] = @$user->interestCountry;
                 }
         return $this->returnData('mUser',$data,__('Success login'));
     }
