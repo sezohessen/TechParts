@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\CarMaker;
 use App\Models\PromoteCar;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -26,7 +27,10 @@ class CarPromoteDatatable extends DataTable
             ->editColumn('subscribe_package.period', '{{Str::limit($subscribe_package["period"], 100)}}')
             ->editColumn('price', '{{Str::limit($price, 100)}}')
             ->editColumn('weaccept_order_id', '{{Str::limit($weaccept_order_id, 100)}}')
-            
+            ->editColumn('car.CarMaker_id', function($promote) {
+                return Str::limit($promote->car->maker->name ?? "", 100);
+
+            })
             ->editColumn('user.email', '{{ Str::limit($user["email"], 100) }}')
             ->addColumn('checkbox', 'dashboard.CarPromote.btn.checkbox')
             ->addColumn('action', 'dashboard.CarPromote.btn.action')

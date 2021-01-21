@@ -43,23 +43,26 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/finance-request','FinanceRequestController');
     Route::resource('/agency','AgencyController');
     Route::resource('/AgencyCar','AgencyCarController');
-    Route::resource('/car','CarController');
     Route::resource('/bank','BankController');
     Route::resource('/bank-offer','BankOfferController');
     Route::resource('/log','LogsController');
     Route::resource('/subscribe_packages','SubscribeController');
     Route::resource('/promote','CarPromoteController');
-    Route::group(['prefix' => 'car'],function(){
-        Route::resource('/maker','CarMakerController');
-        Route::resource('/model','CarModelController');
-        Route::resource('/body','CarBodyController');
-        Route::resource('/year','CarYearController');
-        Route::resource('/capacity','CarCapacityController');
-        Route::resource('/color','CarColorController');
+    Route::resource('car', 'CarController');
+    Route::prefix('car')->group(function () {
+        Route::resources([
+            'maker'=>"CarMakerController",
+            'model'=>"CarModelController",
+            'body'=>"CarBodyController",
+            'year'=>"CarYearController",
+            'capacity'=>"CarCapacityController",
+            'color'=>"CarColorController",
+        ]);
         Route::get("available_model/{id}",'CarController@available_model');
         Route::get("available_governorate/{id}",'CarController@available_governorate');
         Route::get("available_city/{id}",'CarController@available_city');
     });
+
 
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');

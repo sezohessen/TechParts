@@ -46,7 +46,7 @@ class Car extends Model
     {
         return "A car has been {$eventName}";
     }
-  
+
     public static function rules($request,$id = NULL)
     {
         $rules = [
@@ -89,7 +89,7 @@ class Car extends Model
         }
         return $rules;
     }
-    public static function credentials($request,$img_id = NULL)
+    public static function credentials($request,$images_id = NULL)
     {
         $credentials = [
             'CarMaker_id'                 => $request->CarMaker_id,
@@ -121,45 +121,49 @@ class Car extends Model
             'InstallmentPrice'            => $request->InstallmentPrice,
             'InstallmentMonth'            => $request->InstallmentMonth,
             'views'                       => 0,
-            'status'                      => Car::STATUS_ACTIVE
+            'status'                      => Car::STATUS_ACTIVE,
+            'user_id'                     =>Auth()->user()->id
         ];
         if($photos=$request->file('CarPhotos')){
-            if($img_id){
-                foreach($photos as $photo){
-                    $Image_id[] = self::file($photo,$img_id);
+            if($images_id){
+                foreach($photos as $key=>$photo){
+                    $Images_id[] = self::file($photo);
+                }
+                foreach($images_id as $key=>$photo){
+                    self::Updated_file($photo);
                 }
             }else {
                 foreach($photos as $photo){
-                    $Image_id[] = self::file($photo);
+                    $Images_id[] = self::file($photo);
                 }
             }
-            $credentials['CarPhotos'] = $Image_id;
+            $credentials['CarPhotos'] = $Images_id;
         }
         return $credentials;
     }
     public static function file($file,$id = NULL)
     {
+
         $extension = $file->getClientOriginalExtension();
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
         $destinationPath = public_path() . '/img/Cars/';
         $file->move($destinationPath, $fileName);
-        if($id){//For update
-            $Image = Image::find($id);
-            //Delete Old image
-            try {
-                $file_old = $destinationPath.$Image->name;
-                unlink($file_old);
-            } catch (Exception $e) {
-                echo 'Caught exception: ',  $e->getMessage(), "\n";
-            }
-            //Update new image
-            $Image->name = $fileName;
-            $Image->save();
-            return $Image->id;
-        }else{
-            $Image = Image::create(['name' => $fileName]);
-            return $Image->id;
+        $Image = Image::create(['name' => $fileName]);
+        return $Image->id;
+    }
+
+    public static function Updated_file($file)
+    {
+        $destinationPath = public_path() . '/img/Cars/';
+        $Image = Image::find($file->img_id);
+        try {
+            $file_old = $destinationPath.$Image->name;
+            unlink($file_old);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
+        $file->delete();
+        return true;
     }
     public function maker()
     {
@@ -229,6 +233,7 @@ class Car extends Model
                 $file_old = $destinationPath.$Image->name;
                 unlink($file_old);
             } catch (Exception $e) {}
+            $Image->delete();
         }
         return true;
     }

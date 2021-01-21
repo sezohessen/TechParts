@@ -112,7 +112,7 @@ class AddRelationsToCars extends Migration
             $table->integer('price')->nullable()->change();
             $table->integer('price_after_discount')->nullable();;
             $table->integer('payment')->default(0);
-            $table->integer('status')->change()->default(0);
+            $table->integer('status')->change()->default(1);
             $table->integer('SellerType')->default(0);
             $table->integer('isNew')->default(0);
             $table->timestamp('adsExpire')->useCurrent();

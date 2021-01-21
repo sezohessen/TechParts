@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Models\Car;
 use App\Models\City;
+use App\Models\Image;
 use App\Models\Badges;
 use App\Models\car_img;
 use App\Models\CarBody;
@@ -12,17 +13,17 @@ use App\Models\Feature;
 use App\Models\CarColor;
 use App\Models\CarMaker;
 use App\Models\CarModel;
+use App\Models\car_badge;
+use App\Models\car_feature;
 use App\Models\CarCapacity;
 use App\Models\Governorate;
 use App\Models\ListCarUser;
 use Illuminate\Http\Request;
 use App\Models\CarManufacture;
-use App\Http\Controllers\Controller;
-use App\Models\car_badge;
-use App\Models\car_feature;
-use Illuminate\Support\Facades\Auth;
 use App\DataTables\CarDatatable;
-use App\Models\Image;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CarController extends Controller
 {
@@ -33,7 +34,7 @@ class CarController extends Controller
      */
     public function index(CarDatatable $car)
     {
-        $page_title = __('Cars Options ');
+        $page_title = __('Cars Options');
         $page_description = __('View Cars');
         return  $car->render("dashboard.Car.index", compact('page_title', 'page_description'));
     }
@@ -50,8 +51,8 @@ class CarController extends Controller
         $makers=CarMaker::where('active', '=', 1)->get();
         $bodies=CarBody::all();
         $years=CarYear::all();
-        $badges=Badges::where('active', '=', 1)->get();
-        $features=Feature::where('active', '=', 1)->get();
+        $badges=Badges::where('active', '=', 1);
+        $features=Feature::where('active', '=', 1);
         $countries=Country::all();
         $manufactures=CarManufacture::all();
         $capacities=CarCapacity::all();
@@ -73,7 +74,7 @@ class CarController extends Controller
         $rules = Car::rules($request);
         $request->validate($rules);
         $credentials = Car::credentials($request);
-        $car = Car::create(array_merge($credentials,['user_id'=>Auth()->user()->id]));
+        $car = Car::create($credentials);
         foreach($credentials['CarPhotos'] as $key=>$img){
             car_img::create([
                 'car_id'=>$car->id,
@@ -139,13 +140,14 @@ class CarController extends Controller
         }
         $car_badges=[];
         foreach($CarBadges as $item){
-            $car_badges[]=Badges::find($item->badge_id);
+            $car_badges[]=$item->badge_id;
         }
         $car_features=[];
         foreach($CarFeatures as $item){
-            $car_features[]=Feature::find($item->feature_id);
+            $car_features[]=$item->feature_id;
         }
-        return view('dashboard.Car.edit', compact('page_title', 'page_description','car','makers',
+
+        return view('dashboard.Car.edit', compact('car_features','car_badges','page_title', 'page_description','car','makers',
         "years","bodies","badges","features","countries","manufactures","capacities","colors","images"));
     }
 
@@ -156,9 +158,47 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Car $car)
     {
-      //  array_merge($credentials,['user_id'=>Auth()->user()->id])
+
+        $rules = Car::rules($request,true);
+        $request->validate($rules);
+        if($request->file('CarPhotos')){
+            $CarPhotos=car_img::where('car_id', '=', $car->id)->get();
+            $credentials =$car->credentials($request,$CarPhotos);
+            foreach($credentials['CarPhotos'] as $key=>$img){
+                car_img::create([
+                    'car_id'=>$car->id,
+                    'img_id'=>$img
+                ]);
+            }
+        }else {
+            $credentials =$car->credentials($request);
+        }
+
+        $car->update($credentials);
+        $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+        foreach($CarBadges as $key=>$badge){
+            $badge->delete();
+        }
+        foreach($request->badge_id as $key=>$badge){
+            car_badge::create([
+                'car_id'=>$car->id,
+                'badge_id'=>$badge
+            ]);
+        }
+        $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+        foreach($CarFeatures as $key=>$feature){
+            $feature->delete();
+        }
+        foreach($request->feature_id as $key=>$feature){
+            car_feature::create([
+                'car_id'=>$car->id,
+                'feature_id'=>$feature
+            ]);
+        }
+        session()->flash('created',__("Changed has been Updated successfully!"));
+        return redirect()->route("dashboard.car.index");
     }
 
     /**
@@ -171,6 +211,14 @@ class CarController extends Controller
     {
         $images=car_img::where("car_id",$car->id)->get();
         Car::unlink_img($images);
+        $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+        foreach($CarBadges as $key=>$badge){
+            $badge->delete();
+        }
+        $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+        foreach($CarFeatures as $key=>$feature){
+            $feature->delete();
+        }
         $car->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.car.index");
@@ -181,13 +229,29 @@ class CarController extends Controller
                 $car = Car::find($id);
                 $images=car_img::where("car_id",$car->id)->get();
                 Car::unlink_img($images);
-				$car->delete();
+                $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+                foreach($CarBadges as $key=>$badge){
+                    $badge->delete();
+                }
+                $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+                foreach($CarFeatures as $key=>$feature){
+                    $feature->delete();
+                }
+                $car->delete();
 			}
 		} else {
             $car = Car::find(request('item'));
             $images=car_img::where("car_id",$car->id)->get();
             Car::unlink_img($images);
-			$car->delete();
+            $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+            foreach($CarBadges as $key=>$badge){
+                $badge->delete();
+            }
+            $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+            foreach($CarFeatures as $key=>$feature){
+                $feature->delete();
+            }
+            $car->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.car.index");
