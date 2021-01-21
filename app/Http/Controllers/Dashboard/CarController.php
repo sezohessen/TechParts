@@ -146,7 +146,7 @@ class CarController extends Controller
         foreach($CarFeatures as $item){
             $car_features[]=$item->feature_id;
         }
-    
+
         return view('dashboard.Car.edit', compact('car_features','car_badges','page_title', 'page_description','car','makers',
         "years","bodies","badges","features","countries","manufactures","capacities","colors","images"));
     }
@@ -211,6 +211,14 @@ class CarController extends Controller
     {
         $images=car_img::where("car_id",$car->id)->get();
         Car::unlink_img($images);
+        $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+        foreach($CarBadges as $key=>$badge){
+            $badge->delete();
+        }
+        $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+        foreach($CarFeatures as $key=>$feature){
+            $feature->delete();
+        }
         $car->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.car.index");
@@ -221,13 +229,29 @@ class CarController extends Controller
                 $car = Car::find($id);
                 $images=car_img::where("car_id",$car->id)->get();
                 Car::unlink_img($images);
-				$car->delete();
+                $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+                foreach($CarBadges as $key=>$badge){
+                    $badge->delete();
+                }
+                $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+                foreach($CarFeatures as $key=>$feature){
+                    $feature->delete();
+                }
+                $car->delete();
 			}
 		} else {
             $car = Car::find(request('item'));
             $images=car_img::where("car_id",$car->id)->get();
             Car::unlink_img($images);
-			$car->delete();
+            $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+            foreach($CarBadges as $key=>$badge){
+                $badge->delete();
+            }
+            $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+            foreach($CarFeatures as $key=>$feature){
+                $feature->delete();
+            }
+            $car->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.car.index");

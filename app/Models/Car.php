@@ -233,6 +233,7 @@ class Car extends Model
                 $file_old = $destinationPath.$Image->name;
                 unlink($file_old);
             } catch (Exception $e) {}
+            $Image->delete();
         }
         return true;
     }
