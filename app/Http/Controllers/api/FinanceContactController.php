@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator as Validator;
-class Responseobject
+class FinanceContactResponseobject
 {
     const status_ok = "OK";
     const status_failed = "FAILED";
@@ -38,7 +38,7 @@ class FinanceContactController extends Controller
             default_lang();
         }
         $data       = $request->all();
-        $response   = new Responseobject();
+        $response   = new FinanceContactResponseobject();
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'message'           => 'required|min:3|max:1000',

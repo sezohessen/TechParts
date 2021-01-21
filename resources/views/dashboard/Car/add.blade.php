@@ -508,7 +508,8 @@
                             <label class="col-form-label  col-sm-12">@lang("Installment Period")</label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                     <input class="form-control" type="text" value="{{old("InstallmentMonth")}}"  placeholder="{{__("Installment Period")}}" name="InstallmentMonth" />
-                                    @error('InstallmentMonth')
+                                    <span class="form-text text-muted">@lang("[Number] Month/Year")</span>
+                                @error('InstallmentMonth')
                                     <div class="invalid-feedback">{{ $errors->first('InstallmentMonth') }}</div>
                                 @enderror
                             </div>
@@ -539,6 +540,11 @@
 {{-- Scripts Section --}}
 @section('styles')
 <link href="{{asset('plugins/custom/uppy/uppy.bundle.css')}}" rel="stylesheet" type="text/css" />
+<style>
+    .invalid-feedback {
+        display: block;
+    }
+</style>
 @endsection
 
 @section('scripts')

@@ -11,7 +11,7 @@ use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as Validator;
-class Responseobject
+class AgencyResponseobject
 {
     const status_ok = "OK";
     const status_failed = "FAILED";
@@ -39,7 +39,7 @@ class AgencyController extends Controller
             default_lang();
         }
         $data       = $request->all();
-        $response   = new Responseobject();
+        $response   = new AgencyResponseobject();
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'rate'          => 'in:1,2,3,4,5',
