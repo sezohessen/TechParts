@@ -390,6 +390,7 @@
     "No Spare parts centers in this interest country":"لا توجد مراكز قطع غيار في بلد الاهتمام هذا",
     "No such center id exist":"لا يوجد مثل هذا معرف المركز موجود",
     "Un selected work type":"نوع العمل غير المحدد",
-    "No centers found":"لم يتم العثور على مراكز"
+    "No centers found":"لم يتم العثور على مراكز",
+    "Login to see submit review":"تسجيل الدخول لرؤية تقديم الاستعراض"
 
 }

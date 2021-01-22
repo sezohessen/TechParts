@@ -34,9 +34,12 @@ class AgencyController extends Controller
             'price_type'    => 'required|in:1,2,3',
             'comment'       => 'required|min:3|max:1000',
             'center_id'     => 'required|integer',
-            'token'         => 'nullable'
+            'token'         => 'required'
         ]);
         if (!$validator->fails()) {
+            if(!auth()->user()){
+                return $this->errorMessage(__('Login to see submit review'));
+            }
             $agency     = Agency::find($request->center_id);
             if (!$agency) {
                 return $this->errorMessage(__("No such Center id exist"));
@@ -46,11 +49,8 @@ class AgencyController extends Controller
                 'price'         => $request->price_type,
                 'review'        => $request->comment,
                 'agency_id'     => $request->center_id,
+                'user_id'       => auth()->user()->id
             ]);
-            if ($request->token) {
-                $askExpert->user_id = auth()->user();
-                $askExpert->save();
-            }
             return $this->returnSuccess(__("Your Review Has been created Successfully, Wait for Admin to Apply your review"));
         }else{
             return($this->ValidatorErrors($validator));
@@ -294,7 +294,27 @@ class AgencyController extends Controller
     }
     public function centerFav(Request $request)
     {
+        $this->lang($request);
+        $validator = $this->Favorite($request,'center');
 
+        if (!$validator->fails()) {
+            if(!auth()->user()){
+                return $this->errorMessage(__('Login to see your favorite'));
+            }
+
+            if(!auth()->user()->MaintenanceFav->count()){
+                return $this->returnSuccess(__("No centers found"));
+            }
+            $agencyList = auth()->user()->agencyFav;
+            foreach ($agencyList as $agency) {
+
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
+                $paymentMethodList = false,$centerType = false,$mContact = false,$mLocation = false,$carMakerList = false);
+            }
+            return $this->returnData("maintenanceList",$agencies,"Successfully");
+        }else{
+            return($this->ValidatorErrors($validator));
+        }
     }
     public function Contact($agency)
     {
