@@ -138,5 +138,10 @@ class User extends Authenticatable
         return $this->belongsTo(Image::class);
     }
 
+    public function Agency()
+    {
+        return $this->hasOne(Agency::class);
+    }
+
 
 }

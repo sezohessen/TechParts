@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Models\Car;
 use App\Models\City;
+use App\Models\User;
 use App\Models\Image;
+use App\Models\Agency;
 use App\Models\Badges;
 use App\Models\car_img;
 use App\Models\CarBody;
@@ -46,18 +48,18 @@ class CarController extends Controller
      */
     public function create()
     {
+
         $page_title = __("Add Car");
         $page_description = __("Add new Car");
         $makers=CarMaker::where('active', '=', 1)->get();
         $bodies=CarBody::all();
         $years=CarYear::all();
-        $badges=Badges::where('active', '=', 1);
-        $features=Feature::where('active', '=', 1);
+        $badges=Badges::where('active', '=', 1)->get();
+        $features=Feature::where('active', '=', 1)->get();
         $countries=Country::all();
         $manufactures=CarManufacture::all();
         $capacities=CarCapacity::all();
         $colors=CarColor::all();
-        //dd($page_title,$page_description,$makers,$bodies,$years,$badges,$features,$countries,$manufactures,$capacities,$colors);
         return view('dashboard.Car.add', compact('page_title', 'page_description','makers',
         "years","bodies","badges","features","countries","manufactures","capacities","colors"));
     }

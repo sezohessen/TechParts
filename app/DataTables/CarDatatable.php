@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Car;
+use App\Models\Agency;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -29,7 +30,14 @@ class CarDatatable extends DataTable
             ->editColumn('Description', '{!! Str::limit($Description, 100) !!}')
             ->editColumn('Description_ar', '{!! Str::limit($Description_ar, 100) !!}')
             ->addColumn('checkbox', 'dashboard.Car.btn.checkbox')
-            ->addColumn('SellerType', 'dashboard.Car.btn.SellerType')
+            ->editColumn('SellerType', function($car) {
+               if($car->user->Agency){
+                    return Agency::StyleAgecnyType()[$car->user->Agency->agency_type];
+               }else {
+                    return Agency::StyleAgecnyType()[3];
+               }
+
+            })
             ->addColumn('action', 'dashboard.Car.btn.action')
             ->addColumn('status', 'dashboard.Car.btn.status')
             ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar",'status']);

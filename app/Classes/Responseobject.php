@@ -12,5 +12,5 @@ class Responseobject
     const code_error = 500;
     public $status;
     public $code;
-    public $messages = array();
+    public $msg = array();
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\subscribe_package;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
@@ -15,8 +16,8 @@ class subscribe_packageSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i=0; $i < 5; $i++) {
-            DB::table('subscribe_packages')->insert([
+        foreach (range(1,10) as $value){
+            subscribe_package::create([
                 'currency_name'     =>   $faker->currencyCode,
                 'description'       =>   $faker->sentence,
                 'description_ar'    =>   $faker->sentence,

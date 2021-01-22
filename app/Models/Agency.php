@@ -29,6 +29,8 @@ class Agency extends Model
 
     const Ag_Agency             = 1;
     const Ag_Distributor        = 2;
+    const Ag_Individual         = 3;
+
     const Main_Service_center   = 1;
     const Main_Workshop         = 2;
 
@@ -96,6 +98,23 @@ class Agency extends Model
             self::UnSelected        => __('Un selected work type'),
             self::Ag_Agency         => __('Agency'),
             self::Ag_Distributor    => __('Distributor'),
+        ];
+    }
+    public static function StyleAgecnyType()
+    {
+        return [
+            self::UnSelected        => "<span class='label label-danger label-inline mr-2'
+            style='padding: 30px;
+            width: 128px;'>".__('Un selected work type')."</span>",
+            self::Ag_Agency         => "<span class='label label-warning label-inline mr-2'
+            style='padding: 30px;
+            width: 128px;'>".__('Agency')."</span>",
+            self::Ag_Distributor    =>"<span class='label label-success label-inline mr-2'
+            style='padding: 30px;
+            width: 128px;'>".__('Distributor')."</span>",
+            self::Ag_Individual =>"<span class='label label-primary label-inline mr-2'
+            style='padding: 30px;
+            width: 128px;'>".__('Individual')."</span>",
         ];
     }
     public function user() {

@@ -30,9 +30,8 @@ class AddRelationsToCars extends Migration
             $table->string('phone')->nullable();
             $table->string('whats')->nullable();
 
-            $table->string('InstallmentMonth');
-            $table->string('InstallmentPrice');
-
+            $table->string('InstallmentAmount');
+            $table->string('InstallmentPeriod');
             $table->string('DepositPrice');
 
 
@@ -110,7 +109,7 @@ class AddRelationsToCars extends Migration
             $table->integer("transmission")->default(0);
 
             $table->integer('price')->nullable()->change();
-            $table->integer('price_after_discount')->nullable();;
+            $table->integer('price_after_discount')->default(0);
             $table->integer('payment')->default(0);
             $table->integer('status')->change()->default(1);
             $table->integer('SellerType')->default(0);
@@ -159,7 +158,7 @@ class AddRelationsToCars extends Migration
             $table->dropColumn('lat');
             $table->dropColumn('isNew');
             $table->dropColumn('DepositPrice');
-            $table->dropColumn('InstallmentMonth');
+            $table->dropColumn('InstallmentAmount');
             $table->dropColumn('InstallmentPrice');
 
 

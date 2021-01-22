@@ -21,9 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
 
     Route::post("ask_expoert",'AskExpertController@create');
-    Route::group(['prefix' => 'car'], function () {
-        Route::post("details",'CarsController@show');
-    });
     Route::post("payment",'CarsController@deposit');
     Route::post("car/promote/car_promote",'CarsController@promote');
 
@@ -74,4 +71,11 @@ Route::group(['prefix' => 'car','namespace'=>"api"], function () {
     Route::post("compare",'CarsController@compare');
     Route::post("action_counter",'CarsController@action_counter');
     Route::post("promote/get_promote_package",'CarsController@promote_package');
+});
+Route::group(['prefix' => 'sell_car','namespace'=>"api"], function () {
+
+    Route::post("copy",'CarsController@copy');
+    Route::post("delete",'CarsController@delete');
+    Route::post("create",'CarsController@create');
+
 });
