@@ -5,7 +5,6 @@ namespace App\Http\Controllers\api;
 use App\Models\User;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
-use App\Classes\Responseobject;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -90,13 +89,13 @@ class UserController extends Controller
         }else {
             default_lang();
         }
-        $validator  = Validator::make((array) $request->all(), ['interest_country'=>'integer']);
+        $validator  = Validator::make((array) $request->all(), ['interest_country'=>'required|integer']);
         if ($validator->fails()) {
-            foreach ($validator->errors()->getMessages() as $key => $item) {
-                array_push($response->messages, [$key => $item]);
-            }
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
+        $user = auth()->user();
+        $user->interest_country = $request->interest_country;
+        $user->save();
         return $this->SuccessMessage('Updated Successfully');
     }
     public function signup(Request $request)
@@ -116,16 +115,8 @@ class UserController extends Controller
             return $this->returnFailData('phone_number_exist',true,__('This phone number used before'));
         }
         $validator  = Validator::make((array) $request->all(), User::rules(true));
-        $response   = new Responseobject();
         if ($validator->fails()) {
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $key => $item) {
-                array_push($response->messages, [$key => $item]);
-            }
-            return Response::json(
-                $response
-            );
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
         $provider = 'user';
         $user = User::create(User::credentials($request,true));

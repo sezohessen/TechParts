@@ -8,7 +8,7 @@ trait GeneralTrait {
         ]);
     }
     public function errorField($field){
-        $massage = __($field.'required');
+        $massage = __($field.' required');
         return response()->json([
             "msg" => $massage,
             "status" => false
@@ -23,7 +23,7 @@ trait GeneralTrait {
     public function SuccessMessage($massage){
         return response()->json([
             "msg" => __($massage),
-            "status" => false
+            "status" => true
         ]);
     }
     public function returnSuccess($msg=""){
@@ -60,12 +60,11 @@ trait GeneralTrait {
     }
     public function ValidatorMessages($messages){
         $data = [
-            $key=>$value,
             'status'=>false,
             "msg"=>'validation failed'
         ];
-        if (!empty($extra)) {
-            foreach ($extra as $key => $value) {
+        if (!empty($messages)) {
+            foreach ($messages as $key => $value) {
                 $data[$key] = $value;
             }
         }
