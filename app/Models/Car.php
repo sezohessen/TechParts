@@ -52,23 +52,23 @@ class Car extends Model
     public static function PaymentType()
     {
         return [
-            self::PAYMENT_CASH        => __('Cash'),
-            self::PAYMENT_INSTALLMENT         => __('Installment'),
-            self::PAYMENT_FINANCING    => __('Financing'),
+            self::PAYMENT_CASH          => __('Cash'),
+            self::PAYMENT_INSTALLMENT   => __('Installment'),
+            self::PAYMENT_FINANCING     => __('Financing'),
         ];
     }
     public static function TransmissionType()
     {
         return [
             self::TRANSIMSSION_MANUAL        => __('Manual'),
-            self::TRANSIMSSION_AUTOMATIC         => __('Automatic'),
+            self::TRANSIMSSION_AUTOMATIC     => __('Automatic'),
         ];
     }
     public static function StatusType()
     {
         return [
             self::IS_NEW        => __('New'),
-            self::IS_USED         => __('User'),
+            self::IS_USED       => __('User'),
         ];
 
     }
@@ -76,7 +76,7 @@ class Car extends Model
     {
         return [
             self::SELLER_AGENCY        => __('Agency'),
-            self::SELLER_INDIVIDUAL         => __('Individual'),
+            self::SELLER_INDIVIDUAL    => __('Individual'),
         ];
 
     }

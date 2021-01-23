@@ -64,6 +64,7 @@ Route::group(['prefix' => 'centers','namespace'=>'api'], function () {
     });
     Route::group(['prefix' => 'list'], function () {
         Route::post("agency/search",'AgencyController@agencySearch');
+        Route::post("agency/filter",'AgencyController@Filter');
         Route::post("maintenance/search",'AgencyController@maintenanceSearch');
         Route::post("spare/search",'AgencyController@spareSearch');
     });

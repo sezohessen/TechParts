@@ -137,6 +137,10 @@ class Agency extends Model
     {
         return $this->belongsToMany(CarMaker::class, 'agency_car_makers', 'agency_id','CarMaker_id');
     }
+    public function Car()/* CarModel_id */
+    {
+        return $this->belongsToMany(Car::class, 'agency_cars', 'agency_id','car_id');
+    }
     public function agency_specialties()
     {
         return $this->belongsToMany(Specialties::class, 'agency_specialties', 'agency_id','specialty_id');
@@ -244,6 +248,10 @@ class Agency extends Model
             }
         }
         return $credentials;
+    }
+    public function reviews()
+    {
+        return $this->hasMany(AgencyReview::class, 'agency_id', 'id');
     }
     public static function file($file,$id = NULL)
     {

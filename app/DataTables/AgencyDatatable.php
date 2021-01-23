@@ -28,7 +28,8 @@ class AgencyDatatable extends DataTable
             ->editColumn('center_type', 'dashboard.Agency.btn.center_type')
             ->addColumn('checkbox', 'dashboard.Agency.btn.checkbox')
             ->addColumn('action', 'dashboard.Agency.btn.action')
-            ->rawColumns(['checkbox', 'action', 'center_type']);
+            ->addColumn('active', 'dashboard.Agency.btn.active')
+            ->rawColumns(['checkbox', 'action', 'center_type','active']);
     }
 
     /**
@@ -108,6 +109,13 @@ class AgencyDatatable extends DataTable
             Column::make('user.email')
                 ->title(__("User Email")),
             Column::make('center_type'),
+            Column::computed('active')
+            ->title(__('Active'))
+            ->exportable(false)
+            ->printable(false)
+            ->searchable(false)
+            ->width(120)
+            ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

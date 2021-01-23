@@ -77,7 +77,6 @@
                                 name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
                                     <option value=""  >@lang('--Select Car Make first--')</option>
                                 </select>
-
                                 @error('CarModel_id')
                                     <div class="invalid-feedback">{{ $errors->first('CarModel_id') }}</div>
                                 @enderror

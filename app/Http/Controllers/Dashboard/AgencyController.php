@@ -335,4 +335,11 @@ class AgencyController extends Controller
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.agency.index");
     }
+    public function Status(Request $request){
+        $agency = Agency::find($request->id);
+        $agency->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
 }
