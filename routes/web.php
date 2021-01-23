@@ -48,7 +48,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/log','LogsController');
     Route::resource('/subscribe_packages','SubscribeController');
     Route::resource('/promote','CarPromoteController');
-    Route::resource('car', 'CarController');
+
     Route::prefix('car')->group(function () {
         Route::resources([
             'maker'=>"CarMakerController",
@@ -62,6 +62,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
         Route::get("available_governorate/{id}",'CarController@available_governorate');
         Route::get("available_city/{id}",'CarController@available_city');
     });
+    Route::resource('car', 'CarController');
 
 
     // Permissions
