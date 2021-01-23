@@ -32,12 +32,44 @@ trait GeneralTrait {
             "msg"=>$msg
         ]);
     }
-    public function returnData($key,$value,$msg=""){
-        return response()->json([
+    public function returnData($key,$value,$msg="",array $extra=[]){
+        $data = [
             $key=>$value,
             'status'=>true,
             "msg"=>$msg
-        ]);
+        ];
+        if (!empty($extra)) {
+            foreach ($extra as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
+        return response()->json($data);
+    }
+    public function returnFailData($key,$value,$msg="",array $extra=[]){
+        $data = [
+            $key=>$value,
+            'status'=>false,
+            "msg"=>$msg
+        ];
+        if (!empty($extra)) {
+            foreach ($extra as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
+        return response()->json($data);
+    }
+    public function ValidatorMessages($messages){
+        $data = [
+            $key=>$value,
+            'status'=>false,
+            "msg"=>'validation failed'
+        ];
+        if (!empty($extra)) {
+            foreach ($extra as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
+        return response()->json($data);
     }
 
 

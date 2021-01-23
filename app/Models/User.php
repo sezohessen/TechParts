@@ -81,7 +81,7 @@ class User extends Authenticatable
         }
         return $rules;
     }
-    public static function credentials($request)
+    public static function credentials($request,$api=null)
     {
         $credentials = [
             'first_name'                        => $request->first_name,
@@ -90,9 +90,18 @@ class User extends Authenticatable
             'phone'                             => $request->phone,
             'password'                          => Hash::make($request->password)
         ];
-        if($request->file('image')){
-            $Image_id = self::file($request->file('Image'));
-            $credentials['image_id'] = $Image_id;
+        if (!$api) {
+            if($request->file('image')){
+                $Image_id = self::file($request->file('Image'));
+                $credentials['image_id'] = $Image_id;
+
+            }
+        }else {
+            if($request->file('image')){
+                $Image_id = self::file($request->file('image'));
+                $credentials['image_id'] = $Image_id;
+
+            }
         }
         if ( isset($request->is_phone_virefied) ) {
             $credentials['is_phone_virefied'] = $request->is_phone_virefied;
