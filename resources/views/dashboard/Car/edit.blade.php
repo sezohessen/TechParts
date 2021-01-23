@@ -398,14 +398,15 @@
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="transmission" value="0"
-                                        {{ old('transmission')=="0" ? 'checked': ($car->transmission==0) ? 'checked': ''  }}
+                                         @if( old('transmission') == "0" )  checked @elseif($car->transmission == 0)  checked @else  @endif
                                         required/>
                                         <span></span>
                                        @lang('Automatic')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="transmission" value="1"
-                                        {{ old('transmission')=="1" ? 'checked':($car->transmission==1) ? 'checked': ''  }} />
+                                        @if( old('transmission') == "1" )  checked @elseif($car->transmission == 1)  checked @else  @endif
+                                        />
                                         <span></span>
                                         @lang('Manual')
                                     </label>
@@ -537,7 +538,7 @@
                         <div class="form-group row ">
                             <label class="col-form-label  col-sm-12">@lang("Installment Price")<span class="text-danger">*</span></label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <input class="form-control" type="text" value="{{old("InstallmentAmount") ?? $car->InstallmentAmount}}"  placeholder="{{__("Installment Price")}}" name="InstallmentAmount" />
+                                    <input class="form-control" type="text" value="{{old("InstallmentAmount") ? old("InstallmentAmount"): $car->InstallmentAmount }}"  placeholder="{{__("Installment Price")}}" name="InstallmentAmount" />
                                 @error('InstallmentAmount')
                                     <div class="invalid-feedback">{{ $errors->first('InstallmentAmount') }}</div>
                                 @enderror
@@ -597,7 +598,7 @@
                     </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('Sell')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('Edit')  </button>
             </div>
         </form>
         <!--end::Form-->

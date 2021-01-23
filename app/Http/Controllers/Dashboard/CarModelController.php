@@ -71,8 +71,8 @@ class CarModelController extends Controller
     {
         $page_title = __("Edit Car Model");
         $page_description = __("Edit Model");
-        $models=Carmodel::all();
-        return view('dashboard.CarModel.edit', compact('page_title', 'page_description','model','models'));
+        $makers=CarMaker::all()->where("active",1);
+        return view('dashboard.CarModel.edit', compact('page_title', 'page_description','model','makers'));
     }
 
     /**
