@@ -457,5 +457,6 @@
     "description":"الوصف",
     "properties":"البيانات",
     "Causer ID":"المسبب",
-    "Subject ID":""
+    "Subject ID":"التابع",
+    "Add agency car":"اضافة سيارة للوكالة"
 }

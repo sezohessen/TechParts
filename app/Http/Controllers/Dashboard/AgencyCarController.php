@@ -30,21 +30,24 @@ class AgencyCarController extends Controller
 {
     //
 
+    public function index()
+    {
 
+    }
     public function create()
     {
         $page_title         = __("Add agency car");
         $page_description   = __("Add new Car");
         $makers             = CarMaker::where('active', '=', 1)->get();
-        $bodies             = CarBody::all();
+        $bodies             = CarBody::where('active', '=', 1)->get();
         $years              = CarYear::all();
         $badges             = Badges::where('active', '=', 1)->get();
         $features           = Feature::where('active', '=', 1)->get();
-        $countries          = Country::all();
+        $countries          = Country::where('active', '=', 1)->get();
         $manufactures       = CarManufacture::all();
         $capacities         = CarCapacity::all();
         $colors             = CarColor::all();
-        $agencies           = Agency::all();
+        $agencies           = Agency::where('active', '=', 1)->get();
         //dd($page_title,$page_description,$makers,$bodies,$years,$badges,$features,$countries,$manufactures,$capacities,$colors);
         return view('dashboard.Agency.Car.add', compact('page_title', 'page_description','makers','agencies',
         "years","bodies","badges","features","countries","manufactures","capacities","colors"));
@@ -97,9 +100,11 @@ class AgencyCarController extends Controller
 
     public function show($id)
     {
+
         $Agency = Agency::findOrFail( $id);
 
         if($Agency->carMakers->count() > 0 ){
+            return  $Agency->carMakers;
             return response()->json([
                 'carMakers' => $Agency->carMakers
             ]);
@@ -117,15 +122,15 @@ class AgencyCarController extends Controller
         $page_title         = __("Edit agency car");
         $page_description   = __("Edit Car");
         $makers             = CarMaker::where('active', 1)->get();
-        $bodies             = CarBody::all();
+        $bodies             = CarBody::where('active', '=', 1)->get();
         $years              = CarYear::all();
         $badges             = Badges::where('active', 1)->get();
         $features           = Feature::where('active', 1)->get();
-        $countries          = Country::all();
+        $countries          = Country::where('active', '=', 1)->get();
         $manufactures       = CarManufacture::all();
         $capacities         = CarCapacity::all();
         $colors             = CarColor::all();
-        $agencies           = Agency::all();
+        $agencies           = Agency::where('active', '=', 1)->get();
         $agencyCar          = AgencyCar::where('car_id',$id)->first();
         $CarPhotos          = car_img::where('car_id', $id)->get();
         $CarBadges          = car_badge::where('car_id',$id)->get();
