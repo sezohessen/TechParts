@@ -104,7 +104,6 @@ class AgencyCarController extends Controller
         $Agency = Agency::findOrFail( $id);
 
         if($Agency->carMakers->count() > 0 ){
-            return  $Agency->carMakers;
             return response()->json([
                 'carMakers' => $Agency->carMakers
             ]);

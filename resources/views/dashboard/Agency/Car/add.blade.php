@@ -588,7 +588,7 @@
         var id = this.value ;
         model(id);
     });
-    function mode(id){
+    function model(id){
         $('#CarModel_id').empty();
         $.ajax({
             url: '/dashboard/car/available_model/'+id,
@@ -647,10 +647,6 @@
         var id = this.value ;
         governorate(id)
     });
-    $('#maker').on('change', function() {
-        var id = this.value ;
-        model(id);
-    });
     var old_maker="<?php echo (old('CarMaker_id')) ? old('CarMaker_id') : null; ?>";
     if (old_maker != ''){
         model("<?php echo (old('CarMaker_id'))?>");
@@ -686,7 +682,7 @@
         },
         radius: 100,
         zoom:13,
-        markerIcon: "{{url('/media/svg/icons/Map/google-maps.png')}}",
+        markerIcon: "{{url('/media/svg/icons/Mششap/google-maps.png')}}",
         inputBinding: {
             latitudeInput: $('#lat'),
             longitudeInput: $('#lng'),
