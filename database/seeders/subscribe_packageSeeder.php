@@ -15,6 +15,7 @@ class subscribe_packageSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+        //$this->command->comment('test');
         for ($i=0; $i < 5; $i++) {
             DB::table('subscribe_packages')->insert([
                 'currency_name'     =>   $faker->currencyCode,
