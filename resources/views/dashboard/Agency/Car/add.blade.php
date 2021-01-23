@@ -15,7 +15,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{ route('dashboard.AgencyCar.store') }}" method="POST" enctype="multipart/form-data" >
+        <form action="{{route("dashboard.AgencyCar.store")}}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -68,11 +68,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label  col-sm-12">@lang('Select Year')</label><br>
-                            <div class=" col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang('Select Car Year')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
                              <select class="form-control select2 {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
                                  id="kt_select2_1" name="CarYear_id" required>
-                                <option value="">@lang('--Select user--')</option>
+                                 <option value="">@lang('Select Car Year')</option>
                                 @foreach ($years as $year)
                                     <option value="{{$year->id}}"{{ old('CarYear_id')==$year->id ? 'selected':'' }} >{{$year->year}}</option>
                                 @endforeach
@@ -88,11 +88,11 @@
 
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Select Car Manufacture')</label><br>
-                            <div class=" col-md-12">
+                            <label class="col-form-label col-sm-12">@lang('Select Car Manufacture')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('CarManufacture_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_2" name="CarManufacture_id" required>
-                                   <option value="">@lang('--Select Car Manufacture --')</option>
+                                   <option value="">@lang('Select Car Manufacture')</option>
                                    @foreach ($manufactures as $manufacture)
                                        <option value="{{$manufacture->id}}" {{ old('CarManufacture_id')==$manufacture->id ? 'selected':'' }}>{{$manufacture->name}} - {{$manufacture->name_ar}}</option>
                                    @endforeach
@@ -105,11 +105,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Select Car Capacity')</label><br>
-                            <div class=" col-md-12">
+                            <label class="col-form-label col-sm-12">@lang('Select Car Capacity')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('CarCapacity_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_3" name="CarCapacity_id" required>
-                                   <option value="">@lang('--Select Car Capacity --')</option>
+                                   <option value="">@lang('Select Car Capacity')</option>
                                    @foreach ($capacities as $capacity)
                                        <option value="{{$capacity->id}}" {{ old('CarCapacity_id')==$capacity->id ? 'selected':'' }}>{{$capacity->capacity}}</option>
                                    @endforeach
@@ -122,9 +122,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label  col-sm-12">@lang('Price ')</label>
+                            <label class="col-form-label  col-sm-12">@lang('Price')<span class="text-danger">*</span></label>
                             <div class="col-lg-5 col-md-5 col-sm-5">
-                                <input class="form-control" type="text" name="price" value="{{old("price")}}" />
+                                <input class="form-control" type="text" name="price" value="{{old("price")}}" placeholder="{{__("Price")}}" />
                                 @error('price')
                                 <div class="invalid-feedback">{{ $errors->first('price') }}</div>
                                 @enderror
@@ -132,7 +132,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text">%</span></div>
-                                    <input class="form-control" name="price_after_discount" value="{{old("price_after_discount")}}" type="text" placeholder="{{__("Discount")}}" />
+                                    <input class="form-control" name="price_after_discount" value="{{old("price_after_discount")}}" type="text" placeholder="{{__("Discount (Optional)")}}" />
                                 </div>
                                 @error('price_after_discount')
                                     <div class="invalid-feedback">{{ $errors->first('price_after_discount') }}</div>
@@ -142,8 +142,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Accidents")</label><br>
-                            <div class="col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang("Accidents")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                                 <span class="switch switch-icon">
                                     <label>
                                         <input type="hidden" name="AccidentBefore" id='AccidentBefore' value="1">
@@ -161,8 +161,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Kilometers")</label><br>
-                            <div class="col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang("Kilometers")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                                     <input class="form-control" type="text" value="{{old("kiloUsed")}}"  placeholder="{{__("Kilometers")}}" name="kiloUsed" />
                                 @error('kiloUsed')
                                     <div class="invalid-feedback">{{ $errors->first('kiloUsed') }}</div>
@@ -172,10 +172,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Select Car Body')</label><br>
-                            <div class=" col-md-12">
+                            <label class="col-form-label col-sm-12">@lang('Select Car Body')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarBody_id') ? 'is-invalid' : '' }}" name="CarBody_id"  required>
-                                    <option value="">@lang('--Select Car Body --')</option>
+                                    <option value="">@lang('Select Car Body')</option>
                                     @foreach ($bodies as $key=>$body)
                                         <option value="{{$body->id}}"
                                             data-content="
@@ -195,10 +195,10 @@
 
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Select Color')</label><br>
-                            <div class=" col-md-12">
+                            <label class="col-form-label col-sm-12">@lang('Select Color')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarColor_id') ? 'is-invalid' : '' }}" name="CarColor_id"  required>
-                                    <option value="">@lang('--Select Car Color --')</option>
+                                    <option value="">@lang('Select Color')</option>
                                     @foreach ($colors as $key=>$color)
                                         <option value="{{$color->id}}"
                                             data-content="<div class='symbol-list d-flex flex-wrap'>
@@ -218,8 +218,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Badges')</label><br>
-                            <div class=" col-md-12">
+                            <label class="col-form-label col-sm-12">@lang('Badges')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('badge_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_11" name="badge_id[]"   required multiple >
                                     @foreach ($badges as $badge)
@@ -234,14 +234,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Extra Features')</label><br>
-                            <div class=" col-md-12">
+                            <label class="col-form-label col-sm-12">@lang('Extra Features')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('feature_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_12" name="feature_id[]" required multiple >
-                                    @php
-                                        $c=0;
-                                        $count=count(old('feature_id') ?? array());
-                                    @endphp
                                     @foreach ($features as $feature)
                                        <option value="{{$feature->id}}" >{{$feature->name}}- {{$feature->name_ar}}</option>
                                     @endforeach
@@ -252,10 +248,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group row">
-                            <div class=" col-md-12">
-                                <label for="exampleTextarea">@lang("Write A Description (EN)")</label>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <label for="exampleTextarea">@lang("Write A Description (EN)")<span class="text-danger">*</span></label>
                                 <textarea   id="kt-ckeditor-1" name="Description"   required  class="{{ $errors->has('Description') ? ' is-invalid' : '' }}">
                                     {{old("Description")}}
                                 </textarea>
@@ -265,10 +261,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group row">
-                            <div class=" col-md-12">
-                                <label for="exampleTextarea">@lang("Write A Description (AR)")</label>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <label for="exampleTextarea">@lang("Write A Description (AR)")<span class="text-danger">*</span></label>
                                 <textarea   id="kt-ckeditor-2" name="Description_ar"   required  class="{{ $errors->has('Description_ar') ? ' is-invalid' : '' }}">
                                     {{old("Description_ar")}}
                                 </textarea>
@@ -279,13 +275,13 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group row">
-                            <div class=" col-md-12">
-                                <label for="country" class="col-form-label  col-sm-12">@lang('Select Country ')</label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <label for="country" class="col-form-label  col-sm-12">@lang('Select Country')<span class="text-danger">*</span></label><br>
                                 <select class="form-control {{ $errors->has('Country_id') ? 'is-invalid' : '' }}" id="country"
                                 name="Country_id" >
-                                    <option value="">@lang('--Select country--')</option>
+                                    <option value="">@lang('Select Country')</option>
                                     @foreach ($countries as $country)
                                         <option value="{{$country->id}}" {{ old('Country_id')==$country->id ? 'selected':'' }}>{{$country->name}} - {{ $country->name_ar }}</option>
                                     @endforeach
@@ -296,14 +292,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group row">
-                            <div class=" col-md-12">
-                                <label for="governorate" class="col-form-label  col-sm-12">@lang('Select Governorate ')
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <label for="governorate" class="col-form-label  col-sm-12">@lang('Select Governorate')<span class="text-danger">*</span>
                                 </label><br>
                                 <select class="form-control {{ $errors->has('Governorate_id') ? 'is-invalid' : '' }}" id="governorate"
                                 name="Governorate_id" >
-                                    <option value="">@lang('--Select Country first--')</option>
+                                    <option value="">@lang('Select Country first')</option>
                                 </select>
                                 @error('Governorate_id')
                                     <div class="invalid-feedback">{{ $errors->first('Governorate_id') }}</div>
@@ -311,14 +307,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group row">
-                            <div class=" col-md-12">
-                                <label for="city" class="col-form-label  col-sm-12">@lang('Select City')
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <label for="city" class="col-form-label  col-sm-12">@lang('Select City')<span class="text-danger">*</span>
                                 </label><br>
                                     <select class="form-control {{ $errors->has('City_id') ? 'is-invalid' : '' }}" id="city"
                                     name="City_id" >
-                                        <option value="">@lang('--Select Governorate first--')</option>
+                                        <option value="">@lang('Select Governorate first')</option>
                                     </select>
                                     @error('City_id')
                                         <div class="invalid-feedback">{{ $errors->first('City_id') }}</div>
@@ -326,9 +322,9 @@
                             </div>
                         </div>
                     </div>
-                     <div class="col-md-12">
+                     <div class="col-md-6">
                         <div class="form-group row">
-                            <div class=" col-md-12">@lang("Location")</label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">@lang("Location")<span class="text-danger">*</span></label><br>
                                 <input type="hidden" value="{{$lat}}" id="lat" name="lat">
                                 <input type="hidden" value="{{$lng}}" id="lng" name="lng">
                                 <div class="input-group">
@@ -343,10 +339,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group row">
-                            <div class=" col-md-12">
-                                <label for="exampleTextarea" class="mb-10">@lang("Service History")</label>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <label for="exampleTextarea" class="mb-10">@lang("Service History")<span class="text-danger">*</span></label>
                                 <textarea   id="kt-ckeditor-3" name="ServiceHistory"   required  class="{{ $errors->has('ServiceHistory') ? ' is-invalid' : '' }}">
                                     {{old("ServiceHistory")}}
                                 </textarea>
@@ -358,20 +354,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label  col-sm-12">@lang("Car Transmission")</label><br>
-                            <div class="col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang("Car Transmission")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="transmission" value="0"
                                         {{ old('transmission')=="0" ? 'checked':'' }} required/>
                                         <span></span>
-                                        <img src='{{asset('media/svg/icons/Electric/automatic.png')}}' width='20' height='20'>  @lang('Automatic')
+                                          @lang('Automatic')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="transmission" value="1"
                                         {{ old('transmission')=="1" ? 'checked':'' }}/>
                                         <span></span>
-                                        <img src='{{asset('media/svg/icons/Electric/manual.png')}}' width='20' height='20'> &nbsp; @lang('Manual')
+                                      @lang('Manual')
                                     </label>
                                     @error('transmission')
                                          <div class="invalid-feedback">{{ $errors->first('transmission') }}</div>
@@ -383,8 +379,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label  col-sm-12">@lang("Car Status")</label><br>
-                            <div class="col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang("Car Status")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="isNew" value="0"
@@ -407,38 +403,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label  col-sm-12">@lang("Seller type")</label><br>
-                            <div class="col-md-12">
-                                <div class="radio-inline">
-                                    <label class="radio">
-                                        <input type="radio" name="SellerType" value="0"
-                                        {{ old('SellerType')=="0" ? 'checked':'' }} required/>
-                                        <span></span>
-                                        @lang('Agency')
-                                    </label>
-                                    <label class="radio">
-                                        <input type="radio" name="SellerType" value="1"
-                                        {{ old('SellerType')=="1" ? 'checked':'' }}/>
-                                        <span></span>
-                                        @lang('Distributor')
-                                    </label>
-                                    <label class="radio">
-                                        <input type="radio" name="SellerType" value="2"
-                                        {{ old('SellerType')=="2" ? 'checked':'' }}/>
-                                        <span></span>
-                                        @lang('Individual')
-                                    </label>
-                                    @error('SellerType')
-                                        <div class="invalid-feedback">{{ $errors->first('SellerType') }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-form-label  col-sm-12">@lang("Payment")</label><br>
-                            <div class="col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang("Payment")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="payment" value="0"
@@ -465,15 +431,51 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-form-label  col-sm-12">@lang("Feul Type")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <div class="radio-inline">
+                                    <label class="radio">
+                                        <input type="radio" name="FuelType" value="0"
+                                        {{ old('FuelType')=="0" ? 'checked':'' }} required/>
+                                        <span></span>
+                                        @lang('Gas')
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="FuelType" value="1"
+                                        {{ old('FuelType')=="1" ? 'checked':'' }}/>
+                                        <span></span>
+                                        @lang('Petrol')
+                                    </label>
+                                    @error('FuelType')
+                                        <div class="invalid-feedback">{{ $errors->first('FuelType') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Phone")</label><br>
-                            <div class="col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang("Phone")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                                     <input class="form-control" type="text" value="{{old("phone") ?? Auth::user()->phone}}"  placeholder="{{__("Your Phone")}}" name="phone" />
-                                    <span class="form-text text-muted">@lang("This is your phone number ")</span>
+                                    <span class="form-text text-muted">@lang("This is your phone number")</span>
                                 @error('phone')
                                     <div class="invalid-feedback">{{ $errors->first('phone') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("What's App")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("whats") ?? Auth::user()->whats_app}}"  placeholder="{{__("Your What's App")}}" name="whats" />
+                                    <span class="form-text text-muted">@lang("This is your what's app number")</span>
+                                @error('whats')
+                                    <div class="invalid-feedback">{{ $errors->first('whats') }}</div>
                                 @enderror
                             </div>
                         </div>
@@ -481,8 +483,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Deposit Price")</label><br>
-                            <div class="col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang("Deposit Price")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                                     <input class="form-control" type="text" value="{{old("DepositPrice")}}"  placeholder="{{__("Deposit Price")}}" name="DepositPrice" />
                                 @error('DepositPrice')
                                     <div class="invalid-feedback">{{ $errors->first('DepositPrice') }}</div>
@@ -492,31 +494,31 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Installment Price")</label><br>
-                            <div class="col-md-12">
-                                    <input class="form-control" type="text" value="{{old("InstallmentPrice")}}"  placeholder="{{__("Installment Price")}}" name="InstallmentPrice" />
-                                @error('InstallmentPrice')
-                                    <div class="invalid-feedback">{{ $errors->first('InstallmentPrice') }}</div>
+                            <label class="col-form-label  col-sm-12">@lang("Installment Price")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("InstallmentAmount")}}"  placeholder="{{__("Installment Price")}}" name="InstallmentAmount" />
+                                @error('InstallmentAmount')
+                                    <div class="invalid-feedback">{{ $errors->first('InstallmentAmount') }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Installment Month")</label><br>
-                            <div class="col-md-12">
-                                    <input class="form-control" type="text" value="{{old("InstallmentMonth")}}"  placeholder="{{__("Installment Month")}}" name="InstallmentMonth" />
-                                    <span class="form-text text-muted">@lang("Type numeric numbers only")</span>
-                                    @error('InstallmentMonth')
-                                    <div class="invalid-feedback">{{ $errors->first('InstallmentMonth') }}</div>
+                            <label class="col-form-label  col-sm-12">@lang("Installment Period")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("InstallmentPeriod")}}"  placeholder="{{__("Installment Period")}}" name="InstallmentPeriod" />
+                                    <span class="form-text text-muted">@lang("[Number] Month/Year")</span>
+                                @error('InstallmentPeriod')
+                                    <div class="invalid-feedback">{{ $errors->first('InstallmentPeriod') }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Car Photos")</label><br>
-                            <div class="col-md-12">
+                            <label class="col-form-label  col-sm-12">@lang("Car Photos")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                                 <input type="file" class="custom-file-input" name="CarPhotos[]" id="customFile" multiple/>
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                 @error('CarPhotos')
@@ -527,7 +529,7 @@
                     </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('Add')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('create')  </button>
             </div>
         </form>
         <!--end::Form-->
@@ -538,6 +540,11 @@
 {{-- Scripts Section --}}
 @section('styles')
 <link href="{{asset('plugins/custom/uppy/uppy.bundle.css')}}" rel="stylesheet" type="text/css" />
+<style>
+    .invalid-feedback {
+        display: block;
+    }
+</style>
 @endsection
 
 @section('scripts')
@@ -595,7 +602,7 @@
             url:'/dashboard/car/available_governorate/'+id,
             success: data => {
                 if(data.governorates){
-                    $('#governorate').append(`<option value="" >@lang('--Select Governorate--')</option>`)
+                    $('#governorate').append(`<option value="" >@lang('Select Governorate')</option>`)
                     data.governorates.forEach(governorate =>
                     $('#governorate').append(`<option value="${governorate.id}" ${(old_governorate==governorate.id) ? "selected" : "" } >${governorate.title}-${governorate.title_ar}</option>`)
                     )
@@ -635,6 +642,10 @@
         var id = this.value ;
         model(id);
     });
+    var old_maker="<?php echo (old('CarMaker_id')) ? old('CarMaker_id') : null; ?>";
+    if (old_maker != ''){
+        model("<?php echo (old('CarMaker_id'))?>");
+    }
     var old_country="<?php echo (old('Country_id')) ? old('Country_id') : null; ?>";
     if (old_country != ''){
         governorate("<?php echo (old('Country_id'))?>");
@@ -642,17 +653,18 @@
     var old_governorate="<?php echo (old('Governorate_id')) ? old('Governorate_id') : null; ?>";
     if (old_governorate != ''){
         city("<?php echo (old('Governorate_id'))?>");
-    }
+        }
 
- $('#kt_select2_12').select2({
-        tags: true,
-        placeholder: "Add a feature",
-  });
-  $('#kt_select2_2').select2({
-
-  });
-  $('#kt_select2_3').select2({
-  });
+    $('#kt_select2_12').select2({
+            tags: true,
+            placeholder: "{{__('Add a feature')}}",
+    });
+    $('#kt_select2_2').select2({
+            placeholder: "{{__('Select Car Manufacture')}}",
+    });
+    $('#kt_select2_3').select2({
+            placeholder: "{{__('Select Car Capacity')}}",
+    });
 
     $('#map').locationpicker({
         location: {

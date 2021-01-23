@@ -156,6 +156,24 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group center_type" id="center_type2" style="display: none">
+                                    <label>@lang('Center type categorization')<span class="text-danger">*</span></label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="specialty_id_spare">@lang('Spare center specialties') <span class="text-danger">*</span></label>
+                                            <select class="form-control select2 {{ $errors->has('specialty_id_spare') ? 'is-invalid' : '' }}"
+                                                id="kt_select2_4" name="specialty_id_spare[]" multiple="multiple" style="width: 100%">
+                                                @foreach ($specialties as $specialty)
+                                                    <option value="{{$specialty->id}}">{{ $specialty->name }} - {{ $specialty->name_ar }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('specialty_id_spare')
+                                             <div class="invalid-feedback">{{ $errors->first('specialty_id_spare') }}</div>
+                                            @enderror
+                                            <span class="form-text text-muted">@lang('You can choose more than one specialty')</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
@@ -393,7 +411,6 @@
                 }
             }
         });
-        $('#governorate').change();
     });
     $('#governorate').on('change', function() {
         var id = this.value ;
@@ -443,6 +460,15 @@
         $(document).ready(function() {
             $("div.center_type").hide();
             $("#center_type1").show();
+        });
+    </script>
+@endif
+
+@if (old('center_type') == "2")
+    <script>
+        $(document).ready(function() {
+            $("div.center_type").hide();
+            $("#center_type2").show();
         });
     </script>
 @endif
