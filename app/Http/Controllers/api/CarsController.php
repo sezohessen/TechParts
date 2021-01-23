@@ -24,6 +24,7 @@ use App\Http\Resources\CarCollection;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use App\Http\Resources\SubscribeResource;
+use App\Models\Alert;
 use Illuminate\Support\Facades\Validator as Validator;
 
 class DataType {
@@ -160,7 +161,16 @@ class CarsController extends Controller
             if(!$car=Car::find($request->car_id)){
                 return $this->errorMessage('Car not found');
             }
-            $car->update(["status"=>$request->status]);
+            $alert=Alert::where("car_id",$request->car_id)->where("user_id",Auth()->id())->update([
+                "status"=>$request->status
+            ]);
+            if(!$alert){
+                Alert::create([
+                    "car_id"=>$request->car_id,
+                    "user_id"=>Auth()->id(),
+                    "status"=>$request->status
+                ]);
+            }
             return  $this->returnSuccess(__('Success change Status of car'));
 
         }else {

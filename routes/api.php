@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("ask_expoert",'AskExpertController@create');
     Route::post("payment",'CarsController@deposit');
     Route::post("car/promote/car_promote",'CarsController@promote');
-
+    Route::post("car/alert",'CarsController@alert');
     Route::post("insurance/create_request",'InsuranceRequestController@insurance');
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
 
@@ -69,7 +69,6 @@ Route::group(['prefix' => 'car','namespace'=>"api"], function () {
 
     Route::post("details  ",'CarsController@details');
     Route::post("list",'CarsController@search');
-    Route::post("alert",'CarsController@alert');
     Route::post("compare",'CarsController@compare');
     Route::post("action_counter",'CarsController@action_counter');
     Route::post("promote/get_promote_package",'CarsController@promote_package');
