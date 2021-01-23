@@ -58,40 +58,35 @@ class AgencyCarController extends Controller
      */
     public function store(Request $request)
     {
-        //Validate Car
-        $rules      = Car::rules($request);
+        $rules = Car::rules($request);
         $request->validate($rules);
         //Validate AgencyCar
         $rules      = AgencyCar::rules($request);
         $request->validate($rules);
-        //Car::create
         $credentials = Car::credentials($request);
         $car = Car::create($credentials);
-
-        /* End (Add Car to Agency (MANY relation)) */
         foreach($credentials['CarPhotos'] as $key=>$img){
             car_img::create([
-                'car_id'    => $car->id,
-                'img_id'    => $img
+                'car_id'=>$car->id,
+                'img_id'=>$img
             ]);
         }
         foreach($request->badge_id as $key=>$badge){
             car_badge::create([
-                'car_id'    => $car->id,
-                'badge_id'  => $badge
+                'car_id'=>$car->id,
+                'badge_id'=>$badge
             ]);
         }
         foreach($request->feature_id as $key=>$feature){
             car_feature::create([
-                'car_id'    => $car->id,
-                'feature_id'=> $feature
+                'car_id'=>$car->id,
+                'feature_id'=>$feature
             ]);
         }
         ListCarUser::create([
-            "user_id"   => Auth::user()->id,
-            "car_id"    => $car->id
+            "user_id"=>Auth::user()->id,
+            "car_id"=>$car->id
         ]);
-                /* New (Add Car to Agency (MANY relation)) */
         //AgencyCar::create
         $credentials    = AgencyCar::credentials($request,$car->id);
         $agency_cars    = AgencyCar::create($credentials);

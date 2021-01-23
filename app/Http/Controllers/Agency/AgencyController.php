@@ -86,8 +86,14 @@ class AgencyController extends Controller
         //Validation completed in Agency Depends on center_type
 
         //Get car_id Array to Agency Car
+        $Specialty_Lists = 0;
         if($request->center_type==1){
-            foreach ($request->specialty_id as $specialty_id){
+            $Specialty_Lists    = $request->specialty_id;
+        }elseif($request->center_type==2){
+            $Specialty_Lists    = $request->specialty_id_spare;
+        }
+        if($Specialty_Lists){
+            foreach ($Specialty_Lists as $specialty_id){
                 $credentials    = AgencySpecialties::credentials($specialty_id,$agent_id);
                 $Specialties    = AgencySpecialties::create($credentials);
             }
@@ -126,21 +132,32 @@ class AgencyController extends Controller
         $car_makers_selected = AgencyCarMaker::where('agency_id',$id)->get();
         //Add Agency Cars Id in array
         //I will Colled all selectd car to compare it
-        $SelectedCarMakers = [];
+       $SelectedCarMakers = [];
+
         foreach($car_makers_selected as $carMaker)
         {
             $SelectedCarMakers[] = $carMaker->CarMaker_id;
         }
-        $agency_specialties_selected = AgencySpecialties::where('agency_id',$id)->get();
-        $agency_specialties = [];
+        $agency_specialties_selected    = AgencySpecialties::where('agency_id',$id)->get();
+        $agency_specialties_Main        = [];
+        $agency_specialties_Spare       = [];
         if($agency_specialties_selected->count()){
-            foreach($agency_specialties_selected as $specialty)
-            {
-                $agency_specialties[] = $specialty->specialty_id;
+            if($agency->center_type == Agency::center_type_Maintenance){
+                foreach($agency_specialties_selected as $specialty)
+                {
+                    $agency_specialties_Main[] = $specialty->specialty_id;
+                }
+            }elseif($agency->center_type == Agency::center_type_Spare){
+                foreach($agency_specialties_selected as $specialty)
+                {
+                    $agency_specialties_Spare[] = $specialty->specialty_id;
+                }
             }
+
         }
-        return view('AgencyDashboard.Agency.edit', compact('page_title', 'page_description','agency_specialties'
-        ,'countries','agency','agency_contact','car_makers','SelectedCarMakers','specialties'));
+        return view('AgencyDashboard.Agency.edit', compact('page_title', 'page_description','countries',
+        'agency','agency_contact','car_makers','SelectedCarMakers','agency_specialties_Spare',
+        'agency_specialties_Main','specialties'));
         }else{
             return redirect()->route('agency.index');
         }
@@ -200,8 +217,17 @@ class AgencyController extends Controller
             ])->delete();
         }
         //Center Type Update
-
-        if($request->center_type==0||$request->center_type==2){
+        /* //Short Description 
+        There are 3 Condition
+        1- if the comming request is Agency then i will delete all the specialty record
+        2- if the comming request is Maintenance then i will have also 2 condition
+            1- if the specialty old values is Maintenance then i will get the diffrence between the old and the new
+            2- if the specialty old values is Spare then i will delete all old values and create all comming request
+        3- if the comming request is Spare then i will have also 2 condition
+            1- if the specialty old values is Spare then i will get the diffrence between the old and the new
+            2- if the specialty old values is Maintenance then i will delete all old values and create all comming request
+        */
+        if($request->center_type==Agency::center_type_Agency){
             $NeedToBeDeleted    = AgencySpecialties::where('agency_id',$id)->get();
             if($NeedToBeDeleted->count()){
                 foreach ($NeedToBeDeleted as $agencySpecailty){
@@ -212,34 +238,82 @@ class AgencyController extends Controller
                 }
             }
         }else{
-         if($OldSpecialties){
             $AgencySpecialization   = AgencySpecialties::where('agency_id',$id)->get();
             $SelectedSpecialization = [];
             foreach($AgencySpecialization as $AgencySpecialty){
                 $SelectedSpecialization[] = $AgencySpecialty->specialty_id;
             }
-            $NeedToBeDeleted = array_diff($SelectedSpecialization,$request->specialty_id);
-            $NeedToBeCreated = array_diff($request->specialty_id,$SelectedSpecialization);
-            //Validation completed in Agency Depends on center_type
+            if($OldSpecialties){
+                if($request->center_type==Agency::center_type_Maintenance){
+                    $NeedToBeDeleted = array_diff($SelectedSpecialization,$request->specialty_id);
+                    $NeedToBeCreated = array_diff($request->specialty_id,$SelectedSpecialization);
+                    //Validation completed in Agency Depends on center_type
 
-            //Get Specailty Array to AgencySpecialization , (Create New)
-            foreach ($NeedToBeCreated as $specailty){
-                $credentials        = AgencySpecialties::credentials($specailty,$id);
-                $AgencySpecialties  = AgencySpecialties::create($credentials);
+                    //Get Specailty Array to AgencySpecialization , (Create New)
+                    foreach ($NeedToBeCreated as $specailty){
+                        $credentials        = AgencySpecialties::credentials($specailty,$id);
+                        $AgencySpecialties  = AgencySpecialties::create($credentials);
+                    }
+                    //Delete Removed Selected
+                    foreach ($NeedToBeDeleted as $agencySpecailty){
+                        $AgencySpecialization = AgencySpecialties::where([
+                            ['specialty_id','=',$agencySpecailty],
+                            ['agency_id','=',$id]
+                        ])->delete();
+                    }
+                }else{
+                    $NeedToBeDeleted = $SelectedSpecialization;
+                    $NeedToBeCreated = $request->specialty_id_spare;
+                    //Validation completed in Agency Depends on center_type
+
+                    //Get Specailty Array to AgencySpecialization , (Create New)
+                    foreach ($NeedToBeCreated as $specailty){
+                        $credentials        = AgencySpecialties::credentials($specailty,$id);
+                        $AgencySpecialties  = AgencySpecialties::create($credentials);
+                    }
+                    //Delete Removed Selected
+                    foreach ($NeedToBeDeleted as $agencySpecailty){
+                        $AgencySpecialization = AgencySpecialties::where([
+                            ['specialty_id','=',$agencySpecailty],
+                            ['agency_id','=',$id]
+                        ])->delete();
+                    }
+                }
+            }else{
+                if($request->center_type==Agency::center_type_Maintenance){
+                    $NeedToBeDeleted = $SelectedSpecialization;
+                    $NeedToBeCreated = $request->specialty_id;
+                    //Get Specailty Array to AgencySpecialization , (Create New)
+                    foreach ($NeedToBeCreated as $specailty){
+                        $credentials        = AgencySpecialties::credentials($specailty,$id);
+                        $AgencySpecialties  = AgencySpecialties::create($credentials);
+                    }
+                    //Delete Removed Selected
+                    foreach ($NeedToBeDeleted as $agencySpecailty){
+                        $AgencySpecialization = AgencySpecialties::where([
+                            ['specialty_id','=',$agencySpecailty],
+                            ['agency_id','=',$id]
+                        ])->delete();
+                    }
+                }else{
+                    $NeedToBeDeleted = array_diff($SelectedSpecialization,$request->specialty_id_spare);
+                    $NeedToBeCreated = array_diff($request->specialty_id_spare,$SelectedSpecialization);
+                    //Validation completed in Agency Depends on center_type
+
+                    //Get Specailty Array to AgencySpecialization , (Create New)
+                    foreach ($NeedToBeCreated as $specailty){
+                        $credentials        = AgencySpecialties::credentials($specailty,$id);
+                        $AgencySpecialties  = AgencySpecialties::create($credentials);
+                    }
+                    //Delete Removed Selected
+                    foreach ($NeedToBeDeleted as $agencySpecailty){
+                        $AgencySpecialization = AgencySpecialties::where([
+                            ['specialty_id','=',$agencySpecailty],
+                            ['agency_id','=',$id]
+                        ])->delete();
+                    }
+                }
             }
-            //Delete Removed Selected
-            foreach ($NeedToBeDeleted as $agencySpecailty){
-                $AgencySpecialization = AgencySpecialties::where([
-                    ['specialty_id','=',$agencySpecailty],
-                    ['agency_id','=',$id]
-                ])->delete();
-            }
-         }else{
-            foreach ($request->specialty_id as $specialty_id){
-                $credentials    = AgencySpecialties::credentials($specialty_id,$id);
-                $Specialties    = AgencySpecialties::create($credentials);
-            }
-         }
         }
         session()->flash('updated',__("Agency has been Updated successfully!"));
         return redirect()->route('agency.index');

@@ -1,15 +1,36 @@
-@if($center_type==0)
-    @if ($agency_type==1)
-        <p>@lang('Agency')</p>
+<?php
+   use App\Models\Agency;
+?>
+@if($center_type==Agency::center_type_Agency)
+    @if ($agency_type==Agency::Ag_Agency)
+        <span class='label label-success label-inline mr-2'style='padding: 10px;width: 128px;'>
+            @lang('Agency')
+        </span>
+    @elseif($agency_type==Agency::Ag_Distributor)
+        <span class='label label-success label-inline mr-2'style='padding: 10px;width: 128px;'>
+            @lang('Distributor')
+        </span>
     @else
-        <p>@lang('Distributor')</p>
+        <span class='label label-warning label-inline mr-2'style='padding: 10px;width: 128px;'>
+            @lang('UnSelected')
+        </span>
     @endif
-@elseif($center_type==1)
-    @if ($maintenance_type==1)
-    <p>@lang('Service center')</p>
+@elseif($center_type==Agency::center_type_Maintenance)
+    @if ($maintenance_type==Agency::Main_Service_center)
+    <span class='label label-primary label-inline mr-2'style='padding: 10px;width: 128px;'>
+        @lang('Service center')
+    </span>
+    @elseif($maintenance_type==Agency::Main_Workshop)
+    <span class='label label-primary label-inline mr-2'style='padding: 10px;width: 128px;'>
+        @lang('Workshop')
+    </span>
     @else
-    <p>@lang('Workshop')</p>
+    <span class='label label-warning label-inline mr-2'style='padding: 10px;width: 128px;'>
+        @lang('UnSelected')
+    </span>
     @endif
 @else
-    <p>@lang('Spare parts')</p>
+    <span class='label label-danger label-inline mr-2'style='padding: 10px;width: 128px;'>
+        @lang('Spare parts')
+    </span>
 @endif

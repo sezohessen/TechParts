@@ -61,7 +61,7 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                              <select class="form-control select2 {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
                                  id="kt_select2_1" name="CarYear_id" required>
-                                 <option value="">@lang('Select Car Year')</option
+                                 <option value="">@lang('Select Car Year')</option>
                                 @foreach ($years as $year)
                                     <option value="{{$year->id}}"{{ old('CarYear_id')==$year->id ? 'selected':'' }} >{{$year->year}}</option>
                                 @endforeach

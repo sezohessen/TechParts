@@ -407,5 +407,7 @@
     "Sell":"بيع",
     "Feul Type":"نوع الوقود",
     "Gas":"غاز",
-    "Petrol":"بيترول"
+    "Petrol":"بيترول",
+    "UnSelected":"غير محدد",
+    "--Select Car Make first--":"- اختر صنع السيارة أولاً -"
 }
