@@ -73,7 +73,6 @@ class CarsController extends Controller
     }
     public function details(Request $request)
     {
-
         $validator=$this->Validator($request,[
             "car_id"            => 'required|integer',
         ]);
@@ -83,6 +82,7 @@ class CarsController extends Controller
             }
             $type   = new DataType();
             $data=(new CarResource($car))->type($type::single);
+            return $data;
             return  $this->returnData('mCar',$data,__('Successfully'));
         }else {
             return $this->failed($validator);
