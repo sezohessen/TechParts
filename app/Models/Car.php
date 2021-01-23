@@ -19,7 +19,7 @@ class Car extends Model
 
     const PAYMENT_CASH  = 0;
     const PAYMENT_INSTALLMENT = 1;
-    const PAYMENT_FINANCING = 3;
+    const PAYMENT_FINANCING = 2;
 
 
     const STATUS_DISABLE = 0;
@@ -28,8 +28,8 @@ class Car extends Model
     const IS_NEW  = 0;
     const IS_USED = 1;
 
-    const FEUL_GAS  = 0;
-    const FEUL_PETROL = 1;
+    const FUEL_GAS  = 0;
+    const FUEL_PETROL = 1;
 
     const SELLER_AGENCY=0;
     const SELLER_INDIVIDUAL=1;
@@ -57,6 +57,13 @@ class Car extends Model
             self::PAYMENT_FINANCING    => __('Financing'),
         ];
     }
+    public static function FuelType()
+    {
+        return [
+            self::FUEL_GAS        => __('Gas'),
+            self::FUEL_PETROL         => __('Petrol'),
+        ];
+    }
     public static function TransmissionType()
     {
         return [
@@ -68,7 +75,7 @@ class Car extends Model
     {
         return [
             self::IS_NEW        => __('New'),
-            self::IS_USED         => __('User'),
+            self::IS_USED         => __('Used'),
         ];
 
     }
@@ -261,7 +268,14 @@ class Car extends Model
         return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
     }
 
-
+    public function AuthFavCar()
+    {
+        return $this->belongsToMany(User::class, 'user_fav_cars', 'car_id','user_id');
+    }
+    public function AuthAlertCar()
+    {
+        return $this->belongsToMany(User::class, 'alerts', 'car_id','user_id')->withPivot('status');
+    }
     public static function unlink_img($images)
     {
         $destinationPath = public_path() . '/img/Cars/';
