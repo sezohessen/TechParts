@@ -4,37 +4,28 @@ namespace App\Http\Controllers\api;
 
 use App\Models\Car;
 
+use App\Models\car_img;
+use App\Models\Country;
+use App\Models\car_badge;
+use App\Models\PromoteCar;
 use App\Models\car_deposit;
+use App\Models\car_feature;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
+use App\Classes\Responseobject;
 use function PHPSTORM_META\type;
 use App\Models\subscribe_package;
+
 use App\Http\Resources\CarResource;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CarCollection;
 use Illuminate\Support\Facades\Session;
-
 use Illuminate\Support\Facades\Response;
 use App\Http\Resources\SubscribeResource;
-use App\Models\Country;
-use App\Models\PromoteCar;
 use Illuminate\Support\Facades\Validator as Validator;
 
-class CarResponseobject
-{
-    const status_ok = true;
-    const status_failed = false;
-    const code_ok = 200;
-    const code_failed = 400;
-    const code_unauthorized = 403;
-    const code_not_found = 404;
-    const code_error = 500;
-    public $status;
-    public $code;
-    public $msg = array();
-}
 class DataType {
     const single = 1;
     const list = 2;
@@ -65,7 +56,7 @@ class CarsController extends Controller
     }
     public function failed($validator)
     {
-        $response   = new CarResponseobject();
+        $response   = new Responseobject();
         $response->status = $response::status_failed;
         $response->code = $response::code_failed;
         foreach ($validator->errors()->getMessages() as $item) {
@@ -263,5 +254,118 @@ class CarsController extends Controller
         }else {
             return $this->failed($validator);
         }
+    }
+    public function copy(Request $request){
+        $validator=$this->Validator($request,[
+            "car_id"            => 'required|integer',
+        ]);
+        if (!$validator->fails()) {
+            if(!$car=Car::find($request->car_id)){
+                return $this->errorMessage('Car ID not found');
+            }
+            unset($car['adsExpire']);
+            $car['views']=0;
+            $new_car = $car->replicate();
+            $new_car->save();
+            $CarPhotos=car_img::where('car_id', '=', $car->id)->get();
+            foreach($CarPhotos as $key=>$img){
+                car_img::create([
+                    'car_id'=>$new_car->id,
+                    'img_id'=>$img->img_id
+                ]);
+            }
+            $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+            foreach($CarBadges as $key=>$badge){
+                car_badge::create([
+                    'car_id'=>$new_car->id,
+                    'badge_id'=>$badge->badge_id
+                ]);
+            }
+            $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+            foreach($CarFeatures as $key=>$feature){
+                car_feature::create([
+                    'car_id'=>$new_car->id,
+                    'feature_id'=>$feature->feature_id
+                ]);
+            }
+            $car=Car::find($new_car->id);
+            $type   = new DataType();
+            $data=(new CarResource($car))->type($type::single);
+            return  $this->returnData('mCar',$data,__('Successfully'));
+
+        }else {
+            return $this->failed($validator);
+        }
+    }
+    public function delete(Request $request){
+        $validator=$this->Validator($request,[
+            "car_id"            => 'required|integer',
+        ]);
+        if (!$validator->fails()) {
+            if(!$car=Car::find($request->car_id)){
+                return $this->errorMessage('Car ID not found');
+            }
+            $images=car_img::where("car_id",$car->id)->get();
+            Car::unlink_img($images);
+            $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+            foreach($CarBadges as $key=>$badge){
+                $badge->delete();
+            }
+            $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+            foreach($CarFeatures as $key=>$feature){
+                $feature->delete();
+            }
+            $car->delete();
+            return  $this->returnSuccess(__('Deleted successfully'));
+
+        }else {
+            return $this->failed($validator);
+        }
+    }
+    public function create(Request $request){
+        return 1;
+    }
+
+    public static function rules($request,$id = NULL)
+    {
+        $rules = [
+            'carMaker'                 => 'required|integer',
+            'carModel'                 => 'required|integer',
+            'carYear'                  => 'required|integer',
+            'carManufacturing'           => 'required|integer',
+            'carCapacity'              => 'required|integer',
+            'price'                       => 'required|integer',
+            'discount'        => 'nullable|integer|between:1,100',
+            'isAccident'              => 'required|integer',
+            'used_kilometers'                    => 'required|integer',
+            'bodyStyle'                  => 'required|integer',
+            'color'                 => 'required|integer',
+            'badgeList'                    => 'required|array|min:1',
+            'featureList'                  => 'required|array|min:1',
+            'description'                 => 'required|string|min:3|max:1000',
+            'description_ar'              => 'required|string|min:3|max:1000',
+            'country'                  => 'required|integer',
+            'governorate'              => 'required|integer',
+            'city'                     => 'required|integer',
+            'mLocation_latitude'                         => 'required|numeric',
+            'mLocation_longitude'                         => 'required|numeric',
+            'serviceHistory'              => 'required|string|min:3|max:1000',
+            'transmission'                => 'required|integer',
+            'carState'                       => 'required|integer',
+            'SellerType'                  => 'required|integer',
+            'payment_method'                     => 'required|integer',
+            'mContact_phone'                       => 'required|string',
+            'payment_deposit'                => 'required|string',
+            'payment_loan_amount'            => 'required|integer',
+            'payment_loan_period'            =>  ['required', new periodValidate],
+            'CarPhotos'                   => 'required|max:5',
+            'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            "whats"                       => 'required|string',
+        ];
+        if($id){
+            $rules['CarPhotos'] = 'nullable';
+            $rules['CarPhotos.*'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+        }
+        return $rules;
     }
 }

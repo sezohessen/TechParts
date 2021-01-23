@@ -21,32 +21,65 @@ class Car extends Model
     const PAYMENT_INSTALLMENT = 1;
     const PAYMENT_FINANCING = 3;
 
-    const STATUS_ACTIVE  = 0;
-    const STATUS_DISABLE = 1;
+
+    const STATUS_DISABLE = 0;
+    const STATUS_ACTIVE  = 1;
 
     const IS_NEW  = 0;
     const IS_USED = 1;
 
+    const FEUL_GAS  = 0;
+    const FEUL_PETROL = 1;
+
     const SELLER_AGENCY=0;
-    const SELLER_DISTRIBUTOR=1;
-    const SELLER_INDIVIDUAL=2;
+    const SELLER_INDIVIDUAL=1;
 
     protected static $logAttributes = ['phone','Country_id', 'SellerType'];
     protected $fillable=[
         'price', 'price_after_discount','Description', 'Description_ar',
         'CarManufacture_id', 'status', 'kiloUsed','ServiceHistory' ,
-        'lat','lng','phone','InstallmentMonth', 'InstallmentPrice',
+        'lat','lng','phone','InstallmentAmount', 'InstallmentPeriod',
         'DepositPrice' ,'Country_id' ,'City_id' ,'Governorate_id' ,
         'CarModel_id' ,'CarMaker_id' ,'CarBody_id' ,'CarYear_id' ,
         'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' ,
         'transmission' ,'payment', 'SellerType','isNew',"adsExpire",
-        "promotedExpire","promotedStatus","user_id","whats"
+        "promotedExpire","promotedStatus","user_id","whats","data",
     ];
     public function getDescriptionForEvent(string $eventName): string
     {
         return "A car has been {$eventName}";
     }
+    public static function PaymentType()
+    {
+        return [
+            self::PAYMENT_CASH        => __('Cash'),
+            self::PAYMENT_INSTALLMENT         => __('Installment'),
+            self::PAYMENT_FINANCING    => __('Financing'),
+        ];
+    }
+    public static function TransmissionType()
+    {
+        return [
+            self::TRANSIMSSION_MANUAL        => __('Manual'),
+            self::TRANSIMSSION_AUTOMATIC         => __('Automatic'),
+        ];
+    }
+    public static function StatusType()
+    {
+        return [
+            self::IS_NEW        => __('New'),
+            self::IS_USED         => __('User'),
+        ];
 
+    }
+    public static function SellerType()
+    {
+        return [
+            self::SELLER_AGENCY        => __('Agency'),
+            self::SELLER_INDIVIDUAL         => __('Individual'),
+        ];
+
+    }
     public static function rules($request,$id = NULL)
     {
         $rules = [
@@ -56,7 +89,6 @@ class Car extends Model
             'CarManufacture_id'           => 'required|integer',
             'CarCapacity_id'              => 'required|integer',
             'price'                       => 'required|integer',
-            'price_after_discount'        => 'required|integer|between:1,100',
             'AccidentBefore'              => 'required|integer',
             'kiloUsed'                    => 'required|integer',
             'CarBody_id'                  => 'required|integer',
@@ -73,15 +105,16 @@ class Car extends Model
             'ServiceHistory'              => 'required|string|min:3|max:1000',
             'transmission'                => 'required|integer',
             'isNew'                       => 'required|integer',
-            'SellerType'                  => 'required|integer',
             'payment'                     => 'required|integer',
+            "FuelType"                    => 'required|integer',
             'phone'                       => 'required|string',
             'DepositPrice'                => 'required|integer',
-            'InstallmentPrice'            => 'required|integer',
-            'InstallmentMonth'            =>  ['required', new periodValidate],
+            'InstallmentAmount'           => 'required|string',
+            'InstallmentPeriod'           =>  ['required', new periodValidate],
             'CarPhotos'                   => 'required|max:5',
             'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             "whats"                       => 'required|string',
+            "price_after_discount"        =>'nullable|integer|between:0,100'
         ];
         if($id){
             $rules['CarPhotos'] = 'nullable';
@@ -98,7 +131,6 @@ class Car extends Model
             'CarManufacture_id'           => $request->CarManufacture_id,
             'CarCapacity_id'              => $request->CarCapacity_id,
             'price'                       => $request->price,
-            'price_after_discount'        => $request->price_after_discount,
             'AccidentBefore'              => $request->AccidentBefore,
             'kiloUsed'                    => $request->kiloUsed,
             'CarBody_id'                  => $request->CarBody_id,
@@ -113,16 +145,17 @@ class Car extends Model
             'ServiceHistory'              => $request->ServiceHistory,
             'transmission'                => $request->transmission,
             'isNew'                       => $request->isNew,
-            'SellerType'                  => $request->SellerType,
+            'SellerType'                  => Auth()->user()->Agency ? Car::SELLER_AGENCY: Car::SELLER_INDIVIDUAL,
             'payment'                     => $request->payment,
             'phone'                       => $request->phone,
             'whats'                       => $request->whats,
             'DepositPrice'                => $request->DepositPrice,
-            'InstallmentPrice'            => $request->InstallmentPrice,
-            'InstallmentMonth'            => $request->InstallmentMonth,
+            'InstallmentAmount'           => $request->InstallmentAmount,
+            'InstallmentPeriod'           => $request->InstallmentPeriod,
+            "FuelType"                    => $request->FuelType,
             'views'                       => 0,
             'status'                      => Car::STATUS_ACTIVE,
-            'user_id'                     =>Auth()->user()->id
+            'user_id'                     => Auth()->user()->id
         ];
         if($photos=$request->file('CarPhotos')){
             if($images_id){
@@ -139,6 +172,12 @@ class Car extends Model
             }
             $credentials['CarPhotos'] = $Images_id;
         }
+        if ($request->price_after_discount) {
+            $credentials['price_after_discount']=$request->price_after_discount;
+        }else {
+            $credentials['price_after_discount']=0;
+        }
+
         return $credentials;
     }
     public static function file($file,$id = NULL)
@@ -236,6 +275,10 @@ class Car extends Model
             $Image->delete();
         }
         return true;
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class,"user_id","id");
     }
 
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Models\Car;
 use App\Models\City;
+use App\Models\User;
 use App\Models\Image;
+use App\Models\Agency;
 use App\Models\Badges;
 use App\Models\car_img;
 use App\Models\CarBody;
@@ -46,18 +48,18 @@ class CarController extends Controller
      */
     public function create()
     {
+
         $page_title = __("Add Car");
         $page_description = __("Add new Car");
         $makers=CarMaker::where('active', '=', 1)->get();
         $bodies=CarBody::all();
         $years=CarYear::all();
-        $badges=Badges::where('active', '=', 1);
-        $features=Feature::where('active', '=', 1);
-        $countries=Country::all();
+        $badges=Badges::where('active', '=', 1)->get();
+        $features=Feature::where('active', '=', 1)->get();
+        $countries=Country::where('active', '=', 1)->get();
         $manufactures=CarManufacture::all();
         $capacities=CarCapacity::all();
         $colors=CarColor::all();
-        //dd($page_title,$page_description,$makers,$bodies,$years,$badges,$features,$countries,$manufactures,$capacities,$colors);
         return view('dashboard.Car.add', compact('page_title', 'page_description','makers',
         "years","bodies","badges","features","countries","manufactures","capacities","colors"));
     }
@@ -127,7 +129,7 @@ class CarController extends Controller
         $years=CarYear::all();
         $badges=Badges::where('active', '=', 1)->get();
         $features=Feature::where('active', '=', 1)->get();
-        $countries=Country::all();
+        $countries=Country::where('active', '=', 1)->get();
         $manufactures=CarManufacture::all();
         $capacities=CarCapacity::all();
         $colors=CarColor::all();
@@ -258,7 +260,7 @@ class CarController extends Controller
     }
     public function available_model($id){
         /* $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get(); */
-        $models = CarModel::where('CarMaker_id', $id)->get();
+        $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get();
         if($models->count() > 0 ){
             return response()->json([
                 'models' => $models
@@ -269,7 +271,7 @@ class CarController extends Controller
         ]);
     }
     public function available_governorate($id){
-        $governorates = Governorate::where('country_id', $id)->get();
+        $governorates = Governorate::where('country_id', $id)->where('active', 1)->get();
         if($governorates->count() > 0 ){
             return response()->json([
                 'governorates' => $governorates
@@ -280,7 +282,8 @@ class CarController extends Controller
         ]);
     }
     public function available_city($id){
-        $cities = City::where('governorate_id', $id)->get();
+
+        $cities = City::where('governorate_id', $id)->where('active', 1)->get();
         if($cities->count() > 0 ){
             return response()->json([
                 'cities' => $cities

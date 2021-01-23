@@ -81,3 +81,10 @@ Route::group(['prefix' => 'car','namespace'=>"api"], function () {
     Route::post("action_counter",'CarsController@action_counter');
     Route::post("promote/get_promote_package",'CarsController@promote_package');
 });
+Route::group(['prefix' => 'sell_car','namespace'=>"api"], function () {
+
+    Route::post("copy",'CarsController@copy');
+    Route::post("delete",'CarsController@delete');
+    Route::post("create",'CarsController@create');
+
+});

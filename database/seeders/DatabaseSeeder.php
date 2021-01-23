@@ -50,7 +50,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AgencyContactSeeder::class);
         $this->call(AgencyReviewSeeder::class);
         $this->call(UserFavAgencySeeder::class);
-        $this->call(PromoteCarSeeder::class);
         $this->call(ListCarUsersSeeder::class);
         $this->call(SpecialtiesSeeder::class);
         $this->call(AgencySpecialtiesSeeder::class);

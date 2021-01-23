@@ -355,7 +355,7 @@
     "Select Car Year":"اختر السنة",
     "Select Car Manufacture":"اختر مصنع قطع الغيار",
     "Select Car Capacity":"اختر سعة السيارة",
-    "Discount":"الخصم",
+    "Discount (Optional)":"الخصم (اختياري) ",
     "Accidents":"حادث",
     "Kilometers":"كيلو متر",
     "Select Car Body":"اختر مجسم السيارة",
@@ -399,6 +399,10 @@
     "Successfully added to Favorite":"تمت الإضافة إلى المفضلة بنجاح",
     "Target id does not exist":"معرف الهدف غير موجود",
     "There is not favorite to be deleted":"لا توجد مفضلة ليتم حذفها",
-    "Successfully Removed":"تمت الإزالة بنجاح"
-
+    "Successfully Removed":"تمت الإزالة بنجاح",
+    "Deleted successfully":"تم الحذف بنجاح",
+    "Sell":"بيع",
+    "Feul Type":"نوع الوقود",
+    "Gas":"غاز",
+    "Petrol":"بيترول"
 }
