@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     });
     Route::group(['prefix' => 'auth'], function () {
         Route::post("update_interested_country",'UserController@update_interested_country');
+        Route::post("change_status_verify_phone",'UserController@change_status_verify_phone');
     });
     Route::post("ask_expoert",'AskExpertController@create');
     Route::group(['prefix' => 'car'], function () {

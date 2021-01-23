@@ -122,6 +122,22 @@ class UserController extends Controller
             return $this->ValidatorMessages(['email' => trans($response)]);
         }
     }
+    public function change_status_verify_phone(Request $request)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        $user = auth()->user();
+        $user->is_phone_virefied = 1;
+        $user->save();
+        return $this->SuccessMessage('Update Successfully');
+    }
     public function signup(Request $request)
     {
         if ($locale = $request->lang) {
