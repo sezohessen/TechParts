@@ -354,7 +354,7 @@
     "Select Car Year":"اختر السنة",
     "Select Car Manufacture":"اختر مصنع قطع الغيار",
     "Select Car Capacity":"اختر سعة السيارة",
-    "Discount":"الخصم",
+    "Discount (Optional)":"الخصم (اختياري) ",
     "Accidents":"حادث",
     "Kilometers":"كيلو متر",
     "Select Car Body":"اختر مجسم السيارة",
@@ -390,5 +390,9 @@
     "No such center id exist":"لا يوجد مثل هذا معرف المركز موجود",
     "Un selected work type":"نوع العمل غير المحدد",
     "No centers found":"لم يتم العثور على مراكز",
-    "Deleted successfully":"تم الحذف بنجاح"
+    "Deleted successfully":"تم الحذف بنجاح",
+    "Sell":"بيع",
+    "Feul Type":"نوع الوقود",
+    "Gas":"غاز",
+    "Petrol":"بيترول"
 }

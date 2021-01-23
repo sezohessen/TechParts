@@ -472,6 +472,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-form-label  col-sm-12">@lang("Feul Type")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <div class="radio-inline">
+                                    <label class="radio">
+                                        <input type="radio" name="FuelType" value="0"
+                                        {{ old('FuelType')=="0" ? 'checked':'' }} required/>
+                                        <span></span>
+                                        @lang('Gas')
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="FuelType" value="1"
+                                        {{ old('FuelType')=="1" ? 'checked':'' }}/>
+                                        <span></span>
+                                        @lang('Petrol')
+                                    </label>
+                                    @error('FuelType')
+                                        <div class="invalid-feedback">{{ $errors->first('FuelType') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                         <div class="form-group row ">
@@ -613,7 +637,7 @@
                     $('#models').append(`<option value="${models.id}" ${(old_model==models.id) ? "selected" : "" } >${models.name}</option>`)
                     )
                 }else{
-                    $('#models').append(`<option value="">No Results</option>`)
+                    $('#models').append(`<option value="">{{__("No Results")}}</option>`)
                 }
 
             },
@@ -628,12 +652,12 @@
             url:'/dashboard/car/available_governorate/'+id,
             success: data => {
                 if(data.governorates){
-                    $('#governorate').append(`<option value="" >@lang('--Select Governorate--')</option>`)
+                    $('#governorate').append(`<option value="" >@lang('Select Governorate')</option>`)
                     data.governorates.forEach(governorate =>
                     $('#governorate').append(`<option value="${governorate.id}" ${(old_governorate==governorate.id) ? "selected" : "" } >${governorate.title}-${governorate.title_ar}</option>`)
                     )
                 }else{
-                    $('#governorate').append(`<option value="">No Results</option>`)
+                    $('#governorate').append(`<option value="">{{__("No Results")}}</option>`)
                 }
 
             }
@@ -650,7 +674,7 @@
                     $('#city').append(`<option value="${city.id}"  ${(old_city==city.id) ? "selected" : "" } >${city.title}-${city.title_ar}</option>`)
                     )
                 }else{
-                    $('#city').append(`<option value="">No Results</option>`)
+                    $('#city').append(`<option value="">{{__("No Results")}}</option>`)
                 }
 
             }
@@ -669,8 +693,8 @@
         model(id);
     });
     model("<?php echo (old('CarMaker_id') ?? $car->CarMaker_id)?>");
-    governorate("<?php echo (old('Country_id')) ?? $car->Country_id ?>");
-    city("<?php echo (old('Governorate_id')  ?? $car->Governorate_id )?>");
+    governorate("<?php echo (old('Country_id') ?? $car->Country_id) ?>");
+    city("<?php echo (old('Governorate_id')  ?? $car->Governorate_id) ?>");
 
     $('#kt_select2_12').select2({
             tags: true,

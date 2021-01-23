@@ -117,6 +117,8 @@ class AddRelationsToCars extends Migration
             $table->timestamp('adsExpire')->useCurrent();
             $table->timestamp('promotedExpire')->useCurrent();
             $table->boolean('promotedStatus')->default(0);
+            $table->integer('FuelType')->default(0);
+
         });
     }
 
@@ -154,6 +156,7 @@ class AddRelationsToCars extends Migration
             $table->dropColumn('whats');
             $table->dropColumn('price');
             $table->dropColumn('phone');
+            $table->dropColumn('FuelType');
             $table->dropColumn('lng');
             $table->dropColumn('lat');
             $table->dropColumn('isNew');

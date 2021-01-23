@@ -121,7 +121,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text">%</span></div>
-                                    <input class="form-control" name="price_after_discount" value="{{old("price_after_discount")}}" type="text" placeholder="{{__("Discount")}}" />
+                                    <input class="form-control" name="price_after_discount" value="{{old("price_after_discount")}}" type="text" placeholder="{{__("Discount (Optional)")}}" />
                                 </div>
                                 @error('price_after_discount')
                                     <div class="invalid-feedback">{{ $errors->first('price_after_discount') }}</div>
@@ -415,6 +415,30 @@
                                     </label>
                                     @error('payment')
                                         <div class="invalid-feedback">{{ $errors->first('payment') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-form-label  col-sm-12">@lang("Feul Type")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <div class="radio-inline">
+                                    <label class="radio">
+                                        <input type="radio" name="FuelType" value="0"
+                                        {{ old('FuelType')=="0" ? 'checked':'' }} required/>
+                                        <span></span>
+                                        @lang('Gas')
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="FuelType" value="1"
+                                        {{ old('FuelType')=="1" ? 'checked':'' }}/>
+                                        <span></span>
+                                        @lang('Petrol')
+                                    </label>
+                                    @error('FuelType')
+                                        <div class="invalid-feedback">{{ $errors->first('FuelType') }}</div>
                                     @enderror
                                 </div>
                             </div>

@@ -62,6 +62,7 @@ class CarSeeder extends Seeder
                 'isNew'                 => rand(0,1),
                 'status'                => rand(0,1),
                 'kiloUsed'              => $faker->numberBetween(1,100),
+                "FuelType"              => rand(0,1),
                 "adsExpire"             => now(),
                 "promotedExpire"        => now(),
                 "promotedStatus"        => 0,
