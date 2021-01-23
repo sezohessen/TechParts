@@ -5,16 +5,15 @@ namespace App\Http\Controllers\api;
 use App\Models\User;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class UserController extends Controller
 {
-    use GeneralTrait;
+    use GeneralTrait, SendsPasswordResetEmails;
     //
     public function login(Request $request)
     {
@@ -97,6 +96,31 @@ class UserController extends Controller
         $user->interest_country = $request->interest_country;
         $user->save();
         return $this->SuccessMessage('Updated Successfully');
+    }
+    public function forgetPassword(Request $request)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        $this->validateEmail($request);
+
+        // We will send the password reset link to this user. Once we have attempted
+        // to send the link, we will examine the response then see the message we
+        // need to show to the user. Finally, we'll send out a proper response.
+        $response = $this->broker()->sendResetLink(
+            $this->credentials($request)
+        );
+        if ($response == Password::RESET_LINK_SENT) {
+            return $this->SuccessMessage($response);
+        } else {
+            return $this->ValidatorMessages(['email' => trans($response)]);
+        }
     }
     public function signup(Request $request)
     {

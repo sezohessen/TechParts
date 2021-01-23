@@ -72,6 +72,7 @@ Route::group(['prefix' => 'auth','namespace'=>'api'], function () {
     Route::post("login",'UserController@login');
     Route::post("check_phone",'UserController@check_phone');
     Route::post("signup",'UserController@signup');
+    Route::post("forget-password",'UserController@forgetPassword');
 });
 /* Route::post("news/home",'api\NewsController@filter'); */
 Route::post("finance/ask_help",'api\FinanceContactController@create');
