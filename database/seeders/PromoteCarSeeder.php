@@ -26,6 +26,8 @@ class PromoteCarSeeder extends Seeder
                 "subscribe_package_id" => subscribe_package::all()->random()->id,
                 "price"                => $faker->numberBetween(1,100),
                 "weaccept_order_id"    => $faker->numberBetween(1,100),
+                'created_at'        =>  now(),
+                'updated_at'        =>  now(),
             ]);
 
 
