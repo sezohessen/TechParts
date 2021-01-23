@@ -55,7 +55,7 @@ class BadgesController extends Controller
         } else {
             session()->flash('success',__("Badge has been added!"));
         } */
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.category.index");
     }
 
@@ -109,7 +109,7 @@ class BadgesController extends Controller
         } else {
             session()->flash('success',__("Badge has been updated!"));
         } */
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return  redirect()->route("dashboard.badge.index");
     }
     /**

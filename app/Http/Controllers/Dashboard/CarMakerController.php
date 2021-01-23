@@ -16,7 +16,7 @@ class CarMakerController extends Controller
     public function index(CarMakeDatatable $maker)
     {
         $page_title = __('Car Maker');
-        $page_description = __('View CarMakers');
+        $page_description = __('View Car Makers');
         return  $maker->render("dashboard.CarMaker.index", compact('page_title', 'page_description'));
     }
 
@@ -45,7 +45,7 @@ class CarMakerController extends Controller
         $request->validate($rules);
         $credentials = CarMaker::credentials($request);
         $CarMaker = CarMaker::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.maker.index");
     }
 
@@ -87,7 +87,7 @@ class CarMakerController extends Controller
         $request->validate($rules);
         $credentials = $maker->credentials($request,$maker->logo->id);
         $maker->update($credentials);
-        session()->flash('updated',__("Changed has been Updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.maker.index");
     }
 

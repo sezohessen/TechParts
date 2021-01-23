@@ -24,9 +24,10 @@ class CarBodyDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
             ->addColumn('logo.name', 'dashboard.CarBody.btn.logo')
+            ->addColumn('active', 'dashboard.CarBody.btn.active')
             ->addColumn('checkbox', 'dashboard.CarBody.btn.checkbox')
             ->addColumn('action', 'dashboard.CarBody.btn.action')
-            ->rawColumns(['checkbox', 'action', "logo.name"]);
+            ->rawColumns(['checkbox', 'action', "logo.name","active"]);
     }
 
     /**
@@ -103,6 +104,13 @@ class CarBodyDatatable extends DataTable
             Column::make('id'),
             Column::make('logo.name')->title(__("Logo")),
             Column::make('name')->title(__('Name')),
+            Column::computed('active')
+            ->title(__('Active'))
+            ->exportable(false)
+            ->printable(false)
+            ->searchable(false)
+            ->width(120)
+            ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

@@ -43,7 +43,7 @@ class Car extends Model
         'CarModel_id' ,'CarMaker_id' ,'CarBody_id' ,'CarYear_id' ,
         'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' ,
         'transmission' ,'payment', 'SellerType','isNew',"adsExpire",
-        "promotedExpire","promotedStatus","user_id","whats","data",
+        "promotedExpire","promotedStatus","user_id","whats","data","FuelType"
     ];
     public function getDescriptionForEvent(string $eventName): string
     {
@@ -110,7 +110,7 @@ class Car extends Model
             'phone'                       => 'required|string',
             'DepositPrice'                => 'required|integer',
             'InstallmentAmount'           => 'required|string',
-            'InstallmentPeriod'           =>  ['required', new periodValidate],
+            'InstallmentPeriod'           => 'required|integer',
             'CarPhotos'                   => 'required|max:5',
             'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             "whats"                       => 'required|string',

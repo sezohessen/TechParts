@@ -100,7 +100,8 @@ class CarColorDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('code'),
+            Column::make('code')
+            ->title(__("Color")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

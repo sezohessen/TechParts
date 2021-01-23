@@ -45,7 +45,7 @@ class InsuranceOfferController extends Controller
         $request->validate($rules);
         $credentials = Insurance_offer::credentials($request);
         $Insurance_offer = Insurance_offer::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.insurance-offer.index");
     }
 
@@ -93,7 +93,7 @@ class InsuranceOfferController extends Controller
         $request->validate($rules);
         $credentials = Insurance_offer::credentials($request,$request->insurance_id,$offer->img_id);
         $Insurance_offer = Insurance_offer::where('id',$id)->update($credentials);
-        session()->flash('updated',__("Changed has been Created successfully!"));
+        session()->flash('updated',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.insurance-offer.index");
     }
 

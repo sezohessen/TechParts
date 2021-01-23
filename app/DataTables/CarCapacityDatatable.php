@@ -100,7 +100,8 @@ class CarCapacityDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('capacity'),
+            Column::make('capacity')
+            ->title(__("Capacity")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Car Model  Name') <span class="text-danger">*</span></label>
+                            <label>@lang('Car Maker Name') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                              name="name"  placeholder="@lang('Car Make ')" value="{{ old('name')}}" required autofocus  />
                             @error('name')
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label><br>
+                            <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label><br>
                             <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('media/svg/logos/Logo.jpg') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">

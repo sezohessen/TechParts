@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label>@lang('Date Year of manufacture') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('year') ? 'is-invalid' : '' }}"
-                             name="year"  placeholder="@lang('Year of manufacture')" value="{{ old('year')}}" required autofocus  />
+                             name="year"  placeholder="@lang('Date Year of manufacture')" value="{{ old('year')}}" required autofocus  />
                             @error('year')
                                  <div class="invalid-feedback">{{ $errors->first('year') }}</div>
                             @enderror

@@ -480,13 +480,23 @@
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="FuelType" value="0"
-                                        {{ old('FuelType')=="0" ? 'checked':'' }} required/>
+                                        @if(!is_null(old('FuelType')))
+                                            {{old("FuelType")==0 ? "checked" : ""}}
+                                        @else
+                                            {{$car->FuelType==0 ? "checked" : ""}}
+                                        @endif
+                                        required/>
                                         <span></span>
                                         @lang('Gas')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="FuelType" value="1"
-                                        {{ old('FuelType')=="1" ? 'checked':'' }}/>
+                                        @if(!is_null(old('FuelType')))
+                                            {{old("FuelType")==1 ? "checked" : ""}}
+                                        @else
+                                            {{$car->FuelType==1 ? "checked" : ""}}
+                                        @endif
+                                        >
                                         <span></span>
                                         @lang('Petrol')
                                     </label>
@@ -550,7 +560,7 @@
                             <label class="col-form-label  col-sm-12">@lang("Installment Period")<span class="text-danger">*</span></label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                     <input class="form-control" type="text" value="{{old("InstallmentPeriod") ?? $car->InstallmentPeriod}}"  placeholder="{{__("Installment Period")}}" name="InstallmentPeriod" />
-                                    <span class="form-text text-muted">@lang("[Number] Month/Year")</span>
+                                    <span class="form-text text-muted">@lang("Number of Months")</span>
                                     @error('InstallmentPeriod')
                                     <div class="invalid-feedback">{{ $errors->first('InstallmentPeriod') }}</div>
                                 @enderror
@@ -559,7 +569,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Car Photos")<span class="text-danger">*</span></label><br>
+                            <label class="col-form-label  col-sm-12">@lang("Car Photos")</label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <input type="file" class="custom-file-input" name="CarPhotos[]" id="customFile" multiple/>
                                 <label class="custom-file-label" for="customFile">Choose file</label>

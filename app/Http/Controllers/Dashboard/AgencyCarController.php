@@ -90,7 +90,7 @@ class AgencyCarController extends Controller
         //AgencyCar::create
         $credentials    = AgencyCar::credentials($request,$car->id);
         $agency_cars    = AgencyCar::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.car.index");
     }
 

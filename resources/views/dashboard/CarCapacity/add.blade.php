@@ -21,9 +21,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Car Capacity Name') <span class="text-danger">*</span></label>
+                            <label>@lang('Car Capacity') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('capacity') ? 'is-invalid' : '' }}"
-                             name="capacity"  placeholder="@lang('Car Capacity ')" value="{{ old('capacity')}}" required autofocus  />
+                             name="capacity"  placeholder="@lang('Car Capacity')" value="{{ old('capacity')}}" required autofocus  />
                             @error('capacity')
                                  <div class="invalid-feedback">{{ $errors->first('capacity') }}</div>
                             @enderror

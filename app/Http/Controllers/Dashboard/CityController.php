@@ -47,7 +47,7 @@ class CityController extends Controller
         $request->validate($rules);
         $credentials = City::credentials($request);
         $City = City::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.city.index");
     }
 
@@ -93,7 +93,7 @@ class CityController extends Controller
         $request->validate($rules);
         $credentials = $city->credentials($request);
         $city->update($credentials);
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return  redirect()->route("dashboard.city.index");
     }
 

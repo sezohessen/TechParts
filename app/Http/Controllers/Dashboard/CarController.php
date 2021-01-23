@@ -99,7 +99,7 @@ class CarController extends Controller
             "user_id"=>Auth::user()->id,
             "car_id"=>$car->id
         ]);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.car.index");
     }
 
@@ -199,7 +199,7 @@ class CarController extends Controller
                 'feature_id'=>$feature
             ]);
         }
-        session()->flash('created',__("Changed has been Updated successfully!"));
+        session()->flash('created',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.car.index");
     }
 
