@@ -391,6 +391,14 @@
     "No such center id exist":"لا يوجد مثل هذا معرف المركز موجود",
     "Un selected work type":"نوع العمل غير المحدد",
     "No centers found":"لم يتم العثور على مراكز",
-    "Login to see submit review":"تسجيل الدخول لرؤية تقديم الاستعراض"
+    "Login to see submit review":"تسجيل الدخول لرؤية تقديم الاستعراض",
+    "Favorite type invalid":"نوع المفضلة غير صالح",
+    "No cars found":"لم يتم العثور على سيارات",
+    "Something went wrong":"هناك خطأ ما",
+    "This Favorite type is already exist":"نوع المفضلة هذا موجود بالفعل",
+    "Successfully added to Favorite":"تمت الإضافة إلى المفضلة بنجاح",
+    "Target id does not exist":"معرف الهدف غير موجود",
+    "There is not favorite to be deleted":"لا توجد مفضلة ليتم حذفها",
+    "Successfully Removed":"تمت الإزالة بنجاح"
 
 }

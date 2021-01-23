@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as Validator;
 use App\Classes\Responseobject;
+use App\Models\Car;
+use App\Models\UserFav_car;
 
 class AgencyController extends Controller
 {
@@ -316,6 +318,106 @@ class AgencyController extends Controller
             return($this->ValidatorErrors($validator));
         }
     }
+    public function addFav(Request $request)
+    {
+        $this->lang($request);
+        if ($request->favorite_type == 'agency') {
+            $validator = $this->Favorite($request,'agency',1);
+        }elseif ($request->favorite_type == 'center') {
+            $validator = $this->Favorite($request,'center',1);
+        }elseif ($request->favorite_type == 'car') {
+            $validator = $this->Favorite($request,'car',1);
+        }else{
+            return $this->errorMessage(__('Favorite type invalid'));
+        }
+
+        if (!$validator->fails()) {
+            if(!auth()->user()){
+                return $this->errorMessage(__('Login to see your favorite'));
+            }
+            if($request->favorite_type == 'agency'||$request->favorite_type == 'center'){//Add Agency&Center Favorite
+                $agencyFav  = UserFavAgency::where('user_id',auth()->user()->id)
+                ->where('agency_id',$request->target_id)
+                ->first();
+                $isFound    = Agency::find($request->target_id);
+                if($agencyFav){
+                    return $this->errorMessage(__('This Favorite type is already exist'));
+                }elseif(!$isFound){
+                    return $this->errorMessage(__('Target id does not exist'));
+                }else{
+                    $agencyFav  = UserFavAgency::create([
+                        'agency_id'     => $request->target_id,
+                        'user_id'       => auth()->user()->id
+                    ]);
+                    return $this->returnSuccess(__("Successfully added to Favorite"));
+                }
+            }elseif($request->favorite_type == 'car'){//car Favorite
+                $carFav  = UserFav_car::where('user_id',auth()->user()->id)
+                ->where('car_id',$request->target_id)
+                ->first();
+                $isFound    = Car::find($request->target_id);
+                if($carFav){
+                    return $this->errorMessage(__('This Favorite type is already exist'));
+                }elseif(!$isFound){
+                    return $this->errorMessage(__('Target id does not exist'));
+                }else{
+                    $carFav  = UserFav_car::create([
+                        'car_id'        => $request->target_id,
+                        'user_id'       => auth()->user()->id
+                    ]);
+                    return $this->returnSuccess(__("Successfully added to Favorite"));
+                }
+            }else{
+                return $this->returnSuccess(__("Something went wrong"));
+            }
+        }else{
+            return($this->ValidatorErrors($validator));
+        }
+    }
+    public function removeFav(Request $request)
+    {
+        $this->lang($request);
+        if ($request->favorite_type == 'agency') {
+            $validator = $this->Favorite($request,'agency',1);
+        }elseif ($request->favorite_type == 'center') {
+            $validator = $this->Favorite($request,'center',1);
+        }elseif ($request->favorite_type == 'car') {
+            $validator = $this->Favorite($request,'car',1);
+        }else{
+            return $this->errorMessage(__('Favorite type invalid'));
+        }
+
+        if (!$validator->fails()){
+            if(!auth()->user()){
+                return $this->errorMessage(__('Login to see your favorite'));
+            }
+            if($request->favorite_type == 'agency'||$request->favorite_type == 'center'){//Add Agency&Center Favorite
+                $agencyFav  = UserFavAgency::where('user_id',auth()->user()->id)
+                ->where('agency_id',$request->target_id)
+                ->first();
+                if(!$agencyFav){
+                    return $this->errorMessage(__('There is not favorite to be deleted'));
+                }else{
+                    $agencyFav->delete();
+                    return $this->returnSuccess(__("Successfully Removed"));
+                }
+            }elseif($request->favorite_type == 'car'){//car Favorite
+                $carFav  = UserFav_car::where('user_id',auth()->user()->id)
+                ->where('car_id',$request->target_id)
+                ->first();
+                if(!$carFav){
+                    return $this->errorMessage(__('There is not favorite to be deleted'));
+                }else{
+                    $carFav->delete();
+                    return $this->returnSuccess(__("Successfully Removed"));
+                }
+            }else{
+                return $this->returnSuccess(__("Something went wrong"));
+            }
+        }else{
+            return($this->ValidatorErrors($validator));
+        }
+    }
     public function Contact($agency)
     {
         // mContact Row
@@ -511,15 +613,23 @@ class AgencyController extends Controller
         ]);
         return $validator;
     }
-    public function Favorite($request,$type)
+    public function Favorite($request,$type,$id = NULL)
     {
         $data       = $request->all();
 
         $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
-            'token'             => 'required',
-            'favorite_type'     => 'required|in:'.$type
-        ]);
+        if($id){
+            $validator  = Validator::make($array_data, [
+                'token'             => 'required',
+                'target_id'         => 'required|integer',
+                'favorite_type'     => 'required|in:'.$type,
+            ]);
+        }else{
+            $validator  = Validator::make($array_data, [
+                'token'             => 'required',
+                'favorite_type'     => 'required|in:'.$type,
+            ]);
+        }
         return $validator;
     }
 }
