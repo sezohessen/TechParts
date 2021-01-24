@@ -122,6 +122,32 @@ class UserController extends Controller
             return $this->ValidatorMessages(['email' => trans($response)]);
         }
     }
+    public function rest_password(Request $request)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        $validator  = Validator::make((array) $request->all(), [
+            'password_current' => 'required',
+            'password_new' => 'required|min:8',
+        ]);
+        if ($validator->fails()) {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
+        }
+        $user = auth()->user();
+        if (!Hash::check($request->password_current, $user->password)) {
+            return $this->errorMessage('current password is rong');
+        }
+        $user->password = Hash::make($request->password_new);
+        $user->save();
+        return $this->SuccessMessage('Update Successfully');
+    }
     public function change_status_verify_phone(Request $request)
     {
         if ($locale = $request->lang) {
