@@ -47,6 +47,9 @@ Route::group(['prefix' => 'data','namespace'=>'api'], function () {
     Route::group(['prefix' => 'dynamic'], function () {
         Route::post("faq_all",'dynamicController@faq');
         Route::post("distributor_all",'dynamicController@distributor');
+        Route::post("country_all",'dynamicController@country');
+        Route::post("gevernment_all",'dynamicController@governorate');
+        Route::post("city_all",'dynamicController@city');
     });
 });
 Route::post("news/home",'api\NewsController@filter');

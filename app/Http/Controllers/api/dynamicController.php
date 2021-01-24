@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Validator as Validator;
 use App\Classes\Responseobject;
 use App\Models\Agency;
 use App\Models\AgencyReview;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Faq;
+use App\Models\Governorate;
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 
@@ -48,8 +51,8 @@ class dynamicController extends Controller
         })
         ->whereHas('Car', function ($query)use ($request) {
             return $query->where('cars.CarModel_id',$request->car_model);
-        });
-
+        })->get();
+        $agencyLists = [];
         foreach ($agencyList as $agency) {
             $agencyLists[] =[
                 "image"     => $agency->img->name,
@@ -60,6 +63,60 @@ class dynamicController extends Controller
             ];
         }
         return $this->returnData("distributorList",$agencyLists,"Successfully");
+    }
+    public function governorate(Request $request)
+    {
+        $this->lang($request);
+        $validator  = Validator::make((array) $request->all(),['country_name' => 'required|integer']);
+        if ($validator->fails()) {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
+        }
+        $governmentList     = Governorate::where('active',1)
+        ->where('country_id',$request->country_name)
+        ->get();
+        $governmentLists = [];
+        foreach ($governmentList as $governorate) {
+            $governmentLists[] =[
+                "id"            => $governorate->id,
+                "title"         => Session::get('app_locale')=='ar'? $governorate->title_ar : $governorate->title,
+                "country_name"  => Session::get('app_locale')=='ar'? $governorate->country->name_ar : $governorate->country->name,
+            ];
+        }
+        return $this->returnData("governmentList",$governmentLists,"Successfully");
+    }
+    public function country(Request $request)
+    {
+        $this->lang($request);
+
+        $countryList     = Country::where('active',1)->get();
+        $countryLists = [];
+        foreach ($countryList as $country) {
+            $countryLists[] =[
+                "id"            => $country->id,
+                "title"         => Session::get('app_locale')=='ar'? $country->name_ar : $country->name,
+                "code"          => $country->code,
+                "country_phone" => $country->country_phone,
+            ];
+        }
+        return $this->returnData("countryList",$countryLists,"Successfully");
+    }
+    public function city(Request $request)
+    {
+        $this->lang($request);
+        $validator  = Validator::make((array) $request->all(),['government_id' => 'required|integer']);
+        if ($validator->fails()) {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
+        }
+        $cityList     = City::where('active',1)->get();
+        $cityLists = [];
+        foreach ($cityList as $city) {
+            $cityLists[] =[
+                "id"            => $city->id,
+                "title"         => Session::get('app_locale')=='ar'? $city->title_ar : $city->title,
+                "government_id" => $city->governorate_id,
+            ];
+        }
+        return $this->returnData("cityList",$cityLists,"Successfully");
     }
     public function lang($request)
     {
