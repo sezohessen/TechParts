@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\api;
-
 use App\Http\Controllers\Controller;
 use App\Models\Agency;
 use App\Models\AgencyCar;
@@ -21,6 +20,8 @@ use Illuminate\Support\Facades\Validator as Validator;
 use App\Classes\Responseobject;
 use App\Models\Car;
 use App\Models\UserFav_car;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\ToArray;
 
 class AgencyController extends Controller
 {
@@ -421,60 +422,45 @@ class AgencyController extends Controller
     public function Filter(Request $request)
     {
         $this->lang($request);
-
-/*         $validator = $this->FilterValidate($request); */
+        $validator = $this->FilterValidate($request);
 
         if (1) {
             $carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
             $center_type    = $request->work_type == 'agency' ? Agency::center_type_Agency :
              ( ($request->work_type == 'maintenance') ? Agency::center_type_Maintenance : Agency::center_type_Spare );
-            $agencyList     = Agency::where('country_id',$request->interest_country);
-            /*->where('active',1)
-            ->where('car_status',$carStatus)
-            ->whereHas('carMakers', function ($query) use ($request) {
+            $agencyList     = Agency::where('country_id',$request->interest_country)
+            ->where('active',1)
+            ->where('car_status',$carStatus);
+            /*->whereHas('carMakers', function ($query) use ($request) {
                 return $query->where('agency_car_makers.CarMaker_id',$request->car_maker_id);
             })
             ->whereHas('Car', function ($query)use ($request) {
                 return $query->where('cars.CarModel_id',$request->car_model_id);
-            });
-            if($request->badge_ids)$agencyList->whereIn('status',$request->badge_ids);
-            if($request->payment_methods){
-                $query = $request->payment_methods;
-                $value = 3;
-                if($query=='cash'){
-                    $value = Agency::Cash;
-                }elseif($query=='installment'){
-                    $value = Agency::Installment;
-                }elseif($query=='financing'){
-                    $value = Agency::Financial;
-                }
-                $agencyList->where('payment_method',$value);
-            }*/
+            }); */
+            if($request->work_type)$agencyList->where('center_type',$center_type);
+            if($request->badge_ids)$agencyList->whereIn('status',[$request->badge_ids]);
+            if($request->payment_methods)$agencyList->whereIn('payment_method',[$request->payment_methods]);
 
-            if($request->sort_rate =='high'){
+            /* if($request->sort_rate =='high'){
                 $agencyList->whereHas('reviews', function ($query) use ($request) {
                     $query->selectRaw('SUM(rate)/COUNT(agency_id) AS avg_rating');
                 });
-                /*$agencyList->select(DB::raw
-                    ('CASE
-                    WHEN id.PinRequestCount <> 0 THEN 5
-                    WHEN id.HighCallAlertCount <> 0 THEN 4
-                    WHEN id.HighAlertCount <> 0 THEN 3
-                    WHEN id.MediumCallAlertCount <> 0 THEN 2
-                    WHEN id.MediumAlertCount <> 0 THEN 1
-                    END desc')*/
-
             }elseif($request->sort_rate =='low'){
 
-            }
-            if($request->sort_added)$agencyList->orderBy('created_at', 'desc');
-            dd($agencyList);
+            } */
+            if($request->sort_added=='recent')$agencyList->orderBy('created_at', 'desc');
+            /* if (isset($request->sort_near_by_lat) && isset($request->sort_near_by_lng)) { //Filter by location
+                $agencyList->orderBy(DB::raw(
+                    'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point(?, ?))',
+                    [$request->sort_near_by_lat, $request->sort_near_by_lng]
+                ), 'desc');
+            } */
             if(!$agencyList->count()){
                 return $this->returnSuccess(__("No centers found"));
             }
             $agencies = [];
-            foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$paymentMethodList = false,$centerType = false);
+            foreach ($agencyList->get() as $agency) {
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,$paymentMethodList = false,$centerType = true);
             }
             return $this->returnData("centerList",$agencies,"Successfully");
         }else{
@@ -711,7 +697,8 @@ class AgencyController extends Controller
             'badge_ids'             => 'nullable|array|max:3',
             "badge_ids.*"           => "nullable|integer|distinct|in:0,1,2",
             'work_type'             => 'nullable|in:agency,maintenance,spare',
-            'payment_methods'       => 'nullable|in:cash,installment,financing',
+            'payment_methods'       => 'nullable|array|max:3',
+            'payment_methods.*'     => 'nullable|string|distinct|in:cash,installment,financing',
             'sort_added'            => 'nullable|in:recent,trending',
             'sort_rate'             => 'nullable|in:high,low',
             'sort_price'            => 'nullable|in:high,low',

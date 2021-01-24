@@ -42,6 +42,12 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("insurance/create_request",'InsuranceRequestController@insurance');
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
 });
+Route::group(['prefix' => 'data','namespace'=>'api'], function () {
+    Route::group(['prefix' => 'dynamic'], function () {
+        Route::post("faq_all",'dynamicController@faq');
+        Route::post("distributor_all",'dynamicController@distributor');
+    });
+});
 Route::post("news/home",'api\NewsController@filter');
 
 Route::post("news",'api\NewsController@show');
@@ -92,3 +98,5 @@ Route::group(['prefix' => 'sell_car','namespace'=>"api"], function () {
     Route::post("create",'CarsController@create');
 
 });
+
+
