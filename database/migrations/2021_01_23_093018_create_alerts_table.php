@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserFavCarsTable extends Migration
+class CreateAlertsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateUserFavCarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_fav_cars', function (Blueprint $table) {
+        Schema::create('alerts', function (Blueprint $table) {
             $table->id();
-            
+
             $table->bigInteger('car_id')->unsigned();
             $table->foreign('car_id')
             ->references('id')->on('cars')
@@ -27,6 +27,9 @@ class CreateUserFavCarsTable extends Migration
             ->references('id')->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+
+            $table->integer("status")->default(0);
+            
             $table->timestamps();
         });
     }
@@ -38,6 +41,6 @@ class CreateUserFavCarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_fav_cars');
+        Schema::dropIfExists('alerts');
     }
 }

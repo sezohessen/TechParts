@@ -28,6 +28,7 @@ class AgencySeeder extends Seeder
                 'description_ar'    => $faker->text,
                 'show_in_home'      => $faker->boolean,
                 'car_show_rooms'    => $faker->boolean,
+                "agency_type"       => rand(0,2),
                 'center_type'       => $faker->numberBetween(0,2),
                 'lat'               => $faker->latitude,
                 'long'              => $faker->longitude,
