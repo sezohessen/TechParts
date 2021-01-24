@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
 Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::group(['prefix' => 'favorite'], function () {
@@ -28,6 +28,10 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     });
     Route::group(['prefix' => 'auth'], function () {
         Route::post("update_interested_country",'UserController@update_interested_country');
+        Route::post("change_status_verify_phone",'UserController@change_status_verify_phone');
+        Route::post("rest_password",'UserController@rest_password');
+        Route::post("get_profile",'UserController@get_profile');
+        Route::post("edit_profile",'UserController@edit_profile');
     });
     Route::post("ask_expoert",'AskExpertController@create');
     Route::group(['prefix' => 'car'], function () {
@@ -83,6 +87,7 @@ Route::group(['prefix' => 'auth','namespace'=>'api'], function () {
     Route::post("login",'UserController@login');
     Route::post("check_phone",'UserController@check_phone');
     Route::post("signup",'UserController@signup');
+    Route::post("forget-password",'UserController@forgetPassword');
 });
 /* Route::post("news/home",'api\NewsController@filter'); */
 Route::post("finance/ask_help",'api\FinanceContactController@create');

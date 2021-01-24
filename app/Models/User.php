@@ -62,34 +62,46 @@ class User extends Authenticatable
     ];
 
 
-    public static function rules($api=null)
+    public static function rules($api=null,$edit_profile=null)
     {
         $rules = [
             'image'             => 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240',
             'first_name'        => 'required|string|max:255',
             'last_name'         => 'required|string|max:255',
             'provider'          => 'nullable|string|max:255',
-            'email'             => 'required|string|email|max:255|unique:users',
             'country_id'        => 'required|integer',
             'is_phone_virefied' => 'nullable|integer',
-            'phone'             => 'required|string|max:255|unique:users',
-            'password'          => 'required|string|min:8',
 
         ];
         if (!$api) {
            $rules['agree'] = 'required';
         }
+        if (!$edit_profile) {
+           $rules['password'] = 'required|string|min:8';
+        }
+        if ($edit_profile) {
+           $rules['email'] = 'required|string|email|max:255|unique:users,email,'.$edit_profile;
+        }else {
+            $rules['email'] = 'required|string|email|max:255|unique:users';
+        }
+        if ($edit_profile) {
+           $rules['phone'] = 'required|string|max:255|unique:users,phone,'.$edit_profile;
+        }else {
+            $rules['phone'] = 'required|string|max:255|unique:users';
+        }
         return $rules;
     }
-    public static function credentials($request,$api=null)
+    public static function credentials($request,$api=null,$edit_profile=null)
     {
         $credentials = [
             'first_name'                        => $request->first_name,
             'last_name'                         => $request->last_name,
             'email'                             => $request->email,
             'phone'                             => $request->phone,
-            'password'                          => Hash::make($request->password)
         ];
+        if (!$edit_profile) {
+            $credentials['password'] =Hash::make($request->password);
+        }
         if (!$api) {
             if($request->file('image')){
                 $Image_id = self::file($request->file('Image'));
