@@ -10,7 +10,7 @@ class Image extends Model
     use HasFactory;
     protected $table    = 'images';
     protected $fillable=[
-        'name',
+        'name', 'base'
     ];
     public function Setting()
     {

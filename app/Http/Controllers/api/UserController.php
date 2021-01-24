@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Models\User;
+use App\Models\Country;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -206,5 +207,68 @@ class UserController extends Controller
         }
         return $this->returnData('mUser',$data,__('Success create the Account'), ["phone_number_exist" => false]);
 
+    }
+    public function edit_profile(Request $request)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }
+        $user = auth()->user();
+        $validator  = Validator::make((array) $request->all(), User::rules(true,$user->id));
+        if ($validator->fails()) {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
+        }
+
+        $user->update(User::credentials($request,true,$user->id));
+        $data = [
+            "country_code"      => $user->country_code,
+            "country_number"    => $user->country_phone,
+            "email"             => $user->email,
+            "first_name"        => $user->first_name,
+            "image"             => find_image(@$user->image ),
+            "is_phone_verified" => $user->is_phone_virefied ? true: false ,
+            "last_name"         => $user->last_name,
+            "phone"             => $user->phone,
+            "role_id"           => $user->role,
+            "userId"            => $user->id
+        ];
+        if ($user->interestCountry) {
+            $data["interest_country"] = @$user->interestCountry;
+        }
+        return $this->returnData('mUser',$data,__('Success'));
+
+    }
+    public function get_profile(Request $request)
+    {
+        if ($locale = $request->lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }
+        $user = auth()->user();
+        $country_id = @Country::where('code', $user->country_code)->first()->id;
+        $data = [
+            "country_code"      => $user->country_code,
+            "country_number"    => $user->country_phone,
+            "country_id"        => $country_id ? $country_id : 1,
+            "email"             => $user->email,
+            "first_name"        => $user->first_name,
+            "image"             => find_image(@$user->image ),
+            "is_phone_verified" => $user->is_phone_virefied ? true: false ,
+            "last_name"         => $user->last_name,
+            "phone"             => $user->phone,
+            "role_id"           => $user->role,
+            "userId"            => $user->id
+        ];
+        if ($user->interestCountry) {
+            $data["interest_country"] = @$user->interestCountry;
+        }
+        return $this->returnData('mUser',$data,__('Success'));
     }
 }
