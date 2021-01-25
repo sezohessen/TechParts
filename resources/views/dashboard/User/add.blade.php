@@ -110,6 +110,15 @@
                     <option value="insurance" {{ old('provider') == 'insurance' ? 'selected' : '' }}>
                         @lang('Insurance Company')
                     </option>
+                    <option value="agency" {{ old('provider') == 'agency' ? 'selected' : '' }}>
+                        @lang('Agency')
+                    </option>
+                    <option value="bank" {{ old('provider') == 'bank' ? 'selected' : '' }}>
+                        @lang('Bank')
+                    </option>
+                    <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
+                        @lang('User')
+                    </option>
                 </select>
                 @error('provider')
                     <div class="fv-plugins-message-container">

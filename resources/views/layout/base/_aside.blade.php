@@ -16,7 +16,7 @@
     <div class="brand flex-column-auto {{ Metronic::printClasses('brand', false) }}" id="kt_brand">
         <div class="brand-logo">
             <a href="{{ url('/') }}">
-                <img alt="{{ config('app.name') }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
+                <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
             </a>
         </div>
 
@@ -34,7 +34,7 @@
         @if (config('layout.aside.self.display') === false)
             <div class="header-logo">
                 <a href="{{ url('/') }}">
-                    <img alt="{{ config('app.name') }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
+                    <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
                 </a>
             </div>
         @endif

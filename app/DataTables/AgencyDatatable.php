@@ -20,6 +20,7 @@ class AgencyDatatable extends DataTable
      */
     public function dataTable($query)
     {
+        $counter = 0;
         return datatables()
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
