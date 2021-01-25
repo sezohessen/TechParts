@@ -462,5 +462,11 @@
     "Subject ID":"التابع",
     "Add agency car":"اضافة سيارة للوكالة",
     "Agency Cars Options":"اعدادات السيارات للوكالة",
-    "Spare":"قطع غيار"
+    "Spare":"قطع غيار",
+    "Add Trend":"اضافة سيارات شائعة",
+    "Select Date":"اختر اليوم",
+    "Select Cars":"اختر السيارات المتاحة",
+    "Edit Trend":"تعديل السيارات الشائعة",
+    "Trending":"الشائعة",
+    "view Trends":"عرض السيارات الشائعة"
 }

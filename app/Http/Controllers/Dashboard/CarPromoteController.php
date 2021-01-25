@@ -33,7 +33,6 @@ class CarPromoteController extends Controller
      */
     public function create()
     {
-
         $page_title = __("Pomote a car");
         $page_description = __("Pomote a car");
         $cars=Car::where("status","=",1)->get();

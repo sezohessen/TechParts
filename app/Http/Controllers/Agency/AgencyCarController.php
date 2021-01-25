@@ -43,7 +43,7 @@ class AgencyCarController extends Controller
      */
     public function create()
     {
-
+       
         $page_title = __("Add Car");
         $page_description = __("Add new Car");
         $makers=CarMaker::where('active', '=', 1)->get();
@@ -147,7 +147,7 @@ class AgencyCarController extends Controller
         $car_badges=[];
         foreach($CarBadges as $item){
             $car_badges[]=$item->badge_id;
-            
+
         }
         $car_features=[];
         foreach($CarFeatures as $item){
