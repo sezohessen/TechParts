@@ -90,7 +90,7 @@ class NewsController extends Controller
         $credentials = News::credentials($request);
         $New = News::where('id',$id)->update($credentials);
 
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return  redirect()->route("dashboard.news.index");
     }
 

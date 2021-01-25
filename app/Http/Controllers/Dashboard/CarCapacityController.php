@@ -15,7 +15,7 @@ class CarCapacityController extends Controller
      */
     public function index(CarCapacityDatatable $capacity)
     {
-        $page_title = __('Car Capacity ');
+        $page_title = __('Car Capacity');
         $page_description = __('View Capacities');
         return  $capacity->render("dashboard.CarCapacity.index", compact('page_title', 'page_description'));
     }
@@ -45,7 +45,7 @@ class CarCapacityController extends Controller
         $request->validate($rules);
         $credentials = CarCapacity::credentials($request);
         $Carcapacity = CarCapacity::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.capacity.index");
     }
 
@@ -87,7 +87,7 @@ class CarCapacityController extends Controller
         $request->validate($rules);
         $credentials = $capacity->credentials($request);
         $capacity->update($credentials);
-        session()->flash('updated',__("Changed has been Updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.capacity.index");
     }
 

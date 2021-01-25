@@ -15,8 +15,8 @@ class CarYearController extends Controller
      */
     public function index(CarYearDatatable $year)
     {
-        $page_title = __('Year of manufacture ');
-        $page_description = __('View Years');
+        $page_title = __('Years of manufacture');
+        $page_description = __('View Available Years');
         return  $year->render("dashboard.CarYear.index", compact('page_title', 'page_description'));
     }
 
@@ -27,8 +27,8 @@ class CarYearController extends Controller
      */
     public function create()
     {
-        $page_title = __("Add a year of manufacture ");
-        $page_description = __("Year of manufacture");
+        $page_title = __("Add a year of manufacture");
+        $page_description = __("Years of manufacture");
 
         return view('dashboard.CarYear.add', compact('page_title', 'page_description'));
     }
@@ -45,7 +45,7 @@ class CarYearController extends Controller
         $request->validate($rules);
         $credentials = CarYear::credentials($request);
         $Caryear = CarYear::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.year.index");
     }
 
@@ -68,8 +68,8 @@ class CarYearController extends Controller
      */
     public function edit(CarYear $year)
     {
-        $page_title = __("Edit a year of manufacture ");
-        $page_description = __("Year of manufacture");
+        $page_title = __("Edit a year of manufacture");
+        $page_description = __("Years of manufacture");
         return view('dashboard.CarYear.edit', compact('page_title', 'page_description','year'));
     }
 
@@ -86,7 +86,7 @@ class CarYearController extends Controller
         $request->validate($rules);
         $credentials = $year->credentials($request);
         $year->update($credentials);
-        session()->flash('updated',__("Changed has been Updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.year.index");
     }
 

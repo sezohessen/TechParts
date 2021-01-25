@@ -109,7 +109,7 @@ class FeaturesController extends Controller
         } else {
             session()->flash('success',__("Feature has been updated!"));
         } */
-      session()->flash('updated',__("Changed has been updated successfully!"));
+      session()->flash('updated',__("Changes has been Updated Successfully"));
        return redirect()->route("dashboard.feature.index");
     }
 

@@ -16,15 +16,6 @@ $properties=json_decode($properties, true);
     $country=Country::find($properties['attributes']['Country_id'])
     ?>
         <strong> @lang("Phone Number") : </strong>   {{$properties['attributes']['phone'] ?? "Undefined"}} <br>
-        <strong> @lang("Country") : </strong>   {{ $country->name_ar ?? "Undefined" }} <br>
-        @if($properties['attributes']['SellerType']==0)
-            <strong> @lang("Seller Type") : </strong>  @lang("Agency")
-        @elseif($properties['attributes']['SellerType']==1)
-            <strong> @lang("Seller Type") : </strong>  @lang("Distributor")
-        @elseif($properties['attributes']['SellerType']==2)
-            <strong> @lang("Seller Type") : </strong>  @lang("Individual")
-        @else
-            <strong> @lang("Seller Type") : </strong>  @lang("Undefined")
-        @endif
+        <strong> @lang("Country") : </strong>   {{ attr_lang_name($country->name_ar ?? "Undefined",$country->name?? "Undefined") }} <br>
     @endif
 @endif

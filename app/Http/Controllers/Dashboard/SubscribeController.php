@@ -87,7 +87,7 @@ class SubscribeController extends Controller
         $request->validate($rules);
         $credentials = $subscribe_package->credentials($request);
         $subscribe_package->update($credentials);
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.subscribe_packages.index");
     }
 

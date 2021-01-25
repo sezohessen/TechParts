@@ -93,19 +93,20 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/agency/destroy/all','AgencyController@multi_delete');
     Route::delete('/maker/destroy/all','CarMakerController@multi_delete');
     Route::delete('/model/destroy/all','CarModelController@multi_delete');
-    Route::delete('/bodar/destroy/all','CarYearController@multi_delete');
-    Route::delete('/cay/destroy/all','CarBodyController@multi_delete');
-    Route::delete('/yepacity/destroy/all','CarCapacityController@multi_delete');
+    Route::delete('/body/destroy/all','CarBodyController@multi_delete');
+    Route::delete('/year/destroy/all','CarYearController@multi_delete');
+    Route::delete('/car/destroy/all','CarController@multi_delete');
+    Route::delete('/capacity/destroy/all','CarCapacityController@multi_delete');
     Route::delete('/color/destroy/all','CarColorController@multi_delete');
     Route::delete('/AskExpert/destroy/all','AskExpertController@multi_delete');
     Route::delete('/contact/destroy/all','ContactController@multi_delete');
-    Route::delete('/car/destroy/all','CarController@multi_delete');
     Route::delete('/bank/destroy/all','BankController@multi_delete');
     Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
     Route::delete('/log/destroy/all','LogsController@multi_delete');
     Route::delete('/users/destroy/all','UserController@multi_delete');
     Route::delete('/subscribe_packages/destroy/all','SubscribeController@multi_delete');
     Route::delete('/promote/destroy/all','CarPromoteController@multi_delete');
+    Route::delete('/AgencyCar/destroy/all','AgencyCarController@multi_delete');
 
     Route::delete('/news/destroy/all','NewsController@multi_delete');
     /* Datatable Activity request */
@@ -142,6 +143,13 @@ Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insuran
 Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
+    Route::resource('/car','AgencyCarController');
+
+    Route::post('/car/{car}/status',"AgencyCarController@Status")->name('car.Status');
+    Route::get("available_model/{id}",'AgencyCarController@available_model');
+    Route::get("available_governorate/{id}",'AgencyCarController@available_governorate');
+    Route::get("available_city/{id}",'AgencyCarController@available_city');
+
     Route::get('/governorate/{id}','AgencyController@governorate');//Ajax Request
     Route::get('/country/{id}','AgencyController@country');//Ajax Request
 });

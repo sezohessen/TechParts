@@ -15,7 +15,7 @@ class CarColorController extends Controller
      */
     public function index(CarColorDatatable $color)
     {
-        $page_title = __('Car Color ');
+        $page_title = __('Car Color');
         $page_description = __('View Colors Codes');
         return  $color->render("dashboard.CarColor.index", compact('page_title', 'page_description'));
     }
@@ -27,7 +27,7 @@ class CarColorController extends Controller
      */
     public function create()
     {
-        $page_title = __("Add Car Color ");
+        $page_title = __("Add Car Color");
         $page_description = __("Car Color");
 
         return view('dashboard.CarColor.add', compact('page_title', 'page_description'));
@@ -45,7 +45,7 @@ class CarColorController extends Controller
         $request->validate($rules);
         $credentials = CarColor::credentials($request);
         $CarColor = CarColor::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.color.index");
     }
 
@@ -87,7 +87,7 @@ class CarColorController extends Controller
         $request->validate($rules);
         $credentials = $color->credentials($request);
         $color->update($credentials);
-        session()->flash('updated',__("Changed has been Updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.color.index");
     }
 

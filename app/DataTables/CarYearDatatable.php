@@ -100,7 +100,8 @@ class CarYearDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('year'),
+            Column::make('year')
+            ->title(__("Year")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

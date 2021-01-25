@@ -109,7 +109,7 @@ class BankController extends Controller
         $request->validate($rules);
         $credentials = BankContact::credentials($request,$id);
         $bank_offer  = BankContact::where('bank_id',$id)->update($credentials);
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return  redirect()->route("dashboard.bank.index");
     }
 

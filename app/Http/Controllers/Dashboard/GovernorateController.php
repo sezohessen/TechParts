@@ -49,7 +49,7 @@ class GovernorateController extends Controller
         $request->validate($rules);
         $credentials = Governorate::credentials($request);
         $Governorate = Governorate::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.governorate.index");
     }
 
@@ -102,7 +102,7 @@ class GovernorateController extends Controller
         $request->validate($rules);
         $credentials = $governorate->credentials($request);
         $governorate->update($credentials);
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return  redirect()->route("dashboard.governorate.index");
     }
 

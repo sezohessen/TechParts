@@ -14,6 +14,7 @@ class CarBody extends Model
     protected $fillable=[
         'name',
         'logo_id',
+        "active"
     ];
     public function logo()
     {

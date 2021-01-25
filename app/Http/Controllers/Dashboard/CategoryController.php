@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $credentials = Category::credentials($request);
         $Category = Category::create($credentials);
 
-       session()->flash('created',__("Changed has been Created successfully!"));
+       session()->flash('created',__("Changes has been Created Successfully"));
        return redirect()->route("dashboard.category.index");
     }
 
@@ -89,7 +89,7 @@ class CategoryController extends Controller
         $request->validate($rules);
         $credentials = $category->credentials($request);
         $category->update($credentials);
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return  redirect()->route("dashboard.category.index");
     }
 
