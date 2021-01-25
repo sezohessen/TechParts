@@ -18,18 +18,21 @@ class CountrySeeder extends Seeder
         $faker = Faker::create();
         $array = [
             [
+                'id'                    =>   1,
                 'name'                  =>   'egypt',
                 'name_ar'               =>   'مصر',
                 'code'                  =>   'EG',
                 'country_phone'         =>   '+20',
             ],
             [
+                'id'                    =>   2,
                 'name'                  =>   'Saudi Arabia',
                 'name_ar'               =>   'السعودية',
                 'code'                  =>   'KSA',
                 'country_phone'         =>   '+966',
             ],
             [
+                'id'                    =>   3,
                 'name'                  =>   'United Arab Emirates',
                 'name_ar'               =>   'الإمارات العربية المتحدة',
                 'code'                  =>   'UAE',
@@ -38,6 +41,7 @@ class CountrySeeder extends Seeder
         ];
         foreach ($array as $value){
             DB::table('countries')->insert([
+                'id'                    =>   $value['id'],
                 'name'                  =>   $value['name'],
                 'name_ar'               =>   $value['name_ar'],
                 'code'                  =>   $value['code'],
