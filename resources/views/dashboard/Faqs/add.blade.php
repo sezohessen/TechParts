@@ -18,14 +18,14 @@
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="form-group">
-                    <label>@lang('Create A Question') <span class="text-danger">*</span></label>
+                    <label>@lang('Create A Question(ENG)') <span class="text-danger">*</span></label>
                     <input type="text" class="form-control {{ $errors->has('question') ? ' is-invalid' : '' }}" name="question" required  wire:model="question" value="{{ old('question') }}"   placeholder="{{__("Ask a Question")}}" autofocus/>
                     @error('question')
                         <div class="invalid-feedback">{{ $errors->first('question') }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleTextarea">@lang("Write an Answer")<span class="text-danger">*</span></label>
+                    <label for="exampleTextarea">@lang("Write an Answer(ENG)")<span class="text-danger">*</span></label>
                     <textarea  id="kt-ckeditor-1" name="answer"  wire:model="answer"  required  class="{{ $errors->has('question') ? ' is-invalid' : '' }}">
                             {{old("answer")}}
                     </textarea>
@@ -35,14 +35,14 @@
                 </div>
             <!-- AR Form -->
                 <div class="form-group">
-                    <label>@lang("Create A Question (AR)") <span class="text-danger">*</span></label>
+                    <label>@lang("Create A Question(AR)") <span class="text-danger">*</span></label>
                     <input type="text" class="form-control  {{ $errors->has('question_ar') ? ' is-invalid' : '' }}" required value="{{ old('question_ar') }}"   name="question_ar"   wire:model="question_ar" placeholder="{{__("Ask a Question")}}"/>
                     @error('question_ar')
                         <div class="invalid-feedback">{{ $errors->first('question_ar') }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleTextarea">@lang("Write A Answer (EN)") <span class="text-danger">*</span></label>
+                    <label for="exampleTextarea">@lang("Write A Answer(AR)") <span class="text-danger">*</span></label>
                     <textarea   id="kt-ckeditor-2" name="answer_ar"  wire:model="answer_ar" required  class="{{ $errors->has('question') ? ' is-invalid' : '' }}">
                         {{old("answer_ar")}}
                     </textarea>

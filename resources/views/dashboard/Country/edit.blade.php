@@ -3,7 +3,6 @@
 
 {{-- Content --}}
 @section('content')
-
     <div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
@@ -34,10 +33,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Country Name (ENG)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CountryEnglish') ? 'is-invalid' : '' }}"
-                             name="CountryEnglish" value="{{ old('CountryEnglish') ? old('CountryEnglish'): $country->name }}"
+                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                             name="name" value="{{ old('name') ? old('name'): $country->name }}"
                             placeholder="@lang('Name(ENG)')" required autofocus/>
-                            @if ($errors->has('CountryEnglish'))
+                            @if ($errors->has('name'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
                                         @lang('Please enter country name')
@@ -49,9 +48,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Country Name (AR)') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CountryArabic') ? 'is-invalid' : '' }}"
-                             name="CountryArabic" value="{{ old('CountryArabic') ? old('CountryArabic'): $country->name_ar }}" required placeholder="@lang('Name(AR)')"/>
-                             @if ($errors->has('CountryArabic'))
+                            <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
+                             name="name_ar" value="{{ old('name_ar') ? old('name_ar'): $country->name_ar }}" required placeholder="@lang('Name(AR)')"/>
+                             @if ($errors->has('name_ar'))
                              <div class="fv-plugins-message-container">
                                  <div class="fv-help-block">
                                      @lang('Please enter country name')
@@ -63,15 +62,25 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Country Code') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('CountryCode') ? 'is-invalid' : '' }}"
-                             name="CountryCode"  value="{{ old('CountryCode') ? old('CountryCode'): $country->code }}" required placeholder="@lang('Code')"/>
-                             @if ($errors->has('CountryCode'))
+                            <input type="text" class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}"
+                             name="code"  value="{{ old('code') ? old('code'): $country->code }}" required placeholder="@lang('Code')"/>
+                             @if ($errors->has('code'))
                              <div class="fv-plugins-message-container">
                                  <div class="fv-help-block">
                                      @lang('Please enter code')
                                  </div>
                              </div>
                             @endif
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('country phone') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('country_phone') ? 'is-invalid' : '' }}"
+                             name="country_phone"  value="{{ old('country_phone') ? old('country_phone'): $country->country_phone }}" required placeholder="@lang('country phone')"/>
+                             @error('country_phone')
+                             <div class="invalid-feedback">{{ $errors->first('country_phone') }}</div>
+                             @enderror
                         </div>
                     </div>
                 </div>

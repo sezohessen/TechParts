@@ -41,7 +41,11 @@ class AgencyDatatable extends DataTable
      */
     public function query()
     {
-        return Agency::query()->with("user")->select("agencies.*");
+        if ($this->request()->has("center_type")) {
+            return Agency::query()->with("user")->where("center_type",request('center_type'))->select("agencies.*");
+        }else {
+            return Agency::query()->with("user")->select("agencies.*");
+        }
     }
 
     /**

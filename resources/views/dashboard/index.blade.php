@@ -59,7 +59,7 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="{{ route('dashboard.agency.index') }}" class="card card-custom bg-danger bg-hover-state-danger card-stretch gutter-b">
+            <a href="{{ route('dashboard.agency.index',['center_type'=> App\Models\Agency::center_type_Agency ]) }}" class="card card-custom bg-danger bg-hover-state-danger card-stretch gutter-b">
                 <!--begin::Body-->
                 <div class="card-body">
                     <span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
@@ -74,7 +74,7 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="{{ route('dashboard.agency.index') }}" class="card card-custom bg-success bg-hover-state-success card-stretch gutter-b">
+            <a href="{{ route('dashboard.agency.index',['center_type'=> App\Models\Agency::center_type_Maintenance ]) }}" class="card card-custom bg-success bg-hover-state-success card-stretch gutter-b">
                 <!--begin::Body-->
                 <div class="card-body">
                     <span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
@@ -89,7 +89,7 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="{{ route('dashboard.agency.index') }}" class="card card-custom bg-primary bg-hover-state-primary card-stretch gutter-b">
+            <a href="{{ route('dashboard.agency.index',['center_type'=> App\Models\Agency::center_type_Spare ]) }}" class="card card-custom bg-primary bg-hover-state-primary card-stretch gutter-b">
                 <!--begin::Body-->
                 <div class="card-body">
                     <span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
@@ -138,48 +138,36 @@
             </a>
         </div>
         <div class="col-md-3">
-            <a href="">
+            <a href="{{ route('dashboard.car.index',['Customers'=>'show']) }}">
                 <div class="card card-custom bg-light-warning card-stretch gutter-b">
                     <!--begin::Body-->
                     <div class="card-body">
                         <span class="svg-icon svg-icon-2x svg-icon-warning">
                             <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Group-chat.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <rect x="0" y="0" width="24" height="24" />
-                                    <path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000" />
-                                    <path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3" />
-                                </g>
-                            </svg>
+                            <i class="menu-icon fas fa-2x fa-landmark" style="color: #000000"></i>
+                            <i class="fas fa-car fa-2x" style="color: #000000"></i>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">23,508</span>
-                        <span class="font-weight-bold text-muted font-size-sm">23,508</span>
+                        <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">{{ $carShowrooms->count() }}</span>
+                        <span class="font-weight-bold text-dark font-size-sm">@lang('No. of Cars for sale (owned by Showrooms)')</span>
                     </div>
                     <!--end::Body-->
                 </div>
             </a>
         </div>
         <div class="col-md-3">
-            <a href="">
+            <a href="{{ route('dashboard.car.index',['Showrooms'=>'show']) }}">
                 <div class="card card-custom bg-light-info card-stretch gutter-b">
                     <!--begin::Body-->
                     <div class="card-body">
                         <span class="svg-icon svg-icon-2x svg-icon-info">
                             <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Media/Equalizer.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <rect x="0" y="0" width="24" height="24" />
-                                    <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5" />
-                                    <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5" />
-                                    <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5" />
-                                    <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5" />
-                                </g>
-                            </svg>
+                            <i class="fas fa-user fa-2x" style="color: #000000"></i>
+                            <i class="fas fa-car fa-2x" style="color: #000000"></i>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">$50,000</span>
-                        <span class="font-weight-bold text-muted font-size-sm">Milestone Reached</span>
+                        <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">{{ $carCustomers->count() }}</span>
+                        <span class="font-weight-bold text-dark font-size-sm">@lang('No. of Cars for sale (owned by Customers)')</span>
                     </div>
                     <!--end::Body-->
                 </div>

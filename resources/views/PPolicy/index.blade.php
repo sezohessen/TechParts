@@ -37,7 +37,7 @@
                 <!--begin::Content footer-->
             <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
                 <div class="text-dark-50 font-size-lg font-weight-bolder mr-10">
-                    <span class="mr-1">2021©</span>
+                    <span class="mr-1">2021</span>
                     <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</a>
                 </div>
                 <div class="mr-10">

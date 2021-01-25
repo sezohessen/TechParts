@@ -218,10 +218,10 @@
     "new user": "مستخدم جديد",
     "Insurance Company": "شركة تأمين",
     "--Select Acount Type--": "- اختر نوع الحساب -",
-    "Create A Question":"انشاء سؤال",
-    "Write an Answer":"اجابة عن السؤال",
-    "Create A Question (AR)":"انشاء سؤال باللغة العربية",
-    "Write A Answer (EN)":"اجابة عن السؤال باللغة العربية",
+    "Create A Question(ENG)":" انشاء سؤال (بالاجليزية)",
+    "Write an Answer(ENG)":" اجابة عن السرال (بالانجليزية)",
+    "Create A Question(AR)":"انشاء سؤال (بالعربية)",
+    "Write A Answer(AR)":"اجابة عن السؤال (بالعربية)",
     "Ask a Question":"اسأل سؤال",
     "--Select insurance offer--":"-- اختر عرض التأمين--",
     "Agency Name (ENG)":"اسم الوكالة (بالانجليزية)",
@@ -414,5 +414,7 @@
     "--Select Car Make first--":"- اختر صنع السيارة أولاً -",
     "Show Password":"عرض كلمة المرور",
     "Bank":"بنك",
-    "User":"مستخدم"
+    "User":"مستخدم",
+    "No. of Cars for sale (owned by Customers)":"عدد السيارات المعروضة للبيع (المملوكة للعملاء)",
+    "No. of Cars for sale (owned by Showrooms)":"عدد السيارات المعروضة للبيع (المملوكة للمعارض)"
 }

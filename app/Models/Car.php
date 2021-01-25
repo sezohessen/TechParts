@@ -276,6 +276,10 @@ class Car extends Model
     {
         return $this->belongsToMany(User::class, 'alerts', 'car_id','user_id')->withPivot('status');
     }
+    public function agencies()
+    {
+        return $this->belongsToMany(Agency::class, 'agency_cars', 'car_id','agency_id');
+    }
     public static function unlink_img($images)
     {
         $destinationPath = public_path() . '/img/Cars/';
