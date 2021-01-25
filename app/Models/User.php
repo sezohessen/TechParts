@@ -15,9 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use LaratrustUserTrait;
-    use HasApiTokens, HasFactory, Notifiable;
-    use LogsActivity;
+    use LaratrustUserTrait, LogsActivity, HasApiTokens, HasFactory, Notifiable;
     protected static $logAttributes = ['first_name',"phone","email"];
     protected static $recordEvents = ['created'];
     /**
@@ -69,25 +67,24 @@ class User extends Authenticatable
             'first_name'        => 'required|string|max:255',
             'last_name'         => 'required|string|max:255',
             'provider'          => 'nullable|string|max:255',
-            'country_id'        => 'required|integer',
             'is_phone_virefied' => 'nullable|integer',
-
         ];
         if (!$api) {
+           $rules['image'] = 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240';
            $rules['agree'] = 'required';
-        }
-        if (!$edit_profile) {
-           $rules['password'] = 'required|string|min:8';
+           $rules['country_id'] = 'required|integer';
+        }else {
+            $rules['image'] = 'nullable|string';
+            $rules['country_code'] = 'required|string';
+            $rules['country_number'] = 'required|string';
         }
         if ($edit_profile) {
            $rules['email'] = 'required|string|email|max:255|unique:users,email,'.$edit_profile;
-        }else {
-            $rules['email'] = 'required|string|email|max:255|unique:users';
-        }
-        if ($edit_profile) {
            $rules['phone'] = 'required|string|max:255|unique:users,phone,'.$edit_profile;
         }else {
+            $rules['email'] = 'required|string|email|max:255|unique:users';
             $rules['phone'] = 'required|string|max:255|unique:users';
+            $rules['password'] = 'required|string|min:8';
         }
         return $rules;
     }
@@ -109,10 +106,9 @@ class User extends Authenticatable
 
             }
         }else {
-            if($request->file('image')){
-                $Image_id = self::file($request->file('image'));
+            if($request->image){
+                $Image_id = self::fileApi($request->image);
                 $credentials['image_id'] = $Image_id;
-
             }
         }
         if ( isset($request->is_phone_virefied) ) {
@@ -123,6 +119,16 @@ class User extends Authenticatable
             if ($country) {
                 $credentials['country_code'] = $country->code;
                 $credentials['country_phone'] = $country->country_phone;
+            }
+        }
+        if ($api) {
+            $country = Country::where('code', $request->country_code)->first();
+            if ($country) {
+                $credentials['country_code'] = $country->code;
+                $credentials['country_phone'] = $country->country_phone;
+            }else {
+                $credentials['country_code'] = $request->code;
+                $credentials['country_phone'] = $request->country_number;
             }
         }
         if (isset($request->interest_country) ) {
@@ -142,6 +148,21 @@ class User extends Authenticatable
         $file->move($destinationPath, $fileName);
         $Image = Image::create(['name' => $fileName, 'base' => '/img/users/']);
         return $Image->id;
+    }
+    public static function fileApi($file)
+    {
+        $img=parse_url($file);
+        if (is_array($img) and  $img['path']) {
+            $array = explode('/',$img['path']);
+            $image_name = end($array);
+            $path = str_replace($image_name,'',$img['path']);
+            $old_image = Image::where(['name' => $image_name, 'base' => $path])->first();
+            if ($old_image) {
+                return $old_image->id;
+            }
+            $Image = Image::create(['name' => $image_name, 'base' => $path]);
+            return $Image->id;
+        }
     }
 
     public function role()

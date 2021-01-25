@@ -65,6 +65,18 @@ use Illuminate\Support\Facades\Session;
                 $attr;
         }
     }
+    if(!function_exists('site_base')){
+        function site_base(){
+            //return 'https://3arabiat.homeberry.co';
+            if(isset($_SERVER['HTTPS'])){
+                $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+            }
+            else{
+                $protocol = 'http';
+            }
+            return $protocol . "://" . $_SERVER['HTTP_HOST'] ;
+        }
+    }
     if(!function_exists('find_image')){
         function find_image($img, $base=null){
             $src= '';
@@ -72,7 +84,7 @@ use Illuminate\Support\Facades\Session;
                 if (strpos($img->base, 'http') !== false or strpos($img->base, 'https') !== false) {
                     $src = $img->base . $img->name ;
                 }else{
-                    $src = url($img->base.@$img->name);
+                    $src = site_base().$img->base.@$img->name;
                 }
             }elseif(@$img->name){
                 $src = url($base.@$img->name);

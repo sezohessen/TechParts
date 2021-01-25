@@ -33,6 +33,10 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
         Route::post("get_profile",'UserController@get_profile');
         Route::post("edit_profile",'UserController@edit_profile');
     });
+    Route::group(['prefix' => 'general'], function () {
+        Route::post("upload_file",'generalController@upload_file');
+    });
+
     Route::post("ask_expoert",'AskExpertController@create');
     Route::group(['prefix' => 'car'], function () {
         Route::post("details",'CarsController@show');
@@ -88,6 +92,7 @@ Route::group(['prefix' => 'auth','namespace'=>'api'], function () {
     Route::post("check_phone",'UserController@check_phone');
     Route::post("signup",'UserController@signup');
     Route::post("forget-password",'UserController@forgetPassword');
+    Route::post("get_profile_by_id",'UserController@get_profile_by_id');
 });
 /* Route::post("news/home",'api\NewsController@filter'); */
 Route::post("finance/ask_help",'api\FinanceContactController@create');
