@@ -2,23 +2,57 @@
 
 namespace App\Http\Controllers;
 namespace App\Http\Controllers\api;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator as Validator;
-use App\Classes\Responseobject;
-use App\Models\Agency;
-use App\Models\AgencyReview;
-use App\Models\City;
-use App\Models\Country;
 use App\Models\Faq;
+use App\Models\City;
+use App\Models\Agency;
+use App\Models\Country;
+use App\Models\CarMaker;
+use App\Models\CarModel;
 use App\Models\Governorate;
+use App\Models\AgencyReview;
 use App\Traits\GeneralTrait;
+use Illuminate\Http\Request;
+use App\Classes\Responseobject;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Response;
+use App\Http\Resources\CarMakerCollection;
+use App\Http\Resources\CarModelCollection;
+use Illuminate\Support\Facades\Validator as Validator;
 
 class dynamicController extends Controller
 {
     use GeneralTrait;
+    public function Validator($request,$rules,$niceNames=[])
+    {
+        $this->lang_optional( $request->lang);
+        return Validator::make($request->all(),$rules,[],$niceNames);
+    }
+    public function failed($validator)
+    {
+        $response   = new Responseobject();
+        $response->status = $response::status_failed;
+        $response->code = $response::code_failed;
+        foreach ($validator->errors()->getMessages() as $item) {
+            array_push($response->msg, $item);
+        }
+        return Response::json(
+            $response
+        );
+    }
+    public function lang_optional($lang)
+    {
+        if ($locale = $lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        return true;
+    }
     public function faq(Request $request)
     {
         $this->lang($request);
@@ -33,6 +67,7 @@ class dynamicController extends Controller
         }
         return $this->returnData("faqList",$faqLists,"Successfully");
     }
+
     public function distributor(Request $request)
     {
         $this->lang($request);
@@ -139,4 +174,56 @@ class dynamicController extends Controller
         ->avg_rating;
         return $rate;
     }
+    public function maker(Request $request){
+        $this->lang_optional($request->lang);
+        $data=new CarMakerCollection(CarMaker::where("active",1)->paginate(10));
+        return $data;
+    }
+    public function model(Request $request){
+        $this->lang_optional($request->lang);
+        if($request->has("car_maker")){
+            $data=new CarModelCollection(CarModel::where("active",1)->where("CarMaker_id",$request->car_maker)->paginate(10));
+            return $data;
+        }
+        $data=new CarModelCollection(CarModel::where("active",1)->paginate(10));
+        return $data;
+    }
+    public function maker_search(Request $request){
+        $validator=$this->Validator($request,[
+            "word"            => 'required|string',
+        ]);
+        if (!$validator->fails()) {
+            $data=new CarMakerCollection(
+                CarMaker::where("active",1)
+                ->Where('name', 'LIKE', $request->word)
+                ->paginate(10));
+            return $data;
+        }else {
+            return $this->failed($validator);
+        }
+    }
+    public function model_search(Request $request){
+        $validator=$this->Validator($request,[
+            "word"            => 'required|string',
+            "car_maker"       => 'required|integer',
+        ]);
+        if (!$validator->fails()) {
+            $data=new CarModelCollection(
+                CarModel::
+                where(function($query)use($request) {
+                    return $query->where('active', 1)
+                        ->Where('name', 'LIKE',  $request->word);
+                })
+                
+                ->orWhere( function($query)use($request) {
+                    return $query->where('active', 1)
+                        ->Where('CarMaker_id', $request->car_maker);
+                })
+                ->paginate(10));
+            return $data;
+        }else {
+            return $this->failed($validator);
+        }
+    }
+
 }

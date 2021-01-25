@@ -49,22 +49,7 @@ use Illuminate\Support\Facades\Session;
                 $attr;
         }
     }
-    if(!function_exists('attr_lang_title')){
-        function attr_lang_title($attr_ar,$attr){
-            return  (Session::get('app_locale')=='ar') ?
-                $attr_ar
-                :
-                $attr;
-        }
-    }
-    if(!function_exists('attr_lang_desc')){
-        function attr_lang_desc($attr_ar,$attr){
-            return  (Session::get('app_locale')=='ar') ?
-                $attr_ar
-                :
-                $attr;
-        }
-    }
+
     if(!function_exists('site_base')){
         function site_base(){
             //return 'https://3arabiat.homeberry.co';

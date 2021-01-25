@@ -103,14 +103,14 @@ class CarResource extends JsonResource
         $carMan=attr_lang_name($this->manufacture->name_ar,$this->manufacture->name);
         $payment=Car::PaymentType()[$this->payment];
         $data = [
-            "aboutCar" =>attr_lang_desc($this->Description_ar,$this->Description),
+            "aboutCar" =>attr_lang_name($this->Description_ar,$this->Description),
             "carFuelType"=>Car::FuelType()[$this->FuelType],
             "bodyStyle"=>$this->body->name,
             "carManufacturing"=>$carMan,
             "color"=>@$this->color->code,
             "mLocation"=>[
-                "city_name"=>attr_lang_title(@$this->city->title_ar,@$this->city->title),
-                "government_name"=>attr_lang_title(@$this->governorate->title_ar,@$this->governorate->title),
+                "city_name"=>attr_lang_name(@$this->city->title_ar,@$this->city->title),
+                "government_name"=>attr_lang_name(@$this->governorate->title_ar,@$this->governorate->title),
                 "latitude"=>$this->lng,
                 "longitude"=>$this->lat,
             ],

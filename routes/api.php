@@ -57,7 +57,12 @@ Route::group(['prefix' => 'data','namespace'=>'api'], function () {
         Route::post("distributor_all",'dynamicController@distributor');
         Route::post("country_all",'dynamicController@country');
         Route::post("gevernment_all",'dynamicController@governorate');
-        Route::post("city_all",'dynamicController@city');   
+        Route::post("city_all",'dynamicController@city');
+        Route::post("car_maker_all",'dynamicController@maker');
+        Route::post("car_maker_search",'dynamicController@maker_search');
+        Route::post("car_model_all",'dynamicController@model');
+        Route::post("car_model_search",'dynamicController@model_search');
+
     });
 });
 Route::post("news/home",'api\NewsController@filter');
