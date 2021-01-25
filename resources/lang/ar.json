@@ -471,5 +471,11 @@
     "Bank":"بنك",
     "User":"مستخدم",
     "No. of Cars for sale (owned by Customers)":"عدد السيارات المعروضة للبيع (المملوكة للعملاء)",
-    "No. of Cars for sale (owned by Showrooms)":"عدد السيارات المعروضة للبيع (المملوكة للمعارض)"
+    "No. of Cars for sale (owned by Showrooms)":"عدد السيارات المعروضة للبيع (المملوكة للمعارض)",
+    "Add Trend":"اضافة سيارات شائعة",
+    "Select Date":"اختر اليوم",
+    "Select Cars":"اختر السيارات المتاحة",
+    "Edit Trend":"تعديل السيارات الشائعة",
+    "Trending":"الشائعة",
+    "view Trends":"عرض السيارات الشائعة"
 }

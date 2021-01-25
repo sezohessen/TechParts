@@ -211,10 +211,7 @@ class Car extends Model
         $file->delete();
         return true;
     }
-    public function maker()
-    {
-        return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
-    }
+
     public function make()
     {
         return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
@@ -265,9 +262,12 @@ class Car extends Model
     }
     public function model()
     {
+        return $this->belongsTo(CarModel::class,"CarModel_id","id")->where('active','=', 1);
+    }
+    public function maker()
+    {
         return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
     }
-
     public function AuthFavCar()
     {
         return $this->belongsToMany(User::class, 'user_fav_cars', 'car_id','user_id');
@@ -276,10 +276,7 @@ class Car extends Model
     {
         return $this->belongsToMany(User::class, 'alerts', 'car_id','user_id')->withPivot('status');
     }
-    public function agencis()
-    {
-        return $this->belongsToMany(Agency::class, 'agency_cars', 'car_id','agency_id');
-    }
+
     public function OneAgency()
     {
         $agency=Agency::where('user_id',Auth()->id())->first();

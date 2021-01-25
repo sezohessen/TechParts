@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CarManufactureSeeder::class);
         $this->call(CarSeeder::class);
         $this->call(TrendingSeeder::class);
+        $this->call(TrendCarSeeder::class);
         $this->call(car_imgSeeder::class);
         $this->call(car_badgeSeeder::class);
         $this->call(car_featureSeeder::class);

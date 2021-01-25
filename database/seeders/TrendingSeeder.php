@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Car;
-use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TrendingSeeder extends Seeder
 {
@@ -19,8 +20,7 @@ class TrendingSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1,5) as $value){
             DB::table('trendings')->insert([
-                'car_id'        => Car::all()->random()->id,
-                'day'           => now(),
+                'day'           => Carbon::now()->format('Y-m-d'),
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

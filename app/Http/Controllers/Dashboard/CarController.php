@@ -229,6 +229,7 @@ class CarController extends Controller
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
                 $car = Car::find($id);
+
                 $images=car_img::where("car_id",$car->id)->get();
                 Car::unlink_img($images);
                 $CarBadges=car_badge::where('car_id', '=', $car->id)->get();

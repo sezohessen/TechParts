@@ -15,12 +15,9 @@ class CreateTrendingsTable extends Migration
     {
         Schema::create('trendings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('car_id')->unsigned();
-            $table->foreign('car_id')
-            ->references('id')->on('cars')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
+
             $table->date('day');
+
             $table->timestamps();
         });
     }

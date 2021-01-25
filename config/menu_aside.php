@@ -528,6 +528,24 @@ return [
             ],
         ],
         [
+            'title' => 'Trending',
+            'icon' => 'media/svg/icons/Design/Brush.svg',
+            'bullet' => 'line',
+            'root' => true,
+            'submenu' => [
+                [
+                    [
+                        'title' => 'Add Trend',
+                        'page' => "/dashboard/trending/create"
+                    ],
+                    [
+                        'title' => 'View Trendings',
+                        'page' => "dashboard/trending"
+                    ]
+                ],
+             ],
+        ],
+        [
             'title' => 'Contact',
             'icon' => 'fas fa-phone-square-alt',
             'bullet' => 'line',
