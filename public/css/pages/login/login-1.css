@@ -1,5 +1,6 @@
 .login.login-1 .login-aside .aside-img {
   min-height: 450px;
+  max-height: 450px;
 }
 .login.login-1 .login-signin,
 .login.login-1 .login-signup,
@@ -63,6 +64,7 @@
 @media (max-width: 575.98px) {
   .login.login-1 .aside-img {
     min-height: 300px !important;
+    max-height: 300px !important;
     background-size: 400px;
   }
   .login.login-1 .login-content .login-form {

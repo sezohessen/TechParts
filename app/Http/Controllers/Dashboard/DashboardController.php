@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Agency;
 use App\Models\Bank;
 use App\Models\BankOffer;
+use App\Models\Car;
 use App\Models\Insurance;
 use App\Models\Insurance_offer;
 use App\Models\User;
@@ -20,12 +21,15 @@ class DashboardController extends Controller
         $users              = User::all();
         $banks              = Bank::all();
         $insurances         = Insurance::all();
-        $agencies           = Agency::where('center_type',2)->get();
-        $maintenance        = Agency::where('center_type',1)->get();
-        $spares             = Agency::where('center_type',0)->get();
+        $agencies           = Agency::where('center_type',Agency::center_type_Agency)->get();
+        $maintenance        = Agency::where('center_type',Agency::center_type_Maintenance)->get();
+        $spares             = Agency::where('center_type',Agency::center_type_Spare)->get();
         $banks_offers       = BankOffer::all();
         $insurances_offers  = Insurance_offer::all();
+        $carShowrooms       = Car::has('agencies')->get();
+        $carCustomers       = Car::doesnthave('agencies')->get();
         return view('dashboard.index', compact('page_title', 'page_description','users','banks',
-        'insurances','agencies','maintenance','spares','banks_offers','insurances_offers'));
+        'insurances','agencies','maintenance','spares','banks_offers','insurances_offers','carShowrooms',
+        'carCustomers'));
     }
 }

@@ -25,7 +25,7 @@
 
             @endif
 
-            <img alt="{{ config('app.name') }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
+            <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
         </a>
     </div>
     <div class="d-flex align-items-center">

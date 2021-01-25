@@ -95,9 +95,11 @@ class FinanceRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Finance_request $finance_request)
     {
-        //
+        $finance_request->delete();
+        session()->flash('deleted',__("Changes has been Deleted Successfully"));
+        return redirect()->route("dashboard.finance-request.index");
     }
      public function multi_delete(){
         if (is_array(request('item'))) {

@@ -87,7 +87,7 @@ class SettingsController extends Controller
         $this->validate($request,[
             'appName'       => 'required|string|max:255',
             'appName_ar'    => 'required|string|max:255',
-            'logo'          => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
+            'logo'          => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ]);
         $settings->appName          = $request->appName;
         $settings->appName_ar       = $request->appName_ar;
@@ -101,11 +101,12 @@ class SettingsController extends Controller
         } else {
             session()->flash('success',__("Settings has been updated!"));
         } */
-        session()->flash('success',__("Settings has been upated!"));
+        session()->flash('success',__("Settings has been updated!"));
         return redirect()->back();
     }
     public static function file($file,$id)
     {
+
         $extension = $file->getClientOriginalExtension();
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
         $destinationPath = public_path() . '/img/settings/';
@@ -120,6 +121,7 @@ class SettingsController extends Controller
         }
         //Update new image
         $Image->name = $fileName;
+        $Image->base = '/img/settings/';
         $Image->save();
     }
 
@@ -132,18 +134,5 @@ class SettingsController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function multi_delete(){
-        if (is_array(request('item'))) {
-			foreach (request('item') as $id) {
-				$setting = Settings::find($id);
-				$setting->delete();
-			}
-		} else {
-			$setting = Settings::find(request('item'));
-			$setting->delete();
-		}
-        session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.Setting.index");
     }
 }

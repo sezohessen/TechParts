@@ -13,11 +13,11 @@
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <!--begin::Aside header-->
                 <a href="{{url('/')}}" class="text-center mb-10">
-                    <img src="{{asset("media/logos/logo-letter-1.png")}}" class="max-h-70px" alt="" />
+                    <img src="{{find_image(App\Models\Settings::first()->logo,'img/settings/')}}" class="max-h-70px" alt="" />
                 </a>
                 <!--end::Aside header-->
                 <!--begin::Aside title-->
-                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">{{ config('app.name') }} @lang('Web Site')</h3>
+                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
                 <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
@@ -38,8 +38,8 @@
                 <!--begin::Content footer-->
                 <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
                     <div class="text-dark-50 font-size-lg font-weight-bolder mr-10">
-                        <span class="mr-1">2021©</span>
-                        <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ config('app.name') }}</a>
+                        <span class="mr-1">2021</span>
+                        <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</a>
                     </div>
                     <div class="mr-10">
                         <a href="{{ url('/terms') }}" class="text-primary font-weight-bolder font-size-lg">@lang('Terms')</a>

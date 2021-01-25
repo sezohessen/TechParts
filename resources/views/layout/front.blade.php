@@ -20,7 +20,7 @@ for your project.
     <meta charset="utf-8" />
 
     {{-- Title Section --}}
-    <title>{{ config('app.name') }} | @yield('title', $page_title ?? '')</title>
+    <title>{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }} | @yield('title', $page_title ?? '')</title>
 
     {{-- Meta Data --}}
     <meta name="description" content="@yield('page_description', $page_description ?? '')" />

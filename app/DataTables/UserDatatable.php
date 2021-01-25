@@ -31,8 +31,8 @@ class UserDatatable extends DataTable
             {
                 return implode(', ', $user->roles->pluck('name')->toArray());
             })
-            ->addColumn('checkbox', 'dashboard.CarColor.btn.checkbox')
-            ->addColumn('action', 'dashboard.CarColor.btn.action')
+            ->addColumn('checkbox', 'dashboard.User.btn.checkbox')
+            ->addColumn('action', 'dashboard.User.btn.action')
             ->rawColumns(['checkbox','action','role']);
     }
 
