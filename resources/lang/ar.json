@@ -471,5 +471,12 @@
     "Bank":"بنك",
     "User":"مستخدم",
     "No. of Cars for sale (owned by Customers)":"عدد السيارات المعروضة للبيع (المملوكة للعملاء)",
-    "No. of Cars for sale (owned by Showrooms)":"عدد السيارات المعروضة للبيع (المملوكة للمعارض)"
+    "No. of Cars for sale (owned by Showrooms)":"عدد السيارات المعروضة للبيع (المملوكة للمعارض)",
+    "No trending cars today":"لا توجد سيارات رائجة اليوم",
+    "Login to create new maintenance":"تسجيل الدخول لإنشاء صيانة جديدة",
+    "No such car maker id exist":"لا يوجد معرّف صانع السيارة",
+    "No such car model id exist":"لا يوجد معرف طراز السيارة هذا",
+    "Created Successfully":"تم إنشاؤه بنجاح",
+    "This maintenance list already exist":"قائمة الصيانة هذه موجودة بالفعل",
+    "Login to show maintenance list":"تسجيل الدخول لإظهار قائمة الصيانة"
 }

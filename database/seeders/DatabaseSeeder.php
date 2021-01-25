@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\MyMaintenanceList;
 use Illuminate\Database\Seeder;
 use PhpOffice\PhpSpreadsheet\Writer\Ods\Content;
 
@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
         $this->call(subscribe_packageSeeder::class);
         $this->call(PromoteCarSeeder::class);
         $this->call(AlertSeeder::class);
+        $this->call(MyMaintenanceListSeeder::class);
 
     }
 }

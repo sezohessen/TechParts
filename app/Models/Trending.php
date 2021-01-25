@@ -13,4 +13,9 @@ class Trending extends Model
         'car_id',
         'day',
     ];
+
+    public function trend()
+    {
+        return $this->hasOne(Car::class,'id','car_id');
+    }
 }

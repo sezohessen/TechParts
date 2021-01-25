@@ -543,7 +543,7 @@ class AgencyController extends Controller
             $fav    = UserFavAgency::where('agency_id',$agency->id)
             ->where('user_id',auth()->user()->id)
             ->first();
-            if($fav->count()){
+            if($fav){
                 $isFavorite = true;
             }
         }
