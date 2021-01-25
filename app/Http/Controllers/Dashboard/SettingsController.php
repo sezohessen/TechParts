@@ -106,6 +106,7 @@ class SettingsController extends Controller
     }
     public static function file($file,$id)
     {
+
         $extension = $file->getClientOriginalExtension();
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
         $destinationPath = public_path() . '/img/settings/';
@@ -120,6 +121,7 @@ class SettingsController extends Controller
         }
         //Update new image
         $Image->name = $fileName;
+        $Image->base = '/img/settings/';
         $Image->save();
     }
 
