@@ -32,12 +32,9 @@ class CarDatatable extends DataTable
             ->addColumn('checkbox', 'dashboard.Car.btn.checkbox')
             ->editColumn('SellerType', function($car) {
                if(($car->user->Agency) ){
-                    if($car->user->Agency->center_type ==0)
-                         return Agency::StyleAgecnyType()[$car->user->Agency->agency_type];
-                    else
-                        return Agency::StyleAgecnyType()[3];
+                    return Agency::StyleAgecnyType()[0][1];
                }else {
-                    return Agency::StyleAgecnyType()[3];
+                    return Agency::StyleAgecnyType()[0][3];
                }
 
             })

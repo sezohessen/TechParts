@@ -21,6 +21,7 @@ class CreateCarBodiesTable extends Migration
             ->references('id')->on('images')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

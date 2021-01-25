@@ -45,7 +45,7 @@ class CarBodyController extends Controller
         $request->validate($rules);
         $credentials = CarBody::credentials($request);
         $CarMaker = CarBody::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully!"));
         return redirect()->route("dashboard.body.index");
     }
 
@@ -87,7 +87,7 @@ class CarBodyController extends Controller
         $request->validate($rules);
         $credentials = $body->credentials($request,$body->logo->id);
         $body->update($credentials);
-        session()->flash('updated',__("Changed has been Updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.body.index");
     }
     /**

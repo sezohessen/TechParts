@@ -49,7 +49,7 @@ class InsuranceController extends Controller
         $request->validate($rules);
         $credentials = Insurance::credentials($request);
         $Insurance = Insurance::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.insurance.index");
     }
 
@@ -106,7 +106,7 @@ class InsuranceController extends Controller
         $request->validate($rules);
         $credentials = Insurance::credentials($request,$request->user_id,$insurance->img_id);
         $Insurance = Insurance::where('id',$id)->update($credentials);
-        session()->flash('updated',__("Changed has been updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return  redirect()->route("dashboard.insurance.index");
     }
 

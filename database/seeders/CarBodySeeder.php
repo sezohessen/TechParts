@@ -18,8 +18,9 @@ class CarBodySeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1,5) as $value){
             DB::table('car_bodies')->insert([
-                'name'        => $faker->name,
+                'name'          => $faker->name,
                 'logo_id'       => Image::all()->random()->id,
+                "active"        => 1,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

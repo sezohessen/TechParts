@@ -46,7 +46,7 @@ class CarModelController extends Controller
         $request->validate($rules);
         $credentials = CarModel::credentials($request);
         $CarModel = CarModel::create($credentials);
-        session()->flash('created',__("Changed has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.model.index");
     }
 
@@ -88,7 +88,7 @@ class CarModelController extends Controller
         $request->validate($rules);
         $credentials = $model->credentials($request);
         $model->update($credentials);
-        session()->flash('updated',__("Changed has been Updated successfully!"));
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.model.index");
     }
 

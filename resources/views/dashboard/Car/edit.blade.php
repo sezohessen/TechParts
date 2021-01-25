@@ -162,7 +162,13 @@
                                 <span class="switch switch-icon">
                                     <label>
                                         <input type="hidden" name="AccidentBefore" id='AccidentBefore' value="{{ old("AccidentBefore") ?? $car->AccidentBefore  }} ">
-                                        <input type="checkbox" onclick="changeSwitchStatus(event.target);"  {{ $car->AccidentBefore==1 ? 'checked' : '' }}  />
+                                        <input type="checkbox" onclick="changeSwitchStatus(event.target);"
+                                            @if(!is_null(old("AccidentBefore")))
+                                                {{old("AccidentBefore")==1 ? "checked" : ""}}
+                                            @else
+                                            {{ $car->AccidentBefore==1 ? 'checked' : '' }}
+                                            @endif
+                                            />
                                         <span></span>
                                     </label>
                                 </span>
@@ -480,13 +486,23 @@
                                 <div class="radio-inline">
                                     <label class="radio">
                                         <input type="radio" name="FuelType" value="0"
-                                        {{ old('FuelType')=="0" ? 'checked':'' }} required/>
+                                        @if(!is_null(old('FuelType')))
+                                            {{old("FuelType")==0 ? "checked" : ""}}
+                                        @else
+                                            {{$car->FuelType==0 ? "checked" : ""}}
+                                        @endif
+                                        required/>
                                         <span></span>
                                         @lang('Gas')
                                     </label>
                                     <label class="radio">
                                         <input type="radio" name="FuelType" value="1"
-                                        {{ old('FuelType')=="1" ? 'checked':'' }}/>
+                                        @if(!is_null(old('FuelType')))
+                                            {{old("FuelType")==1 ? "checked" : ""}}
+                                        @else
+                                            {{$car->FuelType==1 ? "checked" : ""}}
+                                        @endif
+                                        >
                                         <span></span>
                                         @lang('Petrol')
                                     </label>
@@ -550,7 +566,7 @@
                             <label class="col-form-label  col-sm-12">@lang("Installment Period")<span class="text-danger">*</span></label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                     <input class="form-control" type="text" value="{{old("InstallmentPeriod") ?? $car->InstallmentPeriod}}"  placeholder="{{__("Installment Period")}}" name="InstallmentPeriod" />
-                                    <span class="form-text text-muted">@lang("[Number] Month/Year")</span>
+                                    <span class="form-text text-muted">@lang("Number of Months")</span>
                                     @error('InstallmentPeriod')
                                     <div class="invalid-feedback">{{ $errors->first('InstallmentPeriod') }}</div>
                                 @enderror
@@ -559,7 +575,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Car Photos")<span class="text-danger">*</span></label><br>
+                            <label class="col-form-label  col-sm-12">@lang("Car Photos")</label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <input type="file" class="custom-file-input" name="CarPhotos[]" id="customFile" multiple/>
                                 <label class="custom-file-label" for="customFile">Choose file</label>
@@ -569,16 +585,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="form-group row">
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     @foreach ($images as $key=>$item)
                                         <div class="carousel-item {{$key==0 ? 'active' :''}}">
-                                            <img class="d-block w-100 img-thumbnail " src="{{asset("img/Cars/$item->name")}}"  style="width:700px !important;height:400px" alt="First slide">
+                                            <img class="d-block w-100 img-thumbnail " src="{{asset("img/Cars/$item->name")}}"  style="width:1000px !important;height:400px" alt="First slide">
                                         </div>
                                     @endforeach
                                 </div>
@@ -593,7 +609,7 @@
                               </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
 
                     </div>
             </div>

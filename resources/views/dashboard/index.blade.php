@@ -59,7 +59,7 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="{{ route('dashboard.agency.index') }}" class="card card-custom bg-danger bg-hover-state-danger card-stretch gutter-b">
+            <a href="{{ route('dashboard.agency.index',['center_type'=>0]) }}" class="card card-custom bg-danger bg-hover-state-danger card-stretch gutter-b">
                 <!--begin::Body-->
                 <div class="card-body">
                     <span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
