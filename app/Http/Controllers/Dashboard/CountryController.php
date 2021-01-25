@@ -84,7 +84,8 @@ class CountryController extends Controller
         $page_title = "Edit country";
         $page_description = "Edit";
         $country = Country::find($id);
-        return view('dashboard.Country.edit', compact('page_title', 'page_description','country'));
+        if($country)return view('dashboard.Country.edit', compact('page_title', 'page_description','country'));
+        else return redirect()->route('dashboard.country.index');
     }
 
     /**
@@ -94,13 +95,13 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(Request $request, $id)
     {
-        $rules =$country->rules($request);
+        $rules = Country::rules($request);
         $request->validate($rules);
-        $credentials = $country->credentials($request);
-        $country->update($credentials);
-        session()->flash('updated',__("Changes has been Updated Successfully"));
+        $credentials = Country::credentials($request);
+        $Country = Country::where('id',$id)->update($credentials);
+        session()->flash('updated',__("Changed has been updated successfully!"));
         return  redirect()->route("dashboard.country.index");
     }
 

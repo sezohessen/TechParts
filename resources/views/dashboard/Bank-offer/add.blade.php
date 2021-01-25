@@ -148,7 +148,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Offer image') <span class="text-danger">*</span></label>
@@ -159,7 +159,7 @@
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                     data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg" required />
+                                    <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg" />
                                     <input type="hidden" name="logo_id_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"

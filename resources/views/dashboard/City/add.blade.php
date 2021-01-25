@@ -9,7 +9,11 @@
             <h3 class="card-title">
                 {{$page_title}}
             </h3>
+            <div class="text-right">
+                <a href="{{ route('dashboard.city.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+            </div>
         </div>
+
         <!--begin::Form-->
         <form action="{{route("dashboard.city.store")}}" method="POST">
             @csrf
@@ -85,7 +89,7 @@
             url: '/dashboard/country/'+id,
             success: data => {
                 if(data.governorates){
-                    data.governorates.forEach(governormodelsate =>
+                    data.governorates.forEach(governorate =>
                     $('#governorate').append(`<option value="${governorate.id}">${governorate.title}-${governorate.title_ar}</option>`)
                     )
                 }else{

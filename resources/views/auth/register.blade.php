@@ -13,11 +13,11 @@
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <!--begin::Aside header-->
                 <a href="{{url('/')}}" class="text-center mb-10">
-                    <img src="{{asset("media/logos/logo-letter-1.png")}}" class="max-h-70px" alt="" />
+                    <img src="{{find_image(App\Models\Settings::first()->logo,'img/settings/')}}" class="max-h-70px" alt="" />
                 </a>
                 <!--end::Aside header-->
                 <!--begin::Aside title-->
-                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">{{ config('app.name') }} @lang('Web Site')</h3>
+                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
                 <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
@@ -113,6 +113,13 @@
                         <!--end::Form group-->
                         <div class="form-group">
                             <input id="password" type="password" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
+                            <label class="checkbox mt-5">
+                                <input type="checkbox" onclick="myFunction()"/>
+                                <span></span>
+                                <div class="ml-2">
+                                    @lang('Show Password')
+                                </div>
+                            </label>
                             @error('password')
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -136,6 +143,12 @@
                                 </option>
                                 <option value="agency" {{ old('provider') == 'agency' ? 'selected' : '' }}>
                                     @lang('Agency')
+                                </option>
+                                <option value="bank" {{ old('provider') == 'bank' ? 'selected' : '' }}>
+                                    @lang('Bank')
+                                </option>
+                                <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
+                                    @lang('User')
                                 </option>
                             </select>
                             @error('provider')
@@ -181,8 +194,8 @@
             <!--begin::Content footer-->
             <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
                 <div class="text-dark-50 font-size-lg font-weight-bolder mr-10">
-                    <span class="mr-1">2021©</span>
-                    <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ config('app.name') }}</a>
+                    <span class="mr-1">2021</span>
+                    <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</a>
                 </div>
                 <div class="mr-10">
                     <a href="{{ url('/terms') }}" class="text-primary font-weight-bolder font-size-lg">@lang('Terms')</a>
@@ -201,5 +214,15 @@
 @endsection
 {{-- Scripts Section --}}
 @section('scripts')
+<script>
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 <script src="{{asset("js/pages/custom/login/login-general.js")}}"></script>
 @endsection

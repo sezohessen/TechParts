@@ -25,7 +25,7 @@
 
             @endif
 
-            <img alt="{{ config('app.name') }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
+            <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
         </a>
     </div>
     <div class="d-flex align-items-center">
@@ -34,7 +34,7 @@
             <button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle"><span></span></button>
         @endif
 
-        
+
 
         <button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
             {{ Metronic::getSVG('media/svg/icons/General/User.svg', 'svg-icon-xl') }}

@@ -51,6 +51,11 @@ class CarDatatable extends DataTable
      */
     public function query()
     {
+        if ($this->request()->has("Customers")) {
+            return Car::query()->with(['maker', 'country'])->doesnthave('agencies')->select("cars.*");
+        }elseif($this->request()->has("Showrooms")) {
+            return Car::query()->with(['maker', 'country'])->has('agencies')->select("cars.*");
+        }
         return Car::query()->with(['maker', 'country'])->select("cars.*");
     }
 

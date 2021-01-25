@@ -18,6 +18,13 @@
             @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
+                <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -50,6 +57,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label>
+                            <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{ $settings->logo_id ? asset('img/settings/'.$settings->logo->name) : asset('media/users/blank.png') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">

@@ -20,6 +20,7 @@ class AgencyDatatable extends DataTable
      */
     public function dataTable($query)
     {
+        $counter = 0;
         return datatables()
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
@@ -40,12 +41,11 @@ class AgencyDatatable extends DataTable
      */
     public function query()
     {
-        if ($center_type=$this->request()->has("center_type")) {
-            return Agency::query()->with("user")->select("agencies.*")->where("center_type","=",$center_type);
+        if ($this->request()->has("center_type")) {
+            return Agency::query()->with("user")->where("center_type",request('center_type'))->select("agencies.*");
         }else {
             return Agency::query()->with("user")->select("agencies.*");
         }
-
     }
 
     /**
