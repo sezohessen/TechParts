@@ -106,6 +106,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/users/destroy/all','UserController@multi_delete');
     Route::delete('/subscribe_packages/destroy/all','SubscribeController@multi_delete');
     Route::delete('/promote/destroy/all','CarPromoteController@multi_delete');
+    Route::delete('/AgencyCar/destroy/all','AgencyCarController@multi_delete');
 
     Route::delete('/news/destroy/all','NewsController@multi_delete');
     /* Datatable Activity request */
@@ -141,6 +142,13 @@ Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insuran
 Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
+    Route::resource('/car','AgencyCarController');
+
+    Route::post('/car/{car}/status',"AgencyCarController@Status")->name('car.Status');
+    Route::get("available_model/{id}",'AgencyCarController@available_model');
+    Route::get("available_governorate/{id}",'AgencyCarController@available_governorate');
+    Route::get("available_city/{id}",'AgencyCarController@available_city');
+
     Route::get('/governorate/{id}','AgencyController@governorate');//Ajax Request
     Route::get('/country/{id}','AgencyController@country');//Ajax Request
 });

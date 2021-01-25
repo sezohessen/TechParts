@@ -16,7 +16,7 @@
         </svg>
     </span>
 </a>
-<a href="{{ route('dashboard.AgencyCar.edit', ['AgencyCar' => $id]) }}" class="btn btn-md btn-success btn-icon mb-2"
+<a href="{{ route('agency.car.edit', ['car' => $id]) }}" class="btn btn-md btn-success btn-icon mb-2"
     title="Edit details">
     <span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -43,7 +43,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">@lang("Delete Record")</h4>
             </div>
-            {!! Form::open(['route' => ['dashboard.AgencyCar.destroy', ['AgencyCar' => $id]], 'method' => 'delete']) !!}
+            {!! Form::open(['route' => ['agency.car.destroy', $id], 'method' => 'delete']) !!}
             <div class="modal-body">
                 <p>{{ __('Are you sure you want delete this item  ? ') }}</p>
             </div>

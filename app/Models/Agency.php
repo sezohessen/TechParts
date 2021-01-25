@@ -34,6 +34,8 @@ class Agency extends Model
     const Main_Service_center   = 1;
     const Main_Workshop         = 2;
 
+    const Spare             = 0;
+
     use HasFactory;
     protected $table    = 'agencies';
     protected $fillable=[
@@ -103,18 +105,38 @@ class Agency extends Model
     public static function StyleAgecnyType()
     {
         return [
-            self::UnSelected        => "<span class='label label-danger label-inline mr-2'
-            style='padding: 30px;
-            width: 128px;'>".__('Un selected work type')."</span>",
-            self::Ag_Agency         => "<span class='label label-warning label-inline mr-2'
-            style='padding: 30px;
-            width: 128px;'>".__('Agency')."</span>",
-            self::Ag_Distributor    =>"<span class='label label-success label-inline mr-2'
-            style='padding: 30px;
-            width: 128px;'>".__('Distributor')."</span>",
-            self::Ag_Individual =>"<span class='label label-primary label-inline mr-2'
-            style='padding: 30px;
-            width: 128px;'>".__('Individual')."</span>",
+            [
+                self::UnSelected        => "<span class='label label-danger label-inline mr-2'
+                style='padding: 30px;
+                width: 128px;'>".__('Un selected work type')."</span>",
+                self::Ag_Agency         => "<span class='label label-warning label-inline mr-2'
+                style='padding: 30px;
+                width: 128px;'>".__('Agency')."</span>",
+                self::Ag_Distributor    =>"<span class='label label-success label-inline mr-2'
+                style='padding: 30px;
+                width: 128px;'>".__('Distributor')."</span>",
+                self::Ag_Individual    =>"<span class='label label-dark label-inline mr-2'
+                style='padding: 30px;
+                width: 128px;'>".__('Individual')."</span>",
+
+            ],
+            [
+                self::UnSelected        => "<span class='label label-info label-inline mr-2'
+                style='padding: 30px;
+                width: 128px;'>".__('Un selected work type')."</span>",
+                self::Main_Service_center         => "<span class='label label-dark label-inline mr-2'
+                style='padding: 30px;
+                width: 128px;'>".__('Service center')."</span>",
+                self::Main_Workshop    =>"<span class='label label-primary label-inline mr-2'
+                style='padding: 30px;
+                width: 128px;'>".__('Workshop')."</span>"
+            ],
+            [
+                self::Spare =>"<span class='label label-secondary label-inline mr-2'
+                style='padding: 30px;
+                width: 128px;'>".__('Spare')."</span>",
+            ]
+
         ];
     }
     public function user() {
@@ -141,6 +163,7 @@ class Agency extends Model
     {
         return $this->belongsToMany(Specialties::class, 'agency_specialties', 'agency_id','specialty_id');
     }
+  
     public static function rules($request,$id = NULL)
     {
         $rules = [

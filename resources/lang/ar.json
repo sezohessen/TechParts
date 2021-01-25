@@ -458,5 +458,7 @@
     "properties":"البيانات",
     "Causer ID":"المسبب",
     "Subject ID":"التابع",
-    "Add agency car":"اضافة سيارة للوكالة"
+    "Add agency car":"اضافة سيارة للوكالة",
+    "Agency Cars Options":"اعدادات السيارات للوكالة",
+    "Spare":"قطع غيار"
 }

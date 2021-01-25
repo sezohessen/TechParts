@@ -1,6 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.master')
-
+@extends('layout.agency')
 {{-- Content --}}
 @section('content')
     <div class="container">
@@ -10,7 +9,7 @@
     {{-- Dashboard 1 --}}
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3" style="min-height: 50px">
-            <a href="{{route("dashboard.AgencyCar.create")}}" class="btn btn-primary font-weight-bolder">
+            <a href="{{route("agency.car.create")}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="20px" viewBox="0 0 24 24" version="1.1">
@@ -30,7 +29,7 @@
             <div class="row">
                 <div class="table-responsive">
                     <div class="card-custom" style="width: 100%">
-                        {!! Form::open(['id'=>'form_data','url'=>"dashboard/AgencyCar/destroy/all",'method'=>'delete']) !!}
+                        {!! Form::open(['id'=>'form_data','url'=>"dashboard/agency/destroy/all",'method'=>'delete']) !!}
                             {!! $dataTable->table([
                                 'class'=>'table table-separate table-head-custom table-checkable'
                             ],true)!!}

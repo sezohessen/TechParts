@@ -276,6 +276,16 @@ class Car extends Model
     {
         return $this->belongsToMany(User::class, 'alerts', 'car_id','user_id')->withPivot('status');
     }
+    public function agencis()
+    {
+        return $this->belongsToMany(Agency::class, 'agency_cars', 'car_id','agency_id');
+    }
+    public function OneAgency()
+    {
+        $agency=Agency::where('user_id',Auth()->id())->first();
+        return $this->belongsToMany(Agency::class, 'agency_cars', 'car_id','agency_id')->where('agency_id',$agency->id);
+    }
+
     public static function unlink_img($images)
     {
         $destinationPath = public_path() . '/img/Cars/';
@@ -293,6 +303,14 @@ class Car extends Model
 
     public function user(){
         return $this->belongsTo(User::class,"user_id","id");
+    }
+    public function agencies()
+    {
+        return $this->belongsToMany(Agency::class, 'agency_cars', 'car_id','agency_id');
+    }
+    public function agencies_cars()
+    {
+    return $this->belongsToMany(Agency::class, 'agency_cars');
     }
 
 

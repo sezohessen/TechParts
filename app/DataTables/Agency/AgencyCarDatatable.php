@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Agency;
 
+use App\Models\Car;
 use App\Models\Agency;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -9,7 +10,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AgencyDatatable extends DataTable
+class AgencyCarDatatable extends DataTable
 {
 
     /**
@@ -22,13 +23,26 @@ class AgencyDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('name', '{{Str::limit($name, 100)}}')
-            ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
-            ->editColumn('user.email', '{{Str::limit($user["email"], 100)}}')
-            ->editColumn('center_type', 'dashboard.Agency.btn.center_type')
-            ->addColumn('checkbox', 'dashboard.Agency.btn.checkbox')
-            ->addColumn('action', 'dashboard.Agency.btn.action')
-            ->rawColumns(['checkbox', 'action', 'center_type']);
+            ->editColumn('country.name_ar', '{{Str::limit($country["name_ar"] ?? 1, 100)}}')
+            ->editColumn('maker.name', '{{Str::limit($maker["name"] ?? null, 100)}}')
+            ->editColumn('phone', '{{Str::limit($phone, 100)}}')
+            ->editColumn('price', '{{Str::limit($price, 100)}}')
+            ->editColumn('Description', '{!! Str::limit($Description, 100) !!}')
+            ->editColumn('Description_ar', '{!! Str::limit($Description_ar, 100) !!}')
+            ->addColumn('checkbox', 'agency.Car.btn.checkbox')
+            ->editColumn('SellerType', function($car) {
+               if(($car->user->Agency) ){
+                    if($car->user->Agency->center_type ==0)
+                        return Agency::StyleAgecnyType()[0][$car->user->Agency->agency_type];
+                    elseif($car->user->Agency->center_type ==1)
+                        return Agency::StyleAgecnyType()[1][$car->user->Agency->agency_type];
+                    else
+                        return Agency::StyleAgecnyType()[2][0];
+               }
+            })
+            ->addColumn('action', 'agency.Car.btn.action')
+            ->addColumn('status', 'agency.Car.btn.status')
+            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar",'status']);
     }
 
     /**
@@ -39,12 +53,8 @@ class AgencyDatatable extends DataTable
      */
     public function query()
     {
-        if ($center_type=$this->request()->has("center_type")) {
-            return Agency::query()->with("user")->select("agencies.*")->where("center_type","=",$center_type);
-        }else {
-            return Agency::query()->with("user")->select("agencies.*");
-        }
 
+        return Car::query()->has('OneAgency')->with(['maker', 'country'])->select("cars.*");//->where("SellerType","=",0)
     }
 
     /**
@@ -55,7 +65,7 @@ class AgencyDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('badges-table')
+            ->setTableId('cars-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -108,11 +118,33 @@ class AgencyDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('name')->title(__('Name')),
-            Column::make('name_ar'),
-            Column::make('user.email')
-                ->title(__("User Email")),
-            Column::make('center_type'),
+            Column::make('country.name_ar')
+                ->title(__("Country")),
+            Column::make('maker.name')
+                ->title(__("Car Make")),
+            Column::make('phone')
+                ->title(__("User Phone")),
+            Column::make('price')->title(__("Price")),
+            Column::make('Description')
+            ->title(__("Description (EN)"))
+                ->width(70),
+            Column::make('Description_ar')
+            ->title(__("Description (AR)"))
+                ->width(70),
+            Column::computed('SellerType')
+                ->title(__('Seller Type'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center'),
+            Column::computed('status')
+            ->title(__('Status'))
+            ->exportable(false)
+            ->printable(false)
+            ->searchable(false)
+            ->width(120)
+            ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
@@ -131,6 +163,6 @@ class AgencyDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Agency_' . date('YmdHis');
+        return 'Cars_' . date('YmdHis');
     }
 }

@@ -477,8 +477,14 @@
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <span class="switch switch-icon">
                                     <label>
-                                        <input type="hidden" name="AccidentBefore" id='AccidentBefore' value="1">
-                                        <input type="checkbox" onclick="changeSwitchStatus(event.target);"  checked="checked" />
+                                        <input type="hidden" name="AccidentBefore" id='AccidentBefore' value="{{old("AccidentBefore") ?? 1 }}">
+                                        <input type="checkbox" onclick="changeSwitchStatus(event.target);"
+                                        @if(!is_null(old("AccidentBefore")))
+                                            {{old("AccidentBefore")==1 ? "checked" : ""}}
+                                        @else
+                                            {{"checked"}}
+                                        @endif
+                                    />
                                         <span></span>
                                     </label>
                                 </span>
@@ -564,19 +570,16 @@
 <script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 <script>
-    $('#agency_id').on('change', function() {
-        var id = this.value ;
-        agency(id);
-    });
-    function agency(id ){
+      function agency(id ){
         $('#CarMaker_id').empty();
+        old_maker="<?php echo old('CarMaker_id') ?  old('CarMaker_id') : ""  ?>";
         $.ajax({
             url: '/dashboard/AgencyCar/'+id,
             success: data => {
                 if(data.carMakers){
                     $('#CarMaker_id').append(`<option value="" >@lang('Select car Maker')</option>`)
                     data.carMakers.forEach(carMaker =>
-                    $('#CarMaker_id').append(`<option value="${carMaker.id}">${carMaker.name}</option>`)
+                    $('#CarMaker_id').append(`<option value="${carMaker.id}" ${(old_maker==carMaker.id) ? "selected" : "" }>${carMaker.name}</option>`)
                     )
                 }else{
                     $('#CarMaker_id').append(`<option value="">{{__("No Results")}}</option>`)
@@ -584,18 +587,16 @@
             }
         });
     }
-    $('#CarMaker_id').on('change', function() {
-        var id = this.value ;
-        model(id);
-    });
     function model(id){
         $('#CarModel_id').empty();
+        old_model="<?php echo old('CarModel_id') ?  old('CarModel_id') : ""  ?>";
         $.ajax({
             url: '/dashboard/car/available_model/'+id,
             success: data => {
                 if(data.models){
+
                     data.models.forEach(model =>
-                    $('#CarModel_id').append(`<option value="${model.id}" >${model.name}</option>`)
+                    $('#CarModel_id').append(`<option value="${model.id}" ${(old_model==model.id) ? "selected" : "" } >${model.name}</option>`)
                     )
                 }else{
                     $('#CarModel_id').append(`<option value="">{{__("No Results")}}</option>`)
@@ -639,6 +640,16 @@
             }
         });
     }
+    $('#agency_id').on('change', function() {
+        var id = this.value ;
+        agency(id);
+    });
+
+    $('#CarMaker_id').on('change', function() {
+        var id = this.value ;
+        model(id);
+    });
+
     $('#governorate').on('change', function() {
         var id = this.value ;
         city(id);

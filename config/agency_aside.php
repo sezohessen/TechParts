@@ -31,6 +31,33 @@ return [
 
             ]
         ],
+        [
+            'title' => 'Agency Cars',
+            'icon' => 'fas fa-car',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Cars Settings',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add car',
+                            'page' => "/agency/car/create"
+                        ],
+                        [
+                            'title' => 'View cars',
+                            'page' => '/agency/car'
+                        ],
+
+                    ]
+                ],
+
+            ]
+        ],
+
+
 
     ]
 

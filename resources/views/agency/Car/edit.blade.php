@@ -15,7 +15,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.update",["car"=>$car->id])}}" method="POST" enctype="multipart/form-data" >
+        <form action="{{route("agency.car.update",["car"=>$car->id])}}" method="POST" enctype="multipart/form-data" >
             @csrf
             @method('PATCH')
             <div class="card-body">
@@ -647,7 +647,7 @@
         $('#models').empty();
         old_model="<?php echo old('CarModel_id') ?  old('CarModel_id') :  $car->CarModel_id  ?>";
         $.ajax({
-            url: '/dashboard/car/available_model/'+id,
+            url: '/agency/available_model/'+id,
             success: data => {
                 if(data.models){
                     data.models.forEach(models =>
@@ -666,7 +666,7 @@
         $('#city').empty();
         old_governorate="<?php echo old('Governorate_id') ?  old('Governorate_id') :  $car->Governorate_id   ?>";
         $.ajax({
-            url:'/dashboard/car/available_governorate/'+id,
+            url:'/agency/available_governorate/'+id,
             success: data => {
                 if(data.governorates){
                     $('#governorate').append(`<option value="" >@lang('Select Governorate')</option>`)
@@ -684,7 +684,7 @@
         $('#city').empty();
         old_city="<?php echo old('City_id') ?  old('City_id') : $car->City_id  ?>";
         $.ajax({
-            url: '/dashboard/car/available_city/'+id,
+            url: '/agency/available_city/'+id,
             success: data => {
                 if(data.cities){
                     data.cities.forEach(city =>
