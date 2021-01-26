@@ -55,6 +55,12 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
 
 });
+
+Route::group(['prefix' => 'finance','namespace'=>'api'], function () {
+    Route::post("filter",'BankController@filter');
+    Route::post("home",'BankController@home');
+});
+
 Route::group(['prefix' => 'data','namespace'=>'api'], function () {
     Route::group(['prefix' => 'dynamic'], function () {
         Route::post("faq_all",'dynamicController@faq');

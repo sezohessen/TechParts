@@ -21,7 +21,6 @@ use App\Classes\Responseobject;
 use App\Models\Car;
 use App\Models\UserFav_car;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\ToArray;
 
 class AgencyController extends Controller
 {
