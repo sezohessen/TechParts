@@ -67,7 +67,7 @@ class CarBody extends Model
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName]);
+            $Image = Image::create(['name' => $fileName,'base'=>'/img/CarBodies/']);
             return $Image->id;
         }
     }

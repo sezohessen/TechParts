@@ -199,7 +199,17 @@ class CarController extends Controller
                 'feature_id'=>$feature
             ]);
         }
-        session()->flash('created',__("Changes has been Updated Successfully"));
+        $list_car_user=ListCarUser::where("car_id",$car->id)->where("user_id",Auth()->id())->update([
+            "user_id"=>Auth::user()->id,
+            "car_id"=>$car->id
+        ]);
+        if(!$list_car_user){
+            ListCarUser::create([
+                "user_id"=>Auth::user()->id,
+                "car_id"=>$car->id
+            ]);
+        }
+        session()->flash('updated',__("Changes has been Updated Successfully"));
         return redirect()->route("dashboard.car.index");
     }
 

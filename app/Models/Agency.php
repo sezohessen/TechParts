@@ -167,7 +167,7 @@ class Agency extends Model
     {
         return $this->belongsToMany(Specialties::class, 'agency_specialties', 'agency_id','specialty_id');
     }
-  
+
     public static function rules($request,$id = NULL)
     {
         $rules = [
@@ -295,7 +295,7 @@ class Agency extends Model
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName]);
+            $Image = Image::create(['name' => $fileName,'base'=>"/img/agency/"]);
             return $Image->id;
         }
     }

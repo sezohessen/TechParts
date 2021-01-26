@@ -2,20 +2,34 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Models\Car;
+use Exception;
 
+use App\Models\Car;
+use App\Models\City;
+use App\Models\User;
 use App\Models\Alert;
+use App\Models\Image;
+use App\Models\Badges;
 use App\Models\car_img;
+use App\Models\CarBody;
+use App\Models\CarYear;
 use App\Models\Country;
+use App\Models\Feature;
+
+use App\Models\CarColor;
+use App\Models\CarMaker;
+use App\Models\CarModel;
 use App\Models\car_badge;
 use App\Models\PromoteCar;
 use App\Models\car_deposit;
 use App\Models\car_feature;
+use App\Models\CarCapacity;
+use App\Models\Governorate;
 use App\Models\ListCarUser;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
+use App\Models\CarManufacture;
 use App\Classes\Responseobject;
-
 use function PHPSTORM_META\type;
 use App\Models\subscribe_package;
 use App\Http\Resources\CarResource;
@@ -84,7 +98,6 @@ class CarsController extends Controller
             }
             $type   = new DataType();
             $data=(new CarResource($car))->type($type::single);
-            return $data;
             return  $this->returnData('mCar',$data,__('Successfully'));
         }else {
             return $this->failed($validator);
@@ -102,21 +115,25 @@ class CarsController extends Controller
             "word"             => 'required|string|max:255',
         ]);
         if (!$validator->fails()) {
-            if(session()->get('app_locale')=="ar")
-                $status=(($request->car_status=="جديدة") ? Car::IS_NEW : Car::IS_USED);
-            else {
-                $status=(($request->car_status=="New") ? Car::IS_NEW : Car::IS_USED);
-            }
+            $status=($request->car_status==__("New")) ? Car::IS_NEW : Car::IS_USED;
             if(!$country=Country::find($request->interest_country)){
                 return $this->errorMessage('Country not found');
             }
             $type   = new DataType();
             $data=(new CarCollection(
-                Car::where("Country_id",$country->id)
-                ->orWhereHas('maker', function($query)use($request){
-                    $query->where('name','LIKE',$request->word);
+                Car::
+                where(function($query)use($country) {
+                    return $query->where('status', 1)
+                        ->Where('Country_id',$country->id);
                 })
-                ->orWhere('IsNew', '=', $status)
+                ->orWhere( function($query)use($status) {
+                    return $query->where('status', 1)
+                        ->Where('IsNew', '=', $status);
+                })
+                ->orWhereHas('maker', function($query)use($request){
+                    $query->where('status', 1)
+                    ->where('name','LIKE',$request->word);
+                })
                 ->paginate(10)
             ))->type($type::list);
             return $data;
@@ -242,12 +259,12 @@ class CarsController extends Controller
             }
             if($car->promotedStatus){
                 $car->update([
-                    "promotedExpire"=> date("Y-m-d",strtotime("+".$subscribe_package->period,strtotime($car->promotedExpire))),
+                    "promotedExpire"=> date("Y-m-d",strtotime("+".$subscribe_package->period."month",strtotime($car->promotedExpire))),
                     'promotedStatus'=>true
                 ]);
             }else {
                 $car->update([
-                    "promotedExpire"=> date("Y-m-d",strtotime("+".$subscribe_package->period,strtotime($car->adsExpire))),
+                    "promotedExpire"=> date("Y-m-d",strtotime("+".$subscribe_package->period."month",strtotime($car->adsExpire))),
                     'promotedStatus'=>true
                 ]);
             }
@@ -338,46 +355,233 @@ class CarsController extends Controller
         }
     }
     public function create(Request $request){
-        $rules =$this->rules($request);
-        $request->validate($rules);
-        $credentials = $this->credentials($request);
-        $car = Car::create($credentials);
-        $alert=Alert::where("car_id",$request->car_id)->where("user_id",Auth()->id())->update([
-            "status"=>$request->status
-        ]);
-        if(!$alert){
-            Alert::create([
-                "car_id"=>$request->car_id,
-                "user_id"=>Auth()->id(),
-                "status"=> $request->isAlertBefore ? Car::Alert: Car::NotAlert
+
+
+        $validator=$this->Validator($request,$this->rules());
+        if (!$validator->fails()) {
+
+            $check=$this->checkMultipleImage($request->imageList);
+            if (!$check) {
+                return $this->errorMessage('wrong images');
+            }
+
+            if($maker=CarMaker::where("active",1)->find($request->carMaker)){
+                if(!CarModel::where("active",1)->where("CarMaker_id",$maker->id)->find($request->carModel)){
+                    return $this->errorMessage('Car Model not found');
+                }
+            }
+            else {
+                return $this->errorMessage('Car Maker not found');
+            }
+
+            if(!CarYear::find($request->carYear)){
+                return $this->errorMessage('Year of manufacture not found');
+            }
+
+            if(!CarManufacture::find($request->carManufacturing)){
+                return $this->errorMessage('Manufacturing not found');
+            }
+            if(!CarCapacity::find($request->carCapacity)){
+                return $this->errorMessage('Capacity not found');
+            }
+            if(!CarBody::find($request->bodyStyle)->where("active",1)){
+                return $this->errorMessage('Car Body not found');
+            }
+            if(!CarColor::find($request->color)){
+                return $this->errorMessage('Car Color not found');
+            }
+            if(Country::where("active",1)->find($request->country)){
+                if(Governorate::where("active",1)->where("country_id",$request->country)->find($request->governorate)){
+                    if(!City::where("active",1)->where("governorate_id",$request->governorate)->where("country_id",$request->country)->find($request->city)){
+                        return $this->errorMessage('City not found');
+                    }
+                }else {
+                    return $this->errorMessage('Governorate not found');
+                }
+            }else {
+                return $this->errorMessage('Country not found');
+            }
+            if((Badges::where("active",1)->find($request->badgeList))->count() != count($request->badgeList)){
+                return $this->errorMessage('Badges not found');
+            }
+            if((Feature::where("active",1)->find($request->featureList))->count() != count($request->featureList)){
+                return $this->errorMessage('Features not found');
+            }
+
+            $credentials = $this->credentials($request);
+            $car = Car::create($credentials);
+            $alert=Alert::where("car_id",$car->id)->where("user_id",Auth()->id())->update([
+                "status"=>$request->status
             ]);
+            if(!$alert){
+                Alert::create([
+                    "car_id"=>$car->id,
+                    "user_id"=>Auth()->id(),
+                    "status"=> ($request->isAlertBefore=="true") ? Car::Alert : Car::NotAlert
+                ]);
+            }
+
+            foreach($credentials['CarPhotos'] as $key=>$img){
+                car_img::create([
+                    'car_id'=>$car->id,
+                    'img_id'=>$img
+                ]);
+            }
+            foreach($request->badgeList as $key=>$badge){
+                car_badge::create([
+                    'car_id'=>$car->id,
+                    'badge_id'=>$badge
+                ]);
+            }
+            foreach($request->featureList as $key=>$feature){
+                car_feature::create([
+                    'car_id'=>$car->id,
+                    'feature_id'=>$feature
+                ]);
+            }
+            ListCarUser::create([
+                "user_id"=>Auth::user()->id,
+                "car_id"=>$car->id
+            ]);
+            $type   = new DataType();
+            $data=(new CarResource($car))->type($type::single);
+            return  $this->returnData('mCar',$data,__('Successfully'));
+
+        }else {
+            return $this->failed($validator);
         }
 
-        foreach($credentials['CarPhotos'] as $key=>$img){
-            car_img::create([
-                'car_id'=>$car->id,
-                'img_id'=>$img
-            ]);
-        }
-        foreach($request->badge_id as $key=>$badge){
-            car_badge::create([
-                'car_id'=>$car->id,
-                'badge_id'=>$badge
-            ]);
-        }
-        foreach($request->feature_id as $key=>$feature){
-            car_feature::create([
-                'car_id'=>$car->id,
-                'feature_id'=>$feature
-            ]);
-        }
-        ListCarUser::create([
-            "user_id"=>Auth::user()->id,
-            "car_id"=>$car->id
-        ]);
     }
+    public function edit(Request $request){
 
-    public static function rules($request,$id = NULL)
+        $validator=$this->Validator($request,$this->rules(true));
+        if (!$validator->fails()) {
+            if(!$car=Car::find($request->car_id)){
+                return $this->errorMessage('Car ID not found');
+            }
+            if($request->has("imageList")){
+                $check=$this->checkMultipleImage($request->imageList);
+                if (!$check) {
+                    return $this->errorMessage('wrong images');
+                }
+            }
+            if($maker=CarMaker::where("active",1)->find($request->carMaker)){
+                if(!CarModel::where("active",1)->where("CarMaker_id",$maker->id)->find($request->carModel)){
+                    return $this->errorMessage('Car Model not found');
+                }
+            }
+            else {
+                return $this->errorMessage('Car Maker not found');
+            }
+
+            if(!CarYear::find($request->carYear)){
+                return $this->errorMessage('Year of manufacture not found');
+            }
+
+            if(!CarManufacture::find($request->carManufacturing)){
+                return $this->errorMessage('Manufacturing not found');
+            }
+            if(!CarCapacity::find($request->carCapacity)){
+                return $this->errorMessage('Capacity not found');
+            }
+            if(!CarBody::find($request->bodyStyle)->where("active",1)){
+                return $this->errorMessage('Car Body not found');
+            }
+            if(!CarColor::find($request->color)){
+                return $this->errorMessage('Car Color not found');
+            }
+            if(Country::where("active",1)->find($request->country)){
+                if(Governorate::where("active",1)->where("country_id",$request->country)->find($request->governorate)){
+                    if(!City::where("active",1)->where("governorate_id",$request->governorate)->where("country_id",$request->country)->find($request->city)){
+                        return $this->errorMessage('City not found');
+                    }
+                }else {
+                    return $this->errorMessage('Governorate not found');
+                }
+            }else {
+                return $this->errorMessage('Country not found');
+            }
+            if((Badges::where("active",1)->find($request->badgeList))->count() != count($request->badgeList)){
+                return $this->errorMessage('Badges not found');
+            }
+            if((Feature::where("active",1)->find($request->featureList))->count() != count($request->featureList)){
+                return $this->errorMessage('Features not found');
+            }
+
+            if($request->has("imageList")){
+                $CarPhotos=car_img::where('car_id', '=', $car->id)->get();
+                $credentials = $this->credentials($request,$CarPhotos);
+                foreach($credentials['CarPhotos'] as $key=>$img){
+                    car_img::create([
+                        'car_id'=>$car->id,
+                        'img_id'=>$img
+                    ]);
+                }
+            }else {
+                $credentials = $this->credentials($request);
+            }
+
+
+            $car->update($credentials);
+            $alert=Alert::where("car_id",$car->id)->where("user_id",Auth()->id())->update([
+                "status"=>$request->status
+            ]);
+            if(!$alert){
+                Alert::create([
+                    "car_id"=>$car->id,
+                    "user_id"=>Auth()->id(),
+                    "status"=> ($request->isAlertBefore=="true") ? Car::Alert : Car::NotAlert
+                ]);
+            }
+            $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
+            foreach($CarBadges as $key=>$badge){
+                $badge->delete();
+            }
+            foreach($request->badgeList as $key=>$badge){
+                car_badge::create([
+                    'car_id'=>$car->id,
+                    'badge_id'=>$badge
+                ]);
+            }
+            $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
+            foreach($CarFeatures as $key=>$feature){
+                $feature->delete();
+            }
+            foreach($request->featureList as $key=>$feature){
+                car_feature::create([
+                    'car_id'=>$car->id,
+                    'feature_id'=>$feature
+                ]);
+            }
+            $alert=Alert::where("car_id",$car->id)->where("user_id",Auth()->id())->update([
+                "status"=>$request->status
+            ]);
+            if(!$alert){
+                Alert::create([
+                    "car_id"=>$car->id,
+                    "user_id"=>Auth()->id(),
+                    "status"=> ($request->isAlertBefore=="true") ? Car::Alert : Car::NotAlert
+                ]);
+            }
+            $list_car_user=ListCarUser::where("car_id",$car->id)->where("user_id",Auth()->id())->update([
+                "user_id"=>Auth::user()->id,
+                "car_id"=>$car->id
+            ]);
+            if(!$list_car_user){
+                ListCarUser::create([
+                    "user_id"=>Auth::user()->id,
+                    "car_id"=>$car->id
+                ]);
+            }
+            $type   = new DataType();
+            $data=(new CarResource($car))->type($type::single);
+            return  $this->returnData('mCar',$data,__('Successfully'));
+
+        }else {
+            return $this->failed($validator);
+        }
+    }
+    public static function rules($update=null)
     {
         $rules = [
             'carMaker'                 => 'required|integer',
@@ -387,13 +591,11 @@ class CarsController extends Controller
             'carCapacity'              => 'required|integer',
             'price'                    => 'required|integer',
             'discount'                 => 'nullable|integer|between:1,100',
-            'isAccident'               => 'required|boolean',
-            'isAlertBefore'            => 'required|boolean',
+            'isAccident'               => 'required|in:false,true',
+            'isAlertBefore'            => 'required|in:false,true',
             'used_kilometers'          => 'required|integer',
             'bodyStyle'                => 'required|integer',
             'color'                    => 'required|integer',
-            'badgeList'                => 'required|array|min:1',
-            'featureList'              => 'required|array|min:1',
             'description'              => 'required|string|min:3|max:1000',
             'description_ar'           => 'required|string|min:3|max:1000',
             'country'                  => 'required|integer',
@@ -401,36 +603,43 @@ class CarsController extends Controller
             'city'                     => 'required|integer',
             'mLocation_latitude'       => 'required|numeric',
             'mLocation_longitude'      => 'required|numeric',
+            'badgeList'                => 'required|array|min:1',
+            'badgeList.*'              => 'required|integer',
+            'featureList'              => 'required|array|min:1',
+            'featureList.*'            => 'required|integer',
             'serviceHistory'           => 'required|string|min:3|max:1000',
-            'transmission'             => 'required|in:Automatic,Manual,أوتوماتيكي,يدوي',
-            'carState'                 => 'required|in:Used,New,مستعملة,جديدة',
-            'payment_method'           => 'required|in:Cash,Installment,Financing,نقدي,تقسيط,مالي',
+            'transmission'             => 'required|integer|between:0,1',
+            'carState'                 => 'required|integer|between:0,1',
+            'payment_method'           => 'required|integer|between:0,2',
             'adsExpire'                => 'required|date',
-            "carFuelType"              => 'required|in:Petrol,Gas,بيترول,غاز',
+            "carFuelType"              => 'required|integer|between:0,1',
             'mContact_phone'           => 'required|string',
             'mContact_whats'           => 'required|string',
             'payment_deposit'          => 'required|integer',
-            'payment_loan_amount'      => 'required|string',
-            'payment_loan_period'      => 'required|string',
-            'imageList'                => 'required|max:5',
-            'imageList.*'              => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'payment_loan_amount'      => 'required|integer',
+            'payment_loan_period'      => 'required|integer',
+            'imageList'                => 'required|array|min:1|max:5',
+
         ];
+        if($update){
+            $rules['imageList'] ='nullable|array|min:1|max:5';
+            $rules['car_id']='required|integer';
+        }
         return $rules;
     }
-    public function credentials($request){
+
+    public function credentials($request,$update=null){
+       $credentials=[
         'CarMaker_id'                 => $request->carMaker,
         'CarModel_id'                 => $request->carModel,
         'CarYear_id'                  => $request->carYear,
         'CarManufacture_id'           => $request->carManufacturing,
         'CarCapacity_id'              => $request->carCapacity,
         'price'                       => $request->price,
-        'price_after_discount'        => $request->discount,
-        'AccidentBefore'              => $request->isAccident ? Car::AccidentBefore: Car::NotAccidentBefore,
+        'AccidentBefore'              => ($request->isAccident=='true') ? Car::AccidentBefore: Car::NotAccidentBefore,
         'kiloUsed'                    => $request->used_kilometers,
         'CarBody_id'                  => $request->bodyStyle,
         'CarColor_id'                 => $request->color,
-        'badge_id'                    => $request->badgeList,
-        'feature_id'                  => $request->featureList,
         'Description'                 => $request->description,
         'Description_ar'              => $request->description_ar,
         'Country_id'                  => $request->country,
@@ -438,12 +647,12 @@ class CarsController extends Controller
         'City_id'                     => $request->city,
         'lat'                         => $request->mLocation_latitude,
         'lng'                         => $request->mLocation_longitude,
-        'serviceHistory'              => $request->serviceHistory,
-        'transmission'                => ($request->transmission == __("Manual")) ? Car::TRANSIMSSION_MANUAL: Car::TRANSIMSSION_AUTOMATIC,
-        'isNew'                       => ($request->carState == __("Used")) ? Car::IS_USED: Car::IS_NEW,
-        'payment'                     => $this->PaymentType($request->payment_method),
-        'adsExpire'                   => $request->adsExpire,
-        "FuelType"                    => ($request->carFuelType == __("Petrol")) ? Car::FUEL_PETROL: Car::FUEL_GAS,
+        'ServiceHistory'              => $request->serviceHistory,
+        'transmission'                => $request->transmission,
+        'isNew'                       => $request->carState,
+        'payment'                     => $request->payment_method,
+        'adsExpire'                   => date("Y-m-d",strtotime($request->adsExpire)),
+        "FuelType"                    => $request->carFuelType,
         'phone'                       => $request->mContact_phone,
         'whats'                       => $request->mContact_whats,
         'DepositPrice'                => $request->payment_deposit,
@@ -452,16 +661,59 @@ class CarsController extends Controller
         'SellerType'                  => Auth()->user()->Agency ? Car::SELLER_AGENCY: Car::SELLER_INDIVIDUAL,
         'views'                       => 0,
         'status'                      => Car::STATUS_ACTIVE,
-        'user_id'                     => Auth()->user()->id
-        'CarPhotos'                   => $request->carMaker,
-        'CarPhotos.*'                 => $request->carMaker
+        'user_id'                     => Auth()->user()->id,
+       ];
+
+        if($request->has("imageList")){
+            if($update){
+                foreach($request->imageList as $file){
+                    $Image_id = User::fileApi($file);
+                    $credentials['CarPhotos'][]= $Image_id;
+                }
+                foreach($update as $key=>$photo){
+                    $this->Updated_file($photo);
+                }
+            }else {
+                foreach($request->imageList as $file){
+                    $Image_id = User::fileApi($file);
+                    $credentials['CarPhotos'][]= $Image_id;
+                }
+            }
+
+        }
+
+        if ($request->discount) {
+            $credentials['price_after_discount']=$request->discount;
+        }else {
+            $credentials['price_after_discount']=0;
+        }
+       return $credentials;
     }
-    public static function PaymentType()
+
+    public function checkMultipleImage($files)
     {
-        return [
-            __('Cash')         => Car::PAYMENT_CASH,
-            __('Installment')  => Car::PAYMENT_INSTALLMENT,
-            __('Financing')    => Car::PAYMENT_FINANCING  ,
-        ];
+
+        foreach($files as $file){
+            if(!$this->checkImage($file))
+                return false;
+        }
+        return true;
+    }
+    public static function Updated_file($file)
+    {
+        $Image=Image::find($file->img_id);
+        if($Image){
+            $destinationPath = public_path() . $Image->base;
+            try {
+                $file_old = $destinationPath.$Image->name;
+                unlink($file_old);
+            } catch (Exception $e) {
+
+
+            }
+            $Image->delete();
+        }
+
+        return true;
     }
 }

@@ -71,9 +71,10 @@ class CarResource extends JsonResource
     public function common(){
 
         $price= $this->price-($this->price_after_discount*0.01*($this->price));
+
         $images=[];
         foreach($this->images as $item){
-            $images[]=url('img/Cars/'.Image::find($item->img_id)->name);
+            $images[]=find_image(Image::find($item->img_id));
         }
         $data=[
             "carMaker"=>@$this->model->name,

@@ -72,7 +72,7 @@ use Illuminate\Support\Facades\Session;
                     $src = site_base().$img->base.@$img->name;
                 }
             }elseif(@$img->name){
-                $src = url($base.@$img->name);
+                $src = url($img->base.@$img->name);
             }
             return $src;
         }

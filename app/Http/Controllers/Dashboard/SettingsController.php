@@ -106,12 +106,11 @@ class SettingsController extends Controller
     }
     public static function file($file,$id)
     {
-
+        $Image = Image::find($id);
         $extension = $file->getClientOriginalExtension();
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
-        $destinationPath = public_path() . '/img/settings/';
+        $destinationPath = public_path() . $Image->base;
         $file->move($destinationPath, $fileName);
-        $Image = Image::find($id);
         //Delete Old image
         try {
             $file_old = $destinationPath.$Image->name;

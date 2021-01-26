@@ -331,6 +331,8 @@
     "Financing":"تمويل",
     "Login to see your favorite":"تسجيل الدخول لرؤية المفضلة لديك",
     "Country not found":"البلد غير موجودة",
+    "Governorate not found":"المحافظة غير موجودة",
+    "City not found":"المدينة غير موجودة",
     "Add Subscription item":"اضافة عنصر اشتراك",
     "Edit Subscription item":"تعديل عنصر اشتراك",
     "period":"الفترة",
@@ -477,5 +479,14 @@
     "Select Cars":"اختر السيارات المتاحة",
     "Edit Trend":"تعديل السيارات الشائعة",
     "Trending":"الشائعة",
-    "view Trends":"عرض السيارات الشائعة"
+    "view Trends":"عرض السيارات الشائعة",
+    "Car Maker not found":"صانع السيارة عير موجود",
+    "Car Model not found":"موديل السيارة غير موجود",
+    "Year of manufacture not found":"سنة التصنيع غير موجودة",
+    "Manufacturing not found":"الشركة المصنعة غير موجودة",
+    "Capacity not found":"سعة السيارة غير موجودة",
+    "Car Body not found":"مجسم السيارة غير موجود",
+    "Car Color not found":"لون السيارة غير موجود",
+    "Badges not found":"الشارات غير موجودة",
+    "Features not found":"الميزات غير موجودة"
 }

@@ -97,7 +97,7 @@ class Insurance_offer extends Model
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName]);
+            $Image = Image::create(['name' => $fileName,'base'=>'/img/insurance/offer/']);
             return $Image->id;
         }
 
