@@ -182,13 +182,14 @@ class HomeDataController extends Controller
 
         if($Mylist->count()){
             $agencyList     = Agency::whereHas('carMakers', function ($query) use ($forSuggest) {
-                return $query->whereIn('agency_car_makers.CarMaker_id',$forSuggest)->take(5)->get();
+                return $query->whereIn('agency_car_makers.CarMaker_id',$forSuggest)->take(5);
             });
+            $agencyList = $agencyList->get();
         }else{
-            $agencyList     = Agency::all()->random(3);
+            $agencyList     = Agency::all()->random(5);
         }
-        dd($agencyList);
-        $agencies = [];
+        $agencies   = [];
+
         foreach ($agencyList as $agency) {
             list($Max,$Min)     = $this->PriceRange($agency);
             $agencies[]     =[
