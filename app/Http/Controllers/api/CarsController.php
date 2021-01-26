@@ -418,6 +418,7 @@ class CarsController extends Controller
         return $rules;
     }
     public function credentials($request){
+        $credentials =[
         'CarMaker_id'                 => $request->carMaker,
         'CarModel_id'                 => $request->carModel,
         'CarYear_id'                  => $request->carYear,
@@ -452,9 +453,11 @@ class CarsController extends Controller
         'SellerType'                  => Auth()->user()->Agency ? Car::SELLER_AGENCY: Car::SELLER_INDIVIDUAL,
         'views'                       => 0,
         'status'                      => Car::STATUS_ACTIVE,
-        'user_id'                     => Auth()->user()->id
+        'user_id'                     => Auth()->user()->id,
         'CarPhotos'                   => $request->carMaker,
         'CarPhotos.*'                 => $request->carMaker
+        ];
+        return $credentials;
     }
     public static function PaymentType()
     {

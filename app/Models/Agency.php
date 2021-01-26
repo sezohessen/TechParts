@@ -157,7 +157,7 @@ class Agency extends Model
     }
     public function carMakers()
     {
-        return $this->belongsToMany(CarMaker::class, 'agency_car_makers', 'agency_id','CarMaker_id')->where('active', '=', 1);
+        return $this->belongsToMany(CarMaker::class, 'agency_car_makers', 'agency_id','CarMaker_id')->where('active', 1);
     }
     public function Car()/* CarModel_id */
     {
@@ -167,7 +167,7 @@ class Agency extends Model
     {
         return $this->belongsToMany(Specialties::class, 'agency_specialties', 'agency_id','specialty_id');
     }
-  
+
     public static function rules($request,$id = NULL)
     {
         $rules = [

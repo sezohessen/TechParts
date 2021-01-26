@@ -21,7 +21,6 @@ use App\Classes\Responseobject;
 use App\Models\Car;
 use App\Models\UserFav_car;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\ToArray;
 
 class AgencyController extends Controller
 {
@@ -543,7 +542,7 @@ class AgencyController extends Controller
             $fav    = UserFavAgency::where('agency_id',$agency->id)
             ->where('user_id',auth()->user()->id)
             ->first();
-            if($fav->count()){
+            if($fav){
                 $isFavorite = true;
             }
         }

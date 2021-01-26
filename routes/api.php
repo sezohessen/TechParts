@@ -36,7 +36,11 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::group(['prefix' => 'general'], function () {
         Route::post("upload_file",'generalController@upload_file');
     });
-
+    Route::post("home/complete_data",'HomeDataController@completeData');
+    Route::group(['prefix' => 'my_maintenance'], function () {
+        Route::post("create_new_maintenance",'HomeDataController@createNewMaintenance');
+        Route::post("get_list",'HomeDataController@get_list');
+    });
     Route::post("ask_expoert",'AskExpertController@create');
     Route::group(['prefix' => 'car'], function () {
         Route::post("details",'CarsController@show');
@@ -56,6 +60,12 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
 
 
 });
+
+Route::group(['prefix' => 'finance','namespace'=>'api'], function () {
+    Route::post("filter",'BankController@filter');
+    Route::post("home",'BankController@home');
+});
+
 Route::group(['prefix' => 'data','namespace'=>'api'], function () {
     Route::group(['prefix' => 'dynamic'], function () {
         Route::post("faq_all",'dynamicController@faq');
@@ -71,6 +81,7 @@ Route::group(['prefix' => 'data','namespace'=>'api'], function () {
     });
 });
 Route::post("news/home",'api\NewsController@filter');
+
 
 Route::post("news",'api\NewsController@show');
 Route::group(['prefix' => 'insurance','namespace'=>'api'], function () {
