@@ -80,7 +80,7 @@ class User extends Authenticatable
         }
         if ($edit_profile) {
            $rules['email'] = 'required|string|email|max:255|unique:users,email,'.$edit_profile;
-           $rules['phone'] = 'required|string|max:255|unique:users,phone,'.$edit_profile;
+           //$rules['phone'] = 'required|string|max:255|unique:users,phone,'.$edit_profile;
         }else {
             $rules['email'] = 'required|string|email|max:255|unique:users';
             $rules['phone'] = 'required|string|max:255|unique:users';
@@ -94,10 +94,10 @@ class User extends Authenticatable
             'first_name'                        => $request->first_name,
             'last_name'                         => $request->last_name,
             'email'                             => $request->email,
-            'phone'                             => $request->phone,
         ];
         if (!$edit_profile) {
             $credentials['password'] =Hash::make($request->password);
+            $credentials['phone'] = $request->phone;
         }
         if (!$api) {
             if($request->file('image')){
@@ -127,7 +127,7 @@ class User extends Authenticatable
                 $credentials['country_code'] = $country->code;
                 $credentials['country_phone'] = $country->country_phone;
             }else {
-                $credentials['country_code'] = $request->code;
+                $credentials['country_code'] = $request->country_code;
                 $credentials['country_phone'] = $request->country_number;
             }
         }

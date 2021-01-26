@@ -64,9 +64,9 @@ trait GeneralTrait {
             "msg"=>'validation failed'
         ];
         if (!empty($messages)) {
-            foreach ($messages as $key => $value) {
-                $data[$key] = $value;
-            }
+            $data["msg"] = array_values($messages)[0][0];
+        } else {
+            $data["msg"] = 'validation failed';
         }
         return response()->json($data);
     }
