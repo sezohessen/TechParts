@@ -50,6 +50,11 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("insurance/create_request",'InsuranceRequestController@insurance');
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
 
+    Route::group(['prefix' => 'sell_car'], function () {
+        Route::post("create",'CarsController@create');
+    });
+
+
 });
 Route::group(['prefix' => 'data','namespace'=>'api'], function () {
     Route::group(['prefix' => 'dynamic'], function () {
@@ -111,10 +116,8 @@ Route::group(['prefix' => 'car','namespace'=>"api"], function () {
     Route::post("promote/get_promote_package",'CarsController@promote_package');
 });
 Route::group(['prefix' => 'sell_car','namespace'=>"api"], function () {
-
     Route::post("copy",'CarsController@copy');
     Route::post("delete",'CarsController@delete');
-    Route::post("create",'CarsController@create');
 
 });
 

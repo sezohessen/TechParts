@@ -41,7 +41,7 @@ class generalController extends Controller
                 break;
 
             case 'car':
-                $type_of_page ='/img/users/';
+                $type_of_page ='/img/cars/';
                 break;
 
             default:

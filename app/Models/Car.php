@@ -14,8 +14,8 @@ class Car extends Model
     use LogsActivity;
     protected $table    = 'cars';
 
-    const TRANSIMSSION_MANUAL  = 0;
-    const TRANSIMSSION_AUTOMATIC = 1;
+    const TRANSIMSSION_AUTOMATIC  = 0;
+    const TRANSIMSSION_MANUAL = 1;
 
     const PAYMENT_CASH  = 0;
     const PAYMENT_INSTALLMENT = 1;
@@ -34,6 +34,11 @@ class Car extends Model
     const SELLER_AGENCY=0;
     const SELLER_INDIVIDUAL=1;
 
+    const NotAccidentBefore=0;
+    const AccidentBefore=1;
+
+    const NotAlert=0;
+    const Alert=1;
     protected static $logAttributes = ['phone','Country_id', 'SellerType'];
     protected $fillable=[
         'price', 'price_after_discount','Description', 'Description_ar',

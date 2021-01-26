@@ -4,18 +4,20 @@ namespace App\Http\Controllers\api;
 
 use App\Models\Car;
 
+use App\Models\Alert;
 use App\Models\car_img;
 use App\Models\Country;
 use App\Models\car_badge;
 use App\Models\PromoteCar;
 use App\Models\car_deposit;
 use App\Models\car_feature;
+use App\Models\ListCarUser;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Classes\Responseobject;
+
 use function PHPSTORM_META\type;
 use App\Models\subscribe_package;
-
 use App\Http\Resources\CarResource;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -24,7 +26,6 @@ use App\Http\Resources\CarCollection;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use App\Http\Resources\SubscribeResource;
-use App\Models\Alert;
 use Illuminate\Support\Facades\Validator as Validator;
 
 class DataType {
@@ -298,6 +299,10 @@ class CarsController extends Controller
                     'feature_id'=>$feature->feature_id
                 ]);
             }
+            ListCarUser::create([
+                "user_id"=>$new_car->user->id,
+                "car_id"=>$new_car->id
+            ]);
             $car=Car::find($new_car->id);
             $type   = new DataType();
             $data=(new CarResource($car))->type($type::single);
@@ -333,7 +338,43 @@ class CarsController extends Controller
         }
     }
     public function create(Request $request){
-        return 1;
+        $rules =$this->rules($request);
+        $request->validate($rules);
+        $credentials = $this->credentials($request);
+        $car = Car::create($credentials);
+        $alert=Alert::where("car_id",$request->car_id)->where("user_id",Auth()->id())->update([
+            "status"=>$request->status
+        ]);
+        if(!$alert){
+            Alert::create([
+                "car_id"=>$request->car_id,
+                "user_id"=>Auth()->id(),
+                "status"=> $request->isAlertBefore ? Car::Alert: Car::NotAlert
+            ]);
+        }
+
+        foreach($credentials['CarPhotos'] as $key=>$img){
+            car_img::create([
+                'car_id'=>$car->id,
+                'img_id'=>$img
+            ]);
+        }
+        foreach($request->badge_id as $key=>$badge){
+            car_badge::create([
+                'car_id'=>$car->id,
+                'badge_id'=>$badge
+            ]);
+        }
+        foreach($request->feature_id as $key=>$feature){
+            car_feature::create([
+                'car_id'=>$car->id,
+                'feature_id'=>$feature
+            ]);
+        }
+        ListCarUser::create([
+            "user_id"=>Auth::user()->id,
+            "car_id"=>$car->id
+        ]);
     }
 
     public static function rules($request,$id = NULL)
@@ -342,40 +383,85 @@ class CarsController extends Controller
             'carMaker'                 => 'required|integer',
             'carModel'                 => 'required|integer',
             'carYear'                  => 'required|integer',
-            'carManufacturing'           => 'required|integer',
+            'carManufacturing'         => 'required|integer',
             'carCapacity'              => 'required|integer',
-            'price'                       => 'required|integer',
-            'discount'        => 'nullable|integer|between:1,100',
-            'isAccident'              => 'required|integer',
-            'used_kilometers'                    => 'required|integer',
-            'bodyStyle'                  => 'required|integer',
-            'color'                 => 'required|integer',
-            'badgeList'                    => 'required|array|min:1',
-            'featureList'                  => 'required|array|min:1',
-            'description'                 => 'required|string|min:3|max:1000',
-            'description_ar'              => 'required|string|min:3|max:1000',
+            'price'                    => 'required|integer',
+            'discount'                 => 'nullable|integer|between:1,100',
+            'isAccident'               => 'required|boolean',
+            'isAlertBefore'            => 'required|boolean',
+            'used_kilometers'          => 'required|integer',
+            'bodyStyle'                => 'required|integer',
+            'color'                    => 'required|integer',
+            'badgeList'                => 'required|array|min:1',
+            'featureList'              => 'required|array|min:1',
+            'description'              => 'required|string|min:3|max:1000',
+            'description_ar'           => 'required|string|min:3|max:1000',
             'country'                  => 'required|integer',
             'governorate'              => 'required|integer',
             'city'                     => 'required|integer',
-            'mLocation_latitude'                         => 'required|numeric',
-            'mLocation_longitude'                         => 'required|numeric',
-            'serviceHistory'              => 'required|string|min:3|max:1000',
-            'transmission'                => 'required|integer',
-            'carState'                       => 'required|integer',
-            'SellerType'                  => 'required|integer',
-            'payment_method'                     => 'required|integer',
-            'mContact_phone'                       => 'required|string',
-            'payment_deposit'                => 'required|string',
-            'payment_loan_amount'            => 'required|integer',
-            'payment_loan_period'            =>  ['required', new periodValidate],
-            'CarPhotos'                   => 'required|max:5',
-            'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
-            "whats"                       => 'required|string',
+            'mLocation_latitude'       => 'required|numeric',
+            'mLocation_longitude'      => 'required|numeric',
+            'serviceHistory'           => 'required|string|min:3|max:1000',
+            'transmission'             => 'required|in:Automatic,Manual,أوتوماتيكي,يدوي',
+            'carState'                 => 'required|in:Used,New,مستعملة,جديدة',
+            'payment_method'           => 'required|in:Cash,Installment,Financing,نقدي,تقسيط,مالي',
+            'adsExpire'                => 'required|date',
+            "carFuelType"              => 'required|in:Petrol,Gas,بيترول,غاز',
+            'mContact_phone'           => 'required|string',
+            'mContact_whats'           => 'required|string',
+            'payment_deposit'          => 'required|integer',
+            'payment_loan_amount'      => 'required|string',
+            'payment_loan_period'      => 'required|string',
+            'imageList'                => 'required|max:5',
+            'imageList.*'              => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
         ];
-        if($id){
-            $rules['CarPhotos'] = 'nullable';
-            $rules['CarPhotos.*'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
-        }
         return $rules;
+    }
+    public function credentials($request){
+        'CarMaker_id'                 => $request->carMaker,
+        'CarModel_id'                 => $request->carModel,
+        'CarYear_id'                  => $request->carYear,
+        'CarManufacture_id'           => $request->carManufacturing,
+        'CarCapacity_id'              => $request->carCapacity,
+        'price'                       => $request->price,
+        'price_after_discount'        => $request->discount,
+        'AccidentBefore'              => $request->isAccident ? Car::AccidentBefore: Car::NotAccidentBefore,
+        'kiloUsed'                    => $request->used_kilometers,
+        'CarBody_id'                  => $request->bodyStyle,
+        'CarColor_id'                 => $request->color,
+        'badge_id'                    => $request->badgeList,
+        'feature_id'                  => $request->featureList,
+        'Description'                 => $request->description,
+        'Description_ar'              => $request->description_ar,
+        'Country_id'                  => $request->country,
+        'Governorate_id'              => $request->governorate,
+        'City_id'                     => $request->city,
+        'lat'                         => $request->mLocation_latitude,
+        'lng'                         => $request->mLocation_longitude,
+        'serviceHistory'              => $request->serviceHistory,
+        'transmission'                => ($request->transmission == __("Manual")) ? Car::TRANSIMSSION_MANUAL: Car::TRANSIMSSION_AUTOMATIC,
+        'isNew'                       => ($request->carState == __("Used")) ? Car::IS_USED: Car::IS_NEW,
+        'payment'                     => $this->PaymentType($request->payment_method),
+        'adsExpire'                   => $request->adsExpire,
+        "FuelType"                    => ($request->carFuelType == __("Petrol")) ? Car::FUEL_PETROL: Car::FUEL_GAS,
+        'phone'                       => $request->mContact_phone,
+        'whats'                       => $request->mContact_whats,
+        'DepositPrice'                => $request->payment_deposit,
+        'InstallmentAmount'           => $request->payment_loan_amount,
+        'InstallmentPeriod'           => $request->payment_loan_period,
+        'SellerType'                  => Auth()->user()->Agency ? Car::SELLER_AGENCY: Car::SELLER_INDIVIDUAL,
+        'views'                       => 0,
+        'status'                      => Car::STATUS_ACTIVE,
+        'user_id'                     => Auth()->user()->id
+        'CarPhotos'                   => $request->carMaker,
+        'CarPhotos.*'                 => $request->carMaker
+    }
+    public static function PaymentType()
+    {
+        return [
+            __('Cash')         => Car::PAYMENT_CASH,
+            __('Installment')  => Car::PAYMENT_INSTALLMENT,
+            __('Financing')    => Car::PAYMENT_FINANCING  ,
+        ];
     }
 }
