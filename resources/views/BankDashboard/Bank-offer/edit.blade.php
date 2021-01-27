@@ -11,11 +11,11 @@
                 {{ $page_title }}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.bank-offer.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route('bank.bank-offer.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{ route('dashboard.bank-offer.update',$bank_offer->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('bank.bank-offer.update',$bank_offer->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="card-body">
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <label for="valid_till">@lang('Offer expiration date')</label>
                             <div class="input-group">
-                             <input class="form-control" name="valid_till"
+                             <input name="valid_till"
                              value="{{ old('valid_till') ? old('valid_till') :$bank_offer->valid_till }}" type="date" id="valid_till"  required
                              class="form-control {{ $errors->has('valid_till') ? 'is-invalid' : '' }}" />
                              @error('valid_till')
@@ -148,7 +148,7 @@
                             <label for="Image">@lang('Offer image')</label>
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo_id"
-                                style="background-image: url({{asset('img/bank-offer/'.$bank_offer->img->name) }})">
+                                style="background-image: url({{find_image($bank_offer->img , 'img/bank-offer/') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                     data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">

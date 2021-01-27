@@ -18,8 +18,8 @@
     "--Select user--":"--اختر مستخدم--",
     "Insurance offer title(ENG)":"عنوان عرض التأمين (بالانجليزية)",
     "Insurance offer title(AR)":"عنوان عرض التأمين (بالعربية)",
-    "Bank offer title(ENG)":"(بالاجليزية) عنوان عرض البنك",
-    "Bank offer title(AR)":"(بالعربية) عنوان عرض البنك",
+    "Bank offer title(ENG)":"عنوان عرض البنك (بالانجليزية)",
+    "Bank offer title(AR)":"عنوان عرض البنك (بالعربية)",
     "Select Insurance Company Name":"اختر اسم شركة التأمين",
     "Select Bank Name":"اختر اسم البنك",
     "--Select Insurance--":"اختر تامين",
@@ -566,5 +566,7 @@
     "Edit insurance company":"تعديل شركة التأمين",
     "Edit insurance offer":"تعديل عرض التأمين",
     "Edit insurance offer record":"تعديل سجل عرض التأمين",
-    "Edit offer plan":"تعديل خطة العرض"
+    "Edit offer plan":"تعديل خطة العرض",
+    "Bank Dashboard":"لوحة تحكم البنك",
+    "View bank record":"عرض سجل البنك"
 }

@@ -81,8 +81,8 @@ class BankController extends Controller
         $bank           = Bank::find($id);
         $bank_contact   = BankContact::where('bank_id',$id)->first();
         if($bank && Auth::id() ==$bank->user_id){
-            $page_title = "Edit Bank";
-            $page_description = "Edit";
+            $page_title = __("Edit Bank");
+            $page_description = __("Edit");
             return view('BankDashboard.Bank.edit', compact('page_title', 'page_description','bank','bank_contact'));
         }else{
             return view('BankDashboard.Bank.index', compact('page_title', 'page_description'));
