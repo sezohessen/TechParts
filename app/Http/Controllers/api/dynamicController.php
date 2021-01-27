@@ -195,7 +195,7 @@ class dynamicController extends Controller
         if (!$validator->fails()) {
             $data=new CarMakerCollection(
                 CarMaker::where("active",1)
-                ->Where('name', 'LIKE', $request->word)
+                ->Where('name', 'LIKE', '%'.$request->word.'%')
                 ->paginate(10));
             return $data;
         }else {
@@ -212,7 +212,7 @@ class dynamicController extends Controller
                 CarModel::
                 where(function($query)use($request) {
                     return $query->where('active', 1)
-                        ->Where('name', 'LIKE',  $request->word);
+                        ->Where('name', 'LIKE',  '%'.$request->word.'%');
                 })
 
                 ->orWhere( function($query)use($request) {
