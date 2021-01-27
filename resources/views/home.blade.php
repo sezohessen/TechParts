@@ -13,8 +13,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                    Now return back to Application to make login
+                    {{ __('Now return back to Application to make login') }}
                 </div>
             </div>
         </div>

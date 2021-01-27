@@ -177,6 +177,9 @@ class dynamicController extends Controller
     public function maker(Request $request){
         $this->lang_optional($request->lang);
         $data=new CarMakerCollection(CarMaker::where("active",1)->paginate(10));
+        if (empty($data)) {
+            return $this->errorMessage('No Data Found');
+        }
         return $data;
     }
     public function model(Request $request){

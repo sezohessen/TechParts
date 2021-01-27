@@ -32,13 +32,15 @@ class HomeDataController extends Controller
     public function completeData(Request $request)
     {
         $this->lang($request);
-        $validator      = Validator::make((array) $request->all(), ['interest_country'=>'required|integer','token'=>'required']);
+
+        $validator      = Validator::make((array) $request->all(), ['interest_country'=>'required|integer']);
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
         $agencyList     = Agency::where('country_id',$request->interest_country)
         ->where('show_in_home',1)
         ->get();
+
         if (!$agencyList->count()) {
             return $this->errorMessage(__("No Agencies in this interest country"));
         }
@@ -57,39 +59,52 @@ class HomeDataController extends Controller
                 "rate"          => $this->rate($agency),
             ];
         }
-        $user = auth()->user();
-        if(!$user){
-            return $this->errorField(__("token"));
+        //$user = auth()->user();
+        $user = auth('sanctum')->user();
+        if ($user) {
+            $user_data = [
+                "country_code"      => $user->country_code,
+                "country_number"    => $user->country_phone,
+                "email"             => $user->email,
+                "first_name"        => $user->first_name,
+                "image"             => find_image(@$user->image),
+                "is_phone_verified" => $user->is_phone_virefied ? true : false,
+                "last_name"         => $user->last_name,
+                "phone"             => $user->phone,
+                "role_id"           => $user->role ? $user->role->first()->name : 'user',
+                "token"             => $request->token ? $request->token : '',
+                "userId"            => $user->id
+            ];
+            if ($user->interestCountry) {
+                $data["interest_country"] =  $user->interestCountry->id;
+            }
+        }else {
+            $user_data = null;
         }
-        $data = [
-            "country_code"      => $user->country_code,
-            "country_number"    => $user->country_phone,
-            "email"             => $user->email,
-            "first_name"        => $user->first_name,
-            "image"             => find_image(@$user->image),
-            "is_phone_verified" => $user->is_phone_virefied ? true : false,
-            "last_name"         => $user->last_name,
-            "phone"             => $user->phone,
-            "role_id"           => $user->role ? $user->role->first()->name : 'user',
-            "token"             => $request->token ? $request->token : '',
-            "userId"            => $user->id
-        ];
-        if ($user->interestCountry) {
-            $data["interest_country"] =  Session::get('app_locale')=='ar'? $user->interestCountry->name_ar : $user->interestCountry->name;
-        }
-        $trendingCarList     = Trending::where('day',date("Y-m-d"))->get();
+
+
+        $trendingCarList     = Trending::where('day',date("Y-m-d"))->first();
         $trendingCars = [];
-        foreach ($trendingCarList as $car) {
-            $car            = $car->trend;
-            $type           = new DataType();
-            $trendingCars[]   = (new CarResource($car))->type($type::list);
+        if ($trendingCarList) {
+            if ($trendingCarList->trends) {
+                foreach ($trendingCarList->trends as $car) {
+                    $car            = $car;
+                    $type           = new DataType();
+                    $trendingCars[]   = (new CarResource($car))->type($type::list);
+                }
+            }
         }
-        $completeData   = [
-            "agencyList"        => $agencies,
-            "mUser"             => $data,
-            "trendingCarList"   => $trendingCars
-        ];
-        return $this->returnData("",$completeData,"Success");
+        $array_data = [];
+        if ($user_data) {
+            $array_data['mUser'] = $user_data;
+        }
+        if ($trendingCars) {
+            $array_data['trendingCarList'] = $trendingCars;
+        }
+        if (empty($agencies)) {
+            return $this->errorMessage('No Data Found');
+        }
+        return $this->returnData("agencyList",$agencies,"Success",$array_data);
     }
     public function createNewMaintenance(Request $request)
     {
