@@ -214,7 +214,7 @@ class dynamicController extends Controller
                     return $query->where('active', 1)
                         ->Where('name', 'LIKE',  $request->word);
                 })
-                
+
                 ->orWhere( function($query)use($request) {
                     return $query->where('active', 1)
                         ->Where('CarMaker_id', $request->car_maker);

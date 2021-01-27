@@ -15,7 +15,7 @@ class CarModelCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data'=>parent::toArray($request),
+            'carModelList'=>parent::toArray($request),
             'status'=>true,
             "msg"=>__('Successfully')
         ];
