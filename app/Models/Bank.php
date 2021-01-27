@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bank extends Model
 {
+
     use HasFactory;
     protected $table    = 'banks';
     protected $fillable=[
@@ -19,6 +20,10 @@ class Bank extends Model
         'logo_id',
         'user_id'
     ];
+    //bank status
+    const Approved      = 'Approved';
+    const Pending       = 'Pending';
+    const Canceled      = 'Canceled';
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
     }
