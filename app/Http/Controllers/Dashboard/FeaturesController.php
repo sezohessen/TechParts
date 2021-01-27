@@ -26,15 +26,8 @@ class FeaturesController extends Controller
      */
     public function create()
     {
-         /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة ميزة";
-            $page_description = "اضافة ميزة جديدة";
-        } else {
-            $page_title = "Add Feature";
-            $page_description = "Add new Feature";
-        } */
-        $page_title = "Add Feature";
-        $page_description = "Add new Feature";
+        $page_title = __("Add Feature");
+        $page_description = __("Add new Feature");
         return view('dashboard.Feature.add', compact('page_title', 'page_description'));
     }
 
@@ -50,11 +43,6 @@ class FeaturesController extends Controller
         $request->validate($rules);
         $credentials = Feature::credentials($request);
         $Feature = Feature::create($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم اضافة الخاصية"));
-        } else {
-            session()->flash('success',__("Feature has been added!"));
-        } */
        session()->flash('success',__("Feature has been added!"));
        return redirect()->back();
     }
@@ -78,17 +66,11 @@ class FeaturesController extends Controller
      */
     public function edit($id)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "تعديل الخاصية";
-            $page_description = "تعديل";
-        } else {
-            $page_title = "Edit Feature";
-            $page_description = "Edit";
-        } */
-        $page_title = "Edit Feature";
-        $page_description = "Edit";
+        $page_title = __("Edit Feature");
+        $page_description = __("Edit");
         $feature = Feature::find($id);
-        return view('dashboard.Feature.edit', compact('page_title', 'page_description','feature'));
+        if($feature)return view('dashboard.Feature.edit', compact('page_title', 'page_description','feature'));
+        else return redirect()->route('dashboard.feature.index');
     }
 
     /**

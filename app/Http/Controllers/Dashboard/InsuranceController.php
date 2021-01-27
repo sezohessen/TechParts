@@ -31,8 +31,8 @@ class InsuranceController extends Controller
     public function create()
     {
 
-        $page_title = "Add insurance company";
-        $page_description = "Add new insurance company";
+        $page_title = __("Add insurance company");
+        $page_description = __("Add new insurance company");
         $users = User::all();
         return view('dashboard.Insurance.add', compact('page_title', 'page_description','users'));
     }

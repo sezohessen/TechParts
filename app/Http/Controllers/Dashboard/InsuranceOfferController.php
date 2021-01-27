@@ -27,8 +27,8 @@ class InsuranceOfferController extends Controller
      */
     public function create()
     {
-        $page_title = "Add insurance offer";
-        $page_description = "Add new insurance offer";
+        $page_title = __("Add insurance offer");
+        $page_description = __("Add new insurance offer");
         $Insurances = Insurance::all();
         return view('dashboard.Insurance-offer.add', compact('page_title', 'page_description','Insurances'));
     }

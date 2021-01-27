@@ -29,8 +29,8 @@ class BankOfferController extends Controller
     public function create()
     {
         $banks = Bank::all();
-        $page_title = "Add Bank offer";
-        $page_description = "Add new offer";
+        $page_title = __("Add Bank offer");
+        $page_description = __("Add new offer");
         return view('dashboard.Bank-offer.add', compact('page_title', 'page_description','banks'));
     }
 
@@ -72,8 +72,8 @@ class BankOfferController extends Controller
         $bank_offer  = BankOffer::find($id);
         if($bank_offer){
             $banks = Bank::all();
-            $page_title = "Edit offer bank";
-            $page_description = "Edit";
+            $page_title = __("Edit offer bank");
+            $page_description = __("Edit");
             return view('dashboard.Bank-offer.edit', compact('page_title', 'page_description','banks','bank_offer'));
         }else{
             return redirect()->route('dashboard.bank-offer.index');

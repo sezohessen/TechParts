@@ -18,7 +18,7 @@ class BankController extends Controller
     public function index(BankDatatable $bank)
     {
         $page_title = __('Bank companies');
-        $page_description = __('View Banks');
+        $page_description = __("View Banks's companies");
         return  $bank->render("dashboard.Bank.index", compact('page_title', 'page_description'));
     }
 
@@ -30,8 +30,8 @@ class BankController extends Controller
     public function create()
     {
         $users = User::all();
-        $page_title = "Add Bank";
-        $page_description = "Add new Bank";
+        $page_title = __("Add Bank");
+        $page_description = __("Add new Bank");
         return view('dashboard.Bank.add', compact('page_title', 'page_description','users'));
     }
 
@@ -77,15 +77,15 @@ class BankController extends Controller
      */
     public function edit($id)
     {
-        $bank  = Bank::find($id);
-        $bank_contact   =BankContact::where('bank_id',$id)->first();
+        $bank           = Bank::find($id);
+        $bank_contact   = BankContact::where('bank_id',$id)->first();
         if($bank){
-            $users = User::all();
-            $page_title = "Edit Bank";
+            $users      = User::all();
+            $page_title = __("Edit Bank");
             $page_description = "Edit";
             return view('dashboard.Bank.edit', compact('page_title', 'page_description','users','bank','bank_contact'));
         }else{
-            return view('dashboard.Bank.index', compact('page_title', 'page_description'));
+            return redirect()->route('dashboard.bank.index');
         }
     }
 

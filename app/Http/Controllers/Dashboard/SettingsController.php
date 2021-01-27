@@ -16,17 +16,11 @@ class SettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(SettingDatatable $setting)
+    public function index()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = 'الاعدادات';
-            $page_description = 'عرض الاعدادات';
-        } else {
-            $page_title = 'Settings';
-            $page_description = 'View all Settings';
-        } */
-        $page_title = 'Settings';
-        $page_description = 'View all Settings';
+
+        $page_title = __('Settings');
+        $page_description = __('View');
         $settings = Settings::first();
         return view('dashboard.Setting.index', compact('page_title', 'page_description','settings'));
     }
@@ -94,6 +88,7 @@ class SettingsController extends Controller
 
         if($request->file('logo')){
             $Image_id = self::file($request->file('logo'),$settings->logo_id);
+            $settings->logo_id = $Image_id;
         }
         $settings->save();
         /* if (Session::get('app_locale') == 'ar') {
@@ -116,13 +111,13 @@ class SettingsController extends Controller
         try {
             $file_old = $destinationPath.$Image->name;
             unlink($file_old);
+            $Image->delete();
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         //Update new image
-        $Image->name = $fileName;
-        $Image->base = '/img/settings/';
-        $Image->save();
+        $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/settings/']);
+        return $Image->id;
     }
 
     /**

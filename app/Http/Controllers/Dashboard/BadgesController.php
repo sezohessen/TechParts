@@ -14,8 +14,8 @@ class BadgesController extends Controller
      */
     public function index(BadgesDatatable $badge)
     {
-        $page_title = __('Bagdes');
-        $page_description = __('View Bagdes');
+        $page_title = __('Badges');
+        $page_description = __('View badges');
         return  $badge->render("dashboard.Badge.index", compact('page_title', 'page_description'));
     }
 
@@ -26,15 +26,9 @@ class BadgesController extends Controller
      */
     public function create()
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "اضافة شارة";
-            $page_description = "اضافة شارة جديدة";
-        } else {
-            $page_title = "Add Bagdes";
-            $page_description = "Add new Governorate";
-        } */
-        $page_title = "Add Bagdes";
-        $page_description = "Add new Bagdes";
+
+        $page_title =__("Add Badges");
+        $page_description = __("Add new Badge");
         return view('dashboard.Badge.add', compact('page_title', 'page_description'));
     }
 
@@ -78,17 +72,12 @@ class BadgesController extends Controller
      */
     public function edit($id)
     {
-        /* if (Session::get('app_locale') == 'ar') {
-            $page_title = "تعديل الشارة";
-            $page_description = "تعديل";
-        } else {
-            $page_title = "Edit Badge";
-            $page_description = "Edit";
-        } */
-        $page_title = "Edit Badge";
-        $page_description = "Edit";
+
+        $page_title = __("Edit Badge");
+        $page_description = __("Edit");
         $Badge = Badges::find($id);
-        return view('dashboard.Badge.edit', compact('page_title', 'page_description','Badge'));
+        if($Badge)return view('dashboard.Badge.edit', compact('page_title', 'page_description','Badge'));
+        else return redirect()->route('dashboard.badge.index');
     }
 
     /**
@@ -123,19 +112,6 @@ class BadgesController extends Controller
         $badge->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.badge.index");
-       /*  $badge = Badges::find($id);
-        if($badge->count()!=0){
-            $badge->delete($id);
-             if (Session::get('app_locale') == 'ar') {
-            session()->flash('delete',__(" تم الحذف بنجاح!  "));
-            } else {
-                session()->flash('delete',__("Row has been deleted successfully!"));
-            }
-            session()->flash('delete', 'Row has been deleted successfully!');
-            return redirect()->route('badge.index');
-        }else{
-            return redirect()->back();
-        } */
     }
     public function Activity(Request $request){
         $country = Badges::find($request->id);
