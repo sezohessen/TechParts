@@ -103,10 +103,11 @@ class BankOffer extends Model
             }
             //Update new image
             $Image->name = $fileName;
+            $Image->base = "/img/bank-offer/";
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName]);
+            $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/bank-offer/']);
             return $Image->id;
         }
     }

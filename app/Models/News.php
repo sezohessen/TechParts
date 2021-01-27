@@ -94,10 +94,11 @@ class News extends Model
             }
             //Update new image
             $Image->name = $fileName;
+            $Image->base = "/img/news/";
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName]);
+            $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/news/']);
             return $Image->id;
         }
     }

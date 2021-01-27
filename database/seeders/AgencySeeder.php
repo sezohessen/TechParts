@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agency;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Governorate;
@@ -21,7 +22,7 @@ class AgencySeeder extends Seeder
     {
         $faker = Faker::create();
         foreach (range(1,10) as $value){
-            DB::table('agencies')->insert([
+            $agency = DB::table('agencies')->insertGetId([
                 'name'              => $faker->company,
                 'name_ar'           => $faker->company,
                 'description'       => $faker->text,
@@ -39,6 +40,15 @@ class AgencySeeder extends Seeder
                 'governorate_id'    => Governorate::all()->random()->id,
                 'city_id'           => City::all()->random()->id,
                 'user_id'           => User::all()->random()->id,
+                'created_at'        => now(),
+                'updated_at'        => now()
+            ]);
+            DB::table('agency_contacts')->insert([
+                'facebook'          => $faker->url,
+                'whatsapp'          => $faker->url,
+                'instagram'         => $faker->url,
+                'messenger'         => $faker->url,
+                'agent_id'          => $agency,
                 'created_at'        => now(),
                 'updated_at'        => now()
             ]);

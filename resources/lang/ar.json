@@ -16,9 +16,9 @@
     "Insurance company Name(AR)":"اسم شركة التأمين (بالعربية)",
     "Select User":"اختر مستخدم",
     "--Select user--":"--اختر مستخدم--",
-    "Insurance offer title(ENG)":"(بالاجليزية) عنوان عرض التأمين",
-    "Insurance offer title(AR)":"(بالعربية) عنوان عرض التأمين",
-    "Bank offer title(ENG)":"(بالعربية) عنوان عرض البنك",
+    "Insurance offer title(ENG)":"عنوان عرض التأمين (بالانجليزية)",
+    "Insurance offer title(AR)":"عنوان عرض التأمين (بالعربية)",
+    "Bank offer title(ENG)":"(بالاجليزية) عنوان عرض البنك",
     "Bank offer title(AR)":"(بالعربية) عنوان عرض البنك",
     "Select Insurance Company Name":"اختر اسم شركة التأمين",
     "Select Bank Name":"اختر اسم البنك",
@@ -558,5 +558,13 @@
     "Add News":"أضف خبر",
     "Add new news":"أضف خبر جديد",
     "Settings":"إعدادات",
-    "View":"عرض"
+    "View":"عرض",
+    "Agency Dashboard":"وكالة لوحة القيادة",
+    "View agency record":"عرض سجل الوكالة",
+    "Insurance Dashboard":"لوحة التأمين",
+    "View insurance record":"عرض سجل التأمين",
+    "Edit insurance company":"تعديل شركة التأمين",
+    "Edit insurance offer":"تعديل عرض التأمين",
+    "Edit insurance offer record":"تعديل سجل عرض التأمين",
+    "Edit offer plan":"تعديل خطة العرض"
 }

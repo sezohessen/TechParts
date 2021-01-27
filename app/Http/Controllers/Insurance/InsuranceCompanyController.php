@@ -29,12 +29,12 @@ class InsuranceCompanyController extends Controller
         $insurance = Insurance::where('user_id',Auth::id());
         if($insurance!=NULL){
             $insurance = $insurance->first();
-            $page_title = "Edit insurance company";
-            $page_description = "Edit company";
+            $page_title = __("Edit insurance company");
+            $page_description = __("Edit");
             return view('InsuranceDashboard.Insurance.edit', compact('page_title', 'page_description','insurance'));
         }else{
-            $page_title = "Add insurance company";
-            $page_description = "Add new insurance company";
+            $page_title = __("Add insurance company");
+            $page_description = __("Add new insurance company");
             return view('InsuranceDashboard.Insurance.add', compact('page_title', 'page_description'));
         }
 

@@ -14,7 +14,7 @@ class AgencyDashController extends Controller
         if (!$agencies) {
             $agencies = NULL;
         }
-        $page_title = __('Agency Dashborad');
+        $page_title = __('Agency Dashboard');
         $page_description = __('View agency record');
         return  view("agency.index", compact('page_title', 'page_description','agencies'));
     }

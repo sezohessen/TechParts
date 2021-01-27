@@ -63,10 +63,11 @@ class CarMaker extends Model
             }
             //Update new image
             $Image->name = $fileName;
+            $Image->base = "/img/CarMakers/";
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName]);
+            $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/CarMakers/']);
             return $Image->id;
         }
     }

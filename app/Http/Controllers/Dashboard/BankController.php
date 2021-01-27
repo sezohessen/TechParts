@@ -82,7 +82,7 @@ class BankController extends Controller
         if($bank){
             $users      = User::all();
             $page_title = __("Edit Bank");
-            $page_description = "Edit";
+            $page_description =__("Edit");
             return view('dashboard.Bank.edit', compact('page_title', 'page_description','users','bank','bank_contact'));
         }else{
             return redirect()->route('dashboard.bank.index');

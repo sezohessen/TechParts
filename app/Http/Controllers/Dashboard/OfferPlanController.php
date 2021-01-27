@@ -79,8 +79,8 @@ class OfferPlanController extends Controller
         if($offer_plan){
             return redirect()->route('dashboard.offer-plan.index');
         }else{
-            $page_title = "Edit offer plan";
-            $page_description = "Edit offer plan record";
+            $page_title = __("Edit offer plan");
+            $page_description = __("Edit");
             return view('dashboard.offer-plan.edit', compact('page_title', 'page_description','offer_plan','Insurances'));
         }
     }

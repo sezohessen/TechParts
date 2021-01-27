@@ -109,7 +109,7 @@
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label>
                             <br>
-                            <div class="image-input image-input-empty image-input-outline" id="logo_id" style="background-image: url({{asset('img/bank/'.$bank->img->name) }})">
+                            <div class="image-input image-input-empty image-input-outline" id="logo_id" style="background-image: url({{find_image($bank->img , 'img/bank/')  }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
