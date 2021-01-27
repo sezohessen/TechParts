@@ -20,8 +20,8 @@ class CreateBankOffersTable extends Migration
             $table->text('description');
             $table->text('description_ar');
             $table->date('valid_till');
-            $table->decimal('down_payment_percentage',4,2);
-            $table->decimal('interest_rate',4,2);
+            $table->decimal('down_payment_percentage',5,2);
+            $table->decimal('interest_rate',5,2);
             $table->integer('number_of_years');
             $table->integer('installment_months');
 

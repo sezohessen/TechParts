@@ -7,6 +7,7 @@ use App\Models\Car;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class car_badgeSeeder extends Seeder
 {
     /**
@@ -17,9 +18,9 @@ class car_badgeSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('car_badges')->insert([
-                'car_id'        => Car::all()->random()->id,
+                'car_id'        => Car::where('status', 1)->get()->random()->id,
                 'badge_id'      => Badges::all()->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()

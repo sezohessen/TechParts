@@ -19,9 +19,9 @@ class ListCarUsersSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('list_car_users')->insert([
-                'car_id'               =>Car::all()->random()->id,
+                'car_id'               => Car::where('status', 1)->get()->random()->id,
                 'user_id'            => User::all()->random()->id,
             ]);
         }

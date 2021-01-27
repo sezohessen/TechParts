@@ -28,7 +28,7 @@ class CarSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i=0; $i < 5 ; $i++) {
+        for ($i=0; $i < 20 ; $i++) {
             DB::table('cars')->insert([
 
                 'ServiceHistory'        => $faker->sentence,
@@ -40,13 +40,13 @@ class CarSeeder extends Seeder
                 'InstallmentAmount'      => $faker->month,
                 'InstallmentPeriod'      => $faker->numberBetween(1,10000),
                 'DepositPrice'          => $faker->numberBetween(1,10000),
-                'Country_id'            => Country::all()->random()->id,
-                'City_id'               => City::all()->random()->id,
-                'Governorate_id'        => Governorate::all()->random()->id,
+                'Country_id'            => Country::where('active', 1)->get()->random()->id,
+                'City_id'               => City::where('active', 1)->get()->random()->id,
+                'Governorate_id'        => Governorate::where('active', 1)->get()->random()->id,
                 'CarManufacture_id'     => CarManufacture::all()->random()->id,
-                'CarModel_id'           => CarModel::all()->random()->id,
-                'CarMaker_id'           => CarMaker::all()->random()->id,
-                'CarBody_id'            => CarBody::all()->random()->id,
+                'CarModel_id'           => CarModel::where('active', 1)->get()->random()->id,
+                'CarMaker_id'           => CarMaker::where('active', 1)->get()->random()->id,
+                'CarBody_id'            => CarBody::where('active', 1)->get()->random()->id,
                 'CarYear_id'            => CarYear::all()->random()->id,
                 'CarCapacity_id'        => CarCapacity::all()->random()->id,
                 'CarColor_id'           => CarColor::all()->random()->id,

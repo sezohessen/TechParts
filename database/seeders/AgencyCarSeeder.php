@@ -18,9 +18,9 @@ class AgencyCarSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        foreach (range(1, 10) as $value) {
             DB::table('agency_cars')->insert([
-                'car_id'            => Car::all()->random()->id,
+                'car_id'            => Car::where('status', 1)->get()->random()->id,
                 'agency_id'         => Agency::all()->random()->id,
                 'created_at'        => now(),
                 'updated_at'        => now()

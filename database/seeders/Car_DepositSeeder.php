@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Car;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class Car_DepositSeeder extends Seeder
 {
     /**
@@ -17,12 +18,12 @@ class Car_DepositSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('car_deposits')->insert([
-                'car_id'            => Car::all()->random()->id,
+                'car_id'            => Car::where('status', 1)->get()->random()->id,
                 'user_id'           => User::all()->random()->id,
-                'price'             => $faker->numberBetween(1,1000),
-                "weaccept_order_id" => $faker->numberBetween(1,1000),
+                'price'             => $faker->numberBetween(1, 1000),
+                "weaccept_order_id" => $faker->numberBetween(1, 1000),
                 'created_at'        => now(),
                 'updated_at'        => now()
             ]);

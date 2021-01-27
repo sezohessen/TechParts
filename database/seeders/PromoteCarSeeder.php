@@ -19,18 +19,16 @@ class PromoteCarSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('promote_cars')->insert([
-                'car_id'               => Car::all()->random()->id,
+                'car_id'               => Car::where('status', 1)->get()->random()->id,
                 'user_id'              => User::all()->random()->id,
                 "subscribe_package_id" => subscribe_package::all()->random()->id,
-                "price"                => $faker->numberBetween(1,100),
-                "weaccept_order_id"    => $faker->numberBetween(1,100),
+                "price"                => $faker->numberBetween(1, 100),
+                "weaccept_order_id"    => $faker->numberBetween(1, 100),
                 'created_at'        =>  now(),
                 'updated_at'        =>  now(),
             ]);
-
-
         }
     }
 }
