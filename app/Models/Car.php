@@ -166,7 +166,7 @@ class Car extends Model
             'InstallmentPeriod'           => $request->InstallmentPeriod,
             "FuelType"                    => $request->FuelType,
             'views'                       => 0,
-            'status'                      => Car::STATUS_ACTIVE,
+            'status'                      => Car::STATUS_DISABLE,
             'user_id'                     => Auth()->user()->id
         ];
         if($photos=$request->file('CarPhotos')){

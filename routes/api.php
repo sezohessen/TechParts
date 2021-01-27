@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::group(['prefix' => 'sell_car'], function () {
         Route::post("create",'CarsController@create');
         Route::post("edit",'CarsController@edit');
+        Route::post("my_list",'CarsController@list');
     });
 
 

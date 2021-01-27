@@ -132,7 +132,7 @@ class CarsController extends Controller
                 })
                 ->orWhereHas('maker', function($query)use($request){
                     $query->where('status', 1)
-                    ->where('name','LIKE',$request->word);
+                    ->where('name','LIKE','%'.$request->word.'%');
                 })
                 ->paginate(10)
             ))->type($type::list);
@@ -484,7 +484,7 @@ class CarsController extends Controller
             if(!CarCapacity::find($request->carCapacity)){
                 return $this->errorMessage('Capacity not found');
             }
-            if(!CarBody::find($request->bodyStyle)->where("active",1)){
+            if(!CarBody::where("active",1)->find($request->bodyStyle)){
                 return $this->errorMessage('Car Body not found');
             }
             if(!CarColor::find($request->color)){
@@ -511,20 +511,21 @@ class CarsController extends Controller
             if($request->has("imageList")){
                 $CarPhotos=car_img::where('car_id', '=', $car->id)->get();
                 $credentials = $this->credentials($request,$CarPhotos);
-                foreach($credentials['CarPhotos'] as $key=>$img){
-                    car_img::create([
-                        'car_id'=>$car->id,
-                        'img_id'=>$img
-                    ]);
+                if($credentials['CarPhotos']){
+                    foreach($credentials['CarPhotos'] as $key=>$img){
+                        car_img::create([
+                            'car_id'=>$car->id,
+                            'img_id'=>$img
+                        ]);
+                    }
                 }
+
             }else {
                 $credentials = $this->credentials($request);
             }
-
-
             $car->update($credentials);
             $alert=Alert::where("car_id",$car->id)->where("user_id",Auth()->id())->update([
-                "status"=>$request->status
+                "status"=>($request->isAlertBefore=="true") ? Car::Alert : Car::NotAlert
             ]);
             if(!$alert){
                 Alert::create([
@@ -553,16 +554,7 @@ class CarsController extends Controller
                     'feature_id'=>$feature
                 ]);
             }
-            $alert=Alert::where("car_id",$car->id)->where("user_id",Auth()->id())->update([
-                "status"=>$request->status
-            ]);
-            if(!$alert){
-                Alert::create([
-                    "car_id"=>$car->id,
-                    "user_id"=>Auth()->id(),
-                    "status"=> ($request->isAlertBefore=="true") ? Car::Alert : Car::NotAlert
-                ]);
-            }
+
             $list_car_user=ListCarUser::where("car_id",$car->id)->where("user_id",Auth()->id())->update([
                 "user_id"=>Auth::user()->id,
                 "car_id"=>$car->id
@@ -575,11 +567,17 @@ class CarsController extends Controller
             }
             $type   = new DataType();
             $data=(new CarResource($car))->type($type::single);
-            return  $this->returnData('mCar',$data,__('Successfully'));
+            return  $this->returnData('mCar',$data,__('Edit successfully'));
 
         }else {
             return $this->failed($validator);
         }
+    }
+    public function list(Request $request){
+        $this->lang( $request->lang);
+        $type   = new DataType();
+        $data=(new CarCollection(Car::where("user_id",Auth()->id())->get()))->type($type::list);
+        return $data;
     }
     public static function rules($update=null)
     {
@@ -660,19 +658,21 @@ class CarsController extends Controller
         'InstallmentPeriod'           => $request->payment_loan_period,
         'SellerType'                  => Auth()->user()->Agency ? Car::SELLER_AGENCY: Car::SELLER_INDIVIDUAL,
         'views'                       => 0,
-        'status'                      => Car::STATUS_ACTIVE,
+        'status'                      => Car::STATUS_DISABLE,
         'user_id'                     => Auth()->user()->id,
        ];
 
         if($request->has("imageList")){
             if($update){
+                foreach($update as $key=>$photo){
+                    $this->Updated_file($photo);
+                }
+
                 foreach($request->imageList as $file){
                     $Image_id = User::fileApi($file);
                     $credentials['CarPhotos'][]= $Image_id;
                 }
-                foreach($update as $key=>$photo){
-                    $this->Updated_file($photo);
-                }
+
             }else {
                 foreach($request->imageList as $file){
                     $Image_id = User::fileApi($file);
@@ -703,17 +703,15 @@ class CarsController extends Controller
     {
         $Image=Image::find($file->img_id);
         if($Image){
-            $destinationPath = public_path() . $Image->base;
+            $destinationPath = public_path() .'/'. $Image->base;
             try {
                 $file_old = $destinationPath.$Image->name;
                 unlink($file_old);
             } catch (Exception $e) {
 
-
             }
-            $Image->delete();
         }
-
+        $Image->delete();
         return true;
     }
 }
