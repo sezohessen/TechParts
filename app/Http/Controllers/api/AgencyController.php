@@ -1,26 +1,29 @@
 <?php
 
 namespace App\Http\Controllers\api;
-use App\Http\Controllers\Controller;
-use App\Models\Agency;
-use App\Models\AgencyCar;
-use App\Models\AgencyCarMaker;
-use App\Models\AgencyContact;
-use App\Models\AgencyReview;
-use App\Models\AskExpert;
-use App\Models\CarMaker;
-use App\Models\Image;
-use Illuminate\Support\Facades\Response;
-use App\Models\News;
-use App\Models\UserFavAgency;
-use App\Traits\GeneralTrait;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator as Validator;
-use App\Classes\Responseobject;
 use App\Models\Car;
+use App\Models\News;
+use App\Models\User;
+use App\Models\Image;
+use App\Models\Agency;
+use App\Models\CarMaker;
+use App\Models\AgencyCar;
+use App\Models\AskExpert;
 use App\Models\UserFav_car;
+use App\Models\AgencyReview;
+use App\Traits\GeneralTrait;
+use Illuminate\Http\Request;
+use App\Models\AgencyContact;
+use App\Models\UserFavAgency;
+use App\Models\AgencyCarMaker;
+use App\Classes\Responseobject;
+use App\Classes\DataType;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\CarCollection;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator as Validator;
 
 class AgencyController extends Controller
 {
@@ -580,12 +583,30 @@ class AgencyController extends Controller
             default_lang();
         }
     }
+
+    public function failed($validator)
+    {
+        $response   = new Responseobject();
+        $response->status = $response::status_failed;
+        $response->code = $response::code_failed;
+        foreach ($validator->errors()->getMessages() as $item) {
+            array_push($response->msg, $item);
+        }
+        return Response::json(
+            $response
+        );
+    }
+    public function Validator($request,$rules,$niceNames=[])
+    {
+        $this->lang( $request);
+        return Validator::make($request->all(),$rules,[],$niceNames);
+    }
     public function ValidatorErrors($validator)
     {
         $response           = new Responseobject();       # $response->status   = $response::status_failed;
         $response->code     = $response::code_failed;
         foreach ($validator->errors()->getMessages() as $item) {
-            array_push($response->messages, $item);
+            array_push($response->msg, $item);
         }
         return Response::json(
             $response
@@ -706,5 +727,41 @@ class AgencyController extends Controller
 
         ]);
         return $validator;
+    }
+    public function carFav(Request $request){
+        $validator=$this->Validator($request,[
+            "favorite_type"            => 'required|string|in:car',
+        ]);
+        if (!$validator->fails()) {
+            $user=User::find(Auth()->id());
+            $cars=$user->AuthFavCar()->get();
+            if(!$cars->count())
+                return $this->errorMessage('Favorite cars are empty');
+            $type   = new DataType();
+            $data=(new CarCollection($cars))->type($type::list);
+            return $data;
+        }else {
+            return $this->failed($validator);
+        }
+
+    }
+    public function FavList(Request $request){
+        $validator=$this->Validator($request,[
+            "favorite_type"            => 'required|string',
+        ]);
+        if (!$validator->fails()) {
+            if ($request->favorite_type == 'agency') {
+                return $this->agencyFav($request);
+            }elseif ($request->favorite_type == 'center') {
+                return $this->centerFav($request);
+            }elseif ($request->favorite_type == 'car') {
+                return $this->carFav($request);
+            }else{
+                return $this->errorMessage(__('Favorite type invalid'));
+            }
+        }else {
+            return $this->failed($validator);
+        }
+
     }
 }

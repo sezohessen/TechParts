@@ -8,6 +8,7 @@ use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator as Validator;
 use App\Classes\Responseobject;
+use App\Classes\DataType;
 use App\Models\Agency;
 use App\Models\AgencyCar;
 use App\Models\AgencyReview;
@@ -18,13 +19,6 @@ use App\Models\MyMaintenanceList;
 use App\Models\Trending;
 use App\Models\UserFavAgency;
 use Illuminate\Http\Request;
-class DataType {
-    const single = 1;
-    const list = 2;
-    const compare = 3;
-    const promote = 4;
-
-}
 class HomeDataController extends Controller
 {
 

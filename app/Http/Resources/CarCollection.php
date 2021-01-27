@@ -18,11 +18,16 @@ class CarCollection extends ResourceCollection
         $this->type = $value;
         return $this;
     }
+    protected $key="carList";
+    public function key($value){
+        $this->key = $value;
+        return $this;
+    }
     public function toArray($request)
     {
-
+        $data=$this->key;
         return [
-            'data' =>$this->collection->map(function(CarResource $resource) use($request){
+            $data =>$this->collection->map(function(CarResource $resource) use($request){
                 return $resource->type($this->type)->toArray($request);
             })->all(),
             'status'=>true,

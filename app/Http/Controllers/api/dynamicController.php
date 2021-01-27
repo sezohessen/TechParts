@@ -25,7 +25,7 @@ class dynamicController extends Controller
     use GeneralTrait;
     public function Validator($request,$rules,$niceNames=[])
     {
-        $this->lang_optional( $request->lang);
+        $this->lang($request);
         return Validator::make($request->all(),$rules,[],$niceNames);
     }
     public function failed($validator)
@@ -39,19 +39,6 @@ class dynamicController extends Controller
         return Response::json(
             $response
         );
-    }
-    public function lang_optional($lang)
-    {
-        if ($locale = $lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
-                default_lang($locale);
-            }else {
-                default_lang();
-            }
-        }else {
-            default_lang();
-        }
-        return true;
     }
     public function faq(Request $request)
     {
@@ -175,12 +162,12 @@ class dynamicController extends Controller
         return $rate;
     }
     public function maker(Request $request){
-        $this->lang_optional($request->lang);
+        $this->lang($request);
         $data=new CarMakerCollection(CarMaker::where("active",1)->paginate(10));
         return $data;
     }
     public function model(Request $request){
-        $this->lang_optional($request->lang);
+        $this->lang($request);
         if($request->has("car_maker")){
             $data=new CarModelCollection(CarModel::where("active",1)->where("CarMaker_id",$request->car_maker)->paginate(10));
             return $data;

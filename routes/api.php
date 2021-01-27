@@ -24,7 +24,8 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
         Route::post("remove",'AgencyController@removeFav');//remove favorite
         Route::post("get_agency_list",'AgencyController@agencyFav');//get agency list favorite
         Route::post("get_center_list",'AgencyController@centerFav');//get cetner maintenance list favorite
-        Route::post("get_car_list",'AgencyController@');//get car list favorite(Not Finished)
+        Route::post("get_car_list",'AgencyController@carFav');
+        Route::post("get_fav_list",'AgencyController@FavList');
     });
     Route::group(['prefix' => 'auth'], function () {
         Route::post("update_interested_country",'UserController@update_interested_country');
@@ -123,7 +124,8 @@ Route::post("finance/ask_help",'api\FinanceContactController@create');
 Route::group(['prefix' => 'car','namespace'=>"api"], function () {
 
     Route::post("details  ",'CarsController@details');
-    Route::post("list",'CarsController@search');
+    Route::post("list/car_list",'CarsController@search');
+    Route::post("list/car_paginate",'CarsController@filter');
     Route::post("compare",'CarsController@compare');
     Route::post("action_counter",'CarsController@action_counter');
     Route::post("promote/get_promote_package",'CarsController@promote_package');
