@@ -121,7 +121,7 @@ class Car extends Model
             "FuelType"                    => 'required|integer',
             'phone'                       => 'required|string',
             'DepositPrice'                => 'required|integer',
-            'InstallmentAmount'           => 'required|string',
+            'InstallmentAmount'           => 'required|integer',
             'InstallmentPeriod'           => 'required|integer',
             'CarPhotos'                   => 'required|max:5',
             'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
@@ -166,7 +166,7 @@ class Car extends Model
             'InstallmentPeriod'           => $request->InstallmentPeriod,
             "FuelType"                    => $request->FuelType,
             'views'                       => 0,
-            'status'                      => Car::STATUS_ACTIVE,
+            'status'                      => Car::STATUS_DISABLE,
             'user_id'                     => Auth()->user()->id
         ];
         if($photos=$request->file('CarPhotos')){
@@ -199,7 +199,7 @@ class Car extends Model
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
         $destinationPath = public_path() . '/img/Cars/';
         $file->move($destinationPath, $fileName);
-        $Image = Image::create(['name' => $fileName]);
+        $Image = Image::create(['name' => $fileName, 'base' => '/img/Cars/']);
         return $Image->id;
     }
 
@@ -211,9 +211,9 @@ class Car extends Model
             $file_old = $destinationPath.$Image->name;
             unlink($file_old);
         } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+
         }
-        $file->delete();
+        $Image->delete();
         return true;
     }
 

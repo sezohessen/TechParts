@@ -23,7 +23,7 @@ class subscribe_package extends Model
             'currency_name'          => 'required|string|max:255',
             'description'            => 'required|string|max:255',
             'description_ar'         => 'required|string|max:255',
-            'period'                 => ['required', new periodValidate],
+            'period'                 => 'required|integer',
             'price'                  => 'required|integer'
         ];
         return $rules;
