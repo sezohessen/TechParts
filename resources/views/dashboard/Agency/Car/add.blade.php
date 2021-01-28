@@ -76,12 +76,9 @@
                         <div class="form-group row">
                             <label class="col-form-label  col-sm-12">@lang('Select Car Year')<span class="text-danger">*</span></label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
-                             <select class="form-control select2 {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
-                                 id="kt_select2_1" name="CarYear_id" required>
-                                 <option value="">@lang('Select Car Year')</option>
-                                @foreach ($years as $year)
-                                    <option value="{{$year->id}}"{{ old('CarYear_id')==$year->id ? 'selected':'' }} >{{$year->year}}</option>
-                                @endforeach
+                             <select class="form-control {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
+                                 name="CarYear_id" required id='year'>
+                                 <option value="">@lang('Select Car Model First')</option>
                              </select>
                             @error('CarYear_id')
                              <div class="invalid-feedback">{{ $errors->first('CarYear_id') }}</div>
@@ -89,7 +86,6 @@
                             </div>
                         </div>
                     </div>
-
 
 
                     <div class="col-md-6">
@@ -570,8 +566,28 @@
 <script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 <script>
+        function year(id ){
+            $('#year').empty();
+            old_year="<?php echo old('CarYear_id') ?  old('CarYear_id') : ""  ?>";
+            $.ajax({
+                url: '/dashboard/car/available_year/'+id,
+                success: data => {
+                    if(data.years){
+                        data.years.forEach(years =>
+                        $('#year').append(`<option value="${years.id}" ${(old_year==years.id) ? "selected" : "" } >${years.year}</option>`)
+                        )
+                    }else{
+                        $('#year').append(`<option value="">{{__("No Results")}}</option>`)
+                    }
+
+                },
+
+            });
+        }
       function agency(id ){
         $('#CarMaker_id').empty();
+        $('#CarModel_id').empty();
+        $('#year').empty();
         old_maker="<?php echo old('CarMaker_id') ?  old('CarMaker_id') : ""  ?>";
         $.ajax({
             url: '/dashboard/AgencyCar/'+id,
@@ -589,12 +605,13 @@
     }
     function model(id){
         $('#CarModel_id').empty();
+        $('#year').empty();
         old_model="<?php echo old('CarModel_id') ?  old('CarModel_id') : ""  ?>";
         $.ajax({
             url: '/dashboard/car/available_model/'+id,
             success: data => {
                 if(data.models){
-
+                    $('#CarModel_id').append(`<option value="" >@lang('Select Car Model')</option>`)
                     data.models.forEach(model =>
                     $('#CarModel_id').append(`<option value="${model.id}" ${(old_model==model.id) ? "selected" : "" } >${model.name}</option>`)
                     )
@@ -658,10 +675,19 @@
         var id = this.value ;
         governorate(id)
     });
+    $('#CarModel_id').on('change', function() {
+        var id = this.value;
+        year(id);
+    });
     var old_maker="<?php echo (old('CarMaker_id')) ? old('CarMaker_id') : null; ?>";
     if (old_maker != ''){
         model("<?php echo (old('CarMaker_id'))?>");
     }
+    var old_maker="<?php echo (old('CarModel_id')) ? old('CarModel_id') : null; ?>";
+    if (old_maker != ''){
+        year("<?php echo (old('CarModel_id'))?>");
+    }
+
     var old_country="<?php echo (old('Country_id')) ? old('Country_id') : null; ?>";
     if (old_country != ''){
         governorate("<?php echo (old('Country_id'))?>");

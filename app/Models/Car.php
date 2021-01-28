@@ -233,6 +233,7 @@ class Car extends Model
         return $this->belongsTo(CarYear::class,"CarYear_id","id");
     }
 
+
     public function color()
     {
         return $this->belongsTo(CarColor::class,"CarColor_id","id");
@@ -302,11 +303,14 @@ class Car extends Model
         foreach($images as $key=>$image){
             $Image = Image::find($image->img_id);
             //Delete Old image
-            try {
-                $file_old = $destinationPath.$Image->name;
-                unlink($file_old);
-            } catch (Exception $e) {}
-            $Image->delete();
+            if($Image->count()){
+                try {
+                    $file_old = $destinationPath.$Image->name;
+                    unlink($file_old);
+                } catch (Exception $e) {}
+                $Image->delete();
+            }
+
         }
         return true;
     }
@@ -322,6 +326,8 @@ class Car extends Model
     {
     return $this->belongsToMany(Agency::class, 'agency_cars');
     }
-
-
+    public function trends()
+    {
+        return $this->hasMany(TrendCar::class, 'car_id', 'id');
+    }
 }

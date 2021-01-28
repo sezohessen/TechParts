@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::group(['prefix' => 'general'], function () {
         Route::post("upload_file",'generalController@upload_file');
     });
+
     Route::post("home/complete_data",'HomeDataController@completeData');
     Route::group(['prefix' => 'my_maintenance'], function () {
         Route::post("create_new_maintenance",'HomeDataController@createNewMaintenance');
@@ -78,6 +79,8 @@ Route::group(['prefix' => 'data','namespace'=>'api'], function () {
         Route::post("car_maker_search",'dynamicController@maker_search');
         Route::post("car_model_all",'dynamicController@model');
         Route::post("car_model_search",'dynamicController@model_search');
+        Route::post("car_motor_cc",'dynamicController@motor');
+
 
     });
 });

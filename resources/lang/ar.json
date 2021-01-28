@@ -504,5 +504,7 @@
     "Feature not found":"ميزة السيارة غير موجودة",
     "Governorate ID":"ID المحافظة",
     "Country ID":"ID البلد",
-    "No data found":"لا يوجد بيانات"
+    "No data found":"لا يوجد بيانات",
+    "Edit Car":"تعديل السيارة",
+    "Select Car Model First":"اختر موديل السيارة أولا"
 }

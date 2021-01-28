@@ -167,7 +167,9 @@ class CarsController extends Controller
         ]);
         if (!$validator->fails()) {
 
-            $car=Car::where("status",1);
+            $car = Car::where("status",1)->with('year');
+
+
             $car->where("Country_id",$request->interest_country)
             ->where("isNew",$request->car_state)
             ->where("CarMaker_id",$request->car_maker_id)
@@ -197,12 +199,13 @@ class CarsController extends Controller
 
             if($request->has("extra_feature_id")){
                 $cars=$car;
-                foreach($cars as $item){
-                    $item->features->where("feature_id",$request->extra_feature_id);
-                    $car->where("id",$item->car_id);
-                }
-            }
+                foreach($cars->get() as $item){
+                    if(!$item->features->where("feature_id",$request->extra_feature_id)->count()){
+                        $car->where("cars.id",'!=',$item->id);
+                    }
 
+                }
+            };
             if($this->stop($car)){
 
                 return $this->errorMessage("No data found");
@@ -235,45 +238,68 @@ class CarsController extends Controller
             }
             if($request->has('sort_kilometer')){
                 if($request->sort_kilometer=='low'){
-                    $car->orderBy('kiloUsed', 'ASC');
+                    $car->orderBy('kiloUsed','ASC');
                 }else {
                     $car->orderBy('kiloUsed', 'DESC');
                 }
 
             }
-            if($request->has('sort_year')){
-                if($request->sort_year=='low'){
-                    $car->WhereHas('year', function($query){
-                        return $query->orderBy('year', 'DESC');
-                    });
 
-                }else {
-                    $car->WhereHas('year', function($query){
-                        return $query->orderBy('year', 'DESC');
-                    });
-                }
-
-            }
             if($request->has('sort_price')){
                 if($request->sort_price=='low'){
-                    $car->orderBy('price', 'ASC');
+                    $car->orderBy('price','ASC');
 
                 }else {
                     $car->orderBy('price', 'DESC');
                 }
 
+
+            }
+            if($request->has("sort_near_by_lat")  && $request->has("sort_near_by_lng") ){
+                $cars=$car;
+                foreach($cars->get() as $item){
+                    $check = distance($request->sort_near_by_lat, $request->sort_near_by_lng, $item->lat, $item->lng, "K");
+                    if ($check > d_constent()) {
+                        $car->where("cars.id",'!=',$item->id);
+                    }
+                }
+
+
             }
 
+            if($request->has('sort_added') &&  $request->sort_added=='recent' ){
+                $car->orderBy('created_at', 'DESC');
+            }
+            if($request->has('sort_added') &&  $request->sort_added=='trending' ){
+                $cars=$car;
+                foreach($cars->get() as $item){
+                    if(!$item->trends->where("car_id",$item->id)->count()){
+                        $car->where("cars.id",'!=',$item->id);
+                    }
+                }
+            }
+            if($request->has('sort_year')){
+                if($request->sort_year=='low'){
+                   // $car->sortBy(function($query){
+                     //   return $query->year->year;
+                   // });
+                    //$car->join('car_years','car_years.id','=','cars.CarYear_id')
+                    //->orderBy('car_years.year','ASC');
 
-            //if($request->has('sort_added')){
-           //     $car->where("payment",$request->payment_method);
-           // }
-
+                }else {
+                   // $car->sortByDesc(function($query){
+                   //     return $query->year->year;
+                   // });
+                    //$car->join('car_years','car_years.id','=','cars.CarYear_id')
+                    //->orderBy('car_years.year','DESC');
+                }
+            }
             $type   = new DataType();
             $data=(new CarCollection($car->paginate(10)))->type($type::list);
             if(!$data->count())
                 return $this->errorMessage("No data found");
             return $data;
+
 
 
         }else {

@@ -61,6 +61,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
         Route::get("available_model/{id}",'CarController@available_model');
         Route::get("available_governorate/{id}",'CarController@available_governorate');
         Route::get("available_city/{id}",'CarController@available_city');
+        Route::get("available_year/{id}",'CarController@available_year');
+
     });
     Route::resource('car', 'CarController');
 
@@ -90,7 +92,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/badge/destroy/all','BadgesController@multi_delete');
     Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
     Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete');
-    Route::delete('/agency/destroy/all','AgencyController@multi_delete');
+
     Route::delete('/maker/destroy/all','CarMakerController@multi_delete');
     Route::delete('/model/destroy/all','CarModelController@multi_delete');
     Route::delete('/body/destroy/all','CarBodyController@multi_delete');
@@ -149,7 +151,8 @@ Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'mid
     Route::get("available_model/{id}",'AgencyCarController@available_model');
     Route::get("available_governorate/{id}",'AgencyCarController@available_governorate');
     Route::get("available_city/{id}",'AgencyCarController@available_city');
-
+    Route::get("available_year/{id}",'AgencyCarController@available_year');
+    Route::delete('destroy/all','AgencyCarController@multi_delete');
     Route::get('/governorate/{id}','AgencyController@governorate');//Ajax Request
     Route::get('/country/{id}','AgencyController@country');//Ajax Request
 });

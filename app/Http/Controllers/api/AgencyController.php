@@ -76,15 +76,7 @@ class AgencyController extends Controller
             }
             $data= new AgencyHomeCollection($agencyList->paginate(10));
             return $data;
-            /*
-            $agencies = [];
-            foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
-                $paymentMethodList = false);
-            }
 
-            return $this->returnData("offersList",$agencies,"Successfully");
-            */
         }else{
             return($this->ValidatorErrors($validator));
         }

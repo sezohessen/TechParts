@@ -23,6 +23,7 @@ class CarYearDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('year', '{{Str::limit($year, 100)}}')
+            ->editColumn('model.name', '{{Str::limit($model["name"], 100)}}')
             ->addColumn('checkbox', 'dashboard.CarYear.btn.checkbox')
             ->addColumn('action', 'dashboard.CarYear.btn.action')
             ->rawColumns(['checkbox', 'action']);
@@ -36,7 +37,7 @@ class CarYearDatatable extends DataTable
      */
     public function query()
     {
-        return CarYear::query();
+        return CarYear::query()->with("model")->select("car_years.*");
     }
 
     /**
@@ -102,6 +103,8 @@ class CarYearDatatable extends DataTable
             Column::make('id'),
             Column::make('year')
             ->title(__("Year")),
+            Column::make('model.name')
+            ->title(__("Car Model")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

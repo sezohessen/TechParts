@@ -18,6 +18,7 @@ class CarColorSeeder extends Seeder
         foreach (range(1,5) as $value){
             DB::table('car_colors')->insert([
                 'code'          => $faker->colorName,
+                
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

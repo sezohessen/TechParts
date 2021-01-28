@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use App\Http\Resources\CarMakerCollection;
 use App\Http\Resources\CarModelCollection;
+use App\Models\CarCapacity;
 use Illuminate\Support\Facades\Validator as Validator;
+use App\Http\Resources\CarCapacityResource;
 
 class dynamicController extends Controller
 {
@@ -196,6 +198,13 @@ class dynamicController extends Controller
         }else {
             return $this->failed($validator);
         }
+    }
+    public function motor(Request $request){
+        $this->lang($request);
+        $data=CarCapacityResource::collection(CarCapacity::paginate(10));
+        if(!$data->count())
+            return $this->errorMessage("No data found");
+        return $this->returnData("listMain",$data,"Successfully");
     }
     public function model_search(Request $request){
         $validator=$this->Validator($request,[

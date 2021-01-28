@@ -15,7 +15,13 @@ class CreateCarYearsTable extends Migration
     {
         Schema::create('car_years', function (Blueprint $table) {
             $table->id();
-            $table->string("year");
+            $table->integer("year");
+            $table->bigInteger('CarModel_id')->unsigned();
+            $table->foreign('CarModel_id')
+            ->references('id')->on('car_models')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }

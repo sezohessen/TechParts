@@ -39,6 +39,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
+      
         $agency           = Agency::where('user_id',Auth::id())->first();
         if($agency!=NULL){
             return $this->edit($agency->id);
@@ -351,5 +352,5 @@ class AgencyController extends Controller
     {
         //
     }
-  
+
 }

@@ -30,16 +30,6 @@ class AgencyCarDatatable extends DataTable
             ->editColumn('Description', '{!! Str::limit($Description, 100) !!}')
             ->editColumn('Description_ar', '{!! Str::limit($Description_ar, 100) !!}')
             ->addColumn('checkbox', 'agency.Car.btn.checkbox')
-            ->editColumn('SellerType', function($car) {
-               if(($car->user->Agency) ){
-                    if($car->user->Agency->center_type ==0)
-                        return Agency::StyleAgecnyType()[0][$car->user->Agency->agency_type];
-                    elseif($car->user->Agency->center_type ==1)
-                        return Agency::StyleAgecnyType()[1][$car->user->Agency->agency_type];
-                    else
-                        return Agency::StyleAgecnyType()[2][0];
-               }
-            })
             ->addColumn('action', 'agency.Car.btn.action')
             ->addColumn('status', 'agency.Car.btn.status')
             ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar",'status']);
@@ -131,13 +121,6 @@ class AgencyCarDatatable extends DataTable
             Column::make('Description_ar')
             ->title(__("Description (AR)"))
                 ->width(70),
-            Column::computed('SellerType')
-                ->title(__('Seller Type'))
-                ->exportable(false)
-                ->printable(false)
-                ->searchable(false)
-                ->width(120)
-                ->addClass('text-center'),
             Column::computed('status')
             ->title(__('Status'))
             ->exportable(false)
