@@ -499,5 +499,10 @@
     "Badges not found":"الشارات غير موجودة",
     "Features not found":"الميزات غير موجودة",
     "Edit successfully":"تم التعديل بنجاح",
-    "Favorite cars are empty":"السيارات المفضلة فارغة"
+    "Favorite cars are empty":"السيارات المفضلة فارغة",
+    "Badge not found":"شارة السيارة غير موجودة",
+    "Feature not found":"ميزة السيارة غير موجودة",
+    "Governorate ID":"ID المحافظة",
+    "Country ID":"ID البلد",
+    "No data found":"لا يوجد بيانات"
 }

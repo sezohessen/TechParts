@@ -32,7 +32,8 @@ class Car extends Model
     const FUEL_PETROL = 1;
 
     const SELLER_AGENCY=0;
-    const SELLER_INDIVIDUAL=1;
+    const SELLER_DISTRIBUTOR=1;
+    const SELLER_INDIVIDUAL=2;
 
     const NotAccidentBefore=0;
     const AccidentBefore=1;
@@ -94,6 +95,7 @@ class Car extends Model
     }
     public static function rules($request,$id = NULL)
     {
+
         $rules = [
             'CarMaker_id'                 => 'required|integer',
             'CarModel_id'                 => 'required|integer',
@@ -136,6 +138,10 @@ class Car extends Model
     }
     public static function credentials($request,$images_id = NULL)
     {
+        $seller=Car::SELLER_INDIVIDUAL;
+        if(Auth()->user()->Agency){
+           $seller=(Auth()->user()->Agency->center_type==0) ? Car::SELLER_AGENCY: Car::SELLER_DISTRIBUTOR;
+        }
         $credentials = [
             'CarMaker_id'                 => $request->CarMaker_id,
             'CarModel_id'                 => $request->CarModel_id,
@@ -157,7 +163,7 @@ class Car extends Model
             'ServiceHistory'              => $request->ServiceHistory,
             'transmission'                => $request->transmission,
             'isNew'                       => $request->isNew,
-            'SellerType'                  => Auth()->user()->Agency ? Car::SELLER_AGENCY: Car::SELLER_INDIVIDUAL,
+            'SellerType'                  => $seller,
             'payment'                     => $request->payment,
             'phone'                       => $request->phone,
             'whats'                       => $request->whats,
@@ -226,6 +232,7 @@ class Car extends Model
     {
         return $this->belongsTo(CarYear::class,"CarYear_id","id");
     }
+
     public function color()
     {
         return $this->belongsTo(CarColor::class,"CarColor_id","id");
