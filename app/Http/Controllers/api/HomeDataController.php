@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\api;
+
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CarResource;
 use Illuminate\Support\Facades\Response;
@@ -18,12 +19,13 @@ use App\Models\MyMaintenanceList;
 use App\Models\Trending;
 use App\Models\UserFavAgency;
 use Illuminate\Http\Request;
-class DataType {
+
+class DataType
+{
     const single = 1;
     const list = 2;
     const compare = 3;
     const promote = 4;
-
 }
 class HomeDataController extends Controller
 {
@@ -33,29 +35,29 @@ class HomeDataController extends Controller
     {
         $this->lang($request);
 
-        $validator      = Validator::make((array) $request->all(), ['interest_country'=>'required|integer']);
+        $validator      = Validator::make((array) $request->all(), ['interest_country' => 'required|integer']);
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
-        $agencyList     = Agency::where('country_id',$request->interest_country)
-        ->where('show_in_home',1)
-        ->get();
+        $agencyList     = Agency::where('country_id', $request->interest_country)
+            ->where('show_in_home', 1)
+            ->get();
 
         if (!$agencyList->count()) {
             return $this->errorMessage(__("No Agencies in this interest country"));
         }
         $agencies = [];
         foreach ($agencyList as $agency) {
-            list($Max,$Min)     = $this->PriceRange($agency);
-            $agencies[]     =[
+            list($Max, $Min)     = $this->PriceRange($agency);
+            $agencies[]     = [
                 "centerType"    => Agency::AgecnyType()[$agency->center_type],
                 "id"            => $agency->id,
                 "isAuthorised"  => $agency->is_authorised ? true : false,
                 "isFavorite"    => $this->isFav($agency),
-                "logo"          => $agency->img->name,
+                "logo"          => find_image(@$agency->img),
                 "priceRangeMax" => $Max,
                 "priceRangeMin" => $Min,
-                "title"         => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
+                "title"         => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
                 "rate"          => $this->rate($agency),
             ];
         }
@@ -78,12 +80,12 @@ class HomeDataController extends Controller
             if ($user->interestCountry) {
                 $data["interest_country"] =  $user->interestCountry->id;
             }
-        }else {
+        } else {
             $user_data = null;
         }
 
 
-        $trendingCarList     = Trending::where('day',date("Y-m-d"))->first();
+        $trendingCarList     = Trending::where('day', date("Y-m-d"))->first();
         $trendingCars = [];
         if ($trendingCarList) {
             if ($trendingCarList->trends) {
@@ -104,22 +106,24 @@ class HomeDataController extends Controller
         if (empty($agencies)) {
             return $this->errorMessage('No Data Found');
         }
-        return $this->returnData("agencyList",$agencies,"Success",$array_data);
+        return $this->returnData("agencyList", $agencies, "Success", $array_data);
     }
     public function createNewMaintenance(Request $request)
     {
         $this->lang($request);
-        $validator      = Validator::make((array) $request->all(),
-        [
-            'car_maker_id'      => 'required|integer',
-            'car_model_id'      => 'required|integer',
-            'date_next'         => 'required|date',
-            'token'             => 'required'
-        ]);
+        $validator      = Validator::make(
+            (array) $request->all(),
+            [
+                'car_maker_id'      => 'required|integer',
+                'car_model_id'      => 'required|integer',
+                'date_next'         => 'required|date',
+                'token'             => 'required'
+            ]
+        );
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
-        if(!auth()->user()){
+        if (!auth()->user()) {
             return $this->errorMessage(__('Login to create new maintenance'));
         }
         $car_maker_id   = CarMaker::find($request->car_maker_id);
@@ -130,11 +134,11 @@ class HomeDataController extends Controller
         if (!$car_model_id) {
             return $this->errorMessage(__("No such car model id exist"));
         }
-        $lastList       = MyMaintenanceList::where('CarMaker_id',$request->car_maker_id)
-        ->where('CarModel_id',$request->car_model_id)
-        ->where('date_next',$request->date_next)
-        ->get();
-        if($lastList->count()){
+        $lastList       = MyMaintenanceList::where('CarMaker_id', $request->car_maker_id)
+            ->where('CarModel_id', $request->car_model_id)
+            ->where('date_next', $request->date_next)
+            ->get();
+        if ($lastList->count()) {
             return $this->errorMessage(__("This maintenance list already exist"));
         }
 
@@ -144,50 +148,50 @@ class HomeDataController extends Controller
             'CarModel_id'   => $request->car_model_id,
             'user_id'       => auth()->user()->id
         ]);
-        $mCarMaker  =[
+        $mCarMaker  = [
             "id"        => $car_maker_id->id,
             "logo"      => $car_maker_id->logo->name,
             "title"     => $car_maker_id->name
         ];
-        $mCarModel  =[
+        $mCarModel  = [
             "car_maker_id"  => $car_model_id->CarMaker_id,
             "id"            => $car_model_id->id,
             "title"         => $car_model_id->name
         ];
-        $myMaintenance  =[
+        $myMaintenance  = [
             "date_next"     => $MyMaintenanceList->date_next,
             "id"            => $MyMaintenanceList->id,
             "mCarMaker"     => $mCarMaker,
             "mCarModel"     => $mCarModel
         ];
-        return $this->returnData("myMaintenance",$myMaintenance,__("Created Successfully"));
+        return $this->returnData("myMaintenance", $myMaintenance, __("Created Successfully"));
     }
     public function get_list(Request $request)
     {
         $this->lang($request);
 
-        if(!auth()->user()){
+        if (!auth()->user()) {
             return $this->errorMessage(__('Login to show maintenance list'));
         }
 
-        $Mylist       = MyMaintenanceList::where('user_id',auth()->user()->id)->get();
+        $Mylist       = MyMaintenanceList::where('user_id', auth()->user()->id)->get();
         $MaintenanceList = [];
         $forSuggest      = [];
         foreach ($Mylist as $MainList) {
             $car_maker_id   = CarMaker::find($MainList->CarMaker_id);
             $car_model_id   = CarModel::find($MainList->CarModel_id);
             $forSuggest[]   = $MainList->CarMaker_id;
-            $mCarMaker  =[
+            $mCarMaker  = [
                 "id"        => $car_maker_id->id,
                 "logo"      => $car_maker_id->logo->name,
                 "title"     => $car_maker_id->name
             ];
-            $mCarModel  =[
+            $mCarModel  = [
                 "car_maker_id"  => $car_model_id->CarMaker_id,
                 "id"            => $car_model_id->id,
                 "title"         => $car_model_id->name
             ];
-            $MaintenanceList[]  =[
+            $MaintenanceList[]  = [
                 "date_next"     => $MainList->date_next,
                 "id"            => $MainList->id,
                 "mCarMaker"     => $mCarMaker,
@@ -195,45 +199,45 @@ class HomeDataController extends Controller
             ];
         }
 
-        if($Mylist->count()){
+        if ($Mylist->count()) {
             $agencyList     = Agency::whereHas('carMakers', function ($query) use ($forSuggest) {
-                return $query->whereIn('agency_car_makers.CarMaker_id',$forSuggest)->take(5);
+                return $query->whereIn('agency_car_makers.CarMaker_id', $forSuggest)->take(5);
             });
             $agencyList = $agencyList->get();
-        }else{
+        } else {
             $agencyList     = Agency::all()->random(5);
         }
         $agencies   = [];
 
         foreach ($agencyList as $agency) {
-            list($Max,$Min)     = $this->PriceRange($agency);
-            $agencies[]     =[
+            list($Max, $Min)     = $this->PriceRange($agency);
+            $agencies[]     = [
                 "centerType"    => Agency::AgecnyType()[$agency->center_type],
                 "id"            => $agency->id,
                 "isAuthorised"  => $agency->is_authorised ? true : false,
                 "isFavorite"    => $this->isFav($agency),
-                "logo"          => $agency->img->name,
+                "logo"          => find_image(@$agency->img),
                 "priceRangeMax" => $Max,
                 "priceRangeMin" => $Min,
-                "title"         => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
+                "title"         => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
                 "rate"          => $this->rate($agency),
             ];
         }
-        $getlist  =[
+        $getlist  = [
             "myMaintenanceList"     => $MaintenanceList,
             "suggestedCenterList"   => $agencies
         ];
-        return $this->returnData("",$getlist,__("Successfully"));
+        return $this->returnData("", $getlist, __("Successfully"));
     }
     public function lang($request)
     {
         if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
+            if (in_array($locale, ['ar', 'en'])) {
                 default_lang($locale);
-            }else {
+            } else {
                 default_lang();
             }
-        }else {
+        } else {
             default_lang();
         }
     }
@@ -241,11 +245,11 @@ class HomeDataController extends Controller
     {
         // Favorite Row
         $isFavorite = false;
-        if(auth()->user()){
-            $fav    = UserFavAgency::where('agency_id',$agency->id)
-            ->where('user_id',auth()->user()->id)
-            ->first();
-            if($fav){
+        if (auth()->user()) {
+            $fav    = UserFavAgency::where('agency_id', $agency->id)
+                ->where('user_id', auth()->user()->id)
+                ->first();
+            if ($fav) {
                 $isFavorite = true;
             }
         }
@@ -254,31 +258,31 @@ class HomeDataController extends Controller
     public function rate($agency)
     {
         // Rate Row
-        $rate   = AgencyReview::where('agency_id',$agency->id)
-        ->selectRaw('SUM(rate)/COUNT(user_id) AS avg_rating')
-        ->first()
-        ->avg_rating;
+        $rate   = AgencyReview::where('agency_id', $agency->id)
+            ->selectRaw('SUM(rate)/COUNT(user_id) AS avg_rating')
+            ->first()
+            ->avg_rating;
         return $rate;
     }
     public function PriceRange($agency)
     {
-         // Price Row
-         $agencyCars     = AgencyCar::where('agency_id',$agency->id)->get();
-         $Max = 0;
-         $Min = 100000000;
-         foreach ($agencyCars as $agencyCar) {
-             $price = $agencyCar->car->price;
-             if($price>$Max){
-                 $Max = $price;
-             }
-             if($price<$Min){
-                 $Min = $price;
-             }
-         }
-         if(!$agencyCars->count()){
-             $Max = 0;
-             $Min = 0;
+        // Price Row
+        $agencyCars     = AgencyCar::where('agency_id', $agency->id)->get();
+        $Max = 0;
+        $Min = 100000000;
+        foreach ($agencyCars as $agencyCar) {
+            $price = $agencyCar->car->price;
+            if ($price > $Max) {
+                $Max = $price;
+            }
+            if ($price < $Min) {
+                $Min = $price;
+            }
         }
-        return array($Max,$Min);
+        if (!$agencyCars->count()) {
+            $Max = 0;
+            $Min = 0;
+        }
+        return array($Max, $Min);
     }
 }

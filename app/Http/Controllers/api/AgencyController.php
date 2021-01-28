@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\api;
+
 use App\Http\Controllers\Controller;
 use App\Models\Agency;
 use App\Models\AgencyCar;
@@ -39,7 +40,7 @@ class AgencyController extends Controller
             'token'         => 'required'
         ]);
         if (!$validator->fails()) {
-            if(!auth()->user()){
+            if (!auth()->user()) {
                 return $this->errorMessage(__('Login to see submit review'));
             }
             $agency     = Agency::find($request->center_id);
@@ -54,10 +55,9 @@ class AgencyController extends Controller
                 'user_id'       => auth()->user()->id
             ]);
             return $this->returnSuccess(__("Your Review Has been created Successfully, Wait for Admin to Apply your review"));
-        }else{
-            return($this->ValidatorErrors($validator));
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
-
     }
     public function agency(Request $request)
     {
@@ -65,20 +65,26 @@ class AgencyController extends Controller
         $validator  = $this->home($request);
 
         if (!$validator->fails()) {
-            $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('center_type',Agency::center_type_Agency)
-            ->paginate();
-            if(!$agencyList->count()){
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('center_type', Agency::center_type_Agency)
+                ->paginate();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No Agencies in this interest country"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
-                $paymentMethodList = false);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    $workType = false,
+                    $specializationList = false,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false
+                );
             }
-            return $this->returnData("offersList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("offersList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function maintenance(Request $request)
@@ -87,20 +93,26 @@ class AgencyController extends Controller
         $validator  = $this->home($request);
 
         if (!$validator->fails()) {
-            $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('center_type',Agency::center_type_Maintenance)
-            ->paginate();
-            if(!$agencyList->count()){
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('center_type', Agency::center_type_Maintenance)
+                ->paginate();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No maintenance centers in this interest country"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$description = false,
-                $paymentMethodList = false);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    $workType = false,
+                    $specializationList = true,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false
+                );
             }
-            return $this->returnData("centerList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("centerList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function spare(Request $request)
@@ -109,20 +121,26 @@ class AgencyController extends Controller
         $validator  = $this->home($request);
 
         if (!$validator->fails()) {
-            $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('center_type',Agency::center_type_Spare)
-            ->paginate();
-            if(!$agencyList->count()){
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('center_type', Agency::center_type_Spare)
+                ->paginate();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No Spare parts centers in this interest country"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$description = false,
-                $paymentMethodList = false);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    $workType = false,
+                    $specializationList = true,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false
+                );
             }
-            return $this->returnData("centerList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("centerList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function detailsAgency(Request $request)
@@ -131,20 +149,26 @@ class AgencyController extends Controller
         $validator = $this->Details($request);
 
         if (!$validator->fails()) {
-            $agencyList     = Agency::where('id',$request->center_id)
-            ->where('center_type',Agency::center_type_Agency)
-            ->get();
-            if(!$agencyList->count()){
+            $agencyList     = Agency::where('id', $request->center_id)
+                ->where('center_type', Agency::center_type_Agency)
+                ->get();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No such center id exist"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,Agency::AgecnyType()[$agency->agency_type],$specializationList = false,$badgesList = true,$description = true,
-                $paymentMethodList = true);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    Agency::AgecnyType()[$agency->agency_type],
+                    $specializationList = false,
+                    $badgesList = true,
+                    $description = true,
+                    $paymentMethodList = true
+                );
             }
-            return $this->returnData("mCenter",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("mCenter", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function detailsMaintenance(Request $request)
@@ -153,20 +177,26 @@ class AgencyController extends Controller
         $validator = $this->Details($request);
 
         if (!$validator->fails()) {
-            $agencyList     = Agency::where('id',$request->center_id)
-            ->where('center_type',Agency::center_type_Maintenance)
-            ->get();
-            if(!$agencyList->count()){
+            $agencyList     = Agency::where('id', $request->center_id)
+                ->where('center_type', Agency::center_type_Maintenance)
+                ->get();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No such center id exist"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,Agency::MaintenanceType()[$agency->maintenance_type],$specializationList = true,$badgesList = true,$description = true,
-                $paymentMethodList = true);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    Agency::MaintenanceType()[$agency->maintenance_type],
+                    $specializationList = true,
+                    $badgesList = true,
+                    $description = true,
+                    $paymentMethodList = true
+                );
             }
-            return $this->returnData("mCenter",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("mCenter", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function detailsSpare(Request $request)
@@ -175,20 +205,26 @@ class AgencyController extends Controller
         $validator = $this->Details($request);
 
         if (!$validator->fails()) {
-            $agencyList     = Agency::where('id',$request->center_id)
-            ->where('center_type',Agency::center_type_Spare)
-            ->get();
-            if(!$agencyList->count()){
+            $agencyList     = Agency::where('id', $request->center_id)
+                ->where('center_type', Agency::center_type_Spare)
+                ->get();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No such center id exist"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,Agency::types()[$agency->center_type],$specializationList = true,$badgesList = true,$description = true,
-                $paymentMethodList = true);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    Agency::types()[$agency->center_type],
+                    $specializationList = true,
+                    $badgesList = true,
+                    $description = true,
+                    $paymentMethodList = true
+                );
             }
-            return $this->returnData("mCenter",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("mCenter", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function agencySearch(Request $request)
@@ -198,23 +234,30 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
-            $name           = Session::get('app_locale')=='ar'? "name_ar" : "name";
-            $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('center_type',Agency::center_type_Agency)
-            ->where('car_status',$carStatus)
-            ->where($name,'like','%'.$request->word.'%')
-            ->paginate();
-            if(!$agencyList->count()){
+            $name           = Session::get('app_locale') == 'ar' ? "name_ar" : "name";
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('center_type', Agency::center_type_Agency)
+                ->where('car_status', $carStatus)
+                ->where($name, 'like', '%' . $request->word . '%')
+                ->paginate();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No centers found"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
-                $paymentMethodList = false,$centerType = false);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    $workType = false,
+                    $specializationList = false,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false,
+                    $centerType = false
+                );
             }
-            return $this->returnData("centerList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("centerList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function maintenanceSearch(Request $request)
@@ -224,24 +267,29 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
-            $name           = Session::get('app_locale')=='ar'? "name_ar" : "name";
-            $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('center_type',Agency::center_type_Maintenance)
-            ->where('car_status',$carStatus)
-            ->where($name,'like','%'.$request->word.'%')
-            ->paginate();
-            if(!$agencyList->count()){
+            $name           = Session::get('app_locale') == 'ar' ? "name_ar" : "name";
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('center_type', Agency::center_type_Maintenance)
+                ->where('car_status', $carStatus)
+                ->where($name, 'like', '%' . $request->word . '%')
+                ->paginate();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No centers found"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$description = false,
-                $paymentMethodList = false);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    $workType = false,
+                    $specializationList = true,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false
+                );
             }
-            return $this->returnData("centerList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
-
+            return $this->returnData("centerList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function spareSearch(Request $request)
@@ -251,171 +299,190 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
-            $name           = Session::get('app_locale')=='ar'? "name_ar" : "name";
-            $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('center_type',Agency::center_type_Spare)
-            ->where('car_status',$carStatus)
-            ->where($name,'like','%'.$request->word.'%')
-            ->paginate();
-            if(!$agencyList->count()){
+            $name           = Session::get('app_locale') == 'ar' ? "name_ar" : "name";
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('center_type', Agency::center_type_Spare)
+                ->where('car_status', $carStatus)
+                ->where($name, 'like', '%' . $request->word . '%')
+                ->paginate();
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No centers found"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = true,$badgesList = false,$paymentMethodList = false,$centerType = false);
+                $agencies[]     = $this->AgencyData($agency, $workType = false, $specializationList = true, $badgesList = false, $paymentMethodList = false, $centerType = false);
             }
-            return $this->returnData("centerList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
-
+            return $this->returnData("centerList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function agencyFav(Request $request)
     {
         $this->lang($request);
-        $validator = $this->Favorite($request,'agency');
+        $validator = $this->Favorite($request, 'agency');
 
         if (!$validator->fails()) {
-            if(!auth()->user()){
+            if (!auth()->user()) {
                 return $this->errorMessage(__('Login to see your favorite'));
             }
 
-            if(!auth()->user()->agencyFav->count()){
+            if (!auth()->user()->agencyFav->count()) {
                 return $this->returnSuccess(__("No centers found"));
             }
             $agencyList = auth()->user()->agencyFav;
             foreach ($agencyList as $agency) {
 
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
-                $paymentMethodList = false,$centerType = false,$mContact = false,$mLocation = false,$carMakerList = false);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    $workType = false,
+                    $specializationList = false,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false,
+                    $centerType = false,
+                    $mContact = false,
+                    $mLocation = false,
+                    $carMakerList = false
+                );
             }
-            return $this->returnData("agencyList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("agencyList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function centerFav(Request $request)
     {
         $this->lang($request);
-        $validator = $this->Favorite($request,'center');
+        $validator = $this->Favorite($request, 'center');
 
         if (!$validator->fails()) {
-            if(!auth()->user()){
+            if (!auth()->user()) {
                 return $this->errorMessage(__('Login to see your favorite'));
             }
 
-            if(!auth()->user()->MaintenanceFav->count()){
+            if (!auth()->user()->MaintenanceFav->count()) {
                 return $this->returnSuccess(__("No centers found"));
             }
             $agencyList = auth()->user()->agencyFav;
             foreach ($agencyList as $agency) {
 
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
-                $paymentMethodList = false,$centerType = false,$mContact = false,$mLocation = false,$carMakerList = false);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    $workType = false,
+                    $specializationList = false,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false,
+                    $centerType = false,
+                    $mContact = false,
+                    $mLocation = false,
+                    $carMakerList = false
+                );
             }
-            return $this->returnData("maintenanceList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("maintenanceList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function addFav(Request $request)
     {
         $this->lang($request);
         if ($request->favorite_type == 'agency') {
-            $validator = $this->Favorite($request,'agency',1);
-        }elseif ($request->favorite_type == 'center') {
-            $validator = $this->Favorite($request,'center',1);
-        }elseif ($request->favorite_type == 'car') {
-            $validator = $this->Favorite($request,'car',1);
-        }else{
+            $validator = $this->Favorite($request, 'agency', 1);
+        } elseif ($request->favorite_type == 'center') {
+            $validator = $this->Favorite($request, 'center', 1);
+        } elseif ($request->favorite_type == 'car') {
+            $validator = $this->Favorite($request, 'car', 1);
+        } else {
             return $this->errorMessage(__('Favorite type invalid'));
         }
 
         if (!$validator->fails()) {
-            if(!auth()->user()){
+            if (!auth()->user()) {
                 return $this->errorMessage(__('Login to see your favorite'));
             }
-            if($request->favorite_type == 'agency'||$request->favorite_type == 'center'){//Add Agency&Center Favorite
-                $agencyFav  = UserFavAgency::where('user_id',auth()->user()->id)
-                ->where('agency_id',$request->target_id)
-                ->first();
+            if ($request->favorite_type == 'agency' || $request->favorite_type == 'center') { //Add Agency&Center Favorite
+                $agencyFav  = UserFavAgency::where('user_id', auth()->user()->id)
+                    ->where('agency_id', $request->target_id)
+                    ->first();
                 $isFound    = Agency::find($request->target_id);
-                if($agencyFav){
+                if ($agencyFav) {
                     return $this->errorMessage(__('This Favorite type is already exist'));
-                }elseif(!$isFound){
+                } elseif (!$isFound) {
                     return $this->errorMessage(__('Target id does not exist'));
-                }else{
+                } else {
                     $agencyFav  = UserFavAgency::create([
                         'agency_id'     => $request->target_id,
                         'user_id'       => auth()->user()->id
                     ]);
                     return $this->returnSuccess(__("Successfully added to Favorite"));
                 }
-            }elseif($request->favorite_type == 'car'){//car Favorite
-                $carFav  = UserFav_car::where('user_id',auth()->user()->id)
-                ->where('car_id',$request->target_id)
-                ->first();
+            } elseif ($request->favorite_type == 'car') { //car Favorite
+                $carFav  = UserFav_car::where('user_id', auth()->user()->id)
+                    ->where('car_id', $request->target_id)
+                    ->first();
                 $isFound    = Car::find($request->target_id);
-                if($carFav){
+                if ($carFav) {
                     return $this->errorMessage(__('This Favorite type is already exist'));
-                }elseif(!$isFound){
+                } elseif (!$isFound) {
                     return $this->errorMessage(__('Target id does not exist'));
-                }else{
+                } else {
                     $carFav  = UserFav_car::create([
                         'car_id'        => $request->target_id,
                         'user_id'       => auth()->user()->id
                     ]);
                     return $this->returnSuccess(__("Successfully added to Favorite"));
                 }
-            }else{
+            } else {
                 return $this->returnSuccess(__("Something went wrong"));
             }
-        }else{
-            return($this->ValidatorErrors($validator));
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function removeFav(Request $request)
     {
         $this->lang($request);
         if ($request->favorite_type == 'agency') {
-            $validator = $this->Favorite($request,'agency',1);
-        }elseif ($request->favorite_type == 'center') {
-            $validator = $this->Favorite($request,'center',1);
-        }elseif ($request->favorite_type == 'car') {
-            $validator = $this->Favorite($request,'car',1);
-        }else{
+            $validator = $this->Favorite($request, 'agency', 1);
+        } elseif ($request->favorite_type == 'center') {
+            $validator = $this->Favorite($request, 'center', 1);
+        } elseif ($request->favorite_type == 'car') {
+            $validator = $this->Favorite($request, 'car', 1);
+        } else {
             return $this->errorMessage(__('Favorite type invalid'));
         }
 
-        if (!$validator->fails()){
-            if(!auth()->user()){
+        if (!$validator->fails()) {
+            if (!auth()->user()) {
                 return $this->errorMessage(__('Login to see your favorite'));
             }
-            if($request->favorite_type == 'agency'||$request->favorite_type == 'center'){//Add Agency&Center Favorite
-                $agencyFav  = UserFavAgency::where('user_id',auth()->user()->id)
-                ->where('agency_id',$request->target_id)
-                ->first();
-                if(!$agencyFav){
+            if ($request->favorite_type == 'agency' || $request->favorite_type == 'center') { //Add Agency&Center Favorite
+                $agencyFav  = UserFavAgency::where('user_id', auth()->user()->id)
+                    ->where('agency_id', $request->target_id)
+                    ->first();
+                if (!$agencyFav) {
                     return $this->errorMessage(__('There is not favorite to be deleted'));
-                }else{
+                } else {
                     $agencyFav->delete();
                     return $this->returnSuccess(__("Successfully Removed"));
                 }
-            }elseif($request->favorite_type == 'car'){//car Favorite
-                $carFav  = UserFav_car::where('user_id',auth()->user()->id)
-                ->where('car_id',$request->target_id)
-                ->first();
-                if(!$carFav){
+            } elseif ($request->favorite_type == 'car') { //car Favorite
+                $carFav  = UserFav_car::where('user_id', auth()->user()->id)
+                    ->where('car_id', $request->target_id)
+                    ->first();
+                if (!$carFav) {
                     return $this->errorMessage(__('There is not favorite to be deleted'));
-                }else{
+                } else {
                     $carFav->delete();
                     return $this->returnSuccess(__("Successfully Removed"));
                 }
-            }else{
+            } else {
                 return $this->returnSuccess(__("Something went wrong"));
             }
-        }else{
-            return($this->ValidatorErrors($validator));
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function Filter(Request $request)
@@ -425,20 +492,19 @@ class AgencyController extends Controller
 
         if (1) {
             $carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
-            $center_type    = $request->work_type == 'agency' ? Agency::center_type_Agency :
-             ( ($request->work_type == 'maintenance') ? Agency::center_type_Maintenance : Agency::center_type_Spare );
-            $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('active',1)
-            ->where('car_status',$carStatus);
+            $center_type    = $request->work_type == 'agency' ? Agency::center_type_Agency : (($request->work_type == 'maintenance') ? Agency::center_type_Maintenance : Agency::center_type_Spare);
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('active', 1)
+                ->where('car_status', $carStatus);
             /*->whereHas('carMakers', function ($query) use ($request) {
                 return $query->where('agency_car_makers.CarMaker_id',$request->car_maker_id);
             })
             ->whereHas('Car', function ($query)use ($request) {
                 return $query->where('cars.CarModel_id',$request->car_model_id);
             }); */
-            if($request->work_type)$agencyList->where('center_type',$center_type);
-            if($request->badge_ids)$agencyList->whereIn('status',[$request->badge_ids]);
-            if($request->payment_methods)$agencyList->whereIn('payment_method',[$request->payment_methods]);
+            if ($request->work_type) $agencyList->where('center_type', $center_type);
+            if ($request->badge_ids) $agencyList->whereIn('status', [$request->badge_ids]);
+            if ($request->payment_methods) $agencyList->whereIn('payment_method', [$request->payment_methods]);
 
             /* if($request->sort_rate =='high'){
                 $agencyList->whereHas('reviews', function ($query) use ($request) {
@@ -447,23 +513,23 @@ class AgencyController extends Controller
             }elseif($request->sort_rate =='low'){
 
             } */
-            if($request->sort_added=='recent')$agencyList->orderBy('created_at', 'desc');
+            if ($request->sort_added == 'recent') $agencyList->orderBy('created_at', 'desc');
             /* if (isset($request->sort_near_by_lat) && isset($request->sort_near_by_lng)) { //Filter by location
                 $agencyList->orderBy(DB::raw(
                     'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point(?, ?))',
                     [$request->sort_near_by_lat, $request->sort_near_by_lng]
                 ), 'desc');
             } */
-            if(!$agencyList->count()){
+            if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No centers found"));
             }
             $agencies = [];
             foreach ($agencyList->get() as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,$paymentMethodList = false,$centerType = true);
+                $agencies[]     = $this->AgencyData($agency, $workType = false, $specializationList = false, $badgesList = false, $description = false, $paymentMethodList = false, $centerType = true);
             }
-            return $this->returnData("centerList",$agencies,"Successfully");
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("centerList", $agencies, "Successfully");
+        } else {
+            return ($this->ValidatorErrors($validator));
         }
     }
     public function Contact($agency)
@@ -477,12 +543,12 @@ class AgencyController extends Controller
             "whats"         => null,
         ];
 
-        if ($agency->AgencyContact ) {
+        if ($agency->AgencyContact) {
             $mContact = [
                 "face"          => $agency->AgencyContact->facebook,
                 "instagram"     => $agency->AgencyContact->instagram,
                 "messenger"     => $agency->AgencyContact->messenger,
-                "phone"         => $agency->user->phone,//May be i will edit this
+                "phone"         => $agency->user->phone, //May be i will edit this
                 "whats"         => $agency->AgencyContact->whatsapp,
             ];
         }
@@ -490,32 +556,32 @@ class AgencyController extends Controller
     }
     public function PriceRange($agency)
     {
-         // Price Row
-         $agencyCars     = AgencyCar::where('agency_id',$agency->id)->get();
+        // Price Row
+        $agencyCars     = AgencyCar::where('agency_id', $agency->id)->get();
 
-         $Max = 0;
-         $Min = 100000000;
-         foreach ($agencyCars as $agencyCar) {
-             $price = $agencyCar->car->price;
-             if($price>$Max){
-                 $Max = $price;
-             }
-             if($price<$Min){
-                 $Min = $price;
-             }
-         }
-         if(!$agencyCars->count()){
-             $Max = 0;
-             $Min = 0;
+        $Max = 0;
+        $Min = 100000000;
+        foreach ($agencyCars as $agencyCar) {
+            $price = $agencyCar->car->price;
+            if ($price > $Max) {
+                $Max = $price;
+            }
+            if ($price < $Min) {
+                $Min = $price;
+            }
         }
-        return array($Max,$Min);
+        if (!$agencyCars->count()) {
+            $Max = 0;
+            $Min = 0;
+        }
+        return array($Max, $Min);
     }
     public function Location($agency)
     {
         // mLocation Row
         $mLocation = [
-            "city_name"         => Session::get('app_locale')=='ar'? $agency->city->title_ar : $agency->city->title ,
-            "government_name"   => Session::get('app_locale')=='ar'? $agency->governorate->title_ar : $agency->governorate->title,
+            "city_name"         => Session::get('app_locale') == 'ar' ? $agency->city->title_ar : $agency->city->title,
+            "government_name"   => Session::get('app_locale') == 'ar' ? $agency->governorate->title_ar : $agency->governorate->title,
             "latitude"          => $agency->lat,
             "longitude"         => $agency->long,
         ];
@@ -526,7 +592,7 @@ class AgencyController extends Controller
     {
         // Car Maker Row
         $carMakerList       = [];
-        if($agency->carMakers){
+        if ($agency->carMakers) {
             foreach ($agency->carMakers as $CarMaker) {
                 $logo           = @$CarMaker->logo->name;
                 $carMakerList[] = $logo;
@@ -538,11 +604,11 @@ class AgencyController extends Controller
     {
         // Favorite Row
         $isFavorite = false;
-        if(auth()->user()){
-            $fav    = UserFavAgency::where('agency_id',$agency->id)
-            ->where('user_id',auth()->user()->id)
-            ->first();
-            if($fav){
+        if (auth()->user()) {
+            $fav    = UserFavAgency::where('agency_id', $agency->id)
+                ->where('user_id', auth()->user()->id)
+                ->first();
+            if ($fav) {
                 $isFavorite = true;
             }
         }
@@ -551,19 +617,19 @@ class AgencyController extends Controller
     public function rate($agency)
     {
         // Rate Row
-        $rate   = AgencyReview::where('agency_id',$agency->id)
-        ->selectRaw('SUM(rate)/COUNT(user_id) AS avg_rating')
-        ->first()
-        ->avg_rating;
+        $rate   = AgencyReview::where('agency_id', $agency->id)
+            ->selectRaw('SUM(rate)/COUNT(user_id) AS avg_rating')
+            ->first()
+            ->avg_rating;
         return $rate;
     }
     public function specializationList($agency)
     {
         // specializationList
         $specializationList = [];
-        if($agency->agency_specialties){
+        if ($agency->agency_specialties) {
             foreach ($agency->agency_specialties as $list) {
-                $specializationList[]   = Session::get('app_locale')=='ar'? $list->name_ar : $list->name;
+                $specializationList[]   = Session::get('app_locale') == 'ar' ? $list->name_ar : $list->name;
             }
         }
         return $specializationList;
@@ -571,12 +637,12 @@ class AgencyController extends Controller
     public function lang($request)
     {
         if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
+            if (in_array($locale, ['ar', 'en'])) {
                 default_lang($locale);
-            }else {
+            } else {
                 default_lang();
             }
-        }else {
+        } else {
             default_lang();
         }
     }
@@ -591,17 +657,26 @@ class AgencyController extends Controller
             $response
         );
     }
-    public function AgencyData($agency,$workType = 1
-    ,$specializationList = 1,$badgesList = 1,$description = 1,$paymentMethodList = 1,$centerType = 1
-    ,$mContact = 1,$mLocation = 1,$carMakerList = 1)//Power Full Function :P
+    public function AgencyData(
+        $agency,
+        $workType = 1,
+        $specializationList = 1,
+        $badgesList = 1,
+        $description = 1,
+        $paymentMethodList = 1,
+        $centerType = 1,
+        $mContact = 1,
+        $mLocation = 1,
+        $carMakerList = 1
+    ) //Power Full Function :P
     {
-        list($Max,$Min)             = $this->PriceRange($agency);
+        list($Max, $Min)             = $this->PriceRange($agency);
         $agencies = [
             "centerType"            => Agency::types()[$agency->center_type],
             "id"                    => $agency->id,
-            "logo"                  => $agency->img->name,
-            "title"                 => Session::get('app_locale')=='ar'? $agency->name_ar : $agency->name,
-            "description"           => Session::get('app_locale')=='ar'? $agency->description_ar : $agency->description,
+            "logo"                  => find_image(@$agency->img),
+            "title"                 => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
+            "description"           => Session::get('app_locale') == 'ar' ? $agency->description_ar : $agency->description,
             "isAuthorised"          => $agency->is_authorised ? true : false,
             "priceRangeMax"         => $Max,
             "priceRangeMin"         => $Min,
@@ -615,16 +690,16 @@ class AgencyController extends Controller
             "workType"              => $workType,
             "badgesList"            => Agency::status()[$agency->status],
         ];
-        if(!$specializationList)unset($agencies["specializationList"]);
-        if(!$workType)unset($agencies["workType"]);
-        if(!$badgesList)unset($agencies["badgesList"]);
-        if(!$specializationList)unset($agencies["specializationList"]);
-        if(!$description)unset($agencies["description"]);
-        if(!$paymentMethodList)unset($agencies["paymentMethodList"]);
-        if(!$centerType)unset($agencies["centerType"]);
-        if(!$mContact)unset($agencies["mContact"]);
-        if(!$mLocation)unset($agencies["mLocation"]);
-        if(!$carMakerList)unset($agencies["carMakerList"]);
+        if (!$specializationList) unset($agencies["specializationList"]);
+        if (!$workType) unset($agencies["workType"]);
+        if (!$badgesList) unset($agencies["badgesList"]);
+        if (!$specializationList) unset($agencies["specializationList"]);
+        if (!$description) unset($agencies["description"]);
+        if (!$paymentMethodList) unset($agencies["paymentMethodList"]);
+        if (!$centerType) unset($agencies["centerType"]);
+        if (!$mContact) unset($agencies["mContact"]);
+        if (!$mLocation) unset($agencies["mLocation"]);
+        if (!$carMakerList) unset($agencies["carMakerList"]);
         return $agencies;
     }
     public function Search($request)
@@ -632,7 +707,7 @@ class AgencyController extends Controller
         $data       = $request->all();
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
-            'interest_country'  => 'required|integer',//Will be updated
+            'interest_country'  => 'required|integer', //Will be updated
             'token'             => 'nullable',
             'car_status'        => 'required|in:0,1|integer',
             'word'              => 'required|regex:/^[a-z0-9\s]+$/i'
@@ -661,21 +736,21 @@ class AgencyController extends Controller
         ]);
         return $validator;
     }
-    public function Favorite($request,$type,$id = NULL)
+    public function Favorite($request, $type, $id = NULL)
     {
         $data       = $request->all();
 
         $array_data = (array)$data;
-        if($id){
+        if ($id) {
             $validator  = Validator::make($array_data, [
                 'token'             => 'required',
                 'target_id'         => 'required|integer',
-                'favorite_type'     => 'required|in:'.$type,
+                'favorite_type'     => 'required|in:' . $type,
             ]);
-        }else{
+        } else {
             $validator  = Validator::make($array_data, [
                 'token'             => 'required',
-                'favorite_type'     => 'required|in:'.$type,
+                'favorite_type'     => 'required|in:' . $type,
             ]);
         }
         return $validator;
