@@ -151,7 +151,7 @@ class CarResource extends JsonResource
         $userType=__("Individual");
         if(($this->user->Agency) ){
             if($this->user->Agency->center_type ==0){
-                $userType=Agency::AgecnyType()[$this->user->Agency->agency_type];
+                $userType=Agency::ApiAgecnyType()[$this->user->Agency->agency_type];
                 $image=$this->user->Agency->img->name;
                 $rate   = AgencyReview::where('agency_id',$this->user->Agency->id)
                 ->selectRaw('SUM(rate)/COUNT(user_id) AS avg_rating')

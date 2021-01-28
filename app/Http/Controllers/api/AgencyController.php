@@ -153,7 +153,7 @@ class AgencyController extends Controller
             foreach ($agencyList as $agency) {
                 $agencies[]     = $this->AgencyData(
                     $agency,
-                    Agency::AgecnyType()[$agency->agency_type],
+                    Agency::ApiAgecnyType()[$agency->agency_type],
                     $specializationList = false,
                     $badgesList = true,
                     $description = true,
@@ -181,7 +181,7 @@ class AgencyController extends Controller
             foreach ($agencyList as $agency) {
                 $agencies[]     = $this->AgencyData(
                     $agency,
-                    Agency::MaintenanceType()[$agency->maintenance_type],
+                    Agency::ApiMaintenanceType()[$agency->maintenance_type],
                     $specializationList = true,
                     $badgesList = true,
                     $description = true,

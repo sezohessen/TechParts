@@ -43,7 +43,7 @@ class HomeDataController extends Controller
         foreach ($agencyList as $agency) {
             list($Max, $Min)     = $this->PriceRange($agency);
             $agencies[]     = [
-                "centerType"    => Agency::AgecnyType()[$agency->center_type],
+                "centerType"    => Agency::ApiAgecnyType()[$agency->center_type],
                 "id"            => $agency->id,
                 "isAuthorised"  => $agency->is_authorised ? true : false,
                 "isFavorite"    => $this->isFav($agency),
@@ -205,7 +205,7 @@ class HomeDataController extends Controller
         foreach ($agencyList as $agency) {
             list($Max, $Min)     = $this->PriceRange($agency);
             $agencies[]     = [
-                "centerType"    => Agency::AgecnyType()[$agency->center_type],
+                "centerType"    => Agency::ApiAgecnyType()[$agency->center_type],
                 "id"            => $agency->id,
                 "isAuthorised"  => $agency->is_authorised ? true : false,
                 "isFavorite"    => $this->isFav($agency),

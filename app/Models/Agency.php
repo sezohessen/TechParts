@@ -102,6 +102,22 @@ class Agency extends Model
             self::Ag_Distributor    => __('Distributor'),
         ];
     }
+    public static function ApiMaintenanceType()
+    {
+        return [
+            self::UnSelected            => 'Un_selected_work_type',
+            self::Main_Service_center   => 'Service_center',
+            self::Main_Workshop         => 'Workshop',
+        ];
+    }
+    public static function ApiAgecnyType()
+    {
+        return [
+            self::UnSelected        => 'Un_selected_work_type',
+            self::Ag_Agency         => 'Agency',
+            self::Ag_Distributor    => 'Distributor',
+        ];
+    }
     public static function StyleAgecnyType()
     {
         return [

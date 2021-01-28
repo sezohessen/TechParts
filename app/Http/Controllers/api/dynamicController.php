@@ -84,7 +84,7 @@ class dynamicController extends Controller
                 "name"      => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
                 "rate"      => $this->rate($agency),
                 "userId"    => $agency->user_id,
-                "userType"  => Agency::AgecnyType()[$agency->center_type],
+                "userType"  => Agency::ApiAgecnyType()[$agency->center_type],
             ];
         }
         if (empty($agencyList)) {
