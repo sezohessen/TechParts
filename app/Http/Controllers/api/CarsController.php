@@ -30,6 +30,7 @@ use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\CarManufacture;
 use App\Classes\Responseobject;
+use App\Classes\DataType;
 use function PHPSTORM_META\type;
 use App\Models\subscribe_package;
 use App\Http\Resources\CarResource;
@@ -42,13 +43,6 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Resources\SubscribeResource;
 use Illuminate\Support\Facades\Validator as Validator;
 
-class DataType {
-    const single = 1;
-    const list = 2;
-    const compare = 3;
-    const promote = 4;
-
-}
 class CarsController extends Controller
 {
     use GeneralTrait;
@@ -111,11 +105,65 @@ class CarsController extends Controller
 
         $validator=$this->Validator($request,[
             "interest_country" => 'required|integer',
-            "car_status"       => 'required|string|max:255|in:Used,New,مستعملة,جديدة',
+            "car_status"       => 'required|integer|between:0,1',
             "word"             => 'required|string|max:255',
         ]);
         if (!$validator->fails()) {
-            $status=($request->car_status==__("New")) ? Car::IS_NEW : Car::IS_USED;
+            $status=($request->car_status== 1) ? Car::IS_USED : Car::IS_NEW;
+            if(!$country=Country::find($request->interest_country)){
+                return $this->errorMessage('Country not found');
+            }
+            $type   = new DataType();
+            $data=(new CarCollection(
+                Car::
+                where(function($query)use($country) {
+                    return $query->where('status', 1)
+                        ->Where('Country_id',$country->id);
+                })
+                ->orWhere( function($query)use($status) {
+                    return $query->where('status', 1)
+                        ->Where('IsNew', '=', $status);
+                })
+                ->orWhereHas('maker', function($query)use($request){
+                    $query->where('status', 1)
+                    ->where('name','LIKE','%'.$request->word.'%');
+                })
+                ->paginate(10)
+            ))->type($type::list);
+            return $data;
+        }else {
+            return $this->failed($validator);
+        }
+    }
+    public function filter(Request $request){
+        $validator=$this->Validator($request,[
+            "interest_country" => 'required|integer',
+            "car_state"       => 'required|integer|between:0,1',
+            "car_maker_id"             => 'required|integer',
+            "car_model_id"             => 'required|integer',
+            "year"                     => 'nullable|integer',
+            "price_min"             => 'nullable|integer',
+            "price_max"             => 'nullable|integer',
+            "kilometers_min"             => 'nullable|integer',
+            "kilometers_max"             => 'nullable|integer',
+            "body_style_id"             => 'nullable|integer',
+            "badge_id"             => 'nullable|integer',
+            "extra_feature_id"             => 'nullable|integer',
+            "transimission"             => 'nullable|between:0,1',
+            "color"             => 'nullable|integer',
+            "location_govenment_id"             => 'nullable|integer',
+            "location_city_id"             => 'nullable|integer',
+            "seller_type"             => 'nullable|between:0,2',
+            "is_accident"             => 'nullable|between:0,1',
+            "payment_method"             => 'nullable|between:0,2',
+            "location_govenment_id"             => 'nullable|integer',
+            "location_govenment_id"             => 'nullable|integer',
+            "location_govenment_id"             => 'nullable|integer',
+            "location_govenment_id"             => 'nullable|integer',
+
+        ]);
+        if (!$validator->fails()) {
+            $status=($request->car_status== 1) ? Car::IS_USED : Car::IS_NEW;
             if(!$country=Country::find($request->interest_country)){
                 return $this->errorMessage('Country not found');
             }
@@ -417,7 +465,7 @@ class CarsController extends Controller
                 Alert::create([
                     "car_id"=>$car->id,
                     "user_id"=>Auth()->id(),
-                    "status"=> ($request->isAlertBefore=="true") ? Car::Alert : Car::NotAlert
+                    "status"=> ($request->isAlertBefore) ? Car::Alert : Car::NotAlert
                 ]);
             }
 
@@ -589,8 +637,8 @@ class CarsController extends Controller
             'carCapacity'              => 'required|integer',
             'price'                    => 'required|integer',
             'discount'                 => 'nullable|integer|between:1,100',
-            'isAccident'               => 'required|in:false,true',
-            'isAlertBefore'            => 'required|in:false,true',
+            'isAccident'               => 'required|between:0,1',
+            'isAlertBefore'            => 'required|between:0,1',
             'used_kilometers'          => 'required|integer',
             'bodyStyle'                => 'required|integer',
             'color'                    => 'required|integer',
@@ -634,7 +682,7 @@ class CarsController extends Controller
         'CarManufacture_id'           => $request->carManufacturing,
         'CarCapacity_id'              => $request->carCapacity,
         'price'                       => $request->price,
-        'AccidentBefore'              => ($request->isAccident=='true') ? Car::AccidentBefore: Car::NotAccidentBefore,
+        'AccidentBefore'              => ($request->isAccident) ? Car::AccidentBefore: Car::NotAccidentBefore,
         'kiloUsed'                    => $request->used_kilometers,
         'CarBody_id'                  => $request->bodyStyle,
         'CarColor_id'                 => $request->color,

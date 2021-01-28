@@ -179,7 +179,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Image::class);
     }
-
+    public function AuthFavCar()
+    {
+        return $this->belongsToMany(Car::class, 'user_fav_cars', 'user_id','car_id');
+    }
     public function agencyFav()
     {
         return $this->belongsToMany(Agency::class,'user_fav_agencies','user_id','agency_id')

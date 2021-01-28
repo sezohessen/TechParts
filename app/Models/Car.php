@@ -277,6 +277,7 @@ class Car extends Model
     {
         return $this->belongsToMany(User::class, 'user_fav_cars', 'car_id','user_id');
     }
+
     public function AuthAlertCar()
     {
         return $this->belongsToMany(User::class, 'alerts', 'car_id','user_id')->withPivot('status');

@@ -53,7 +53,7 @@ class InsuranceCompanyController extends Controller
             $response->status = $response::status_failed;
             $response->code = $response::code_failed;
             foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
+                array_push($response->msg, $item);
             }
             return Response::json(
                 $response
@@ -129,7 +129,7 @@ class InsuranceCompanyController extends Controller
             $response->status = $response::status_failed;
             $response->code = $response::code_failed;
             foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
+                array_push($response->msg, $item);
             }
             return Response::json(
                 $response
@@ -180,7 +180,7 @@ class InsuranceCompanyController extends Controller
             $response->status = $response::status_failed;
             $response->code = $response::code_failed;
             foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->messages, $item);
+                array_push($response->msg, $item);
             }
             return Response::json(
                 $response
