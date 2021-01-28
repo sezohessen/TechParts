@@ -31,8 +31,8 @@ class GovernorateController extends Controller
     public function create()
     {
 
-        $page_title = "Add Governorate";
-        $page_description = "Add new Governorate";
+        $page_title = __("Add Governorate");
+        $page_description = __("Add new Governorate");
         $countries = Country::all();
         return view('dashboard.Governorate.add', compact('page_title', 'page_description','countries'));
     }
@@ -82,11 +82,12 @@ class GovernorateController extends Controller
     public function edit($id)
     {
 
-        $page_title = "Edit governorate";
-        $page_description = "Edit";
+        $page_title = __("Edit governorate");
+        $page_description = __("Edit");
         $governorate = Governorate::find($id);
         $countries = Country::all();
-        return view('dashboard.Governorate.edit', compact('page_title', 'page_description','governorate','countries'));
+        if($governorate)return view('dashboard.Governorate.edit', compact('page_title', 'page_description','governorate','countries'));
+        else return redirect()->route('dashboard.governorate.index');
     }
 
     /**

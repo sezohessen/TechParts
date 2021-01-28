@@ -82,10 +82,11 @@ class Insurance extends Model
             }
             //Update new image
             $Image->name = $fileName;
+            $Image->base = "/img/insurance/";
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName,'base'=>'/img/insurance/']);
+            $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/insurance/']);
             return $Image->id;
         }
     }

@@ -15,7 +15,7 @@ class FinanceRequestController extends Controller
     public function index(Finance_requestDatatable $Finance_request)
     {
         $page_title = __('Finance Request');
-        $page_description = __('Finance Request');
+        $page_description = __('View Requests');
         return  $Finance_request->render("dashboard.Finance-request.index", compact('page_title', 'page_description'));
     }
 
@@ -59,10 +59,11 @@ class FinanceRequestController extends Controller
      */
     public function edit(Finance_request $Finance_request)
     {
-        $page_title = "View  Finance Request";
-        $page_description = "Finance Request Information";
+        $page_title = __("View Finance Request");
+        $page_description = __("Finance Request Information");
         $request = Finance_request::find($Finance_request->id);
-        return view('dashboard.Finance-request.edit', compact('page_title', 'page_description','request'));
+        if($request)return view('dashboard.Finance-request.edit', compact('page_title', 'page_description','request'));
+        else return redirect()->route('dashboard.finance-request.index');
     }
 
     /**

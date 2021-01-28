@@ -32,12 +32,12 @@ class InsuranceOfferController extends Controller
 
         $insurance  = Insurance::where('user_id',Auth::id())->first();
         if($insurance){
-            $page_title = "Add insurance offer";
-            $page_description = "Add new insurance offer";
+            $page_title = __("Add insurance offer");
+            $page_description = __("Add new insurance offer");
             return view('InsuranceDashboard.Insurance-offer.add', compact('page_title', 'page_description'));
         }else{
-            $page_title = "Add insurance company";
-            $page_description = "Add new insurance company";
+            $page_title = __("Add insurance company");
+            $page_description = __("Add new insurance company");
             return view('InsuranceDashboard.Insurance.add', compact('page_title', 'page_description'));
         }
     }
@@ -86,8 +86,8 @@ class InsuranceOfferController extends Controller
             return redirect('/insurance');
         }else{
             if($offer->insurance_id==$insurance->id){
-                $page_title = "Edit insurance offer";
-                $page_description = "Edit insurance offer record";
+                $page_title = __("Edit insurance offer");
+                $page_description = __("Edit insurance offer record");
                 return view('InsuranceDashboard.Insurance-offer.edit', compact('page_title', 'page_description','offer'));
             }else{
                 return redirect('/insurance');

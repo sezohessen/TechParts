@@ -16,8 +16,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $page_title         = 'Dashboard';
-        $page_description   = 'Some description for the page';
+        $page_title         = __('Dashboard');
+        $page_description   = __('Information management');
         $users              = User::all();
         $banks              = Bank::all();
         $insurances         = Insurance::all();

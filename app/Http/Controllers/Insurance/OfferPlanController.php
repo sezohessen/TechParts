@@ -19,8 +19,8 @@ class OfferPlanController extends Controller
      */
     public function index(Offer_planDatatable $offer_plan)
     {
-        $page_title = __("Offers plan");
-        $page_description = __("View Offers plan");
+        $page_title = __("Offer plan");
+        $page_description = __("View Offer plan  for Insurance ");
         return  $offer_plan->render("InsuranceDashboard.offer-plan.index", compact('page_title', 'page_description'));
     }
 
@@ -37,8 +37,8 @@ class OfferPlanController extends Controller
         ->id;
         $offers = Insurance_offer::where('insurance_id',$insurance)->get();
         if($offers){
-            $page_title = "Add offer plan for insurance";
-            $page_description = "Add offer plan for insurance";
+            $page_title = __("Add offer plan for insurance");
+            $page_description = __("Add offer plan for insurance");
             return view('InsuranceDashboard.offer-plan.add', compact('page_title', 'page_description','offers'));
         }else{
 
@@ -95,8 +95,8 @@ class OfferPlanController extends Controller
             return redirect('/insurance');
         }else{
             if($offer_plan->insurance_id==$insurance->id){
-                $page_title = "Edit offer plan";
-                $page_description = "Edit offer plan record";
+                $page_title = __("Edit offer plan");
+                $page_description = __("Edit");
                 return view('InsuranceDashboard.offer-plan.edit', compact('page_title', 'page_description','offer_plan','offers'));
             }else{
                 return redirect('/insurance');

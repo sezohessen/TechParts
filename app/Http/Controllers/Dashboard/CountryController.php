@@ -31,8 +31,8 @@ class CountryController extends Controller
     public function create()
     {
 
-        $page_title = "Add country";
-        $page_description = "Add new country";
+        $page_title = __("Add country");
+        $page_description = __("Add new country");
 
         return view('dashboard.Country.add', compact('page_title', 'page_description'));
     }
@@ -81,8 +81,8 @@ class CountryController extends Controller
     public function edit($id)
     {
 
-        $page_title = "Edit country";
-        $page_description = "Edit";
+        $page_title = __("Edit country");
+        $page_description = __("Edit");
         $country = Country::find($id);
         if($country)return view('dashboard.Country.edit', compact('page_title', 'page_description','country'));
         else return redirect()->route('dashboard.country.index');

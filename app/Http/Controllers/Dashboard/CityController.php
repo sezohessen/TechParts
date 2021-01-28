@@ -29,8 +29,8 @@ class CityController extends Controller
     public function create()
     {
 
-        $page_title = "Add City";
-        $page_description = "Add new City";
+        $page_title = __("Add City");
+        $page_description = __("Add new City");
         $countries = Country::all();
         return view('dashboard.City.add', compact('page_title', 'page_description','countries'));
     }
@@ -76,7 +76,8 @@ class CityController extends Controller
         $city = City::find($id);
         $governorate=Governorate::find($city->governorate_id);
         $countries = Country::all();
-        return view('dashboard.City.edit', compact('page_title', 'page_description','city',"countries","governorate"));
+        if($city)return view('dashboard.City.edit', compact('page_title', 'page_description','city',"countries","governorate"));
+        else return redirect()->route('dashboard.city.index');
 
     }
 

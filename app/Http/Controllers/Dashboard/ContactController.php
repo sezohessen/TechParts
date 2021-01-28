@@ -15,8 +15,8 @@ class ContactController extends Controller
      */
     public function index(ContactDatatable $contact)
     {
-        $page_title = __('Ask An Expert');
-        $page_description = __('View Ask An Expert');
+        $page_title = __('Contact us');
+        $page_description = __('View messages');
         return  $contact->render("dashboard.Contact.index", compact('page_title', 'page_description'));
     }
 

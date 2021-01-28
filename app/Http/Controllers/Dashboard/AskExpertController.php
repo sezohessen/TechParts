@@ -16,7 +16,7 @@ class AskExpertController extends Controller
     public function index(AskAnExpertDatatable $askExpert)
     {
         $page_title = __('Ask An Expert');
-        $page_description = __('View Ask An Expert');
+        $page_description = __('View questions');
         return  $askExpert->render("dashboard.AskAnExpert.index", compact('page_title', 'page_description'));
     }
 

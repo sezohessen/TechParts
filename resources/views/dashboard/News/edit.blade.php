@@ -48,13 +48,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-<<<<<<< HEAD
-                            <label for="Image">@lang('News Image')</label><br>
-                            <div class="image-input image-input-empty image-input-outline" id="Image" style="background-image: url({{ asset('media/users/blank.png') }})">
-=======
-                            <label for="image_id">@lang('News Image') <span class="text-danger">*</span></label>
-                            <div class="image-input image-input-empty image-input-outline" id="image_id" style="background-image: url({{asset('img/news/'.$news->img->name) }})">
->>>>>>> feature/AgencyAPI
+                            <label for="image_id">@lang('News Image') <span class="text-danger">*</span></label><br>
+                            <div class="image-input image-input-empty image-input-outline" id="image_id" style="background-image: url({{find_image($news->img , 'img/news/') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
@@ -93,13 +88,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-<<<<<<< HEAD
-                            <label for="Image">@lang('Author Image')</label><br>
-                            <div class="image-input image-input-empty image-input-outline" id="authorImg" style="background-image: url({{ asset('media/users/blank.png') }})">
-=======
-                            <label for="authorImg_id">@lang('Author Image') <span class="text-danger">*</span></label>
-                            <div class="image-input image-input-empty image-input-outline" id="authorImg_id" style="background-image: url({{asset('img/news/'.$news->imgAuthor->name) }})">
->>>>>>> feature/AgencyAPI
+                            <label for="authorImg_id">@lang('Author Image') <span class="text-danger">*</span></label><br>
+                            <div class="image-input image-input-empty image-input-outline" id="authorImg_id" style="background-image: url({{find_image($news->imgAuthor , 'img/news/') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>

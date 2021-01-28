@@ -102,6 +102,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/contact/destroy/all','ContactController@multi_delete');
     Route::delete('/bank/destroy/all','BankController@multi_delete');
     Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
+
     Route::delete('/log/destroy/all','LogsController@multi_delete');
     Route::delete('/users/destroy/all','UserController@multi_delete');
     Route::delete('/subscribe_packages/destroy/all','SubscribeController@multi_delete');
@@ -157,6 +158,7 @@ Route::group(['prefix' => 'bank','as' => 'bank.','namespace'=>"Bank", 'middlewar
     Route::get('/','BankDashController@index')->name('index');
     Route::resource('/company','BankController');
     Route::resource('/bank-offer','BankOfferController');
+    Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
 });
 //});
 

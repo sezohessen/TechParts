@@ -28,8 +28,8 @@ class NewsController extends Controller
     public function create()
     {
 
-        $page_title = "Add News";
-        $page_description = "Add new news";
+        $page_title = __("Add News");
+        $page_description = __("Add new news");
         $categories = Category::all();
         return view('dashboard.News.add', compact('page_title', 'page_description','categories'));
     }
@@ -47,8 +47,8 @@ class NewsController extends Controller
         $credentials = News::credentials($request);
         $New = News::create($credentials);
         $New->save();
-       session()->flash('success',__("news has been added!"));
-       return redirect()->route("dashboard.news.index");
+        session()->flash('success',__("news has been added!"));
+        return redirect()->route("dashboard.news.index");
     }
 
     /**
@@ -71,8 +71,8 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $categories = Category::all();
-        $page_title = __('news');
-        $page_description = __('Frequently Asked Questions');
+        $page_title = __('News');
+        $page_description = __('Edit');
         return view('dashboard.News.edit', compact('page_title', 'page_description','news', 'categories'));
     }
 

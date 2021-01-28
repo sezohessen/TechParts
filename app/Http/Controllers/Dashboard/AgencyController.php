@@ -26,7 +26,7 @@ class AgencyController extends Controller
     {
         $agency->request()->all();
         $page_title = __('Agency companies');
-        $page_description = __('View Insurances');
+        $page_description = __('View companies');
         return  $agency->render("dashboard.Agency.index", compact('page_title', 'page_description'));
     }
 
@@ -80,9 +80,9 @@ class AgencyController extends Controller
 
         //Get car_id Array to Agency Car
         $Specialty_Lists = 0;
-        if($request->center_type==1){
+        if($request->center_type==Agency::center_type_Maintenance){
             $Specialty_Lists    = $request->specialty_id;
-        }elseif($request->center_type==2){
+        }elseif($request->center_type==Agency::center_type_Spare){
             $Specialty_Lists    = $request->specialty_id_spare;
         }
         if($Specialty_Lists){

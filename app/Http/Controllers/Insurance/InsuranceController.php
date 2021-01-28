@@ -27,7 +27,7 @@ class InsuranceController extends Controller
             $offers         = null;
             $offers_plan    = null;
         }
-        $page_title = __('Insurance Dashborad');
+        $page_title = __('Insurance Dashboard');
         $page_description = __('View insurance record');
         return  view("insurance.index", compact('page_title', 'page_description','offers','offers_plan'));
     }

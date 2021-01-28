@@ -31,8 +31,8 @@ class OfferPlanController extends Controller
     public function create()
     {
 
-        $page_title = "Add offer plan for insurance";
-        $page_description = "Add offer plan for insurance";
+        $page_title = __("Add offer plan for insurance");
+        $page_description = __("Add");
         $Insurances = Insurance::all();
         return view('dashboard.offer-plan.add', compact('page_title', 'page_description','Insurances'));
     }
@@ -76,11 +76,11 @@ class OfferPlanController extends Controller
         $offer_plan = offer_plan::find($id);
         $Insurances = Insurance::all();
         //User can access only his Insurance campony offer
-        if(!$offer_plan->count()){
-            return redirect('/dashboard');
+        if($offer_plan){
+            return redirect()->route('dashboard.offer-plan.index');
         }else{
-            $page_title = "Edit offer plan";
-            $page_description = "Edit offer plan record";
+            $page_title = __("Edit offer plan");
+            $page_description = __("Edit");
             return view('dashboard.offer-plan.edit', compact('page_title', 'page_description','offer_plan','Insurances'));
         }
     }

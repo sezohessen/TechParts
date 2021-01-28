@@ -292,10 +292,11 @@ class Agency extends Model
             }
             //Update new image
             $Image->name = $fileName;
+            $Image->base = "/img/agency/";
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName,'base'=>"/img/agency/"]);
+            $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/agency/']);
             return $Image->id;
         }
     }

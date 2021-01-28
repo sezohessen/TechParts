@@ -104,10 +104,11 @@ class Bank extends Model
             }
             //Update new image
             $Image->name = $fileName;
+            $Image->base = "/img/bank/";
             $Image->save();
             return $Image->id;
         }else{
-            $Image = Image::create(['name' => $fileName,'base'=>"/img/bank/"]);
+            $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/bank/']);
             return $Image->id;
         }
     }
