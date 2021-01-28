@@ -20,7 +20,7 @@ class FinanceRequestSeeder extends Seeder
     public function run() //strval -> convert int to string
     {
         $faker = Faker::create();
-        foreach (range(1, 10) as $value) {
+        for ($i = 0; $i < 20; $i++) {
             DB::table('finance_requests')->insert([
                 'self_employed'         => $faker->boolean,
                 'salary_through_bank'   => $faker->boolean,

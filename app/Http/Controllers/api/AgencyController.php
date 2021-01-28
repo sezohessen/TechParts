@@ -44,6 +44,10 @@ class AgencyController extends Controller
             if (!$agency) {
                 return $this->errorMessage(__("No such Center id exist"));
             }
+            $check = AgencyReview::where( [ 'agency_id' => $request->center_id, 'user_id' => auth()->user()->id])->first();
+            if ($check) {
+                return $this->errorMessage(__("You review this agency before"));
+            }
             $askExpert  = AgencyReview::create([
                 'rate'          => $request->rate,
                 'price'         => $request->price_type,

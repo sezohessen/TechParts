@@ -18,7 +18,7 @@ class AlertSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1, 10) as $value) {
+        for ($i = 0; $i < 20; $i++) {
             DB::table('alerts')->insert([
                 'car_id'            => Car::where('status', 1)->get()->random()->id,
                 'user_id'           => User::all()->random()->id,
