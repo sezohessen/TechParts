@@ -31,7 +31,7 @@ class InsuranceRequestController extends Controller
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'interest_country'              => 'required|integer', //Will be updated
-            'token'                         => 'required',
+
             'car_id'                        => 'required|integer',
             'car_modelId'                   => 'required|integer',
             'car_makerId'                   => 'required|integer',

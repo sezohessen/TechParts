@@ -19,7 +19,7 @@ class AgencySpecialtiesSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('agency_specialties')->insert([
                 'specialty_id'          => Specialties::all()->random()->id,
                 'agency_id'             => Agency::all()->random()->id,

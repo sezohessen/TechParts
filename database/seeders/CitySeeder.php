@@ -7,6 +7,7 @@ use App\Models\Governorate;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class CitySeeder extends Seeder
 {
     /**
@@ -17,7 +18,7 @@ class CitySeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('cities')->insert([
                 'title'             =>   $faker->country,
                 'title_ar'          =>   $faker->country,

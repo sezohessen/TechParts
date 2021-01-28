@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\api;
+
 use App\Models\Car;
 use App\Models\Agency;
 use App\Models\AgencyCar;
@@ -33,7 +34,7 @@ class AgencyController extends Controller
             'price_type'    => 'required|in:1,2,3',
             'comment'       => 'required|min:3|max:1000',
             'center_id'     => 'required|integer',
-            'token'         => 'required'
+
         ]);
         if (!$validator->fails()) {
             if (!auth()->user()) {
@@ -52,7 +53,7 @@ class AgencyController extends Controller
             ]);
             return $this->returnSuccess(__("Your Review Has been created Successfully, Wait for Admin to Apply your review"));
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function agency(Request $request)
@@ -61,16 +62,16 @@ class AgencyController extends Controller
         $validator  = $this->home($request);
 
         if (!$validator->fails()) {
-            $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('center_type',Agency::center_type_Agency)->get();
-            if(!$agencyList->count()){
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('center_type', Agency::center_type_Agency)->get();
+            if (!$agencyList->count()) {
                 return $this->errorMessage("No Agencies in this interest country");
             }
             $user = auth('sanctum')->user();
             $subscripedList = [];
-            if($user){
-                $agencyFavs = Agency::whereHas('UserFav', function ($query) use ($user) {
-                    return $query->where('user_fav_agencies.user_id',$user->id);
+            if ($user) {
+                $agencyFavs = Agency::where('center_type', Agency::center_type_Agency)->whereHas('UserFav', function ($query) use ($user) {
+                    return $query->where('user_fav_agencies.user_id', $user->id);
                 })->get();
                 foreach ($agencyFavs as $agencyFav) {
                     $subscripedList[]     = $this->AgencyData(
@@ -99,9 +100,9 @@ class AgencyController extends Controller
                 );
             }
 
-            return $this->returnData("offersList", $agencies, "Successfully",["subscribedList"    => $subscripedList]);
-        }else{
-            return($this->ValidatorErrors($validator));
+            return $this->returnData("offersList", $agencies, "Successfully", ["subscribedList"    => $subscripedList]);
+        } else {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function maintenance(Request $request)
@@ -119,7 +120,7 @@ class AgencyController extends Controller
             $data   = new AgencyHomeCollection($agencyList->paginate(10));
             return $data;
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function spare(Request $request)
@@ -137,7 +138,7 @@ class AgencyController extends Controller
             $data   = new AgencyHomeCollection($agencyList->paginate(10));
             return $data;
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function detailsAgency(Request $request)
@@ -165,7 +166,7 @@ class AgencyController extends Controller
             }
             return $this->returnData("mCenter", $agencies, "Successfully");
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function detailsMaintenance(Request $request)
@@ -193,7 +194,7 @@ class AgencyController extends Controller
             }
             return $this->returnData("mCenter", $agencies, "Successfully");
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function detailsSpare(Request $request)
@@ -221,7 +222,7 @@ class AgencyController extends Controller
             }
             return $this->returnData("mCenter", $agencies, "Successfully");
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function agencySearch(Request $request)
@@ -242,7 +243,7 @@ class AgencyController extends Controller
             $data   = new AgencySearchCollection($agencyList->paginate(10));
             return $data;
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function maintenanceSearch(Request $request)
@@ -263,7 +264,7 @@ class AgencyController extends Controller
             $data   = new AgencyHomeCollection($agencyList->paginate(10));
             return $data;
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function spareSearch(Request $request)
@@ -284,7 +285,7 @@ class AgencyController extends Controller
             $data   = new AgencyHomeCollection($agencyList->paginate(10));
             return $data;
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function agencyFav(Request $request)
@@ -298,7 +299,7 @@ class AgencyController extends Controller
             }
 
             if (!auth()->user()->agencyFav->count()) {
-                return $this->returnSuccess(__("No centers found"));
+                return $this->errorMessage("No centers found");
             }
             $agencyList = auth()->user()->agencyFav;
             foreach ($agencyList as $agency) {
@@ -318,7 +319,7 @@ class AgencyController extends Controller
             }
             return $this->returnData("agencyList", $agencies, "Successfully");
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function centerFav(Request $request)
@@ -352,7 +353,7 @@ class AgencyController extends Controller
             }
             return $this->returnData("maintenanceList", $agencies, "Successfully");
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function addFav(Request $request)
@@ -405,10 +406,10 @@ class AgencyController extends Controller
                     return $this->returnSuccess(__("Successfully added to Favorite"));
                 }
             } else {
-                return $this->returnSuccess(__("Something went wrong"));
+                return $this->errorMessage("Something went wrong");
             }
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function removeFav(Request $request)
@@ -449,10 +450,10 @@ class AgencyController extends Controller
                     return $this->returnSuccess(__("Successfully Removed"));
                 }
             } else {
-                return $this->returnSuccess(__("Something went wrong"));
+                return $this->errorMessage("Something went wrong");
             }
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function Filter(Request $request)
@@ -491,7 +492,7 @@ class AgencyController extends Controller
                 ), 'desc');
             } */
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No centers found"));
+                return $this->errorMessage("No centers found");
             }
             $agencies = [];
             foreach ($agencyList->get() as $agency) {
@@ -499,7 +500,7 @@ class AgencyController extends Controller
             }
             return $this->returnData("centerList", $agencies, "Successfully");
         } else {
-            return ($this->ValidatorErrors($validator));
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function Contact($agency)
@@ -574,9 +575,9 @@ class AgencyController extends Controller
     {
         // Favorite Row
         $isFavorite = false;
-        if (auth()->user()) {
+        if (auth('sanctum')->user()) {
             $fav    = UserFavAgency::where('agency_id', $agency->id)
-                ->where('user_id', auth()->user()->id)
+                ->where('user_id', auth('sanctum')->user()->id)
                 ->first();
             if ($fav) {
                 $isFavorite = true;
@@ -629,10 +630,10 @@ class AgencyController extends Controller
             $response
         );
     }
-    public function Validator($request,$rules,$niceNames=[])
+    public function Validator($request, $rules, $niceNames = [])
     {
-        $this->lang( $request);
-        return Validator::make($request->all(),$rules,[],$niceNames);
+        $this->lang($request);
+        return Validator::make($request->all(), $rules, [], $niceNames);
     }
     public function ValidatorErrors($validator)
     {
@@ -696,7 +697,7 @@ class AgencyController extends Controller
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'interest_country'  => 'required|integer', //Will be updated
-            'token'             => 'nullable',
+
             'car_status'        => 'required|in:0,1|integer',
             'word'              => 'required|regex:/^[a-z0-9\s]+$/i'
         ]);
@@ -709,7 +710,7 @@ class AgencyController extends Controller
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'center_id'         => 'required|integer',
-            'token'             => 'nullable',
+
         ]);
         return $validator;
     }
@@ -720,7 +721,7 @@ class AgencyController extends Controller
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'interest_country'  => 'required|integer',
-            'token'             => 'nullable',
+
         ]);
         return $validator;
     }
@@ -731,13 +732,13 @@ class AgencyController extends Controller
         $array_data = (array)$data;
         if ($id) {
             $validator  = Validator::make($array_data, [
-                'token'             => 'required',
+
                 'target_id'         => 'required|integer',
                 'favorite_type'     => 'required|in:' . $type,
             ]);
         } else {
             $validator  = Validator::make($array_data, [
-                'token'             => 'required',
+
                 'favorite_type'     => 'required|in:' . $type,
             ]);
         }
@@ -750,7 +751,7 @@ class AgencyController extends Controller
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'interest_country'      => 'required|integer',
-            'token'                 => 'nullable',
+
             'car_state'             => 'required|in:new,used',
             'car_maker_id'          => 'required|integer',
             'car_model_id'          => 'required|integer',
@@ -770,40 +771,40 @@ class AgencyController extends Controller
         ]);
         return $validator;
     }
-    public function carFav(Request $request){
-        $validator=$this->Validator($request,[
+    public function carFav(Request $request)
+    {
+        $validator = $this->Validator($request, [
             "favorite_type"            => 'required|string|in:car',
         ]);
         if (!$validator->fails()) {
-            $user=Auth()->user();
-            $cars=$user->AuthFavCar()->get();
-            if(!$cars->count())
+            $user = auth('sanctum')->user();
+            $cars = $user->AuthFavCar()->get();
+            if (!$cars->count())
                 return $this->errorMessage('Favorite cars are empty');
             $type   = new DataType();
-            $data=(new CarCollection($cars))->type($type::list);
+            $data = (new CarCollection($cars))->type($type::list);
             return $data;
-        }else {
+        } else {
             return $this->failed($validator);
         }
-
     }
-    public function FavList(Request $request){
-        $validator=$this->Validator($request,[
+    public function FavList(Request $request)
+    {
+        $validator = $this->Validator($request, [
             "favorite_type"            => 'required|string',
         ]);
         if (!$validator->fails()) {
             if ($request->favorite_type == 'agency') {
                 return $this->agencyFav($request);
-            }elseif ($request->favorite_type == 'center') {
+            } elseif ($request->favorite_type == 'center') {
                 return $this->centerFav($request);
-            }elseif ($request->favorite_type == 'car') {
+            } elseif ($request->favorite_type == 'car') {
                 return $this->carFav($request);
-            }else{
+            } else {
                 return $this->errorMessage(__('Favorite type invalid'));
             }
-        }else {
+        } else {
             return $this->failed($validator);
         }
-
     }
 }

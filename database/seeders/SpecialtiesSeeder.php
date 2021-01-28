@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -14,8 +15,8 @@ class SpecialtiesSeeder extends Seeder
      */
     public function run()
     {
-    $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        $faker = Faker::create();
+        for ($i = 0; $i < 20; $i++) {
             DB::table('specialties')->insert([
                 'name'                  => $faker->company,
                 'name_ar'               => $faker->company,

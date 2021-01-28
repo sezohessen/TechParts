@@ -20,6 +20,7 @@ use App\Models\MyMaintenanceList;
 use App\Models\Trending;
 use App\Models\UserFavAgency;
 use Illuminate\Http\Request;
+
 class HomeDataController extends Controller
 {
 
@@ -63,9 +64,9 @@ class HomeDataController extends Controller
         if ($user) {
             $token = null;
             $headers = apache_request_headers();
-            if(isset($headers['Authorization'])){
+            if (isset($headers['Authorization'])) {
                 if (strpos($headers['Authorization'], 'Bearer') !== false) {
-                    $token = str_replace('Bearer ', '',$headers['Authorization']);
+                    $token = str_replace('Bearer ', '', $headers['Authorization']);
                 }
             }
             $user_data = [
@@ -121,7 +122,7 @@ class HomeDataController extends Controller
                 'car_maker_id'      => 'required|integer',
                 'car_model_id'      => 'required|integer',
                 'date_next'         => 'required|date',
-                'token'             => 'required'
+
             ]
         );
         if ($validator->fails()) {
