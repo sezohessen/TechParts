@@ -100,6 +100,7 @@ class Agency extends Model
             self::UnSelected        => __('Un selected work type'),
             self::Ag_Agency         => __('Agency'),
             self::Ag_Distributor    => __('Distributor'),
+            self::Ag_Individual    => __('Individual'),
         ];
     }
     public static function ApiMaintenanceType()
@@ -116,6 +117,7 @@ class Agency extends Model
             self::UnSelected        => 'Un_selected_work_type',
             self::Ag_Agency         => 'Agency',
             self::Ag_Distributor    => 'Distributor',
+            self::Ag_Individual    => 'Individual',
         ];
     }
     public static function StyleAgecnyType()

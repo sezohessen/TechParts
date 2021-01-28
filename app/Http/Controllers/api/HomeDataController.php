@@ -54,9 +54,20 @@ class HomeDataController extends Controller
                 "rate"          => $this->rate($agency),
             ];
         }
-        //$user = auth()->user();
         $user = auth('sanctum')->user();
+        /*
+        foreach ($user->tokens as $token) {
+            $token->delete();
+        }
+        dd($user->currentAccessToken()->plainTextToken);*/
         if ($user) {
+            $token = null;
+            $headers = apache_request_headers();
+            if(isset($headers['Authorization'])){
+                if (strpos($headers['Authorization'], 'Bearer') !== false) {
+                    $token = str_replace('Bearer ', '',$headers['Authorization']);
+                }
+            }
             $user_data = [
                 "country_code"      => $user->country_code,
                 "country_number"    => $user->country_phone,
@@ -67,7 +78,7 @@ class HomeDataController extends Controller
                 "last_name"         => $user->last_name,
                 "phone"             => $user->phone,
                 "role_id"           => $user->role ? $user->role->first()->name : 'user',
-                "token"             => $request->token ? $request->token : '',
+                "token"             => $token,
                 "userId"            => $user->id
             ];
             if ($user->interestCountry) {
