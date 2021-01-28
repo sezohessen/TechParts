@@ -131,9 +131,9 @@ class CarResource extends JsonResource
     public function Incoming_user_feature(){
         $isalert=false;
         $isfav=false;
-        if(Auth()->user()){
-            $alert=$this->AuthAlertCar()->wherePivot('user_id','=',Auth()->id())->get()->first();
-            $fav=$this->AuthFavCar()->wherePivot('user_id','=',Auth()->id())->get()->first();
+        if($auth=auth('sanctum')->user()){
+            $alert=$this->AuthAlertCar()->wherePivot('user_id','=',$auth->id)->get()->first();
+            $fav=$this->AuthFavCar()->wherePivot('user_id','=',$auth->id)->get()->first();
             if($alert)
                 $isalert=($alert->pivot->status) ? true : false;
             if($fav)
@@ -150,8 +150,8 @@ class CarResource extends JsonResource
         $image=$this->user->image->name;
         $userType=__("Individual");
         if(($this->user->Agency) ){
-            if($this->user->Agency->center_type ==0){
-                $userType=Agency::ApiAgecnyType()[$this->user->Agency->agency_type];
+            if($this->user->Agency->center_type == Agency::Ag_Agency){
+                $userType=Agency::AgecnyType()[$this->user->Agency->agency_type];
                 $image=$this->user->Agency->img->name;
                 $rate   = AgencyReview::where('agency_id',$this->user->Agency->id)
                 ->selectRaw('SUM(rate)/COUNT(user_id) AS avg_rating')

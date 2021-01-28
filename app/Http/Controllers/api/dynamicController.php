@@ -170,20 +170,23 @@ class dynamicController extends Controller
     public function maker(Request $request)
     {
         $this->lang($request);
-        $data = new CarMakerCollection(CarMaker::where("active", 1)->paginate(10));
-        if (empty($data)) {
-            return $this->errorMessage('No Data Found');
-        }
+        $data=new CarMakerCollection(CarMaker::where("active",1)->paginate(10));
+        if(!$data->count())
+            return $this->errorMessage("No data found");
         return $data;
     }
     public function model(Request $request)
     {
         $this->lang($request);
-        if ($request->has("car_maker")) {
-            $data = new CarModelCollection(CarModel::where("active", 1)->where("CarMaker_id", $request->car_maker)->paginate(10));
+        if($request->has("car_maker")){
+            $data=new CarModelCollection(CarModel::where("active",1)->where("CarMaker_id",$request->car_maker)->paginate(10));
+            if(!$data->count())
+                return $this->errorMessage("No data found");
             return $data;
         }
-        $data = new CarModelCollection(CarModel::where("active", 1)->paginate(10));
+        $data=new CarModelCollection(CarModel::where("active",1)->paginate(10));
+        if(!$data->count())
+            return $this->errorMessage("No data found");
         return $data;
     }
     public function maker_search(Request $request)
@@ -192,11 +195,12 @@ class dynamicController extends Controller
             "word"            => 'required|string',
         ]);
         if (!$validator->fails()) {
-            $data = new CarMakerCollection(
-                CarMaker::where("active", 1)
-                    ->Where('name', 'LIKE', '%' . $request->word . '%')
-                    ->paginate(10)
-            );
+            $data=new CarMakerCollection(
+                CarMaker::where("active",1)
+                ->Where('name', 'LIKE', '%'.$request->word.'%')
+                ->paginate(10));
+            if(!$data->count())
+                return $this->errorMessage("No data found");
             return $data;
         } else {
             return $this->failed($validator);
@@ -215,12 +219,13 @@ class dynamicController extends Controller
                             ->Where('name', 'LIKE',  '%' . $request->word . '%');
                     })
 
-                    ->orWhere(function ($query) use ($request) {
-                        return $query->where('active', 1)
-                            ->Where('CarMaker_id', $request->car_maker);
-                    })
-                    ->paginate(10)
-            );
+                ->orWhere( function($query)use($request) {
+                    return $query->where('active', 1)
+                        ->Where('CarMaker_id', $request->car_maker);
+                })
+                ->paginate(10));
+            if(!$data->count())
+                return $this->errorMessage("No data found");
             return $data;
         } else {
             return $this->failed($validator);

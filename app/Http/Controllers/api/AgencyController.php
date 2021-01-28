@@ -12,6 +12,7 @@ use App\Models\UserFavAgency;
 use App\Classes\Responseobject;
 use App\Classes\DataType;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AgencyHomeCollection;
 use App\Http\Resources\CarCollection;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
@@ -59,26 +60,24 @@ class AgencyController extends Controller
         $validator  = $this->home($request);
 
         if (!$validator->fails()) {
-            $agencyList     = Agency::where('country_id', $request->interest_country)
-                ->where('center_type', Agency::center_type_Agency)
-                ->paginate();
-            if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No Agencies in this interest country"));
+            $agencyList     = Agency::where('country_id',$request->interest_country)
+            ->where('center_type',Agency::center_type_Agency);
+            if(!$agencyList->count()){
+                return $this->errorMessage("No Agencies in this interest country");
             }
+            $data= new AgencyHomeCollection($agencyList->paginate(10));
+            return $data;
+            /*
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData(
-                    $agency,
-                    $workType = false,
-                    $specializationList = false,
-                    $badgesList = false,
-                    $description = false,
-                    $paymentMethodList = false
-                );
+                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
+                $paymentMethodList = false);
             }
-            return $this->returnData("offersList", $agencies, "Successfully");
-        } else {
-            return ($this->ValidatorErrors($validator));
+
+            return $this->returnData("offersList",$agencies,"Successfully");
+            */
+        }else{
+            return($this->ValidatorErrors($validator));
         }
     }
     public function maintenance(Request $request)
@@ -121,6 +120,7 @@ class AgencyController extends Controller
             if (!$agencyList->count()) {
                 return $this->returnSuccess(__("No Spare parts centers in this interest country"));
             }
+
             $agencies = [];
             foreach ($agencyList as $agency) {
                 $agencies[]     = $this->AgencyData(

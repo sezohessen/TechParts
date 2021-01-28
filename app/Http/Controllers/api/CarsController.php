@@ -115,76 +115,167 @@ class CarsController extends Controller
             }
             $type   = new DataType();
             $data=(new CarCollection(
-                Car::
-                where(function($query)use($country) {
-                    return $query->where('status', 1)
-                        ->Where('Country_id',$country->id);
-                })
-                ->orWhere( function($query)use($status) {
-                    return $query->where('status', 1)
-                        ->Where('IsNew', '=', $status);
-                })
-                ->orWhereHas('maker', function($query)use($request){
-                    $query->where('status', 1)
-                    ->where('name','LIKE','%'.$request->word.'%');
+                Car::where("status",1)
+                ->where('IsNew', '=', $status)
+                ->where('Country_id',$country->id)
+                ->WhereHas('maker', function($query)use($request){
+                    $query->where('name','LIKE','%'.$request->word.'%');
                 })
                 ->paginate(10)
             ))->type($type::list);
+            if(!$data->count())
+                return $this->errorMessage("No data found");
             return $data;
+
         }else {
             return $this->failed($validator);
         }
     }
+    public function stop($car){
+        if(!$car->count()){
+            return true;
+        }
+    }
     public function filter(Request $request){
         $validator=$this->Validator($request,[
-            "interest_country" => 'required|integer',
-            "car_state"       => 'required|integer|between:0,1',
+            "interest_country"         => 'required|integer',
+            "car_state"                => 'required|integer|between:0,1',
             "car_maker_id"             => 'required|integer',
             "car_model_id"             => 'required|integer',
             "year"                     => 'nullable|integer',
-            "price_min"             => 'nullable|integer',
-            "price_max"             => 'nullable|integer',
-            "kilometers_min"             => 'nullable|integer',
-            "kilometers_max"             => 'nullable|integer',
-            "body_style_id"             => 'nullable|integer',
-            "badge_id"             => 'nullable|integer',
-            "extra_feature_id"             => 'nullable|integer',
-            "transimission"             => 'nullable|between:0,1',
-            "color"             => 'nullable|integer',
-            "location_govenment_id"             => 'nullable|integer',
-            "location_city_id"             => 'nullable|integer',
-            "seller_type"             => 'nullable|between:0,2',
-            "is_accident"             => 'nullable|between:0,1',
-            "payment_method"             => 'nullable|between:0,2',
-            "location_govenment_id"             => 'nullable|integer',
-            "location_govenment_id"             => 'nullable|integer',
-            "location_govenment_id"             => 'nullable|integer',
-            "location_govenment_id"             => 'nullable|integer',
+            "price_min"                => 'nullable|integer',
+            "price_max"                => 'nullable|integer',
+            "kilometers_min"           => 'nullable|integer',
+            "kilometers_max"           => 'nullable|integer',
+            "body_style_id"            => 'nullable|integer',
+            "badge_id"                 => 'nullable|integer',
+            "extra_feature_id"         => 'nullable|integer',
+            "transmission"            => 'nullable|between:0,1',
+            "color"                    => 'nullable|integer',
+            "location_government_id"    => 'nullable|integer',
+            "location_city_id"         => 'nullable|integer',
+            "seller_type"              => 'nullable|between:0,2',
+            "is_accident"              => 'nullable|between:0,1',
+            "payment_method"           => 'nullable|between:0,2',
+            "sort_added"               => 'nullable|in:recent,trending',
+            "sort_kilometer"           => 'nullable|in:low,high',
+            "sort_year"                => 'nullable|in:low,high',
+            "sort_price"               => 'nullable|in:low,high',
+            "sort_near_by_lat"         => 'nullable|numeric',
+            "sort_near_by_lng"         => 'nullable|numeric',
 
         ]);
         if (!$validator->fails()) {
-            $status=($request->car_status== 1) ? Car::IS_USED : Car::IS_NEW;
-            if(!$country=Country::find($request->interest_country)){
-                return $this->errorMessage('Country not found');
+
+            $car=Car::where("status",1);
+            $car->where("Country_id",$request->interest_country)
+            ->where("isNew",$request->car_state)
+            ->where("CarMaker_id",$request->car_maker_id)
+            ->where("CarModel_id",$request->car_model_id);
+            if($this->stop($car)){
+
+                return $this->errorMessage("No data found");
             }
+
+            if($request->has("year")){
+                $car->where('CarYear_id',$request->year);
+            }
+
+            if($request->has("price_min") && $request->has("price_max")){
+                $car->whereBetween('price', [$request->price_min , $request->price_max]);
+            }
+            if($request->has("kilometers_min")  && $request->has("kilometers_max") ){
+                $car->whereBetween('kiloUsed', [ (int)$request->kilometers_min, (int)$request->kilometers_max]);
+            }
+            if($request->has("body_style_id")){
+                $car->where('CarBody_id',$request->body_style_id);
+            }
+            if($this->stop($car)){
+
+                return $this->errorMessage("No data found");
+            }
+
+            if($request->has("extra_feature_id")){
+                $cars=$car;
+                foreach($cars as $item){
+                    $item->features->where("feature_id",$request->extra_feature_id);
+                    $car->where("id",$item->car_id);
+                }
+            }
+
+            if($this->stop($car)){
+
+                return $this->errorMessage("No data found");
+            }
+            if($request->has('transmission')){
+                $car->where("transmission",$request->transmission);
+            }
+
+            if($request->has('color')){
+                $car->where("CarColor_id",$request->color);
+            }
+            if($request->has('location_government_id')){
+                $car->where("Governorate_id",$request->location_government_id);
+            }
+            if($request->has('location_city_id')){
+                $car->where("City_id",$request->location_city_id);
+            }
+            if($request->has('seller_type')){
+                $car->where("SellerType",$request->seller_type);
+            }
+
+            if($request->has('is_accident')){
+                $car->where("AccidentBefore",$request->is_accident);
+            }
+            if($request->has('payment_method')){
+                $car->where("payment",$request->payment_method);
+            }
+            if($this->stop($car)){
+                return $this->errorMessage("No data found");
+            }
+            if($request->has('sort_kilometer')){
+                if($request->sort_kilometer=='low'){
+                    $car->orderBy('kiloUsed', 'ASC');
+                }else {
+                    $car->orderBy('kiloUsed', 'DESC');
+                }
+
+            }
+            if($request->has('sort_year')){
+                if($request->sort_year=='low'){
+                    $car->WhereHas('year', function($query){
+                        return $query->orderBy('year', 'DESC');
+                    });
+
+                }else {
+                    $car->WhereHas('year', function($query){
+                        return $query->orderBy('year', 'DESC');
+                    });
+                }
+
+            }
+            if($request->has('sort_price')){
+                if($request->sort_price=='low'){
+                    $car->orderBy('price', 'ASC');
+
+                }else {
+                    $car->orderBy('price', 'DESC');
+                }
+
+            }
+
+
+            //if($request->has('sort_added')){
+           //     $car->where("payment",$request->payment_method);
+           // }
+
             $type   = new DataType();
-            $data=(new CarCollection(
-                Car::
-                where(function($query)use($country) {
-                    return $query->where('status', 1)
-                        ->Where('Country_id',$country->id);
-                })
-                ->orWhere( function($query)use($status) {
-                    return $query->where('status', 1)
-                        ->Where('IsNew', '=', $status);
-                })
-                ->orWhereHas('maker', function($query)use($request){
-                    $query->where('status', 1)
-                    ->where('name','LIKE','%'.$request->word.'%');
-                })
-                ->paginate(10)
-            ))->type($type::list);
+            $data=(new CarCollection($car->paginate(10)))->type($type::list);
+            if(!$data->count())
+                return $this->errorMessage("No data found");
             return $data;
+
+
         }else {
             return $this->failed($validator);
         }
@@ -286,6 +377,8 @@ class CarsController extends Controller
     public function promote_package(Request $request){
         $this->lang($request->lang);
         $package= SubscribeResource::collection(subscribe_package::all());
+        if(!$package->count())
+            return $this->errorMessage("No data found");
         return  $this->returnData('packageList',$package,__('Successfully get Subscribed Packages'));
     }
     public function promote(Request $request){
@@ -301,9 +394,6 @@ class CarsController extends Controller
                 return $this->errorMessage('First Car ID not found');
             }elseif(!$subscribe_package=subscribe_package::find($request->subscribe_package_id)){
                 return $this->errorMessage('Subscribe Package  ID not found');
-            }
-            if(!strtotime($subscribe_package->period)){
-                return $this->errorMessage('Subscribe Package invalid period');
             }
             if($car->promotedStatus){
                 $car->update([
@@ -343,6 +433,7 @@ class CarsController extends Controller
             $car['views']=0;
             $new_car = $car->replicate();
             $new_car->save();
+            $auth=(auth('sanctum')->user())? auth('sanctum')->id() : $new_car->user->id;
             $CarPhotos=car_img::where('car_id', '=', $car->id)->get();
             foreach($CarPhotos as $key=>$img){
                 car_img::create([
@@ -365,10 +456,14 @@ class CarsController extends Controller
                 ]);
             }
             ListCarUser::create([
-                "user_id"=>$new_car->user->id,
+                "user_id"=>$auth,
                 "car_id"=>$new_car->id
             ]);
             $car=Car::find($new_car->id);
+            $car->update([
+                'user_id'=>$auth,
+                'status'=>Car::STATUS_DISABLE
+            ]);
             $type   = new DataType();
             $data=(new CarResource($car))->type($type::single);
             return  $this->returnData('mCar',$data,__('Successfully'));
@@ -625,6 +720,8 @@ class CarsController extends Controller
         $this->lang( $request->lang);
         $type   = new DataType();
         $data=(new CarCollection(Car::where("user_id",Auth()->id())->get()))->type($type::list);
+        if(!$data->count())
+            return $this->errorMessage("No data found");
         return $data;
     }
     public static function rules($update=null)
@@ -675,6 +772,10 @@ class CarsController extends Controller
     }
 
     public function credentials($request,$update=null){
+        $seller=Car::SELLER_INDIVIDUAL;
+        if(Auth()->user()->Agency){
+           $seller=(Auth()->user()->Agency->center_type==0) ? Car::SELLER_AGENCY: Car::SELLER_DISTRIBUTOR;
+        }
        $credentials=[
         'CarMaker_id'                 => $request->carMaker,
         'CarModel_id'                 => $request->carModel,
@@ -704,7 +805,7 @@ class CarsController extends Controller
         'DepositPrice'                => $request->payment_deposit,
         'InstallmentAmount'           => $request->payment_loan_amount,
         'InstallmentPeriod'           => $request->payment_loan_period,
-        'SellerType'                  => Auth()->user()->Agency ? Car::SELLER_AGENCY: Car::SELLER_INDIVIDUAL,
+        'SellerType'                  => $seller,
         'views'                       => 0,
         'status'                      => Car::STATUS_DISABLE,
         'user_id'                     => Auth()->user()->id,

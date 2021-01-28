@@ -588,5 +588,10 @@
     "Edit offer plan":"تعديل خطة العرض",
     "Bank Dashboard":"لوحة تحكم البنك",
     "View bank record":"عرض سجل البنك",
-    "Favorite cars are empty":"السيارات المفضلة فارغة"
+    "Favorite cars are empty":"السيارات المفضلة فارغة",
+    "Badge not found":"شارة السيارة غير موجودة",
+    "Feature not found":"ميزة السيارة غير موجودة",
+    "Governorate ID":"ID المحافظة",
+    "Country ID":"ID البلد",
+    "No data found":"لا يوجد بيانات"
 }

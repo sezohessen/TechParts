@@ -14,6 +14,7 @@ class CarModelResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             "car_maker_id"=>$this->CarMaker_id,
             "id"=> $this->id,
