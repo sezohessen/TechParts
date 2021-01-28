@@ -185,7 +185,10 @@ class Agency extends Model
     {
         return $this->belongsToMany(Specialties::class, 'agency_specialties', 'agency_id','specialty_id');
     }
-
+    public function UserFav()
+    {
+        return $this->belongsToMany(User::class, 'user_fav_agencies', 'agency_id','user_id');
+    }
     public static function rules($request,$id = NULL)
     {
         $rules = [

@@ -13,6 +13,7 @@ use App\Classes\Responseobject;
 use App\Classes\DataType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AgencyHomeCollection;
+use App\Http\Resources\AgencySearchCollection;
 use App\Http\Resources\CarCollection;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
@@ -61,21 +62,44 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id',$request->interest_country)
-            ->where('center_type',Agency::center_type_Agency);
+            ->where('center_type',Agency::center_type_Agency)->get();
             if(!$agencyList->count()){
                 return $this->errorMessage("No Agencies in this interest country");
             }
-            $data= new AgencyHomeCollection($agencyList->paginate(10));
-            return $data;
-            /*
+            $user = auth('sanctum')->user();
+            $subscripedList = [];
+            if($user){
+                $agencyFavs = Agency::whereHas('UserFav', function ($query) use ($user) {
+                    return $query->where('user_fav_agencies.user_id',$user->id);
+                })->get();
+                foreach ($agencyFavs as $agencyFav) {
+                    $subscripedList[]     = $this->AgencyData(
+                        $agencyFav,
+                        $workType = false,
+                        $specializationList = false,
+                        $badgesList = false,
+                        $description = false,
+                        $paymentMethodList = false,
+                        $centerType = true,
+                        $mContact = false,
+                        $mLocation = false,
+                        $carMakerList = false
+                    );
+                }
+            }
             $agencies = [];
             foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency,$workType = false,$specializationList = false,$badgesList = false,$description = false,
-                $paymentMethodList = false);
+                $agencies[]     = $this->AgencyData(
+                    $agency,
+                    $workType = false,
+                    $specializationList = false,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false
+                );
             }
 
-            return $this->returnData("offersList",$agencies,"Successfully");
-            */
+            return $this->returnData("offersList", $agencies, "Successfully",["subscribedList"    => $subscripedList]);
         }else{
             return($this->ValidatorErrors($validator));
         }
@@ -87,23 +111,13 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id', $request->interest_country)
-                ->where('center_type', Agency::center_type_Maintenance)
-                ->paginate();
+                ->where('center_type', Agency::center_type_Maintenance);
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No maintenance centers in this interest country"));
+                return $this->errorMessage(__("No maintenance centers in this interest country"));
             }
-            $agencies = [];
-            foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData(
-                    $agency,
-                    $workType = false,
-                    $specializationList = true,
-                    $badgesList = false,
-                    $description = false,
-                    $paymentMethodList = false
-                );
-            }
-            return $this->returnData("centerList", $agencies, "Successfully");
+
+            $data   = new AgencyHomeCollection($agencyList->paginate(10));
+            return $data;
         } else {
             return ($this->ValidatorErrors($validator));
         }
@@ -115,24 +129,13 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id', $request->interest_country)
-                ->where('center_type', Agency::center_type_Spare)
-                ->paginate();
+                ->where('center_type', Agency::center_type_Spare);
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No Spare parts centers in this interest country"));
+                return $this->errorMessage(__("No Spare parts centers in this interest country"));
             }
 
-            $agencies = [];
-            foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData(
-                    $agency,
-                    $workType = false,
-                    $specializationList = true,
-                    $badgesList = false,
-                    $description = false,
-                    $paymentMethodList = false
-                );
-            }
-            return $this->returnData("centerList", $agencies, "Successfully");
+            $data   = new AgencyHomeCollection($agencyList->paginate(10));
+            return $data;
         } else {
             return ($this->ValidatorErrors($validator));
         }
@@ -147,7 +150,7 @@ class AgencyController extends Controller
                 ->where('center_type', Agency::center_type_Agency)
                 ->get();
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No such center id exist"));
+                return $this->errorMessage(__("No such center id exist"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
@@ -175,7 +178,7 @@ class AgencyController extends Controller
                 ->where('center_type', Agency::center_type_Maintenance)
                 ->get();
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No such center id exist"));
+                return $this->errorMessage(__("No such center id exist"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
@@ -203,7 +206,7 @@ class AgencyController extends Controller
                 ->where('center_type', Agency::center_type_Spare)
                 ->get();
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No such center id exist"));
+                return $this->errorMessage(__("No such center id exist"));
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
@@ -232,24 +235,12 @@ class AgencyController extends Controller
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('center_type', Agency::center_type_Agency)
                 ->where('car_status', $carStatus)
-                ->where($name, 'like', '%' . $request->word . '%')
-                ->paginate();
+                ->where($name, 'like', '%' . $request->word . '%');
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No centers found"));
+                return $this->errorMessage(__("No centers found"));
             }
-            $agencies = [];
-            foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData(
-                    $agency,
-                    $workType = false,
-                    $specializationList = false,
-                    $badgesList = false,
-                    $description = false,
-                    $paymentMethodList = false,
-                    $centerType = false
-                );
-            }
-            return $this->returnData("centerList", $agencies, "Successfully");
+            $data   = new AgencySearchCollection($agencyList->paginate(10));
+            return $data;
         } else {
             return ($this->ValidatorErrors($validator));
         }
@@ -265,23 +256,12 @@ class AgencyController extends Controller
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('center_type', Agency::center_type_Maintenance)
                 ->where('car_status', $carStatus)
-                ->where($name, 'like', '%' . $request->word . '%')
-                ->paginate();
+                ->where($name, 'like', '%' . $request->word . '%');
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No centers found"));
+                return $this->errorMessage(__("No centers found"));
             }
-            $agencies = [];
-            foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData(
-                    $agency,
-                    $workType = false,
-                    $specializationList = true,
-                    $badgesList = false,
-                    $description = false,
-                    $paymentMethodList = false
-                );
-            }
-            return $this->returnData("centerList", $agencies, "Successfully");
+            $data   = new AgencyHomeCollection($agencyList->paginate(10));
+            return $data;
         } else {
             return ($this->ValidatorErrors($validator));
         }
@@ -297,16 +277,12 @@ class AgencyController extends Controller
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('center_type', Agency::center_type_Spare)
                 ->where('car_status', $carStatus)
-                ->where($name, 'like', '%' . $request->word . '%')
-                ->paginate();
+                ->where($name, 'like', '%' . $request->word . '%');
             if (!$agencyList->count()) {
-                return $this->returnSuccess(__("No centers found"));
+                return $this->errorMessage(__("No centers found"));
             }
-            $agencies = [];
-            foreach ($agencyList as $agency) {
-                $agencies[]     = $this->AgencyData($agency, $workType = false, $specializationList = true, $badgesList = false, $paymentMethodList = false, $centerType = false);
-            }
-            return $this->returnData("centerList", $agencies, "Successfully");
+            $data   = new AgencyHomeCollection($agencyList->paginate(10));
+            return $data;
         } else {
             return ($this->ValidatorErrors($validator));
         }
@@ -356,9 +332,9 @@ class AgencyController extends Controller
             }
 
             if (!auth()->user()->MaintenanceFav->count()) {
-                return $this->returnSuccess(__("No centers found"));
+                return $this->errorMessage(__("No centers found"));
             }
-            $agencyList = auth()->user()->agencyFav;
+            $agencyList = auth()->user()->MaintenanceFav;
             foreach ($agencyList as $agency) {
 
                 $agencies[]     = $this->AgencyData(

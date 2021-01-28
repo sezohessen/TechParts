@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use App\Http\Resources\CarMakerCollection;
 use App\Http\Resources\CarModelCollection;
+use App\Http\Resources\CityCollection;
+use App\Http\Resources\CountryCollection;
+use App\Http\Resources\GovernorateCollection;
 use Illuminate\Support\Facades\Validator as Validator;
 
 class dynamicController extends Controller
@@ -100,33 +103,17 @@ class dynamicController extends Controller
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
         $governmentList     = Governorate::where('active', 1)
-            ->where('country_id', $request->country_name)
-            ->get();
-        $governmentLists = [];
-        foreach ($governmentList as $governorate) {
-            $governmentLists[] = [
-                "id"            => $governorate->id,
-                "title"         => Session::get('app_locale') == 'ar' ? $governorate->title_ar : $governorate->title,
-                "country_name"  => Session::get('app_locale') == 'ar' ? $governorate->country->name_ar : $governorate->country->name,
-            ];
-        }
-        return $this->returnData("governmentList", $governmentLists, "Successfully");
+            ->where('country_id', $request->country_name);
+        $data           = new GovernorateCollection($governmentList->paginate(10));
+        return $data;
     }
     public function country(Request $request)
     {
         $this->lang($request);
 
-        $countryList     = Country::where('active', 1)->get();
-        $countryLists = [];
-        foreach ($countryList as $country) {
-            $countryLists[] = [
-                "id"            => $country->id,
-                "title"         => Session::get('app_locale') == 'ar' ? $country->name_ar : $country->name,
-                "code"          => $country->code,
-                "country_phone" => $country->country_phone,
-            ];
-        }
-        return $this->returnData("countryList", $countryLists, "Successfully");
+        $countryList    = Country::where('active', 1);
+        $data           = new CountryCollection($countryList->paginate(10));
+        return $data;
     }
     public function city(Request $request)
     {
@@ -135,16 +122,10 @@ class dynamicController extends Controller
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
-        $cityList     = City::where('active', 1)->get();
-        $cityLists = [];
-        foreach ($cityList as $city) {
-            $cityLists[] = [
-                "id"            => $city->id,
-                "title"         => Session::get('app_locale') == 'ar' ? $city->title_ar : $city->title,
-                "government_id" => $city->governorate_id,
-            ];
-        }
-        return $this->returnData("cityList", $cityLists, "Successfully");
+        $cityList     = City::where('active', 1)
+        ->where('governorate_id',$request->government_id);
+        $data           = new CityCollection($cityList->paginate(10));
+        return $data;
     }
     public function lang($request)
     {

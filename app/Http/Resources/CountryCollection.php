@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class AgencyHomeCollection extends ResourceCollection
+class CountryCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,10 +15,9 @@ class AgencyHomeCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'centerList'    =>  parent::toArray($request),
+            'countryList'   =>  parent::toArray($request),
             'status'        =>  true,
             "msg"           =>  __('Successfully')
         ];
     }
-
 }
