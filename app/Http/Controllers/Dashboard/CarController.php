@@ -53,7 +53,6 @@ class CarController extends Controller
         $page_description = __("Add new Car");
         $makers=CarMaker::where('active', '=', 1)->get();
         $bodies=CarBody::all();
-        $years=CarYear::all();
         $badges=Badges::where('active', '=', 1)->get();
         $features=Feature::where('active', '=', 1)->get();
         $countries=Country::where('active', '=', 1)->get();
@@ -61,7 +60,7 @@ class CarController extends Controller
         $capacities=CarCapacity::all();
         $colors=CarColor::all();
         return view('dashboard.Car.add', compact('page_title', 'page_description','makers',
-        "years","bodies","badges","features","countries","manufactures","capacities","colors"));
+        "bodies","badges","features","countries","manufactures","capacities","colors"));
     }
 
     /**
@@ -126,7 +125,6 @@ class CarController extends Controller
         $page_description = __("Edit Car");
         $makers=CarMaker::where('active', '=', 1)->get();
         $bodies=CarBody::all();
-        $years=CarYear::all();
         $badges=Badges::where('active', '=', 1)->get();
         $features=Feature::where('active', '=', 1)->get();
         $countries=Country::where('active', '=', 1)->get();
@@ -150,7 +148,7 @@ class CarController extends Controller
         }
 
         return view('dashboard.Car.edit', compact('car_features','car_badges','page_title', 'page_description','car','makers',
-        "years","bodies","badges","features","countries","manufactures","capacities","colors","images"));
+        "bodies","badges","features","countries","manufactures","capacities","colors","images"));
     }
 
     /**
@@ -281,6 +279,19 @@ class CarController extends Controller
                 'models' => null
         ]);
     }
+    public function available_year($id){
+        /* $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get(); */
+        $years = CarYear::where('CarModel_id', $id)->get();
+        if($years->count() > 0 ){
+            return response()->json([
+                'years' => $years
+            ]);
+        }
+        return response()->json([
+                'years' => null
+        ]);
+    }
+
     public function available_governorate($id){
         $governorates = Governorate::where('country_id', $id)->where('active', 1)->get();
         if($governorates->count() > 0 ){

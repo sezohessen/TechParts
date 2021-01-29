@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\CarModel;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
+
 class CarYearSeeder extends Seeder
 {
     /**
@@ -18,6 +20,7 @@ class CarYearSeeder extends Seeder
         foreach (range(1,5) as $value){
             DB::table('car_years')->insert([
                 'year'          => $faker->year,
+                'CarModel_id'    => CarModel::all()->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

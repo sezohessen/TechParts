@@ -11,11 +11,13 @@ class CarYear extends Model
     protected $table    = 'car_years';
     protected $fillable=[
         'year',
+        'CarModel_id'
     ];
     public static function rules($request)
     {
         $rules = [
-            'year'             => 'required|numeric|digits_between:4,4',
+            'year'             => 'required|integer|digits_between:4,4',
+            'CarModel_id'      => 'required|integer',
         ];
         return $rules;
     }
@@ -23,8 +25,13 @@ class CarYear extends Model
     {
         $credentials = [
             'year'              => $request->year,
+            'CarModel_id'              => $request->CarModel_id,
         ];
         return $credentials;
     }
+    public function model(){
+        return $this->belongsTo(CarModel::class,'CarModel_id','id');
+    }
+
 }
 

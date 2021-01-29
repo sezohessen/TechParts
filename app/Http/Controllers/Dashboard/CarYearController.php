@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\CarYear;
 use Illuminate\Http\Request;
 use App\DataTables\CarYearDatatable;
+use App\Models\CarModel;
+
 class CarYearController extends Controller
 {
     /**
@@ -29,8 +31,8 @@ class CarYearController extends Controller
     {
         $page_title = __("Add a year of manufacture");
         $page_description = __("Years of manufacture");
-
-        return view('dashboard.CarYear.add', compact('page_title', 'page_description'));
+        $models=CarModel::where("active",1)->get();
+        return view('dashboard.CarYear.add', compact('page_title', 'page_description','models'));
     }
 
     /**
@@ -41,6 +43,7 @@ class CarYearController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = CarYear::rules($request);
         $request->validate($rules);
         $credentials = CarYear::credentials($request);
@@ -70,7 +73,8 @@ class CarYearController extends Controller
     {
         $page_title = __("Edit a year of manufacture");
         $page_description = __("Years of manufacture");
-        return view('dashboard.CarYear.edit', compact('page_title', 'page_description','year'));
+        $models=CarModel::where("active",1)->get();
+        return view('dashboard.CarYear.edit', compact('page_title', 'page_description','year','models'));
     }
 
     /**

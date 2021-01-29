@@ -43,12 +43,12 @@ class AgencyCarController extends Controller
      */
     public function create()
     {
-       
+
         $page_title = __("Add Car");
         $page_description = __("Add new Car");
         $makers=CarMaker::where('active', '=', 1)->get();
         $bodies=CarBody::all();
-        $years=CarYear::all();
+
         $badges=Badges::where('active', '=', 1)->get();
         $features=Feature::where('active', '=', 1)->get();
         $countries=Country::where('active', '=', 1)->get();
@@ -56,7 +56,7 @@ class AgencyCarController extends Controller
         $capacities=CarCapacity::all();
         $colors=CarColor::all();
         return view('agency.Car.add', compact('page_title', 'page_description','makers',
-        "years","bodies","badges","features","countries","manufactures","capacities","colors"));
+        "bodies","badges","features","countries","manufactures","capacities","colors"));
     }
 
     /**
@@ -122,6 +122,7 @@ class AgencyCarController extends Controller
      */
     public function edit(Car $car)
     {
+
         if(!$car->query()->has('OneAgency')->where('id',$car->id)->get()->count()){
             return redirect()->route("agency.car.index");
         }
@@ -130,7 +131,7 @@ class AgencyCarController extends Controller
         $page_description = __("Edit Car");
         $makers=CarMaker::where('active', '=', 1)->get();
         $bodies=CarBody::all();
-        $years=CarYear::all();
+
         $badges=Badges::where('active', '=', 1)->get();
         $features=Feature::where('active', '=', 1)->get();
         $countries=Country::where('active', '=', 1)->get();
@@ -154,8 +155,8 @@ class AgencyCarController extends Controller
             $car_features[]=$item->feature_id;
         }
 
-        return view('dashboard.Car.edit', compact('car_features','car_badges','page_title', 'page_description','car','makers',
-        "years","bodies","badges","features","countries","manufactures","capacities","colors","images"));
+        return view('agency.Car.edit', compact('car_features','car_badges','page_title', 'page_description','car','makers',
+        "bodies","badges","features","countries","manufactures","capacities","colors","images"));
     }
 
     /**
@@ -208,7 +209,7 @@ class AgencyCarController extends Controller
             ]);
         }
         session()->flash('created',__("Changes has been Updated Successfully"));
-        return redirect()->route("dashboard.car.index");
+        return redirect()->route("agency.car.index");
     }
 
     /**
@@ -223,7 +224,6 @@ class AgencyCarController extends Controller
             return redirect()->route("agency.car.index");
         }
         $car=$car->query()->has('OneAgency')->where('id',$car->id)->first();
-        dd($car);
         $images=car_img::where("car_id",$car->id)->get();
         Car::unlink_img($images);
         $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
@@ -236,7 +236,7 @@ class AgencyCarController extends Controller
         }
         $car->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.car.index");
+        return redirect()->route("agency.car.index");
     }
     public function multi_delete(){
         if (is_array(request('item'))) {
@@ -277,7 +277,7 @@ class AgencyCarController extends Controller
             $car->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.car.index");
+        return redirect()->route("agency.car.index");
     }
     public function available_model($id){
         /* $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get(); */
@@ -289,6 +289,18 @@ class AgencyCarController extends Controller
         }
         return response()->json([
                 'models' => null
+        ]);
+    }
+    public function available_year($id){
+        /* $models = CarModel::where('CarMaker_id', $id)->where('active', 1)->get(); */
+        $years = CarYear::where('CarModel_id', $id)->get();
+        if($years->count() > 0 ){
+            return response()->json([
+                'years' => $years
+            ]);
+        }
+        return response()->json([
+                'years' => null
         ]);
     }
     public function available_governorate($id){

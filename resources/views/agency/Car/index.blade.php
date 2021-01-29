@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="table-responsive">
                     <div class="card-custom" style="width: 100%">
-                        {!! Form::open(['id'=>'form_data','url'=>"dashboard/agency/destroy/all",'method'=>'delete']) !!}
+                        {!! Form::open(['id'=>'form_data','url'=>"agency/destroy/all",'method'=>'delete']) !!}
                             {!! $dataTable->table([
                                 'class'=>'table table-separate table-head-custom table-checkable'
                             ],true)!!}

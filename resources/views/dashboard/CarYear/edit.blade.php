@@ -20,13 +20,34 @@
                 <!-- EN Form -->
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>@lang('Date Year of manufacture') <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('year') ? 'is-invalid' : '' }}"
-                             name="year"  placeholder="@lang('Year of manufacture')" value="{{ old('year') ?? $year->year}}" required autofocus  />
-                            @error('year')
-                                 <div class="invalid-feedback">{{ $errors->first('year') }}</div>
-                            @enderror
+                        <div class="form-group row">
+                            <label class="col-form-label  col-sm-12">@lang('Date Year of manufacture') <span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <input type="text" class="form-control {{ $errors->has('year') ? 'is-invalid' : '' }}"
+                                name="year"  placeholder="@lang('Date Year of manufacture')" value="{{ old('year') ?? $year->year}}" required autofocus  />
+                                @error('year')
+                                    <div class="invalid-feedback">{{ $errors->first('year') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row ">
+                             <label for="model" class="col-form-label  col-sm-12">@lang('Select Car Model')<span class="text-danger">*</span>
+                            </label><br>
+                             <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
+                                name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
+                                    <option value=""  >@lang('Select Car Make')</option>
+                                    @foreach ($models as $model)
+                                        <option value="{{$model->id}}" {{ $year->CarModel_id==$model->id ? 'selected':'' }}>{{$model->name}}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('CarModel_id')
+                                    <div class="invalid-feedback">{{ $errors->first('CarModel_id') }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 

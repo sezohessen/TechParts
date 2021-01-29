@@ -9,6 +9,7 @@ use App\Models\promote;
 use Illuminate\Http\Request;
 use App\DataTables\CarPromoteDatatable;
 use App\Models\CarMaker;
+use App\Models\Image;
 use App\Models\subscribe_package;
 
 class CarPromoteController extends Controller
@@ -33,6 +34,7 @@ class CarPromoteController extends Controller
      */
     public function create()
     {
+        dd( Image::find(1)->delete());
         $page_title = __("Pomote a car");
         $page_description = __("Pomote a car");
         $cars=Car::where("status","=",1)->get();

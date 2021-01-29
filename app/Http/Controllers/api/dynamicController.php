@@ -23,7 +23,9 @@ use App\Http\Resources\CarModelCollection;
 use App\Http\Resources\CityCollection;
 use App\Http\Resources\CountryCollection;
 use App\Http\Resources\GovernorateCollection;
+use App\Models\CarCapacity;
 use Illuminate\Support\Facades\Validator as Validator;
+use App\Http\Resources\CarCapacityResource;
 
 class dynamicController extends Controller
 {
@@ -187,9 +189,15 @@ class dynamicController extends Controller
             return $this->failed($validator);
         }
     }
-    public function model_search(Request $request)
-    {
-        $validator = $this->Validator($request, [
+    public function motor(Request $request){
+        $this->lang($request);
+        $data=CarCapacityResource::collection(CarCapacity::paginate(10));
+        if(!$data->count())
+            return $this->errorMessage("No data found");
+        return $this->returnData("listMain",$data,"Successfully");
+    }
+    public function model_search(Request $request){
+        $validator=$this->Validator($request,[
             "word"            => 'required|string',
             "car_maker"       => 'required|integer',
         ]);
