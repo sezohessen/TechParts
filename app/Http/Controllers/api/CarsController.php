@@ -534,17 +534,17 @@ class CarsController extends Controller
                 return $this->errorMessage('wrong images');
             }
 
-            if($maker=CarMaker::where("active",1)->find($request->carMaker)){
-                if(!CarModel::where("active",1)->where("CarMaker_id",$maker->id)->find($request->carModel)){
+            if(CarMaker::where("active",1)->find($request->carMaker)){
+                if(CarModel::where("active",1)->where("CarMaker_id",$request->carMaker)->find($request->carModel)){
+                    if(!CarYear::where("CarModel_id",$request->carModel)->find($request->carYear)){
+                        return $this->errorMessage('Model Year of manufacture not found');
+                    }
+                }else {
                     return $this->errorMessage('Car Model not found');
                 }
             }
             else {
                 return $this->errorMessage('Car Maker not found');
-            }
-
-            if(!CarYear::find($request->carYear)){
-                return $this->errorMessage('Year of manufacture not found');
             }
 
             if(!CarManufacture::find($request->carManufacturing)){
@@ -634,18 +634,20 @@ class CarsController extends Controller
                     return $this->errorMessage('wrong images');
                 }
             }
-            if($maker=CarMaker::where("active",1)->find($request->carMaker)){
-                if(!CarModel::where("active",1)->where("CarMaker_id",$maker->id)->find($request->carModel)){
+
+            if(CarMaker::where("active",1)->find($request->carMaker)){
+                if(CarModel::where("active",1)->where("CarMaker_id",$request->carMaker)->find($request->carModel)){
+                    if(!CarYear::where("CarModel_id",$request->carModel)->find($request->carYear)){
+                        return $this->errorMessage('Model Year of manufacture not found');
+                    }
+                }else {
                     return $this->errorMessage('Car Model not found');
                 }
             }
             else {
                 return $this->errorMessage('Car Maker not found');
             }
-
-            if(!CarYear::find($request->carYear)){
-                return $this->errorMessage('Year of manufacture not found');
-            }
+  
 
             if(!CarManufacture::find($request->carManufacturing)){
                 return $this->errorMessage('Manufacturing not found');
