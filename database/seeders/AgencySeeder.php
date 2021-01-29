@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class AgencySeeder extends Seeder
 {
     /**
@@ -21,7 +22,8 @@ class AgencySeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        $users = User::whereRoleIs('agency')->get();
+        foreach ($users as $user ) {
             $agency = DB::table('agencies')->insertGetId([
                 'name'              => $faker->company,
                 'name_ar'           => $faker->company,
@@ -29,18 +31,19 @@ class AgencySeeder extends Seeder
                 'description_ar'    => $faker->text,
                 'show_in_home'      => $faker->boolean,
                 'car_show_rooms'    => $faker->boolean,
-                "agency_type"       => rand(1,2),
-                "maintenance_type"       => rand(1,2),
-                'center_type'       => $faker->numberBetween(0,2),
+                "agency_type"       => rand(1, 2),
+                "is_authorised"       => rand(1, 2),
+                "maintenance_type"       => rand(1, 2),
+                'center_type'       => $faker->numberBetween(0, 2),
                 'lat'               => $faker->latitude,
                 'long'              => $faker->longitude,
                 'car_status'        => $faker->boolean,
-                'payment_method'    => $faker->numberBetween(0,2),
+                'payment_method'    => $faker->numberBetween(0, 2),
                 'img_id'            => Image::all()->random()->id,
                 'country_id'        => Country::all()->random()->id,
                 'governorate_id'    => Governorate::all()->random()->id,
                 'city_id'           => City::all()->random()->id,
-                'user_id'           => User::all()->random()->id,
+                'user_id'           => $user->id,
                 'created_at'        => now(),
                 'updated_at'        => now()
             ]);

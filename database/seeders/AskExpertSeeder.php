@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -15,7 +16,7 @@ class AskExpertSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('ask_experts')->insert([
                 'message'           =>  $faker->sentence,
                 'email'             =>  $faker->email,

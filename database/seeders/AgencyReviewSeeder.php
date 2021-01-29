@@ -18,9 +18,9 @@ class AgencyReviewSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('agency_reviews')->insert([
-                'rate'              => $faker->randomElement(['1', '2', '3','4','5']),
+                'rate'              => $faker->randomElement(['1', '2', '3', '4', '5']),
                 'price'             => $faker->randomElement(['1', '2', '3']),
                 'review'            => $faker->text,
                 'agency_id'         => Agency::all()->random()->id,

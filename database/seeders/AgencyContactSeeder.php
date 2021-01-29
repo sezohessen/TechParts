@@ -17,7 +17,7 @@ class AgencyContactSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('agency_contacts')->insert([
                 'facebook'          => $faker->url,
                 'whatsapp'          => $faker->url,

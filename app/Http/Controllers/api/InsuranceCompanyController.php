@@ -34,7 +34,7 @@ class InsuranceCompanyController extends Controller
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'interest_country'  => 'required|integer', //Will be updated
-            'token'             => 'nullable',
+
         ]);
 
         if (!$validator->fails()) {
@@ -77,7 +77,7 @@ class InsuranceCompanyController extends Controller
         $validator  = Validator::make($array_data, [
             'interest_country'  => 'required|integer', //Will be updated
             'company_id'        => 'required|integer',
-            'token'             => 'nullable',
+
         ]);
 
         if (!$validator->fails()) {
@@ -156,7 +156,7 @@ class InsuranceCompanyController extends Controller
             'email'             => 'required|email',
             'phone'             => 'string',
             'interest_country'  => 'nullable|integer', //Will be updated
-            'token'             => 'nullable', //Will be updated
+            //Will be updated
         ]);
 
         if (!$validator->fails()) {

@@ -65,8 +65,6 @@ trait GeneralTrait {
         ];
         if (!empty($messages)) {
             $data["msg"] = array_values($messages)[0][0];
-        } else {
-            $data["msg"] = 'validation failed';
         }
         return response()->json($data);
     }

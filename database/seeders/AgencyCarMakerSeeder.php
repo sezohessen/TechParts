@@ -8,6 +8,7 @@ use App\Models\CarMaker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class AgencyCarMakerSeeder extends Seeder
 {
     /**
@@ -18,7 +19,7 @@ class AgencyCarMakerSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('agency_car_makers')->insert([
                 'CarMaker_id'       => CarMaker::all()->random()->id,
                 'agency_id'         => Agency::all()->random()->id,
