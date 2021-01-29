@@ -91,7 +91,6 @@ class RegisterController extends Controller
         }else {
             $provider = 'user';
         }
-
         $user = User::create(User::credentials((object)$data));
         $user->attachRole($provider) ;
         return $user;
