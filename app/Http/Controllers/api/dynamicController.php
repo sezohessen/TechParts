@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 namespace App\Http\Controllers\api;
+use App\Models\Car;
 use App\Models\Faq;
 use App\Models\City;
 use App\Models\Agency;
 use App\Models\Country;
 use App\Models\CarMaker;
 use App\Models\CarModel;
+use App\Models\CarCapacity;
 use App\Models\Governorate;
 use App\Models\AgencyReview;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Classes\Responseobject;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CarYearResource;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use App\Http\Resources\CarMakerCollection;
 use App\Http\Resources\CarModelCollection;
-use App\Models\CarCapacity;
-use Illuminate\Support\Facades\Validator as Validator;
 use App\Http\Resources\CarCapacityResource;
+use App\Models\CarYear;
+use Illuminate\Support\Facades\Validator as Validator;
 
 class dynamicController extends Controller
 {
@@ -205,6 +208,20 @@ class dynamicController extends Controller
         if(!$data->count())
             return $this->errorMessage("No data found");
         return $this->returnData("listMain",$data,"Successfully");
+    }
+    public function year(Request $request){
+        $validator=$this->Validator($request,[
+            "car_model"       => 'required|integer',
+        ]);
+        if (!$validator->fails()) {
+
+            $data=CarYearResource::collection(CarYear::where('CarModel_id',$request->car_model)->get());
+            if(!$data->count())
+                return $this->errorMessage("No data found");
+            return $this->returnData("yearList",$data,"Successfully");
+        }else {
+            return $this->failed($validator);
+        }
     }
     public function model_search(Request $request){
         $validator=$this->Validator($request,[
