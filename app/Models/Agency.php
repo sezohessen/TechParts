@@ -321,4 +321,31 @@ class Agency extends Model
             return $Image->id;
         }
     }
+    public function getRangeAttribute()
+    {
+        $Max = 0;
+        $Min = 100000000;
+        if ($this->Car()) {
+            $agencyCars     = $this->Car();
+            foreach ($agencyCars as $agencyCar) {
+                $price = $agencyCar->car->price;
+                if ($price > $Max) {
+                    $Max = $price;
+                }
+                if ($price < $Min) {
+                    $Min = $price;
+                }
+            }
+        }
+        return array($Max, $Min);
+    }
+    public function getLowPriceAttribute()
+    {
+        return $this->range[1];
+    }
+    public function getHighPriceAttribute()
+    {
+         return $this->range[0];
+    }
+
 }
