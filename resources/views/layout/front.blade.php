@@ -100,6 +100,16 @@ for your project.
                                     {{ __('Insurance') }}
                                 </a>
                                 @endrole
+                                @role('agency')
+                                <a class="dropdown-item" href="{{ route('agency.index') }}">
+                                    {{ __('agency') }}
+                                </a>
+                                @endrole
+                                @role('bank')
+                                <a class="dropdown-item" href="{{ route('bank.index') }}">
+                                    {{ __('bank') }}
+                                </a>
+                                @endrole
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">

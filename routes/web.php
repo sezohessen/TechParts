@@ -67,12 +67,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('car', 'CarController');
 
 
-    // Permissions
-    Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
-    Route::resource('permissions', 'PermissionsController');
-    // Roles
-    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
-    Route::resource('roles', 'RolesController');
+
     // Users
   //  Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
   //  Route::resource('users', 'UsersController');
@@ -124,6 +119,14 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::post('/body/{body}/activity',"CarBodyController@Activity")->name('CarBody.Activity');
     Route::post('/car/{car}/status',"CarController@Status")->name('Car.Status');
     Route::post('/agency/{agency}/status',"AgencyController@Status")->name('Agency.Status');
+});
+Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator']], function () {
+// Permissions
+    Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
+    Route::resource('permissions', 'PermissionsController');
+    // Roles
+    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
+    Route::resource('roles', 'RolesController');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
