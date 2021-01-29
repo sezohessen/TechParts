@@ -15,10 +15,10 @@ class CreateAgencyReviewsTable extends Migration
     {
         Schema::create('agency_reviews', function (Blueprint $table) {
             $table->id();
-            $table->enum ('rate', ['1', ' 2', ' 3', ' 4', ' 5'] );
-            $table->enum ('price', ['1', ' 2', ' 3'] );
+            $table->integer('rate');
+            $table->integer('price');
             $table->text('review');
-            $table->boolean('active')->default(0);
+            $table->integer('active')->default(0);
             $table->bigInteger('agency_id')->unsigned();
             $table->foreign('agency_id')
             ->references('id')->on('agencies')

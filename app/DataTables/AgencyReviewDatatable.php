@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Agency;
+use App\Models\AgencyReview;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AgencyDatatable extends DataTable
+class AgencyReviewDatatable extends DataTable
 {
 
     /**
@@ -20,17 +20,17 @@ class AgencyDatatable extends DataTable
      */
     public function dataTable($query)
     {
-        $counter = 0;
         return datatables()
             ->eloquent($query)
-            ->editColumn('name', '{{Str::limit($name, 100)}}')
-            ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
+            ->editColumn('rate', '{{Str::limit($rate, 100)}}')
+            ->editColumn('price', '{{Str::limit($price, 100)}}')
+            ->editColumn('review', '{{Str::limit($review, 100)}}')
             ->editColumn('user.email', '{{Str::limit($user["email"], 100)}}')
-            ->editColumn('center_type', 'dashboard.Agency.btn.center_type')
-            ->addColumn('checkbox', 'dashboard.Agency.btn.checkbox')
-            ->addColumn('action', 'dashboard.Agency.btn.action')
-            ->addColumn('active', 'dashboard.Agency.btn.active')
-            ->rawColumns(['checkbox', 'action', 'center_type','active']);
+            ->editColumn('agency.name', '{{Str::limit($agency["name"], 100)}}')
+            ->addColumn('checkbox', 'dashboard.AgencyReview.btn.checkbox')
+            ->addColumn('action', 'dashboard.AgencyReview.btn.action')
+            ->addColumn('active', 'dashboard.AgencyReview.btn.active')
+            ->rawColumns(['checkbox', 'action','active']);
     }
 
     /**
@@ -41,11 +41,7 @@ class AgencyDatatable extends DataTable
      */
     public function query()
     {
-        if ($this->request()->has("center_type")) {
-            return Agency::query()->with("user")->where("center_type",request('center_type'))->select("agencies.*");
-        }else {
-            return Agency::query()->with("user")->select("agencies.*");
-        }
+        return AgencyReview::query()->with("user","agency")->select("agency_reviews.*");
     }
 
     /**
@@ -56,7 +52,7 @@ class AgencyDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('agency-table')
+            ->setTableId('AgencyReview-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -109,11 +105,13 @@ class AgencyDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('name')->title(__('Name')),
-            Column::make('name_ar'),
+            Column::make('rate'),
+            Column::make('price'),
+            Column::make('review'),
             Column::make('user.email')
-                ->title(__("User Email")),
-            Column::make('center_type'),
+            ->title(__("User email")),
+            Column::make('agency.name')
+            ->title(__("Agency name")),
             Column::computed('active')
             ->title(__('Active'))
             ->exportable(false)
@@ -127,8 +125,7 @@ class AgencyDatatable extends DataTable
                 ->printable(false)
                 ->searchable(false)
                 ->width(120)
-                ->addClass('text-center')
-
+                ->addClass('text-center'),
         ];
     }
 
@@ -139,6 +136,6 @@ class AgencyDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Agency_' . date('YmdHis');
+        return 'Agency Reviews_' . date('YmdHis');
     }
 }

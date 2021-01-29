@@ -18,5 +18,10 @@ class AgencyReview extends Model
         'active'
     ];
 
-
+    public function user() {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
+    public function agency() {
+        return $this->belongsTo(Agency::class,'agency_id','id');
+    }
 }

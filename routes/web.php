@@ -41,6 +41,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/contact','ContactController');
     Route::resource('/AskExpert','AskExpertController');
     Route::resource('/finance-request','FinanceRequestController');
+    Route::resource('/agency-review','AgencyReviewController');
     Route::resource('/agency','AgencyController');
     Route::resource('/AgencyCar','AgencyCarController');
     Route::resource('/bank','BankController');
@@ -107,6 +108,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/AgencyCar/destroy/all','AgencyCarController@multi_delete');
     Route::delete("trending/destroy/all","TrendingController@multi_delete");
     Route::delete('/news/destroy/all','NewsController@multi_delete');
+    Route::delete('/agency-review/destroy/all','AgencyReviewController@multi_delete');
     /* Datatable Activity request */
     Route::post('/country/{country}/activity',"CountryController@Activity")->name('Country.Activity');
     Route::post('/governorate/{governorate}/activity',"GovernorateController@Activity")->name('Governorate.Activity');
@@ -119,6 +121,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::post('/body/{body}/activity',"CarBodyController@Activity")->name('CarBody.Activity');
     Route::post('/car/{car}/status',"CarController@Status")->name('Car.Status');
     Route::post('/agency/{agency}/status',"AgencyController@Status")->name('Agency.Status');
+    Route::post('/agency-review/{agency}/status',"AgencyReviewController@Status")->name('agency-review.Status');
 });
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator']], function () {
 // Permissions
