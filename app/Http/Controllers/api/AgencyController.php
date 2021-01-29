@@ -476,11 +476,7 @@ class AgencyController extends Controller
             ->whereHas('Car', function ($query)use ($request) {
                 return $query->where('cars.CarModel_id',$request->car_model_id);
             });
-            /* if($request->year){
-                $agencyList->whereHas('Car', function ($query)use ($request) {
-                    return $query->where('car_years.year',$request->year);
-                });
-            } */
+
             if($request->work_type) $agencyList->whereIn('agency_type', $request->work_type);
             if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
             if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
@@ -530,11 +526,7 @@ class AgencyController extends Controller
             ->whereHas('Car', function ($query)use ($request) {
                 return $query->where('cars.CarModel_id',$request->car_model_id);
             });
-            /* if($request->year){
-                $agencyList->whereHas('Car', function ($query)use ($request) {
-                    return $query->where('car_years.year',$request->year);
-                });
-            } */
+
             if($request->work_type) $agencyList->whereIn('maintenance_type', $request->work_type);
             if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
             if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
@@ -584,11 +576,7 @@ class AgencyController extends Controller
             ->whereHas('Car', function ($query)use ($request) {
                 return $query->where('cars.CarModel_id',$request->car_model_id);
             });
-            /* if($request->year){
-                $agencyList->whereHas('Car', function ($query)use ($request) {
-                    return $query->where('car_years.year',$request->year);
-                });
-            } */
+
             if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
             if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
             if($request->year){
