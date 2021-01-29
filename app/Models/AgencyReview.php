@@ -15,7 +15,8 @@ class AgencyReview extends Model
         'review',
         'agency_id',
         'user_id',
+        'active'
     ];
 
-    
+
 }

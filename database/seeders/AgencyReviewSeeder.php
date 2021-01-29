@@ -23,6 +23,7 @@ class AgencyReviewSeeder extends Seeder
                 'rate'              => $faker->randomElement(['1', '2', '3', '4', '5']),
                 'price'             => $faker->randomElement(['1', '2', '3']),
                 'review'            => $faker->text,
+                'active'            => $faker->boolean,
                 'agency_id'         => Agency::all()->random()->id,
                 'user_id'           => User::all()->random()->id,
                 'created_at'        => now(),
