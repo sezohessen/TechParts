@@ -460,27 +460,37 @@ class AgencyController extends Controller
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
-    public function Filter(Request $request)
+    public function agencyFilter(Request $request)
     {
         $this->lang($request);
         $validator = $this->FilterValidate($request);
-
-        if (1) {
-            $carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
-            $center_type    = $request->work_type == 'agency' ? Agency::center_type_Agency : (($request->work_type == 'maintenance') ? Agency::center_type_Maintenance : Agency::center_type_Spare);
+        if (!$validator->fails()) {
+           //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
             $agencyList     = Agency::where('country_id', $request->interest_country)
-                ->where('active', 1)
-                ->where('car_status', $carStatus);
-            /*->whereHas('carMakers', function ($query) use ($request) {
+            ->where('active', 1)
+            ->where('center_type', Agency::center_type_Agency)
+            ->where('car_status', $request->car_state)
+            ->whereHas('carMakers', function ($query) use ($request) {
                 return $query->where('agency_car_makers.CarMaker_id',$request->car_maker_id);
             })
             ->whereHas('Car', function ($query)use ($request) {
                 return $query->where('cars.CarModel_id',$request->car_model_id);
-            }); */
-            if ($request->work_type) $agencyList->where('center_type', $center_type);
-            if ($request->badge_ids) $agencyList->whereIn('status', [$request->badge_ids]);
-            if ($request->payment_methods) $agencyList->whereIn('payment_method', [$request->payment_methods]);
-
+            });
+            /* if($request->year){
+                $agencyList->whereHas('Car', function ($query)use ($request) {
+                    return $query->where('car_years.year',$request->year);
+                });
+            } */
+            if($request->work_type) $agencyList->whereIn('agency_type', $request->work_type);
+            if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
+            if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
+            if($request->year){
+                $agencyList->whereHas('Car', function ($query)use ($request) {
+                    $query->whereHas('year', function ($query)use ($request) {
+                        return $query->where('car_years.year',$request->year);
+                    });
+                });
+            }
             /* if($request->sort_rate =='high'){
                 $agencyList->whereHas('reviews', function ($query) use ($request) {
                     $query->selectRaw('SUM(rate)/COUNT(agency_id) AS avg_rating');
@@ -495,14 +505,118 @@ class AgencyController extends Controller
                     [$request->sort_near_by_lat, $request->sort_near_by_lng]
                 ), 'desc');
             } */
-            if (!$agencyList->count()) {
+            if (!$agencyList->get()->count()) {
                 return $this->errorMessage("No centers found");
             }
-            $agencies = [];
-            foreach ($agencyList->get() as $agency) {
-                $agencies[]     = $this->AgencyData($agency, $workType = false, $specializationList = false, $badgesList = false, $description = false, $paymentMethodList = false, $centerType = true);
+            $data   = new AgencySearchCollection($agencyList->paginate(10));
+            return $data;
+        } else {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
+        }
+    }
+    public function maintenanceFilter(Request $request)
+    {
+        $this->lang($request);
+        $validator = $this->FilterValidate($request);
+        if (!$validator->fails()) {
+           //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+            ->where('active', 1)
+            ->where('center_type', Agency::center_type_Maintenance)
+            ->where('car_status', $request->car_state)
+            ->whereHas('carMakers', function ($query) use ($request) {
+                return $query->where('agency_car_makers.CarMaker_id',$request->car_maker_id);
+            })
+            ->whereHas('Car', function ($query)use ($request) {
+                return $query->where('cars.CarModel_id',$request->car_model_id);
+            });
+            /* if($request->year){
+                $agencyList->whereHas('Car', function ($query)use ($request) {
+                    return $query->where('car_years.year',$request->year);
+                });
+            } */
+            if($request->work_type) $agencyList->whereIn('maintenance_type', $request->work_type);
+            if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
+            if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
+            if($request->year){
+                $agencyList->whereHas('Car', function ($query)use ($request) {
+                    $query->whereHas('year', function ($query)use ($request) {
+                        return $query->where('car_years.year',$request->year);
+                    });
+                });
             }
-            return $this->returnData("centerList", $agencies, "Successfully");
+            /* if($request->sort_rate =='high'){
+                $agencyList->whereHas('reviews', function ($query) use ($request) {
+                    $query->selectRaw('SUM(rate)/COUNT(agency_id) AS avg_rating');
+                });
+            }elseif($request->sort_rate =='low'){
+
+            } */
+            if ($request->sort_added == 'recent') $agencyList->orderBy('created_at', 'desc');
+            /* if (isset($request->sort_near_by_lat) && isset($request->sort_near_by_lng)) { //Filter by location
+                $agencyList->orderBy(DB::raw(
+                    'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point(?, ?))',
+                    [$request->sort_near_by_lat, $request->sort_near_by_lng]
+                ), 'desc');
+            } */
+            if (!$agencyList->get()->count()) {
+                return $this->errorMessage("No centers found");
+            }
+            $data   = new AgencyHomeCollection($agencyList->paginate(10));
+            return $data;
+        } else {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
+        }
+    }
+    public function spareFilter(Request $request)
+    {
+        $this->lang($request);
+        $validator = $this->FilterValidate($request);
+        if (!$validator->fails()) {
+           //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
+            $agencyList     = Agency::where('country_id', $request->interest_country)
+            ->where('active', 1)
+            ->where('center_type', Agency::center_type_Spare)
+            ->where('car_status', $request->car_state)
+            ->whereHas('carMakers', function ($query) use ($request) {
+                return $query->where('agency_car_makers.CarMaker_id',$request->car_maker_id);
+            })
+            ->whereHas('Car', function ($query)use ($request) {
+                return $query->where('cars.CarModel_id',$request->car_model_id);
+            });
+            /* if($request->year){
+                $agencyList->whereHas('Car', function ($query)use ($request) {
+                    return $query->where('car_years.year',$request->year);
+                });
+            } */
+            if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
+            if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
+            if($request->year){
+                $agencyList->whereHas('Car', function ($query)use ($request) {
+                    $query->whereHas('year', function ($query)use ($request) {
+                        return $query->where('car_years.year',$request->year);
+                    });
+                });
+            }
+            /* if($request->sort_rate =='high'){
+                $agencyList->whereHas('reviews', function ($query) use ($request) {
+                    $query->selectRaw('SUM(rate)/COUNT(agency_id) AS avg_rating');
+                });
+            }elseif($request->sort_rate =='low'){
+
+            } */
+            if ($request->sort_added == 'recent') $agencyList->orderBy('created_at', 'desc');
+            /* if (isset($request->sort_near_by_lat) && isset($request->sort_near_by_lng)) { //Filter by location
+                $agencyList->orderBy(DB::raw(
+                    'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point(?, ?))',
+                    [$request->sort_near_by_lat, $request->sort_near_by_lng]
+                ), 'desc');
+            } */
+            if (!$agencyList->get()->count()) {
+                return $this->errorMessage("No centers found");
+            }
+            $data   = new AgencyHomeCollection($agencyList->paginate(10));
+            return $data;
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -755,23 +869,22 @@ class AgencyController extends Controller
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'interest_country'      => 'required|integer',
-
-            'car_state'             => 'required|in:new,used',
+            //'car_state'             => 'required|in:new,used',
+            'car_state'             => 'required|in:0,1',
             'car_maker_id'          => 'required|integer',
-            'car_model_id'          => 'required|integer',
             'car_model_id'          => 'required|integer',
             'year'                  => 'nullable|integer',
             'badge_ids'             => 'nullable|array|max:3',
             "badge_ids.*"           => "nullable|integer|distinct|in:0,1,2",
-            'work_type'             => 'nullable|in:agency,maintenance,spare',
+            'work_type'             => 'nullable|array|max:3',
+            "work_type.*"           => "nullable|integer|distinct|in:1,2",
             'payment_methods'       => 'nullable|array|max:3',
-            'payment_methods.*'     => 'nullable|string|distinct|in:cash,installment,financing',
+            'payment_methods.*'     => 'nullable|integer|distinct|in:0,1,2',
             'sort_added'            => 'nullable|in:recent,trending',
             'sort_rate'             => 'nullable|in:high,low',
             'sort_price'            => 'nullable|in:high,low',
             'sort_near_by_lat'      => 'nullable|string',
             'sort_near_by_lng'      => 'nullable|string',
-
         ]);
         return $validator;
     }

@@ -17,6 +17,7 @@ class AgencyCar extends Model
     {
         return $this->belongsTo(Car::class,'car_id','id');
     }
+    
     public static function rules($request)
     {
         $rules = [

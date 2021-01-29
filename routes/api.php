@@ -106,9 +106,11 @@ Route::group(['prefix' => 'centers','namespace'=>'api'], function () {
     });
     Route::group(['prefix' => 'list'], function () {
         Route::post("agency/search",'AgencyController@agencySearch');
-        Route::post("agency/filter",'AgencyController@Filter');
+        Route::post("agency/filter",'AgencyController@agencyFilter');
         Route::post("maintenance/search",'AgencyController@maintenanceSearch');
+        Route::post("maintenance/filter",'AgencyController@maintenanceFilter');
         Route::post("spare/search",'AgencyController@spareSearch');
+        Route::post("spare/filter",'AgencyController@spareFilter');
     });
 });
 Route::group(['prefix' => 'auth','namespace'=>'api'], function () {

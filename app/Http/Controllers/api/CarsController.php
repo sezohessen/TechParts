@@ -263,8 +263,6 @@ class CarsController extends Controller
                         $car->where("cars.id",'!=',$item->id);
                     }
                 }
-
-
             }
 
             if($request->has('sort_added') &&  $request->sort_added=='recent' ){
