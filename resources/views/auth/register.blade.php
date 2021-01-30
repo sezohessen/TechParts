@@ -78,12 +78,12 @@
                         <!--end::Form group-->
                         <div class="form-group">
                             @php
-                                $countries = \App\Models\Country::all();
+                                $countries = \App\Models\Country::where('active',1);
                             @endphp
                             <select class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
                                  id="country_id" name="country_id" required>
                                 <option value="">@lang('--Select country first--')</option>
-                                @foreach ($countries as $country)
+                                @foreach ($countries->get() as $country)
                                     <option value="{{$country->id}}" {{ old('country_id') == $country->id ? 'selected' : '' }}>
                                     {{$country->code}} {{ $country->country_phone }}
                                     </option>

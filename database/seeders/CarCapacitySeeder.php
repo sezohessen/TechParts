@@ -6,6 +6,7 @@ use App\Models\CarModel;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class CarCapacitySeeder extends Seeder
 {
     /**
@@ -16,9 +17,9 @@ class CarCapacitySeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('car_capacities')->insert([
-                'capacity'       => $faker->numberBetween(100,1000),
+                'capacity'       => $faker->numberBetween(100, 1000),
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

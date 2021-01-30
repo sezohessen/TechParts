@@ -60,8 +60,9 @@ class User extends Authenticatable
     ];
 
 
-    public static function rules($api=null,$edit_profile=null)
+    public static function rules($api=null,$edit_profile=null,$email_not_unique=null)
     {
+
         $rules = [
             'image'             => 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240',
             'first_name'        => 'required|string|max:255',
@@ -74,12 +75,13 @@ class User extends Authenticatable
            $rules['agree'] = 'required';
            $rules['country_id'] = 'required|integer';
         }else {
-            $rules['image'] = 'nullable|string';
+
+            $rules['image'] = 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240';
             $rules['country_code'] = 'required|string';
             $rules['country_number'] = 'required|string';
         }
         if ($edit_profile) {
-           $rules['email'] = 'required|string|email|max:255|unique:users,email,'.$edit_profile;
+           $rules['email'] = 'required|string|max:255|unique:users,email,'.$edit_profile;
            //$rules['phone'] = 'required|string|max:255|unique:users,phone,'.$edit_profile;
         }else {
             $rules['email'] = 'required|string|email|max:255|unique:users';
@@ -100,8 +102,8 @@ class User extends Authenticatable
             $credentials['phone'] = $request->phone;
         }
         if (!$api) {
-            if(property_exists($request, 'file') ){
-                $Image_id = self::file($request->file('Image'));
+            if(!empty($request->file('image_id'))){
+                $Image_id = self::file($request->file('image_id'));
                 $credentials['image_id'] = $Image_id;
 
             }

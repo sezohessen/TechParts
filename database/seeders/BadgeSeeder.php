@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class BadgeSeeder extends Seeder
 {
     /**
@@ -15,7 +16,7 @@ class BadgeSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('badges')->insert([
                 'name'          => $faker->name,
                 'name_ar'       => $faker->name,

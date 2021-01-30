@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -15,7 +16,7 @@ class ContactUsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('contact_us')->insert([
                 'message'           =>  $faker->sentence,
                 'email'             =>  $faker->email,

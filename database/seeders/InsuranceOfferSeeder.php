@@ -18,7 +18,7 @@ class InsuranceOfferSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('insurance_offers')->insert([
                 'title'               => $faker->name,
                 'title_ar'            => $faker->name,

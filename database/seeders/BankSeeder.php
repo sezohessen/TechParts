@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class BankSeeder extends Seeder
 {
     /**
@@ -18,12 +19,12 @@ class BankSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
-            $bank = DB::table('banks')->insertGetId([//I need id table to insert it into bank contact table
+        for ($i = 0; $i < 20; $i++) {
+            $bank = DB::table('banks')->insertGetId([ //I need id table to insert it into bank contact table
                 'name'                  => $faker->company,
-                'status'                => $faker->randomElement(['Approved','Canceled','Pending']),
+                'status'                => $faker->randomElement(['Approved', 'Canceled', 'Pending']),
                 'color'                 => $faker->hexColor,
-                'order'                 => $faker->numberBetween(1,100),
+                'order'                 => $faker->numberBetween(1, 100),
                 'show_finance_services' => $faker->boolean,
                 'logo_id'               => Image::all()->random()->id,
                 'user_id'               => User::all()->random()->id,
