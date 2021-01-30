@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 namespace App\Http\Controllers\api;
 
-use App\Models\Car;
 use App\Models\Faq;
 use App\Models\City;
 use App\Models\Agency;
@@ -16,11 +15,9 @@ use App\Models\Governorate;
 use App\Models\AgencyReview;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
-use App\Classes\Responseobject;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CarYearResource;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Response;
 use App\Http\Resources\CarMakerCollection;
 use App\Http\Resources\CarModelCollection;
 use App\Http\Resources\CarCapacityResource;
@@ -30,23 +27,8 @@ use Illuminate\Support\Facades\Validator as Validator;
 class dynamicController extends Controller
 {
     use GeneralTrait;
-    public function Validator($request, $rules, $niceNames = [])
-    {
-        $this->lang($request);
-        return Validator::make($request->all(), $rules, [], $niceNames);
-    }
-    public function failed($validator)
-    {
-        $response   = new Responseobject();
-        $response->status = $response::status_failed;
-        $response->code = $response::code_failed;
-        foreach ($validator->errors()->getMessages() as $item) {
-            array_push($response->msg, $item);
-        }
-        return Response::json(
-            $response
-        );
-    }
+
+
     public function faq(Request $request)
     {
         $this->lang($request);
@@ -129,10 +111,7 @@ class dynamicController extends Controller
         $data           = new CityCollection($cityList->paginate(10));
         return $data;
     }
-    public function lang($request)
-    {
-        $this->lang($request->lang);
-    }
+
     public function rate($agency)
     {
         // Rate Row

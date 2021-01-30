@@ -11,9 +11,7 @@ use App\Models\offer_plan;
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator as Validator;
-use App\Classes\Responseobject;
 
 class InsuranceCompanyController extends Controller
 {
@@ -21,10 +19,7 @@ class InsuranceCompanyController extends Controller
     public function show(Request $request)
     {
         $this->lang($request->lang);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
+        $validator  = Validator::make((array) $request->all(), [
             'interest_country'  => 'required|integer', //Will be updated
 
         ]);
@@ -48,10 +43,7 @@ class InsuranceCompanyController extends Controller
     public function offer(Request $request)
     {
         $this->lang($request->lang);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
+        $validator  = Validator::make((array) $request->all(), [
             'interest_country'  => 'required|integer', //Will be updated
             'company_id'        => 'required|integer',
 
@@ -73,7 +65,7 @@ class InsuranceCompanyController extends Controller
                     $insurance  = [
                         "color"     => '#000000', //Will be updated
                         "id"        => $InsuranceCompany->id,
-                        "logo"      => $InsuranceCompany->img->name,
+                        "logo"      => find_image($InsuranceCompany->img->name),
                         "name"      => Session::get('app_locale') == 'ar' ? $InsuranceCompany->name_ar : $InsuranceCompany->name,
                     ];
                     /* Insurance Offers's plans */
@@ -91,7 +83,7 @@ class InsuranceCompanyController extends Controller
                     $insurances[] = [
                         "description"   => Session::get('app_locale') == 'ar' ? $offer->description_ar : $offer->description,
                         "id"            => $offer->id,
-                        "photo"         => $offer->img->name,
+                        "photo"         => find_image($offer->img->name),
                         "title"         => Session::get('app_locale') == 'ar' ? $offer->title_ar : $offer->title,
                         "mCompany"      => $insurance,
                         "mContact"      => $mContact,
@@ -109,10 +101,7 @@ class InsuranceCompanyController extends Controller
     public function askHelp(Request $request)
     {
         $this->lang($request->lang);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
+        $validator  = Validator::make((array) $request->all(), [
             'message'           => 'required|min:3|max:1000',
             'name'              => 'required',
             'email'             => 'required|email',
@@ -133,7 +122,7 @@ class InsuranceCompanyController extends Controller
                 'email'         => $request->email,
                 'phone'         => $request->phone,
             ]);
-            if ($country) {
+            if (@$country) {
                 $ContactUs->country_phone = $country->country_phone;
                 $ContactUs->save();
             }

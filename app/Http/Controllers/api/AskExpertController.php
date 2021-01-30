@@ -10,7 +10,7 @@ use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as Validator;
-use App\Classes\Responseobject;
+
 
 class AskExpertController extends Controller
 {
@@ -19,7 +19,6 @@ class AskExpertController extends Controller
     {
         $this->lang($request->lang);
         $data       = $request->all();
-        $response   = new Responseobject();
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'question'       => 'required|min:3|max:1000',

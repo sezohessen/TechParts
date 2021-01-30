@@ -10,14 +10,14 @@ use App\Models\AgencyReview;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\UserFavAgency;
-use App\Classes\Responseobject;
+
 use App\Classes\DataType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AgencyHomeCollection;
 use App\Http\Resources\AgencySearchCollection;
 use App\Http\Resources\CarCollection;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Response;
+
 use Illuminate\Support\Facades\Validator as Validator;
 
 class AgencyController extends Controller
@@ -26,10 +26,7 @@ class AgencyController extends Controller
     public function review(Request $request)
     {
         $this->lang($request);
-        $data       = $request->all();
-
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
+        $validator  = Validator::make((array) $request->all(), [
             'rate'          => 'required|in:1,2,3,4,5',
             'price_type'    => 'required|in:1,2,3',
             'comment'       => 'required|min:3|max:1000',
@@ -711,39 +708,8 @@ class AgencyController extends Controller
         }
         return $specializationList;
     }
-    public function lang($request)
-    {
-        $this->lang($request->lang);
-    }
 
-    public function failed($validator)
-    {
-        $response   = new Responseobject();
-        $response->status = $response::status_failed;
-        $response->code = $response::code_failed;
-        foreach ($validator->errors()->getMessages() as $item) {
-            array_push($response->msg, $item);
-        }
-        return Response::json(
-            $response
-        );
-    }
-    public function Validator($request, $rules, $niceNames = [])
-    {
-        $this->lang($request);
-        return Validator::make($request->all(), $rules, [], $niceNames);
-    }
-    public function ValidatorErrors($validator)
-    {
-        $response           = new Responseobject();       # $response->status   = $response::status_failed;
-        $response->code     = $response::code_failed;
-        foreach ($validator->errors()->getMessages() as $item) {
-            array_push($response->msg, $item);
-        }
-        return Response::json(
-            $response
-        );
-    }
+
     public function AgencyData(
         $agency,
         $workType = 1,
@@ -803,10 +769,7 @@ class AgencyController extends Controller
     }
     public function Details($request)
     {
-        $data       = $request->all();
-
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
+        $validator  = Validator::make((array) $request->all(), [
             'center_id'         => 'required|integer',
 
         ]);
@@ -814,10 +777,7 @@ class AgencyController extends Controller
     }
     public function home($request)
     {
-        $data       = $request->all();
-
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
+        $validator  = Validator::make((array) $request->all(), [
             'interest_country'  => 'required|integer',
 
         ]);
@@ -844,10 +804,7 @@ class AgencyController extends Controller
     }
     public function FilterValidate($request)
     {
-        $data       = $request->all();
-
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
+        $validator  = Validator::make((array) $request->all(), [
             'interest_country'      => 'required|integer',
             //'car_state'             => 'required|in:new,used',
             'car_state'             => 'required|in:0,1',

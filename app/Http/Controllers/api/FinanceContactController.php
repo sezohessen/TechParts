@@ -6,11 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
 use App\Models\Country;
 use App\Traits\GeneralTrait;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator as Validator;
-use App\Classes\Responseobject;
 
 class FinanceContactController extends Controller
 {
@@ -18,10 +15,7 @@ class FinanceContactController extends Controller
     public function create(Request $request)
     {
         $this->lang($request->lang);
-        $data       = $request->all();
-        $response   = new Responseobject();
-        $array_data = (array)$data;
-        $validator  = Validator::make($array_data, [
+        $validator  = Validator::make((array) $request->all(), [
             'message'           => 'required|min:3|max:1000',
             'name'              => 'required',
             'email'             => 'required|email',
@@ -41,7 +35,7 @@ class FinanceContactController extends Controller
                 'email'         => $request->email,
                 'phone'         => $request->phone,
             ]);
-            if ($country) {
+            if (@$country) {
                 $ContactUs->country_phone = $country->country_phone;
                 $ContactUs->save();
             }

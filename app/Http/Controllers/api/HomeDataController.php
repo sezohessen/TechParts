@@ -4,11 +4,11 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CarResource;
-use Illuminate\Support\Facades\Response;
+
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator as Validator;
-use App\Classes\Responseobject;
+
 use App\Classes\DataType;
 use App\Models\Agency;
 use App\Models\AgencyCar;
@@ -234,10 +234,7 @@ class HomeDataController extends Controller
         ];
         return $this->returnData("", $getlist, __("Successfully"));
     }
-    public function lang($request)
-    {
-        $this->lang($request->lang);
-    }
+
     public function isFav($agency)
     {
         // Favorite Row

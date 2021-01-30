@@ -2,6 +2,7 @@
 namespace  App\Traits;
 
 use App\Classes\Responseobject;
+use Illuminate\Support\Facades\Response;
 
 trait GeneralTrait {
     public function lang($lang)
@@ -25,6 +26,7 @@ trait GeneralTrait {
         foreach ($validator->errors()->getMessages() as $item) {
             array_push($response->msg, $item);
         }
+
         return Response::json(
             $response
         );
@@ -134,6 +136,12 @@ trait GeneralTrait {
 
     public function returnValidationError($validator){
         return $this->returnError($validator->errors()->first());
+    }
+
+    public function Validator($request, $rules, $niceNames = [])
+    {
+        $this->lang($request);
+        return Validator::make($request->all(), $rules, [], $niceNames);
     }
 
 }

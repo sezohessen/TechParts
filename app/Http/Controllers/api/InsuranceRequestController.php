@@ -7,9 +7,9 @@ use App\Models\Finance_request;
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
+
 use Illuminate\Support\Facades\Validator as Validator;
-use App\Classes\Responseobject;
+
 
 class InsuranceRequestController extends Controller
 {
@@ -19,11 +19,9 @@ class InsuranceRequestController extends Controller
     {
         $this->lang($request->lang);
         $data       = $request->all();
-        $response   = new Responseobject();
         $array_data = (array)$data;
         $validator  = Validator::make($array_data, [
             'interest_country'              => 'required|integer', //Will be updated
-
             'car_id'                        => 'required|integer',
             'car_modelId'                   => 'required|integer',
             'car_makerId'                   => 'required|integer',
