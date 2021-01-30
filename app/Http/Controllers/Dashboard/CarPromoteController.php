@@ -55,7 +55,7 @@ class CarPromoteController extends Controller
         $request->validate($rules);
         $credentials = PromoteCar::credentials($request);
         PromoteCar::create($credentials);
-        session()->flash('created',__("Changes has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created successfully"));
         return redirect()->route("dashboard.promote.index");
 
     }

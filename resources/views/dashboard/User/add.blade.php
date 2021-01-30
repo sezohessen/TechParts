@@ -53,15 +53,13 @@
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">
-                @php
-                    $countries = \App\Models\Country::all();
-                @endphp
+
                 <select class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
                      id="country_id" name="country_id" required>
                     <option value="">@lang('--Select country--')</option>
-                    @foreach ($countries as $country)
+                    @foreach ($countries->get() as $country)
                         <option value="{{$country->id}}" {{ old('country_id') == $country->id ? 'selected' : '' }}>
-                        {{$country->code}} {{ $country->country_phone }}
+                            {{$country->code}} {{ $country->country_phone }}
                         </option>
                     @endforeach
                 </select>
@@ -88,7 +86,14 @@
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">
-                <input id="password" type="password" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
+                <input id="password" type="password"  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
+                <label class="checkbox mt-5">
+                    <input type="checkbox" onclick="myFunction()"/>
+                    <span></span>
+                    <div class="ml-2">
+                        @lang('Show Password')
+                    </div>
+                </label>
                 @error('password')
                     <div class="fv-plugins-message-container">
                         <div class="fv-help-block">
@@ -96,7 +101,9 @@
                         </div>
                     </div>
                 @enderror
+
             </div>
+
             <!--end::Form group-->
             <div class="form-group">
 
@@ -128,6 +135,7 @@
                     </div>
                 @enderror
             </div>
+            <input type="hidden" name="agree" value="on" />
             <!--end::Form group-->
 
             </div>
@@ -140,5 +148,15 @@
 
 @endsection
 
-
-
+@section('scripts')
+<script>
+    function myFunction() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>
+@endsection

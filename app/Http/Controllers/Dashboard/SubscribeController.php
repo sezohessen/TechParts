@@ -45,7 +45,7 @@ class SubscribeController extends Controller
         $request->validate($rules);
         $credentials = subscribe_package::credentials($request);
          subscribe_package::create($credentials);
-        session()->flash('created',__("Changes has been Created successfully!"));
+        session()->flash('created',__("Changes has been Created successfully"));
         return redirect()->route("dashboard.subscribe_packages.index");
     }
 

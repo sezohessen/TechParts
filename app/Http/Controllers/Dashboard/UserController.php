@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\User;
+use App\Models\Country;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\DataTables\UserDatatable;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+
 class UserController extends Controller
 {
     /**
@@ -27,9 +31,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        $page_title = "Add User";
-        $page_description = "Add new User";
-        return view('dashboard.User.add', compact('page_title', 'page_description'));
+        $page_title = __("Add User");
+        $page_description = __("Add new User");
+        $countries =Country::where('active',1);
+        return view('dashboard.User.add', compact('page_title', 'page_description','countries'));
     }
 
     /**
@@ -38,9 +43,29 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        dd($request->all());
+
+        $rules = User::rules();
+        $request->validate($rules);
+        $credentials = User::credentials($request);
+        if (isset($request->provider)) {
+            if ($request->provider == 'insurance') {
+                $provider = 'insurance';
+            }elseif ($request->provider == 'agency') {
+                $provider = 'agency';
+            }else {
+                $provider = 'user';
+            }
+            unset($request->provider);
+        }else {
+            $provider = 'user';
+        }
+        $user = User::create($credentials);
+        $user->attachRole($provider) ;
+        session()->flash('created',__("Changes has been Created successfully"));
+        return redirect()->route("dashboard.users.index");
     }
 
     /**
@@ -60,9 +85,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $users)
+    public function edit(User $user)
     {
-        //
+
+        $page_title = __("Add User");
+        $page_description = __("Add new User");
+        $countries =Country::where('active',1);
+        $selected =Country::where('active',1)->where('code',$user->country_code)->first();
+        if($selected->count()){
+            $selected=$selected->id;
+        }
+        if($user->hasRole('insurance')) {
+            $provider = 'insurance';
+        }elseif($user->hasRole('agency')){
+            $provider = 'agency';
+        }elseif($user->hasRole('bank')){
+            $provider = 'bank';
+        }else {
+            $provider = 'user';
+        }
+
+        return view('dashboard.User.edit', compact('page_title', 'page_description','countries','provider','user','selected'));
     }
 
     /**
@@ -72,9 +115,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $rules =User::rules(null, $user->id);
+        $request->validate($rules);
+
+        if (isset($request->provider)) {
+            if ($request->provider == 'insurance') {
+                $provider = 'insurance';
+            }elseif ($request->provider == 'agency') {
+                $provider = 'agency';
+            }else {
+                $provider = 'user';
+            }
+            unset($request->provider);
+        }else {
+            $provider = 'user';
+        }
+        $user->update(User::credentials($request, null,$user->id));
+        //$user->attachRole($provider) ;
+        session()->flash('updated',__("Changes has been Updated successfully"));
+        return redirect()->route("dashboard.users.index");
     }
 
     /**
