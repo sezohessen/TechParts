@@ -168,6 +168,7 @@ return [
         App\Providers\MetronicServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -234,8 +235,10 @@ return [
         // Metronic Aliases
         'Metronic' => App\Classes\Theme\Metronic::class,
         'Menu' => App\Classes\Theme\Menu::class,
-        "PDF"     => Barryvdh\Snappy\Facades\SnappyPdf::class,
-        "Image"   => Barryvdh\Snappy\Facades\SnappyImage::class,
+      //  "PDF"     => Barryvdh\Snappy\Facades\SnappyPdf::class,
+       // "Image"   => Barryvdh\Snappy\Facades\SnappyImage::class,
+       'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+       'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];
