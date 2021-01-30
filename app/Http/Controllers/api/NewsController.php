@@ -70,4 +70,17 @@ class NewsController extends Controller
         /* $Trendingdata   = new NewsDetailCollection($news->paginate(10)); */
         return $data;
     }
+    public function category()
+    {
+        $categroyLists  = Category::where('active',1)->get();
+        $categories     = [];
+        foreach ($categroyLists as $categroyList) {
+            $categories[]   =[
+                "id"        => $categroyList->id,
+                "title_en"  => $categroyList->name,
+                "title_ar"  => $categroyList->name_ar,
+            ];
+        }
+        return $this->returnData("listMain", $categories, "Successfully");
+    }
 }

@@ -597,5 +597,6 @@
     "No data found":"لا يوجد بيانات",
     "Edit Car":"تعديل السيارة",
     "Select Car Model First":"اختر موديل السيارة أولا",
-    "Agency Reviews":"مراجعات الوكالة"
+    "Agency Reviews":"مراجعات الوكالة",
+    "No such car id":"لا يوجد معرف هذه السيارة"
 }

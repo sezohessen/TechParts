@@ -61,7 +61,15 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
 
 
 });
-
+Route::group(['prefix' => 'data','namespace'=>'api'], function () {
+    Route::group(['prefix' => 'static'], function () {
+        Route::get("news_category",'NewsController@category');
+        Route::get("car_body_style",'CarsController@carBody');
+        Route::get("car_extra_feature",'CarsController@carFeature');
+        Route::get("car_badge",'CarsController@carBadge');
+        Route::post("color_pallet",'CarsController@carColors');
+    });
+});
 Route::group(['prefix' => 'finance','namespace'=>'api'], function () {
     Route::post("filter",'BankController@filter');
     Route::post("home",'BankController@home');
