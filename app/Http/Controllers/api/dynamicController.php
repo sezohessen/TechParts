@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 namespace App\Http\Controllers\api;
+
 use App\Models\Car;
 use App\Models\Faq;
 use App\Models\City;
@@ -32,7 +33,7 @@ class dynamicController extends Controller
     public function Validator($request, $rules, $niceNames = [])
     {
         $this->lang($request);
-        return Validator::make($request->all(),$rules,[],$niceNames);
+        return Validator::make($request->all(), $rules, [], $niceNames);
     }
     public function failed($validator)
     {
@@ -124,21 +125,13 @@ class dynamicController extends Controller
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
         $cityList     = City::where('active', 1)
-        ->where('governorate_id',$request->government_id);
+            ->where('governorate_id', $request->government_id);
         $data           = new CityCollection($cityList->paginate(10));
         return $data;
     }
     public function lang($request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
     }
     public function rate($agency)
     {
@@ -152,22 +145,22 @@ class dynamicController extends Controller
     public function maker(Request $request)
     {
         $this->lang($request);
-        $data=new CarMakerCollection(CarMaker::where("active",1)->paginate(10));
-        if(!$data->count())
+        $data = new CarMakerCollection(CarMaker::where("active", 1)->paginate(10));
+        if (!$data->count())
             return $this->errorMessage("No data found");
         return $data;
     }
     public function model(Request $request)
     {
         $this->lang($request);
-        if($request->has("car_maker")){
-            $data=new CarModelCollection(CarModel::where("active",1)->where("CarMaker_id",$request->car_maker)->paginate(10));
-            if(!$data->count())
+        if ($request->has("car_maker")) {
+            $data = new CarModelCollection(CarModel::where("active", 1)->where("CarMaker_id", $request->car_maker)->paginate(10));
+            if (!$data->count())
                 return $this->errorMessage("No data found");
             return $data;
         }
-        $data=new CarModelCollection(CarModel::where("active",1)->paginate(10));
-        if(!$data->count())
+        $data = new CarModelCollection(CarModel::where("active", 1)->paginate(10));
+        if (!$data->count())
             return $this->errorMessage("No data found");
         return $data;
     }
@@ -177,56 +170,61 @@ class dynamicController extends Controller
             "word"            => 'required|string',
         ]);
         if (!$validator->fails()) {
-            $data=new CarMakerCollection(
-                CarMaker::where("active",1)
-                ->Where('name', 'LIKE', '%'.$request->word.'%')
-                ->paginate(10));
-            if(!$data->count())
+            $data = new CarMakerCollection(
+                CarMaker::where("active", 1)
+                    ->Where('name', 'LIKE', '%' . $request->word . '%')
+                    ->paginate(10)
+            );
+            if (!$data->count())
                 return $this->errorMessage("No data found");
             return $data;
         } else {
             return $this->failed($validator);
         }
     }
-    public function motor(Request $request){
+    public function motor(Request $request)
+    {
         $this->lang($request);
-        $data=CarCapacityResource::collection(CarCapacity::paginate(10));
-        if(!$data->count())
+        $data = CarCapacityResource::collection(CarCapacity::paginate(10));
+        if (!$data->count())
             return $this->errorMessage("No data found");
-        return $this->returnData("listMain",$data,"Successfully");
+        return $this->returnData("listMain", $data, "Successfully");
     }
-    public function year(Request $request){
-        $validator=$this->Validator($request,[
+    public function year(Request $request)
+    {
+        $validator = $this->Validator($request, [
             "car_model"       => 'required|integer',
         ]);
         if (!$validator->fails()) {
 
-            $data=CarYearResource::collection(CarYear::where('CarModel_id',$request->car_model)->get());
-            if(!$data->count())
+            $data = CarYearResource::collection(CarYear::where('CarModel_id', $request->car_model)->get());
+            if (!$data->count())
                 return $this->errorMessage("No data found");
-            return $this->returnData("yearList",$data,"Successfully");
-        }else {
+            return $this->returnData("yearList", $data, "Successfully");
+        } else {
             return $this->failed($validator);
         }
     }
-    public function model_search(Request $request){
-        $validator=$this->Validator($request,[
+    public function model_search(Request $request)
+    {
+        $validator = $this->Validator($request, [
             "word"            => 'required|string',
             "car_maker"       => 'required|integer',
         ]);
         if (!$validator->fails()) {
             $data = new CarModelCollection(
                 CarModel::where(function ($query) use ($request) {
-                        return $query->where('active', 1)
-                            ->Where('name', 'LIKE',  '%' . $request->word . '%');
-                    })
-
-                ->orWhere( function($query)use($request) {
                     return $query->where('active', 1)
-                        ->Where('CarMaker_id', $request->car_maker);
+                        ->Where('name', 'LIKE',  '%' . $request->word . '%');
                 })
-                ->paginate(10));
-            if(!$data->count())
+
+                    ->orWhere(function ($query) use ($request) {
+                        return $query->where('active', 1)
+                            ->Where('CarMaker_id', $request->car_maker);
+                    })
+                    ->paginate(10)
+            );
+            if (!$data->count())
                 return $this->errorMessage("No data found");
             return $data;
         } else {

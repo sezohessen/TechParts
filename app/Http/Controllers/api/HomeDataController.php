@@ -236,15 +236,7 @@ class HomeDataController extends Controller
     }
     public function lang($request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
     }
     public function isFav($agency)
     {

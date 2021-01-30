@@ -1,6 +1,34 @@
 <?php
 namespace  App\Traits;
+
+use App\Classes\Responseobject;
+
 trait GeneralTrait {
+    public function lang($lang)
+    {
+        if ($locale = $lang) {
+            if (in_array($locale, ['ar', 'en']) ) {
+                default_lang($locale);
+            }else {
+                default_lang();
+            }
+        }else {
+            default_lang();
+        }
+        return true;
+    }
+    public function failed($validator)
+    {
+        $response   = new Responseobject();
+        $response->status = $response::status_failed;
+        $response->code = $response::code_failed;
+        foreach ($validator->errors()->getMessages() as $item) {
+            array_push($response->msg, $item);
+        }
+        return Response::json(
+            $response
+        );
+    }
     public function returnError($msg){
         return response()->json([
             'status'=>false,

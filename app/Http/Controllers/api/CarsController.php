@@ -29,7 +29,6 @@ use App\Models\ListCarUser;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\CarManufacture;
-use App\Classes\Responseobject;
 use App\Classes\DataType;
 use function PHPSTORM_META\type;
 use App\Models\subscribe_package;
@@ -51,31 +50,7 @@ class CarsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function lang($lang)
-    {
-        if ($locale = $lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
-                default_lang($locale);
-            }else {
-                default_lang();
-            }
-        }else {
-            default_lang();
-        }
-        return true;
-    }
-    public function failed($validator)
-    {
-        $response   = new Responseobject();
-        $response->status = $response::status_failed;
-        $response->code = $response::code_failed;
-        foreach ($validator->errors()->getMessages() as $item) {
-            array_push($response->msg, $item);
-        }
-        return Response::json(
-            $response
-        );
-    }
+
     public function Validator($request,$rules,$niceNames=[])
     {
         $this->lang( $request->lang);
@@ -645,7 +620,7 @@ class CarsController extends Controller
             else {
                 return $this->errorMessage('Car Maker not found');
             }
-  
+
 
             if(!CarManufacture::find($request->carManufacturing)){
                 return $this->errorMessage('Manufacturing not found');

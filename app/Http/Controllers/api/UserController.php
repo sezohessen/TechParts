@@ -18,15 +18,7 @@ class UserController extends Controller
     //
     public function login(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         if (!$request->phone) {
             return $this->errorField('phone');
         }
@@ -58,15 +50,7 @@ class UserController extends Controller
     }
     public function check_phone(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         if (!$request->phone) {
             return $this->errorField('phone');
         }
@@ -80,15 +64,7 @@ class UserController extends Controller
     }
     public function update_interested_country(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $validator  = Validator::make((array) $request->all(), ['interest_country' => 'required|integer']);
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
@@ -100,15 +76,7 @@ class UserController extends Controller
     }
     public function forgetPassword(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $this->validateEmail($request);
 
         // We will send the password reset link to this user. Once we have attempted
@@ -125,15 +93,7 @@ class UserController extends Controller
     }
     public function rest_password(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $validator  = Validator::make((array) $request->all(), [
             'password_current' => 'required',
             'password_new' => 'required|min:8',
@@ -151,15 +111,7 @@ class UserController extends Controller
     }
     public function change_status_verify_phone(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $user = auth()->user();
         $user->is_phone_virefied = 1;
         $user->save();

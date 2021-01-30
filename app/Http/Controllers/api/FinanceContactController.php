@@ -17,15 +17,7 @@ class FinanceContactController extends Controller
     use GeneralTrait;
     public function create(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $data       = $request->all();
         $response   = new Responseobject();
         $array_data = (array)$data;
@@ -55,14 +47,7 @@ class FinanceContactController extends Controller
             }
             return $this->returnSuccess(__("We will contact you soon"));
         } else {
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->msg, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
 }

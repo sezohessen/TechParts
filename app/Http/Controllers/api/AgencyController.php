@@ -44,7 +44,7 @@ class AgencyController extends Controller
             if (!$agency) {
                 return $this->errorMessage(__("No such Center id exist"));
             }
-            $check = AgencyReview::where( [ 'agency_id' => $request->center_id, 'user_id' => auth()->user()->id])->first();
+            $check = AgencyReview::where(['agency_id' => $request->center_id, 'user_id' => auth()->user()->id])->first();
             if ($check) {
                 return $this->errorMessage(__("You review this agency before"));
             }
@@ -465,25 +465,25 @@ class AgencyController extends Controller
         $this->lang($request);
         $validator = $this->FilterValidate($request);
         if (!$validator->fails()) {
-           //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
+            //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
             $agencyList     = Agency::where('country_id', $request->interest_country)
-            ->where('active', 1)
-            ->where('center_type', Agency::center_type_Agency)
-            ->where('car_status', $request->car_state)
-            ->whereHas('carMakers', function ($query) use ($request) {
-                return $query->where('agency_car_makers.CarMaker_id',$request->car_maker_id);
-            })
-            ->whereHas('Car', function ($query)use ($request) {
-                return $query->where('cars.CarModel_id',$request->car_model_id);
-            });
+                ->where('active', 1)
+                ->where('center_type', Agency::center_type_Agency)
+                ->where('car_status', $request->car_state)
+                ->whereHas('carMakers', function ($query) use ($request) {
+                    return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
+                })
+                ->whereHas('Car', function ($query) use ($request) {
+                    return $query->where('cars.CarModel_id', $request->car_model_id);
+                });
 
-            if($request->work_type) $agencyList->whereIn('agency_type', $request->work_type);
-            if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
-            if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
-            if($request->year){
-                $agencyList->whereHas('Car', function ($query)use ($request) {
-                    $query->whereHas('year', function ($query)use ($request) {
-                        return $query->where('car_years.year',$request->year);
+            if ($request->work_type) $agencyList->whereIn('agency_type', $request->work_type);
+            if ($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
+            if ($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
+            if ($request->year) {
+                $agencyList->whereHas('Car', function ($query) use ($request) {
+                    $query->whereHas('year', function ($query) use ($request) {
+                        return $query->where('car_years.year', $request->year);
                     });
                 });
             }
@@ -515,25 +515,25 @@ class AgencyController extends Controller
         $this->lang($request);
         $validator = $this->FilterValidate($request);
         if (!$validator->fails()) {
-           //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
+            //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
             $agencyList     = Agency::where('country_id', $request->interest_country)
-            ->where('active', 1)
-            ->where('center_type', Agency::center_type_Maintenance)
-            ->where('car_status', $request->car_state)
-            ->whereHas('carMakers', function ($query) use ($request) {
-                return $query->where('agency_car_makers.CarMaker_id',$request->car_maker_id);
-            })
-            ->whereHas('Car', function ($query)use ($request) {
-                return $query->where('cars.CarModel_id',$request->car_model_id);
-            });
+                ->where('active', 1)
+                ->where('center_type', Agency::center_type_Maintenance)
+                ->where('car_status', $request->car_state)
+                ->whereHas('carMakers', function ($query) use ($request) {
+                    return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
+                })
+                ->whereHas('Car', function ($query) use ($request) {
+                    return $query->where('cars.CarModel_id', $request->car_model_id);
+                });
 
-            if($request->work_type) $agencyList->whereIn('maintenance_type', $request->work_type);
-            if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
-            if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
-            if($request->year){
-                $agencyList->whereHas('Car', function ($query)use ($request) {
-                    $query->whereHas('year', function ($query)use ($request) {
-                        return $query->where('car_years.year',$request->year);
+            if ($request->work_type) $agencyList->whereIn('maintenance_type', $request->work_type);
+            if ($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
+            if ($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
+            if ($request->year) {
+                $agencyList->whereHas('Car', function ($query) use ($request) {
+                    $query->whereHas('year', function ($query) use ($request) {
+                        return $query->where('car_years.year', $request->year);
                     });
                 });
             }
@@ -565,24 +565,24 @@ class AgencyController extends Controller
         $this->lang($request);
         $validator = $this->FilterValidate($request);
         if (!$validator->fails()) {
-           //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
+            //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
             $agencyList     = Agency::where('country_id', $request->interest_country)
-            ->where('active', 1)
-            ->where('center_type', Agency::center_type_Spare)
-            ->where('car_status', $request->car_state)
-            ->whereHas('carMakers', function ($query) use ($request) {
-                return $query->where('agency_car_makers.CarMaker_id',$request->car_maker_id);
-            })
-            ->whereHas('Car', function ($query)use ($request) {
-                return $query->where('cars.CarModel_id',$request->car_model_id);
-            });
+                ->where('active', 1)
+                ->where('center_type', Agency::center_type_Spare)
+                ->where('car_status', $request->car_state)
+                ->whereHas('carMakers', function ($query) use ($request) {
+                    return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
+                })
+                ->whereHas('Car', function ($query) use ($request) {
+                    return $query->where('cars.CarModel_id', $request->car_model_id);
+                });
 
-            if($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
-            if($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
-            if($request->year){
-                $agencyList->whereHas('Car', function ($query)use ($request) {
-                    $query->whereHas('year', function ($query)use ($request) {
-                        return $query->where('car_years.year',$request->year);
+            if ($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
+            if ($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
+            if ($request->year) {
+                $agencyList->whereHas('Car', function ($query) use ($request) {
+                    $query->whereHas('year', function ($query) use ($request) {
+                        return $query->where('car_years.year', $request->year);
                     });
                 });
             }
@@ -713,15 +713,7 @@ class AgencyController extends Controller
     }
     public function lang($request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
     }
 
     public function failed($validator)

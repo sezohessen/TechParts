@@ -17,15 +17,7 @@ class InsuranceRequestController extends Controller
 
     public function insurance(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $data       = $request->all();
         $response   = new Responseobject();
         $array_data = (array)$data;
@@ -62,14 +54,7 @@ class InsuranceRequestController extends Controller
 
             return $this->returnSuccess(__("Successfully Create Request"));
         } else {
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->msg, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
 }

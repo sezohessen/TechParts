@@ -20,15 +20,7 @@ class InsuranceCompanyController extends Controller
     use GeneralTrait;
     public function show(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $data       = $request->all();
         $response   = new Responseobject();
         $array_data = (array)$data;
@@ -44,33 +36,18 @@ class InsuranceCompanyController extends Controller
                 $insurances[] = [
                     "color"     => '#000000', //Will be updated
                     "id"        => $insurance->id,
-                    "logo"      => $insurance->img->name,
+                    "logo"      => find_image($insurance->img),
                     "name"      => Session::get('app_locale') == 'ar' ? $insurance->name_ar : $insurance->name,
                 ];
             }
             return $this->returnData("insuranceCompanyList", $insurances, "Successfully");
         } else {
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->msg, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function offer(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $data       = $request->all();
         $response   = new Responseobject();
         $array_data = (array)$data;
@@ -126,27 +103,12 @@ class InsuranceCompanyController extends Controller
                 return $this->errorMessage(__("No such company id found"));
             }
         } else {
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->msg, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function askHelp(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         $data       = $request->all();
         $response   = new Responseobject();
         $array_data = (array)$data;
@@ -177,14 +139,7 @@ class InsuranceCompanyController extends Controller
             }
             return $this->returnSuccess(__("Will call you back soon"));
         } else {
-            $response->status = $response::status_failed;
-            $response->code = $response::code_failed;
-            foreach ($validator->errors()->getMessages() as $item) {
-                array_push($response->msg, $item);
-            }
-            return Response::json(
-                $response
-            );
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
 }
