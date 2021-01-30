@@ -61,8 +61,11 @@ class BadgesDatatable extends DataTable
                         '<i class="fa fa-trash"></i> ' . __('Delete All'),
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
-                    'export',
-                    'print',
+                    [
+                        "extend"=> 'collection',
+                        "text"=> __("Export"),
+                        "buttons" => [ 'csv', 'excel','print' ]
+                    ],
                 ],
                 'lengthMenu' =>
                 [
