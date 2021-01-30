@@ -79,6 +79,8 @@ Route::group(['prefix' => 'data','namespace'=>'api'], function () {
         Route::post("car_model_all",'dynamicController@model');
         Route::post("car_model_search",'dynamicController@model_search');
         Route::post("car_motor_cc",'dynamicController@motor');
+        Route::post("car_year_by_model",'dynamicController@year');
+
 
 
     });

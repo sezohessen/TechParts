@@ -599,5 +599,6 @@
     "Select Car Model First":"اختر موديل السيارة أولا",
     "Agency Reviews":"مراجعات الوكالة",
     "Add User":"اضافة مستخدم",
-    "Add new User":"اضافة مستخدم جديد"
+    "Add new User":"اضافة مستخدم جديد",
+    "Year of manufacturer model not found":"لم يتم العثور على سنة تصنيع الموديل"
 }
