@@ -17,11 +17,12 @@ class car_imgSeeder extends Seeder
      */
     public function run()
     {
+        $images = Image::where('base','/img/Cars/')->get();
         $faker = Faker::create();
         for ($i = 0; $i < 20; $i++) {
             DB::table('car_imgs')->insert([
                 'car_id'        => Car::where('status', 1)->get()->random()->id,
-                'img_id'        => Image::all()->random()->id,
+                'img_id'        => $images->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

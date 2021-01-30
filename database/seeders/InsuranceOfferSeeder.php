@@ -17,12 +17,13 @@ class InsuranceOfferSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $images = Image::where('base','/img/insurance/offer/')->get();
+        $faker  = Faker::create();
         for ($i = 0; $i < 20; $i++) {
             DB::table('insurance_offers')->insert([
                 'title'               => $faker->name,
                 'title_ar'            => $faker->name,
-                'img_id'              => Image::all()->random()->id,
+                'img_id'              => $images->random()->id,
                 'description'         => $faker->sentence,
                 'description_ar'      => $faker->sentence,
                 'insurance_id'        => Insurance::all()->random()->id,

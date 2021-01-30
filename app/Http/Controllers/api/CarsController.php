@@ -825,7 +825,70 @@ class CarsController extends Controller
         }
         return $credentials;
     }
-
+    public function carBody()
+    {
+        $carBodyLists  = CarBody::where('active',1)->get();
+        $carBodies     = [];
+        foreach ($carBodyLists as $carBodyList) {
+            $carBodies[]   =[
+                "id"        => $carBodyList->id,
+                "logo"      => find_image(@$carBodyList->logo),
+                "title_en"  => $carBodyList->name,
+            ];
+        }
+        return $this->returnData("listMain", $carBodies, "Successfully");
+    }
+    public function carFeature()
+    {
+        $featureLists  = Feature::where('active',1)->get();
+        $features     = [];
+        foreach ($featureLists as $featureList) {
+            $features[]   =[
+                "id"        => $featureList->id,
+                "title_en"  => $featureList->name,
+                "title_ar"  => $featureList->name_ar,
+            ];
+        }
+        return $this->returnData("listMain", $features, "Successfully");
+    }
+    public function carBadge()
+    {
+        $BadgesLists  = Badges::where('active',1)->get();
+        $badges     = [];
+        foreach ($BadgesLists as $BadgesList) {
+            $badges[]   =[
+                "id"        => $BadgesList->id,
+                "title_en"  => $BadgesList->name,
+                "title_ar"  => $BadgesList->name_ar,
+            ];
+        }
+        return $this->returnData("listMain", $badges, "Successfully");
+    }
+    public function carColors(Request $request)
+    {
+        if($request->car_id){
+            $carColor   = Car::find($request->car_id);
+            if($carColor){
+                $colorList  = [
+                    "id"    => $carColor->color->id,
+                    "code"  => $carColor->color->code
+                ];
+                return $colorList;
+            }else{
+                return $this->errorMessage(__("No such car id"));
+            }
+        }else{
+            $carColors  = CarColor::all();
+            $colors     = [];
+            foreach ($carColors as $carColor) {
+                $colors[]   =[
+                    "id"        => $carColor->id,
+                    "code"  => $carColor->code,
+                ];
+            }
+            return $colors;
+        }
+    }
     public function checkMultipleImage($files)
     {
 
