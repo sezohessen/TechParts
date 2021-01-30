@@ -17,7 +17,7 @@ class CarYearSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('car_years')->insert([
                 'year'          => $faker->year,
                 'CarModel_id'    => CarModel::all()->random()->id,

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class CarColorSeeder extends Seeder
 {
     /**
@@ -15,10 +16,10 @@ class CarColorSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('car_colors')->insert([
-                'code'          => $faker->colorName,
-                
+                'code'          => $faker->hexColor,
+
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

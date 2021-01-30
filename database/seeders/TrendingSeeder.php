@@ -18,7 +18,7 @@ class TrendingSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('trendings')->insert([
                 'day'           => Carbon::now()->format('Y-m-d'),
                 'created_at'    => now(),

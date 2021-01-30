@@ -6,6 +6,7 @@ use App\Models\Image;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+
 class CarBodySeeder extends Seeder
 {
     /**
@@ -16,7 +17,7 @@ class CarBodySeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,5) as $value){
+        for ($i = 0; $i < 20; $i++) {
             DB::table('car_bodies')->insert([
                 'name'          => $faker->name,
                 'logo_id'       => Image::all()->random()->id,
