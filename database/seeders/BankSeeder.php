@@ -18,7 +18,8 @@ class BankSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $images = Image::where('base','/img/bank/')->get();
+        $faker  = Faker::create();
         for ($i = 0; $i < 20; $i++) {
             $bank = DB::table('banks')->insertGetId([ //I need id table to insert it into bank contact table
                 'name'                  => $faker->company,
@@ -26,7 +27,7 @@ class BankSeeder extends Seeder
                 'color'                 => $faker->hexColor,
                 'order'                 => $faker->numberBetween(1, 100),
                 'show_finance_services' => $faker->boolean,
-                'logo_id'               => Image::all()->random()->id,
+                'logo_id'               => $images->random()->id,
                 'user_id'               => User::all()->random()->id,
                 'created_at'            => now(),
                 'updated_at'            => now()

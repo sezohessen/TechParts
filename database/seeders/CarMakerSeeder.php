@@ -17,7 +17,7 @@ class CarMakerSeeder extends Seeder
     public function run()
     {
         $images = Image::where('base','/img/CarMakers/')->get();
-        $faker = Faker::create();
+        $faker  = Faker::create();
         for ($i = 0; $i < 20; $i++) {
             DB::table('car_makers')->insert([
                 'name'          => $faker->name,

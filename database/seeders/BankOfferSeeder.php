@@ -16,6 +16,7 @@ class BankOfferSeeder extends Seeder
      */
     public function run()
     {
+        $images = Image::where('base','/img/bank-offer/')->get();
         $faker = Faker::create();
         foreach (range(1,20) as $value){
             DB::table('bank_offers')->insert([
@@ -28,7 +29,7 @@ class BankOfferSeeder extends Seeder
                 'interest_rate'             => $faker->numberBetween(1,99),
                 'number_of_years'           => $faker->numberBetween(1,20),
                 'installment_months'        => $faker->numberBetween(10,99),
-                'logo_id'                   => Image::all()->random()->id,
+                'logo_id'                   => $images->random()->id,
                 'bank_id'                   => Bank::all()->random()->id,
                 'created_at'                => now(),
                 'updated_at'                => now(),
