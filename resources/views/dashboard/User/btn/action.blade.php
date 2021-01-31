@@ -32,6 +32,10 @@
         </svg>
     </span>
 </a>
+<a href="{{route('dashboard.users.show',['user'=>$id,'user_id'=>$id])}}"  target='_blank' class="btn btn-md btn-primary btn-icon mb-2">
+    <i class=" icon-lg text-success-50 ki ki-eye"></i>
+
+</a>
 
 
 <!-- Modal -->

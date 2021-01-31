@@ -153,7 +153,6 @@ Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'mid
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
     Route::resource('/car','AgencyCarController');
-
     Route::post('/car/{car}/status',"AgencyCarController@Status")->name('car.Status');
     Route::get("available_model/{id}",'AgencyCarController@available_model');
     Route::get("available_governorate/{id}",'AgencyCarController@available_governorate');

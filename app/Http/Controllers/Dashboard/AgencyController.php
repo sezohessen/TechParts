@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\User;
+use App\Models\Agency;
+use App\Models\Country;
+use App\Models\CarMaker;
+use App\Models\AgencyCar;
+use App\Models\Specialties;
+use Illuminate\Http\Request;
+use App\Models\AgencyContact;
+use App\Models\AgencyCarMaker;
+use App\DataTables\CarDatatable;
+use App\Models\AgencySpecialties;
 use App\DataTables\AgencyDatatable;
 use App\Http\Controllers\Controller;
-use App\Models\Agency;
-use App\Models\AgencyCar;
-use App\Models\AgencyCarMaker;
-use App\Models\AgencyContact;
-use App\Models\AgencySpecialties;
-use App\Models\CarMaker;
-use App\Models\Country;
-use App\Models\Specialties;
-use App\Models\User;
-use Illuminate\Http\Request;
 
 class AgencyController extends Controller
 {
@@ -101,11 +102,13 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, CarDatatable $car,Agency $agency)
     {
-        //
+        $page_title = __('Agencies Cars');
+        $page_description = __('Manage Agencies Cars');
+        $car->request()->all();
+        return  $car->render("dashboard.Car.index", compact('page_title', 'page_description'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *

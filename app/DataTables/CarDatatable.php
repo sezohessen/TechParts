@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Car;
+use App\Models\User;
 use App\Models\Agency;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -51,10 +52,19 @@ class CarDatatable extends DataTable
      */
     public function query()
     {
+
         if ($this->request()->has("Customers")) {
             return Car::query()->with(['maker', 'country'])->doesnthave('agencies')->select("cars.*");
         }elseif($this->request()->has("Showrooms")) {
             return Car::query()->with(['maker', 'country'])->has('agencies')->select("cars.*");
+        }
+        if ($this->request()->has("user_id")) {
+            $user=User::find($this->request()->user_id);
+            return Car::query()->with(['maker', 'country'])->whereIn('id', $user->cars->pluck('id'))->has('List_cars_user')->select("cars.*");
+        }
+        if ($this->request()->has("agency_id")) {
+            $agency=Agency::find($this->request()->agency_id);
+            return Car::query()->with(['maker', 'country'])->whereIn('id', $agency->Car->pluck('id'))->has('List_cars_agency')->select("cars.*");
         }
         return Car::query()->with(['maker', 'country'])->select("cars.*");
     }

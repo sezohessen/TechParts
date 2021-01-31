@@ -181,6 +181,7 @@ class Agency extends Model
     {
         return $this->belongsToMany(Car::class, 'agency_cars', 'agency_id','car_id');
     }
+
     public function agency_specialties()
     {
         return $this->belongsToMany(Specialties::class, 'agency_specialties', 'agency_id','specialty_id');

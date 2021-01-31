@@ -168,6 +168,18 @@ return [
 
                     ]
                 ],
+                [
+                    'title' => 'View Agency cars',
+                    'page' => "/dashboard/agency?center_type=0"
+                ],
+                [
+                    'title' => 'View Maintenance cars',
+                    'page' => "/dashboard/agency?center_type=1"
+                ],
+                [
+                    'title' => 'View Spare cars',
+                    'page' => "/dashboard/agency?center_type=2"
+                ]
 
             ]
         ],

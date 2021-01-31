@@ -1,22 +1,23 @@
 <?php
 
 namespace App\Http\Controllers\Agency;
-use App\Http\Controllers\Controller;
-
-use App\Models\Agency;
-use App\Models\AgencyCar;
-use App\Models\AgencyContact;
-use App\Models\CarMaker;
-use App\Models\Country;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\DataTables\Agency\AgencyDatatable;
-use App\Models\AgencyCarMaker;
-use App\Models\AgencySpecialties;
 use App\Models\City;
+
+use App\Models\User;
+use App\Models\Agency;
+use App\Models\Country;
+use App\Models\CarMaker;
+use App\Models\AgencyCar;
 use App\Models\Governorate;
 use App\Models\Specialties;
+use Illuminate\Http\Request;
+use App\Models\AgencyContact;
+use App\Models\AgencyCarMaker;
+use App\DataTables\CarDatatable;
+use App\Models\AgencySpecialties;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\DataTables\Agency\AgencyDatatable;
 
 class AgencyController extends Controller
 {
@@ -39,7 +40,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-      
+
         $agency           = Agency::where('user_id',Auth::id())->first();
         if($agency!=NULL){
             return $this->edit($agency->id);
@@ -109,11 +110,9 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    public function show($id){
 
+    }
     /**
      * Show the form for editing the specified resource.
      *
