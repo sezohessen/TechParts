@@ -77,8 +77,8 @@ class CarResource extends JsonResource
             $images[]=find_image(Image::find($item->img_id));
         }
         $data=[
-            "carMaker"=>@$this->model->name,
-            "carModel"=>@$this->maker->name,
+            "carModel"=>@$this->model->name,
+            "carMaker"=>@$this->maker->name,
             "carState"=>Car::StatusType()[$this->isNew],
             "carYear"=>@$this->year->year,
             "id"=>$this->id,

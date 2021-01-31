@@ -3,6 +3,7 @@ namespace  App\Traits;
 
 use App\Classes\Responseobject;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 trait GeneralTrait {
     public function lang($lang)
@@ -64,15 +65,15 @@ trait GeneralTrait {
     }
     public function returnData($key,$value,$msg="",array $extra=[]){
         $data = [
-            $key=>$value,
-            'status'=>true,
-            "msg"=>$msg
+            $key=>$value
         ];
         if (!empty($extra)) {
             foreach ($extra as $key => $value) {
                 $data[$key] = $value;
             }
         }
+        $data['status'] = true;
+        $data['msg'] = $msg;
         return response()->json($data);
     }
     public function returnFailData($key,$value,$msg="",array $extra=[]){

@@ -22,7 +22,7 @@ class AgencyCarMakerSeeder extends Seeder
         for ($i = 0; $i < 40; $i++) {
             DB::table('agency_car_makers')->insert([
                 'CarMaker_id'       => CarMaker::all()->random()->id,
-                'agency_id'         => Agency::all()->random()->id,
+                'agency_id'         => Agency::where('active', 1)->get()->random()->id,
                 'created_at'        => now(),
                 'updated_at'        => now()
             ]);

@@ -35,7 +35,7 @@ class AgencySeeder extends Seeder
                 "agency_type"       => rand(1, 2),
                 "is_authorised"     => rand(1, 2),
                 "maintenance_type"  => rand(1, 2),
-                'center_type'       => $faker->numberBetween(1, 2),
+                'center_type'       => $faker->numberBetween(0, 2),
                 'lat'               => $faker->latitude,
                 'long'              => $faker->longitude,
                 'car_status'        => $faker->boolean,

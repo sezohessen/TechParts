@@ -69,7 +69,7 @@ class CarsController extends Controller
             $data = (new CarResource($car))->type($type::single);
             return  $this->returnData('mCar', $data, __('Successfully'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
 
@@ -101,7 +101,7 @@ class CarsController extends Controller
                 return $this->errorMessage("No data found");
             return $data;
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function stop($car)
@@ -142,7 +142,7 @@ class CarsController extends Controller
         ]);
         if (!$validator->fails()) {
 
-            $car = Car::where("status", 1)->with('year');
+            $car = Car::where("status", 1);
 
 
             $car->where("Country_id", $request->interest_country)
@@ -268,7 +268,7 @@ class CarsController extends Controller
                 return $this->errorMessage("No data found");
             return $data;
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function deposit(Request $request)
@@ -295,7 +295,7 @@ class CarsController extends Controller
             $data = (new CarResource($car))->type($type::list);
             return  $this->returnData('mCar', $data, __('Deposit Successfully'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function alert(Request $request)
@@ -320,7 +320,7 @@ class CarsController extends Controller
             }
             return  $this->returnSuccess(__('Success change Status of car'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function compare(Request $request)
@@ -344,7 +344,7 @@ class CarsController extends Controller
                 ->type($type::compare);
             return  $data;
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function action_counter(Request $request)
@@ -359,7 +359,7 @@ class CarsController extends Controller
             $car->update(["views" => $car->views + 1]);
             return  $this->returnSuccess(__('Car views has been increment successfully'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function promote_package(Request $request)
@@ -407,7 +407,7 @@ class CarsController extends Controller
             $data = (new CarResource($car))->type($type::promote);
             return  $this->returnData('mCar', $data, __('Promoted Successfully'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function copy(Request $request)
@@ -458,7 +458,7 @@ class CarsController extends Controller
             $data = (new CarResource($car))->type($type::single);
             return  $this->returnData('mCar', $data, __('Successfully'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function delete(Request $request)
@@ -483,7 +483,7 @@ class CarsController extends Controller
             $car->delete();
             return  $this->returnSuccess(__('Deleted successfully'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function create(Request $request)
@@ -579,7 +579,7 @@ class CarsController extends Controller
             $data = (new CarResource($car))->type($type::single);
             return  $this->returnData('mCar', $data, __('Successfully'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function edit(Request $request)
@@ -700,7 +700,7 @@ class CarsController extends Controller
             $data = (new CarResource($car))->type($type::single);
             return  $this->returnData('mCar', $data, __('Edit successfully'));
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function list(Request $request)
@@ -827,10 +827,10 @@ class CarsController extends Controller
     }
     public function carBody()
     {
-        $carBodyLists  = CarBody::where('active',1)->get();
+        $carBodyLists  = CarBody::where('active', 1)->get();
         $carBodies     = [];
         foreach ($carBodyLists as $carBodyList) {
-            $carBodies[]   =[
+            $carBodies[]   = [
                 "id"        => $carBodyList->id,
                 "logo"      => find_image(@$carBodyList->logo),
                 "title_en"  => $carBodyList->name,
@@ -840,10 +840,10 @@ class CarsController extends Controller
     }
     public function carFeature()
     {
-        $featureLists  = Feature::where('active',1)->get();
+        $featureLists  = Feature::where('active', 1)->get();
         $features     = [];
         foreach ($featureLists as $featureList) {
-            $features[]   =[
+            $features[]   = [
                 "id"        => $featureList->id,
                 "title_en"  => $featureList->name,
                 "title_ar"  => $featureList->name_ar,
@@ -853,10 +853,10 @@ class CarsController extends Controller
     }
     public function carBadge()
     {
-        $BadgesLists  = Badges::where('active',1)->get();
+        $BadgesLists  = Badges::where('active', 1)->get();
         $badges     = [];
         foreach ($BadgesLists as $BadgesList) {
-            $badges[]   =[
+            $badges[]   = [
                 "id"        => $BadgesList->id,
                 "title_en"  => $BadgesList->name,
                 "title_ar"  => $BadgesList->name_ar,
@@ -866,22 +866,22 @@ class CarsController extends Controller
     }
     public function carColors(Request $request)
     {
-        if($request->car_id){
+        if ($request->car_id) {
             $carColor   = Car::find($request->car_id);
-            if($carColor){
+            if ($carColor) {
                 $colorList  = [
                     "id"    => $carColor->color->id,
                     "code"  => $carColor->color->code
                 ];
                 return $colorList;
-            }else{
+            } else {
                 return $this->errorMessage(__("No such car id"));
             }
-        }else{
+        } else {
             $carColors  = CarColor::all();
             $colors     = [];
             foreach ($carColors as $carColor) {
-                $colors[]   =[
+                $colors[]   = [
                     "id"        => $carColor->id,
                     "code"  => $carColor->code,
                 ];

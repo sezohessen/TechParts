@@ -15,7 +15,6 @@ use App\Models\AgencyCar;
 use App\Models\AgencyReview;
 use App\Models\CarMaker;
 use App\Models\CarModel;
-use App\Models\Country;
 use App\Models\MyMaintenanceList;
 use App\Models\Trending;
 use App\Models\UserFavAgency;
@@ -33,7 +32,7 @@ class HomeDataController extends Controller
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
-        $agencyList     = Agency::where('country_id', $request->interest_country)
+        $agencyList     = Agency::where('center_type', Agency::center_type_Agency)->where('country_id', $request->interest_country)
             ->where('show_in_home', 1)
             ->get();
 
@@ -44,7 +43,7 @@ class HomeDataController extends Controller
         foreach ($agencyList as $agency) {
             list($Max, $Min)     = $this->PriceRange($agency);
             $agencies[]     = [
-                "centerType"    => Agency::ApiAgecnyType()[$agency->center_type],
+                "centerType"    => Agency::ApiType()[$agency->center_type],
                 "id"            => $agency->id,
                 "isAuthorised"  => $agency->is_authorised ? true : false,
                 "isFavorite"    => $this->isFav($agency),
@@ -122,7 +121,6 @@ class HomeDataController extends Controller
                 'car_maker_id'      => 'required|integer',
                 'car_model_id'      => 'required|integer',
                 'date_next'         => 'required|date',
-
             ]
         );
         if ($validator->fails()) {
@@ -205,19 +203,19 @@ class HomeDataController extends Controller
         }
 
         if ($Mylist->count()) {
-            $agencyList     = Agency::whereHas('carMakers', function ($query) use ($forSuggest) {
+            $agencyList     = Agency::where('center_type', Agency::center_type_Maintenance)->whereHas('carMakers', function ($query) use ($forSuggest) {
                 return $query->whereIn('agency_car_makers.CarMaker_id', $forSuggest)->take(5);
             });
             $agencyList = $agencyList->get();
         } else {
-            $agencyList     = Agency::all()->random(5);
+            $agencyList     = Agency::where('active', 1)->where('center_type', Agency::center_type_Maintenance)->get()->random(5);
         }
         $agencies   = [];
 
         foreach ($agencyList as $agency) {
             list($Max, $Min)     = $this->PriceRange($agency);
             $agencies[]     = [
-                "centerType"    => Agency::ApiAgecnyType()[$agency->center_type],
+                "centerType"    => Agency::ApiType()[$agency->center_type],
                 "id"            => $agency->id,
                 "isAuthorised"  => $agency->is_authorised ? true : false,
                 "isFavorite"    => $this->isFav($agency),
@@ -227,12 +225,8 @@ class HomeDataController extends Controller
                 "title"         => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
                 "rate"          => $this->rate($agency),
             ];
-        }
-        $getlist  = [
-            "myMaintenanceList"     => $MaintenanceList,
-            "suggestedCenterList"   => $agencies
-        ];
-        return $this->returnData("", $getlist, __("Successfully"));
+        };
+        return $this->returnData("myMaintenanceList", $MaintenanceList, __("Successfully"), ["suggestedCenterList"   => $agencies]);
     }
 
     public function isFav($agency)

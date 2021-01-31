@@ -15,4 +15,5 @@ class MyMaintenanceList extends Model
         'date_next',
         'user_id'
     ];
+    protected $dates = ['date_next'];
 }

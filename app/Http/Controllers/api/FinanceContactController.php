@@ -39,7 +39,7 @@ class FinanceContactController extends Controller
                 $ContactUs->country_phone = $country->country_phone;
                 $ContactUs->save();
             }
-            return $this->returnSuccess(__("We will contact you soon"));
+            return $this->returnSuccess(__("Team Support will contact you soon."));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }

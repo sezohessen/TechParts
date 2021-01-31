@@ -839,7 +839,7 @@ class AgencyController extends Controller
             $data = (new CarCollection($cars))->type($type::list);
             return $data;
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function FavList(Request $request)
@@ -858,7 +858,7 @@ class AgencyController extends Controller
                 return $this->errorMessage(__('Favorite type invalid'));
             }
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
 }

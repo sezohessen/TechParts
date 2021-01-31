@@ -85,11 +85,7 @@ class BankController extends Controller
                 "valid_date"                => $bankOffer->valid_till,
             ];
         }
-        $resultList = [
-            "bankList"          => $bankLists,
-            "featuredOfferList" => $bankOfferLists,
-        ];
-        return $this->returnData("", $resultList, "Successfully");
+        return $this->returnData("bankList", $bankLists, "Successfully", ["featuredOfferList" => $bankOfferLists]);
     }
     public function filter(Request $request)
     {

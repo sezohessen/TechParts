@@ -7,6 +7,7 @@ namespace App\Http\Controllers\api;
 use App\Models\Faq;
 use App\Models\City;
 use App\Models\Agency;
+use App\Models\CarYear;
 use App\Models\Country;
 use App\Models\CarMaker;
 use App\Models\CarModel;
@@ -18,10 +19,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CarYearResource;
 use Illuminate\Support\Facades\Session;
+use App\Http\Resources\CountryCollection;
 use App\Http\Resources\CarMakerCollection;
 use App\Http\Resources\CarModelCollection;
 use App\Http\Resources\CarCapacityResource;
-use App\Models\CarYear;
 use Illuminate\Support\Facades\Validator as Validator;
 
 class dynamicController extends Controller
@@ -158,7 +159,7 @@ class dynamicController extends Controller
                 return $this->errorMessage("No data found");
             return $data;
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function motor(Request $request)
@@ -181,7 +182,7 @@ class dynamicController extends Controller
                 return $this->errorMessage("No data found");
             return $this->returnData("yearList", $data, "Successfully");
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
     public function model_search(Request $request)
@@ -207,7 +208,7 @@ class dynamicController extends Controller
                 return $this->errorMessage("No data found");
             return $data;
         } else {
-            return $this->failed($validator);
+            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
 }

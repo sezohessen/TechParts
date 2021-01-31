@@ -31,7 +31,7 @@ class AskExpertController extends Controller
                 'phone'         => auth()->user()->phone,
                 'country_phone' => auth()->user()->country_phone,
             ]);
-            return $this->returnSuccess(__("We will contact you soon"));
+            return $this->returnSuccess(__("Team Support will contact you soon."));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }

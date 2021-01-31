@@ -23,7 +23,7 @@ class AgencyContactSeeder extends Seeder
                 'whatsapp'          => $faker->url,
                 'instagram'         => $faker->url,
                 'messenger'         => $faker->url,
-                'agent_id'          => Agency::all()->random()->id,
+                'agent_id'          => Agency::where('active', 1)->get()->random()->id,
                 'created_at'        => now(),
                 'updated_at'        => now()
             ]);

@@ -120,6 +120,14 @@ class Agency extends Model
             self::Ag_Individual    => 'Individual',
         ];
     }
+    public static function ApiType()
+    {
+        return [
+            self::center_type_Agency        => 'Agency',
+            self::center_type_Maintenance   => 'Maintenance',
+            self::center_type_Spare         => 'Spare',
+        ];
+    }
     public static function StyleAgecnyType()
     {
         return [
