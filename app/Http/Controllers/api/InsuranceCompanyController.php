@@ -6,10 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
 use App\Models\Country;
 use App\Models\Insurance;
-use App\Models\Insurance_offer;
-use App\Models\offer_plan;
 use App\Traits\GeneralTrait;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as Validator;
 
@@ -32,7 +29,7 @@ class InsuranceCompanyController extends Controller
                     "color"     => '#000000', //Will be updated
                     "id"        => $insurance->id,
                     "logo"      => find_image($insurance->img),
-                    "name"      => Session::get('app_locale') == 'ar' ? $insurance->name_ar : $insurance->name,
+                    "name"      => $insurance->name_by_lang,
                 ];
             }
             return $this->returnData("insuranceCompanyList", $insurances, "Successfully");
@@ -52,43 +49,45 @@ class InsuranceCompanyController extends Controller
         if (!$validator->fails()) {
             $id                 = $request->company_id;
             $InsuranceCompany   = Insurance::find($id); //Will be updated
-            $InsuranceOffers    = Insurance_offer::where('insurance_id', $id)->get();
             if ($InsuranceCompany) {
                 $insurances = [];
-                foreach ($InsuranceOffers as $offer) {
-                    /* Insurance Contact */
-                    $mContact = [ //Will be updated
-                        "phone" => $InsuranceCompany->user->phone,
-                        "whats" => $InsuranceCompany->user->whats_app
-                    ];
-                    /* Insurance Company */
-                    $insurance  = [
-                        "color"     => '#000000', //Will be updated
-                        "id"        => $InsuranceCompany->id,
-                        "logo"      => find_image($InsuranceCompany->img->name),
-                        "name"      => Session::get('app_locale') == 'ar' ? $InsuranceCompany->name_ar : $InsuranceCompany->name,
-                    ];
-                    /* Insurance Offers's plans */
-                    $offer_plans    = offer_plan::where("offer_id", $offer->id)->get();
-                    $offer_plan = [];
-                    foreach ($offer_plans as $plan) {
-                        $offer_plan[] = [
-                            "description"   => Session::get('app_locale') == 'ar' ? $plan->description_ar : $plan->description,
-                            "id"            => $plan->id,
-                            "money"         => $plan->price,
-                            "name"          => Session::get('app_locale') == 'ar' ? $plan->title_ar : $plan->title,
+                if ($InsuranceCompany->offers) {
+                    foreach ($InsuranceCompany->offers as $offer) {
+                        /* Insurance Contact */
+                        $mContact = [ //Will be updated
+                            "phone" => $InsuranceCompany->user->phone,
+                            "whats" => $InsuranceCompany->user->whats_app
+                        ];
+                        /* Insurance Company */
+                        $insurance  = [
+                            "color"     => '#000000', //Will be updated
+                            "id"        => $InsuranceCompany->id,
+                            "logo"      => find_image($InsuranceCompany->img),
+                            "name"      => $InsuranceCompany->name_by_lang,
+                        ];
+                        /* Insurance Offers's plans */
+                        $offer_plan = [];
+                        if ($offer->plans) {
+                            foreach ($offer->plans as $plan) {
+                                $offer_plan[] = [
+                                    "description"   =>  $plan->description_by_lang,
+                                    "id"            => $plan->id,
+                                    "money"         => $plan->price,
+                                    "name"          => $plan->name_by_lang,
+                                ];
+                            }
+                        }
+                        /* Insurance Offers */
+                        $insurances[] = [
+                            "description"   => $offer->description_by_lang,
+                            "id"            => $offer->id,
+                            "photo"         => find_image($offer->img),
+                            "title"         => $offer->name_by_lang,
+                            "mCompany"      => $insurance,
+                            "mContact"      => $mContact,
+                            "planList"      => $offer_plan,
                         ];
                     }
-                    /* Insurance Offers */
-                    $insurances[] = [
-                        "description"   => Session::get('app_locale') == 'ar' ? $offer->description_ar : $offer->description,
-                        "id"            => $offer->id,
-                        "photo"         => find_image($offer->img->name),
-                        "title"         => Session::get('app_locale') == 'ar' ? $offer->title_ar : $offer->title,
-                        "mCompany"      => $insurance,
-                        "mContact"      => $mContact,
-                        "planList"      => $offer_plan,
-                    ];
                 }
                 return $this->returnData("insuranceOfferList", $insurances, "Successfully");
             } else {

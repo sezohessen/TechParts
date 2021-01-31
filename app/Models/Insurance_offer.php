@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Exception;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Insurance_offer extends Model
 {
@@ -19,6 +19,12 @@ class Insurance_offer extends Model
         'img_id',
         'insurance_id',
     ];
+    public function getNameByLangAttribute(){
+        return Session::get('app_locale') == 'ar' ? $this->title_ar : $this->title;
+    }
+    public function getDescriptionByLangAttribute(){
+        return Session::get('app_locale') == 'ar' ? $this->description_ar : $this->description;
+    }
     public function insurance(){
         return $this->belongsTo(Insurance::class,"insurance_id","id");
     }
@@ -27,7 +33,7 @@ class Insurance_offer extends Model
     }
     public function plans()
     {
-        return $this->hasMany(offer_plan::class);
+        return $this->hasMany(offer_plan::class, 'offer_id', 'id');
     }
     public static function rules($request,$id = NULL)
     {

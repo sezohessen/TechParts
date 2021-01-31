@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Exception;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Insurance extends Model
 {
@@ -89,5 +90,12 @@ class Insurance extends Model
             $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/insurance/']);
             return $Image->id;
         }
+    }
+    public function offers()
+    {
+        return $this->hasMany(Insurance_offer::class, 'insurance_id', 'id');
+    }
+    public function getNameByLangAttribute(){
+        return Session::get('app_locale') == 'ar' ? $this->name_ar : $this->name;
     }
 }

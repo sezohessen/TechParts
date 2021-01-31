@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class offer_plan extends Model
 {
@@ -18,6 +19,12 @@ class offer_plan extends Model
         'offer_id',
         'insurance_id',
     ];
+    public function getDescriptionByLangAttribute(){
+        return Session::get('app_locale') == 'ar' ? $this->description_ar : $this->description;
+    }
+    public function getNameByLangAttribute(){
+        return Session::get('app_locale') == 'ar' ? $this->title_ar : $this->title;
+    }
     public function offer_plan(){
         return $this->belongsTo(Insurance_offer::class,"offer_id","id");
     }
