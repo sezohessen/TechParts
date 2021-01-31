@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\Car;
-use App\Models\PromoteCar;
-use App\Models\promote;
-use Illuminate\Http\Request;
-use App\DataTables\CarPromoteDatatable;
-use App\Models\CarMaker;
+use App\Models\User;
 use App\Models\Image;
+use App\Models\Agency;
+use App\Models\promote;
+use App\Models\CarMaker;
+use App\Models\PromoteCar;
+use App\Models\ListCarUser;
+use Illuminate\Http\Request;
 use App\Models\subscribe_package;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\DataTables\CarPromoteDatatable;
 
 class CarPromoteController extends Controller
 {
@@ -34,7 +39,7 @@ class CarPromoteController extends Controller
      */
     public function create()
     {
-        dd( Image::find(1)->delete());
+
         $page_title = __("Pomote a car");
         $page_description = __("Pomote a car");
         $cars=Car::where("status","=",1)->get();

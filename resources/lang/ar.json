@@ -598,5 +598,15 @@
     "Edit Car":"تعديل السيارة",
     "Select Car Model First":"اختر موديل السيارة أولا",
     "Add User":"اضافة مستخدم",
-    "Add new User":"اضافة مستخدم جديد"
+    "Add new User":"اضافة مستخدم جديد",
+    "Last Name":"الاسم الأخير",
+    "Role":"الوظيفة",
+    "Own Cars":"السيارات التابعة",
+    "Users Cars":"السيارات الخاصة بالمستخدم",
+    "Manage User Cars":"ادارة السيارات الخاصة بالمستخدم",
+    "Agencies Cars":"السيارات الخاصة بالوكالة",
+    "Manage Agencies Cars":"ادارة السيارات الخاصة بالوكالة",
+    "Manage User":"بيانات المستخدم",
+    "Country Phone":"رقم الدولة",
+    "Image":"صوره"
 }

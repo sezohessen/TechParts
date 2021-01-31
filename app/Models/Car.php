@@ -330,4 +330,18 @@ class Car extends Model
     {
         return $this->hasMany(TrendCar::class, 'car_id', 'id');
     }
+    public function List_cars_user()
+    {
+        return $this->belongsToMany(Car::class,'list_car_users','car_id','user_id');
+    }
+    public function List_cars_agency()
+    {
+        return $this->belongsToMany(Car::class,'agency_cars','car_id','agency_id');
+    }
+    public function agency()
+    {
+        return $this->belongsTo(Agency::class, 'agency_cars', 'car_id','agency_id');
+    }
+
+
 }

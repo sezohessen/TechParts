@@ -31,6 +31,7 @@ class UserDatatable extends DataTable
             {
                 return implode(', ', $user->roles->pluck('name')->toArray());
             })
+
             ->addColumn('checkbox', 'dashboard.User.btn.checkbox')
             ->addColumn('action', 'dashboard.User.btn.action')
             ->rawColumns(['checkbox','action','role']);
@@ -111,18 +112,25 @@ class UserDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('email'),
-            Column::make('first_name'),
-            Column::make('last_name'),
-            Column::make('phone'),
-            Column::make('role'),
+            Column::make('email')
+            ->title(__("Email")),
+            Column::make('first_name')
+            ->title(__("First Name")),
+            Column::make('last_name')
+            ->title(__("Last Name")),
+            Column::make('phone')
+            ->title(__("Phone")),
+            Column::make('role')
+            ->title(__("Role")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
                 ->printable(false)
                 ->searchable(false)
-                ->width(120)
+                ->width(150)
                 ->addClass('text-center')
+
+
 
         ];
     }

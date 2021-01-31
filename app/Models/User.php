@@ -196,6 +196,15 @@ class User extends Authenticatable
         return $this->belongsToMany(Agency::class,'user_fav_agencies','user_id','agency_id')
         ->where('agencies.center_type',Agency::center_type_Maintenance);
     }
+    public function cars()
+    {
+        return $this->belongsToMany(Car::class,'list_car_users','car_id','user_id');
+    }
+
+    public function List_cars()
+    {
+        return $this->belongsToMany(Car::class,'list_car_users','car_id','user_id');
+    }
     public function Agency()
     {
         return $this->hasOne(Agency::class);

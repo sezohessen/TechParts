@@ -30,7 +30,13 @@ class AgencyDatatable extends DataTable
             ->addColumn('checkbox', 'dashboard.Agency.btn.checkbox')
             ->addColumn('action', 'dashboard.Agency.btn.action')
             ->addColumn('active', 'dashboard.Agency.btn.active')
-            ->rawColumns(['checkbox', 'action', 'center_type','active']);
+            ->editColumn('view', function($agency) {
+                if(($agency->Car->count()) ){
+                   return  "<a href='".route('dashboard.agency.show',['agency'=>$agency->id,'agency_id'=>$agency->id])."' target='_blank'><i class='fa fa-eye'></i></a>";
+                }
+
+             })
+            ->rawColumns(['checkbox', 'action', 'center_type','active','view']);
     }
 
     /**
@@ -43,9 +49,9 @@ class AgencyDatatable extends DataTable
     {
         if ($this->request()->has("center_type")) {
             return Agency::query()->with("user")->where("center_type",request('center_type'))->select("agencies.*");
-        }else {
-            return Agency::query()->with("user")->select("agencies.*");
         }
+            return Agency::query()->with("user")->select("agencies.*");
+
     }
 
     /**
@@ -119,6 +125,13 @@ class AgencyDatatable extends DataTable
             Column::make('center_type'),
             Column::computed('active')
             ->title(__('Active'))
+            ->exportable(false)
+            ->printable(false)
+            ->searchable(false)
+            ->width(120)
+            ->addClass('text-center'),
+            Column::computed('view')
+            ->title(__('Own Cars'))
             ->exportable(false)
             ->printable(false)
             ->searchable(false)
