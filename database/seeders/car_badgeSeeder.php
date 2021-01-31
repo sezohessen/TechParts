@@ -21,7 +21,7 @@ class car_badgeSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             DB::table('car_badges')->insert([
                 'car_id'        => Car::where('status', 1)->get()->random()->id,
-                'badge_id'      => Badges::all()->random()->id,
+                'badge_id'      => Badges::where('active', 1)->get()->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

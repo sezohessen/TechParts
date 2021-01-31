@@ -20,6 +20,7 @@ class BadgeSeeder extends Seeder
             DB::table('badges')->insert([
                 'name'          => $faker->name,
                 'name_ar'       => $faker->name,
+                "active"        => rand(0,1),
                 'created_at'    => now(),
                 'updated_at'    => now(),
             ]);

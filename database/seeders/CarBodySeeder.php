@@ -22,7 +22,7 @@ class CarBodySeeder extends Seeder
             DB::table('car_bodies')->insert([
                 'name'          => $faker->name,
                 'logo_id'       => $images->random()->id,
-                "active"        => 1,
+                "active"        => rand(0,1),
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

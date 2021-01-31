@@ -18,10 +18,12 @@ class car_featureSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+        $cars =  Car::where('status', 1)->get();
+        $Features  =  Car::where('status', 1)->get();
         for ($i = 0; $i < 20; $i++) {
             DB::table('car_features')->insert([
-                'car_id'        => Car::where('status', 1)->get()->random()->id,
-                'feature_id'    => Feature::all()->random()->id,
+                'car_id'        => $cars->random()->id,
+                'feature_id'    => $Features->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);
