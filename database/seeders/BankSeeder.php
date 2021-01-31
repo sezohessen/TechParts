@@ -18,9 +18,9 @@ class BankSeeder extends Seeder
      */
     public function run()
     {
-        $images = Image::where('base','/img/bank/')->get();
+        $images = Image::where('base', '/img/bank/')->get();
         $faker  = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             $bank = DB::table('banks')->insertGetId([ //I need id table to insert it into bank contact table
                 'name'                  => $faker->company,
                 'status'                => $faker->randomElement(['Approved', 'Canceled', 'Pending']),

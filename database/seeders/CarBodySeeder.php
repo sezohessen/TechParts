@@ -16,13 +16,13 @@ class CarBodySeeder extends Seeder
      */
     public function run()
     {
-        $images = Image::where('base','/img/CarBodies/')->get();
+        $images = Image::where('base', '/img/CarBodies/')->get();
         $faker  = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('car_bodies')->insert([
                 'name'          => $faker->name,
                 'logo_id'       => $images->random()->id,
-                "active"        => rand(0,1),
+                "active"        => rand(0, 1),
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

@@ -18,7 +18,7 @@ class car_badgeSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('car_badges')->insert([
                 'car_id'        => Car::where('status', 1)->get()->random()->id,
                 'badge_id'      => Badges::where('active', 1)->get()->random()->id,

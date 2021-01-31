@@ -17,7 +17,7 @@ class CarCapacitySeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('car_capacities')->insert([
                 'capacity'       => $faker->numberBetween(100, 1000),
                 'created_at'    => now(),

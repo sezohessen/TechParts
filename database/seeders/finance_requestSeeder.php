@@ -17,7 +17,7 @@ class finance_requestSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('finance_requests')->insert([
                 'self_employed'             => $faker->boolean,
                 'salary_through_bank'       => $faker->boolean,

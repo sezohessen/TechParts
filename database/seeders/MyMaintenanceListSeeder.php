@@ -19,7 +19,7 @@ class MyMaintenanceListSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('my_maintenance_lists')->insert([
                 'date_next'         => $faker->dateTime(),
                 'CarMaker_id'       => CarMaker::all()->random()->id,

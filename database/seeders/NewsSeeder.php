@@ -17,10 +17,10 @@ class NewsSeeder extends Seeder
      */
     public function run()
     {
-        $images = Image::where('base','/img/news/')->get();
-        $imagesAuthor = Image::where('name','LIKE','%'.'avatar'.'%')->get();
+        $images = Image::where('base', '/img/news/')->get();
+        $imagesAuthor = Image::where('name', 'LIKE', '%' . 'avatar' . '%')->get();
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('news')->insert([
                 'title'                 => $faker->name,
                 'title_ar'              => $faker->name,

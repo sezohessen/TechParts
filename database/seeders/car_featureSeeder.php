@@ -20,7 +20,7 @@ class car_featureSeeder extends Seeder
         $faker = Faker::create();
         $cars =  Car::where('status', 1)->get();
         $Features  =  Car::where('status', 1)->get();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('car_features')->insert([
                 'car_id'        => $cars->random()->id,
                 'feature_id'    => $Features->random()->id,

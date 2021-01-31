@@ -19,7 +19,7 @@ class PromoteCarSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('promote_cars')->insert([
                 'car_id'               => Car::where('status', 1)->get()->random()->id,
                 'user_id'              => User::all()->random()->id,

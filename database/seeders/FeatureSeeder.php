@@ -16,11 +16,11 @@ class FeatureSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('features')->insert([
                 'name'          => $faker->name,
                 'name_ar'       => $faker->name,
-                "active"        => rand(0,1),
+                "active"        => rand(0, 1),
                 'created_at'    => now(),
                 'updated_at'    => now(),
             ]);

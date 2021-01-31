@@ -16,7 +16,7 @@ class ContactUsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('contact_us')->insert([
                 'message'           =>  $faker->sentence,
                 'email'             =>  $faker->email,

@@ -18,7 +18,7 @@ class UserFavAgencySeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('user_fav_agencies')->insert([
                 'agency_id'         => Agency::all()->random()->id,
                 'user_id'           => User::all()->random()->id,

@@ -15,20 +15,12 @@ class NewsController extends Controller
     use GeneralTrait;
     public function show(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
-                default_lang($locale);
-            }else {
-                default_lang();
-            }
-        }else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         if (!$request->news_id) {
             return $this->errorField('News id ');
         }
         $news    = News::find($request->news_id);
-        if(!$news){
+        if (!$news) {
             return $this->returnError('Not found');
         }
         $data   = [
@@ -37,33 +29,25 @@ class NewsController extends Controller
             'image'         => find_image(@$news->img),
             'author_name'   => $news->authorName,
             'category_id'   => $news->category_id,
-            'date'          => date("Y-m-d",strtotime($news->created_at)),
-            'details'       => Session::get('app_locale')=='ar'? $news->description_ar : $news->description,
-            'title'         => Session::get('app_locale')=='ar'? $news->title : $news->title,
+            'date'          => date("Y-m-d", strtotime($news->created_at)),
+            'details'       => Session::get('app_locale') == 'ar' ? $news->description_ar : $news->description,
+            'title'         => Session::get('app_locale') == 'ar' ? $news->title : $news->title,
 
         ];
-        return $this->returnData('mNews',$data,__('Success'));
+        return $this->returnData('mNews', $data, __('Success'));
     }
-     public function filter(Request $request)
+    public function filter(Request $request)
     {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
-                default_lang($locale);
-            }else {
-                default_lang();
-            }
-        }else {
-            default_lang();
-        }
+        $this->lang($request->lang);
         if (!$request->category_id) {
             return $this->errorField('Category id ');
         }
         $category   = Category::find($request->category_id);
-        if(!$category){
+        if (!$category) {
             return $this->returnError('No such Category id exist');
         }
-        $news       = News::where('category_id',$request->category_id);
-        if(!$news->count()){
+        $news       = News::where('category_id', $request->category_id);
+        if (!$news->count()) {
             return $this->returnError('No news in this category');
         }
         $data           = new NewsDetailCollection($news->paginate(10));
@@ -72,10 +56,10 @@ class NewsController extends Controller
     }
     public function category()
     {
-        $categroyLists  = Category::where('active',1)->get();
+        $categroyLists  = Category::where('active', 1)->get();
         $categories     = [];
         foreach ($categroyLists as $categroyList) {
-            $categories[]   =[
+            $categories[]   = [
                 "id"        => $categroyList->id,
                 "title_en"  => $categroyList->name,
                 "title_ar"  => $categroyList->name_ar,

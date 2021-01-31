@@ -16,7 +16,7 @@ class CarManufactureSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('car_manufactures')->insert([
                 'name'               => $faker->name,
                 'name_ar'            => $faker->name,

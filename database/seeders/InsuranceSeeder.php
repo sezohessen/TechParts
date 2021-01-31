@@ -17,9 +17,9 @@ class InsuranceSeeder extends Seeder
      */
     public function run()
     {
-        $images = Image::where('base','/img/insurance/')->get();
+        $images = Image::where('base', '/img/insurance/')->get();
         $faker  = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             DB::table('insurances')->insert([
                 'name'          => $faker->name,
                 'name_ar'       => $faker->name,
