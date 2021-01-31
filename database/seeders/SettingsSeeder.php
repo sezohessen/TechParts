@@ -18,10 +18,11 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+        $image = Image::where( 'base', '/img/settings/')->first();
         DB::table('settings')->insert([
             'appName'       => '3arabiat App',
             'appName_ar'    => 'تطبيق عربيات',
-            'logo_id'        => Image::all()->random()->id
+            'logo_id'        => $image->id
         ]);
     }
 }

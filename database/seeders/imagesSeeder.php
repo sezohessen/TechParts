@@ -158,6 +158,12 @@ class imagesSeeder extends Seeder
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
+            [
+                'name'              =>  "logo.png",
+                'base'              =>  "/img/settings/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
         ];
         foreach ($array as $value){
             DB::table('images')->insert([

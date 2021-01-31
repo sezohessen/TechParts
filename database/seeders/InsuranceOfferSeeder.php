@@ -19,16 +19,32 @@ class InsuranceOfferSeeder extends Seeder
     {
         $images = Image::where('base','/img/insurance/offer/')->get();
         $faker  = Faker::create();
-        for ($i = 0; $i < 20; $i++) {
+        $Insurances = Insurance::all();
+        foreach ($Insurances as $Insurance) {
             DB::table('insurance_offers')->insert([
                 'title'               => $faker->name,
                 'title_ar'            => $faker->name,
                 'img_id'              => $images->random()->id,
                 'description'         => $faker->sentence,
                 'description_ar'      => $faker->sentence,
-                'insurance_id'        => Insurance::all()->random()->id,
+                'insurance_id'        => $Insurance->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
+            ]);
+        }
+        $offers = Insurance_offer::all();
+        foreach ($offers as $offer) {
+            DB::table('offer_plans')->insert([
+                'title'               => $faker->name,
+                'title_ar'            => $faker->name,
+                'img_id'              => $images->random()->id,
+                'description'         => $faker->sentence,
+                'description_ar'      => $faker->sentence,
+                'price'               => $faker->numberBetween(1000,10000),
+                'insurance_id'        => $offer->insurance_id,
+                'offer_id'            => $offer->id,
+                'created_at'          => now(),
+                'updated_at'          => now()
             ]);
         }
     }
