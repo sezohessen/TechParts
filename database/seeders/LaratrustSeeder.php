@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Image;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -64,8 +65,9 @@ class LaratrustSeeder extends Seeder
             if (Config::get('laratrust_seeder.create_users')) {
                 $this->command->info("Creating '{$key}' user");
                 // Create default user for each role
+                $images = \App\Models\Image::where('base','/img/users/')->get();
                 $user = \App\Models\User::create([
-                    'image_id' => \App\Models\Image::all()->random()->id,
+                    'image_id' => $images->random()->id,
                     'interest_country' => \App\Models\Country::all()->random()->id,
                     'first_name' => ucwords(str_replace('_', ' ', $key)),
                     'last_name' => ucwords(str_replace('_', ' ', $key)),
@@ -86,8 +88,9 @@ class LaratrustSeeder extends Seeder
         }
         for ($i = 0; $i < 20; $i++) {
             $countyr = \App\Models\Country::all()->random();
-            $user = \App\Models\User::create([
-                    'image_id' => \App\Models\Image::all()->random()->id,
+            $images = \App\Models\Image::where('base','/img/users/')->get();
+            $user   = \App\Models\User::create([
+                    'image_id' => $images->random()->id,
                     'interest_country' => $countyr->id,
                     'first_name' => ucwords(str_replace('_', ' ', 'agency')).$i,
                     'last_name' => ucwords(str_replace('_', ' ', 'agency')).$i,
