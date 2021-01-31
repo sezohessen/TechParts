@@ -198,7 +198,7 @@ class User extends Authenticatable
     }
     public function cars()
     {
-        return $this->belongsToMany(Car::class,'list_car_users','car_id','user_id');
+        return $this->belongsToMany(Car::class,'list_car_users','user_id','car_id');
     }
 
     public function List_cars()

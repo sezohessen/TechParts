@@ -138,7 +138,7 @@
             </a>
         </div>
         <div class="col-md-3">
-            <a href="{{ route('dashboard.car.index',['Customers'=>'show']) }}">
+            <a href="{{ route('dashboard.car.index',['Showrooms'=>'show']) }}">
                 <div class="card card-custom bg-light-warning card-stretch gutter-b">
                     <!--begin::Body-->
                     <div class="card-body">
@@ -156,7 +156,7 @@
             </a>
         </div>
         <div class="col-md-3">
-            <a href="{{ route('dashboard.car.index',['Showrooms'=>'show']) }}">
+            <a href="{{ route('dashboard.car.index',['Customers'=>'show']) }}">
                 <div class="card card-custom bg-light-info card-stretch gutter-b">
                     <!--begin::Body-->
                     <div class="card-body">
