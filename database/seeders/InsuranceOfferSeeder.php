@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Image;
 use App\Models\Insurance;
 use Faker\Factory as Faker;
+use App\Models\Insurance_offer;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +38,6 @@ class InsuranceOfferSeeder extends Seeder
             DB::table('offer_plans')->insert([
                 'title'               => $faker->name,
                 'title_ar'            => $faker->name,
-                'img_id'              => $images->random()->id,
                 'description'         => $faker->sentence,
                 'description_ar'      => $faker->sentence,
                 'price'               => $faker->numberBetween(1000,10000),
