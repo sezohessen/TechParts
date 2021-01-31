@@ -61,6 +61,7 @@ class DatabaseSeeder extends Seeder
         $this->call(subscribe_packageSeeder::class);
         $this->call(PromoteCarSeeder::class);
         $this->call(AlertSeeder::class);
+        $this->call(NewsSeeder::class);
         $this->call(MyMaintenanceListSeeder::class);
 
     }

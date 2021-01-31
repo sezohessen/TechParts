@@ -158,6 +158,60 @@ class imagesSeeder extends Seeder
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
+            [
+                'name'              =>  "avata3.png",
+                'base'              =>  "/img/users/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "avatar.png",
+                'base'              =>  "/img/users/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "avatar2.png",
+                'base'              =>  "/img/users/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "new1.jpg",
+                'base'              =>  "/img/news/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "new2.jpg",
+                'base'              =>  "/img/news/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "new3.jpg",
+                'base'              =>  "/img/news/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "body1.jpg",
+                'base'              =>  "/img/CarBodies/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "body2.jpg",
+                'base'              =>  "/img/CarBodies/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "body3.jpg",
+                'base'              =>  "/img/CarBodies/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
         ];
         foreach ($array as $value){
             DB::table('images')->insert([
