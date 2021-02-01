@@ -38,6 +38,9 @@ class RegisterController extends Controller
         if (auth()->user()->hasRole('agency')) {
             return '/agency';
         }
+        if (auth()->user()->hasRole('bank')) {
+            return '/bank';
+        }
         return '/user';
     }
     /**
@@ -84,6 +87,8 @@ class RegisterController extends Controller
                 $provider = 'insurance';
             }elseif ($data['provider'] == 'agency') {
                 $provider = 'agency';
+            }elseif ($data['provider'] == 'bank') {
+                $provider = 'bank';
             }else {
                 $provider = 'user';
             }

@@ -102,7 +102,7 @@ class User extends Authenticatable
             $credentials['phone'] = $request->phone;
         }
         if (!$api) {
-            if(!empty($request->file('image_id'))){
+            if(property_exists($request, 'file') ){
                 $Image_id = self::file($request->file('image_id'));
                 $credentials['image_id'] = $Image_id;
 
