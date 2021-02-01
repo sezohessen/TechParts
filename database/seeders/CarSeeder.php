@@ -28,7 +28,7 @@ class CarSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i=0; $i < 20 ; $i++) {
+        for ($i=0; $i < 120 ; $i++) {
             DB::table('cars')->insert([
 
                 'ServiceHistory'        => $faker->sentence,

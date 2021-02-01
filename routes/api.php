@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
         Route::post("edit",'CarsController@edit');
         Route::post("my_list",'CarsController@list');
     });
-
+    Route::post("sell_car/delete",'CarsController@delete');
 
 });
 Route::group(['prefix' => 'data','namespace'=>'api'], function () {
@@ -136,16 +136,14 @@ Route::post("finance/ask_help",'api\FinanceContactController@create');
 Route::group(['prefix' => 'car','namespace'=>"api"], function () {
 
     Route::post("details  ",'CarsController@details');
-    Route::post("list/car_list",'CarsController@search');
-    Route::post("list/car_paginate",'CarsController@filter');
+    Route::post("list/car_paginate",'CarsController@search');
+    Route::post("list/car_list",'CarsController@filter');
     Route::post("compare",'CarsController@compare');
     Route::post("action_counter",'CarsController@action_counter');
     Route::post("promote/get_promote_package",'CarsController@promote_package');
 });
 Route::group(['prefix' => 'sell_car','namespace'=>"api"], function () {
     Route::post("copy",'CarsController@copy');
-    Route::post("delete",'CarsController@delete');
-
 });
 
 

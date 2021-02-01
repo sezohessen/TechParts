@@ -467,8 +467,12 @@ class CarsController extends Controller
             "car_id"            => 'required|integer',
         ]);
         if (!$validator->fails()) {
-            if (!$car = Car::find($request->car_id)) {
+            $car = Car::find($request->car_id);
+            if (!$car) {
                 return $this->errorMessage('Car ID not found');
+            }
+            if (!$car->user_id != auth()->id()) {
+                return $this->errorMessage("you don't have permissions");
             }
             $images = car_img::where("car_id", $car->id)->get();
             Car::unlink_img($images);

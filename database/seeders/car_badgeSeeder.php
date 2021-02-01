@@ -17,10 +17,16 @@ class car_badgeSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        for ($i = 0; $i < 40; $i++) {
+        $cars = Car::all();
+        foreach ($cars as  $car) {
             DB::table('car_badges')->insert([
-                'car_id'        => Car::where('status', 1)->get()->random()->id,
+                'car_id'        => $car->id,
+                'badge_id'      => Badges::where('active', 1)->get()->random()->id,
+                'created_at'    => now(),
+                'updated_at'    => now()
+            ]);
+            DB::table('car_badges')->insert([
+                'car_id'        => $car->id,
                 'badge_id'      => Badges::where('active', 1)->get()->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()

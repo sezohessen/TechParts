@@ -6,7 +6,6 @@ use App\Models\Car;
 use App\Models\Feature;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
 class car_featureSeeder extends Seeder
 {
@@ -17,12 +16,17 @@ class car_featureSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        $cars =  Car::where('status', 1)->get();
-        $Features  =  Car::where('status', 1)->get();
-        for ($i = 0; $i < 40; $i++) {
+        $Features  =  Feature::where('active', 1)->get();
+        $cars = Car::all();
+        foreach ($cars as  $car) {
             DB::table('car_features')->insert([
-                'car_id'        => $cars->random()->id,
+                'car_id'        => $car->id,
+                'feature_id'    => $Features->random()->id,
+                'created_at'    => now(),
+                'updated_at'    => now()
+            ]);
+            DB::table('car_features')->insert([
+                'car_id'        => $car->id,
                 'feature_id'    => $Features->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
