@@ -7,7 +7,7 @@
         @include('dashboard/message')
     </div>
 
-    {{-- Dashboard 1 --}}
+    {{-- Bank 1 --}}
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3" style="min-height: 50px">
             <a href="{{route("bank.bank-offer.create")}}" class="btn btn-primary font-weight-bolder">
