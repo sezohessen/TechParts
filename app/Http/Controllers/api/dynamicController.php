@@ -23,6 +23,7 @@ use App\Http\Resources\CountryCollection;
 use App\Http\Resources\CarMakerCollection;
 use App\Http\Resources\CarModelCollection;
 use App\Http\Resources\CarCapacityResource;
+use App\Http\Resources\DistributorCollection;
 use Illuminate\Support\Facades\Validator as Validator;
 
 class dynamicController extends Controller
@@ -64,22 +65,12 @@ class dynamicController extends Controller
             })
             ->whereHas('Car', function ($query) use ($request) {
                 return $query->where('cars.CarModel_id', $request->car_model);
-            })->get();
-        $agencyLists = [];
-        foreach ($agencyList as $agency) {
-            //dd($agency->center_type);
-            $agencyLists[] = [
-                "image"     => find_image(@$agency->img),
-                "name"      => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
-                "rate"      => $this->rate($agency),
-                "userId"    => $agency->user_id,
-                "userType"  => Agency::ApiAgecnyType()[$agency->agency_type],
-            ];
-        }
-        if (count($agencyList) <= 0) {
+            });
+        if ($agencyList->get()->count()<=0) {
             return $this->errorMessage('No Data Found');
         }
-        return $this->returnData("distributorList", $agencyLists, "Successfully");
+        $data   = new DistributorCollection($agencyList->paginate(10));
+        return $data;
     }
     public function governorate(Request $request)
     {
