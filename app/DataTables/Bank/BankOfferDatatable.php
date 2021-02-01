@@ -2,8 +2,8 @@
 
 namespace App\DataTables\Bank;
 
-use App\Models\Bank;
 use App\Models\BankOffer;
+use App\Models\Bank;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class Bank_offerDatatable extends DataTable
+class BankOfferDatatable extends DataTable
 {
 
     /**
@@ -25,12 +25,12 @@ class Bank_offerDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
-            ->editColumn('bank.name', '{{ Str::limit($bank["name"], 100) }}')
-            ->editColumn('valid_till', '{!! Str::limit($valid_till, 100)!!}')
-            ->editColumn('down_payment_percentage', '{!! Str::limit($down_payment_percentage, 100)!!}')
-            ->editColumn('interest_rate', '{!! Str::limit($interest_rate, 100)!!}')
-            ->editColumn('number_of_years', '{!! Str::limit($number_of_years, 100)!!}')
-            ->editColumn('installment_months', '{!! Str::limit($installment_months, 100)!!}')
+            ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
+            ->editColumn('valid_till', '{{Str::limit($valid_till, 100)}}')
+            ->editColumn('down_payment_percentage', '{{Str::limit($down_payment_percentage, 100)}}')
+            ->editColumn('interest_rate', '{{Str::limit($interest_rate, 100)}}')
+            ->editColumn('number_of_years', '{{Str::limit($number_of_years, 100)}}')
+            ->editColumn('installment_months', '{{Str::limit($installment_months, 100)}}')
             ->addColumn('checkbox', 'BankDashboard.Bank-offer.btn.checkbox')
             ->addColumn('action', 'BankDashboard.Bank-offer.btn.action')
             ->rawColumns(['checkbox', 'action']);
@@ -44,8 +44,8 @@ class Bank_offerDatatable extends DataTable
      */
     public function query()
     {
-        $bank = Bank::where("user_id", Auth::id())->first();
-        return BankOffer::query()->where('bank_id',$bank->id)->with("bank")->select("bank_offers.*");
+        $bank = Bank::where('user_id',Auth::id())->first();
+        return BankOffer::query()->where('bank_id', $bank->id)->select("bank_offers.*");
     }
 
     /**
@@ -56,7 +56,7 @@ class Bank_offerDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('banks-table')
+            ->setTableId('badges-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -68,11 +68,8 @@ class Bank_offerDatatable extends DataTable
                         '<i class="fa fa-trash"></i> ' . __('Delete All'),
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
-                    [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
-                    ],
+                    'export',
+                    'print',
                 ],
                 'lengthMenu' =>
                 [
@@ -113,18 +110,12 @@ class Bank_offerDatatable extends DataTable
             ],
             Column::make('id'),
             Column::make('name')->title(__('Name')),
-            Column::make('bank.name')
-                ->title(__("Bank Name")),
-            Column::make('valid_till')
-                ->title(__("Valid till")),
-            Column::make('down_payment_percentage')
-                ->title(__("Down payment(%)")),
-            Column::make('interest_rate')
-                ->title(__("Interest rate(%)")),
-            Column::make('number_of_years')
-                ->title(__("N. Years")),
-            Column::make('installment_months')
-                ->title(__("Installment months")),
+            Column::make('name_ar'),
+            Column::make('valid_till')->title(__('Valid till')),
+            Column::make('down_payment_percentage')->title(__('Down Payment(%)')),
+            Column::make('interest_rate')->title(__('Interest Rate(%)')),
+            Column::make('number_of_years')->title(__('No. years')),
+            Column::make('installment_months')->title(__('Installment Months')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
@@ -132,6 +123,7 @@ class Bank_offerDatatable extends DataTable
                 ->searchable(false)
                 ->width(120)
                 ->addClass('text-center')
+
         ];
     }
 
@@ -142,6 +134,6 @@ class Bank_offerDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'BankOffer_' . date('YmdHis');
+        return 'Bank_' . date('YmdHis');
     }
 }

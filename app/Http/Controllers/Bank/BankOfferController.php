@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Bank;
+
+use App\DataTables\Bank\BankOfferDatatable;
 use App\Http\Controllers\Controller;
 use App\DataTables\bank\Bank_offerDatatable;
 use App\Models\Bank;

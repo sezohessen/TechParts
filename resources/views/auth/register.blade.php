@@ -147,9 +147,7 @@
                                 <option value="bank" {{ old('provider') == 'bank' ? 'selected' : '' }}>
                                     @lang('Bank')
                                 </option>
-                                <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
-                                    @lang('User')
-                                </option>
+                                
                             </select>
                             @error('provider')
                                 <div class="fv-plugins-message-container">
