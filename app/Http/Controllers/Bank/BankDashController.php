@@ -11,7 +11,9 @@ class BankDashController extends Controller
     public function index()
     {
         $bank       = Bank::where('user_id',Auth::id())->first();
-        $bankOffer  = BankOffer::where('bank_id',$bank->id)->get();
+        if($bank)$bankOffer  = BankOffer::where('bank_id',$bank->id)->get()->count();
+        else $bankOffer = 0;
+
         $page_title = __('Bank Dashboard');
         $page_description = __('View bank record');
         return  view("bank.index", compact('page_title', 'page_description','bankOffer'));
