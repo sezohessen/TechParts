@@ -20,7 +20,7 @@ class BankController extends Controller
     use GeneralTrait;
     public function home(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = Validator::make(
             (array) $request->all(),
             [
@@ -89,7 +89,7 @@ class BankController extends Controller
     }
     public function filter(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = Validator::make(
             (array) $request->all(),
             [

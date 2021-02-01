@@ -32,7 +32,7 @@ class dynamicController extends Controller
 
     public function faq(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
 
         $faqList = Faq::all();
         foreach ($faqList as $faq) {
@@ -47,7 +47,7 @@ class dynamicController extends Controller
 
     public function distributor(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = Validator::make(
             (array) $request->all(),
             [
@@ -67,22 +67,23 @@ class dynamicController extends Controller
             })->get();
         $agencyLists = [];
         foreach ($agencyList as $agency) {
+            //dd($agency->center_type);
             $agencyLists[] = [
                 "image"     => find_image(@$agency->img),
                 "name"      => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
                 "rate"      => $this->rate($agency),
                 "userId"    => $agency->user_id,
-                "userType"  => Agency::ApiAgecnyType()[$agency->center_type],
+                "userType"  => Agency::ApiAgecnyType()[$agency->agency_type],
             ];
         }
-        if (empty($agencyList)) {
+        if (count($agencyList) <= 0) {
             return $this->errorMessage('No Data Found');
         }
         return $this->returnData("distributorList", $agencyLists, "Successfully");
     }
     public function governorate(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = Validator::make((array) $request->all(), ['country_name' => 'required|integer']);
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
@@ -94,7 +95,7 @@ class dynamicController extends Controller
     }
     public function country(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
 
         $countryList    = Country::where('active', 1);
         $data           = new CountryCollection($countryList->paginate(10));
@@ -102,7 +103,7 @@ class dynamicController extends Controller
     }
     public function city(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = Validator::make((array) $request->all(), ['government_id' => 'required|integer']);
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
@@ -124,7 +125,7 @@ class dynamicController extends Controller
     }
     public function maker(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $data = new CarMakerCollection(CarMaker::where("active", 1)->paginate(10));
         if (!$data->count())
             return $this->errorMessage("No data found");
@@ -132,7 +133,7 @@ class dynamicController extends Controller
     }
     public function model(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         if ($request->has("car_maker")) {
             $data = new CarModelCollection(CarModel::where("active", 1)->where("CarMaker_id", $request->car_maker)->paginate(10));
             if (!$data->count())
@@ -164,7 +165,7 @@ class dynamicController extends Controller
     }
     public function motor(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $data = CarCapacityResource::collection(CarCapacity::paginate(10));
         if (!$data->count())
             return $this->errorMessage("No data found");

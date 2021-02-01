@@ -25,7 +25,7 @@ class AgencyController extends Controller
     use GeneralTrait;
     public function review(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = Validator::make((array) $request->all(), [
             'rate'          => 'required|in:1,2,3,4,5',
             'price_type'    => 'required|in:1,2,3',
@@ -59,7 +59,7 @@ class AgencyController extends Controller
     }
     public function agency(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = $this->home($request);
 
         if (!$validator->fails()) {
@@ -108,7 +108,7 @@ class AgencyController extends Controller
     }
     public function maintenance(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = $this->home($request);
 
         if (!$validator->fails()) {
@@ -126,7 +126,7 @@ class AgencyController extends Controller
     }
     public function spare(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator  = $this->home($request);
 
         if (!$validator->fails()) {
@@ -144,7 +144,7 @@ class AgencyController extends Controller
     }
     public function detailsAgency(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->Details($request);
 
         if (!$validator->fails()) {
@@ -172,7 +172,7 @@ class AgencyController extends Controller
     }
     public function detailsMaintenance(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->Details($request);
 
         if (!$validator->fails()) {
@@ -200,7 +200,7 @@ class AgencyController extends Controller
     }
     public function detailsSpare(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->Details($request);
 
         if (!$validator->fails()) {
@@ -228,7 +228,7 @@ class AgencyController extends Controller
     }
     public function agencySearch(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->Search($request);
 
         if (!$validator->fails()) {
@@ -249,7 +249,7 @@ class AgencyController extends Controller
     }
     public function maintenanceSearch(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->Search($request);
 
         if (!$validator->fails()) {
@@ -270,7 +270,7 @@ class AgencyController extends Controller
     }
     public function spareSearch(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->Search($request);
 
         if (!$validator->fails()) {
@@ -291,7 +291,7 @@ class AgencyController extends Controller
     }
     public function agencyFav(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->Favorite($request, 'agency');
 
         if (!$validator->fails()) {
@@ -325,7 +325,7 @@ class AgencyController extends Controller
     }
     public function centerFav(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->Favorite($request, 'center');
 
         if (!$validator->fails()) {
@@ -359,7 +359,7 @@ class AgencyController extends Controller
     }
     public function addFav(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         if ($request->favorite_type == 'agency') {
             $validator = $this->Favorite($request, 'agency', 1);
         } elseif ($request->favorite_type == 'center') {
@@ -415,7 +415,7 @@ class AgencyController extends Controller
     }
     public function removeFav(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         if ($request->favorite_type == 'agency') {
             $validator = $this->Favorite($request, 'agency', 1);
         } elseif ($request->favorite_type == 'center') {
@@ -459,7 +459,7 @@ class AgencyController extends Controller
     }
     public function agencyFilter(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->FilterValidate($request);
         if (!$validator->fails()) {
             //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
@@ -509,7 +509,7 @@ class AgencyController extends Controller
     }
     public function maintenanceFilter(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->FilterValidate($request);
         if (!$validator->fails()) {
             //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;
@@ -559,7 +559,7 @@ class AgencyController extends Controller
     }
     public function spareFilter(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator = $this->FilterValidate($request);
         if (!$validator->fails()) {
             //$carStatus      = $request->car_state == 'new' ? Agency::NewCar : Agency::UsedCar;

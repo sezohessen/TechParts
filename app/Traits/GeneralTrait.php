@@ -141,7 +141,7 @@ trait GeneralTrait {
 
     public function Validator($request, $rules, $niceNames = [])
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         return Validator::make($request->all(), $rules, [], $niceNames);
     }
 

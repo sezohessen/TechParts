@@ -26,7 +26,7 @@ class HomeDataController extends Controller
     use GeneralTrait;
     public function completeData(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
 
         $validator      = Validator::make((array) $request->all(), ['interest_country' => 'required|integer']);
         if ($validator->fails()) {
@@ -114,7 +114,7 @@ class HomeDataController extends Controller
     }
     public function createNewMaintenance(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
         $validator      = Validator::make(
             (array) $request->all(),
             [
@@ -171,7 +171,7 @@ class HomeDataController extends Controller
     }
     public function get_list(Request $request)
     {
-        $this->lang($request);
+        $this->lang($request->lang);
 
         if (!auth()->user()) {
             return $this->errorMessage(__('Login to show maintenance list'));

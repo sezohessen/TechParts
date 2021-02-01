@@ -20,7 +20,7 @@ class TrendingSeeder extends Seeder
         $faker = Faker::create();
         for ($i = 0; $i < 40; $i++) {
             DB::table('trendings')->insert([
-                'day'           => Carbon::now()->format('Y-m-d'),
+                'day'           => Carbon::now()->addDays($i)->format('Y-m-d'),
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

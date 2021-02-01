@@ -17,10 +17,11 @@ class TrendCarSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        for ($i = 0; $i < 40; $i++) {
+        $cars =  Car::where('status', 1)->get();
+        foreach ($cars as $car ) {
+
             DB::table('trendings_cars')->insert([
-                'car_id'           => Car::where('status', 1)->get()->random()->id,
+                'car_id'           =>  $car->id,
                 'trend_id'         => Trending::all()->random()->id,
                 'created_at'       => now(),
                 'updated_at'       => now()
