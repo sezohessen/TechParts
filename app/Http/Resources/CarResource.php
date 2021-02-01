@@ -172,6 +172,7 @@ class CarResource extends JsonResource
         return
         [   "mDistributor"=>
             [
+                "rate"=> 0,
                 "image"=>$image,
                 "name"=>$this->user->first_name." ".$this->user->last_name,
                 "userId"=>$this->user->id,
