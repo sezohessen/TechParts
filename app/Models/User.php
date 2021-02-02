@@ -76,7 +76,7 @@ class User extends Authenticatable
            $rules['country_id'] = 'required|integer';
         }else {
 
-            $rules['image'] = 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240';
+            $rules['image'] = 'nullable|string';
             $rules['country_code'] = 'required|string';
             $rules['country_number'] = 'required|string';
         }

@@ -9,6 +9,7 @@ class Trending extends Model
 {
     use HasFactory;
     protected $table    = 'trendings';
+    protected $dates    = 'day';
     protected $fillable=[
         'day',
     ];

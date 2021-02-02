@@ -18,11 +18,18 @@ class TrendCarSeeder extends Seeder
     public function run()
     {
         $cars =  Car::where('status', 1)->get();
-        foreach ($cars as $car ) {
+        $Trendings =  Trending::all();
+        foreach ($Trendings as $Trending ) {
 
             DB::table('trendings_cars')->insert([
-                'car_id'           =>  $car->id,
-                'trend_id'         => Trending::all()->random()->id,
+                'car_id'           =>  $cars->random()->id,
+                'trend_id'         => $Trending->id,
+                'created_at'       => now(),
+                'updated_at'       => now()
+            ]);
+            DB::table('trendings_cars')->insert([
+                'car_id'           =>  $cars->random()->id,
+                'trend_id'         => $Trending->id,
                 'created_at'       => now(),
                 'updated_at'       => now()
             ]);
