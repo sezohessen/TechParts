@@ -50,6 +50,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/subscribe_packages','SubscribeController');
     Route::resource('/promote','CarPromoteController');
     Route::resource('/trending','TrendingController');
+    Route::resource('/trending-news','TrendingNewsController');
+
     Route::prefix('car')->group(function () {
         Route::resources([
             'maker'=>"CarMakerController",
@@ -107,6 +109,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('/promote/destroy/all','CarPromoteController@multi_delete');
     Route::delete('/AgencyCar/destroy/all','AgencyCarController@multi_delete');
     Route::delete("trending/destroy/all","TrendingController@multi_delete");
+    Route::delete("trending-news/destroy/all","TrendingNewsController@multi_delete");
     Route::delete('/news/destroy/all','NewsController@multi_delete');
     Route::delete('/agency-review/destroy/all','AgencyReviewController@multi_delete');
     /* Datatable Activity request */

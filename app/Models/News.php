@@ -102,4 +102,8 @@ class News extends Model
             return $Image->id;
         }
     }
+    public function trends()
+    {
+        return $this->belongsToMany(NewsDay::class, 'trending_news', 'trend_id','news_id');
+    }
 }

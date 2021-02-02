@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\NewsDetailCollection;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\TrendingNews;
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class NewsController extends Controller
     }
     public function filter(Request $request)
     {
+        /* date_default_timezone_set("Egypt"); */
         $this->lang($request->lang);
         if (!$request->category_id) {
             return $this->errorField('Category id ');
@@ -46,13 +48,17 @@ class NewsController extends Controller
         if (!$category) {
             return $this->returnError('No such Category id exist');
         }
-        $news       = News::where('category_id', $request->category_id);
-        if (!$news->count()) {
-            return $this->returnError('No news in this category');
-        }
-        $data           = new NewsDetailCollection($news->paginate(10));
-        /* $Trendingdata   = new NewsDetailCollection($news->paginate(10)); */
-        return $data;
+        $news           = News::where('category_id', $request->category_id);
+        if (!$news->count())return $this->errorMessage("No data found");
+        $trendingNews   = News::whereHas('trends', function ($query) {
+            return $query->where('news_days.day', date('Y-m-d'));
+        });
+
+        $data           = (new NewsDetailCollection($news->paginate(10)))->type('resultList');
+
+        $trend          = (new NewsDetailCollection($trendingNews->paginate(10)))->type('trendingList');
+        
+        return $this->returnData('resultList', $data, __('Success'), ['trendingList' => $trend]);
     }
     public function category()
     {

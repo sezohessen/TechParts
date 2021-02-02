@@ -23,7 +23,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">{{ $bankOffer->count() }}</div>
+                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">{{ $bankOffer }}</div>
                     <a href="{{ route('bank.bank-offer.index') }}" class="text-inverse-success font-weight-bold font-size-lg mt-1">@lang("Bank Offers")</a>
                 </div>
             </div>

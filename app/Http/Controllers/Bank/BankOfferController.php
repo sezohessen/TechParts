@@ -19,6 +19,8 @@ class BankOfferController extends Controller
      */
     public function index(Bank_offerDatatable $bank_offer)
     {
+        $bank = Bank::where("user_id", Auth::id())->first();
+        if($bank==NULL) return redirect()->route('bank.company.create');
         $page_title = __('Bank offers companies');
         $page_description = __('View offers');
         return  $bank_offer->render("BankDashboard.Bank-offer.index", compact('page_title', 'page_description'));

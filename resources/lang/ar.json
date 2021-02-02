@@ -612,5 +612,12 @@
     "Manage Agencies Cars":"ادارة السيارات الخاصة بالوكالة",
     "Manage User":"بيانات المستخدم",
     "Country Phone":"رقم الدولة",
-    "Image":"صوره"
+    "Image":"صوره",
+    "Trending news":"الاخبار الرائجة",
+    "View news":"اظهار الاخبار",
+    "Select News":"اختر الاخبار",
+    "Add trend news":"اضافة اخبار رائجة",
+    "You can choose more than one news":"يمكنك اختيار اكثر من خبر",
+    "This day already exist as a trend day":"هذا اليوم موجود بالفعل باعتباره يوم ترويجي",
+    "Edit news trend":"تعديل الخبر الترويجي"
 }
