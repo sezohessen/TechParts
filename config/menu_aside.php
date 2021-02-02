@@ -427,6 +427,10 @@ return [
                     'title' => 'View news',
                     'page' => '/dashboard/news'
                 ],
+                [
+                    'title' => 'Trending news',
+                    'page' => '/dashboard/trending-news'
+                ],
 
             ]
         ],

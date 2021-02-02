@@ -12,12 +12,18 @@ class NewsDetailCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    protected $type;
     public function toArray($request)
     {
-        return [
-            'resultList'    =>  parent::toArray($request),
-            'status'        =>  true,
-            "msg"           =>  __('Successfully')
+        return parent::toArray($request);
+        return  [
+            $this->type => parent::toArray($request),
         ];
+    }
+
+    public function type($type)
+    {
+        $this->type = $type;
+        return $this;
     }
 }

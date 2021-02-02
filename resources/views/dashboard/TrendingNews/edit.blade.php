@@ -10,16 +10,21 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.trending.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route('dashboard.trending-news.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.trending.update",["trending"=>$trending->id])}}" method="POST">
+        <form action="{{route("dashboard.trending-news.update",$trending->id)}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
-                <div class="col-12">
+                <div class="card-body">
+                    @if (session('failed'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('failed') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -27,7 +32,8 @@
                             <label class="col-form-label col-sm-12">@lang('Select Date')<span class="text-danger">*</span></label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <div class="input-group date" >
-                                    <input type="text" class="form-control" readonly   value="{{ old("day") ?? date("m/d/Y", strtotime($trending->day)) }}" name='day' placeholder="Select date" id="kt_datepicker_1"/>
+                                    <input type="text" class="form-control {{ $errors->has('day') ? 'is-invalid' : '' }}"
+                                    readonly   value="{{ old("day") ?? date("m/d/Y", strtotime($trending->day)) }}" name='day' placeholder="Select date" id="kt_datepicker_1"/>
                                     <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="la la-calendar"></i>
@@ -45,17 +51,18 @@
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Cars')<span class="text-danger">*</span></label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <select class="form-control select2 {{ $errors->has('car_id') ? 'is-invalid' : '' }}"
-                                    id="kt_select2_12" name="car_id[]" required multiple >
-                                    @foreach ($cars as $car)
-                                       <option value="{{$car->id}}"
-                                        {{(in_array($car->id,$car_select)) ? 'selected':""}}
-                                        >ID[{{$car->id}}]: {{$car->maker->name}} -{{$car->model->name}} </option>
+                                <select class="form-control select2 {{ $errors->has('news_id') ? 'is-invalid' : '' }}"
+                                    id="kt_select2_12" name="news_id[]" required multiple >
+                                    @foreach ($newsList as $news)
+                                       <option value="{{$news->id}}"
+                                        {{(in_array($news->id,$newsSelect)) ? 'selected':""}}
+                                        >{{$news->title}} - {{$news->title_ar}} </option>
                                     @endforeach
                                 </select>
-                                @error('car_id')
-                                    <div class="invalid-feedback">{{ $errors->first('car_id') }}</div>
+                                @error('news_id')
+                                    <div class="invalid-feedback">{{ $errors->first('news_id') }}</div>
                                 @enderror
+                                <span class="form-text text-muted">@lang('You can choose more than one news')</span>
                             </div>
                         </div>
                     </div>

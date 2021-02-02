@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\MyMaintenanceList;
+use App\Models\NewsDay;
 use Illuminate\Database\Seeder;
 use PhpOffice\PhpSpreadsheet\Writer\Ods\Content;
 
@@ -62,6 +63,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PromoteCarSeeder::class);
         $this->call(AlertSeeder::class);
         $this->call(NewsSeeder::class);
+        $this->call(NewsDaysSeeder::class);
+        $this->call(TrendingNewsSeeder::class);
         $this->call(MyMaintenanceListSeeder::class);
 
     }

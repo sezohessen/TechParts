@@ -31,7 +31,6 @@ class TrendingController extends Controller
      */
     public function create()
     {
-
         $page_title = __("Add Trend");
         $page_description = __("Add Trend");
         $cars=Car::where("status",1)->get();

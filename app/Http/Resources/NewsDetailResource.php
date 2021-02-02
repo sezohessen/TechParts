@@ -15,7 +15,7 @@ class NewsDetailResource extends JsonResource
      */
     public function toArray($request)
     {
-        $data[]   = [
+        $data  = [
             'id'            => $this->id,
             'author_image'  => find_image(@$this->imgAuthor),
             'image'         => find_image(@$this->img),
