@@ -19,7 +19,7 @@
                 <!-- EN Form -->
                 <div class="card-body">
                     @if (session('failed'))
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-danger" role="alert">
                             {{ session('failed') }}
                         </div>
                     @endif

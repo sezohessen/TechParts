@@ -23,7 +23,7 @@ class TrendingNewsDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('day', '{{Str::limit($day, 100)}}')
+            ->editColumn('day', '{{Str::limit(date("Y-m-d", strtotime($day)), 100)}}')
             ->editColumn('trendingNews', function($trendingNews) {
                 if($trendingNews->trends)return view("dashboard.TrendingNews.btn.news",['data' => $trendingNews->trends]);
               })

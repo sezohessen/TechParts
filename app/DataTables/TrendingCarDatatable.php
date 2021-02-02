@@ -23,7 +23,7 @@ class TrendingCarDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('day', '{{Str::limit($day, 100)}}')
+            ->editColumn('day', '{{Str::limit(date("Y-m-d", strtotime($day)), 100)}}')
        //     ->editColumn('trends', 'dashboard.Trending.btn.cars')
             ->editColumn('trends', function($trending) {
                 return view("dashboard.Trending.btn.cars",['data' => $trending->trends]);
