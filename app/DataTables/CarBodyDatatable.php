@@ -23,6 +23,7 @@ class CarBodyDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
+            ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
             ->addColumn('logo.name', 'dashboard.CarBody.btn.logo')
             ->addColumn('active', 'dashboard.CarBody.btn.active')
             ->addColumn('checkbox', 'dashboard.CarBody.btn.checkbox')
@@ -107,6 +108,7 @@ class CarBodyDatatable extends DataTable
             Column::make('id'),
             Column::make('logo.name')->title(__("Logo")),
             Column::make('name')->title(__('Name')),
+            Column::make('name_ar')->title(__('Name(AR)')),
             Column::computed('active')
             ->title(__('Active'))
             ->exportable(false)

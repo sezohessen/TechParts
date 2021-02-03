@@ -16,7 +16,9 @@ use App\Models\Governorate;
 use App\Models\AgencyReview;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
+use App\Models\CarManufacture;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CityCollection;
 use App\Http\Resources\CarYearResource;
 use Illuminate\Support\Facades\Session;
 use App\Http\Resources\CountryCollection;
@@ -24,6 +26,8 @@ use App\Http\Resources\CarMakerCollection;
 use App\Http\Resources\CarModelCollection;
 use App\Http\Resources\CarCapacityResource;
 use App\Http\Resources\DistributorCollection;
+use App\Http\Resources\GovernorateCollection;
+use App\Http\Resources\CarManufactureCollection;
 use Illuminate\Support\Facades\Validator as Validator;
 
 class dynamicController extends Controller
@@ -66,7 +70,7 @@ class dynamicController extends Controller
             ->whereHas('Car', function ($query) use ($request) {
                 return $query->where('cars.CarModel_id', $request->car_model);
             });
-        if ($agencyList->get()->count()<=0) {
+        if ( $agencyList->get()->count() <= 0 ) {
             return $this->errorMessage('No Data Found');
         }
         $data   = new DistributorCollection($agencyList->paginate(10));
@@ -90,6 +94,8 @@ class dynamicController extends Controller
 
         $countryList    = Country::where('active', 1);
         $data           = new CountryCollection($countryList->paginate(10));
+        if (!$data->count())
+            return $this->errorMessage("No data found");
         return $data;
     }
     public function city(Request $request)
@@ -102,6 +108,8 @@ class dynamicController extends Controller
         $cityList     = City::where('active', 1)
             ->where('governorate_id', $request->government_id);
         $data           = new CityCollection($cityList->paginate(10));
+        if (!$data->count())
+            return $this->errorMessage("No data found");
         return $data;
     }
 
@@ -118,6 +126,14 @@ class dynamicController extends Controller
     {
         $this->lang($request->lang);
         $data = new CarMakerCollection(CarMaker::where("active", 1)->paginate(10));
+        if (!$data->count())
+            return $this->errorMessage("No data found");
+        return $data;
+    }
+    public function manufactures(Request $request)
+    {
+        $this->lang($request->lang);
+        $data = new CarManufactureCollection(CarManufacture::paginate(10));
         if (!$data->count())
             return $this->errorMessage("No data found");
         return $data;

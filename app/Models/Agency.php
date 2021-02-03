@@ -114,10 +114,10 @@ class Agency extends Model
     public static function ApiAgecnyType()
     {
         return [
-            self::UnSelected        => 'Un_selected_work_type',
-            self::Ag_Agency         => 'Agency',
-            self::Ag_Distributor    => 'Distributor',
-            self::Ag_Individual    => 'Individual',
+            self::UnSelected        => 'un_selected_work_type',
+            self::Ag_Agency         => 'agency',
+            self::Ag_Distributor    => 'distributor',
+            self::Ag_Individual    => 'individual',
         ];
     }
     public static function ApiType()

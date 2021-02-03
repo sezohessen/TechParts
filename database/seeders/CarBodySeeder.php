@@ -21,6 +21,7 @@ class CarBodySeeder extends Seeder
         for ($i = 0; $i < 40; $i++) {
             DB::table('car_bodies')->insert([
                 'name'          => $faker->name,
+                'name_ar'          => $faker->name,
                 'logo_id'       => $images->random()->id,
                 "active"        => rand(0, 1),
                 'created_at'    => now(),

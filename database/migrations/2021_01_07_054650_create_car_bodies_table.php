@@ -16,6 +16,7 @@ class CreateCarBodiesTable extends Migration
         Schema::create('car_bodies', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string("name_ar");
             $table->bigInteger('logo_id')->unsigned();
             $table->foreign('logo_id')
             ->references('id')->on('images')

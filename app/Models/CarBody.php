@@ -13,6 +13,7 @@ class CarBody extends Model
     protected $table    = 'car_bodies';
     protected $fillable=[
         'name',
+        'name_ar',
         'logo_id',
         "active"
     ];
@@ -25,6 +26,7 @@ class CarBody extends Model
     {
         $rules = [
             'name'             => 'required|string|max:255',
+            'name_ar'             => 'required|string|max:255',
             'logo'             => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ];
         if($id){
@@ -36,6 +38,7 @@ class CarBody extends Model
     {
         $credentials = [
             'name'              => $request->name,
+            'name_ar'              => $request->name_ar,
         ];
         if($request->file('logo')){
             if($img_id){

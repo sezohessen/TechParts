@@ -37,8 +37,8 @@ class CarResource extends JsonResource
         elseif($this->type==3){
 
             $data=[
-                "carFuelType"=>Car::FuelType()[$this->FuelType],
-                "transmission"=>Car::TransmissionType()[$this->transmission]
+                "carFuelType"=>Car::ApiFuelType()[$this->FuelType],
+                "transmission"=>Car::ApiTransmissionType()[$this->transmission]
             ];
             return array_merge($this->item(),$data);
         } elseif($this->type==4){
@@ -73,13 +73,13 @@ class CarResource extends JsonResource
         $price= $this->price-($this->price_after_discount*0.01*($this->price));
 
         $images=[];
-        foreach($this->images as $item){
-            $images[]=find_image(Image::find($item->img_id));
+        foreach($this->photos as $item){
+            $images[]= find_image($item);
         }
         $data=[
             "carModel"=>@$this->model->name,
             "carMaker"=>@$this->maker->name,
-            "carState"=>Car::StatusType()[$this->isNew],
+            "carState"=> Car::ApiStatusType()[$this->isNew],
             "carYear"=>@$this->year->year,
             "id"=>$this->id,
             "imageList"=>$images,
@@ -91,7 +91,7 @@ class CarResource extends JsonResource
             "price"=> (int)$price,
             "price_before_discount"=> $this->price,
             "promotedStatus"=> ($this->promotedStatus)?true:false,
-            "used_kilometers"=> $this->kiloUsed
+            "used_kilometers"=> intval($this->kiloUsed)
         ];
         return array_merge($this->Incoming_user_feature(),$data);
     }
@@ -102,10 +102,10 @@ class CarResource extends JsonResource
     }
     public function details(){
         $carMan=attr_lang_name($this->manufacture->name_ar,$this->manufacture->name);
-        $payment=Car::PaymentType()[$this->payment];
+        $payment=Car::ApiPaymentType()[$this->payment];
         $data = [
             "aboutCar" =>attr_lang_name($this->Description_ar,$this->Description),
-            "carFuelType"=>Car::FuelType()[$this->FuelType],
+            "carFuelType"=>Car::ApiFuelType()[$this->FuelType],
             "bodyStyle"=>$this->body->name,
             "carManufacturing"=>$carMan,
             "color"=>@$this->color->code,
@@ -116,12 +116,12 @@ class CarResource extends JsonResource
                 "longitude"=>$this->lat,
             ],
             "other_costs"=>"",
-            "payment_deposit"=>$this->DepositPrice,
-            "payment_loan_amount"=>$this->InstallmentAmount ,
-            "payment_loan_period"=>$this->InstallmentPeriod,
-            "payment_method"=>$payment,
+            "payment_deposit"=> intval( $this->DepositPrice),
+            "payment_loan_amount"=> intval($this->InstallmentAmount)  ,
+            "payment_loan_period"=> intval($this->InstallmentPeriod) ,
+            "payment_method"=> $payment,
             "serviceHistory"=>$this->ServiceHistory,
-            "transmission"=> Car::TransmissionType()[$this->transmission]
+            "transmission"=> Car::ApiTransmissionType()[$this->transmission]
             //CarCapacity_id
             //SellerType
         ];
@@ -147,12 +147,12 @@ class CarResource extends JsonResource
     public function CarUserFeature(){
 
 
-        $image=$this->user->image->name;
-        $userType=__("Individual");
+        $image= find_image(@$this->user->image);
+        $userType= "individual" ;
         if(($this->user->Agency) ){
             if($this->user->Agency->center_type == Agency::Ag_Agency){
-                $userType=Agency::AgecnyType()[$this->user->Agency->agency_type];
-                $image=$this->user->Agency->img->name;
+                $userType=Agency::ApiAgecnyType()[$this->user->Agency->agency_type];
+                $image = find_image(@$this->user->Agency->img) ;
                 $rate   = AgencyReview::where('agency_id',$this->user->Agency->id)
                 ->selectRaw('SUM(rate)/COUNT(user_id) AS avg_rating')
                 ->first()
@@ -162,7 +162,7 @@ class CarResource extends JsonResource
                     [
                         "image"=>$image,
                         "name"=>attr_lang_name($this->user->Agency->name_ar,$this->user->Agency->name),
-                        "rate"=>$rate,
+                        "rate"=> floatval($rate),
                         "userId"=>$this->user->id,
                         "userType"=>$userType
                     ]

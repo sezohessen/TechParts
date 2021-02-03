@@ -23,6 +23,7 @@ class CarColorDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('code', 'dashboard.CarColor.btn.color')
+            ->editColumn('hexa', '{{$code}}')
             ->addColumn('checkbox', 'dashboard.CarColor.btn.checkbox')
             ->addColumn('action', 'dashboard.CarColor.btn.action')
             ->rawColumns(['checkbox', 'action', "code"]);
@@ -105,6 +106,7 @@ class CarColorDatatable extends DataTable
             Column::make('id'),
             Column::make('code')
             ->title(__("Color")),
+            Column::computed('hexa'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

@@ -63,11 +63,26 @@ class Car extends Model
             self::PAYMENT_FINANCING     => __('Financing'),
         ];
     }
+    public static function ApiPaymentType()
+    {
+        return [
+            self::PAYMENT_CASH          => 'cash',
+            self::PAYMENT_INSTALLMENT   => 'installment',
+            self::PAYMENT_FINANCING     => 'financing',
+        ];
+    }
     public static function FuelType()
     {
         return [
             self::FUEL_GAS        => __('Gas'),
             self::FUEL_PETROL         => __('Petrol'),
+        ];
+    }
+    public static function ApiFuelType()
+    {
+        return [
+            self::FUEL_GAS        => 'gas',
+            self::FUEL_PETROL         => 'petrol',
         ];
     }
     public static function TransmissionType()
@@ -77,11 +92,26 @@ class Car extends Model
             self::TRANSIMSSION_AUTOMATIC     => __('Automatic'),
         ];
     }
+    public static function ApiTransmissionType()
+    {
+        return [
+            self::TRANSIMSSION_MANUAL        => 'manual',
+            self::TRANSIMSSION_AUTOMATIC     => 'automatic',
+        ];
+    }
     public static function StatusType()
     {
         return [
             self::IS_NEW        => __('New'),
             self::IS_USED         => __('Used'),
+        ];
+
+    }
+    public static function ApiStatusType()
+    {
+        return [
+            self::IS_NEW        => 'new',
+            self::IS_USED         => 'used',
         ];
 
     }
@@ -264,6 +294,10 @@ class Car extends Model
     public function images()
     {
         return $this->hasMany(car_img::class,"car_id","id");
+    }
+    public function photos()
+    {
+        return $this->belongsToMany(Image::class,'car_imgs',"car_id","img_id");
     }
     public function manufacture()
     {

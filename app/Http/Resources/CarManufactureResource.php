@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SubscribeResource extends JsonResource
+class CarManufactureResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,13 +14,11 @@ class SubscribeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            "currency_name"=> $this->currency_name,
-            "description"=> attr_lang_name($this->description_ar,$this->description),
-            "id"=> $this->id,
-            "period"=> intval($this->period) ,
-            "price"=> intval($this->price)
 
+        return [
+            "id"=> $this->id,
+            "name"=> $this->name,
+            "name_ar"=> $this->name_ar,
         ];
     }
 }

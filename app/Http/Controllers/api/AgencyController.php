@@ -466,7 +466,8 @@ class AgencyController extends Controller
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('active', 1)
                 ->where('center_type', Agency::center_type_Agency)
-                ->where('car_status', $request->car_state)
+                //->where('car_status', $request->car_state)
+                ->where('car_status', Agency::UsedCar)
                 ->whereHas('carMakers', function ($query) use ($request) {
                     return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
                 })
@@ -492,12 +493,15 @@ class AgencyController extends Controller
 
             } */
             if ($request->sort_added == 'recent') $agencyList->orderBy('created_at', 'desc');
-            /* if (isset($request->sort_near_by_lat) && isset($request->sort_near_by_lng)) { //Filter by location
-                $agencyList->orderBy(DB::raw(
-                    'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point(?, ?))',
-                    [$request->sort_near_by_lat, $request->sort_near_by_lng]
-                ), 'desc');
-            } */
+            if ($request->has("sort_near_by_lat")  && $request->has("sort_near_by_lng")) {
+                $agencies = $agencyList;
+                foreach ($agencies->get() as $agency) {
+                    $check = distance($request->sort_near_by_lat, $request->sort_near_by_lng, $agency->lat, $agency->long, "K");
+                    if ($check > d_constent()) {
+                        $agencyList->where("agencies.id", '!=', $agency->id);
+                    }
+                }
+            }
             if (!$agencyList->get()->count()) {
                 return $this->errorMessage("No centers found");
             }
@@ -516,7 +520,8 @@ class AgencyController extends Controller
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('active', 1)
                 ->where('center_type', Agency::center_type_Maintenance)
-                ->where('car_status', $request->car_state)
+                //->where('car_status', $request->car_state)
+                ->where('car_status', Agency::UsedCar)
                 ->whereHas('carMakers', function ($query) use ($request) {
                     return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
                 })
@@ -542,12 +547,16 @@ class AgencyController extends Controller
 
             } */
             if ($request->sort_added == 'recent') $agencyList->orderBy('created_at', 'desc');
-            /* if (isset($request->sort_near_by_lat) && isset($request->sort_near_by_lng)) { //Filter by location
-                $agencyList->orderBy(DB::raw(
-                    'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point(?, ?))',
-                    [$request->sort_near_by_lat, $request->sort_near_by_lng]
-                ), 'desc');
-            } */
+            if ($request->has("sort_near_by_lat")  && $request->has("sort_near_by_lng")) {
+                $agencies = $agencyList;
+                foreach ($agencies->get() as $agency) {
+                    $check = distance($request->sort_near_by_lat, $request->sort_near_by_lng, $agency->lat, $agency->long, "K");
+                    if ($check > d_constent()) {
+                        $agencyList->where("agencies.id", '!=', $agency->id);
+                    }
+                }
+            }
+
             if (!$agencyList->get()->count()) {
                 return $this->errorMessage("No centers found");
             }
@@ -566,7 +575,8 @@ class AgencyController extends Controller
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('active', 1)
                 ->where('center_type', Agency::center_type_Spare)
-                ->where('car_status', $request->car_state)
+                //->where('car_status', $request->car_state)
+                ->where('car_status', Agency::UsedCar)
                 ->whereHas('carMakers', function ($query) use ($request) {
                     return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
                 })
@@ -591,12 +601,15 @@ class AgencyController extends Controller
 
             } */
             if ($request->sort_added == 'recent') $agencyList->orderBy('created_at', 'desc');
-            /* if (isset($request->sort_near_by_lat) && isset($request->sort_near_by_lng)) { //Filter by location
-                $agencyList->orderBy(DB::raw(
-                    'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point(?, ?))',
-                    [$request->sort_near_by_lat, $request->sort_near_by_lng]
-                ), 'desc');
-            } */
+            if ($request->has("sort_near_by_lat")  && $request->has("sort_near_by_lng")) {
+                $agencies = $agencyList;
+                foreach ($agencies->get() as $agency) {
+                    $check = distance($request->sort_near_by_lat, $request->sort_near_by_lng, $agency->lat, $agency->long, "K");
+                    if ($check > d_constent()) {
+                        $agencyList->where("agencies.id", '!=', $agency->id);
+                    }
+                }
+            }
             if (!$agencyList->get()->count()) {
                 return $this->errorMessage("No centers found");
             }
@@ -668,7 +681,7 @@ class AgencyController extends Controller
         $carMakerList       = [];
         if ($agency->carMakers) {
             foreach ($agency->carMakers as $CarMaker) {
-                $logo           = @$CarMaker->logo->name;
+                $logo           = find_image(@$CarMaker->logo);
                 $carMakerList[] = $logo;
             }
         }
@@ -733,7 +746,7 @@ class AgencyController extends Controller
             "isAuthorised"          => $agency->is_authorised ? true : false,
             "priceRangeMax"         => $Max,
             "priceRangeMin"         => $Min,
-            "rate"                  => $this->rate($agency),
+            "rate"                  => intval($this->rate($agency)) ,
             "isFavorite"            => $this->isFav($agency),
             "mContact"              => $this->Contact($agency),
             "mLocation"             => $this->Location($agency),
@@ -807,7 +820,7 @@ class AgencyController extends Controller
         $validator  = Validator::make((array) $request->all(), [
             'interest_country'      => 'required|integer',
             //'car_state'             => 'required|in:new,used',
-            'car_state'             => 'required|in:0,1',
+            //'car_state'             => 'required|in:0,1',
             'car_maker_id'          => 'required|integer',
             'car_model_id'          => 'required|integer',
             'year'                  => 'nullable|integer',

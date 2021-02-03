@@ -31,6 +31,16 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label>@lang('Car Model  name_ar') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
+                             name="name_ar"  placeholder="@lang('Car Make ')" value="{{ old('name_ar') ?? $body->name_ar}}" required autofocus  />
+                            @error('name_ar')
+                                 <div class="invalid-feedback">{{ $errors->first('name_ar') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label for="Image">@lang('Logo image')</label><br>
                             <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{ find_image($body->logo , 'img/CarBodies/') }})">
                                 <div class="image-input-wrapper"></div>

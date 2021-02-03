@@ -19,6 +19,7 @@ use App\Models\Feature;
 use App\Models\CarColor;
 use App\Models\CarMaker;
 use App\Models\CarModel;
+use App\Classes\DataType;
 use App\Models\car_badge;
 use App\Models\PromoteCar;
 use App\Models\car_deposit;
@@ -29,7 +30,7 @@ use App\Models\ListCarUser;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\CarManufacture;
-use App\Classes\DataType;
+use Illuminate\Support\Carbon;
 use function PHPSTORM_META\type;
 use App\Models\subscribe_package;
 use App\Http\Resources\CarResource;
@@ -37,8 +38,8 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CarCollection;
-use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Session;
 use App\Http\Resources\SubscribeResource;
 use Illuminate\Support\Facades\Validator as Validator;
 
@@ -308,9 +309,13 @@ class CarsController extends Controller
             if (!$car = Car::find($request->car_id)) {
                 return $this->errorMessage('Car not found');
             }
-            $alert = Alert::where("car_id", $request->car_id)->where("user_id", Auth()->id())->update([
-                "status" => $request->status
-            ]);
+            $alert = Alert::where("car_id", $request->car_id)->where("user_id", Auth()->id())->first();
+            if ($alert) {
+                $alert->update([
+                    "status" => $request->status
+                ]);
+            }
+
             if (!$alert) {
                 Alert::create([
                     "car_id" => $request->car_id,
@@ -471,7 +476,7 @@ class CarsController extends Controller
             if (!$car) {
                 return $this->errorMessage('Car ID not found');
             }
-            if (!$car->user_id != auth()->id()) {
+            if ($car->user_id != auth()->id()) {
                 return $this->errorMessage("you don't have permissions");
             }
             $images = car_img::where("car_id", $car->id)->get();
@@ -546,7 +551,7 @@ class CarsController extends Controller
 
             $credentials = $this->credentials($request);
             $car = Car::create($credentials);
-            $alert = Alert::where("car_id", $car->id)->where("user_id", Auth()->id())->update([
+            /*$alert = Alert::where("car_id", $car->id)->where("user_id", Auth()->id())->update([
                 "status" => $request->status
             ]);
             if (!$alert) {
@@ -555,7 +560,7 @@ class CarsController extends Controller
                     "user_id" => Auth()->id(),
                     "status" => ($request->isAlertBefore) ? Car::Alert : Car::NotAlert
                 ]);
-            }
+            }*/
 
             foreach ($credentials['CarPhotos'] as $key => $img) {
                 car_img::create([
@@ -659,7 +664,7 @@ class CarsController extends Controller
                 $credentials = $this->credentials($request);
             }
             $car->update($credentials);
-            $alert = Alert::where("car_id", $car->id)->where("user_id", Auth()->id())->update([
+            /*$alert = Alert::where("car_id", $car->id)->where("user_id", Auth()->id())->update([
                 "status" => ($request->isAlertBefore == "true") ? Car::Alert : Car::NotAlert
             ]);
             if (!$alert) {
@@ -668,7 +673,7 @@ class CarsController extends Controller
                     "user_id" => Auth()->id(),
                     "status" => ($request->isAlertBefore == "true") ? Car::Alert : Car::NotAlert
                 ]);
-            }
+            }*/
             $CarBadges = car_badge::where('car_id', '=', $car->id)->get();
             foreach ($CarBadges as $key => $badge) {
                 $badge->delete();
@@ -727,7 +732,7 @@ class CarsController extends Controller
             'price'                    => 'required|integer',
             'discount'                 => 'nullable|integer|between:1,100',
             'isAccident'               => 'required|between:0,1',
-            'isAlertBefore'            => 'required|between:0,1',
+            //'isAlertBefore'            => 'required|between:0,1',
             'used_kilometers'          => 'required|integer',
             'bodyStyle'                => 'required|integer',
             'color'                    => 'required|integer',
@@ -744,15 +749,15 @@ class CarsController extends Controller
             'featureList.*'            => 'required|integer',
             'serviceHistory'           => 'required|string|min:3|max:1000',
             'transmission'             => 'required|integer|between:0,1',
-            'carState'                 => 'required|integer|between:0,1',
-            'payment_method'           => 'required|integer|between:0,2',
-            'adsExpire'                => 'required|date',
+            //'carState'                 => 'required|integer|between:0,1',
+            //'payment_method'           => 'required|integer|between:0,2',
+            //'adsExpire'                => 'required|date',
             "carFuelType"              => 'required|integer|between:0,1',
             'mContact_phone'           => 'required|string',
             'mContact_whats'           => 'required|string',
-            'payment_deposit'          => 'required|integer',
-            'payment_loan_amount'      => 'required|integer',
-            'payment_loan_period'      => 'required|integer',
+            //'payment_deposit'          => 'required|integer',
+            //'payment_loan_amount'      => 'required|integer',
+            //'payment_loan_period'      => 'required|integer',
             'imageList'                => 'required|array|min:1|max:5',
 
         ];
@@ -789,15 +794,15 @@ class CarsController extends Controller
             'lng'                         => $request->mLocation_longitude,
             'ServiceHistory'              => $request->serviceHistory,
             'transmission'                => $request->transmission,
-            'isNew'                       => $request->carState,
-            'payment'                     => $request->payment_method,
-            'adsExpire'                   => date("Y-m-d", strtotime($request->adsExpire)),
+            'isNew'                       => 1,
+            'payment'                     => 0,
+            'adsExpire'                   => Carbon::now()->addDays(60)->format('Y-m-d'),
             "FuelType"                    => $request->carFuelType,
             'phone'                       => $request->mContact_phone,
             'whats'                       => $request->mContact_whats,
-            'DepositPrice'                => $request->payment_deposit,
-            'InstallmentAmount'           => $request->payment_loan_amount,
-            'InstallmentPeriod'           => $request->payment_loan_period,
+            'DepositPrice'                => 2000,
+            'InstallmentAmount'           => 100,
+            'InstallmentPeriod'           => 10,
             'SellerType'                  => $seller,
             'views'                       => 0,
             'status'                      => Car::STATUS_DISABLE,
@@ -838,6 +843,7 @@ class CarsController extends Controller
                 "id"        => $carBodyList->id,
                 "logo"      => find_image(@$carBodyList->logo),
                 "title_en"  => $carBodyList->name,
+                "title_ar"  => $carBodyList->name_ar,
             ];
         }
         return $this->returnData("listMain", $carBodies, "Successfully");
@@ -875,7 +881,7 @@ class CarsController extends Controller
             if ($carColor) {
                 $colorList  = [
                     "id"    => $carColor->color->id,
-                    "code"  => $carColor->color->code
+                    "title"  => $carColor->color->code
                 ];
                 return $colorList;
             } else {
@@ -887,7 +893,7 @@ class CarsController extends Controller
             foreach ($carColors as $carColor) {
                 $colors[]   = [
                     "id"        => $carColor->id,
-                    "code"  => $carColor->code,
+                    "title"  => $carColor->code,
                 ];
             }
             return $colors;

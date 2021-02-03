@@ -2,22 +2,22 @@
 
 namespace Database\Seeders;
 
-use App\Models\Badges;
+use App\Models\City;
+use App\Models\User;
 use App\Models\CarBody;
-use App\Models\CarCapacity;
+use App\Models\CarYear;
+use App\Models\Country;
 use App\Models\CarColor;
 use App\Models\CarMaker;
-use App\Models\CarManufacture;
 use App\Models\CarModel;
-use App\Models\CarYear;
-use App\Models\City;
-use App\Models\Country;
-use App\Models\Feature;
+use App\Models\CarCapacity;
 use App\Models\Governorate;
-use App\Models\User;
+use Faker\Factory as Faker;
+use App\Models\CarManufacture;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
+
 class CarSeeder extends Seeder
 {
     /**
@@ -63,8 +63,8 @@ class CarSeeder extends Seeder
                 'status'                => rand(0,1),
                 'kiloUsed'              => $faker->numberBetween(1,100),
                 "FuelType"              => rand(0,1),
-                "adsExpire"             => now(),
-                "promotedExpire"        => now(),
+                "adsExpire"             => Carbon::now()->addDays($i)->format('Y-m-d'),
+                "promotedExpire"        => Carbon::now()->addDays($i)->format('Y-m-d'),
                 "promotedStatus"        => 0,
                 'created_at'            => now(),
                 'updated_at'            => now()

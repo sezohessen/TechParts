@@ -33,6 +33,6 @@ class DistributorResource extends JsonResource
             ->selectRaw('SUM(rate)/COUNT(user_id) AS avg_rating')
             ->first()
             ->avg_rating;
-        return $rate;
+        return floatval($rate);
     }
 }

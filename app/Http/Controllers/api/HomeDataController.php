@@ -51,7 +51,7 @@ class HomeDataController extends Controller
                 "priceRangeMax" => $Max,
                 "priceRangeMin" => $Min,
                 "title"         => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
-                "rate"          => $this->rate($agency),
+                "rate"          => floatval($this->rate($agency)) ,
             ];
         }
         $user = auth('sanctum')->user();
@@ -107,7 +107,7 @@ class HomeDataController extends Controller
         if ($trendingCars) {
             $array_data['trendingCarList'] = $trendingCars;
         }
-        if (empty($agencies)) {
+        if ( count($agencies) <= 0 ) {
             return $this->errorMessage('No Data Found');
         }
         return $this->returnData("agencyList", $agencies, "Success", $array_data);
@@ -162,7 +162,7 @@ class HomeDataController extends Controller
             "title"         => $car_model_id->name
         ];
         $myMaintenance  = [
-            "date_next"     => $MyMaintenanceList->date_next,
+            "date_next"     => $MyMaintenanceList->date_next->format('Y-m-d'),
             "id"            => $MyMaintenanceList->id,
             "mCarMaker"     => $mCarMaker,
             "mCarModel"     => $mCarModel
@@ -195,7 +195,7 @@ class HomeDataController extends Controller
                 "title"         => $car_model_id->name
             ];
             $MaintenanceList[]  = [
-                "date_next"     => $MainList->date_next,
+                "date_next"     => $MainList->date_next->format('Y-m-d'),
                 "id"            => $MainList->id,
                 "mCarMaker"     => $mCarMaker,
                 "mCarModel"     => $mCarModel

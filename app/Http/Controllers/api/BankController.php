@@ -30,6 +30,7 @@ class BankController extends Controller
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
+
         $banks   = Bank::whereHas('user', function ($query) use ($request) {
             return $query->where('users.interest_country', $request->interest_country);
         })
@@ -44,20 +45,21 @@ class BankController extends Controller
         if (!$banks->count()) {
             return $this->errorMessage(__('No banks found to be showen.'));
         }
+        $firstBank =   $banks->first();
         $bankLists  = [];
         foreach ($banks as $key => $bank) {
-            if (!$key) $firstBank =   $bank;
+
             $bankLists[]    = [
                 "color" => $bank->color,
                 "id"    => $bank->id,
-                "logo"  => $bank->img->name,
+                "logo"  => find_image(@$bank->img),
                 "name"  => $bank->name,
             ];
         }
         $mBank  = [
             "color" =>  $firstBank->color,
             "id"    =>  $firstBank->id,
-            "logo"  =>  $firstBank->img->name,
+            "logo"  =>  find_image($firstBank->img) ,
             "name"  =>  $firstBank->name,
         ];
         $bankContact    = BankContact::find($firstBank->id);
@@ -108,7 +110,7 @@ class BankController extends Controller
         $mBank  = [
             "color" => $bank->color,
             "id"    => $bank->id,
-            "logo"  => $bank->img->name,
+            "logo"  => find_image(@$bank->img),
             "name"  => $bank->name,
         ];
         $bankContact    = BankContact::find($bank->id);
@@ -138,16 +140,5 @@ class BankController extends Controller
         }
         return $this->returnData("resultList", $bankLists, "Successfully");
     }
-    public function lang($request)
-    {
-        if ($locale = $request->lang) {
-            if (in_array($locale, ['ar', 'en'])) {
-                default_lang($locale);
-            } else {
-                default_lang();
-            }
-        } else {
-            default_lang();
-        }
-    }
+
 }

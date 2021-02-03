@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Car;
 use Faker\Factory as Faker;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
