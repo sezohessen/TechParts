@@ -23,11 +23,11 @@ class TrendingCarDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('day', '{{Str::limit($day, 100)}}')
-            //     ->editColumn('trends', 'dashboard.Trending.btn.cars')
-            ->editColumn('trends', function ($trending) {
-                return view("dashboard.Trending.btn.cars", ['data' => $trending->trends]);
-            })
+            ->editColumn('day', '{{Str::limit(date("Y-m-d", strtotime($day)), 100)}}')
+       //     ->editColumn('trends', 'dashboard.Trending.btn.cars')
+            ->editColumn('trends', function($trending) {
+                return view("dashboard.Trending.btn.cars",['data' => $trending->trends]);
+              })
             ->addColumn('checkbox', 'dashboard.Trending.btn.checkbox')
             ->addColumn('action', 'dashboard.Trending.btn.action')
             ->rawColumns(['checkbox', 'action', "trends"]);
@@ -56,7 +56,7 @@ class TrendingCarDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('CarBodies-table')
+            ->setTableId('trinding-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -138,6 +138,6 @@ class TrendingCarDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'CarBodies_' . date('YmdHis');
+        return 'trinding_' . date('YmdHis');
     }
 }

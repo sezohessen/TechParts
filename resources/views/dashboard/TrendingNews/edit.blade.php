@@ -33,7 +33,7 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <div class="input-group date" >
                                     <input type="text" class="form-control {{ $errors->has('day') ? 'is-invalid' : '' }}"
-                                    readonly   value="{{ old("day") ?? date("m/d/Y", strtotime($trending->day)) }}" name='day' placeholder="Select date" id="kt_datepicker_1"/>
+                                    readonly   value="{{ old("day") ?? date("Y-m-d", strtotime($trending->day)) }}" name='day' placeholder="Select date" id="kt_datepicker_1"/>
                                     <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="la la-calendar"></i>

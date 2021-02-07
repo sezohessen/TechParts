@@ -45,8 +45,13 @@ class TrendingController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = Trending::rules($request);
+        $rules  = Trending::rules($request);
         $request->validate($rules);
+        $trend  = Trending::where('day',date("Y-m-d", strtotime($request->day)))->get();
+        if($trend->count()){
+            session()->flash('failed',__("This day already exist as a trend day"));
+            return  redirect()->back();
+        }
         $credentials = Trending::credentials($request);
         $trend=Trending::create($credentials);
         foreach($request->car_id as $car)
@@ -100,18 +105,40 @@ class TrendingController extends Controller
      */
     public function update(Request $request,Trending $trending)
     {
+
         $rules = Trending::rules($request);
         $request->validate($rules);
-        $credentials = Trending::credentials($request);
-        $trending->update($credentials);
-        foreach($request->car_id as $car)
-        {
-            if (!$trending->trends->contains($car)) {
-                $trending->trends()->attach([$car]);
-            }
-
+        $ValidDay   = Trending::where('day',date("Y-m-d", strtotime($request->day)))
+        ->where('id','!=',$trending->id)
+        ->get();
+        if($ValidDay->count()){
+            session()->flash('failed',__("This day already exist as a trend day"));
+            return  redirect()->back();
         }
+        $credentials    = Trending::credentials($request);
+        $CarDay         = Trending::where('id',$trending->id)->update($credentials);
+        /* Update Trending News */
+        $TrendingNews    = TrendCar::where('trend_id',$trending->id)->get();
+        $SelectedNews = [];
+        foreach($TrendingNews as $car){
+            $SelectedNews[] = $car->car_id;
+        }
+        $NeedToBeDeleted = array_diff($SelectedNews,$request->car_id);
+        $NeedToBeCreated = array_diff($request->car_id,$SelectedNews);
 
+        $rules          = TrendCar::rules($request);
+        $request->validate($rules);
+
+        foreach ($NeedToBeCreated as $car){
+            $credentials    = TrendCar::credentials($car,$trending->id);
+            $TrendingNews   = TrendCar::create($credentials);
+        }
+        foreach ($NeedToBeDeleted as $car){
+            $TrendingNews      = TrendCar::where([
+                ['car_id',$car],
+                ['trend_id',$trending->id]
+            ])->delete();
+        }
         session()->flash('created',__("Changes has been Updated Successfully"));
         return  redirect()->route("dashboard.trending.index");
     }
