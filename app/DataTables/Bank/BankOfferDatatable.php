@@ -44,7 +44,7 @@ class BankOfferDatatable extends DataTable
      */
     public function query()
     {
-        $bank = Bank::where('user_id',Auth::id())->first();
+        $bank = Bank::where('user_id', Auth::id())->first();
         return BankOffer::query()->where('bank_id', $bank->id)->select("bank_offers.*");
     }
 
@@ -74,7 +74,7 @@ class BankOfferDatatable extends DataTable
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 

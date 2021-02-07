@@ -30,19 +30,19 @@ class AgencyCarDatatable extends DataTable
             ->editColumn('Description', '{!! Str::limit($Description, 100) !!}')
             ->editColumn('Description_ar', '{!! Str::limit($Description_ar, 100) !!}')
             ->addColumn('checkbox', 'dashboard.Agency.Car.btn.checkbox')
-            ->editColumn('SellerType', function($car) {
-               if(($car->user->Agency) ){
-                    if($car->user->Agency->center_type ==0)
+            ->editColumn('SellerType', function ($car) {
+                if (($car->user->Agency)) {
+                    if ($car->user->Agency->center_type == 0)
                         return Agency::StyleAgecnyType()[0][$car->user->Agency->agency_type];
-                    elseif($car->user->Agency->center_type ==1)
+                    elseif ($car->user->Agency->center_type == 1)
                         return Agency::StyleAgecnyType()[1][$car->user->Agency->agency_type];
                     else
                         return Agency::StyleAgecnyType()[2][0];
-               }
+                }
             })
             ->addColumn('action', 'dashboard.Agency.Car.btn.action')
             ->addColumn('status', 'dashboard.Agency.Car.btn.status')
-            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar",'status']);
+            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar", 'status']);
     }
 
     /**
@@ -54,7 +54,7 @@ class AgencyCarDatatable extends DataTable
     public function query()
     {
 
-        return Car::query()->has('agencies')->with(['maker', 'country'])->select("cars.*");//->where("SellerType","=",0)
+        return Car::query()->has('agencies')->with(['maker', 'country'])->select("cars.*"); //->where("SellerType","=",0)
     }
 
     /**
@@ -78,15 +78,15 @@ class AgencyCarDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -129,10 +129,10 @@ class AgencyCarDatatable extends DataTable
                 ->title(__("User Phone")),
             Column::make('price')->title(__("Price")),
             Column::make('Description')
-            ->title(__("Description (EN)"))
+                ->title(__("Description (EN)"))
                 ->width(70),
             Column::make('Description_ar')
-            ->title(__("Description (AR)"))
+                ->title(__("Description (AR)"))
                 ->width(70),
             Column::computed('SellerType')
                 ->title(__('Seller Type'))
@@ -142,12 +142,12 @@ class AgencyCarDatatable extends DataTable
                 ->width(120)
                 ->addClass('text-center'),
             Column::computed('status')
-            ->title(__('Status'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center'),
+                ->title(__('Status'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

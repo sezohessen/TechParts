@@ -27,9 +27,8 @@ class CarPromoteDatatable extends DataTable
             ->editColumn('subscribe_package.period', '{{Str::limit($subscribe_package["period"], 100)}}')
             ->editColumn('price', '{{Str::limit($price, 100)}}')
             ->editColumn('weaccept_order_id', '{{Str::limit($weaccept_order_id, 100)}}')
-            ->editColumn('car.CarMaker_id', function($promote) {
+            ->editColumn('car.CarMaker_id', function ($promote) {
                 return Str::limit($promote->car->maker->name ?? "", 100);
-
             })
             ->editColumn('user.email', '{{ Str::limit($user["email"], 100) }}')
             ->addColumn('checkbox', 'dashboard.CarPromote.btn.checkbox')
@@ -45,7 +44,7 @@ class CarPromoteDatatable extends DataTable
      */
     public function query()
     {
-        return PromoteCar::query()->with(['user','car','subscribe_package'])->select("promote_cars.*");
+        return PromoteCar::query()->with(['user', 'car', 'subscribe_package'])->select("promote_cars.*");
     }
 
     /**
@@ -69,15 +68,15 @@ class CarPromoteDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -113,15 +112,15 @@ class CarPromoteDatatable extends DataTable
             ],
             Column::make('id'),
             Column::make('subscribe_package.period')
-            ->title(__("Period")),
+                ->title(__("Period")),
             Column::make('price')
-            ->title(__("price")),
+                ->title(__("price")),
             Column::make('weaccept_order_id')
-            ->title(__("Order ID")),
+                ->title(__("Order ID")),
             Column::make('car.CarMaker_id')
-            ->title(__("Car Maker")),
+                ->title(__("Car Maker")),
             Column::make('user.email')
-            ->title(__("User Email")),
+                ->title(__("User Email")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

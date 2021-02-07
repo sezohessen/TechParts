@@ -24,12 +24,12 @@ class TrendingNewsDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('day', '{{Str::limit($day, 100)}}')
-            ->editColumn('trendingNews', function($trendingNews) {
-                if($trendingNews->trends)return view("dashboard.TrendingNews.btn.news",['data' => $trendingNews->trends]);
-              })
+            ->editColumn('trendingNews', function ($trendingNews) {
+                if ($trendingNews->trends) return view("dashboard.TrendingNews.btn.news", ['data' => $trendingNews->trends]);
+            })
             ->addColumn('checkbox', 'dashboard.TrendingNews.btn.checkbox')
             ->addColumn('action', 'dashboard.TrendingNews.btn.action')
-            ->rawColumns(['checkbox', 'action',"trends"]);
+            ->rawColumns(['checkbox', 'action', "trends"]);
     }
 
     /**
@@ -64,15 +64,15 @@ class TrendingNewsDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 

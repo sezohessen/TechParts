@@ -30,7 +30,7 @@ class AgencyReviewDatatable extends DataTable
             ->addColumn('checkbox', 'dashboard.AgencyReview.btn.checkbox')
             ->addColumn('action', 'dashboard.AgencyReview.btn.action')
             ->addColumn('active', 'dashboard.AgencyReview.btn.active')
-            ->rawColumns(['checkbox', 'action','active']);
+            ->rawColumns(['checkbox', 'action', 'active']);
     }
 
     /**
@@ -41,7 +41,7 @@ class AgencyReviewDatatable extends DataTable
      */
     public function query()
     {
-        return AgencyReview::query()->with("user","agency")->select("agency_reviews.*");
+        return AgencyReview::query()->with("user", "agency")->select("agency_reviews.*");
     }
 
     /**
@@ -70,7 +70,7 @@ class AgencyReviewDatatable extends DataTable
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -109,16 +109,16 @@ class AgencyReviewDatatable extends DataTable
             Column::make('price'),
             Column::make('review'),
             Column::make('user.email')
-            ->title(__("User email")),
+                ->title(__("User email")),
             Column::make('agency.name')
-            ->title(__("Agency name")),
+                ->title(__("Agency name")),
             Column::computed('active')
-            ->title(__('Active'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center'),
+                ->title(__('Active'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

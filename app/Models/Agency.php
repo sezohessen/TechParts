@@ -141,19 +141,19 @@ class Agency extends Model
                 self::Ag_Distributor    =>"<span class='label label-success label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Distributor')."</span>",
-                self::Ag_Individual    =>"<span class='label label-dark label-inline mr-2'
+                self::Ag_Individual    =>"<span class='label label-primary label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Individual')."</span>",
 
             ],
             [
-                self::UnSelected        => "<span class='label label-info label-inline mr-2'
+                self::UnSelected        => "<span class='label label-danger label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Un selected work type')."</span>",
                 self::Main_Service_center         => "<span class='label label-dark label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Service center')."</span>",
-                self::Main_Workshop    =>"<span class='label label-primary label-inline mr-2'
+                self::Main_Workshop    =>"<span class='label label-info label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Workshop')."</span>"
             ],

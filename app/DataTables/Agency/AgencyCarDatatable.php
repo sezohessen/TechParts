@@ -32,7 +32,7 @@ class AgencyCarDatatable extends DataTable
             ->addColumn('checkbox', 'agency.Car.btn.checkbox')
             ->addColumn('action', 'agency.Car.btn.action')
             ->addColumn('status', 'agency.Car.btn.status')
-            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar",'status']);
+            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar", 'status']);
     }
 
     /**
@@ -44,7 +44,7 @@ class AgencyCarDatatable extends DataTable
     public function query()
     {
 
-        return Car::query()->has('OneAgency')->with(['maker', 'country'])->select("cars.*");//->where("SellerType","=",0)
+        return Car::query()->has('OneAgency')->with(['maker', 'country'])->select("cars.*"); //->where("SellerType","=",0)
     }
 
     /**
@@ -68,15 +68,15 @@ class AgencyCarDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -119,18 +119,18 @@ class AgencyCarDatatable extends DataTable
                 ->title(__("User Phone")),
             Column::make('price')->title(__("Price")),
             Column::make('Description')
-            ->title(__("Description (EN)"))
+                ->title(__("Description (EN)"))
                 ->width(70),
             Column::make('Description_ar')
-            ->title(__("Description (AR)"))
+                ->title(__("Description (AR)"))
                 ->width(70),
             Column::computed('status')
-            ->title(__('Status'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center'),
+                ->title(__('Status'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

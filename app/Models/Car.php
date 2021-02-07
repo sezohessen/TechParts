@@ -168,9 +168,9 @@ class Car extends Model
     }
     public static function credentials($request,$images_id = NULL)
     {
-        $seller=Car::SELLER_INDIVIDUAL;
+        $seller = Car::SELLER_INDIVIDUAL;
         if(Auth()->user()->Agency){
-           $seller=(Auth()->user()->Agency->center_type==0) ? Car::SELLER_AGENCY: Car::SELLER_DISTRIBUTOR;
+           $seller=(Auth()->user()->Agency->center_type == Agency::center_type_Agency) ? Car::SELLER_AGENCY : Car::SELLER_DISTRIBUTOR;
         }
         $credentials = [
             'CarMaker_id'                 => $request->CarMaker_id,

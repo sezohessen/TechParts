@@ -29,7 +29,7 @@ class SubscribeDatatable extends DataTable
             ->editColumn('description_ar', '{!! Str::limit($description_ar, 100) !!}')
             ->addColumn('checkbox', 'dashboard.subscribe_package.btn.checkbox')
             ->addColumn('action', 'dashboard.subscribe_package.btn.action')
-            ->rawColumns(['checkbox', 'action','description','description_ar']);
+            ->rawColumns(['checkbox', 'action', 'description', 'description_ar']);
     }
 
     /**
@@ -64,15 +64,15 @@ class SubscribeDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -108,15 +108,15 @@ class SubscribeDatatable extends DataTable
             ],
             Column::make('id'),
             Column::make('currency_name')
-            ->title(__("Currency")),
+                ->title(__("Currency")),
             Column::make('period')
-            ->title(__('period')),
+                ->title(__('period')),
             Column::make('description')
-            ->title(__('Description (EN)')),
+                ->title(__('Description (EN)')),
             Column::make('description_ar')
-            ->title(__('Description (AR)')),
+                ->title(__('Description (AR)')),
             Column::make('price')
-            ->title(__('price')),
+                ->title(__('price')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
