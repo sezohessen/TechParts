@@ -50,7 +50,7 @@ class generalController extends Controller
         }
         $destinationPath = public_path() . $type_of_page;
         $file->move($destinationPath, $fileName);
-        $Image = Image::create(['name' => $fileName, 'base' => '/img/users/']);
+        $Image = Image::create(['name' => $fileName, 'base' => $type_of_page]);
         return $this->returnData('file_url',find_image($Image) ,__('File Uploaded Successfully') );
     }
 }

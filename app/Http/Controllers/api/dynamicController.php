@@ -47,6 +47,9 @@ class dynamicController extends Controller
                 "answer"     => Session::get('app_locale') == 'ar' ? $faq->answer_ar : $faq->answer,
             ];
         }
+        if (  count($faqLists) <= 0 ) {
+            return $this->errorMessage('No Data Found');
+        }
         return $this->returnData("faqList", $faqLists, "Successfully");
     }
 
@@ -85,6 +88,9 @@ class dynamicController extends Controller
         }
         $governmentList     = Governorate::where('active', 1)
             ->where('country_id', $request->country_name);
+        if (  $governmentList->get()->count() <= 0 ) {
+            return $this->errorMessage('No Data Found');
+        }
         $data           = new GovernorateCollection($governmentList->paginate(10));
         return $data;
     }

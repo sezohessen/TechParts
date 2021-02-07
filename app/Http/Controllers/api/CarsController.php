@@ -859,6 +859,8 @@ class CarsController extends Controller
                 "title_ar"  => $featureList->name_ar,
             ];
         }
+        if (!$featureLists->count())
+                return $this->errorMessage("No data found");
         return $this->returnData("listMain", $features, "Successfully");
     }
     public function carBadge()
