@@ -45,7 +45,9 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("ask_expoert",'AskExpertController@create');
 
     Route::group(['prefix' => 'centers/review'], function () {
-        Route::post("agency",'AgencyController@review');
+        Route::post("CenterAgency",'AgencyController@review');
+        Route::post("CenterMaintenace",'AgencyController@review');
+        Route::post("CenterSpare",'AgencyController@review');
     });
     Route::post("payment",'CarsController@deposit');
     Route::post("car/promote/car_promote",'CarsController@promote');

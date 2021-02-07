@@ -26,13 +26,7 @@ class AgencyController extends Controller
     public function review(Request $request)
     {
         $this->lang($request->lang);
-        $validator  = Validator::make((array) $request->all(), [
-            'rate'          => 'required|in:1,2,3,4,5',
-            'price_type'    => 'required|in:1,2,3',
-            'comment'       => 'required|min:3|max:1000',
-            'center_id'     => 'required|integer',
-
-        ]);
+        $validator  = Validator::make((array) $request->all(), AgencyReview::rules());
         if (!$validator->fails()) {
             if (!auth()->user()) {
                 return $this->errorMessage(__('Login to see submit review'));
@@ -45,17 +39,10 @@ class AgencyController extends Controller
             if ($check) {
                 return $this->errorMessage(__("You review this agency before"));
             }
-            $askExpert  = AgencyReview::create([
-                'rate'          => $request->rate,
-                'price'         => $request->price_type,
-                'review'        => $request->comment,
-                'agency_id'     => $request->center_id,
-                'user_id'       => auth()->user()->id
-            ]);
+            $askExpert  = AgencyReview::create(AgencyReview::credentials($request, auth()->user()->id));
             return $this->returnSuccess(__("Your Review Has been created Successfully, Wait for Admin to Apply your review"));
-        } else {
-            return $this->ValidatorMessages($validator->errors()->getMessages());
         }
+        return $this->ValidatorMessages($validator->errors()->getMessages());
     }
     public function agency(Request $request)
     {
