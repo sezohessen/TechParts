@@ -263,7 +263,7 @@ return [
         'fonts' => [
             'google' => [
                 'families' => [
-                    'Poppins:300,400,500,600,700'
+                    'Cairo:300,400,500,600,700'
                 ]
             ]
         ],
