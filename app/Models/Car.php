@@ -85,6 +85,20 @@ class Car extends Model
             self::FUEL_PETROL         => 'petrol',
         ];
     }
+
+    public static function STATUS()
+    {
+        return [
+            self::STATUS_DISABLE                => false, //'disable'
+            self::STATUS_ACTIVE                 => true, // 'active'
+        ];
+    }
+
+    public function getIsAdminAprovedAttribute()
+    {
+        return self::STATUS()[$this->status];
+    }
+
     public static function TransmissionType()
     {
         return [

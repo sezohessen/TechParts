@@ -35,7 +35,7 @@ class NewsController extends Controller
             'title'         => Session::get('app_locale') == 'ar' ? $news->title : $news->title,
 
         ];
-        return $this->returnData('mNews', $data, __('Success'));
+        return $this->returnData('mNews', $data, __('Successfully'));
     }
     public function filter(Request $request)
     {
@@ -49,7 +49,7 @@ class NewsController extends Controller
             return $this->returnError('No such Category id exist');
         }
         $news           = News::where('category_id', $request->category_id);
-        if (!$news->count())return $this->errorMessage("No data found");
+        if (!$news->count()) return $this->errorMessage("No data found");
         $trendingNews   = News::whereHas('trends', function ($query) {
             return $query->where('news_days.day', date('Y-m-d'));
         });
@@ -57,8 +57,8 @@ class NewsController extends Controller
         $data           = (new NewsDetailCollection($news->paginate(10)))->type('resultList');
 
         $trend          = (new NewsDetailCollection($trendingNews->paginate(10)))->type('trendingList');
-        
-        return $this->returnData('resultList', $data, __('Success'), ['trendingList' => $trend]);
+
+        return $this->returnData('resultList', $data, __('Successfully'), ['trendingList' => $trend]);
     }
     public function category()
     {
@@ -71,6 +71,6 @@ class NewsController extends Controller
                 "title_ar"  => $categroyList->name_ar,
             ];
         }
-        return $this->returnData("listMain", $categories, "Successfully");
+        return $this->returnData("listMain", $categories, __('Successfully'));
     }
 }

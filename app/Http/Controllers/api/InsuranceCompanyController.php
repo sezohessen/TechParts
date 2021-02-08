@@ -32,7 +32,7 @@ class InsuranceCompanyController extends Controller
                     "name"      => $insurance->name_by_lang,
                 ];
             }
-            return $this->returnData("insuranceCompanyList", $insurances, "Successfully");
+            return $this->returnData("insuranceCompanyList", $insurances, __('Successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -89,7 +89,7 @@ class InsuranceCompanyController extends Controller
                         ];
                     }
                 }
-                return $this->returnData("insuranceOfferList", $insurances, "Successfully");
+                return $this->returnData("insuranceOfferList", $insurances, __('Successfully'));
             } else {
                 return $this->errorMessage(__("No such company id found"));
             }

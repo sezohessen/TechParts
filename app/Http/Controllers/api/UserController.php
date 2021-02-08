@@ -77,11 +77,12 @@ class UserController extends Controller
     public function forgetPassword(Request $request)
     {
         $this->lang($request->lang);
-        $this->validateEmail($request);
-
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
+        $validator  = Validator::make((array) $request->all(), [
+            'email' => 'required|email'
+        ]);
+        if ($validator->fails()) {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
+        }
 
         $response = $this->broker()->sendResetLink(
             $this->credentials($request)
@@ -89,7 +90,7 @@ class UserController extends Controller
         if ($response == Password::RESET_LINK_SENT) {
             return $this->SuccessMessage($response);
         } else {
-            return $this->ValidatorMessages(['email' => $response ]);
+            return $this->returnError(trans($response, [], $request->lang));
         }
     }
     public function rest_password(Request $request)
@@ -201,7 +202,7 @@ class UserController extends Controller
         if ($user->interestCountry) {
             $data["interest_country"] =  $user->interestCountry->id;
         }
-        return $this->returnData('mUser', $data, __('Success'));
+        return $this->returnData('mUser', $data, __('Successfully'));
     }
     public function get_profile(Request $request)
     {
@@ -230,7 +231,7 @@ class UserController extends Controller
         if ($user->interestCountry) {
             $data["interest_country"] =  $user->interestCountry->id;
         }
-        return $this->returnData('mUser', $data, __('Success'));
+        return $this->returnData('mUser', $data, __('Successfully'));
     }
     public function get_profile_by_id(Request $request)
     {
@@ -265,6 +266,6 @@ class UserController extends Controller
         if ($user->interestCountry) {
             $data["interest_country"] =  $user->interestCountry->id;
         }
-        return $this->returnData('mUser', $data, __('Success'));
+        return $this->returnData('mUser', $data, __('Successfully'));
     }
 }

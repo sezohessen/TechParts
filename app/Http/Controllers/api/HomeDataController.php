@@ -110,7 +110,7 @@ class HomeDataController extends Controller
         if ( count($agencies) <= 0 ) {
             return $this->errorMessage('No Data Found');
         }
-        return $this->returnData("agencyList", $agencies, "Success", $array_data);
+        return $this->returnData("agencyList", $agencies, __("Successfully"), $array_data);
     }
     public function createNewMaintenance(Request $request)
     {

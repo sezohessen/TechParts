@@ -88,7 +88,7 @@ class AgencyController extends Controller
                 );
             }
 
-            return $this->returnData("offersList", $agencies, "Successfully", ["subscribedList"    => $subscripedList]);
+            return $this->returnData("offersList", $agencies, __('Successfully'), ["subscribedList"    => $subscripedList]);
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -152,7 +152,7 @@ class AgencyController extends Controller
                     $paymentMethodList = true
                 );
             }
-            return $this->returnData("mCenter", $agencies, "Successfully");
+            return $this->returnData("mCenter", $agencies, __('Successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -180,7 +180,7 @@ class AgencyController extends Controller
                     $paymentMethodList = true
                 );
             }
-            return $this->returnData("mCenter", $agencies, "Successfully");
+            return $this->returnData("mCenter", $agencies, __('Successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -208,7 +208,7 @@ class AgencyController extends Controller
                     $paymentMethodList = true
                 );
             }
-            return $this->returnData("mCenter", $agencies, "Successfully");
+            return $this->returnData("mCenter", $agencies, __('Successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -305,7 +305,7 @@ class AgencyController extends Controller
                     $carMakerList = false
                 );
             }
-            return $this->returnData("agencyList", $agencies, "Successfully");
+            return $this->returnData("agencyList", $agencies, __('Successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -339,7 +339,7 @@ class AgencyController extends Controller
                     $carMakerList = false
                 );
             }
-            return $this->returnData("maintenanceList", $agencies, "Successfully");
+            return $this->returnData("maintenanceList", $agencies, __('Successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -733,7 +733,7 @@ class AgencyController extends Controller
             "isAuthorised"          => $agency->is_authorised ? true : false,
             "priceRangeMax"         => $Max,
             "priceRangeMin"         => $Min,
-            "rate"                  => intval($this->rate($agency)) ,
+            "rate"                  => intval($this->rate($agency)),
             "isFavorite"            => $this->isFav($agency),
             "mContact"              => $this->Contact($agency),
             "mLocation"             => $this->Location($agency),
