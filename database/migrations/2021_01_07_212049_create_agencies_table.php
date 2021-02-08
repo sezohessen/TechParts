@@ -38,6 +38,12 @@ class CreateAgenciesTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
+            $table->bigInteger('logo_id')->unsigned();
+            $table->foreign('logo_id')
+            ->references('id')->on('images')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
             $table->bigInteger('img_id')->unsigned();
             $table->foreign('img_id')
             ->references('id')->on('images')

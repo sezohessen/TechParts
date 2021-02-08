@@ -19,6 +19,7 @@ class DistributorResource extends JsonResource
     {
         $agencyLists = [
             "image"     => find_image(@$this->img),
+            "logo"      => find_image(@$this->logo),
             "name"      => Session::get('app_locale') == 'ar' ? $this->name_ar : $this->name,
             "rate"      => $this->rate($this),
             "userId"    => $this->user_id,
