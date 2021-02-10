@@ -173,7 +173,7 @@ class AgencyController extends Controller
         $OldSpecialties = $agency->maintenance_type;
         $rules          = Agency::rules($request,'Agency');
         $request->validate($rules);
-        $credentials    = Agency::credentials($request,$request->user_id,$agency->img_id);
+        $credentials    = Agency::credentials($request,$request->user_id,$agency->img_id,1,$agency->logo_id);
         $Agency         = Agency::where('id',$id)->update($credentials);
         //After Creating Agency row ,Agency Contact will be created by adding the agency id
         $rules          = AgencyContact::rules($request);

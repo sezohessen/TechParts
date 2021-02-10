@@ -52,6 +52,7 @@ class Agency extends Model
         'car_status',
         'payment_method',
         'img_id',
+        'logo_id',
         'country_id',
         'governorate_id',
         'city_id',
@@ -181,6 +182,9 @@ class Agency extends Model
     public function img(){
         return $this->belongsTo(Image::class,'img_id','id');
     }
+    public function logo(){
+        return $this->belongsTo(Image::class,'logo_id','id');
+    }
     public function carMakers()
     {
         return $this->belongsToMany(CarMaker::class, 'agency_car_makers', 'agency_id','CarMaker_id')->where('active', 1);
@@ -216,6 +220,7 @@ class Agency extends Model
             'payment_method'        => 'required|integer',
             'status'                => 'required|integer',
             'img_id'                => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'logo_id'               => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'country_id'            => 'required',
             'governorate_id'        => 'required',
             'city_id'               => 'required',
@@ -225,18 +230,20 @@ class Agency extends Model
             'active'                => 'nullable'
         ];
         if($id == 'Agency'){//For update in Dashborad
-            $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['img_id']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['logo_id']   = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
         }elseif($id == 'AgencyDash'){//For Create in Agency Dashboard
             unset($rules['status']);
             unset($rules['user_id']);
         }elseif($id){//For Update in Agency Dashboard
-            $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['img_id']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['logo_id']   = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             unset($rules['status']);
             unset($rules['user_id']);
         }
         return $rules;
     }
-    public static function credentials($request,$id = NULL,$img_id = NULL,$specialCase = 1)
+    public static function credentials($request,$id = NULL,$img_id = NULL,$specialCase = 1,$logo_id = NULL)
     {
         $credentials = [
             'name'              =>  $request->name,
@@ -297,6 +304,18 @@ class Agency extends Model
         }else{
             if($id){
                 $credentials['img_id'] = $img_id;
+            }
+        }
+        if($request->file('logo_id')){//Creating and Updating Image
+            if($id){
+                $Image_id = self::file($request->file('logo_id'),$logo_id);
+            }else{
+                $Image_id = self::file($request->file('logo_id'));
+            }
+            $credentials['logo_id'] = $Image_id;
+        }else{
+            if($id){
+                $credentials['logo_id'] = $logo_id;
             }
         }
         return $credentials;

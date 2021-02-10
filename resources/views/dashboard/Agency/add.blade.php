@@ -7,6 +7,7 @@
     $lat=!empty(old("lat"))?old("lat"):'30.044352632821397';
     $long=!empty(old("long"))?old("long"):'31.24011230468745';
 ?>
+
     <div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
@@ -433,26 +434,51 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
-                            <br>
-                            <div class="image-input image-input-empty image-input-outline" id="img_id" style="background-image: url({{asset('media/users/blank.png') }})">
-                                <div class="image-input-wrapper"></div>
-                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                    <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="img_id" accept=".png, .jpg, .jpeg ,gif,svg" >
-                                    <input type="hidden" name="img_id_remove" />
-                                </label>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label>
+                                    <br>
+                                    <div class="image-input image-input-empty image-input-outline" id="logo_id" style="background-image: url({{asset('media/users/blank.png') }})">
+                                        <div class="image-input-wrapper"></div>
+                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                            <i class="fa fa-pen icon-sm text-muted"></i>
+                                            <input type="file" name="logo_id" accept=".png, .jpg, .jpeg ,gif,svg" >
+                                            <input type="hidden" name="logo_id_remove" />
+                                        </label>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                    </div>
+                                    @error('logo_id')
+                                    <div class="invalid-feedback">{{ $errors->first('logo_id') }}</div>
+                                    @enderror
+                                </div>
                             </div>
-                            @error('img_id')
-                            <div class="invalid-feedback">{{ $errors->first('img_id') }}</div>
-                            @enderror
+                            <div class="form-group">
+                                <label for="Image">@lang('Agency image') <span class="text-danger">*</span></label>
+                                <br>
+                                <div class="image-input image-input-empty image-input-outline" id="img_id" style="background-image: url({{asset('media/users/blank.png') }})">
+                                    <div class="image-input-wrapper"></div>
+                                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                        <i class="fa fa-pen icon-sm text-muted"></i>
+                                        <input type="file" name="img_id" accept=".png, .jpg, .jpeg ,gif,svg" >
+                                        <input type="hidden" name="img_id_remove" />
+                                    </label>
+                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                    </span>
+                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                    </span>
+                                </div>
+                                @error('img_id')
+                                <div class="invalid-feedback">{{ $errors->first('img_id') }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -527,6 +553,8 @@
     var KTUserEdit={
         init:function(){
             new KTImageInput("img_id");
+            new KTImageInput("logo_id");
+
             }
             };jQuery(document).ready((function(){KTUserEdit.init()}));
 </script>
@@ -534,7 +562,6 @@
     $(document).ready(function() {
     $("input[name$='center_type']").click(function() {
         var test = $(this).val();
-
         $("div.center_type").hide();
         $("#center_type" + test).show();
     });
