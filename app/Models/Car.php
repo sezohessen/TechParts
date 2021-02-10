@@ -47,7 +47,7 @@ class Car extends Model
         'lat','lng','phone','InstallmentAmount', 'InstallmentPeriod',
         'DepositPrice' ,'Country_id' ,'City_id' ,'Governorate_id' ,
         'CarModel_id' ,'CarMaker_id' ,'CarBody_id' ,'CarYear_id' ,
-        'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' ,
+        'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' , 'clicks',
         'transmission' ,'payment', 'SellerType','isNew',"adsExpire",
         "promotedExpire","promotedStatus","user_id","whats","data","FuelType"
     ];

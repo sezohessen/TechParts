@@ -67,7 +67,7 @@ class CarResource extends JsonResource
             "featureList"=>$car_features,
             "isAdminAproved"=> $this->isAdminAproved,
             "counter_view"=> $this->views,
-            "counter_clicks"=> $this->views,
+            "counter_clicks"=> $this->clicks,
             "bodyStyle"=>$this->body->name,
             "color"=>@$this->color->code,
         ];

@@ -18,11 +18,18 @@ class AgencyCarMakerSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        for ($i = 0; $i < 40; $i++) {
+        $agencies = Agency::where('active', 1)->get();
+        $makers = CarMaker::all();
+        foreach ($agencies as $key => $agency) {
             DB::table('agency_car_makers')->insert([
-                'CarMaker_id'       => CarMaker::all()->random()->id,
-                'agency_id'         => Agency::where('active', 1)->get()->random()->id,
+                'CarMaker_id'       => $makers->random()->id,
+                'agency_id'         => $agency->id,
+                'created_at'        => now(),
+                'updated_at'        => now()
+            ]);
+            DB::table('agency_car_makers')->insert([
+                'CarMaker_id'       => $makers->random()->id,
+                'agency_id'         => $agency->id,
                 'created_at'        => now(),
                 'updated_at'        => now()
             ]);

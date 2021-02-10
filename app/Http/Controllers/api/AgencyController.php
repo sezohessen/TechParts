@@ -51,30 +51,29 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('active', 1)
                 ->where('center_type', Agency::center_type_Agency)->get();
             if (!$agencyList->count()) {
                 return $this->errorMessage("No Agencies in this interest country");
             }
             $user = auth('sanctum')->user();
             $subscripedList = [];
-            if ($user) {
-                $agencyFavs = Agency::where('center_type', Agency::center_type_Agency)->whereHas('UserFav', function ($query) use ($user) {
-                    return $query->where('user_fav_agencies.user_id', $user->id);
-                })->get();
-                foreach ($agencyFavs as $agencyFav) {
-                    $subscripedList[]     = $this->AgencyData(
-                        $agencyFav,
-                        $workType = false,
-                        $specializationList = false,
-                        $badgesList = false,
-                        $description = false,
-                        $paymentMethodList = false,
-                        $centerType = true,
-                        $mContact = false,
-                        $mLocation = false,
-                        $carMakerList = false
-                    );
-                }
+            $agencyFavs = Agency::where('center_type', Agency::center_type_Agency)
+            ->where('active', 1)
+            ->where('car_show_rooms', 1)->get();
+            foreach ($agencyFavs as $agencyFav) {
+                $subscripedList[]     = $this->AgencyData(
+                    $agencyFav,
+                    $workType = false,
+                    $specializationList = false,
+                    $badgesList = false,
+                    $description = false,
+                    $paymentMethodList = false,
+                    $centerType = true,
+                    $mContact = false,
+                    $mLocation = false,
+                    $carMakerList = false
+                );
             }
             $agencies = [];
             foreach ($agencyList as $agency) {
@@ -100,6 +99,7 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('active', 1)
                 ->where('center_type', Agency::center_type_Maintenance);
             if (!$agencyList->count()) {
                 return $this->errorMessage(__("No maintenance centers in this interest country"));
@@ -118,6 +118,7 @@ class AgencyController extends Controller
 
         if (!$validator->fails()) {
             $agencyList     = Agency::where('country_id', $request->interest_country)
+                ->where('active', 1)
                 ->where('center_type', Agency::center_type_Spare);
             if (!$agencyList->count()) {
                 return $this->errorMessage(__("No Spare parts centers in this interest country"));
@@ -201,7 +202,7 @@ class AgencyController extends Controller
             foreach ($agencyList as $agency) {
                 $agencies[]     = $this->AgencyData(
                     $agency,
-                    Agency::types()[$agency->center_type],
+                    Agency::ApiTypes()[$agency->center_type],
                     $specializationList = true,
                     $badgesList = true,
                     $description = true,
@@ -219,11 +220,11 @@ class AgencyController extends Controller
         $validator = $this->Search($request);
 
         if (!$validator->fails()) {
-            $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
+            //$carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
             $name           = Session::get('app_locale') == 'ar' ? "name_ar" : "name";
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('center_type', Agency::center_type_Agency)
-                ->where('car_status', $carStatus)
+                //->where('car_status', $carStatus)
                 ->where($name, 'like', '%' . $request->word . '%');
             if (!$agencyList->count()) {
                 return $this->errorMessage(__("No centers found"));
@@ -240,11 +241,11 @@ class AgencyController extends Controller
         $validator = $this->Search($request);
 
         if (!$validator->fails()) {
-            $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
+            //$carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
             $name           = Session::get('app_locale') == 'ar' ? "name_ar" : "name";
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('center_type', Agency::center_type_Maintenance)
-                ->where('car_status', $carStatus)
+                //->where('car_status', $carStatus)
                 ->where($name, 'like', '%' . $request->word . '%');
             if (!$agencyList->count()) {
                 return $this->errorMessage(__("No centers found"));
@@ -261,11 +262,11 @@ class AgencyController extends Controller
         $validator = $this->Search($request);
 
         if (!$validator->fails()) {
-            $carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
+            //$carStatus      = $request->car_status ? Agency::UsedCar : Agency::NewCar;
             $name           = Session::get('app_locale') == 'ar' ? "name_ar" : "name";
             $agencyList     = Agency::where('country_id', $request->interest_country)
                 ->where('center_type', Agency::center_type_Spare)
-                ->where('car_status', $carStatus)
+                //->where('car_status', $carStatus)
                 ->where($name, 'like', '%' . $request->word . '%');
             if (!$agencyList->count()) {
                 return $this->errorMessage(__("No centers found"));
@@ -454,7 +455,7 @@ class AgencyController extends Controller
                 ->where('active', 1)
                 ->where('center_type', Agency::center_type_Agency)
                 //->where('car_status', $request->car_state)
-                ->where('car_status', Agency::UsedCar)
+                //->where('car_status', Agency::UsedCar)
                 ->whereHas('carMakers', function ($query) use ($request) {
                     return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
                 })
@@ -508,7 +509,7 @@ class AgencyController extends Controller
                 ->where('active', 1)
                 ->where('center_type', Agency::center_type_Maintenance)
                 //->where('car_status', $request->car_state)
-                ->where('car_status', Agency::UsedCar)
+                //->where('car_status', Agency::UsedCar)
                 ->whereHas('carMakers', function ($query) use ($request) {
                     return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
                 })
@@ -563,7 +564,7 @@ class AgencyController extends Controller
                 ->where('active', 1)
                 ->where('center_type', Agency::center_type_Spare)
                 //->where('car_status', $request->car_state)
-                ->where('car_status', Agency::UsedCar)
+                //->where('car_status', Agency::UsedCar)
                 ->whereHas('carMakers', function ($query) use ($request) {
                     return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
                 })
@@ -725,7 +726,7 @@ class AgencyController extends Controller
     {
         list($Max, $Min)             = $this->PriceRange($agency);
         $agencies = [
-            "centerType"            => Agency::types()[$agency->center_type],
+            "centerType"            => Agency::ApiTypes()[$agency->center_type],
             "id"                    => $agency->id,
             "image"                 => find_image(@$agency->img),
             "logo"                  => find_image(@$agency->logo),
@@ -740,9 +741,9 @@ class AgencyController extends Controller
             "mLocation"             => $this->Location($agency),
             "carMakerList"          => $this->carMakerList($agency),
             "specializationList"    => $this->specializationList($agency),
-            "paymentMethodList"     => Agency::payment()[$agency->payment_method],
+            "paymentMethodList"     => [Agency::ApiPayment()[$agency->payment_method]],
             "workType"              => $workType,
-            "badgesList"            => Agency::status()[$agency->status],
+            "badgesList"            => [Agency::ApiStatus()[$agency->status]],
         ];
         if (!$specializationList) unset($agencies["specializationList"]);
         if (!$workType) unset($agencies["workType"]);
@@ -763,10 +764,16 @@ class AgencyController extends Controller
         $validator  = Validator::make($array_data, [
             'interest_country'  => 'required|integer', //Will be updated
 
-            'car_status'        => 'required|in:0,1|integer',
+            //'car_status'        => 'required|in:0,1|integer',
             'word'              => 'required|regex:/^[a-z0-9\s]+$/i'
         ]);
         return $validator;
+    }
+
+    public function badgesList()
+    {
+        $data       = Agency::ApiStatus();
+        return $this->returnData('data', $data, 'Successfully');
     }
     public function Details($request)
     {

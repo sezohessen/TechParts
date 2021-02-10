@@ -66,6 +66,7 @@ class CarsController extends Controller
             if (!$car = Car::find($request->car_id)) {
                 return $this->errorMessage('Car not found');
             }
+            $car->update(["views" => $car->views + 1]);
             $type   = new DataType();
             $data = (new CarResource($car))->type($type::single);
             return  $this->returnData('mCar', $data, __('Successfully'));
@@ -361,8 +362,8 @@ class CarsController extends Controller
             if (!$car = Car::find($request->car_id)) {
                 return $this->errorMessage('First Car ID not found');
             }
-            $car->update(["views" => $car->views + 1]);
-            return  $this->returnSuccess(__('Car views has been increment successfully'));
+            $car->update(["clicks" => $car->clicks + 1]);
+            return  $this->returnSuccess(__('Car clicks has been increment successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }

@@ -71,6 +71,14 @@ class Agency extends Model
             self::center_type_Spare         => __('Spare'),
         ];
     }
+    public static function ApiTypes()
+    {
+        return [
+            self::center_type_Agency        => 'agency',
+            self::center_type_Maintenance   => 'mintenance',
+            self::center_type_Spare         => 'spare',
+        ];
+    }
     public static function payment()
     {
         return [
@@ -79,12 +87,28 @@ class Agency extends Model
             self::Financial     => __('Financial'),
         ];
     }
+    public static function ApiPayment()
+    {
+        return [
+            self::Cash          => 'cash',
+            self::Installment   => 'installment',
+            self::Financial     => 'financial',
+        ];
+    }
     public static function status()
     {
         return [
             self::Status_Normal     => __('Normal'),
             self::Status_Premium    => __('Premium'),
             self::Status_Trusted    => __('Trusted'),
+        ];
+    }
+    public static function ApiStatus()
+    {
+        return [
+            self::Status_Normal     => 'normal',
+            self::Status_Premium    => 'premium',
+            self::Status_Trusted    => 'trusted',
         ];
     }
     public static function MaintenanceType()

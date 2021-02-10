@@ -105,7 +105,7 @@ class BankController extends Controller
             ->where('status', Bank::Approved)
             ->first();
         if (!$bank) {
-            return $this->errorMessage(__('No such bank id exist, maybe bank id not approved yet.'));
+            return $this->errorMessage(__('No such bank id exist, or bank id not approved yet.'));
         }
         $mBank  = [
             "color" => $bank->color,
