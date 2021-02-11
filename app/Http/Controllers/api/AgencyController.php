@@ -770,11 +770,22 @@ class AgencyController extends Controller
         return $validator;
     }
 
+
     public function badgesList()
     {
-        $data       = Agency::ApiStatus();
-        return $this->returnData('data', $data, 'Successfully');
+        $BadgesLists  = Agency::ApiStatus();
+        $badges     = [];
+        $this->lang('ar');
+        foreach ($BadgesLists as $key => $BadgesList) {
+            $badges[]   = [
+                "id"        => $key,
+                "title_en"  => $BadgesList,
+                "title_ar"  => __($BadgesList),
+            ];
+        }
+        return $this->returnData("listMain", $badges, __('Successfully'));
     }
+
     public function Details($request)
     {
         $validator  = Validator::make((array) $request->all(), [
