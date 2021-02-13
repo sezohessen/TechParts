@@ -59,6 +59,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function country()
+    {
+        $country = Country::where('code', $this->country_code)->first();
+        if (!$country) {
+            $country = Country::where('active', 1)->first();
+        }
+        return $country;
+    }
 
     public static function rules($api=null,$edit_profile=null,$email_not_unique=null)
     {

@@ -55,6 +55,9 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("insurance/create_request",'InsuranceRequestController@insurance');
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
 
+    Route::group(['prefix' => 'payment'], function () {
+        Route::post("weaccept",'paymentsController@payments_token');
+    });
     Route::group(['prefix' => 'sell_car'], function () {
         Route::post("create",'CarsController@create');
         Route::post("edit",'CarsController@edit');
