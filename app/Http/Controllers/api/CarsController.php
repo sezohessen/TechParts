@@ -722,6 +722,31 @@ class CarsController extends Controller
             return $this->errorMessage("No data found");
         return $data;
     }
+    public function car_ids(Request $request)
+    {
+        $this->lang($request->lang);
+        $validator  = Validator::make((array) $request->all(), [
+            'car_id' => 'required|integer'
+        ]);
+        $car = Car::find($request->car_id);
+        if (!$car)
+            return $this->errorMessage("No data found");
+        $data = [
+            "carModel"          => $car->CarModel_id,
+            "carMaker"          => $car->CarMaker_id,
+            "carState"          => $car->isNew,
+            "carYear"           => $car->CarYear_id,
+            "bodyStyle"         => $car->CarBody_id,
+            "color"             => $car->CarColor_id,
+            "badgeList"         => [
+                $car->badges_id,
+            ],
+            "featureList"       => [
+                $car->features_id,
+            ]
+        ];
+        return $this->returnData("car_ids", $data, __('Successfully'));
+    }
     public static function rules($update = null)
     {
         $rules = [

@@ -728,7 +728,7 @@ class AgencyController extends Controller
         $agencies = [
             "centerType"            => Agency::ApiTypes()[$agency->center_type],
             "id"                    => $agency->id,
-            "image"                 => find_image(@$agency->img),
+            "photo"                 => find_image(@$agency->img),
             "logo"                  => find_image(@$agency->logo),
             "title"                 => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
             "description"           => Session::get('app_locale') == 'ar' ? $agency->description_ar : $agency->description,

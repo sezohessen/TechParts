@@ -301,6 +301,14 @@ class Car extends Model
     {
         return $this->hasMany(car_badge::class,"car_id","id");
     }
+    public function getBadgesIdAttribute()
+    {
+        return $this->badges->pluck('id')->toArray();
+    }
+    public function getFeaturesIdAttribute()
+    {
+        return $this->features->pluck('id')->toArray();
+    }
     public function features()
     {
         return $this->hasMany(car_feature::class,"car_id","id");

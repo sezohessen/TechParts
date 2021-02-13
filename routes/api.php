@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
         Route::post("create",'CarsController@create');
         Route::post("edit",'CarsController@edit');
         Route::post("my_list",'CarsController@list');
+        Route::get("car_ids",'CarsController@car_ids');
     });
     Route::post("sell_car/delete",'CarsController@delete');
 
