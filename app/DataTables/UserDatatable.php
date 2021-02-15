@@ -27,14 +27,13 @@ class UserDatatable extends DataTable
             ->editColumn('first_name', '{{Str::limit($first_name, 100)}}')
             ->editColumn('last_name', '{{Str::limit($last_name, 100)}}')
             ->editColumn('phone', '{{Str::limit($phone, 100)}}')
-            ->editColumn('role', function (User $user)
-            {
+            ->editColumn('role', function (User $user) {
                 return implode(', ', $user->roles->pluck('name')->toArray());
             })
 
             ->addColumn('checkbox', 'dashboard.User.btn.checkbox')
             ->addColumn('action', 'dashboard.User.btn.action')
-            ->rawColumns(['checkbox','action','role']);
+            ->rawColumns(['checkbox', 'action', 'role']);
     }
 
     /**
@@ -69,15 +68,15 @@ class UserDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -113,15 +112,15 @@ class UserDatatable extends DataTable
             ],
             Column::make('id'),
             Column::make('email')
-            ->title(__("Email")),
+                ->title(__("Email")),
             Column::make('first_name')
-            ->title(__("First Name")),
+                ->title(__("First Name")),
             Column::make('last_name')
-            ->title(__("Last Name")),
+                ->title(__("Last Name")),
             Column::make('phone')
-            ->title(__("Phone")),
+                ->title(__("Phone")),
             Column::make('role')
-            ->title(__("Role")),
+                ->title(__("Role")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

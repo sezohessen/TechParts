@@ -9,14 +9,14 @@ class Trending extends Model
 {
     use HasFactory;
     protected $table    = 'trendings';
-    protected $dates    = 'day';
+    protected $dates    = ['day'];
     protected $fillable=[
         'day',
     ];
     public static function  rules($request)
     {
         $rules = [
-            'day'            =>  'required|date',
+            'day'               =>  'required|date',
             'car_id'            =>  'required|array|min:1',
         ];
         return $rules;

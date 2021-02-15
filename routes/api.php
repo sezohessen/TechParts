@@ -45,7 +45,9 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("ask_expoert",'AskExpertController@create');
 
     Route::group(['prefix' => 'centers/review'], function () {
-        Route::post("agency",'AgencyController@review');
+        Route::post("CenterAgency",'AgencyController@review');
+        Route::post("CenterMaintenace",'AgencyController@review');
+        Route::post("CenterSpare",'AgencyController@review');
     });
     Route::post("payment",'CarsController@deposit');
     Route::post("car/promote/car_promote",'CarsController@promote');
@@ -53,10 +55,14 @@ Route::group(['middleware' => 'auth:sanctum','namespace'=>'api'], function () {
     Route::post("insurance/create_request",'InsuranceRequestController@insurance');
     Route::post("finance/create_request",'InsuranceRequestController@insurance');
 
+    Route::group(['prefix' => 'payment'], function () {
+        Route::post("weaccept",'paymentsController@payments_token');
+    });
     Route::group(['prefix' => 'sell_car'], function () {
         Route::post("create",'CarsController@create');
         Route::post("edit",'CarsController@edit');
         Route::post("my_list",'CarsController@list');
+        Route::get("car_ids",'CarsController@car_ids');
     });
     Route::post("sell_car/delete",'CarsController@delete');
 
@@ -66,6 +72,7 @@ Route::group(['prefix' => 'data','namespace'=>'api'], function () {
         Route::get("news_category",'NewsController@category');
         Route::get("car_body_style",'CarsController@carBody');
         Route::get("car_extra_feature",'CarsController@carFeature');
+        Route::get("badgesList",'AgencyController@badgesList');
         Route::get("car_badge",'CarsController@carBadge');
         Route::post("color_pallet",'CarsController@carColors');
     });

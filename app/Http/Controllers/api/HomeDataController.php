@@ -47,7 +47,8 @@ class HomeDataController extends Controller
                 "id"            => $agency->id,
                 "isAuthorised"  => $agency->is_authorised ? true : false,
                 "isFavorite"    => $this->isFav($agency),
-                "logo"          => find_image(@$agency->img),
+                "image"         => find_image(@$agency->img),
+                "logo"          => find_image(@$agency->logo),
                 "priceRangeMax" => $Max,
                 "priceRangeMin" => $Min,
                 "title"         => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,
@@ -110,7 +111,7 @@ class HomeDataController extends Controller
         if ( count($agencies) <= 0 ) {
             return $this->errorMessage('No Data Found');
         }
-        return $this->returnData("agencyList", $agencies, "Success", $array_data);
+        return $this->returnData("agencyList", $agencies, __("Successfully"), $array_data);
     }
     public function createNewMaintenance(Request $request)
     {
@@ -219,7 +220,8 @@ class HomeDataController extends Controller
                 "id"            => $agency->id,
                 "isAuthorised"  => $agency->is_authorised ? true : false,
                 "isFavorite"    => $this->isFav($agency),
-                "logo"          => find_image(@$agency->img),
+                "image"         => find_image(@$agency->img),
+                "logo"          => find_image(@$agency->logo),
                 "priceRangeMax" => $Max,
                 "priceRangeMin" => $Min,
                 "title"         => Session::get('app_locale') == 'ar' ? $agency->name_ar : $agency->name,

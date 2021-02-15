@@ -35,7 +35,7 @@ class CarBodyDatatable extends DataTable
                 }
             })
             ->addColumn('action', 'dashboard.CarBody.btn.action')
-            ->rawColumns(['checkbox', 'action', "logo.name","active"]);
+            ->rawColumns(['checkbox', 'action', "logo.name", "active"]);
     }
 
     /**
@@ -70,15 +70,15 @@ class CarBodyDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -117,12 +117,12 @@ class CarBodyDatatable extends DataTable
             Column::make('name')->title(__('Name')),
             Column::make('name_ar')->title(__('Name(AR)')),
             Column::computed('active')
-            ->title(__('Active'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center'),
+                ->title(__('Active'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

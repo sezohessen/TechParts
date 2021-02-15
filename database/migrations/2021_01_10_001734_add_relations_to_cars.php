@@ -103,6 +103,7 @@ class AddRelationsToCars extends Migration
 
 
             $table->integer('views')->nullable();
+            $table->integer('clicks')->nullable();
 
             $table->boolean('AccidentBefore')->default(0);
 

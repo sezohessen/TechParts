@@ -8,16 +8,11 @@ use Illuminate\Support\Facades\Validator;
 trait GeneralTrait {
     public function lang($lang)
     {
-        if ($locale = $lang) {
-            if (in_array($locale, ['ar', 'en']) ) {
-                default_lang($locale);
-            }else {
-                default_lang();
-            }
-        }else {
+        if (in_array($lang, ['ar', 'en']) ) {
+            default_lang($lang);
+        } else {
             default_lang();
         }
-        return true;
     }
     public function failed($validator)
     {

@@ -12,11 +12,11 @@
                 <i class=" icon-nm text-primary-50 flaticon2-reply"></i>
             </a>
         @else
-            <span class="label label-danger label-pill label-inline mr-2">@lang("Undefined")</span>
+            <span class="label label-danger label-pill label-inline mr-2">@lang("Empty")</span>
         @endif
     @else
-        <span class="label label-danger label-pill label-inline mr-2">@lang("Undefined")</span>
+        <span class="label label-danger label-pill label-inline mr-2">@lang("deleted")</span>
     @endif
 @else
-    <span class="label label-danger label-pill label-inline mr-2">@lang("Undefined")</span>
+    <span class="label label-danger label-pill label-inline mr-2">@lang("Unknow resource")</span>
 @endif

@@ -31,17 +31,21 @@ class CarDatatable extends DataTable
             ->editColumn('Description', '{!! Str::limit($Description, 100) !!}')
             ->editColumn('Description_ar', '{!! Str::limit($Description_ar, 100) !!}')
             ->addColumn('checkbox', 'dashboard.Car.btn.checkbox')
-            ->editColumn('SellerType', function($car) {
-               if(($car->user->Agency) ){
-                    return Agency::StyleAgecnyType()[0][1];
-               }else {
+            ->editColumn('SellerType', function ($car) {
+                if (($car->user->Agency)) {
+                    if ($car->user->Agency->center_type == 0)
+                        return Agency::StyleAgecnyType()[0][$car->user->Agency->agency_type];
+                    elseif ($car->user->Agency->center_type == 1)
+                        return Agency::StyleAgecnyType()[1][$car->user->Agency->agency_type];
+                    else
+                        return Agency::StyleAgecnyType()[2][0];
+                } else {
                     return Agency::StyleAgecnyType()[0][3];
-               }
-
+                }
             })
             ->addColumn('action', 'dashboard.Car.btn.action')
             ->addColumn('status', 'dashboard.Car.btn.status')
-            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar",'status']);
+            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar", 'status']);
     }
 
     /**
@@ -55,15 +59,15 @@ class CarDatatable extends DataTable
 
         if ($this->request()->has("Customers")) {
             return Car::query()->with(['maker', 'country'])->doesnthave('agencies')->select("cars.*");
-        }elseif($this->request()->has("Showrooms")) {
+        } elseif ($this->request()->has("Showrooms")) {
             return Car::query()->with(['maker', 'country'])->has('agencies')->select("cars.*");
         }
         if ($this->request()->has("user_id")) {
-            $user=User::find($this->request()->user_id);
+            $user = User::find($this->request()->user_id);
             return Car::query()->with(['maker', 'country'])->whereIn('id', $user->cars->pluck('id'))->has('List_cars_user')->select("cars.*");
         }
         if ($this->request()->has("agency_id")) {
-            $agency=Agency::find($this->request()->agency_id);
+            $agency = Agency::find($this->request()->agency_id);
             return Car::query()->with(['maker', 'country'])->whereIn('id', $agency->Car->pluck('id'))->has('List_cars_agency')->select("cars.*");
         }
         return Car::query()->with(['maker', 'country'])->select("cars.*");
@@ -90,15 +94,15 @@ class CarDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -141,10 +145,10 @@ class CarDatatable extends DataTable
                 ->title(__("User Phone")),
             Column::make('price')->title(__("Price")),
             Column::make('Description')
-            ->title(__("Description (EN)"))
+                ->title(__("Description (EN)"))
                 ->width(70),
             Column::make('Description_ar')
-            ->title(__("Description (AR)"))
+                ->title(__("Description (AR)"))
                 ->width(70),
             Column::computed('SellerType')
                 ->title(__('Seller Type'))
@@ -154,12 +158,12 @@ class CarDatatable extends DataTable
                 ->width(120)
                 ->addClass('text-center'),
             Column::computed('status')
-            ->title(__('Status'))
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(120)
-            ->addClass('text-center'),
+                ->title(__('Status'))
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(120)
+                ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

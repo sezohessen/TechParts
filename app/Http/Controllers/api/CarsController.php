@@ -66,6 +66,7 @@ class CarsController extends Controller
             if (!$car = Car::find($request->car_id)) {
                 return $this->errorMessage('Car not found');
             }
+            $car->update(["views" => $car->views + 1]);
             $type   = new DataType();
             $data = (new CarResource($car))->type($type::single);
             return  $this->returnData('mCar', $data, __('Successfully'));
@@ -361,8 +362,8 @@ class CarsController extends Controller
             if (!$car = Car::find($request->car_id)) {
                 return $this->errorMessage('First Car ID not found');
             }
-            $car->update(["views" => $car->views + 1]);
-            return  $this->returnSuccess(__('Car views has been increment successfully'));
+            $car->update(["clicks" => $car->clicks + 1]);
+            return  $this->returnSuccess(__('Car clicks has been increment successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -716,10 +717,35 @@ class CarsController extends Controller
     {
         $this->lang($request->lang);
         $type   = new DataType();
-        $data = (new CarCollection(Car::where("user_id", Auth()->id())->get()))->type($type::list);
+        $data = (new CarCollection(Car::where("user_id", Auth()->id())->orderBy('id', 'DESC')->get()))->type($type::list);
         if (!$data->count())
             return $this->errorMessage("No data found");
         return $data;
+    }
+    public function car_ids(Request $request)
+    {
+        $this->lang($request->lang);
+        $validator  = Validator::make((array) $request->all(), [
+            'car_id' => 'required|integer'
+        ]);
+        $car = Car::find($request->car_id);
+        if (!$car)
+            return $this->errorMessage("No data found");
+        $data = [
+            "carModel"          => $car->CarModel_id,
+            "carMaker"          => $car->CarMaker_id,
+            "carState"          => $car->isNew,
+            "carYear"           => $car->CarYear_id,
+            "bodyStyle"         => $car->CarBody_id,
+            "color"             => $car->CarColor_id,
+            "badgeList"         => [
+                $car->badges_id,
+            ],
+            "featureList"       => [
+                $car->features_id,
+            ]
+        ];
+        return $this->returnData("car_ids", $data, __('Successfully'));
     }
     public static function rules($update = null)
     {
@@ -800,9 +826,9 @@ class CarsController extends Controller
             "FuelType"                    => $request->carFuelType,
             'phone'                       => $request->mContact_phone,
             'whats'                       => $request->mContact_whats,
-            'DepositPrice'                => 2000,
-            'InstallmentAmount'           => 100,
-            'InstallmentPeriod'           => 10,
+            'DepositPrice'                => $request->payment_deposit ? $request->payment_deposit  : 0,
+            'InstallmentAmount'           => $request->payment_loan_amount ? $request->payment_loan_amount  : 0,
+            'InstallmentPeriod'           => $request->payment_loan_period ? $request->payment_loan_period  : 0,
             'SellerType'                  => $seller,
             'views'                       => 0,
             'status'                      => Car::STATUS_DISABLE,
@@ -846,7 +872,7 @@ class CarsController extends Controller
                 "title_ar"  => $carBodyList->name_ar,
             ];
         }
-        return $this->returnData("listMain", $carBodies, "Successfully");
+        return $this->returnData("listMain", $carBodies, __('Successfully'));
     }
     public function carFeature()
     {
@@ -860,8 +886,8 @@ class CarsController extends Controller
             ];
         }
         if (!$featureLists->count())
-                return $this->errorMessage("No data found");
-        return $this->returnData("listMain", $features, "Successfully");
+            return $this->errorMessage("No data found");
+        return $this->returnData("listMain", $features, __('Successfully'));
     }
     public function carBadge()
     {
@@ -874,7 +900,7 @@ class CarsController extends Controller
                 "title_ar"  => $BadgesList->name_ar,
             ];
         }
-        return $this->returnData("listMain", $badges, "Successfully");
+        return $this->returnData("listMain", $badges, __('Successfully'));
     }
     public function carColors(Request $request)
     {

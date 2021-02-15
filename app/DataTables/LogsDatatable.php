@@ -31,7 +31,7 @@ class LogsDatatable extends DataTable
             ->addColumn('checkbox', 'dashboard.Logs.btn.checkbox')
             ->addColumn('action', 'dashboard.Logs.btn.action')
             ->addColumn('active', 'dashboard.Logs.btn.active')
-            ->rawColumns(['checkbox', 'action', "active", "causer_id", "properties","subject_id"]);
+            ->rawColumns(['checkbox', 'action', "active", "causer_id", "properties", "subject_id"]);
     }
 
     /**
@@ -66,15 +66,15 @@ class LogsDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -114,9 +114,8 @@ class LogsDatatable extends DataTable
             Column::make('causer_id')
             ->title(__("Causer ID")),
             Column::make('subject_id')
-            ->title(__("Subject ID")),
-            Column::make('properties')
-            ->title(__("properties")),
+                ->title(__("Subject ID")),
+            Column::make('properties'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

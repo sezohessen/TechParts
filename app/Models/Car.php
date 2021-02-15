@@ -47,7 +47,7 @@ class Car extends Model
         'lat','lng','phone','InstallmentAmount', 'InstallmentPeriod',
         'DepositPrice' ,'Country_id' ,'City_id' ,'Governorate_id' ,
         'CarModel_id' ,'CarMaker_id' ,'CarBody_id' ,'CarYear_id' ,
-        'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' ,
+        'CarCapacity_id' ,'CarColor_id' ,'views' ,'AccidentBefore' , 'clicks',
         'transmission' ,'payment', 'SellerType','isNew',"adsExpire",
         "promotedExpire","promotedStatus","user_id","whats","data","FuelType"
     ];
@@ -85,6 +85,20 @@ class Car extends Model
             self::FUEL_PETROL         => 'petrol',
         ];
     }
+
+    public static function STATUS()
+    {
+        return [
+            self::STATUS_DISABLE                => false, //'disable'
+            self::STATUS_ACTIVE                 => true, // 'active'
+        ];
+    }
+
+    public function getIsAdminAprovedAttribute()
+    {
+        return self::STATUS()[$this->status];
+    }
+
     public static function TransmissionType()
     {
         return [
@@ -168,9 +182,9 @@ class Car extends Model
     }
     public static function credentials($request,$images_id = NULL)
     {
-        $seller=Car::SELLER_INDIVIDUAL;
+        $seller = Car::SELLER_INDIVIDUAL;
         if(Auth()->user()->Agency){
-           $seller=(Auth()->user()->Agency->center_type==0) ? Car::SELLER_AGENCY: Car::SELLER_DISTRIBUTOR;
+           $seller=(Auth()->user()->Agency->center_type == Agency::center_type_Agency) ? Car::SELLER_AGENCY : Car::SELLER_DISTRIBUTOR;
         }
         $credentials = [
             'CarMaker_id'                 => $request->CarMaker_id,
@@ -286,6 +300,14 @@ class Car extends Model
     public function badges()
     {
         return $this->hasMany(car_badge::class,"car_id","id");
+    }
+    public function getBadgesIdAttribute()
+    {
+        return $this->badges->pluck('id')->toArray();
+    }
+    public function getFeaturesIdAttribute()
+    {
+        return $this->features->pluck('id')->toArray();
     }
     public function features()
     {

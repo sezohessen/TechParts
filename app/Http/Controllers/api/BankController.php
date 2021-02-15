@@ -59,7 +59,7 @@ class BankController extends Controller
         $mBank  = [
             "color" =>  $firstBank->color,
             "id"    =>  $firstBank->id,
-            "logo"  =>  find_image($firstBank->img) ,
+            "logo"  =>  find_image($firstBank->img),
             "name"  =>  $firstBank->name,
         ];
         $bankContact    = BankContact::find($firstBank->id);
@@ -87,7 +87,7 @@ class BankController extends Controller
                 "valid_date"                => $bankOffer->valid_till,
             ];
         }
-        return $this->returnData("bankList", $bankLists, "Successfully", ["featuredOfferList" => $bankOfferLists]);
+        return $this->returnData("bankList", $bankLists, __('Successfully'), ["featuredOfferList" => $bankOfferLists]);
     }
     public function filter(Request $request)
     {
@@ -105,7 +105,7 @@ class BankController extends Controller
             ->where('status', Bank::Approved)
             ->first();
         if (!$bank) {
-            return $this->errorMessage(__('No such bank id exist, maybe bank id not approved yet.'));
+            return $this->errorMessage(__('No such bank id exist, or bank id not approved yet.'));
         }
         $mBank  = [
             "color" => $bank->color,
@@ -138,7 +138,6 @@ class BankController extends Controller
                 "valid_date"                => $bankOffer->valid_till,
             ];
         }
-        return $this->returnData("resultList", $bankLists, "Successfully");
+        return $this->returnData("resultList", $bankLists, __('Successfully'));
     }
-
 }

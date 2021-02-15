@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CarManufacture extends Model
 {
@@ -14,5 +15,9 @@ class CarManufacture extends Model
         'name',
         'name_ar',
     ];
+
+    public function getNameByLangAttribute(){
+        return Session::get('app_locale') == 'ar' ? $this->name_ar : $this->name;
+    }
 
 }

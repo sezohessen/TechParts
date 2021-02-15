@@ -23,15 +23,15 @@ class TrendingCarDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('day', '{{Str::limit($day, 100)}}')
+            ->editColumn('day', '{{Str::limit(date("Y-m-d", strtotime($day)), 100)}}')
        //     ->editColumn('trends', 'dashboard.Trending.btn.cars')
             ->editColumn('trends', function($trending) {
                 return view("dashboard.Trending.btn.cars",['data' => $trending->trends]);
               })
             ->addColumn('checkbox', 'dashboard.Trending.btn.checkbox')
             ->addColumn('action', 'dashboard.Trending.btn.action')
-            ->rawColumns(['checkbox', 'action',"trends"]);
-            /*
+            ->rawColumns(['checkbox', 'action', "trends"]);
+        /*
              ->editColumn('trends', function($trending) {
                return Trending::StyleTrending($trending->trends);
              })*/
@@ -56,7 +56,7 @@ class TrendingCarDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('CarBodies-table')
+            ->setTableId('trinding-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -69,15 +69,15 @@ class TrendingCarDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -138,6 +138,6 @@ class TrendingCarDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'CarBodies_' . date('YmdHis');
+        return 'trinding_' . date('YmdHis');
     }
 }

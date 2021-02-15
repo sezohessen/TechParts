@@ -65,6 +65,11 @@ class CarResource extends JsonResource
             "adsExpire" =>date("Y-m-d",strtotime($this->adsExpire)),
             "badgeList"=>$car_badges,
             "featureList"=>$car_features,
+            "isAdminAproved"=> $this->isAdminAproved,
+            "counter_view"=> $this->views ? $this->views : 0,
+            "counter_clicks"=> $this->clicks ? $this->clicks : 0,
+            "bodyStyle"=>$this->body->name,
+            "color"=>@$this->color->code,
         ];
         return array_merge($this->common(),$data);
     }

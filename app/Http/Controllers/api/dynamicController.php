@@ -47,10 +47,10 @@ class dynamicController extends Controller
                 "answer"     => Session::get('app_locale') == 'ar' ? $faq->answer_ar : $faq->answer,
             ];
         }
-        if (  count($faqLists) <= 0 ) {
+        if (count($faqLists) <= 0) {
             return $this->errorMessage('No Data Found');
         }
-        return $this->returnData("faqList", $faqLists, "Successfully");
+        return $this->returnData("faqList", $faqLists, __('Successfully'));
     }
 
     public function distributor(Request $request)
@@ -73,7 +73,7 @@ class dynamicController extends Controller
             ->whereHas('Car', function ($query) use ($request) {
                 return $query->where('cars.CarModel_id', $request->car_model);
             });
-        if ( $agencyList->get()->count() <= 0 ) {
+        if ($agencyList->get()->count() <= 0) {
             return $this->errorMessage('No Data Found');
         }
         $data   = new DistributorCollection($agencyList->paginate(10));
@@ -88,7 +88,7 @@ class dynamicController extends Controller
         }
         $governmentList     = Governorate::where('active', 1)
             ->where('country_id', $request->country_name);
-        if (  $governmentList->get()->count() <= 0 ) {
+        if ($governmentList->get()->count() <= 0) {
             return $this->errorMessage('No Data Found');
         }
         $data           = new GovernorateCollection($governmentList->paginate(10));
@@ -182,7 +182,7 @@ class dynamicController extends Controller
         $data = CarCapacityResource::collection(CarCapacity::paginate(10));
         if (!$data->count())
             return $this->errorMessage("No data found");
-        return $this->returnData("listMain", $data, "Successfully");
+        return $this->returnData("listMain", $data, __('Successfully'));
     }
     public function year(Request $request)
     {
@@ -194,7 +194,7 @@ class dynamicController extends Controller
             $data = CarYearResource::collection(CarYear::where('CarModel_id', $request->car_model)->get());
             if (!$data->count())
                 return $this->errorMessage("No data found");
-            return $this->returnData("yearList", $data, "Successfully");
+            return $this->returnData("yearList", $data, __('Successfully'));
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }

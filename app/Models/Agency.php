@@ -52,6 +52,7 @@ class Agency extends Model
         'car_status',
         'payment_method',
         'img_id',
+        'logo_id',
         'country_id',
         'governorate_id',
         'city_id',
@@ -70,6 +71,14 @@ class Agency extends Model
             self::center_type_Spare         => __('Spare'),
         ];
     }
+    public static function ApiTypes()
+    {
+        return [
+            self::center_type_Agency        => 'agency',
+            self::center_type_Maintenance   => 'mintenance',
+            self::center_type_Spare         => 'spare',
+        ];
+    }
     public static function payment()
     {
         return [
@@ -78,12 +87,28 @@ class Agency extends Model
             self::Financial     => __('Financial'),
         ];
     }
+    public static function ApiPayment()
+    {
+        return [
+            self::Cash          => 'cash',
+            self::Installment   => 'installment',
+            self::Financial     => 'financial',
+        ];
+    }
     public static function status()
     {
         return [
             self::Status_Normal     => __('Normal'),
             self::Status_Premium    => __('Premium'),
             self::Status_Trusted    => __('Trusted'),
+        ];
+    }
+    public static function ApiStatus()
+    {
+        return [
+            self::Status_Normal     => 'normal',
+            self::Status_Premium    => 'premium',
+            self::Status_Trusted    => 'trusted',
         ];
     }
     public static function MaintenanceType()
@@ -141,19 +166,19 @@ class Agency extends Model
                 self::Ag_Distributor    =>"<span class='label label-success label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Distributor')."</span>",
-                self::Ag_Individual    =>"<span class='label label-dark label-inline mr-2'
+                self::Ag_Individual    =>"<span class='label label-primary label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Individual')."</span>",
 
             ],
             [
-                self::UnSelected        => "<span class='label label-info label-inline mr-2'
+                self::UnSelected        => "<span class='label label-danger label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Un selected work type')."</span>",
                 self::Main_Service_center         => "<span class='label label-dark label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Service center')."</span>",
-                self::Main_Workshop    =>"<span class='label label-primary label-inline mr-2'
+                self::Main_Workshop    =>"<span class='label label-info label-inline mr-2'
                 style='padding: 30px;
                 width: 128px;'>".__('Workshop')."</span>"
             ],
@@ -180,6 +205,9 @@ class Agency extends Model
     }
     public function img(){
         return $this->belongsTo(Image::class,'img_id','id');
+    }
+    public function logo(){
+        return $this->belongsTo(Image::class,'logo_id','id');
     }
     public function carMakers()
     {
@@ -216,6 +244,7 @@ class Agency extends Model
             'payment_method'        => 'required|integer',
             'status'                => 'required|integer',
             'img_id'                => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'logo_id'               => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'country_id'            => 'required',
             'governorate_id'        => 'required',
             'city_id'               => 'required',
@@ -225,18 +254,20 @@ class Agency extends Model
             'active'                => 'nullable'
         ];
         if($id == 'Agency'){//For update in Dashborad
-            $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['img_id']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['logo_id']   = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
         }elseif($id == 'AgencyDash'){//For Create in Agency Dashboard
             unset($rules['status']);
             unset($rules['user_id']);
         }elseif($id){//For Update in Agency Dashboard
-            $rules['img_id'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['img_id']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['logo_id']   = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             unset($rules['status']);
             unset($rules['user_id']);
         }
         return $rules;
     }
-    public static function credentials($request,$id = NULL,$img_id = NULL,$specialCase = 1)
+    public static function credentials($request,$id = NULL,$img_id = NULL,$specialCase = 1,$logo_id = NULL)
     {
         $credentials = [
             'name'              =>  $request->name,
@@ -297,6 +328,18 @@ class Agency extends Model
         }else{
             if($id){
                 $credentials['img_id'] = $img_id;
+            }
+        }
+        if($request->file('logo_id')){//Creating and Updating Image
+            if($id){
+                $Image_id = self::file($request->file('logo_id'),$logo_id);
+            }else{
+                $Image_id = self::file($request->file('logo_id'));
+            }
+            $credentials['logo_id'] = $Image_id;
+        }else{
+            if($id){
+                $credentials['logo_id'] = $logo_id;
             }
         }
         return $credentials;

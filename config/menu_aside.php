@@ -421,16 +421,35 @@ return [
             'root' => true,
             'submenu' => [
                 [
-                    'title' => 'Add news',
-                    'page' => "/dashboard/news/create"
+                    'title' => 'News',
+                    'bullet' => 'dot',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add news',
+                            'page' => "/dashboard/news/create"
+                        ],
+                        [
+                            'title' => 'View news',
+                            'page' => '/dashboard/news'
+                        ],
+                    ]
                 ],
+
                 [
-                    'title' => 'View news',
-                    'page' => '/dashboard/news'
-                ],
-                [
-                    'title' => 'Trending news',
-                    'page' => '/dashboard/trending-news'
+                    'title' => 'Trend',
+                    'bullet' => 'dot',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Trending news',
+                            'page' => '/dashboard/trending-news'
+                        ],
+                        [
+                            'title' => 'Add trending News',
+                            'page' => '/dashboard/trending-news/create'
+                        ],
+                    ]
                 ],
 
             ]

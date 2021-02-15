@@ -67,15 +67,15 @@ class CarCapacityDatatable extends DataTable
                         'className' => 'dt-button buttons-collection delBtn buttons-page-length'
                     ],
                     [
-                        "extend"=> 'collection',
-                        "text"=> __("Export"),
-                        "buttons" => [ 'csv', 'excel','print' ]
+                        "extend" => 'collection',
+                        "text" => __("Export"),
+                        "buttons" => ['csv', 'excel', 'print']
                     ],
                 ],
                 'lengthMenu' =>
                 [
                     [10, 25, 50, -1],
-                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                    ['10 ' . __('rows'), '25 ' . __('rows'), '50 ' . __('rows'), __('Show all')]
                 ],
                 'language' => datatable_lang(),
 
@@ -111,7 +111,7 @@ class CarCapacityDatatable extends DataTable
             ],
             Column::make('id'),
             Column::make('capacity')
-            ->title(__("Capacity")),
+                ->title(__("Capacity")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

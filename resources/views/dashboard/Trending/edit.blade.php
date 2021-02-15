@@ -14,6 +14,13 @@
             </div>
         </div>
         <!--begin::Form-->
+        <div class="card-body">
+            @if (session('failed'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('failed') }}
+                </div>
+            @endif
+        </div>
         <form action="{{route("dashboard.trending.update",["trending"=>$trending->id])}}" method="POST">
             @csrf
             @method('PATCH')

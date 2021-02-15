@@ -40,6 +40,7 @@ class AgencySeeder extends Seeder
                 'long'              => $faker->longitude,
                 'car_status'        => $faker->boolean,
                 'payment_method'    => $faker->numberBetween(0, 2),
+                'logo_id'           => $images->random()->id,
                 'img_id'            => $images->random()->id,
                 'country_id'        => Country::all()->random()->id,
                 'governorate_id'    => Governorate::all()->random()->id,
