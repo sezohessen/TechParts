@@ -50,7 +50,7 @@ class UserController extends Controller
 
         $rules = User::rules();
         $request->validate($rules);
-        $credentials = User::credentials($request);
+        $credentials = User::credentials($request,1,1);
         if (isset($request->provider)) {
             if ($request->provider == 'insurance') {
                 $provider = 'insurance';
@@ -91,8 +91,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
 
-        $page_title = __("Add User");
-        $page_description = __("Add new User");
+        $page_title = __("Edit User");
+        $page_description = __("Edit");
         $countries =Country::where('active',1);
         $selected =Country::where('active',1)->where('code',$user->country_code)->first();
         if($selected->count()){

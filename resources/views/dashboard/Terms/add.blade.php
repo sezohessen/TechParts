@@ -74,4 +74,7 @@
 @section('scripts')
 <script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
+<script>
+
+</script>
 @endsection

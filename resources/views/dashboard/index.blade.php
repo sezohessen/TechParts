@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <span class="svg-icon svg-icon-2x svg-icon-danger">
                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Group.svg-->
-                        <i class="fa fa-user fa-3x" style="color: #ffffff"></i>
+                        <i class="fa fa-user fa-4x" style="color: #ffffff"></i>
                         <!--end::Svg Icon-->
                     </span>
                     <div class="text-inverse-dark font-weight-bolder font-size-h3 mb-2 mt-5">{{ $users->count() }}</div>
@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                        <i class="menu-icon fas fa-synagogue fa-3x" style="color: #ffffff"></i>
+                        <i class="menu-icon fas fa-synagogue fa-4x" style="color: #ffffff"></i>
                         <!--end::Svg Icon-->
                     </span>
                     <div class="text-inverse-info font-weight-bolder font-size-h3 mb-2 mt-5">{{ $banks->count() }}</div>
@@ -38,10 +38,10 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="{{ route('dashboard.insurance.index') }}" class="card card-custom card-stretch gutter-b">
+            <a href="{{ route('dashboard.insurance.index') }}" class="card card-custom bg-dark card-stretch gutter-b">
                 <!--begin::Body-->
                 <div class="card-body">
-                    <span class="svg-icon svg-icon-info svg-icon-3x ml-n1">
+                    <span class="svg-icon svg-icon-info svg-icon-4x ml-n1">
                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Shopping/Cart3.svg-->
                         <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/General/Shield-check.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -52,8 +52,8 @@
                         </svg><!--end::Svg Icon--></span>
                         <!--end::Svg Icon-->
                     </span>
-                    <div class="text-inverse-white font-weight-bolder font-size-h3 mb-2 mt-5">{{ $insurances->count() }}</div>
-                    <div class="font-weight-bold text-inverse-white font-size-sm">@lang('No. of Insurance Companies')</div>
+                    <div class="text-inverse-danger font-weight-bolder font-size-h3 mb-2 mt-5">{{ $insurances->count() }}</div>
+                    <div class="font-weight-bold text-inverse-danger font-size-sm">@lang('No. of Insurance Companies')</div>
                 </div>
                 <!--end::Body-->
             </a>
@@ -64,7 +64,7 @@
                 <div class="card-body">
                     <span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Shopping/Cart3.svg-->
-                        <i class="menu-icon fas fa-3x fa-landmark" style="color: #ffffff"></i>
+                        <i class="menu-icon fas fa-4x fa-landmark" style="color: #ffffff"></i>
                         <!--end::Svg Icon-->
                     </span>
                     <div class="text-inverse-danger font-weight-bolder font-size-h3 mb-2 mt-5">{{ $agencies->count() }}</div>
@@ -79,7 +79,7 @@
                 <div class="card-body">
                     <span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Media/Equalizer.svg-->
-                        <i class="fa fa-tools fa-3x" style="color:#ffffff"></i>
+                        <i class="fa fa-tools fa-4x" style="color:#ffffff"></i>
                         <!--end::Svg Icon-->
                     </span>
                     <div class="text-inverse-success font-weight-bolder font-size-h3 mb-2 mt-5">{{ $maintenance->count() }}</div>
@@ -94,7 +94,7 @@
                 <div class="card-body">
                     <span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                        <i class="fa fa-cogs fa-3x" style="color: #ffffff"></i>
+                        <i class="fa fa-cogs fa-4x" style="color: #ffffff"></i>
                         <!--end::Svg Icon-->
                     </span>
                     <div class="text-inverse-primary font-weight-bolder font-size-h5 mb-2 mt-5">{{ $spares->count() }}</div>

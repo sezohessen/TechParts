@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <form action="{{route("dashboard.users.store")}}" method="POST" id="myform" >
+        <form action="{{route("dashboard.users.store")}}" method="POST" id="myform" autocomplete="off">
             @csrf
             <div class="card-body">
                <!--begin::Form group-->
@@ -41,7 +41,8 @@
             </div>
             <!--end::Form group-->
             <div class="form-group">
-                <input id="email" type="email" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"  placeholder="@lang('Email')">
+                <input id="email" type="email" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('email') is-invalid @enderror"
+                name="email" value="{{ old('email') }}" autocomplete="new-password"   required placeholder="@lang('Email')">
                 @error('email')
                     <div class="fv-plugins-message-container">
                         <div class="fv-help-block">
@@ -86,7 +87,8 @@
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">
-                <input id="password" type="password"  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
+                <input id="password" type="password"   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror"
+                 name="password" value="{{ old('password') }}" autocomplete="new-password"  required placeholder="@lang('Password')">
                 <label class="checkbox mt-5">
                     <input type="checkbox" onclick="myFunction()"/>
                     <span></span>
@@ -135,6 +137,32 @@
                     </div>
                 @enderror
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Image">@lang('User Image') </label><br>
+                    <div class="image-input image-input-empty image-input-outline" id="image_id" style="background-image: url({{ asset('media/users/blank.png') }})">
+                        <div class="image-input-wrapper"></div>
+                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                            <i class="fa fa-pen icon-sm text-muted"></i>
+                            <input type="file" name="image_id" accept=".png, .jpg, .jpeg ,gif,svg" />
+                            <input type="hidden" name="image_id_remove" />
+                        </label>
+                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                        </span>
+                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                        </span>
+                    </div>
+                     @if ($errors->has('image_id'))
+                     <div class="fv-plugins-message-container">
+                         <div class="fv-help-block">
+                            <strong>{{ $errors->first('image_id')  }}</strong>
+                         </div>
+                     </div>
+                    @endif
+                </div>
+            </div>
             <input type="hidden" name="agree" value="on" />
             <!--end::Form group-->
 
@@ -149,6 +177,16 @@
 @endsection
 
 @section('scripts')
+<script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
+<script>
+
+"use strict";
+var KTUserEdit={
+    init:function(){
+        new KTImageInput("image_id");
+        }
+        };jQuery(document).ready((function(){KTUserEdit.init()}));
+</script>
 <script>
     function myFunction() {
       var x = document.getElementById("password");

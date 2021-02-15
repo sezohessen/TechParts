@@ -102,7 +102,9 @@
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">
-                <input id="password" type="password"  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
+                <input id="password" type="password" value="{{ old('password')}}"
+                class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror"
+                 name="password" value="{{ old('password') }}" placeholder="@lang('Password')">
                 <label class="checkbox mt-5">
                     <input type="checkbox" onclick="myFunction()"/>
                     <span></span>
@@ -176,26 +178,44 @@
                 @enderror
             </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label><br>
-                    <div class="image-input image-input-empty image-input-outline" id="image_id" style="background-image: url({{ (isset($user->image)) ? asset($user->image->base.$user->image->name)  :  asset('media/svg/image_ids/image_id.jpg') }})">
-                        <div class="image-input-wrapper"></div>
-                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                            <i class="fa fa-pen icon-sm text-muted"></i>
-                            <input type="file" name="image_id" accept=".png, .jpg, .jpeg ,gif,svg"  required />
-                            <input type="hidden" name="image_id_remove" value="{{$user->image->id ?? null}}" />
-                        </label>
-                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                        </span>
-                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                        </span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label><br>
+                        <div class="image-input image-input-empty image-input-outline" id="image_id" style="background-image: url({{ (isset($user->image)) ? asset($user->image->base.$user->image->name)  :  asset('media/svg/image_ids/image_id.jpg') }})">
+                            <div class="image-input-wrapper"></div>
+                            <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                <i class="fa fa-pen icon-sm text-muted"></i>
+                                <input type="file" name="image_id" accept=".png, .jpg, .jpeg ,gif,svg"  />
+                                <input type="hidden" name="image_id_remove" value="{{$user->image->id ?? null}}" />
+                            </label>
+                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                            </span>
+                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                            </span>
+                        </div>
+                        @error('image_id')
+                            <div class="invalid-feedback">{{ $errors->first('image_id') }}</div>
+                        @enderror
                     </div>
-                    @error('image_id')
-                        <div class="invalid-feedback">{{ $errors->first('image_id') }}</div>
-                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>@lang('Is verified')</label>
+                        <div class="checkbox-list">
+                            <label class="checkbox">
+                                <input type="checkbox" name="is_phone_virefied"
+                                {{ old('is_phone_virefied')=="on" ? 'checked':( ($user->is_phone_virefied) ? 'checked': '') }}/>
+                                @error('is_phone_virefied')
+                                    <div class="invalid-is_phone_virefied">{{ $errors->first('is_phone_virefied') }}</div>
+                                @enderror
+                                <span></span>
+                                @lang('Yes')
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <input type="hidden" name="agree" value="on" />

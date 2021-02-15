@@ -1,7 +1,7 @@
 "use strict";
 // Class definition
 
-var KTCkeditorDocument = function () {    
+var KTCkeditorDocument = function () {
     // Private functions
     var demos = function () {
         DecoupledEditor
@@ -41,7 +41,7 @@ var KTCkeditorDocument = function () {
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();

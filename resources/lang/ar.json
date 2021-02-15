@@ -700,5 +700,9 @@
     "You can choose more than one news":"يمكنك اختيار اكثر من خبر",
     "This day already exist as a trend day":"هذا اليوم موجود بالفعل باعتباره يوم ترويجي",
     "Edit news trend":"تعديل الخبر الترويجي",
-    "Agency image":"صورة الوكالة"
+    "Agency image":"صورة الوكالة",
+    "Edit User":"تعديل مستخدم",
+    "New user":"مستخدم جديد",
+    "Is verified":"تم التحقق منه",
+    "User Image":"صورة المستخدم"
 }

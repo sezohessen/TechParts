@@ -434,7 +434,6 @@ return [
                         ],
                     ]
                 ],
-
                 [
                     'title' => 'Trend',
                     'bullet' => 'dot',
@@ -450,22 +449,21 @@ return [
                         ],
                     ]
                 ],
+                [
+                    'title' => 'Categories',
+                    'bullet' => 'dot',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add category',
+                            'page' => "/dashboard/category/create"
+                        ],
+                        [
+                            'title' => 'View Categories',
+                            'page' => '/dashboard/category'
+                        ],
 
-            ]
-        ],
-        [
-            'title' => 'Categories',
-            'icon' => 'fas fa-pager',
-            'bullet' => 'dot',
-            'root' => true,
-            'submenu' => [
-                [
-                    'title' => 'Add category',
-                    'page' => "/dashboard/category/create"
-                ],
-                [
-                    'title' => 'View Categories',
-                    'page' => '/dashboard/category'
+                    ]
                 ],
 
             ]

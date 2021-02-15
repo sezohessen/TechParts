@@ -1,7 +1,7 @@
 "use strict";
 // Class definition
 
-var KTCkeditorInline = function () {    
+var KTCkeditorInline = function () {
     // Private functions
     var demos = function () {
         InlineEditor
@@ -53,7 +53,7 @@ var KTCkeditorInline = function () {
     return {
         // public functions
         init: function() {
-			demos(); 
+			demos();
         }
     };
 }();

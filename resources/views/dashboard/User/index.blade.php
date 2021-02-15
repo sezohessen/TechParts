@@ -22,7 +22,7 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                @lang("New Record")
+                @lang("New user")
             </a>
         </div>
         <br>
