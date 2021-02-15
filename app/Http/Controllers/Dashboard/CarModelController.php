@@ -16,6 +16,7 @@ class CarModelController extends Controller
      */
     public function index(CarModelDatatable $model)
     {
+
         $page_title = __('Car Models');
         $page_description = __('View Car Models');
         return  $model->render("dashboard.CarModel.index", compact('page_title', 'page_description'));
@@ -114,12 +115,14 @@ class CarModelController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$model = CarModel::find($id);
-				$model->delete();
+                $model = CarModel::find($id);
+                if($model)
+				    $model->delete();
 			}
 		} else {
-			$model = CarModel::find(request('item'));
-			$model->delete();
+            $model = CarModel::find(request('item'));
+            if($model)
+			    $model->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.model.index");

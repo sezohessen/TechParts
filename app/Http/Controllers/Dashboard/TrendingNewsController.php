@@ -157,12 +157,14 @@ class TrendingNewsController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$trending = NewsDay::find($id);
-				$trending->delete();
+                $trending = NewsDay::find($id);
+                if($trending)
+				    $trending->delete();
 			}
 		} else {
 			$trending = NewsDay::find(request('item'));
-			$trending->delete();
+			if($trending)
+                $trending->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.trending-news.index");

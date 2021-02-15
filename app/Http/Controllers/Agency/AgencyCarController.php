@@ -242,6 +242,20 @@ class AgencyCarController extends Controller
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
                 $car = Car::find($id);
+                if($car){
+                    if(!$car->query()->has('OneAgency')->where('id',$car->id)->get()->count()){
+                        return redirect()->route("agency.car.index");
+                    }
+                    $car=$car->query()->has('OneAgency')->where('id',$car->id)->first();
+                    $images=car_img::where("car_id",$car->id)->get();
+                    Car::unlink_img($images);
+                    $car->delete();
+                }
+
+			}
+		} else {
+            $car = Car::find(request('item'));
+            if($car){
                 if(!$car->query()->has('OneAgency')->where('id',$car->id)->get()->count()){
                     return redirect()->route("agency.car.index");
                 }
@@ -257,24 +271,8 @@ class AgencyCarController extends Controller
                     $feature->delete();
                 }
                 $car->delete();
-			}
-		} else {
-            $car = Car::find(request('item'));
-            if(!$car->query()->has('OneAgency')->where('id',$car->id)->get()->count()){
-                return redirect()->route("agency.car.index");
             }
-            $car=$car->query()->has('OneAgency')->where('id',$car->id)->first();
-            $images=car_img::where("car_id",$car->id)->get();
-            Car::unlink_img($images);
-            $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
-            foreach($CarBadges as $key=>$badge){
-                $badge->delete();
-            }
-            $CarFeatures=car_feature::where('car_id', '=', $car->id)->get();
-            foreach($CarFeatures as $key=>$feature){
-                $feature->delete();
-            }
-            $car->delete();
+
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("agency.car.index");

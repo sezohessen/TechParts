@@ -99,6 +99,10 @@ class CarColorController extends Controller
      */
     public function destroy(CarColor $color)
     {
+        if($color->car){
+            session()->flash('error',__("Cannot delete Color while belong to a car"));
+            return redirect()->route("dashboard.color.index");
+        }
         $color->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.color.index");
@@ -113,12 +117,22 @@ class CarColorController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$color = CarColor::find($id);
-				$color->delete();
+                $color = CarColor::find($id);
+                if($color->car){
+                    session()->flash('error',__("Cannot delete Color while belong to a car"));
+                    return redirect()->route("dashboard.color.index");
+                }
+                if($color)
+				    $color->delete();
 			}
 		} else {
-			$color = CarColor::find(request('item'));
-			$color->delete();
+            $color = CarColor::find(request('item'));
+            if($color->car){
+                session()->flash('error',__("Cannot delete Color while belong to a car"));
+                return redirect()->route("dashboard.color.index");
+            }
+            if($color)
+                $color->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.color.index");

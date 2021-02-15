@@ -127,12 +127,14 @@ class CountryController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$country = Country::find($id);
-				$country->delete();
+                $country = Country::find($id);
+                if($country)
+				    $country->delete();
 			}
 		} else {
-			$country = Country::find(request('item'));
-			$country->delete();
+            $country = Country::find(request('item'));
+            if($country)
+		    	$country->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.country.index");

@@ -123,12 +123,14 @@ class BadgesController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$badge = Badges::find($id);
-				$badge->delete();
+                $badge = Badges::find($id);
+                if($badge)
+				    $badge->delete();
 			}
 		} else {
 			$badge = Badges::find(request('item'));
-			$badge->delete();
+            if($badge)
+                $badge->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.badge.index");

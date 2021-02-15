@@ -120,12 +120,14 @@ class CityController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$city = City::find($id);
-				$city->delete();
+                $city = City::find($id);
+                if($city)
+				    $city->delete();
 			}
 		} else {
-			$city = City::find(request('item'));
-			$city->delete();
+            $city = City::find(request('item'));
+            if($city)
+		    	$city->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.city.index");

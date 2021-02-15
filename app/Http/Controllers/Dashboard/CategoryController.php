@@ -42,6 +42,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        
         $rules = Category::rules($request);
         $request->validate($rules);
         $credentials = Category::credentials($request);
@@ -115,12 +116,14 @@ class CategoryController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$category = Category::find($id);
-				$category->delete();
+                $category = Category::find($id);
+                if($category)
+				    $category->delete();
 			}
 		} else {
-			$category = Category::find(request('item'));
-			$category->delete();
+            $category = Category::find(request('item'));
+            if($category)
+			    $category->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.category.index");

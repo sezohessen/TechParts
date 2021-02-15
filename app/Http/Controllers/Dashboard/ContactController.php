@@ -106,12 +106,14 @@ class ContactController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$ContactUs = ContactUs::find($id);
-				$ContactUs->delete();
+                $ContactUs = ContactUs::find($id);
+                if($ContactUs)
+				    $ContactUs->delete();
 			}
 		} else {
-			$ContactUs = ContactUs::find(request('item'));
-			$ContactUs->delete();
+            $ContactUs = ContactUs::find(request('item'));
+            if($ContactUs)
+			    $ContactUs->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.contact.index");

@@ -345,6 +345,7 @@
     "Currency":"العملة",
     "Description (EN)":"الوصف بالانجليزية",
     "Description (AR)":"الوصف بالعربية ",
+    "Description":"الوصف",
     "Subscription":"الأشتراكات",
     "View Subscriptions":"عرض الأشتراكات",
     "price":"السعر",
@@ -472,6 +473,8 @@
     "Spare":"قطع غيار",
     "Show Password":"عرض كلمة المرور",
     "Bank":"بنك",
+    "Logs":"السجلات",
+    "Logs Activity":"نشاط السجلات",
     "User":"مستخدم",
     "No. of Cars for sale (owned by Customers)":"عدد السيارات المعروضة للبيع (المملوكة للعملاء)",
     "No. of Cars for sale (owned by Showrooms)":"عدد السيارات المعروضة للبيع (المملوكة للمعارض)",
@@ -690,5 +693,9 @@
     "Add trend news":"اضافة اخبار رائجة",
     "You can choose more than one news":"يمكنك اختيار اكثر من خبر",
     "This day already exist as a trend day":"هذا اليوم موجود بالفعل باعتباره يوم ترويجي",
-    "Edit news trend":"تعديل الخبر الترويجي"
+    "Edit news trend":"تعديل الخبر الترويجي",
+    "Cannot delete body style while belong to a car":"لا يمكن حذف مجسم تابع لسيارة موجودة",
+    "Cannot delete Year  of manufacture  while belong to a car":"لا يمكن حذف سنة التصنيع التابعة لسيارة موجودة ",
+    "Cannot delete Color while belong to a car":"لا يمكن حذف لون تابع لسيارة موجودة ",
+    "Cannot delete Capacity while belong to a car":"لا يمكن حذف سعة تابعة لسيارة موجودة"
 }

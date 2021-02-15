@@ -128,12 +128,14 @@ class BankOfferController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$bank_offer = BankOffer::find($id);
-				$bank_offer->delete();
+                $bank_offer = BankOffer::find($id);
+                if($bank_offer)
+				    $bank_offer->delete();
 			}
 		} else {
-			$bank_offer = BankOffer::find(request('item'));
-			$bank_offer->delete();
+            $bank_offer = BankOffer::find(request('item'));
+            if($bank_offer)
+			    $bank_offer->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("bank.bank-offer.index");

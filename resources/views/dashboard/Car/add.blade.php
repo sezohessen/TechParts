@@ -133,12 +133,10 @@
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <span class="switch switch-icon">
                                     <label>
-                                        <input type="hidden" name="AccidentBefore" id='AccidentBefore' value="{{old("AccidentBefore") ?? 1 }}">
+                                        <input type="hidden" name="AccidentBefore" id='AccidentBefore' value="{{old("AccidentBefore") ?? 0 }}">
                                         <input type="checkbox" onclick="changeSwitchStatus(event.target);"
                                         @if(!is_null(old("AccidentBefore")))
                                             {{old("AccidentBefore")==1 ? "checked" : ""}}
-                                        @else
-                                            {{"checked"}}
                                         @endif
                                         />
                                         <span></span>
@@ -245,7 +243,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea">@lang("Write A Description (EN)")<span class="text-danger">*</span></label>
-                                <textarea   id="kt-ckeditor-1" name="Description"   required  class="{{ $errors->has('Description') ? ' is-invalid' : '' }}">
+                                <textarea  class="form-control"  name="Description" cols="6"  rows="6"  required  class="{{ $errors->has('Description') ? ' is-invalid' : '' }}">
                                     {{old("Description")}}
                                 </textarea>
                                 @error('Description')
@@ -258,7 +256,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea">@lang("Write A Description (AR)")<span class="text-danger">*</span></label>
-                                <textarea   id="kt-ckeditor-2" name="Description_ar"   required  class="{{ $errors->has('Description_ar') ? ' is-invalid' : '' }}">
+                                <textarea   class="form-control"  name="Description_ar"  cols="6"  rows="6" required  class="{{ $errors->has('Description_ar') ? ' is-invalid' : '' }}">
                                     {{old("Description_ar")}}
                                 </textarea>
                                 @error('Description_ar')

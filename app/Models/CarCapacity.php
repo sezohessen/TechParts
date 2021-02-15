@@ -26,4 +26,8 @@ class CarCapacity extends Model
         ];
         return $credentials;
     }
+    public function car()
+    {
+        return $this->hasOne(Car::class,"CarCapacity_id","id");
+    }
 }

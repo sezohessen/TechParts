@@ -98,6 +98,10 @@ class CarBodyController extends Controller
      */
     public function destroy(CarBody $body)
     {
+        if($body->car){
+            session()->flash('error',__("Cannot delete body style while belong to a car"));
+            return redirect()->route("dashboard.body.index");
+        }
         $body->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.body.index");
@@ -112,11 +116,22 @@ class CarBodyController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$maker = CarBody::find($id);
-				$maker->delete();
+                $maker = CarBody::find($id);
+                if($maker->car){
+                    session()->flash('error',__("Cannot delete body style while belong to a car"));
+                    return redirect()->route("dashboard.body.index");
+                }
+                if($maker)
+				    $maker->delete();
 			}
 		} else {
-			$maker = CarBody::find(request('item'));
+            $maker = CarBody::find(request('item'));
+            if($maker->car){
+                session()->flash('error',__("Cannot delete body style while belong to a car"));
+                return redirect()->route("dashboard.body.index");
+            }
+            if($maker)
+                $maker->delete();
 			$maker->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));

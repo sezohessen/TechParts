@@ -102,6 +102,10 @@ class CarYearController extends Controller
      */
     public function destroy(CarYear $year)
     {
+        if($year->car){
+            session()->flash('error',__("Cannot delete Year  of manufacture  while belong to a car"));
+            return redirect()->route("dashboard.year.index");
+        }
         $year->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.year.index");
@@ -116,12 +120,22 @@ class CarYearController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$year = CarYear::find($id);
-				$year->delete();
+                $year = CarYear::find($id);
+                if($year->car){
+                    session()->flash('error',__("Cannot delete Year  of manufacture  while belong to a car"));
+                    return redirect()->route("dashboard.year.index");
+                }
+                if($year)
+				    $year->delete();
 			}
 		} else {
-			$year = CarYear::find(request('item'));
-			$year->delete();
+            $year = CarYear::find(request('item'));
+            if($year->car){
+                session()->flash('error',__("Cannot delete Year  of manufacture  while belong to a car"));
+                return redirect()->route("dashboard.year.index");
+            }
+            if($year)
+			    $year->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.year.index");

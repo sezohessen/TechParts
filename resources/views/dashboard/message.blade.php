@@ -24,4 +24,11 @@
         <p>{{ session('deleted') }}</p>
     </div>
 @endif
+@if(session()->has('error'))
+    <div class="alert alert-danger  m-4  ">
+        <p>{{ session('error') }}</p>
+    </div>
+@endif
+
+
 

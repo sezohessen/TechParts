@@ -125,12 +125,14 @@ class InsuranceController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$insurance = Insurance::find($id);
-				$insurance->delete();
+                $insurance = Insurance::find($id);
+                if($insurance)
+				    $insurance->delete();
 			}
 		} else {
-			$insurance = Insurance::find(request('item'));
-			$insurance->delete();
+            $insurance = Insurance::find(request('item'));
+            if($insurance)
+			    $insurance->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.insurance.index");

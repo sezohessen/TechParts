@@ -131,12 +131,14 @@ class TrendingController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$trending = Trending::find($id);
-				$trending->delete();
+                $trending = Trending::find($id);
+                if($trending)
+				    $trending->delete();
 			}
 		} else {
-			$trending = Trending::find(request('item'));
-			$trending->delete();
+            $trending = Trending::find(request('item'));
+            if($trending)
+			    $trending->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.trending.index");

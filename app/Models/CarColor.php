@@ -26,6 +26,9 @@ class CarColor extends Model
         ];
         return $credentials;
     }
-
+    public function car()
+    {
+        return $this->hasOne(Car::class,"CarColor_id","id");
+    }
 
 }

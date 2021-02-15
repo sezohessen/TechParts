@@ -109,12 +109,14 @@ class NewsController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$new = News::find($id);
-				$new->delete();
+                $new = News::find($id);
+                if($new)
+				    $new->delete();
 			}
 		} else {
-			$new = News::find(request('item'));
-			$new->delete();
+            $new = News::find(request('item'));
+            if($new)
+		    	$new->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.news.index");

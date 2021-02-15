@@ -99,6 +99,10 @@ class CarCapacityController extends Controller
      */
     public function destroy(CarCapacity $capacity)
     {
+        if($capacity->car){
+            session()->flash('error',__("Cannot delete Capacity while belong to a car"));
+            return redirect()->route("dashboard.capacity.index");
+        }
         $capacity->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.capacity.index");
@@ -113,12 +117,22 @@ class CarCapacityController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$capacity = CarCapacity::find($id);
-				$capacity->delete();
+                $capacity = CarCapacity::find($id);
+                if($capacity->car){
+                    session()->flash('error',__("Cannot delete Capacity while belong to a car"));
+                    return redirect()->route("dashboard.capacity.index");
+                }
+                if($capacity)
+				    $capacity->delete();
 			}
 		} else {
-			$capacity = CarCapacity::find(request('item'));
-			$capacity->delete();
+            $capacity = CarCapacity::find(request('item'));
+            if($capacity->car){
+                session()->flash('error',__("Cannot delete Capacity while belong to a car"));
+                return redirect()->route("dashboard.capacity.index");
+            }
+            if($capacity)
+			    $capacity->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.capacity.index");

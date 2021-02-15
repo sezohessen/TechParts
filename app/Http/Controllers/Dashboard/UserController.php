@@ -156,12 +156,14 @@ class UserController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$user = User::find($id);
-				$user->delete();
+                $user = User::find($id);
+                if($user)
+				    $user->delete();
 			}
 		} else {
-			$user = User::find(request('item'));
-			$user->delete();
+            $user = User::find(request('item'));
+            if($user)
+			    $user->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.users.index");

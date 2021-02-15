@@ -43,8 +43,8 @@ class FeaturesController extends Controller
         $request->validate($rules);
         $credentials = Feature::credentials($request);
         $Feature = Feature::create($credentials);
-       session()->flash('success',__("Feature has been added!"));
-       return redirect()->back();
+        session()->flash('created',__("Changes has been Created Successfully"));
+        return redirect()->route("dashboard.feature.index");
     }
 
     /**
@@ -64,13 +64,11 @@ class FeaturesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Feature $feature)
     {
         $page_title = __("Edit Feature");
         $page_description = __("Edit");
-        $feature = Feature::find($id);
-        if($feature)return view('dashboard.Feature.edit', compact('page_title', 'page_description','feature'));
-        else return redirect()->route('dashboard.feature.index');
+        return view('dashboard.Feature.edit', compact('page_title', 'page_description','feature'));
     }
 
     /**
@@ -86,13 +84,8 @@ class FeaturesController extends Controller
         $request->validate($rules);
         $credentials = Feature::credentials($request);
         $Feature = $feature->update($credentials);
-        /* if (Session::get('app_locale') == 'ar') {
-            session()->flash('success',__("تم تعديل الخاصية"));
-        } else {
-            session()->flash('success',__("Feature has been updated!"));
-        } */
-      session()->flash('updated',__("Changes has been Updated Successfully"));
-       return redirect()->route("dashboard.feature.index");
+        session()->flash('updated',__("Changes has been Updated Successfully"));
+        return redirect()->route("dashboard.feature.index");
     }
 
     /**
@@ -106,19 +99,6 @@ class FeaturesController extends Controller
         $feature->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.feature.index");
-        /* $Feature = Feature::find($id);
-        if($Feature->count()!=0){
-            $Feature->delete($id);
-             if (Session::get('app_locale') == 'ar') {
-            session()->flash('delete',__(" تم الحذف بنجاح!  "));
-            } else {
-                session()->flash('delete',__("Row has been deleted successfully!"));
-            }
-            session()->flash('delete', 'Row has been deleted successfully!');
-            return redirect()->route('feature.index');
-        }else{
-            return redirect()->back();
-        } */
     }
     public function Activity(Request $request){
         $category = Feature::find($request->id);
@@ -128,14 +108,17 @@ class FeaturesController extends Controller
         ]);
     }
     public function multi_delete(){
+    
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$feature = Feature::find($id);
-				$feature->delete();
+                $feature = Feature::find($id);
+                if($feature)
+				    $feature->delete();
 			}
 		} else {
-			$feature = Feature::find(request('item'));
-			$feature->delete();
+            $feature = Feature::find(request('item'));
+            if($feature)
+			    $feature->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.feature.index");

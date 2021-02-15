@@ -129,12 +129,14 @@ class GovernorateController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$governorate = Governorate::find($id);
-				$governorate->delete();
+                $governorate = Governorate::find($id);
+                if($governorate)
+				    $governorate->delete();
 			}
 		} else {
-			$governorate = Governorate::find(request('item'));
-			$governorate->delete();
+            $governorate = Governorate::find(request('item'));
+            if($governorate)
+			    $governorate->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.governorate.index");

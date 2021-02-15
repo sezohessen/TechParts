@@ -1,3 +1,4 @@
+@if(!app\Models\CarCapacity::find($id)->car)
 <!-- Trigger the modal with a button -->
 <a href="javascript:;" class="btn btn-md btn-danger btn-icon mb-2" title="Delete" data-toggle="modal"
     data-target="#myModal{{ $id }}">
@@ -16,6 +17,7 @@
         </svg>
     </span>
 </a>
+@endif
 <a href="{{ route('dashboard.capacity.edit', ['capacity' => $id]) }}" class="btn btn-md btn-success btn-icon mb-2"
     title="Edit details">
     <span class="svg-icon svg-icon-md">
@@ -32,7 +34,7 @@
         </svg>
     </span>
 </a>
-
+@if(!app\Models\CarCapacity::find($id)->car)
 <!-- Modal -->
 <div id="myModal{{ $id }}" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -56,3 +58,4 @@
 
     </div>
 </div>
+@endif

@@ -106,12 +106,14 @@ class SubscribeController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$subscribe_package = subscribe_package::find($id);
-				$subscribe_package->delete();
+                $subscribe_package = subscribe_package::find($id);
+                if($subscribe_package)
+				    $subscribe_package->delete();
 			}
 		} else {
-			$subscribe_package = subscribe_package::find(request('item'));
-			$subscribe_package->delete();
+            $subscribe_package = subscribe_package::find(request('item'));
+            if($subscribe_package)
+		    	$subscribe_package->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.subscribe_packages.index");

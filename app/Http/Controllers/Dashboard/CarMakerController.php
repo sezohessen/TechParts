@@ -113,12 +113,14 @@ class CarMakerController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$maker = CarMaker::find($id);
-				$maker->delete();
+                $maker = CarMaker::find($id);
+                if($maker)
+				    $maker->delete();
 			}
 		} else {
-			$maker = CarMaker::find(request('item'));
-			$maker->delete();
+            $maker = CarMaker::find(request('item'));
+            if($maker)
+			    $maker->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.maker.index");

@@ -106,12 +106,14 @@ class AskExpertController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$askExpert = AskExpert::find($id);
-				$askExpert->delete();
+                $askExpert = AskExpert::find($id);
+                if($askExpert)
+				    $askExpert->delete();
 			}
 		} else {
-			$askExpert = AskExpert::find(request('item'));
-			$askExpert->delete();
+            $askExpert = AskExpert::find(request('item'));
+            if($askExpert)
+                $askExpert->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.AskExpert.index");

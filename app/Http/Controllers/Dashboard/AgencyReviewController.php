@@ -96,12 +96,14 @@ class AgencyReviewController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$agencyReview = AgencyReview::find($id);
-				$agencyReview->delete();
+                $agencyReview = AgencyReview::find($id);
+                if($agencyReview)
+				    $agencyReview->delete();
 			}
 		} else {
-			$agencyReview = AgencyReview::find(request('item'));
-			$agencyReview->delete();
+            $agencyReview = AgencyReview::find(request('item'));
+            if($agencyReview)
+			    $agencyReview->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.agency-review.index");

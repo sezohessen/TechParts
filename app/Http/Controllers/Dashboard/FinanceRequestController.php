@@ -105,12 +105,14 @@ class FinanceRequestController extends Controller
      public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$Finance_request = Finance_request::find($id);
-				$Finance_request->delete();
+                $Finance_request = Finance_request::find($id);
+                if($Finance_request)
+				    $Finance_request->delete();
 			}
 		} else {
-			$Finance_request = Finance_request::find(request('item'));
-			$Finance_request->delete();
+            $Finance_request = Finance_request::find(request('item'));
+            if($Finance_request)
+			    $Finance_request->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.finance-request.index");

@@ -525,7 +525,7 @@ class CarsController extends Controller
             if (!CarCapacity::find($request->carCapacity)) {
                 return $this->errorMessage('Capacity not found');
             }
-            if (!CarBody::find($request->bodyStyle)->where("active", 1)) {
+            if (!CarBody::where("active", 1)->find($request->bodyStyle)) {
                 return $this->errorMessage('Car Body not found');
             }
             if (!CarColor::find($request->color)) {

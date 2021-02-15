@@ -112,12 +112,14 @@ class InsuranceOfferController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$insurance_offer = Insurance_offer::find($id);
-				$insurance_offer->delete();
+                $insurance_offer = Insurance_offer::find($id);
+                if($insurance_offer)
+				    $insurance_offer->delete();
 			}
 		} else {
-			$insurance_offer = Insurance_offer::find(request('item'));
-			$insurance_offer->delete();
+            $insurance_offer = Insurance_offer::find(request('item'));
+            if($insurance_offer)
+			    $insurance_offer->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.insurance-offer.index");

@@ -34,7 +34,7 @@
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" required>
                                     @foreach ($makers as $key=>$maker)
-                                        <option value="{{$maker->id}}"  data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}'  width='30' height='30'>  {{$maker->name}}</span>">
+                                        <option value="{{$maker->id}}"  data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}' class='img-fluid img-thumbnai'  width='40' height='40'>  {{$maker->name}}</span>">
                                         </option>
                                     @endforeach
                                 </select>

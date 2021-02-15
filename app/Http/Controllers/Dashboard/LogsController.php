@@ -17,7 +17,7 @@ class LogsController extends Controller
      */
     public function index(LogsDatatable $log)
     {
-        $page_title = __("Logs ");
+        $page_title = __("Logs");
         $page_description = __("Logs Activity");
         return  $log->render("dashboard.Logs.index", compact('page_title', 'page_description'));
     }
@@ -92,12 +92,14 @@ class LogsController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$log = Logs::find($id);
-				$log->delete();
+                $log = Logs::find($id);
+                if($log)
+				    $log->delete();
 			}
 		} else {
-			$log = Logs::find(request('item'));
-			$log->delete();
+            $log = Logs::find(request('item'));
+            if($log)
+			    $log->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.log.index");

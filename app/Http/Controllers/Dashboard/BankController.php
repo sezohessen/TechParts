@@ -128,12 +128,15 @@ class BankController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$bank = Bank::find($id);
-				$bank->delete();
+                $bank = Bank::find($id);
+                if($bank)
+				    $bank->delete();
 			}
 		} else {
 			$bank = Bank::find(request('item'));
-			$bank->delete();
+            if($bank)
+                $bank->delete();
+
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.bank.index");

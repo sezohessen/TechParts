@@ -38,7 +38,7 @@
                              <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
                                 name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
-                                    <option value=""  >@lang('Select Car Make')</option>
+                                    <option value=""  >@lang('Select Car Model')</option>
                                     @foreach ($models as $model)
                                         <option value="{{$model->id}}" {{ $year->CarModel_id==$model->id ? 'selected':'' }}>{{$model->name}}</option>
                                     @endforeach

@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Agency;
+use App\Models\CarBody;
 use App\Models\promote;
 use App\Models\CarMaker;
 use App\Models\PromoteCar;
@@ -39,6 +40,7 @@ class CarPromoteController extends Controller
      */
     public function create()
     {
+
 
         $page_title = __("Pomote a car");
         $page_description = __("Pomote a car");
@@ -125,12 +127,14 @@ class CarPromoteController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$promote = PromoteCar::find($id);
-				$promote->delete();
+                $promote = PromoteCar::find($id);
+                if($promote)
+				    $promote->delete();
 			}
 		} else {
-			$promote = PromoteCar::find(request('item'));
-			$promote->delete();
+            $promote = PromoteCar::find(request('item'));
+            if($promote)
+			    $promote->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.promote.index");

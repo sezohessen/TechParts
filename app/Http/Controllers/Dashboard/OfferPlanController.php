@@ -117,12 +117,14 @@ class OfferPlanController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$offer_plan = offer_plan::find($id);
-				$offer_plan->delete();
+                $offer_plan = offer_plan::find($id);
+                if($offer_plan)
+				    $offer_plan->delete();
 			}
 		} else {
-			$offer_plan = offer_plan::find(request('item'));
-			$offer_plan->delete();
+            $offer_plan = offer_plan::find(request('item'));
+            if($offer_plan)
+			    $offer_plan->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.offer-plan.index");

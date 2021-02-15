@@ -32,6 +32,9 @@ class CarYear extends Model
     public function model(){
         return $this->belongsTo(CarModel::class,'CarModel_id','id');
     }
-
+    public function car()
+    {
+        return $this->hasOne(Car::class,"CarBody_id","id");
+    }
 }
 

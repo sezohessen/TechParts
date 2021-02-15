@@ -35,6 +35,17 @@ class Handler extends ExceptionHandler
     {
         //
     }
+    /*
+        public function render($request, Exception $e)
+        {
+            if ($e instanceof \Illuminate\Session\TokenMismatchException) {
+
+                return redirect('/login');
+
+            }
+            return parent::render($request, $e);
+        }
+    */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return response()->json([
@@ -42,4 +53,5 @@ class Handler extends ExceptionHandler
             "msg"       => __('unauthorized')
         ], 403);
     }
+
 }

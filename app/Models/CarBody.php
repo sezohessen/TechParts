@@ -75,5 +75,9 @@ class CarBody extends Model
             return $Image->id;
         }
     }
+    public function car()
+    {
+        return $this->hasOne(Car::class,"CarBody_id","id");
+    }
 
 }

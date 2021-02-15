@@ -24,7 +24,14 @@ class CarYearDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('year', '{{Str::limit($year, 100)}}')
             ->editColumn('model.name', '{{Str::limit($model["name"], 100)}}')
-            ->addColumn('checkbox', 'dashboard.CarYear.btn.checkbox')
+            ->addColumn('checkbox', function($year){
+                if(!$year->car) {
+                    return "<label class='checkbox checkbox-single'>
+                    <input type='checkbox' name='item[]' class='item_checkbox' value='$year->id'>
+                    <span></span>
+                     </label>";
+                }
+            })
             ->addColumn('action', 'dashboard.CarYear.btn.action')
             ->rawColumns(['checkbox', 'action']);
     }

@@ -106,12 +106,14 @@ class FaqController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$faqs = Faq::find($id);
-				$faqs->delete();
+                $faqs = Faq::find($id);
+                if($faqs)
+				    $faqs->delete();
 			}
 		} else {
-			$faqs = Faq::find(request('item'));
-			$faqs->delete();
+            $faqs = Faq::find(request('item'));
+            if($faqs)
+			    $faqs->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.faqs.index");

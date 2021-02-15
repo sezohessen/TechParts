@@ -329,12 +329,15 @@ class AgencyController extends Controller
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {
-				$agency = Agency::find($id);
-				$agency->delete();
+                $agency = Agency::find($id);
+                if($agency)
+                    $agency->delete();
+
 			}
 		} else {
-			$agency = Agency::find(request('item'));
-			$agency->delete();
+            $agency = Agency::find(request('item'));
+            if($agency)
+                $agency->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.agency.index");
