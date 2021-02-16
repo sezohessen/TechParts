@@ -380,9 +380,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea" class="mb-10">@lang("Service History")<span class="text-danger">*</span></label>
-                                <textarea   id="kt-ckeditor-3" name="ServiceHistory"   required  class="{{ $errors->has('ServiceHistory') ? ' is-invalid' : '' }}">
-                                    {{old("ServiceHistory") ?? $car->ServiceHistory}}
-                                </textarea>
+                                <textarea   class="form-control"  cols="6"  rows="6" name="ServiceHistory"   required  class="{{ $errors->has('ServiceHistory') ? ' is-invalid' : '' }}">{{old("ServiceHistory") ?? $car->ServiceHistory}}</textarea>
                                 @error('ServiceHistory')
                                     <div class="invalid-feedback " style="display: block">{{ $errors->first('ServiceHistory') }}</div>
                                 @enderror
@@ -471,6 +469,40 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 payment" style="display: none" id="payment0">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("Deposit Price")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("DepositPrice") ?? $car->DepositPrice}}"  placeholder="{{__("Deposit Price")}}" name="DepositPrice" />
+                                @error('DepositPrice')
+                                    <div class="invalid-feedback">{{ $errors->first('DepositPrice') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 payment " style="display: none" id="payment1">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("Installment Price")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("InstallmentAmount") ?? $car->InstallmentAmount}}"  placeholder="{{__("Installment Price")}}" name="InstallmentAmount" />
+                                @error('InstallmentAmount')
+                                    <div class="invalid-feedback">{{ $errors->first('InstallmentAmount') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 payment" style="display: none" id="payment3">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("Installment Period")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("InstallmentPeriod") ?? $car->InstallmentPeriod}}"  placeholder="{{__("Installment Period")}}" name="InstallmentPeriod" />
+                                    <span class="form-text text-muted">@lang("Number of Months")</span>
+                                @error('InstallmentPeriod')
+                                    <div class="invalid-feedback">{{ $errors->first('InstallmentPeriod') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label  col-sm-12">@lang("Feul Type")<span class="text-danger">*</span></label><br>
@@ -531,40 +563,6 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Deposit Price")<span class="text-danger">*</span></label><br>
-                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <input class="form-control" type="text" value="{{old("DepositPrice") ?? $car->DepositPrice}}"  placeholder="{{__("Deposit Price")}}" name="DepositPrice" />
-                                @error('DepositPrice')
-                                    <div class="invalid-feedback">{{ $errors->first('DepositPrice') }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Installment Price")<span class="text-danger">*</span></label><br>
-                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <input class="form-control" type="text" value="{{old("InstallmentAmount") ? old("InstallmentAmount"): $car->InstallmentAmount }}"  placeholder="{{__("Installment Price")}}" name="InstallmentAmount" />
-                                @error('InstallmentAmount')
-                                    <div class="invalid-feedback">{{ $errors->first('InstallmentAmount') }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Installment Period")<span class="text-danger">*</span></label><br>
-                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <input class="form-control" type="text" value="{{old("InstallmentPeriod") ?? $car->InstallmentPeriod}}"  placeholder="{{__("Installment Period")}}" name="InstallmentPeriod" />
-                                    <span class="form-text text-muted">@lang("Number of Months")</span>
-                                    @error('InstallmentPeriod')
-                                    <div class="invalid-feedback">{{ $errors->first('InstallmentPeriod') }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
                             <label class="col-form-label  col-sm-12">@lang("Car Photos")</label><br>
@@ -629,8 +627,6 @@
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-select.js') }}"></script>
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-switch.js') }}"></script>
-<script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
-<script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src="{{"https://maps.googleapis.com/maps/api/js?".MapTOken()}}"></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 
@@ -760,7 +756,55 @@
         var status = $(_this).prop('checked') == true ? 1 : 0;
         $("#AccidentBefore").val(status);
     }
+    $("input[name$='payment']").click(function() {
+            var test = $(this).val();
+            $("div.payment").hide();
+            $("#payment" + test).show();
+            if(test==1){
+             $("#payment3").show();
+            }
+
+    });
 
 </script>
+@if (old('payment'))
+    @if((old('payment') == "0"))
+        <script>
+            $(document).ready(function() {
+                $("div.payment").hide();
+                $("#payment0").show();
+            });
+        </script>
+    @endif
+    @if((old('payment') == "1"))
+        <script>
+            $(document).ready(function() {
+                $("div.payment").hide();
+                $("#payment1").show();
+                $("#payment3").show();
 
+            });
+        </script>
+    @endif
+
+@else
+    @if(($car->payment == 0))
+    <script>
+        $(document).ready(function() {
+            $("div.payment").hide();
+            $("#payment0").show();
+        });
+    </script>
+    @endif
+    @if(($car->payment  == 1))
+    <script>
+        $(document).ready(function() {
+            $("div.payment").hide();
+            $("#payment1").show();
+            $("#payment3").show();
+
+        });
+    </script>
+    @endif
+@endif
 @endsection

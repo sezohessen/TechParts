@@ -30,9 +30,9 @@ class AddRelationsToCars extends Migration
             $table->string('phone')->nullable();
             $table->string('whats')->nullable();
 
-            $table->string('InstallmentAmount');
-            $table->string('InstallmentPeriod');
-            $table->string('DepositPrice');
+            $table->string('InstallmentAmount')->nullable();
+            $table->string('InstallmentPeriod')->nullable();
+            $table->string('DepositPrice')->nullable();
 
 
             $table->bigInteger('Country_id')->unsigned();
@@ -112,7 +112,7 @@ class AddRelationsToCars extends Migration
             $table->integer('price')->nullable()->change();
             $table->integer('price_after_discount')->default(0);
             $table->integer('payment')->default(0);
-            $table->integer('status')->change()->default(0);
+            $table->integer('status')->change()->default(1);
             $table->integer('SellerType')->default(0);
             $table->integer('isNew')->default(0);
             $table->timestamp('adsExpire')->useCurrent();

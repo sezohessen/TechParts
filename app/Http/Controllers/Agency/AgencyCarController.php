@@ -186,7 +186,7 @@ class AgencyCarController extends Controller
         }else {
             $credentials =$car->credentials($request);
         }
-
+        dd($credentials);
         $car->update($credentials);
         $CarBadges=car_badge::where('car_id', '=', $car->id)->get();
         foreach($CarBadges as $key=>$badge){

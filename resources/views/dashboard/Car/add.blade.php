@@ -334,7 +334,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea" class="mb-10">@lang("Service History")<span class="text-danger">*</span></label>
-                                <textarea   id="kt-ckeditor-3" name="ServiceHistory"   required  class="{{ $errors->has('ServiceHistory') ? ' is-invalid' : '' }}">
+                                <textarea   class="form-control"  cols="6"  rows="6" name="ServiceHistory"   required  class="{{ $errors->has('ServiceHistory') ? ' is-invalid' : '' }}">
                                     {{old("ServiceHistory")}}
                                 </textarea>
                                 @error('ServiceHistory')
@@ -422,6 +422,41 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6 payment" style="display: none" id="payment0">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("Deposit Price")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("DepositPrice")}}"  placeholder="{{__("Deposit Price")}}" name="DepositPrice" />
+                                @error('DepositPrice')
+                                    <div class="invalid-feedback">{{ $errors->first('DepositPrice') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 payment " style="display: none" id="payment1">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("Installment Price")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("InstallmentAmount")}}"  placeholder="{{__("Installment Price")}}" name="InstallmentAmount" />
+                                @error('InstallmentAmount')
+                                    <div class="invalid-feedback">{{ $errors->first('InstallmentAmount') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 payment" style="display: none" id="payment3">
+                        <div class="form-group row ">
+                            <label class="col-form-label  col-sm-12">@lang("Installment Period")<span class="text-danger">*</span></label><br>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input class="form-control" type="text" value="{{old("InstallmentPeriod")}}"  placeholder="{{__("Installment Period")}}" name="InstallmentPeriod" />
+                                    <span class="form-text text-muted">@lang("Number of Months")</span>
+                                @error('InstallmentPeriod')
+                                    <div class="invalid-feedback">{{ $errors->first('InstallmentPeriod') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label  col-sm-12">@lang("Feul Type")<span class="text-danger">*</span></label><br>
@@ -474,41 +509,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Deposit Price")<span class="text-danger">*</span></label><br>
-                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <input class="form-control" type="text" value="{{old("DepositPrice")}}"  placeholder="{{__("Deposit Price")}}" name="DepositPrice" />
-                                @error('DepositPrice')
-                                    <div class="invalid-feedback">{{ $errors->first('DepositPrice') }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Installment Price")<span class="text-danger">*</span></label><br>
-                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <input class="form-control" type="text" value="{{old("InstallmentAmount")}}"  placeholder="{{__("Installment Price")}}" name="InstallmentAmount" />
-                                @error('InstallmentAmount')
-                                    <div class="invalid-feedback">{{ $errors->first('InstallmentAmount') }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Installment Period")<span class="text-danger">*</span></label><br>
-                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <input class="form-control" type="text" value="{{old("InstallmentPeriod")}}"  placeholder="{{__("Installment Period")}}" name="InstallmentPeriod" />
-                                    <span class="form-text text-muted">@lang("Number of Months")</span>
-                                @error('InstallmentPeriod')
-                                    <div class="invalid-feedback">{{ $errors->first('InstallmentPeriod') }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row ">
-                            <label class="col-form-label  col-sm-12">@lang("Car Photos")<span class="text-danger">*</span></label><br>
+                            <label class="col-form-label  col-sm-12">@lang("Car Photos")</label><br>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <input type="file" class="custom-file-input" name="CarPhotos[]" id="customFile" multiple/>
                                 <label class="custom-file-label" for="customFile">Choose file</label>
@@ -518,6 +519,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="form-group row ">
+                            <div class="image-input image-input-outline" >
+                                <div class="imgPreview"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">@lang('Sell')  </button>
@@ -531,10 +542,15 @@
 {{-- Scripts Section --}}
 @section('styles')
 <link href="{{asset('plugins/custom/uppy/uppy.bundle.css')}}" rel="stylesheet" type="text/css" />
+
 <style>
     .invalid-feedback {
         display: block;
     }
+    .imgPreview img {
+            padding: 8px;
+            max-width: 100px;
+        }
 </style>
 @endsection
 
@@ -543,11 +559,37 @@
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-select.js') }}"></script>
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-switch.js') }}"></script>
-<script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
-<script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
+
 <script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
+ <!-- jQuery -->
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ <script>
+     $(function() {
+     // Multiple images preview with JavaScript
+     var multiImgPreview = function(input, imgPreviewPlaceholder) {
 
+         if (input.files) {
+             var filesAmount = input.files.length;
+
+             for (i = 0; i < filesAmount; i++) {
+                 var reader = new FileReader();
+
+                 reader.onload = function(event) {
+                     $($.parseHTML('<img class="image-input-wrapper img-fluid img-thumbnail">')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+                 }
+
+                 reader.readAsDataURL(input.files[i]);
+             }
+         }
+
+     };
+
+     $('#customFile').on('change', function() {
+         multiImgPreview(this, 'div.imgPreview');
+     });
+     });
+ </script>
 <script>
     function year(id ){
         $('#year').empty();
@@ -688,8 +730,37 @@
         var status = $(_this).prop('checked') == true ? 1 : 0;
         $("#AccidentBefore").val(status);
     }
+    $("input[name$='payment']").click(function() {
+            var test = $(this).val();
+            $("div.payment").hide();
+            $("#payment" + test).show();
+            if(test==1){
+             $("#payment3").show();
+            }
+
+    });
 
 
 </script>
+
+@if (old('payment') == "0")
+    <script>
+        $(document).ready(function() {
+            $("div.payment").hide();
+            $("#payment0").show();
+        });
+    </script>
+    @endif
+@if (old('payment') == "1")
+    <script>
+        $(document).ready(function() {
+            $("div.payment").hide();
+            $("#payment1").show();
+            $("#payment3").show();
+
+        });
+    </script>
+@endif
+
 
 @endsection

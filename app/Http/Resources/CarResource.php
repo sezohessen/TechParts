@@ -121,9 +121,9 @@ class CarResource extends JsonResource
                 "longitude"=>$this->lat,
             ],
             "other_costs"=>"",
-            "payment_deposit"=> intval( $this->DepositPrice),
-            "payment_loan_amount"=> intval($this->InstallmentAmount)  ,
-            "payment_loan_period"=> intval($this->InstallmentPeriod) ,
+            "payment_deposit"=> $this->DepositPrice ? intval( $this->DepositPrice) : "",
+            "payment_loan_amount"=> $this->InstallmentAmount ? intval( $this->InstallmentAmount) : "" ,
+            "payment_loan_period"=> $this->InstallmentPeriod ? intval( $this->InstallmentPeriod) : "",
             "payment_method"=> $payment,
             "serviceHistory"=>$this->ServiceHistory,
             "transmission"=> Car::ApiTransmissionType()[$this->transmission]

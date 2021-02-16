@@ -379,7 +379,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea" class="mb-10">@lang("Service History")<span class="text-danger">*</span></label>
-                                <textarea   id="kt-ckeditor-3" name="ServiceHistory"   required  class="{{ $errors->has('ServiceHistory') ? ' is-invalid' : '' }}">
+                                <textarea    class="form-control"  cols="6"  rows="6" name="ServiceHistory"   required  class="{{ $errors->has('ServiceHistory') ? ' is-invalid' : '' }}">
                                     {{old("ServiceHistory") ?? $car->ServiceHistory}}
                                 </textarea>
                                 @error('ServiceHistory')
@@ -628,8 +628,6 @@
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-select.js') }}"></script>
 <script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-switch.js') }}"></script>
-<script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
-<script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src="{{"https://maps.googleapis.com/maps/api/js?".MapTOken()}}"></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 

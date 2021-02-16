@@ -68,7 +68,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
 
     });
     Route::resource('car', 'CarController');
-
+    Route::get("car/endpoint",'CarController@endpoint');
 
 
     // Users

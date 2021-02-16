@@ -71,7 +71,7 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-
+     
         $rules = Car::rules($request);
         $request->validate($rules);
         $credentials = Car::credentials($request);
@@ -112,6 +112,7 @@ class CarController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.

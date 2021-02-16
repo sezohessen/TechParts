@@ -166,9 +166,9 @@ class Car extends Model
             'payment'                     => 'required|integer',
             "FuelType"                    => 'required|integer',
             'phone'                       => 'required|string',
-            'DepositPrice'                => 'required|integer',
-            'InstallmentAmount'           => 'required|integer',
-            'InstallmentPeriod'           => 'required|integer',
+            'DepositPrice'                => 'required_if:payment,==,0|nullable|integer',
+            'InstallmentAmount'           => 'required_if:payment,==,1|nullable|integer',
+            'InstallmentPeriod'           => 'required_if:payment,==,1|nullable|integer',
             'CarPhotos'                   => 'required|max:5',
             'CarPhotos.*'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             "whats"                       => 'required|string',
@@ -211,14 +211,18 @@ class Car extends Model
             'payment'                     => $request->payment,
             'phone'                       => $request->phone,
             'whats'                       => $request->whats,
-            'DepositPrice'                => $request->DepositPrice,
-            'InstallmentAmount'           => $request->InstallmentAmount,
-            'InstallmentPeriod'           => $request->InstallmentPeriod,
             "FuelType"                    => $request->FuelType,
             'views'                       => 0,
             'status'                      => Car::STATUS_DISABLE,
             'user_id'                     => Auth()->user()->id
         ];
+        if($request->payment==Car::PAYMENT_CASH){
+            $credentials['DepositPrice']=$request->DepositPrice;
+
+        }elseif ($request->payment==Car::PAYMENT_INSTALLMENT){
+            $credentials['InstallmentAmount']=$request->InstallmentAmount;
+            $credentials['InstallmentPeriod']=$request->InstallmentPeriod;
+        }
         if($photos=$request->file('CarPhotos')){
             if($images_id){
                 foreach($photos as $key=>$photo){
