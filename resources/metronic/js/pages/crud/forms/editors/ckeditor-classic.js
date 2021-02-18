@@ -1,11 +1,11 @@
 "use strict";
 // Class definition
 
-var KTCkeditor = function () {    
+var KTCkeditor = function () {
     // Private functions
     var demos = function () {
         ClassicEditor
-			.create( document.querySelector( '#kt-ckeditor-1' ) )
+			.create( document.querySelector( '#kt-ckeditor-1' ))
 			.then( editor => {
 				console.log( editor );
 			} )
@@ -53,7 +53,7 @@ var KTCkeditor = function () {
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();

@@ -707,5 +707,9 @@
     "Cannot delete Year  of manufacture  while belong to a car":"لا يمكن حذف سنة التصنيع التابعة لسيارة موجودة ",
     "Cannot delete Color while belong to a car":"لا يمكن حذف لون تابع لسيارة موجودة ",
     "Cannot delete Capacity while belong to a car":"لا يمكن حذف سعة تابعة لسيارة موجودة",
-    "Agency image":"صورة الوكالة"
+    "Agency image":"صورة الوكالة",
+    "Edit User":"تعديل مستخدم",
+    "New user":"مستخدم جديد",
+    "Is verified":"تم التحقق منه",
+    "User Image":"صورة المستخدم"
 }

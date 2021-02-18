@@ -72,29 +72,29 @@ class User extends Authenticatable
     {
 
         $rules = [
-            'image'             => 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240',
+            'image_id'          => 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240',
             'first_name'        => 'required|string|max:255',
             'last_name'         => 'required|string|max:255',
             'provider'          => 'nullable|string|max:255',
-            'is_phone_virefied' => 'nullable|integer',
         ];
         if (!$api) {
-           $rules['image'] = 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240';
-           $rules['agree'] = 'required';
-           $rules['country_id'] = 'required|integer';
+           $rules['image_id']       = 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240';
+           $rules['agree']          = 'required';
+           $rules['country_id']     = 'required|integer';
         }else {
-
-            $rules['image'] = 'nullable|string';
-            $rules['country_code'] = 'required|string';
-            $rules['country_number'] = 'required|string';
+            $rules['image_id']          = 'required|image|mimes:jpeg,jpg,png,gif|max:10240';
+            $rules['country_code']      = 'required|string';
+            $rules['country_number']    = 'required|string';
         }
         if ($edit_profile) {
-           $rules['email'] = 'required|string|max:255|unique:users,email,'.$edit_profile;
+           $rules['email']          = 'required|string|max:255|unique:users,email,'.$edit_profile;
+           $rules['phone']          = 'required|string|max:255|unique:users,phone,'.$edit_profile;
+           $rules['password']       = 'nullable|string|min:8';
            //$rules['phone'] = 'required|string|max:255|unique:users,phone,'.$edit_profile;
         }else {
-            $rules['email'] = 'required|string|email|max:255|unique:users';
-            $rules['phone'] = 'required|string|max:255|unique:users';
-            $rules['password'] = 'required|string|min:8';
+            $rules['email']         = 'required|string|max:255|unique:users,email,'.$edit_profile;
+            $rules['phone']         = 'required|string|max:255|unique:users,phone,'.$edit_profile;
+            $rules['password']      = 'required|string|min:8';
         }
         return $rules;
     }
@@ -105,40 +105,41 @@ class User extends Authenticatable
             'last_name'                         => $request->last_name,
             'email'                             => $request->email,
         ];
-        if (!$edit_profile) {
-            $credentials['password'] =Hash::make($request->password);
-            $credentials['phone'] = $request->phone;
+        if ($edit_profile) {
+            $credentials['password']    = Hash::make($request->password);
+            $credentials['phone']       = $request->phone;
         }
         if (!$api) {
             if(property_exists($request, 'file') ){
                 $Image_id = self::file($request->file('image_id'));
                 $credentials['image_id'] = $Image_id;
-
             }
         }else {
-            if($request->image){
-                $Image_id = self::fileApi($request->image);
+            if($request->has('image_id')){
+                $Image_id = self::fileApi($request->image_id);
                 $credentials['image_id'] = $Image_id;
             }
         }
-        if ( isset($request->is_phone_virefied) ) {
-            $credentials['is_phone_virefied'] = $request->is_phone_virefied;
+        if($request->is_phone_virefied!=NULL&&$request->is_phone_virefied=='on'){//Check Box
+            $credentials['is_phone_virefied'] = 1;
+        }else{
+            $credentials['is_phone_virefied'] = 0;
         }
         if (isset($request->country_id) ) {
             $country = Country::find($request->country_id);
             if ($country) {
-                $credentials['country_code'] = $country->code;
-                $credentials['country_phone'] = $country->country_phone;
+                $credentials['country_code']    = $country->code;
+                $credentials['country_phone']   = $country->country_phone;
             }
         }
         if ($api) {
             $country = Country::where('code', $request->country_code)->first();
             if ($country) {
-                $credentials['country_code'] = $country->code;
-                $credentials['country_phone'] = $country->country_phone;
+                $credentials['country_code']    = $country->code;
+                $credentials['country_phone']   = $country->country_phone;
             }else {
-                $credentials['country_code'] = $request->country_code;
-                $credentials['country_phone'] = $request->country_number;
+                $credentials['country_code']    = $request->country_code;
+                $credentials['country_phone']   = $request->country_number;
             }
         }
         if (isset($request->interest_country) ) {

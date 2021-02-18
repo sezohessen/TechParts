@@ -119,7 +119,7 @@ class UserDatatable extends DataTable
                 ->title(__("Last Name")),
             Column::make('phone')
                 ->title(__("Phone")),
-            Column::make('role')
+            Column::computed('role')
                 ->title(__("Role")),
             Column::computed('action')
                 ->title(__('Action'))
