@@ -17,7 +17,7 @@ class CarColorSeeder extends Seeder
      */
     public function run()
     {
-        $string = file_get_contents("/home/mohamedelshazly/Documents/3arabiat/colors.json");
+        $string = file_get_contents("C:/xampp/htdocs/3arabiat/colors.json");
         $json_a = json_decode(json_encode($string),true);
         $jsonIterator = new RecursiveIteratorIterator(
         new RecursiveArrayIterator(json_decode($json_a, TRUE)),

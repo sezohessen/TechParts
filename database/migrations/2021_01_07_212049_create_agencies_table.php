@@ -25,7 +25,7 @@ class CreateAgenciesTable extends Migration
             $table->string('lat');
             $table->string('long');
             $table->boolean('car_status')->default(0);
-            $table->integer('payment_method')->default(0);
+            $table->string('payment_method');
             $table->integer('status')->default(0);
             $table->integer('agency_type')->default(0);
             $table->integer('maintenance_type')->default(0);
