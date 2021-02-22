@@ -176,60 +176,42 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>@lang('Payment Method')<span class="text-danger">*</span></label>
-                                            <div class="radio-inline">
-                                                <label class="radio">
-                                                    <input type="radio" name="payment_method" value="0"
-                                                    {{ old('payment_method')=="0" ? 'checked':'' }} required/>
-                                                    <span></span>
-                                                    @lang('Cash')
-                                                </label>
-                                                <label class="radio">
-                                                    <input type="radio" name="payment_method" value="1"
-                                                    {{ old('payment_method')=="1" ? 'checked':'' }}/>
-                                                    <span></span>
-                                                    @lang('Installment')
-                                                </label>
-                                                <label class="radio">
-                                                    <input type="radio" name="payment_method" value="2"
-                                                    {{ old('payment_method')=="2" ? 'checked':'' }}/>
-                                                    <span></span>
-                                                    @lang('Financial')
-                                                </label>
-                                                @error('payment_method')
-                                                    <div class="invalid-feedback">{{ $errors->first('payment_method') }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>@lang('Car status')<span class="text-danger">*</span></label>
-                                                    <div class="radio-inline">
-                                                        <label class="radio">
-                                                            <input type="radio" name="car_status" value="0"
-                                                            {{ old('car_status')=="0" ? 'checked':'' }} required/>
-                                                            <span></span>
-                                                            @lang('New')
-                                                        </label>
-                                                        <label class="radio">
-                                                            <input type="radio" name="car_status" value="1"
-                                                            {{ old('car_status')=="1" ? 'checked':'' }}/>
-                                                            <span></span>
-                                                            @lang('Used')
-                                                        </label>
-                                                        @error('car_status')
-                                                            <div class="invalid-feedback">{{ $errors->first('car_status') }}</div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="form-group">
+                                    <label>@lang('Payment Method')<span class="text-danger">*</span></label>
+                                    <div class="checkbox-list">
+                                        <label class="checkbox  {{ $errors->has('payment_method') ? 'is-invalid' : '' }}">
+                                            <input type="checkbox" name="payment_method[]" value="0"
+                                            @if (is_array(old('payment_method')))
+                                                @if (in_array( 0,old('payment_method') ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @endif/>
+                                            <span></span>
+                                            @lang('Cash')
+                                        </label>
+                                        <label class="checkbox ">
+                                            <input type="checkbox" name="payment_method[]" value="1"
+                                            @if (is_array(old('payment_method')))
+                                                @if (in_array( 1,old('payment_method') ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @endif/>
+                                            <span></span>
+                                            @lang('Installment')
+                                        </label>
+                                        <label class="checkbox ">
+                                            <input type="checkbox" name="payment_method[]" value="2"
+                                            @if (is_array(old('payment_method')))
+                                                @if (in_array( 2,old('payment_method') ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @endif/>
+                                            <span></span>
+                                            @lang('Financial')
+                                        </label>
+                                        @error('payment_method')
+                                            <div class="invalid-feedback">{{ $errors->first('payment_method') }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

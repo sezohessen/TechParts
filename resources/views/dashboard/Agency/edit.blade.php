@@ -239,22 +239,46 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>@lang('Payment Method')<span class="text-danger">*</span></label>
-                                    <div class="radio-inline">
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="0"
-                                            {{ old('payment_method')=="0" ? 'checked':(($agency->payment_method==0) ? 'checked': '' ) }} required/>
+                                    <div class="checkbox-list" >
+                                        <label class="checkbox  {{ $errors->has('payment_method') ? 'is-invalid' : '' }}">
+                                            <input type="checkbox" name="payment_method[]" value="0"
+                                            @if (is_array(old('payment_method')))
+                                                @if (in_array( 0,old('payment_method') ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @else
+                                                @if (in_array( 0,json_decode($agency->payment_method) ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @endif/>
                                             <span></span>
                                             @lang('Cash')
                                         </label>
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="1"
-                                            {{ old('payment_method')=="1" ? 'checked':(($agency->payment_method==1) ? 'checked': '' ) }}/>
+                                        <label class="checkbox ">
+                                            <input type="checkbox" name="payment_method[]" value="1"
+                                            @if (is_array(old('payment_method')))
+                                                @if (in_array( 1,old('payment_method') ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @else
+                                                @if (in_array( 1,json_decode($agency->payment_method) ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @endif/>
                                             <span></span>
                                             @lang('Installment')
                                         </label>
-                                        <label class="radio">
-                                            <input type="radio" name="payment_method" value="2"
-                                            {{ old('payment_method')=="2" ? 'checked':(($agency->payment_method==2) ? 'checked': '' ) }}/>
+                                        <label class="checkbox ">
+                                            <input type="checkbox" name="payment_method[]" value="2"
+                                            @if (is_array(old('payment_method')))
+                                                @if (in_array( 2,old('payment_method') ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @else
+                                                @if (in_array( 2,json_decode($agency->payment_method) ) )
+                                                    {{ 'checked' }}
+                                                @endif
+                                            @endif/>
                                             <span></span>
                                             @lang('Financial')
                                         </label>

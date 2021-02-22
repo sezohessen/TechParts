@@ -24,6 +24,11 @@ class AgencySeeder extends Seeder
         $faker  = Faker::create();
         $images = Image::where('base','/img/agency/')->get();
         $users  = User::whereRoleIs('agency')->get();
+        $array  = [
+            '0','1',
+            '0','1','2',
+            '0','2'
+        ];
         foreach ($users as $user ) {
             $agency = DB::table('agencies')->insertGetId([
                 'name'              => $faker->company,
@@ -39,7 +44,7 @@ class AgencySeeder extends Seeder
                 'lat'               => $faker->latitude,
                 'long'              => $faker->longitude,
                 'car_status'        => $faker->boolean,
-                'payment_method'    => $faker->numberBetween(0, 2),
+                'payment_method'    => json_encode($faker->randomElements($array)),
                 'logo_id'           => $images->random()->id,
                 'img_id'            => $images->random()->id,
                 'country_id'        => Country::all()->random()->id,

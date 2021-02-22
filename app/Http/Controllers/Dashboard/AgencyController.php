@@ -56,7 +56,6 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-
         //Validate and create for Agency Table
         $rules          = Agency::rules($request);
         $request->validate($rules);
