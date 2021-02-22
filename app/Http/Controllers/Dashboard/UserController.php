@@ -50,12 +50,16 @@ class UserController extends Controller
 
         $rules = User::rules();
         $request->validate($rules);
-        $credentials = User::credentials($request,1,1);
+        $credentials = User::credentials($request);
         if (isset($request->provider)) {
             if ($request->provider == 'insurance') {
                 $provider = 'insurance';
             }elseif ($request->provider == 'agency') {
                 $provider = 'agency';
+            }elseif ($request->provider == 'bank') {
+                $provider = 'bank';
+            }elseif ($request->provider == 'administrator') {
+                $provider = 'administrator';
             }else {
                 $provider = 'user';
             }
@@ -104,6 +108,8 @@ class UserController extends Controller
             $provider = 'agency';
         }elseif($user->hasRole('bank')){
             $provider = 'bank';
+        }elseif($user->hasRole('administrator')){
+            $provider = 'administrator';
         }else {
             $provider = 'user';
         }
@@ -126,6 +132,10 @@ class UserController extends Controller
         if (isset($request->provider)) {
             if ($request->provider == 'insurance') {
                 $provider = 'insurance';
+            }elseif($request->provider == 'bank'){
+                $provider = 'bank';
+            }elseif($request->provider == 'administrator'){
+                $provider = 'administrator';
             }elseif ($request->provider == 'agency') {
                 $provider = 'agency';
             }else {
@@ -136,7 +146,7 @@ class UserController extends Controller
             $provider = 'user';
         }
         $user->update(User::credentials($request, null,$user->id));
-        //$user->attachRole($provider) ;
+        $user->attachRole($provider) ;
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("dashboard.users.index");
     }

@@ -125,6 +125,9 @@
                     <option value="bank" {{ old('provider') == 'bank' ? 'selected' : '' }}>
                         @lang('Bank')
                     </option>
+                    <option value="admin" {{ old('provider') == 'administrator' ? 'selected' : '' }}>
+                        @lang('administrator')
+                    </option>
                     <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
                         @lang('User')
                     </option>

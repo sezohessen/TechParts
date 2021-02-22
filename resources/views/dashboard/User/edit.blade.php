@@ -90,7 +90,7 @@
             <div class="form-group">
                 <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6
                 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') ?? $user->phone }}"
-                required autocomplete="phone"  placeholder="@lang('phone')">
+                required autocomplete="phone"  placeholder="@lang('phone')" disabled>
                 @error('phone')
                     <div class="fv-plugins-message-container">
                         <div class="fv-help-block">
@@ -158,6 +158,15 @@
                        @endif
                        >
                         @lang('Bank')
+                    </option>
+                    <option value="administrator"
+                    @if(old('provider'))
+                    {{   old('provider') == 'administrator'? 'selected' : ''}}
+                       @else
+                    {{ $provider == 'administrator' ? 'selected' : ''}}
+                       @endif
+                       >
+                        @lang('administrator')
                     </option>
                     <option value="user"
                     @if(old('provider'))

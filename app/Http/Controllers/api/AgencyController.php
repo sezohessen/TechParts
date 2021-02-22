@@ -725,6 +725,11 @@ class AgencyController extends Controller
     ) //Power Full Function :P
     {
         list($Max, $Min)             = $this->PriceRange($agency);
+        $arr                         = json_decode($agency->payment_method);
+        $newArr                      = [];
+        foreach ($arr as $value) {
+            $newArr[] = Agency::ApiPayment()[$value] ;
+        }
         $agencies = [
             "centerType"            => Agency::ApiTypes()[$agency->center_type],
             "id"                    => $agency->id,
@@ -741,7 +746,7 @@ class AgencyController extends Controller
             "mLocation"             => $this->Location($agency),
             "carMakerList"          => $this->carMakerList($agency),
             "specializationList"    => $this->specializationList($agency),
-            "paymentMethodList"     => [Agency::ApiPayment()[$agency->payment_method]],
+            "paymentMethodList"     => $newArr,
             "workType"              => $workType,
             "badgesList"            => [Agency::ApiStatus()[$agency->status]],
         ];

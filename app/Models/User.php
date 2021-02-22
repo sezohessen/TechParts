@@ -68,7 +68,7 @@ class User extends Authenticatable
         return $country;
     }
 
-    public static function rules($api=null,$edit_profile=null,$email_not_unique=null)
+    public static function rules($api=null,$edit_profile=null)
     {
 
         $rules = [
@@ -88,12 +88,11 @@ class User extends Authenticatable
         }
         if ($edit_profile) {
            $rules['email']          = 'required|string|max:255|unique:users,email,'.$edit_profile;
-           $rules['phone']          = 'required|string|max:255|unique:users,phone,'.$edit_profile;
+           //$rules['phone']          = 'required|integer|unique:users,phone,'.$edit_profile;
            $rules['password']       = 'nullable|string|min:8';
-           //$rules['phone'] = 'required|string|max:255|unique:users,phone,'.$edit_profile;
         }else {
             $rules['email']         = 'required|string|max:255|unique:users,email,'.$edit_profile;
-            $rules['phone']         = 'required|string|max:255|unique:users,phone,'.$edit_profile;
+            $rules['phone']         = 'required|integer|max:255|unique:users,phone,'.$edit_profile;
             $rules['password']      = 'required|string|min:8';
         }
         return $rules;
@@ -105,9 +104,14 @@ class User extends Authenticatable
             'last_name'                         => $request->last_name,
             'email'                             => $request->email,
         ];
-        if ($edit_profile) {
+        if (!$edit_profile) {
             $credentials['password']    = Hash::make($request->password);
             $credentials['phone']       = $request->phone;
+        }else {
+            if ($request->password) {
+                $credentials['password']    = Hash::make($request->password);
+            }
+            //$credentials['phone']       = $request->phone;
         }
         if (!$api) {
             if(property_exists($request, 'file') ){
