@@ -184,6 +184,19 @@ return [
             ]
         ],
         [
+            'title' => 'Agency reviews',
+            'icon' => 'fas fa-star',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'View reviews',
+                    'page' => "/dashboard/agency-review"
+                ],
+
+            ]
+        ],
+        [
             'title' => 'Location',
             'icon' => 'fas fa-map-marked-alt',
             'bullet' => 'dot',
@@ -522,19 +535,7 @@ return [
 
             ]
         ],
-        [
-            'title' => 'Agency reviews',
-            'icon' => 'fas fa-star',
-            'bullet' => 'dot',
-            'root' => true,
-            'submenu' => [
-                [
-                    'title' => 'View reviews',
-                    'page' => "/dashboard/agency-review"
-                ],
 
-            ]
-        ],
         [   'title' => 'Promotion',
             'icon' => 'media/svg/icons/Navigation/Angle-double-up.svg',
             'bullet' => 'line',

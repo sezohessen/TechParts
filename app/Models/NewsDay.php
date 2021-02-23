@@ -20,7 +20,7 @@ class NewsDay extends Model
     public static function  rules($request)
     {
         $rules = [
-            'day'            =>  'required|date|after:today',
+            'day'            =>  'required|date',
             'news_id'        =>  'required|array|min:1',
         ];
         return $rules;

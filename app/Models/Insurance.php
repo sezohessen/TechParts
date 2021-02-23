@@ -23,7 +23,7 @@ class Insurance extends Model
     public function img(){
         return $this->belongsTo(Image::class,'img_id','id');
     }
-    public static function  rules($request,$id = NULL)
+    public static function  rules($request,$id = NULL, $create = null)
     {
         $rules = [
             'name'          => 'required|string|max:255',
@@ -36,6 +36,9 @@ class Insurance extends Model
         }elseif($id){//For update in Insurance Dashboard
             $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
             unset($rules['user_id']);
+        }
+        if ($create) {
+            $rules['logo'] = 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
         }
         return $rules;
     }

@@ -33,18 +33,22 @@ class OfferPlanController extends Controller
     {
 
         $insurance  = Insurance::where('user_id',Auth::id())
-        ->first()
-        ->id;
-        $offers = Insurance_offer::where('insurance_id',$insurance)->get();
-        if($offers){
-            $page_title = __("Add offer plan for insurance");
-            $page_description = __("Add offer plan for insurance");
-            return view('InsuranceDashboard.offer-plan.add', compact('page_title', 'page_description','offers'));
-        }else{
+        ->first();
 
-            $page_title = "Add insurance offer";
-            $page_description = "Add new insurance offer";
-            return view('InsuranceDashboard.Insurance-offer.add', compact('page_title', 'page_description'));
+        if($insurance){
+            $offers = Insurance_offer::where('insurance_id',$insurance->id)->get();
+            if ($offers) {
+                $page_title = __("Add offer plan for insurance");
+                $page_description = __("Add offer plan for insurance");
+                return view('InsuranceDashboard.offer-plan.add', compact('page_title', 'page_description','offers'));
+            }else {
+                $page_title = "Add insurance offer";
+                $page_description = "Add new insurance offer";
+                return view('InsuranceDashboard.Insurance-offer.add', compact('page_title', 'page_description'));
+            }
+
+        }else{
+            return redirect('/insurance/company/create');
         }
 
     }

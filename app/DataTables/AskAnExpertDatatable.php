@@ -2,8 +2,9 @@
 
 namespace App\DataTables;
 
-use App\Models\AskExpert;
+use Carbon\Carbon;
 use App\Models\Badges;
+use App\Models\AskExpert;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -27,6 +28,9 @@ class AskAnExpertDatatable extends DataTable
             ->editColumn('email', '{{Str::limit($email, 100)}}')
             ->editColumn('phone', '{{Str::limit($phone, 100)}}')
             ->editColumn('country_phone', '{{Str::limit($country_phone, 100)}}')
+            ->editColumn('created_at', function ($ask) {
+                return Carbon::parse($ask->created_at)->format('d/m/Y');
+            })
             ->addColumn('checkbox', 'dashboard.AskAnExpert.btn.checkbox')
             ->addColumn('action', 'dashboard.AskAnExpert.btn.action')
             ->rawColumns(['checkbox', 'action']);
@@ -110,8 +114,10 @@ class AskAnExpertDatatable extends DataTable
             Column::make('message'),
             Column::make('email'),
             Column::make('phone'),
+
             Column::make('country_phone')
                 ->title(__('Country Phone Code')),
+            Column::make('created_at'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

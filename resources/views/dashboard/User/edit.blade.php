@@ -125,7 +125,7 @@
             <!--end::Form group-->
             <div class="form-group">
 
-                <select id="provider" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('provider') is-invalid @enderror" name="provider" required>
+                <select id="provider" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('provider') is-invalid @enderror" name="provider" required disabled>
                     <option value="" >@lang('--Select Acount Type--')</option>
                     {{--
                     <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>

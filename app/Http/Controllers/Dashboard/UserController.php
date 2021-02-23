@@ -146,7 +146,8 @@ class UserController extends Controller
             $provider = 'user';
         }
         $user->update(User::credentials($request, null,$user->id));
-        $user->attachRole($provider) ;
+
+        //$user->attachRole($provider) ;
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("dashboard.users.index");
     }

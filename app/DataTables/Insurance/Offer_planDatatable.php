@@ -44,7 +44,11 @@ class Offer_planDatatable extends DataTable
     public function query()
     {
         $insurance = Insurance::where("user_id", Auth::id())->first();
-        return offer_plan::query()->where('insurance_id', $insurance->id)->select("offer_plans.*")->with("offer_plan", "insurance");
+        if ($insurance) {
+            return offer_plan::query()->where('insurance_id', $insurance->id)->select("offer_plans.*")->with("offer_plan", "insurance");
+        }
+        return offer_plan::query()->where('insurance_id','no_insurance')->select("offer_plans.*")->with("offer_plan", "insurance");
+
     }
 
     /**

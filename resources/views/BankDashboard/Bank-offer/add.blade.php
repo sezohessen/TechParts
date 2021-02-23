@@ -135,6 +135,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Offer image') <span class="text-danger">*</span></label>
+                            @error('logo_id')
+                                <div style="color:red">{{ $errors->first('logo_id') }}</div>
+                            @enderror
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="logo_id"
                                 style="background-image: url({{ asset('media/users/blank.png') }})">
@@ -154,9 +157,7 @@
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
                             </div>
-                            @error('logo_id')
-                                <div class="invalid-feedback">{{ $errors->first('logo_id') }}</div>
-                            @enderror
+
                         </div>
                     </div>
 

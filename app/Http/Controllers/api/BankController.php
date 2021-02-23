@@ -133,7 +133,7 @@ class BankController extends Controller
                 "mBank"                     => $mBank,
                 "mContact"                  => $mContact,
                 "number_years_installment"  => $bankOffer->number_of_years,
-                "photo"                     => $bankOffer->img->name,
+                "photo"                     => find_image(@$bankOffer->img),
                 "title"                     => Session::get('app_locale') == 'ar' ? $bankOffer->name_ar : $bankOffer->name,
                 "valid_date"                => $bankOffer->valid_till,
             ];

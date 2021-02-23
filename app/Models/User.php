@@ -92,7 +92,7 @@ class User extends Authenticatable
            $rules['password']       = 'nullable|string|min:8';
         }else {
             $rules['email']         = 'required|string|max:255|unique:users,email,'.$edit_profile;
-            $rules['phone']         = 'required|integer|max:255|unique:users,phone,'.$edit_profile;
+            $rules['phone']         = 'required|integer|unique:users,phone,'.$edit_profile;
             $rules['password']      = 'required|string|min:8';
         }
         return $rules;
@@ -124,10 +124,12 @@ class User extends Authenticatable
                 $credentials['image_id'] = $Image_id;
             }
         }
-        if($request->is_phone_virefied!=NULL&&$request->is_phone_virefied=='on'){//Check Box
-            $credentials['is_phone_virefied'] = 1;
-        }else{
-            $credentials['is_phone_virefied'] = 0;
+        if (isset($request->is_phone_virefied) ){
+            if ($request->is_phone_virefied != NULL && $request->is_phone_virefied == 'on'){//Check Box
+                $credentials['is_phone_virefied'] = 1;
+            }else{
+                $credentials['is_phone_virefied'] = 0;
+            }
         }
         if (isset($request->country_id) ) {
             $country = Country::find($request->country_id);

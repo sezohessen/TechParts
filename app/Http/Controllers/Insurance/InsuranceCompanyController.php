@@ -26,9 +26,8 @@ class InsuranceCompanyController extends Controller
      */
     public function create()
     {
-        $insurance = Insurance::where('user_id',Auth::id());
+        $insurance = Insurance::where('user_id',Auth::id())->first();
         if($insurance!=NULL){
-            $insurance = $insurance->first();
             $page_title = __("Edit insurance company");
             $page_description = __("Edit");
             return view('InsuranceDashboard.Insurance.edit', compact('page_title', 'page_description','insurance'));
@@ -49,7 +48,7 @@ class InsuranceCompanyController extends Controller
     public function store(Request $request)
     {
         $id = Auth::id();
-        $rules = Insurance::rules($request,$id);
+        $rules = Insurance::rules($request,$id,true);
         $request->validate($rules);
         $credentials = Insurance::credentials($request,$id);
         $Insurance = Insurance::create($credentials);

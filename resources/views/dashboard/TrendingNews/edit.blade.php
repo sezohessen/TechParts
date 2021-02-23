@@ -49,7 +49,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Select Cars')<span class="text-danger">*</span></label><br>
+                            <label class="col-form-label col-sm-12">@lang('Select News  ')<span class="text-danger">*</span></label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control select2 {{ $errors->has('news_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_12" name="news_id[]" required multiple >
