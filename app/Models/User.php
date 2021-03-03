@@ -82,17 +82,17 @@ class User extends Authenticatable
            $rules['agree']          = 'required';
            $rules['country_id']     = 'required|integer';
         }else {
-            $rules['image_id']          = 'required|image|mimes:jpeg,jpg,png,gif|max:10240';
+            $rules['image_id']          = 'nullable|image|mimes:jpeg,jpg,png,gif|max:10240';
             $rules['country_code']      = 'required|string';
             $rules['country_number']    = 'required|string';
         }
         if ($edit_profile) {
            $rules['email']          = 'required|string|max:255|unique:users,email,'.$edit_profile;
-           //$rules['phone']          = 'required|integer|unique:users,phone,'.$edit_profile;
+           //$rules['phone']          = 'required|string|unique:users,phone,'.$edit_profile;
            $rules['password']       = 'nullable|string|min:8';
         }else {
             $rules['email']         = 'required|string|max:255|unique:users,email,'.$edit_profile;
-            $rules['phone']         = 'required|integer|unique:users,phone,'.$edit_profile;
+            $rules['phone']         = 'required|string|unique:users,phone,'.$edit_profile;
             $rules['password']      = 'required|string|min:8';
         }
         return $rules;
