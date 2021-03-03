@@ -54,22 +54,35 @@ class CarResource extends JsonResource
     }
     public function item(){
         $car_badges=[];
-        foreach($this->badges as $item){
-            ($badge=Badges::where('active', '=', 1)->find($item->badge_id))?$car_badges[]=attr_lang_name($badge->name_ar,$badge->name):'';
+        $car_badges_ids=[];
+        foreach($this->newbadges as $item){
+            if ($item->active == 1) {
+                $car_badges[]=attr_lang_name($item->name_ar,$item->name);
+                $car_badges_ids[]=$item->id;
+            }
         }
         $car_features=[];
-        foreach($this->features as $item){
-            ($feature=Feature::where('active', '=', 1)->find($item->feature_id))? $car_features[]=attr_lang_name($feature->name_ar,$feature->name):'';
+        $car_features_ids=[];
+        foreach($this->newfeatures as $item){
+            if ($item->active == 1) {
+                $car_features[] = attr_lang_name($item->name_ar,$item->name);
+                $car_features_ids[]=$item->id;
+            }
+
         }
         $data= [
             "adsExpire" =>date("Y-m-d",strtotime($this->adsExpire)),
             "badgeList"=>$car_badges,
+            "badgeList_ids"=>$car_badges_ids,
             "featureList"=>$car_features,
+            "featureList_ids"=>$car_features_ids,
             "isAdminAproved"=> $this->isAdminAproved,
             "counter_view"=> $this->views ? $this->views : 0,
             "counter_clicks"=> $this->clicks ? $this->clicks : 0,
             "bodyStyle"=>$this->body->name,
+            "bodyStyle_id"=>$this->body->id,
             "color"=>@$this->color->code,
+            "color_id"=>@$this->color->id,
         ];
         return array_merge($this->common(),$data);
     }
@@ -83,9 +96,13 @@ class CarResource extends JsonResource
         }
         $data=[
             "carModel"=>@$this->model->name,
+            "carModel_id"=>@$this->model->id,
             "carMaker"=>@$this->maker->name,
+            "carMaker_id"=>@$this->maker->id,
             "carState"=> Car::ApiStatusType()[$this->isNew],
+            "carState_id"=> $this->isNew,
             "carYear"=>@$this->year->year,
+            "carYear_id"=>@$this->year->id,
             "id"=>$this->id,
             "imageList"=>$images,
             "isAccident"=>($this->AccidentBefore) ? true :false,
@@ -111,12 +128,16 @@ class CarResource extends JsonResource
         $data = [
             "aboutCar" =>attr_lang_name($this->Description_ar,$this->Description),
             "carFuelType"=>Car::ApiFuelType()[$this->FuelType],
+            "carFuelType_id" => $this->FuelType,
             "bodyStyle"=>$this->body->name,
             "carManufacturing"=>$carMan,
+            "carManufacturing_id" => $this->manufacture->id,
             "color"=>@$this->color->code,
             "mLocation"=>[
                 "city_name"=>attr_lang_name(@$this->city->title_ar,@$this->city->title),
                 "government_name"=>attr_lang_name(@$this->governorate->title_ar,@$this->governorate->title),
+                "city_id" => @$this->city->id,
+                "government_id" => @$this->governorate->id,
                 "latitude"=>$this->lng,
                 "longitude"=>$this->lat,
             ],
@@ -126,7 +147,8 @@ class CarResource extends JsonResource
             "payment_loan_period"=> $this->InstallmentPeriod ? intval( $this->InstallmentPeriod) : "",
             "payment_method"=> $payment,
             "serviceHistory"=>$this->ServiceHistory,
-            "transmission"=> Car::ApiTransmissionType()[$this->transmission]
+            "transmission"=> Car::ApiTransmissionType()[$this->transmission],
+            "transmission_id" => $this->transmission
             //CarCapacity_id
             //SellerType
         ];

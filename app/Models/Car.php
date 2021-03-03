@@ -305,6 +305,10 @@ class Car extends Model
     {
         return $this->hasMany(car_badge::class,"car_id","id");
     }
+    public function newbadges()
+    {
+        return $this->belongsToMany(Badges::class,'car_badges',"car_id","badge_id");
+    }
     public function getBadgesIdAttribute()
     {
         return $this->badges->pluck('id')->toArray();
@@ -316,6 +320,10 @@ class Car extends Model
     public function features()
     {
         return $this->hasMany(car_feature::class,"car_id","id");
+    }
+    public function newfeatures()
+    {
+        return $this->belongsToMany(Feature::class,'car_features', "car_id", "feature_id");
     }
     public function images()
     {
