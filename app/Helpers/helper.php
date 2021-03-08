@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Session;
     }
     if(!function_exists('MapTOken')){
         function MapTOken(){
-            return "sensor=false&libraries=places&key=AIzaSyDcl_4E5iBaAR4bUuZePK3MIL-pO_oDoCA";
+            return "sensor=false&libraries=places&key=AIzaSyCm_9T4rw71kRJNsaZrttzykV4FZQgGzPk";
         }
     }
     if(!function_exists('default_lang')){
