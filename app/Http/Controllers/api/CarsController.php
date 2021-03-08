@@ -74,6 +74,28 @@ class CarsController extends Controller
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
     }
+    public function simillar(Request $request)
+    {
+        $validator = $this->Validator($request, [
+            "car_id"            => 'required|integer',
+        ]);
+        if (!$validator->fails()) {
+            if (!$car = Car::find($request->car_id)) {
+                return $this->errorMessage('Car not found');
+            }
+            $type   = new DataType();
+            $data = (new CarCollection(
+                Car::where("status", 1)
+                    ->where('CarModel_id', $car->CarModel_id)
+                    ->limit(5)->get()
+            ))->type($type::list);
+            if (!$data->count())
+                return $this->errorMessage("No data found");
+            return $data;
+        } else {
+            return $this->ValidatorMessages($validator->errors()->getMessages());
+        }
+    }
 
 
     public function search(Request $request)
@@ -115,10 +137,10 @@ class CarsController extends Controller
     public function filter(Request $request)
     {
         $validator = $this->Validator($request, [
-            "interest_country"         => 'required|integer',
-            "car_state"                => 'required|integer|between:0,1',
-            "car_maker_id"             => 'required|integer',
-            "car_model_id"             => 'required|integer',
+            "interest_country"         => 'nullable|integer',
+            "car_state"                => 'nullable|integer|between:0,1',
+            "car_maker_id"             => 'nullable|integer',
+            "car_model_id"             => 'nullable|integer',
             "year"                     => 'nullable|integer',
             "price_min"                => 'nullable|integer',
             "price_max"                => 'nullable|integer',
@@ -145,12 +167,18 @@ class CarsController extends Controller
         if (!$validator->fails()) {
 
             $car = Car::where("status", 1);
-
-
-            $car->where("Country_id", $request->interest_country)
-                ->where("isNew", $request->car_state)
-                ->where("CarMaker_id", $request->car_maker_id)
-                ->where("CarModel_id", $request->car_model_id);
+            if ($request->interest_country) {
+                $car->where("Country_id", $request->interest_country);
+            }
+            if ($request->car_maker_id) {
+                $car->where("CarMaker_id", $request->car_maker_id);
+            }
+            if ($request->car_model_id) {
+                $car->where("CarModel_id", $request->car_model_id);
+            }
+            if ($request->car_state) {
+                $car->where("isNew", $request->car_state);
+            }
             if ($this->stop($car)) {
 
                 return $this->errorMessage("No data found");

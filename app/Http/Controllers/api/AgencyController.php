@@ -462,7 +462,7 @@ class AgencyController extends Controller
                 ->whereHas('Car', function ($query) use ($request) {
                     return $query->where('cars.CarModel_id', $request->car_model_id);
                 });
-
+            if ($request->city_id) $agencyList->where('city_id', $request->city_id);
             if ($request->work_type) $agencyList->whereIn('agency_type', $request->work_type);
             if ($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
             if ($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
@@ -517,6 +517,7 @@ class AgencyController extends Controller
                     return $query->where('cars.CarModel_id', $request->car_model_id);
                 });
 
+            if ($request->city_id) $agencyList->where('city_id', $request->city_id);
             if ($request->work_type) $agencyList->whereIn('maintenance_type', $request->work_type);
             if ($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
             if ($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
@@ -525,6 +526,12 @@ class AgencyController extends Controller
                     $query->whereHas('year', function ($query) use ($request) {
                         return $query->where('car_years.year', $request->year);
                     });
+                });
+            }
+
+            if ($request->Specialties_id) {
+                $agencyList->whereHas('agency_specialties', function ($query) use ($request) {
+                    return $query->where('agency_specialties.specialty_id', $request->Specialties_id);
                 });
             }
             /* if($request->sort_rate =='high'){
@@ -571,7 +578,7 @@ class AgencyController extends Controller
                 ->whereHas('Car', function ($query) use ($request) {
                     return $query->where('cars.CarModel_id', $request->car_model_id);
                 });
-
+            if ($request->city_id) $agencyList->where('city_id', $request->city_id);
             if ($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
             if ($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
             if ($request->year) {
@@ -834,7 +841,9 @@ class AgencyController extends Controller
             //'car_state'             => 'required|in:0,1',
             'car_maker_id'          => 'required|integer',
             'car_model_id'          => 'required|integer',
+            'city_id'               => 'nullable|integer',
             'year'                  => 'nullable|integer',
+            'Specialties_id'        => 'nullable|integer',
             'badge_ids'             => 'nullable|array|max:3',
             "badge_ids.*"           => "nullable|integer|distinct|in:0,1,2",
             'work_type'             => 'nullable|array|max:3',

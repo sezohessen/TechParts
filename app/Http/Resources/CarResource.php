@@ -97,6 +97,8 @@ class CarResource extends JsonResource
         $data=[
             "carModel"=>@$this->model->name,
             "carModel_id"=>@$this->model->id,
+            "CarCapacity"=>@$this->Capacity->capacity,
+            "CarCapacity_id"=>@$this->Capacity->id,
             "carMaker"=>@$this->maker->name,
             "carMaker_id"=>@$this->maker->id,
             "carState"=> Car::ApiStatusType()[$this->isNew],

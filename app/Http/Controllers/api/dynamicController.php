@@ -13,6 +13,7 @@ use App\Models\CarMaker;
 use App\Models\CarModel;
 use App\Models\CarCapacity;
 use App\Models\Governorate;
+use App\Models\Specialties;
 use App\Models\AgencyReview;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
@@ -132,6 +133,14 @@ class dynamicController extends Controller
     {
         $this->lang($request->lang);
         $data = new CarMakerCollection(CarMaker::where("active", 1)->paginate(10));
+        if (!$data->count())
+            return $this->errorMessage("No data found");
+        return $data;
+    }
+    public function specilization(Request $request)
+    {
+        $this->lang($request->lang);
+        $data = Specialties::select(['id', 'name_ar', 'name'])->paginate(10);
         if (!$data->count())
             return $this->errorMessage("No data found");
         return $data;

@@ -275,6 +275,10 @@ class Car extends Model
     {
         return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
     }
+    public function Capacity()
+    {
+        return $this->belongsTo(CarCapacity::class,"CarCapacity_id","id");
+    }
 
     public function year()
     {

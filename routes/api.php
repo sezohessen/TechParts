@@ -94,6 +94,7 @@ Route::group(['prefix' => 'data','namespace'=>'api'], function () {
         Route::post("car_model_all",'dynamicController@model');
         Route::post("car_model_search",'dynamicController@model_search');
         Route::post("car_manufactures_all",'dynamicController@manufactures');
+        Route::post("specilization",'dynamicController@specilization');
         Route::post("car_manufactures_search",'dynamicController@manufactures_search');
         Route::post("car_motor_cc",'dynamicController@motor');
         Route::post("car_year_by_model",'dynamicController@year');
@@ -145,6 +146,7 @@ Route::post("finance/ask_help",'api\FinanceContactController@create');
 Route::group(['prefix' => 'car','namespace'=>"api"], function () {
 
     Route::post("details  ",'CarsController@details');
+    Route::post("simillar  ",'CarsController@simillar');
     Route::post("list/car_paginate",'CarsController@search');
     Route::post("list/car_list",'CarsController@filter');
     Route::post("compare",'CarsController@compare');
