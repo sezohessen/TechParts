@@ -1,5 +1,4 @@
-{{--
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4 & Angular 8
+{{-- Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4 & Angular 8
 Author: KeenThemes
 Website: http://www.keenthemes.com/
 Contact: support@keenthemes.com
@@ -9,8 +8,7 @@ Like: www.facebook.com/keenthemes
 Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
 Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
 License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme
-for your project.
---}}
+for your project. --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {{ Metronic::printAttrs('html') }}
     {{ Metronic::printClasses('html') }} @if (App::isLocale('ar')) direction="rtl"
@@ -20,7 +18,9 @@ dir="rtl" style="direction: rtl" @endif>
     <meta charset="utf-8" />
 
     {{-- Title Section --}}
-    <title>{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }} | @yield('title', $page_title ?? '')</title>
+    <title>
+        {{ Session::get('app_locale') == 'en' ? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}
+        | @yield('title', $page_title ?? '')</title>
 
     {{-- Meta Data --}}
     <meta name="description" content="@yield('page_description', $page_description ?? '')" />
@@ -62,12 +62,9 @@ dir="rtl" style="direction: rtl" @endif>
 
     </script>
 
-    {{-- Global Config (global config for global JS scripts)
-    --}}
-    <script>
-        var KTAppSettings = {
-            !!json_encode(config('layout.js'), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!
-        };
+    {{-- Global Config (global config for global JS scripts) --}}
+    <script type="text/javascript">
+        var KTAppSettings = {!! json_encode(config('layout.js'), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!};
 
     </script>
 

@@ -69,7 +69,13 @@ class CarsController extends Controller
             $car->update(["views" => $car->views + 1]);
             $type   = new DataType();
             $data = (new CarResource($car))->type($type::single);
-            return  $this->returnData('mCar', $data, __('Successfully'));
+            $list = (new CarCollection(
+                Car::where("status", 1)
+                    ->where('id','!=' ,$car->id)
+                    ->where('CarModel_id', $car->CarModel_id)
+                    ->limit(5)->get()
+            ))->type($type::simillar);
+            return  $this->returnData('mCar', $data, __('Successfully'), ['simillar' => $list]);
         } else {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
@@ -116,7 +122,7 @@ class CarsController extends Controller
                 Car::where("status", 1)
                     ->where('IsNew', '=', $status)
                     ->where('Country_id', $country->id)
-                    ->WhereHas('maker', function ($query) use ($request) {
+                    ->WhereHas('model', function ($query) use ($request) {
                         $query->where('name', 'LIKE', '%' . $request->word . '%');
                     })
                     ->paginate(10)
@@ -151,7 +157,7 @@ class CarsController extends Controller
             "extra_feature_id"         => 'nullable|integer',
             "transmission"            => 'nullable|between:0,1',
             "color"                    => 'nullable|integer',
-            "location_government_id"    => 'nullable|integer',
+            "location_govenment_id"    => 'nullable|integer',
             "location_city_id"         => 'nullable|integer',
             "seller_type"              => 'nullable|between:0,2',
             "is_accident"              => 'nullable|between:0,1',
@@ -221,8 +227,8 @@ class CarsController extends Controller
             if ($request->has('color')) {
                 $car->where("CarColor_id", $request->color);
             }
-            if ($request->has('location_government_id')) {
-                $car->where("Governorate_id", $request->location_government_id);
+            if ($request->has('location_govenment_id')) {
+                $car->where("Governorate_id", $request->location_govenment_id);
             }
             if ($request->has('location_city_id')) {
                 $car->where("City_id", $request->location_city_id);

@@ -46,6 +46,8 @@ class CarResource extends JsonResource
                 "promotedExpire"=>$this->promotedExpire,
             ];
             return array_merge($this->details(),$data);
+        }elseif($this->type==5){
+            return $this->details();
         }
         else {
             return $this->type;

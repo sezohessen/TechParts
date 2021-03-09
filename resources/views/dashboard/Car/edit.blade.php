@@ -278,9 +278,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea">@lang("Write A Description (EN)")<span class="text-danger">*</span></label>
-                                <textarea   class="form-control"  cols="6"  rows="6"  name="Description"   required  class="{{ $errors->has('Description') ? ' is-invalid' : '' }}">
-                                    {{old("Description") ?? $car->Description}}
-                                </textarea>
+                                <textarea   class="form-control"  cols="6"  rows="6"  name="Description"   required  class="{{ $errors->has('Description') ? ' is-invalid' : '' }}">{{old("Description") ?? $car->Description}}</textarea>
                                 @error('Description')
                                     <div class="invalid-feedback " style="display: block">{{ $errors->first('Description') }}</div>
                                 @enderror
@@ -291,9 +289,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea">@lang("Write A Description (AR)")<span class="text-danger">*</span></label>
-                                <textarea    class="form-control"  cols="6"  rows="6" name="Description_ar"   required  class="{{ $errors->has('Description_ar') ? ' is-invalid' : '' }}">
-                                    {{old("Description_ar") ?? $car->Description_ar}}
-                                </textarea>
+                                <textarea    class="form-control"  cols="6"  rows="6" name="Description_ar"   required  class="{{ $errors->has('Description_ar') ? ' is-invalid' : '' }}">{{old("Description_ar") ?? $car->Description_ar}}</textarea>
                                 @error('Description_ar')
                                     <div class="invalid-feedback " style="display: block">{{ $errors->first('Description_ar') }}</div>
                                 @enderror

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Classes\DataType;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CarCollection extends ResourceCollection
@@ -27,13 +28,21 @@ class CarCollection extends ResourceCollection
     }
     public function toArray($request)
     {
-        $data = $this->key;
-        return [
-            $data => $this->collection->map(function (CarResource $resource) use ($request) {
-                return $resource->type($this->type)->toArray($request);
-            })->all(),
-            'status' => true,
-            "msg" => __('Successfully')
-        ];
+        if ($this->type != DataType::simillar) {
+            $data = $this->key;
+            return [
+                $data => $this->collection->map(function (CarResource $resource) use ($request) {
+                    return $resource->type($this->type)->toArray($request);
+                })->all(),
+                'status' => true,
+                "msg" => __('Successfully')
+            ];
+        } else {
+            return $this->collection->map(function (CarResource $resource) use ($request) {
+                    return $resource->type($this->type)->toArray($request);
+                })->all();
+        }
     }
+
+
 }

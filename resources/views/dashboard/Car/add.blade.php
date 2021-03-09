@@ -243,9 +243,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea">@lang("Write A Description (EN)")<span class="text-danger">*</span></label>
-                                <textarea  class="form-control"  name="Description" cols="6"  rows="6"  required  class="{{ $errors->has('Description') ? ' is-invalid' : '' }}">
-                                    {{old("Description")}}
-                                </textarea>
+                                <textarea  class="form-control"  name="Description" cols="6"  rows="6"  required  class="{{ $errors->has('Description') ? ' is-invalid' : '' }}">{{old("Description")}}</textarea>
                                 @error('Description')
                                     <div class="invalid-feedback " style="display: block">{{ $errors->first('Description') }}</div>
                                 @enderror
@@ -256,9 +254,7 @@
                         <div class="form-group row">
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <label for="exampleTextarea">@lang("Write A Description (AR)")<span class="text-danger">*</span></label>
-                                <textarea   class="form-control"  name="Description_ar"  cols="6"  rows="6" required  class="{{ $errors->has('Description_ar') ? ' is-invalid' : '' }}">
-                                    {{old("Description_ar")}}
-                                </textarea>
+                                <textarea   class="form-control"  name="Description_ar"  cols="6"  rows="6" required  class="{{ $errors->has('Description_ar') ? ' is-invalid' : '' }}">{{old("Description_ar")}}</textarea>
                                 @error('Description_ar')
                                     <div class="invalid-feedback " style="display: block">{{ $errors->first('Description_ar') }}</div>
                                 @enderror
@@ -553,7 +549,8 @@
         }
 </style>
 @endsection
-
+ <!-- jQuery -->
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 @section('scripts')
 <script src="{{ asset("js/pages/crud/forms/widgets/select2.js") }}"></script>
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
@@ -562,8 +559,7 @@
 
 <script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
- <!-- jQuery -->
- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
  <script>
      $(function() {
      // Multiple images preview with JavaScript
