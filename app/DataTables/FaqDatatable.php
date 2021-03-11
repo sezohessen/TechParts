@@ -108,7 +108,7 @@ class FaqDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('question'),
             Column::make('answer'),
             Column::make('question_ar'),

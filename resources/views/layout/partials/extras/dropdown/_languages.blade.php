@@ -1,6 +1,6 @@
 {{-- Nav --}}
 <ul class="navi navi-hover py-4">
-    {{-- Item --}}
+    {{-- Item
     <li class="navi-item">
         <a href="{{url('/lang/en')}}" class="navi-link @if (App::isLocale('en'))  active  @endif">
             <span class="symbol symbol-20 mr-3">
@@ -9,6 +9,7 @@
             <span class="navi-text">English</span>
         </a>
     </li>
+    --}}
 
     {{-- Item --}}
     <li class="navi-item">

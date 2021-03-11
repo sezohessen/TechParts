@@ -24,9 +24,9 @@ class TrendingNewsDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('day', '{{Str::limit(date("Y-m-d", strtotime($day)), 100)}}')
-            ->editColumn('trendingNews', function($trendingNews) {
-                if($trendingNews->trends)return view("dashboard.TrendingNews.btn.news",['data' => $trendingNews->trends]);
-              })
+            ->editColumn('trendingNews', function ($trendingNews) {
+                if ($trendingNews->trends) return view("dashboard.TrendingNews.btn.news", ['data' => $trendingNews->trends]);
+            })
             ->addColumn('checkbox', 'dashboard.TrendingNews.btn.checkbox')
             ->addColumn('action', 'dashboard.TrendingNews.btn.action')
             ->rawColumns(['checkbox', 'action', "trends"]);
@@ -106,7 +106,7 @@ class TrendingNewsDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('day')->title(__("Day")),
             Column::computed('trendingNews')
                 ->title(__('News'))

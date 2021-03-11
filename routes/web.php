@@ -135,7 +135,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('roles', 'RolesController');
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
-Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
+Route::get('/privacy-policy', 'Dashboard\PrivacyPolicyController@show');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function ()

@@ -24,8 +24,8 @@ class CarColorDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('code', 'dashboard.CarColor.btn.color')
             ->editColumn('hexa', '{{$code}}')
-            ->addColumn('checkbox', function($color){
-                if(!$color->car) {
+            ->addColumn('checkbox', function ($color) {
+                if (!$color->car) {
                     return "<label class='checkbox checkbox-single'>
                     <input type='checkbox' name='item[]' class='item_checkbox' value='$color->id'>
                     <span></span>
@@ -110,7 +110,7 @@ class CarColorDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('code')
                 ->title(__("Color")),
             Column::computed('hexa'),

@@ -26,8 +26,8 @@ class CarBodyDatatable extends DataTable
             ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
             ->addColumn('logo.name', 'dashboard.CarBody.btn.logo')
             ->addColumn('active', 'dashboard.CarBody.btn.active')
-            ->addColumn('checkbox', function($body){
-                if(!$body->car) {
+            ->addColumn('checkbox', function ($body) {
+                if (!$body->car) {
                     return "<label class='checkbox checkbox-single'>
                     <input type='checkbox' name='item[]' class='item_checkbox' value='$body->id'>
                     <span></span>
@@ -112,7 +112,7 @@ class CarBodyDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('logo.name')->title(__("Logo")),
             Column::make('name')->title(__('Name')),
             Column::make('name_ar')->title(__('Name(AR)')),

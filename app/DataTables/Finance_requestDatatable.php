@@ -112,7 +112,7 @@ class Finance_requestDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('self_employed'),
             Column::make('salary_through_bank'),
             Column::make('paid_loan'),

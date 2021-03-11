@@ -110,7 +110,7 @@ class UserDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('email')
                 ->title(__("Email")),
             Column::make('first_name')

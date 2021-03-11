@@ -23,8 +23,8 @@ class CarCapacityDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('capacity', '{{Str::limit($capacity, 100)}}')
-            ->addColumn('checkbox', function($capacity){
-                if(!$capacity->car) {
+            ->addColumn('checkbox', function ($capacity) {
+                if (!$capacity->car) {
                     return "<label class='checkbox checkbox-single'>
                     <input type='checkbox' name='item[]' class='item_checkbox' value='$capacity->id'>
                     <span></span>
@@ -109,7 +109,7 @@ class CarCapacityDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('capacity')
                 ->title(__("Capacity")),
             Column::computed('action')

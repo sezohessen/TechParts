@@ -24,10 +24,10 @@ class TrendingCarDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('day', '{{Str::limit(date("Y-m-d", strtotime($day)), 100)}}')
-       //     ->editColumn('trends', 'dashboard.Trending.btn.cars')
-            ->editColumn('trends', function($trending) {
-                return view("dashboard.Trending.btn.cars",['data' => $trending->trends]);
-              })
+            //     ->editColumn('trends', 'dashboard.Trending.btn.cars')
+            ->editColumn('trends', function ($trending) {
+                return view("dashboard.Trending.btn.cars", ['data' => $trending->trends]);
+            })
             ->addColumn('checkbox', 'dashboard.Trending.btn.checkbox')
             ->addColumn('action', 'dashboard.Trending.btn.action')
             ->rawColumns(['checkbox', 'action', "trends"]);
@@ -111,7 +111,7 @@ class TrendingCarDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('day')->title(__("Day")),
             Column::computed('trends')
                 ->title(__('Cars'))

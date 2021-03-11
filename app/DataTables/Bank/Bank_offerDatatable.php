@@ -111,7 +111,7 @@ class Bank_offerDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('name')->title(__('Name')),
             Column::make('bank.name')
                 ->title(__("Bank Name")),

@@ -107,9 +107,9 @@ class CityDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
-            Column::make('title'),
-            Column::make('title_ar'),
+            Column::make('id')->title(__('id')),
+            Column::make('title')->title(__('title')),
+            Column::make('title_ar')->title(__('title_ar')),
             Column::make('country.name_ar')
                 ->title(__("Country")),
             Column::make('governorate.title_ar')

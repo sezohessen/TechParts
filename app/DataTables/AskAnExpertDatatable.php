@@ -110,7 +110,7 @@ class AskAnExpertDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('message'),
             Column::make('email'),
             Column::make('phone'),

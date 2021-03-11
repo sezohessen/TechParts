@@ -106,7 +106,7 @@ class FeatureDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('name')->title(__('Name')),
             Column::make('name_ar'),
             Column::computed('active')

@@ -110,7 +110,7 @@ class CarPromoteDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('subscribe_package.period')
                 ->title(__("Period")),
             Column::make('price')

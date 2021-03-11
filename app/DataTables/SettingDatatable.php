@@ -104,7 +104,7 @@ class SettingDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('appName'),
             Column::make('appName_ar'),
             Column::computed('action')

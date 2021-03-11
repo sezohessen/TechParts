@@ -111,11 +111,11 @@ class Insurance_offerDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
-            Column::make('title'),
-            Column::make('title_ar'),
-            Column::make('description'),
-            Column::make('description_ar'),
+            Column::make('id')->title(__('id')),
+            Column::make('title')->title(__('title')),
+            Column::make('title_ar')->title(__('title_ar')),
+            Column::make('description')->title(__('description')),
+            Column::make('description_ar')->title(__('description_ar')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

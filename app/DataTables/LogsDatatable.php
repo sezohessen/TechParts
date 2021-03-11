@@ -108,11 +108,11 @@ class LogsDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('description')
-            ->title(__("Description")),
+                ->title(__("Description")),
             Column::make('causer_id')
-            ->title(__("Causer ID")),
+                ->title(__("Causer ID")),
             Column::make('subject_id')
                 ->title(__("Subject ID")),
             Column::make('properties'),

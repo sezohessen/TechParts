@@ -104,7 +104,7 @@ class CarMakeDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('logo.name')->title(__("Logo")),
             Column::make('name')->title(__('Name')),
             Column::computed('active')

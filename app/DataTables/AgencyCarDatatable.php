@@ -120,7 +120,7 @@ class AgencyCarDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('country.name_ar')
                 ->title(__("Country")),
             Column::make('maker.name')

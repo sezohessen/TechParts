@@ -104,7 +104,7 @@ class AgencyReviewDatatable extends DataTable
                 "orderable" => false,
                 "searchable" => false,
             ],
-            Column::make('id'),
+            Column::make('id')->title(__('id')),
             Column::make('rate'),
             Column::make('price'),
             Column::make('review'),
