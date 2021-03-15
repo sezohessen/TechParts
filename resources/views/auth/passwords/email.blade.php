@@ -44,10 +44,8 @@
                             @csrf
                             <!--begin::Title-->
                             <div class="pb-13 pt-lg-0 pt-5">
-                                <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">@lang('Forgotten
-                                    Password ?')</h3>
-                                <p class="text-muted font-weight-bold font-size-h4">@lang('Enter your email to reset your
-                                    password')</p>
+                                <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">@lang('Forgotten Password ?')</h3>
+                                <p class="text-muted font-weight-bold font-size-h4">@lang('Enter your email to reset your password')</p>
                                 @if (session('status'))
                                     <div class="alert alert-success" role="alert">
                                         {{ session('status') }}
@@ -92,7 +90,13 @@
                             class="text-dark-75 text-hover-primary">{{ Session::get('app_locale') == 'en' ? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</a>
                     </div>
                     <a href="{{ url('/terms') }}" class="text-primary font-weight-bolder font-size-lg">@lang('Terms')</a>
+                    <div class="mr-10 ml-10">
+                    <a href="{{ url('/privacy-policy') }}"
+                        class="text-primary font-weight-bolder font-size-lg">@lang('Privcay and policy')</a>
                 </div>
+
+                </div>
+
                 <!--end::Content footer-->
             </div>
             <!--end::Content-->

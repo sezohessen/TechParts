@@ -29,11 +29,13 @@
         <div class="container">
             <div class="row">
                 <div class="card-custom" style="width: 100%;">
-                    {!! Form::open(['id'=>'form_data','url'=>"insurance/insurance-offer/destroy/all",'method'=>'delete']) !!}
-                        {!! $dataTable->table([
-                            'class'=>'table table-separate table-head-custom table-checkable '
-                        ],true)!!}
+                    <div class="table-responsive">
+                        {!! Form::open(['id'=>'form_data','url'=>"insurance/insurance-offer/destroy/all",'method'=>'delete']) !!}
+                            {!! $dataTable->table([
+                                'class'=>'table table-separate table-head-custom table-checkable '
+                            ],true)!!}
 
+                    </div>
                 </div>
             </div>
         </div>

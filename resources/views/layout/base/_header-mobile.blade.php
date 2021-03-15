@@ -1,10 +1,11 @@
 {{-- Header Mobile --}}
-<div id="kt_header_mobile" class="header-mobile {{ Metronic::printClasses('header-mobile', false) }}" {{ Metronic::printAttrs('header-mobile') }}>
+<div id="kt_header_mobile" class="header-mobile {{ Metronic::printClasses('header-mobile', false) }}"
+    {{ Metronic::printAttrs('header-mobile') }}>
     <div class="mobile-logo">
         <a href="{{ url('/') }}">
 
             @php
-                $kt_logo_image = 'logo-light.png'
+                $kt_logo_image = 'logo-light.png';
             @endphp
 
             @if (config('layout.aside.self.display') == false)
@@ -25,7 +26,7 @@
 
             @endif
 
-            <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
+            {{ __('Dashboard') }}
         </a>
     </div>
     <div class="d-flex align-items-center">
