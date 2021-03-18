@@ -117,10 +117,10 @@ class AgencyDatatable extends DataTable
             ],
             Column::make('id')->title(__('id')),
             Column::make('name')->title(__('Name')),
-            Column::make('name_ar'),
+            Column::make('name_ar')->title(__('name_ar')),
             Column::make('user.email')
                 ->title(__("User Email")),
-            Column::make('center_type'),
+            Column::make('center_type')->title(__('center_type')),
             Column::computed('active')
                 ->title(__('Active'))
                 ->exportable(false)

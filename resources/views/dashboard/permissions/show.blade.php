@@ -3,7 +3,7 @@
 
     <div class="card">
         <div class="card-header">
-            {{ trans('show') }} {{ trans('cruds.permission.title') }}
+            {{ trans('show') }} {{ trans('title') }}
         </div>
 
         <div class="card-body">
@@ -17,7 +17,7 @@
                     <tbody>
                         <tr>
                             <th>
-                                {{ trans('cruds.permission.fields.id') }}
+                                {{ trans('id') }}
                             </th>
                             <td>
                                 {{ $permission->id }}
@@ -25,7 +25,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.permission.fields.title') }}
+                                {{ trans('title') }}
                             </th>
                             <td>
                                 {{ $permission->name }}

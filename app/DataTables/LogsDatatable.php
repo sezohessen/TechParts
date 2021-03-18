@@ -115,7 +115,7 @@ class LogsDatatable extends DataTable
                 ->title(__("Causer ID")),
             Column::make('subject_id')
                 ->title(__("Subject ID")),
-            Column::make('properties'),
+            Column::make('properties')->title(__("properties")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

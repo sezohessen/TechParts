@@ -3,7 +3,7 @@
 
     <div class="card">
         <div class="card-header">
-            {{ trans('show') }} {{ trans('cruds.role.title') }}
+            {{ trans('show') }} {{ trans('title') }}
         </div>
 
         <div class="card-body">
@@ -17,7 +17,7 @@
                     <tbody>
                         <tr>
                             <th>
-                                {{ trans('cruds.role.fields.id') }}
+                                {{ trans('id') }}
                             </th>
                             <td>
                                 {{ $role->id }}
@@ -25,7 +25,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.role.fields.title') }}
+                                {{ trans('title') }}
                             </th>
                             <td>
                                 {{ $role->name }}
@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.role.fields.permissions') }}
+                                {{ trans('permissions') }}
                             </th>
                             <td>
                                 @foreach ($role->permissions as $key => $permissions)

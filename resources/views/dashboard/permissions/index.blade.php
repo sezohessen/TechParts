@@ -11,7 +11,7 @@
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.permission.title_singular') }} {{ trans('list') }}
+            {{ trans('permission list') }}
         </div>
 
         <div class="card-body">
@@ -23,10 +23,10 @@
 
                             </th>
                             <th>
-                                {{ trans('cruds.permission.fields.id') }}
+                                {{ trans('id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.permission.fields.title') }}
+                                {{ trans('title') }}
                             </th>
                             <th>
                                 &nbsp;

@@ -23,13 +23,13 @@
 
                             </th>
                             <th>
-                                {{ trans('cruds.role.fields.id') }}
+                                {{ trans('id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.role.fields.title') }}
+                                {{ trans('title') }}
                             </th>
                             <th>
-                                {{ trans('cruds.role.fields.permissions') }}
+                                {{ trans('permissions') }}
                             </th>
                             <th>
                                 &nbsp;

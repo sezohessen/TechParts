@@ -107,7 +107,7 @@ class InsuranceDatatable extends DataTable
             ],
             Column::make('id')->title(__('id')),
             Column::make('name')->title(__('Name')),
-            Column::make('name_ar'),
+            Column::make('name_ar')->title(__('name_ar')),
             Column::make('user.email')
                 ->title(__("User")),
             Column::computed('action')

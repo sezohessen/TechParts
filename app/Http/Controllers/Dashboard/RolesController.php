@@ -51,9 +51,11 @@ class RolesController extends Controller
         return view('dashboard.roles.edit', compact('permissions', 'role'));
     }
 
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(Request $request, Role $role)
     {
-        $role->update($request->all());
+        //dd($request->all());
+        //dd($request->all());
+        $role->update(['name' => $request->title]);
         $role->permissions()->sync($request->input('permissions', []));
 
         return redirect()->route('dashboard.roles.index');

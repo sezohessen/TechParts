@@ -106,7 +106,7 @@ class BadgesDatatable extends DataTable
             ],
             Column::make('id')->title(__('id')),
             Column::make('name')->title(__('Name')),
-            Column::make('name_ar'),
+            Column::make('name_ar')->title(__('name_ar')),
             Column::computed('active')
                 ->title(__('Active'))
                 ->exportable(false)

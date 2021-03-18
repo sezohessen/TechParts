@@ -43,9 +43,9 @@ class PermissionsController extends Controller
         return view('dashboard.permissions.edit', compact('permission'));
     }
 
-    public function update(UpdatePermissionRequest $request, Permission $permission)
+    public function update(Request $request, Permission $permission)
     {
-        $permission->update($request->all());
+        $permission->update(['name' => $request->title]);
 
         return redirect()->route('dashboard.permissions.index');
     }

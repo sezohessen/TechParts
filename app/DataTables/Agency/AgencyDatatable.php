@@ -108,8 +108,8 @@ class AgencyDatatable extends DataTable
             ],
             Column::make('id')->title(__('id')),
             Column::make('name')->title(__('Name')),
-            Column::make('name_ar'),
-            Column::make('center_type'),
+            Column::make('name_ar')->title(__('name_ar')),
+            Column::make('center_type')->title(__('center_type')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

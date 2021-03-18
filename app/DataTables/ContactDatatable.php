@@ -107,9 +107,9 @@ class ContactDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id')->title(__('id')),
-            Column::make('message'),
-            Column::make('email'),
-            Column::make('phone'),
+            Column::make('message')->title(__('message')),
+            Column::make('email')->title(__('email')),
+            Column::make('phone')->title(__('phone')),
             Column::make('country_phone')
                 ->title(__('Country Phone Code')),
             Column::computed('action')

@@ -110,7 +110,7 @@ class BankOfferDatatable extends DataTable
             ],
             Column::make('id')->title(__('id')),
             Column::make('name')->title(__('Name')),
-            Column::make('name_ar'),
+            Column::make('name_ar')->title(__('name_ar')),
             Column::make('valid_till')->title(__('Valid till')),
             Column::make('down_payment_percentage')->title(__('Down Payment(%)')),
             Column::make('interest_rate')->title(__('Interest Rate(%)')),
