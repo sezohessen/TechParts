@@ -67,7 +67,7 @@ class dynamicController extends Controller
         if ($validator->fails()) {
             return $this->ValidatorMessages($validator->errors()->getMessages());
         }
-        $agencyList     = Agency::where('active', 1)
+        $agencyList     = Agency::where('active', 1)->where('center_type', Agency::center_type_Agency)
             ->whereHas('carMakers', function ($query) use ($request) {
                 return $query->where('agency_car_makers.CarMaker_id', $request->car_maker);
             })

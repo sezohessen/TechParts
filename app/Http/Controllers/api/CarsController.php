@@ -117,14 +117,33 @@ class CarsController extends Controller
             if (!$country = Country::find($request->interest_country)) {
                 return $this->errorMessage('Country not found');
             }
+            $array = explode(' ', $request->word);
             $type   = new DataType();
             $data = (new CarCollection(
                 Car::where("status", 1)
                     ->where('IsNew', '=', $status)
-                    ->where('Country_id', $country->id)
-                    ->WhereHas('model', function ($query) use ($request) {
-                        $query->where('name', 'LIKE', '%' . $request->word . '%');
+                    ->where('Country_id', $country->id)->
+                    where(function ($query) use ($array) {
+                        $query->WhereHas('model', function ($query) use ($array) {
+                            foreach ($array as $key => $value) {
+                                if ($key == 0) {
+                                    $query->where('name', 'LIKE', '%' . $value . '%');
+                                } else {
+                                    $query->OrWhere('name', 'LIKE', '%' . $value . '%');
+                                }
+                            }
+
+                        })->orWhereHas('make', function ($query) use ($array) {
+                            foreach ($array as $key => $value) {
+                                if ($key == 0) {
+                                    $query->where('name', 'LIKE', '%' . $value . '%');
+                                } else {
+                                    $query->OrWhere('name', 'LIKE', '%' . $value . '%');
+                                }
+                            }
+                        });
                     })
+
                     ->paginate(10)
             ))->type($type::list);
             if (!$data->count())
