@@ -23,6 +23,10 @@ class Finance_request extends Model
         "car_makerId",
         "car_modelId",
         "car_id",
+        "bank_id",
+        "offer_id",
+        "insurance_company_id",
+        "plan_id",
 
     ];
     public function user() {

@@ -74,6 +74,12 @@
                             <i class="fa fa-arrow-right" style="color:#3699FF" ></i> <h4 style="color: #3699FF;display:inline-block">{{ $request->created_at->format('d/m/Y H:i') }}</h4>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h3>@lang('bank name')</h3>
+                            <i class="fa fa-arrow-right" style="color:#3699FF" ></i> <h4 style="color: #3699FF;display:inline-block">{{ $request->bank_name }}</h4>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <h2 style="color:#3699FF" >@lang('Change Status')</h2>
                         <div class="row">

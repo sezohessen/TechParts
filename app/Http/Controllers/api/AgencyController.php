@@ -512,10 +512,10 @@ class AgencyController extends Controller
                 //->where('car_status', Agency::UsedCar)
                 ->whereHas('carMakers', function ($query) use ($request) {
                     return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
-                })
-                ->whereHas('Car', function ($query) use ($request) {
-                    return $query->where('cars.CarModel_id', $request->car_model_id);
                 });
+               /* ->whereHas('Car', function ($query) use ($request) {
+                    return $query->where('cars.CarModel_id', $request->car_model_id);
+                });*/
 
             if ($request->city_id) $agencyList->where('city_id', $request->city_id);
             if ($request->work_type) $agencyList->whereIn('maintenance_type', $request->work_type);
@@ -574,10 +574,10 @@ class AgencyController extends Controller
                 //->where('car_status', Agency::UsedCar)
                 ->whereHas('carMakers', function ($query) use ($request) {
                     return $query->where('agency_car_makers.CarMaker_id', $request->car_maker_id);
-                })
-                ->whereHas('Car', function ($query) use ($request) {
-                    return $query->where('cars.CarModel_id', $request->car_model_id);
                 });
+                /*->whereHas('Car', function ($query) use ($request) {
+                    return $query->where('cars.CarModel_id', $request->car_model_id);
+                });*/
             if ($request->city_id) $agencyList->where('city_id', $request->city_id);
             if ($request->badge_ids) $agencyList->whereIn('status', $request->badge_ids);
             if ($request->payment_methods) $agencyList->whereIn('payment_method', $request->payment_methods);
@@ -840,7 +840,7 @@ class AgencyController extends Controller
             //'car_state'             => 'required|in:new,used',
             //'car_state'             => 'required|in:0,1',
             'car_maker_id'          => 'required|integer',
-            'car_model_id'          => 'required|integer',
+            'car_model_id'          => 'nullable|integer',
             'city_id'               => 'nullable|integer',
             'year'                  => 'nullable|integer',
             'Specialties_id'        => 'nullable|integer',

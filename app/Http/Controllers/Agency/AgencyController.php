@@ -28,9 +28,9 @@ class AgencyController extends Controller
      */
     public function index(AgencyDatatable $agency)
     {
-        /* $page_title = __('Agency companies');
+        $page_title = __('Agency companies');
         $page_description = __('View Insurances');
-        return  $agency->render("AgencyDashboard.Agency.index", compact('page_title', 'page_description')); */
+        return  $agency->render("AgencyDashboard.Agency.index", compact('page_title', 'page_description'));
     }
 
     /**
