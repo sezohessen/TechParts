@@ -128,36 +128,6 @@
                                 </div>
                             @enderror
                         </div>
-                        <!--end::Form group-->
-                        <div class="form-group">
-
-                            <select id="provider" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('provider') is-invalid @enderror" name="provider" required>
-                                <option value="" >@lang('--Select Acount Type--')</option>
-                                {{--
-                                <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
-                                    @lang('new user')
-                                </option>
-                                --}}
-                                <option value="insurance" {{ old('provider') == 'insurance' ? 'selected' : '' }}>
-                                    @lang('Insurance Company')
-                                </option>
-                                <option value="agency" {{ old('provider') == 'agency' ? 'selected' : '' }}>
-                                    @lang('Agency')
-                                </option>
-                                <option value="bank" {{ old('provider') == 'bank' ? 'selected' : '' }}>
-                                    @lang('Bank')
-                                </option>
-                                
-                            </select>
-                            @error('provider')
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        <strong>{{ $message }}</strong>
-                                    </div>
-                                </div>
-                            @enderror
-                        </div>
-                        <!--end::Form group-->
 
                         <!--begin::Form group-->
                         <div class="form-group  fv-plugins-icon-container">

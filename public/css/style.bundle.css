@@ -80345,7 +80345,7 @@ body {
   display: flex;
   justify-content: flex-begin;
 }
-.aside-minimize:not(.aside-minimize-hover) .brand .brand-logo img {
+.aside-minimize:not(.aside-minimize-hover) .brand .brand-logo a {
   display: none;
 }
 .brand .brand-toggle .svg-icon svg {
@@ -80487,4 +80487,10 @@ body {
 }
 .invalid-feedback {
     display:block;
+}
+.image-input-outline{
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    background-size: 100% 100%;
 }

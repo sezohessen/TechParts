@@ -144,15 +144,15 @@ Route::get('/', function ()
     $page_description = __('login page');
     return view('auth.login',  compact('page_title', 'page_description'));
 });
-Route::group(['prefix' => 'insurance','as' => 'insurance.','namespace'=>"Insurance", 'middleware' => ['role:insurance']], function () {
+Route::group(['prefix' => 'seller','as' => 'seller','namespace'=>"Insurance", 'middleware' => ['role:seller']], function () {
     Route::get('/','InsuranceController@index')->name('index');
     Route::resource('/company','InsuranceCompanyController');
     Route::resource('/insurance-offer','InsuranceOfferController');
     Route::resource('/offer-plan','OfferPlanController');
     Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
-    Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete');
+    /* Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete'); */
 });
-Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
+/* Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
     Route::get('/','AgencyDashController@index')->name('index');
     Route::resource('/company','AgencyController');
     Route::resource('/car','AgencyCarController');
@@ -170,6 +170,6 @@ Route::group(['prefix' => 'bank','as' => 'bank.','namespace'=>"Bank", 'middlewar
     Route::resource('/company','BankController');
     Route::resource('/bank-offer','BankOfferController');
     Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
-});
+}); */
 //});
 

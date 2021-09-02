@@ -33,35 +33,10 @@ return [
             'role' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'administrator' => [
-            'users' => 'c,r,u,d',
-            'cities' => 'c,r,u,d',
-            'countries' => 'c,r,u,d',
-            'faqs' => 'c,r,u,d',
-            'governorates' => 'c,r,u,d',
-            'insurances' => 'c,r,u,d',
-            'agencies' => 'c,r,u,d',
-            'banks' => 'c,r,u,d',
-            'insurance_offers' => 'c,r,u,d',
-            'bank_offers' => 'c,r,u,d',
-            'news' => 'c,r,u,d',
-            'offer_plans' => 'c,r,u,d',
-            'profile' => 'r,u'
-        ],
-        'insurance' => [
+        'seller' => [
             'insurances' => 'r,u',
             'insurance_offers' => 'c,r,u,d',
             'offer_plans' => 'c,r,u,d',
-            'profile' => 'r,u',
-        ],
-        'agency' => [
-            'agencies' => 'c,r,u,d',
-            'profile' => 'r,u',
-        ],
-        'bank' => [
-            'banks' => 'c,r,u,d',
-            'bank_offers' => 'c,r,u,d',
-            'bank_offer_plans' => 'c,r,u,d',
             'profile' => 'r,u',
         ],
         'user' => [

@@ -51,20 +51,9 @@ class UserController extends Controller
         $rules = User::rules();
         $request->validate($rules);
         $credentials = User::credentials($request);
-        if (isset($request->provider)) {
-            if ($request->provider == 'insurance') {
-                $provider = 'insurance';
-            }elseif ($request->provider == 'agency') {
-                $provider = 'agency';
-            }else {
-                $provider = 'user';
-            }
-            unset($request->provider);
-        }else {
-            $provider = 'user';
-        }
+        $provider = 'user';
         $user = User::create($credentials);
-        $user->attachRole($provider) ;
+        $user->attachRole($provider);
         session()->flash('created',__("Changes has been Created successfully"));
         return redirect()->route("dashboard.users.index");
     }
@@ -91,22 +80,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
 
-        $page_title = __("Add User");
-        $page_description = __("Add new User");
-        $countries =Country::where('active',1);
-        $selected =Country::where('active',1)->where('code',$user->country_code)->first();
-        if($selected->count()){
-            $selected=$selected->id;
-        }
-        if($user->hasRole('insurance')) {
-            $provider = 'insurance';
-        }elseif($user->hasRole('agency')){
-            $provider = 'agency';
-        }elseif($user->hasRole('bank')){
-            $provider = 'bank';
-        }else {
-            $provider = 'user';
-        }
+        $page_title = __("Edit User");
+        $page_description = __("Edit new User");
 
         return view('dashboard.User.edit', compact('page_title', 'page_description','countries','provider','user','selected'));
     }
@@ -123,19 +98,6 @@ class UserController extends Controller
         $rules =User::rules(null, $user->id);
         $request->validate($rules);
 
-        if (isset($request->provider)) {
-            if ($request->provider == 'insurance') {
-                $provider = 'insurance';
-            }elseif ($request->provider == 'agency') {
-                $provider = 'agency';
-            }else {
-                $provider = 'user';
-            }
-            unset($request->provider);
-        }else {
-            $provider = 'user';
-        }
-        $user->update(User::credentials($request, null,$user->id));
         //$user->attachRole($provider) ;
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("dashboard.users.index");

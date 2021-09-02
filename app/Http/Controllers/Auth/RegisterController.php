@@ -32,15 +32,10 @@ class RegisterController extends Controller
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
-        if (auth()->user()->hasRole('insurance')) {
-            return '/insurance';
+        if (auth()->user()->hasRole('seller')) {
+            return '/seller';
         }
-        if (auth()->user()->hasRole('agency')) {
-            return '/agency';
-        }
-        if (auth()->user()->hasRole('bank')) {
-            return '/bank';
-        }
+
         return '/user';
     }
     /**
@@ -75,13 +70,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create($data)
+    /* protected function create($data)
     {
-        /*return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);*/
+
         if (isset($data['provider'])) {
             if ($data['provider'] == 'insurance') {
                 $provider = 'insurance';
@@ -99,5 +90,5 @@ class RegisterController extends Controller
         $user = User::create(User::credentials((object)$data));
         $user->attachRole($provider) ;
         return $user;
-    }
+    } */
 }

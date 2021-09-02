@@ -49,7 +49,7 @@ class CarSeeder extends Seeder
                 'CarBody_id'            => CarBody::where('active', 1)->get()->random()->id,
                 'CarYear_id'            => CarYear::all()->random()->id,
                 'CarCapacity_id'        => CarCapacity::all()->random()->id,
-                'CarColor_id'           => CarColor::all()->random()->id,
+                'CarColor_id'                => CarColor::all()->random()->id,
                 'user_id'               => User::all()->random()->id,
                 'views'                 => $faker->numberBetween(1,100),
                 'AccidentBefore'        => rand(0,1),

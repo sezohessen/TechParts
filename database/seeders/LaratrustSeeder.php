@@ -65,18 +65,12 @@ class LaratrustSeeder extends Seeder
             if (Config::get('laratrust_seeder.create_users')) {
                 $this->command->info("Creating '{$key}' user");
                 // Create default user for each role
-                $images = \App\Models\Image::where('base', '/img/users/')->get();
                 $user = \App\Models\User::create([
-                    'image_id' => $images->random()->id,
-                    'interest_country' => \App\Models\Country::all()->random()->id,
                     'first_name' => ucwords(str_replace('_', ' ', $key)),
                     'last_name' => ucwords(str_replace('_', ' ', $key)),
-                    'country_code' => \App\Models\Country::all()->random()->code,
-                    'country_phone' => \App\Models\Country::all()->random()->country_phone,
                     'whats_app' => \App\Models\Country::all()->random()->country_phone . rand(1000000, 10000000),
                     'email' => $key . '@app.com',
                     'email_verified_at' => now(),
-                    'is_phone_virefied' => 1,
                     'phone' => rand(1000000, 10000000),
                     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                     'remember_token' => Str::random(10)
@@ -86,23 +80,17 @@ class LaratrustSeeder extends Seeder
         }
         for ($i = 0; $i < 40; $i++) {
             $countyr = \App\Models\Country::all()->random();
-            $images = \App\Models\Image::where('base', '/img/users/')->get();
             $user   = \App\Models\User::create([
-                'image_id' => $images->random()->id,
-                'interest_country' => $countyr->id,
                 'first_name' => ucwords(str_replace('_', ' ', 'agency')) . $i,
                 'last_name' => ucwords(str_replace('_', ' ', 'agency')) . $i,
-                'country_code' => $countyr->code,
-                'country_phone' => $countyr->country_phone,
                 'whats_app' => $countyr->country_phone . rand(1000000, 10000000),
                 'email' => 'agency' . $i . '@app.com',
                 'email_verified_at' => now(),
-                'is_phone_virefied' => 1,
                 'phone' => rand(1000000, 10000000) . $i,
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10)
             ]);
-            $user->attachRole('agency');
+            $user->attachRole('seller');
         }
     }
 
