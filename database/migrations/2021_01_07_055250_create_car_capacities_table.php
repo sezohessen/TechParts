@@ -15,11 +15,7 @@ class CreateCarCapacitiesTable extends Migration
     {
         Schema::create('car_capacities', function (Blueprint $table) {
             $table->id();
-
             $table->string("capacity");
-
-     
-
             $table->timestamps();
         });
     }

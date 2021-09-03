@@ -17,10 +17,11 @@ class CarYearSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+        $carModel   = CarModel::all();
         for ($i = 0; $i < 40; $i++) {
             DB::table('car_years')->insert([
                 'year'          => $faker->year,
-                'CarModel_id'    => CarModel::all()->random()->id,
+                'CarModel_id'   => $carModel->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

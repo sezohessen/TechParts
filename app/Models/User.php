@@ -15,8 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use LaratrustUserTrait, LogsActivity, HasApiTokens, HasFactory, Notifiable;
-    protected static $logAttributes = ['first_name',"phone","email"];
+    use LaratrustUserTrait, HasApiTokens, HasFactory, Notifiable;
     protected static $recordEvents = ['created'];
     /**
      * The attributes that are mass assignable.

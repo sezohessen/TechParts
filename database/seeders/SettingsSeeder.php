@@ -20,9 +20,17 @@ class SettingsSeeder extends Seeder
         $faker = Faker::create();
         $image = Image::where( 'base', '/img/settings/')->first();
         DB::table('settings')->insert([
-            'appName'       => '3arabiat App',
-            'appName_ar'    => 'تطبيق عربيات',
-            'logo_id'        => $image->id
+            'appName'       => 'Tech Parts',
+            'appName_ar'    => 'قطع غيار',
+            'email'         => $faker->email,
+            'phone'         => $faker->phoneNumber,
+            'whatsapp'      => $faker->phoneNumber,
+            'facebook'      => $faker->url,
+            'instgram'      => $faker->url,
+            'location'      => $faker->url,
+            'andriod'       => $faker->url,
+            'ios'           => $faker->url,
+            'logo_id'       => $image->id
         ]);
     }
 }

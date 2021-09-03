@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Image;
+
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -68,7 +68,7 @@ class LaratrustSeeder extends Seeder
                 $user = \App\Models\User::create([
                     'first_name' => ucwords(str_replace('_', ' ', $key)),
                     'last_name' => ucwords(str_replace('_', ' ', $key)),
-                    'whats_app' => \App\Models\Country::all()->random()->country_phone . rand(1000000, 10000000),
+                    'whats_app' => '012' . rand(1000000, 10000000),
                     'email' => $key . '@app.com',
                     'email_verified_at' => now(),
                     'phone' => rand(1000000, 10000000),
@@ -78,12 +78,11 @@ class LaratrustSeeder extends Seeder
                 $user->attachRole($role);
             }
         }
-        for ($i = 0; $i < 40; $i++) {
-            $countyr = \App\Models\Country::all()->random();
+        for ($i = 0; $i < 20; $i++) {
             $user   = \App\Models\User::create([
                 'first_name' => ucwords(str_replace('_', ' ', 'agency')) . $i,
                 'last_name' => ucwords(str_replace('_', ' ', 'agency')) . $i,
-                'whats_app' => $countyr->country_phone . rand(1000000, 10000000),
+                'whats_app' => '012'  . rand(1000000, 10000000),
                 'email' => 'agency' . $i . '@app.com',
                 'email_verified_at' => now(),
                 'phone' => rand(1000000, 10000000) . $i,

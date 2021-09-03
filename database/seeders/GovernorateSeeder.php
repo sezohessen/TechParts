@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Country;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
@@ -21,10 +20,8 @@ class GovernorateSeeder extends Seeder
             DB::table('governorates')->insert([
                 'title'             =>   $faker->country,
                 'title_ar'          =>   $faker->country,
-                'country_id'        =>   Country::all()->random()->id,
                 'created_at'        =>  now(),
                 'updated_at'        =>  now(),
-                'active'            =>  1
             ]);
         }
     }

@@ -17,12 +17,6 @@ class CreateGovernoratesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('title_ar');
-            $table->bigInteger('country_id')->unsigned();
-            $table->boolean("active")->default(1);
-            $table->foreign('country_id')
-            ->references('id')->on('countries')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

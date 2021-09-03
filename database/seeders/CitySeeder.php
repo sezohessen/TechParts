@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Country;
 use App\Models\Governorate;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,15 +17,14 @@ class CitySeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+        $governorate = Governorate::all();
         for ($i = 0; $i < 40; $i++) {
             DB::table('cities')->insert([
-                'title'             =>   $faker->country,
-                'title_ar'          =>   $faker->country,
-                'country_id'        =>   Country::all()->random()->id,
-                'governorate_id'    =>   Governorate::all()->random()->id,
+                'title'             =>  $faker->country,
+                'title_ar'          =>  $faker->country,
+                'governorate_id'    =>  $governorate->random()->id,
                 'created_at'        =>  now(),
                 'updated_at'        =>  now(),
-                'active'            =>  1,
             ]);
         }
     }

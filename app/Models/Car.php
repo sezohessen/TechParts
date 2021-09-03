@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Car extends Model
 {
     use HasFactory;
-    use LogsActivity;
     protected $table    = 'cars';
 
     const TRANSIMSSION_AUTOMATIC  = 0;

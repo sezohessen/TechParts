@@ -17,11 +17,11 @@ class CarModelSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+        $carMaker   = CarMaker::all();
         for ($i = 0; $i < 40; $i++) {
             DB::table('car_models')->insert([
                 'name'          => $faker->name,
-                'CarMaker_id'   => CarMaker::all()->random()->id,
-                'active'        => rand(0, 1),
+                'CarMaker_id'   => $carMaker->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

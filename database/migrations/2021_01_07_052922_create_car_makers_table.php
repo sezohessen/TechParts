@@ -23,7 +23,6 @@ class CreateCarMakersTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

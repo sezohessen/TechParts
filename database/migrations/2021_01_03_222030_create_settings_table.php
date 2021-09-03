@@ -17,6 +17,14 @@ class CreateSettingsTable extends Migration
             $table->id();
             $table->string('appName');
             $table->string('appName_ar');
+            $table->string('email')->unique();
+            $table->string('phone');
+            $table->string('whatsapp');
+            $table->string('facebook');
+            $table->string('instgram');
+            $table->string('location');
+            $table->string('andriod');
+            $table->string('ios');
             $table->bigInteger('logo_id')->unsigned();
             $table->foreign('logo_id')
             ->references('id')->on('images')

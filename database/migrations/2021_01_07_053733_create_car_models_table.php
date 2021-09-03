@@ -21,7 +21,6 @@ class CreateCarModelsTable extends Migration
             ->references('id')->on('car_makers')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }
