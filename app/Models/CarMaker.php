@@ -12,8 +12,7 @@ class CarMaker extends Model
     protected $table    = 'car_makers';
     protected $fillable=[
         'name',
-        'logo_id',
-        'active'
+        'logo_id'
     ];
     public function logo()
     {

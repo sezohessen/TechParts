@@ -5,7 +5,9 @@
 @endsection
 {{-- Content --}}
 @section('content')
-
+    <div class="container">
+        @include('dashboard/message')
+    </div>
     <div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">

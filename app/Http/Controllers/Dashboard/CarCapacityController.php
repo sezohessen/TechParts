@@ -43,10 +43,19 @@ class CarCapacityController extends Controller
     {
         $rules = CarCapacity::rules($request);
         $request->validate($rules);
-        $credentials = CarCapacity::credentials($request);
-        $Carcapacity = CarCapacity::create($credentials);
-        session()->flash('created',__("Changes has been Created Successfully"));
-        return redirect()->route("dashboard.capacity.index");
+
+        $isExist    = CarCapacity::where('capacity',$request->capacity)->where('capacity',$request->capacity)->first() ? true: false;
+        if($isExist){
+            session()->flash('exist',__("This engine capacity is already exist"));
+            return redirect()->back();
+        }
+        else {
+            $credentials = CarCapacity::credentials($request);
+            $Carcapacity = CarCapacity::create($credentials);
+            session()->flash('created',__("Changes has been Created Successfully"));
+            return redirect()->route("dashboard.capacity.index");
+        }
+
     }
 
     /**

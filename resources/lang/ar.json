@@ -612,7 +612,7 @@
     "Cars Settings":"إعدادات السيارات",
     "Car Options":"خيارات السيارة",
     "Add A car ":"أضف سيارة",
-    "Car Makers":"صناع السيارات",
+    "Car Makers":"الشركة المصنعة",
     "Car Bodies":"أجسام السيارات",
     "View Car Bodies":"مشاهدة هياكل السيارات",
     "Add Year ":"أضف سنة",
@@ -698,5 +698,17 @@
     "Edit User":"تعديل مستخدم",
     "Edit new User":"تعديل مستخدم جديد",
     "Seller":"تاجر",
-    "Message":"الرسالة"
+    "Message":"الرسالة",
+    "This year model already exist":"سنة التصنيع هذه موجودة بالفعل",
+    "This engine capacity is already exist":"سعة المحرك هذه موجودة بالفعل",
+    "Add a manufacturer":"أضف الشركة المصنعة",
+    "View manufacturing":"عرض الشركات المصنعة",
+    "Company name":"اسم الشركة",
+    "Add company name":"أضف اسم الشركة",
+    "Companies":"الشركات",
+    "Type name":"اكتب الاسم",
+    "Manufacture company":"الشركة المصنعة",
+    "Model name":"اسم الموديل",
+    "Select company name":"اختر اسم الشركة",
+    "This car model is already exist":"موديل هذه السيارة موجود بالفعل"
 }

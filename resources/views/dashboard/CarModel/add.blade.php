@@ -2,10 +2,17 @@
 @extends('layout.master')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
+<style>
+    .bootstrap-select>.dropdown-toggle.btn-light .filter-option, .bootstrap-select>.dropdown-toggle.btn-secondary .filter-option{
+        text-align: initial;
+    }
+</style>
 @endsection
 {{-- Content --}}
 @section('content')
-
+    <div class="container">
+        @include('dashboard/message')
+    </div>
     <div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
@@ -22,7 +29,7 @@
                         <div class="form-group">
                             <label>@lang('Car Model Name') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                             name="name"  placeholder="@lang('Car Make ')" value="{{ old('name')}}" required autofocus  />
+                             name="name"  placeholder="@lang('Type name')" value="{{ old('name')}}" required autofocus  />
                             @error('name')
                                  <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @enderror
@@ -30,11 +37,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group ">
-                            <label for="Image">@lang('Select Car Model')</label><br>
+                            <label for="Image">@lang('Select company name')</label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" required>
+                                <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}"
+                                     name="CarMaker_id" required data-select2-id="{{old("CarModel_id")}}">
                                     @foreach ($makers as $key=>$maker)
-                                        <option value="{{$maker->id}}"  data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}'  width='30' height='30'>  {{$maker->name}}</span>">
+                                        <option value="{{$maker->id}}"
+                                        data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}' width='30' height='20'>{{ $maker->name }}">
                                         </option>
                                     @endforeach
                                 </select>
@@ -57,5 +66,5 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-<script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-select.js?v=7.1.8') }}"></script>
+<script src="{{ asset('js/pages/crud/forms/widgets/select2.js') }}"></script>
 @endsection

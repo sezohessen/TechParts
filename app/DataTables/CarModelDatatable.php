@@ -26,8 +26,7 @@ class CarModelDatatable extends DataTable
             ->editColumn('maker.name', '{{Str::limit($maker["name"], 100)}}')
             ->addColumn('checkbox', 'dashboard.CarModel.btn.checkbox')
             ->addColumn('action', 'dashboard.CarModel.btn.action')
-            ->addColumn('active', 'dashboard.CarModel.btn.active')
-            ->rawColumns(['checkbox', 'action', "active"]);
+            ->rawColumns(['checkbox', 'action']);
     }
 
     /**
@@ -105,15 +104,8 @@ class CarModelDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('maker.name')->title(__("Maker")),
-            Column::make('name')->title(__('Name')),
-            Column::computed('active')
-                ->title(__('Active'))
-                ->exportable(false)
-                ->printable(false)
-                ->searchable(false)
-                ->width(120)
-                ->addClass('text-center'),
+            Column::make('maker.name')->title(__("Manufacture company")),
+            Column::make('name')->title(__('Model name')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

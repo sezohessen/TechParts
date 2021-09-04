@@ -28,9 +28,9 @@ class CarModelController extends Controller
      */
     public function create()
     {
-        $page_title = __("Add Car Model");
-        $page_description = __("Car Model");
-        $makers=CarMaker::all();
+        $page_title         = __("Add Car Model");
+        $page_description   = __("Car Model");
+        $makers             = CarMaker::all();
         return view('dashboard.CarModel.add', compact('page_title', 'page_description',"makers"));
     }
 
@@ -42,12 +42,20 @@ class CarModelController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = CarModel::rules($request);
+        $rules      = CarModel::rules($request);
         $request->validate($rules);
-        $credentials = CarModel::credentials($request);
-        $CarModel = CarModel::create($credentials);
-        session()->flash('created',__("Changes has been Created Successfully"));
-        return redirect()->route("dashboard.model.index");
+        $isExist    = CarModel::where('name',$request->name)->where('CarMaker_id',$request->CarMaker_id)->first() ? true: false;
+        if($isExist){
+            session()->flash('exist',__("This car model is already exist"));
+            return redirect()->back();
+        }
+        else {
+            $credentials = CarModel::credentials($request);
+            $CarModel = CarModel::create($credentials);
+            session()->flash('created',__("Changes has been Created Successfully"));
+            return redirect()->route("dashboard.model.index");
+        }
+
     }
 
     /**

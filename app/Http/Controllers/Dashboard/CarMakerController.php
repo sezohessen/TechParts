@@ -15,8 +15,8 @@ class CarMakerController extends Controller
      */
     public function index(CarMakeDatatable $maker)
     {
-        $page_title = __('Car Maker');
-        $page_description = __('View Car Makers');
+        $page_title = __('Companies');
+        $page_description = __('View manufacturing');
         return  $maker->render("dashboard.CarMaker.index", compact('page_title', 'page_description'));
     }
 
@@ -27,8 +27,8 @@ class CarMakerController extends Controller
      */
     public function create()
     {
-        $page_title = __("Add Car Make");
-        $page_description = __("Car Make");
+        $page_title = __("Add company name");
+        $page_description = __("Company name");
 
         return view('dashboard.CarMaker.add', compact('page_title', 'page_description'));
     }

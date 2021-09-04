@@ -85,11 +85,11 @@ return [
                     'root' => true,
                     'submenu' => [
                         [
-                            'title' => 'Add Car Make',
+                            'title' => 'Add a manufacturer',
                             'page' => "/dashboard/car/maker/create"
                         ],
                         [
-                            'title' => 'View Car Makers',
+                            'title' => 'View manufacturing',
                             'page' => '/dashboard/car/maker'
                         ],
 

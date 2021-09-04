@@ -12,7 +12,6 @@ class CarModel extends Model
     protected $fillable=[
         'name',
         'CarMaker_id',
-        'active'
     ];
 
     public function maker(){

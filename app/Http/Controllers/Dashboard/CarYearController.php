@@ -44,12 +44,19 @@ class CarYearController extends Controller
     public function store(Request $request)
     {
 
-        $rules = CarYear::rules($request);
+        $rules      = CarYear::rules($request);
         $request->validate($rules);
-        $credentials = CarYear::credentials($request);
-        $Caryear = CarYear::create($credentials);
-        session()->flash('created',__("Changes has been Created Successfully"));
-        return redirect()->route("dashboard.year.index");
+        $isExist    = CarYear::where('year',$request->year)->where('CarModel_id',$request->CarModel_id)->first() ? true: false;
+        if($isExist){
+            session()->flash('exist',__("This year model already exist"));
+            return redirect()->back();
+        }
+        else {
+            $credentials    = CarYear::credentials($request);
+            $Caryear        = CarYear::create($credentials);
+            session()->flash('created',__("Changes has been Created Successfully"));
+            return redirect()->route("dashboard.year.index");
+        }
     }
 
     /**

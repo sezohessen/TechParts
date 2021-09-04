@@ -21,9 +21,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Car Maker Name') <span class="text-danger">*</span></label>
+                            <label>@lang('Company name') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                             name="name"  placeholder="@lang('Car Make ')" value="{{ old('name')}}" required autofocus  />
+                             name="name"  placeholder="@lang('Type name')" value="{{ old('name')}}" required autofocus  />
                             @error('name')
                                  <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @enderror

@@ -26,8 +26,7 @@ class CarMakeDatatable extends DataTable
             ->addColumn('logo.name', 'dashboard.CarMaker.btn.logo')
             ->addColumn('checkbox', 'dashboard.CarMaker.btn.checkbox')
             ->addColumn('action', 'dashboard.CarMaker.btn.action')
-            ->addColumn('active', 'dashboard.CarMaker.btn.active')
-            ->rawColumns(['checkbox', 'action', "active", "logo.name"]);
+            ->rawColumns(['checkbox', 'action', "logo.name"]);
     }
 
     /**
@@ -107,13 +106,6 @@ class CarMakeDatatable extends DataTable
             Column::make('id'),
             Column::make('logo.name')->title(__("Logo")),
             Column::make('name')->title(__('Name')),
-            Column::computed('active')
-                ->title(__('Active'))
-                ->exportable(false)
-                ->printable(false)
-                ->searchable(false)
-                ->width(120)
-                ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
