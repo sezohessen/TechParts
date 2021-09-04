@@ -21,7 +21,6 @@ class ContactUsSeeder extends Seeder
                 'message'           =>  $faker->sentence,
                 'email'             =>  $faker->email,
                 'phone'             =>  $faker->phoneNumber,
-                'country_phone'     =>  $faker->phoneNumber,
                 'created_at'        => now(),
                 'updated_at'        => now(),
             ]);

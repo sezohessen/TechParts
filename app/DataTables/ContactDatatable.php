@@ -26,7 +26,6 @@ class ContactDatatable extends DataTable
             ->editColumn('message', '{{Str::limit($message, 100)}}')
             ->editColumn('email', '{{Str::limit($email, 100)}}')
             ->editColumn('phone', '{{Str::limit($phone, 100)}}')
-            ->editColumn('country_phone', '{{Str::limit($country_phone, 100)}}')
             ->addColumn('checkbox', 'dashboard.Contact.btn.checkbox')
             ->addColumn('action', 'dashboard.Contact.btn.action')
             ->rawColumns(['checkbox', 'action']);
@@ -107,11 +106,12 @@ class ContactDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('message'),
-            Column::make('email'),
-            Column::make('phone'),
-            Column::make('country_phone')
-                ->title(__('Country Phone Code')),
+            Column::make('message')
+                ->title(__('Message')),
+            Column::make('email')
+                ->title(__('Email')),
+            Column::make('phone')
+                ->title(__('Phone')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
@@ -130,6 +130,6 @@ class ContactDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'AskAnExpert_' . date('YmdHis');
+        return 'Contact Us' . date('YmdHis');
     }
 }

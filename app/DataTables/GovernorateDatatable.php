@@ -25,11 +25,9 @@ class GovernorateDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('title', '{{Str::limit($title, 100)}}')
             ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
-            ->editColumn('country.name_ar', '{{ Str::limit($country["name_ar"], 100) }}')
             ->addColumn('checkbox', 'dashboard.Governorate.btn.checkbox')
             ->addColumn('action', 'dashboard.Governorate.btn.action')
-            ->addColumn('active', 'dashboard.Governorate.btn.active')
-            ->rawColumns(['checkbox', 'action', "active"]);
+            ->rawColumns(['checkbox', 'action']);
     }
 
     /**
@@ -40,7 +38,7 @@ class GovernorateDatatable extends DataTable
      */
     public function query()
     {
-        return Governorate::query()->with("country")->select("governorates.*");
+        return Governorate::query()->select("governorates.*");
     }
 
     /**
@@ -107,17 +105,10 @@ class GovernorateDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('title'),
-            Column::make('title_ar'),
-            Column::make('country.name_ar')
-                ->title(__("Country")),
-            Column::computed('active')
-                ->title(__('Active'))
-                ->exportable(false)
-                ->printable(false)
-                ->searchable(false)
-                ->width(120)
-                ->addClass('text-center'),
+            Column::make('title')
+                ->title(__('Governorate Name(ENG)')),
+            Column::make('title_ar')
+                ->title(__('Governorate Name(AR)')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

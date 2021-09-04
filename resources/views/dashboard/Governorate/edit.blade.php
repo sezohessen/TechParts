@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Governorate Name (AR)') <span class="text-danger">*</span></label>
+                            <label>@lang('Governorate Name  (AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('title_ar') ? 'is-invalid' : '' }}"
                              name="title_ar" value="{{ old('title_ar') ? old('title_ar'): $governorate->title_ar }}"
                               placeholder="@lang('Name(AR)')" required />
@@ -44,24 +44,6 @@
                                 <div class="invalid-feedback">{{ $errors->first('title_ar') }}</div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="country">@lang('Select Country')<span class="text-danger">*</span></label>
-                            <select class="form-control {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
-                                 id="country" name="country_id" required>
-                                @foreach ($countries as $country)
-                                    @if ($country->id == $governorate->country_id)
-                                        <option value="{{$country->id}}" selected>{{$country->name}} - {{ $country->name_ar }}</option>
-                                    @else
-                                        <option value="{{$country->id}}">{{$country->name}} - {{ $country->name_ar }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            @error('country_id')
-                                <div class="invalid-feedback">{{ $errors->first('country_id') }}</div>
-                            @enderror
-                          </div>
                     </div>
                 </div>
             </div>
@@ -76,5 +58,5 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-    <script src="/metronic/theme/html/demo1/dist/assets/js/pages/crud/forms/validation/form-controls.js?v=7.1.8"></script>
+<script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
 @endsection

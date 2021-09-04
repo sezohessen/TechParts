@@ -31,7 +31,7 @@ class CarYearController extends Controller
     {
         $page_title = __("Add a year of manufacture");
         $page_description = __("Years of manufacture");
-        $models=CarModel::where("active",1)->get();
+        $models=CarModel::all();
         return view('dashboard.CarYear.add', compact('page_title', 'page_description','models'));
     }
 
@@ -71,9 +71,9 @@ class CarYearController extends Controller
      */
     public function edit(CarYear $year)
     {
-        $page_title = __("Edit a year of manufacture");
-        $page_description = __("Years of manufacture");
-        $models=CarModel::where("active",1)->get();
+        $page_title         = __("Edit a year of manufacture");
+        $page_description   = __("Years of manufacture");
+        $models             = CarModel::all();
         return view('dashboard.CarYear.edit', compact('page_title', 'page_description','year','models'));
     }
 
@@ -105,13 +105,6 @@ class CarYearController extends Controller
         $year->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.year.index");
-    }
-    public function Activity(Request $request){
-        $year = CarYear::find($request->id);
-        $year->update(["active"=>$request->status]);
-        return response()->json([
-            'status' => true
-        ]);
     }
     public function multi_delete(){
         if (is_array(request('item'))) {

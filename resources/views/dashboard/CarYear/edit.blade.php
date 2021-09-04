@@ -36,9 +36,8 @@
                              <label for="model" class="col-form-label  col-sm-12">@lang('Select Car Model')<span class="text-danger">*</span>
                             </label><br>
                              <div class=" col-lg-9 col-md-9 col-sm-12">
-                                <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
+                                <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="kt_select2_1"
                                 name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
-                                    <option value=""  >@lang('Select Car Make')</option>
                                     @foreach ($models as $model)
                                         <option value="{{$model->id}}" {{ $year->CarModel_id==$model->id ? 'selected':'' }}>{{$model->name}}</option>
                                     @endforeach
@@ -64,5 +63,5 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-
+<script src="{{ asset('js/pages/crud/forms/widgets/select2.js') }}"></script>
 @endsection

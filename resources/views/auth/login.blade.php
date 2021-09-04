@@ -58,7 +58,8 @@
                                 <label for="password" class="font-size-h6 font-weight-bolder text-dark pt-5">{{ __('Password') }}</label>
                                 <a href="{{ route('password.request') }}"class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5" id="kt_login_forgot"> {{ __('Forgot Your Password?') }}</a>
                             </div>
-                            <input id="password" type="password" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required  >
+                            <input id="password" type="password" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg @error('password') is-invalid @enderror"
+                             name="password" value="{{ old('password') }}" required  >
                             @error('password')
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">

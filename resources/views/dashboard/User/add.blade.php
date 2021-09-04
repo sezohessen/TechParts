@@ -53,28 +53,8 @@
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">
-
-                <select class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
-                     id="country_id" name="country_id" required>
-                    <option value="">@lang('--Select country--')</option>
-                    @foreach ($countries->get() as $country)
-                        <option value="{{$country->id}}" {{ old('country_id') == $country->id ? 'selected' : '' }}>
-                            {{$country->code}} {{ $country->country_phone }}
-                        </option>
-                    @endforeach
-                </select>
-                @if ($errors->has('country_id'))
-                    <div class="fv-plugins-message-container">
-                        <div class="fv-help-block">
-                            @lang('Please select country')
-                        </div>
-                    </div>
-                @endif
-            </div>
-            <!--end::Form group-->
-            <!--end::Form group-->
-            <div class="form-group">
-                <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone"  placeholder="@lang('phone')">
+                <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('phone') is-invalid @enderror"
+                 name="phone" value="{{ old('phone') }}" required autocomplete="phone"  placeholder="@lang('phone')">
                 @error('phone')
                     <div class="fv-plugins-message-container">
                         <div class="fv-help-block">
@@ -86,7 +66,8 @@
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">
-                <input id="password" type="password"  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
+                <input id="password" type="password"  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror"
+                 name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
                 <label class="checkbox mt-5">
                     <input type="checkbox" onclick="myFunction()"/>
                     <span></span>
@@ -101,7 +82,6 @@
                         </div>
                     </div>
                 @enderror
-
             </div>
 
             <!--end::Form group-->
@@ -109,19 +89,8 @@
 
                 <select id="provider" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('provider') is-invalid @enderror" name="provider" required>
                     <option value="" >@lang('--Select Acount Type--')</option>
-                    {{--
-                    <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
-                        @lang('new user')
-                    </option>
-                    --}}
-                    <option value="insurance" {{ old('provider') == 'insurance' ? 'selected' : '' }}>
-                        @lang('Insurance Company')
-                    </option>
-                    <option value="agency" {{ old('provider') == 'agency' ? 'selected' : '' }}>
-                        @lang('Agency')
-                    </option>
-                    <option value="bank" {{ old('provider') == 'bank' ? 'selected' : '' }}>
-                        @lang('Bank')
+                    <option value="seller" {{ old('seller') == 'seller' ? 'selected' : '' }}>
+                        @lang('Seller')
                     </option>
                     <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
                         @lang('User')

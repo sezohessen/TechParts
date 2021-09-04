@@ -34,8 +34,7 @@ class UserController extends Controller
     {
         $page_title = __("Add User");
         $page_description = __("Add new User");
-        $countries =Country::where('active',1);
-        return view('dashboard.User.add', compact('page_title', 'page_description','countries'));
+        return view('dashboard.User.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -51,9 +50,13 @@ class UserController extends Controller
         $rules = User::rules();
         $request->validate($rules);
         $credentials = User::credentials($request);
-        $provider = 'user';
+        $provider = User::UserRole;
         $user = User::create($credentials);
-        $user->attachRole($provider);
+        if (isset($request->provider)) {
+            if($request->provider == User::SellerRole)$provider = User::SellerRole;
+            else $provider = User::UserRole;
+            $user->attachRole($provider);
+        }
         session()->flash('created',__("Changes has been Created successfully"));
         return redirect()->route("dashboard.users.index");
     }
@@ -80,10 +83,12 @@ class UserController extends Controller
     public function edit(User $user)
     {
 
-        $page_title = __("Edit User");
-        $page_description = __("Edit new User");
+        $page_title         = __("Edit User");
+        $page_description   = __("Edit new User");
 
-        return view('dashboard.User.edit', compact('page_title', 'page_description','countries','provider','user','selected'));
+        if($user->hasRole('seller'))$provider = User::SellerRole;
+        else $provider = User::UserRole;
+        return view('dashboard.User.edit', compact('page_title', 'page_description','provider','user'));
     }
 
     /**
@@ -95,10 +100,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $rules =User::rules(null, $user->id);
+        $rules =    User::rules(null, $user->id);
         $request->validate($rules);
 
-        //$user->attachRole($provider) ;
+        if (isset($request->provider)) {
+            if($user->hasRole(User::SellerRole))$provider = User::SellerRole;
+            else $provider = User::UserRole;
+            $user->detachRole($provider);
+            $user->attachRole($request->provider);
+        }
+        $user->update(User::credentials($request));
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("dashboard.users.index");
     }

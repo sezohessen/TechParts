@@ -13,9 +13,7 @@ class City extends Model
     protected $fillable=[
         'title',
         'title_ar',
-        'country_id',
         'governorate_id',
-        "active"
     ];
 
     public static function rules($request)
@@ -23,7 +21,6 @@ class City extends Model
         $rules = [
             'title'         => 'required|string|max:255',
             'title_ar'          => 'required|string|max:255',
-            'country_id'          => 'required',
             'governorate_id'         => 'required'
         ];
         return $rules;
@@ -33,15 +30,10 @@ class City extends Model
         $credentials = [
             'title'         =>  $request->title,
             'title_ar'      =>  $request->title_ar,
-            'country_id'    =>  $request->country_id,
             'governorate_id'=>  $request->governorate_id,
-            'active'         => 1
         ];
 
         return $credentials;
-    }
-    public function country(){
-        return $this->belongsTo(Country::class,'country_id','id');
     }
     public function governorate(){
         return $this->belongsTo(Governorate::class,'governorate_id','id');

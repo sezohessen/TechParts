@@ -18,8 +18,8 @@ class GovernorateController extends Controller
      */
     public function index(GovernorateDatatable $governorate)
     {
-        $page_title = __('Governorates');
-        $page_description = __('View Governorates');
+        $page_title         = __('Governorates');
+        $page_description   = __('View Governorates');
         return  $governorate->render("dashboard.Governorate.index", compact('page_title', 'page_description'));
     }
 
@@ -31,10 +31,9 @@ class GovernorateController extends Controller
     public function create()
     {
 
-        $page_title = __("Add Governorate");
-        $page_description = __("Add new Governorate");
-        $countries = Country::all();
-        return view('dashboard.Governorate.add', compact('page_title', 'page_description','countries'));
+        $page_title         = __("Add Governorate");
+        $page_description   = __("Add new Governorate");
+        return view('dashboard.Governorate.add', compact('page_title', 'page_description'));
     }
 
     /**
@@ -82,11 +81,10 @@ class GovernorateController extends Controller
     public function edit($id)
     {
 
-        $page_title = __("Edit governorate");
-        $page_description = __("Edit");
-        $governorate = Governorate::find($id);
-        $countries = Country::all();
-        if($governorate)return view('dashboard.Governorate.edit', compact('page_title', 'page_description','governorate','countries'));
+        $page_title         = __("Edit governorate");
+        $page_description   = __("Edit");
+        $governorate        = Governorate::find($id);
+        if($governorate)return view('dashboard.Governorate.edit', compact('page_title', 'page_description','governorate'));
         else return redirect()->route('dashboard.governorate.index');
     }
 
@@ -118,13 +116,6 @@ class GovernorateController extends Controller
         $governorate->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.governorate.index");
-    }
-    public function Activity(Request $request){
-        $country = Governorate::find($request->id);
-        $country->update(["active"=>$request->status]);
-        return response()->json([
-            'status' => true
-        ]);
     }
     public function multi_delete(){
         if (is_array(request('item'))) {

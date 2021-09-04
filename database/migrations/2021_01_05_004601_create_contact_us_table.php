@@ -18,7 +18,6 @@ class CreateContactUsTable extends Migration
             $table->text('message');
             $table->string('email');
             $table->string('phone');
-            $table->string('country_phone')->nullable();
             $table->timestamps();
         });
     }

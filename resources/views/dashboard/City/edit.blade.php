@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('City Name (ENG)') <span class="text-danger">*</span></label>
+                            <label>@lang('City Name(ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
                             name="title"  placeholder="@lang('Name(ENG)')" autofocus  value="{{$city->title}}"/>
                             @error('title')
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('City Name (AR)') <span class="text-danger">*</span></label>
+                            <label>@lang('City Name(AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('title_ar') ? 'is-invalid' : '' }}"
                             name="title_ar"  placeholder="@lang('Name(AR)')"  value="{{$city->title_ar}}" />
                             @error('title_ar')
@@ -42,25 +42,15 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="country">@lang('Select Country') <span class="text-danger">*</span></label>
-                            <select class="form-control {{ $errors->has('country_id') ? 'is-invalid' : '' }}" id="country"
-                            name="country_id" >
-                                <option value="">@lang('--Select country first--')</option>
-                                @foreach ($countries as $country)
-                                    <option value="{{$country->id}}" {{ ($country->id==$city->country_id) ? 'selected' : '' }}>{{$country->name}} - {{ $country->name_ar }}</option>
-                                @endforeach
-                            </select>
-                            @error('country_id')
-                                <div class="invalid-feedback">{{ $errors->first('country_id') }}</div>
-                            @enderror
-                          </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="governorate">@lang('Select Governorate') <span class="text-danger">*</span></label>
-                            <select class="form-control {{ $errors->has('governorate') ? 'is-invalid' : '' }}" id="governorate"
+                            <label for="country">@lang('Select Governorate') <span class="text-danger">*</span></label>
+                            <select class="form-control {{ $errors->has('governorate_id') ? 'is-invalid' : '' }}" id="kt_select2_1"
                             name="governorate_id" >
-                                <option value="{{$city->governorate_id}}">{{$governorate->title}} - {{ $governorate->title_ar }}</option>
+                                <option value="">@lang('--Select governorate first--')</option>
+                                @foreach ($governorates as $governorate)
+                                    <option value="{{$governorate->id}}" {{ ($governorate->id==$city->governorate_id) ? 'selected' : '' }}>
+                                        {{$governorate->title}} - {{ $governorate->title_ar }}
+                                    </option>
+                                @endforeach
                             </select>
                             @error('governorate_id')
                                 <div class="invalid-feedback">{{ $errors->first('governorate_id') }}</div>
@@ -81,23 +71,5 @@
 {{-- Scripts Section --}}
 @section('scripts')
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
-<script>
-    $('#country').on('change', function() {
-        var id = this.value ;
-        $('#governorate').empty();
-        $.ajax({
-            url: '/dashboard/country/'+id,
-            success: data => {
-                if(data.governorates){
-                    data.governorates.forEach(governorate =>
-                    $('#governorate').append(`<option value="${governorate.id}">${governorate.title}-${governorate.title_ar}</option>`)
-                    )
-                }else{
-                    $('#governorate').append(`<option value="">No Results</option>`)
-                }
-
-            }
-        });
-    });
-</script>
+<script src="{{ asset('js/pages/crud/forms/widgets/select2.js') }}"></script>
 @endsection

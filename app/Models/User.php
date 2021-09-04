@@ -22,6 +22,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    const SellerRole    = 'seller';
+    const UserRole      = 'user';
     protected $fillable = [
         'first_name',
         'last_name',
@@ -73,23 +75,15 @@ class User extends Authenticatable
         }
         return $rules;
     }
-    public static function credentials($request,$api=null,$edit_profile=null)
+    public static function credentials($request)
     {
         $credentials = [
-            'first_name'                        => $request->first_name,
-            'last_name'                         => $request->last_name,
-            'email'                             => $request->email,
+            'first_name'            => $request->first_name,
+            'last_name'             => $request->last_name,
+            'email'                 => $request->email,
+            'phone'                 => $request->phone,
+            'password'              => Hash::make($request->password)
         ];
-        if (!$edit_profile) {
-            $credentials['password'] =Hash::make($request->password);
-            $credentials['phone'] = $request->phone;
-        }
-
-
-        if (isset($request->provider)) {
-            $credentials['provider'] = $request->provider;
-        }
-
         return $credentials;
     }
 
@@ -99,32 +93,9 @@ class User extends Authenticatable
       return $this->belongsToMany(Role::class);
     }
 
-    public function AuthFavCar()
-    {
-        return $this->belongsToMany(Car::class, 'user_fav_cars', 'user_id','car_id');
-    }
-    public function agencyFav()
-    {
-        return $this->belongsToMany(Agency::class,'user_fav_agencies','user_id','agency_id')
-        ->where('agencies.center_type',Agency::center_type_Agency);
-    }
-    public function MaintenanceFav()
-    {
-        return $this->belongsToMany(Agency::class,'user_fav_agencies','user_id','agency_id')
-        ->where('agencies.center_type',Agency::center_type_Maintenance);
-    }
     public function cars()
     {
         return $this->belongsToMany(Car::class,'list_car_users','user_id','car_id');
-    }
-
-    public function List_cars()
-    {
-        return $this->belongsToMany(Car::class,'list_car_users','car_id','user_id');
-    }
-    public function Agency()
-    {
-        return $this->hasOne(Agency::class);
     }
 
 

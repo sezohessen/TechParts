@@ -60,34 +60,6 @@
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">
-
-                <select class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
-                     id="country_id" name="country_id" required>
-                    <option value="">@lang('--Select country--')</option>
-                    @foreach ($countries->get() as $country)
-                        <option value="{{$country->id}}"
-                            @if(old('country_id'))
-                         {{   old('country_id') == $country->id ? 'selected' : ''}}
-                            @else
-                         {{ $selected == $country->id ? 'selected' : ''}}
-                            @endif
-
-                        >
-                            {{$country->code}} {{ $country->country_phone }}
-                        </option>
-                    @endforeach
-                </select>
-                @if ($errors->has('country_id'))
-                    <div class="fv-plugins-message-container">
-                        <div class="fv-help-block">
-                            @lang('Please select country')
-                        </div>
-                    </div>
-                @endif
-            </div>
-            <!--end::Form group-->
-            <!--end::Form group-->
-            <div class="form-group">
                 <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6
                 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') ?? $user->phone }}"
                 required autocomplete="phone"  placeholder="@lang('phone')">
@@ -130,32 +102,14 @@
                         @lang('new user')
                     </option>
                     --}}
-                    <option value="insurance"
+                    <option value="seller"
                     @if(old('provider'))
-                    {{   old('provider') == 'insurance'? 'selected' : ''}}
+                    {{   old('provider') == 'seller'? 'selected' : ''}}
                        @else
-                    {{ $provider == 'insurance' ? 'selected' : ''}}
+                    {{ $provider == 'seller' ? 'selected' : ''}}
                        @endif
                     >
-                        @lang('Insurance Company')
-                    </option>
-                    <option value="agency"
-                    @if(old('provider'))
-                    {{   old('provider') == 'agency'? 'selected' : ''}}
-                       @else
-                    {{ $provider == 'agency' ? 'selected' : ''}}
-                       @endif
-                    >
-                        @lang('Agency')
-                    </option>
-                    <option value="bank"
-                    @if(old('provider'))
-                    {{   old('provider') == 'bank'? 'selected' : ''}}
-                       @else
-                    {{ $provider == 'bank' ? 'selected' : ''}}
-                       @endif
-                       >
-                        @lang('Bank')
+                        @lang('Seller')
                     </option>
                     <option value="user"
                     @if(old('provider'))
@@ -174,29 +128,6 @@
                         </div>
                     </div>
                 @enderror
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label><br>
-                    <div class="image-input image-input-empty image-input-outline" id="image_id" style="background-image: url({{ (isset($user->image)) ? asset($user->image->base.$user->image->name)  :  asset('media/svg/image_ids/image_id.jpg') }})">
-                        <div class="image-input-wrapper"></div>
-                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                            <i class="fa fa-pen icon-sm text-muted"></i>
-                            <input type="file" name="image_id" accept=".png, .jpg, .jpeg ,gif,svg"  required />
-                            <input type="hidden" name="image_id_remove" value="{{$user->image->id ?? null}}" />
-                        </label>
-                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                        </span>
-                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                        </span>
-                    </div>
-                    @error('image_id')
-                        <div class="invalid-feedback">{{ $errors->first('image_id') }}</div>
-                    @enderror
-                </div>
             </div>
             <input type="hidden" name="agree" value="on" />
             <!--end::Form group-->
@@ -222,12 +153,4 @@
       }
     }
     </script>
-    <script>
-        "use strict";
-        var KTUserEdit={
-            init:function(){
-                new KTImageInput("image_id");
-                }
-                };jQuery(document).ready((function(){KTUserEdit.init()}));
-        </script>
 @endsection

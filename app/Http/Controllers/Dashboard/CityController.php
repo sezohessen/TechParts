@@ -16,8 +16,8 @@ class CityController extends Controller
      */
     public function index(CityDatatable $city)
     {
-        $page_title = __('Cities');
-        $page_description = __('View Cities');
+        $page_title         = __('Cities');
+        $page_description   = __('View Cities');
         return  $city->render("dashboard.City.index", compact('page_title', 'page_description'));
     }
 
@@ -29,10 +29,10 @@ class CityController extends Controller
     public function create()
     {
 
-        $page_title = __("Add City");
-        $page_description = __("Add new City");
-        $countries = Country::all();
-        return view('dashboard.City.add', compact('page_title', 'page_description','countries'));
+        $page_title         = __("Add City");
+        $page_description   = __("Add new City");
+        $governorates       = Governorate::all();
+        return view('dashboard.City.add', compact('page_title', 'page_description','governorates'));
     }
 
     /**
@@ -71,12 +71,11 @@ class CityController extends Controller
     public function edit($id)
     {
 
-        $page_title =__("Edit country");
-        $page_description = __("Edit");
-        $city = City::find($id);
-        $governorate=Governorate::find($city->governorate_id);
-        $countries = Country::all();
-        if($city)return view('dashboard.City.edit', compact('page_title', 'page_description','city',"countries","governorate"));
+        $page_title         =__("Edit city");
+        $page_description   = __("Edit");
+        $city               = City::find($id);
+        $governorates       = Governorate::all();
+        if($city)return view('dashboard.City.edit', compact('page_title', 'page_description','city',"governorates"));
         else return redirect()->route('dashboard.city.index');
 
     }
@@ -109,13 +108,6 @@ class CityController extends Controller
         $city->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.city.index");
-    }
-    public function Activity(Request $request){
-        $country = City::find($request->id);
-        $country->update(["active"=>$request->status]);
-        return response()->json([
-            'status' => true
-        ]);
     }
     public function multi_delete(){
         if (is_array(request('item'))) {
