@@ -56,7 +56,7 @@ class User extends Authenticatable
     ];
 
 
-        public static function rules($api=null,$edit_profile=null,$email_not_unique=null)
+    public static function rules($api=null,$edit_profile=null,$email_not_unique=null)
     {
 
         $rules = [

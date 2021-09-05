@@ -77,29 +77,6 @@
                         <!--end::Form group-->
                         <!--end::Form group-->
                         <div class="form-group">
-                            @php
-                                $countries = \App\Models\Country::where('active',1);
-                            @endphp
-                            <select class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
-                                 id="country_id" name="country_id" required>
-                                <option value="">@lang('--Select country first--')</option>
-                                @foreach ($countries->get() as $country)
-                                    <option value="{{$country->id}}" {{ old('country_id') == $country->id ? 'selected' : '' }}>
-                                    {{$country->code}} {{ $country->country_phone }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('country_id'))
-                                <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
-                                        @lang('Please select country')
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                        <!--end::Form group-->
-                        <!--end::Form group-->
-                        <div class="form-group">
                             <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone"  placeholder="@lang('phone')">
                             @error('phone')
                                 <div class="fv-plugins-message-container">

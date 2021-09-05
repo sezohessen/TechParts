@@ -30,7 +30,6 @@ class UserDatatable extends DataTable
             ->editColumn('role', function (User $user) {
                 return implode(', ', $user->roles->pluck('name')->toArray());
             })
-
             ->addColumn('checkbox', 'dashboard.User.btn.checkbox')
             ->addColumn('action', 'dashboard.User.btn.action')
             ->rawColumns(['checkbox', 'action', 'role']);
@@ -120,7 +119,8 @@ class UserDatatable extends DataTable
             Column::make('phone')
                 ->title(__("Phone")),
             Column::make('role')
-                ->title(__("Role")),
+                ->title(__("Role"))
+                ->searchable(false),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)

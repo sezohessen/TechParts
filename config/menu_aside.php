@@ -186,6 +186,46 @@ return [
             ]
         ],
         [
+            'title' => 'Pages',
+            'icon' => 'fas fa-scroll',
+            'bullet' => 'line',
+            'root' => true,
+            'submenu' => [
+                [
+                    [
+                        'title' => 'Terms',
+                        'bullet' => 'dot',
+                        'root' => true,
+                        'submenu' => [
+                            [
+                                'title' => 'Update Terms',
+                                'page' => "/dashboard/terms"
+                            ],
+                            [
+                                'title' => 'View Terms',
+                                'page' => "terms"
+                            ]
+                        ]
+                    ],
+                    [
+                        'title' => 'Privacy&Policy',
+                        'bullet' => 'dot',
+                        'root' => true,
+                        'submenu' => [
+                            [
+                                'title' => 'Update Privacy&Policy',
+                                'page' => "/dashboard/PPolicy"
+                            ],
+                            [
+                                'title' => 'View Privacy&Policy',
+                                'page' => "PPolicy"
+                            ]
+                        ]
+                    ],
+                ],
+            ]
+        ],
+        [
             'title' => 'Settings',
             'icon' => 'media/svg/icons/General/Settings-2.svg',
             'bullet' => 'dot',
