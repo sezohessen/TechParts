@@ -81,10 +81,26 @@ class SettingsController extends Controller
         $this->validate($request,[
             'appName'       => 'required|string|max:255',
             'appName_ar'    => 'required|string|max:255',
-            'logo'          => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
+            'logo'          => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'email'         => 'nullable|string|max:255|email',
+            'phone'         => 'nullable|string|max:55',
+            'whatsapp'      => 'nullable|string|max:255',
+            'facebook'      => 'nullable|string|max:255',
+            'instgram'      => 'nullable|string|max:255',
+            'location'      => 'nullable|string|max:255',
+            'andriod'       => 'nullable|string|max:255',
+            'ios'           => 'nullable|string|max:255',
         ]);
         $settings->appName          = $request->appName;
         $settings->appName_ar       = $request->appName_ar;
+        $settings->email            = $request->email;
+        $settings->phone            = $request->phone;
+        $settings->Whatsapp         = $request->Whatsapp;
+        $settings->facebook         = $request->facebook;
+        $settings->instgram         = $request->instgram;
+        $settings->location         = $request->location;
+        $settings->andriod          = $request->andriod;
+        $settings->ios              = $request->ios;
 
         if($request->file('logo')){
             $Image_id = self::file($request->file('logo'),$settings->logo_id);

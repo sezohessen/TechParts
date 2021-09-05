@@ -54,6 +54,129 @@
                             @endif
                         </div>
                     </div>
+                    <!-- Edit setting -->
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Email') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                             name="email"  placeholder="@lang('Enter Email')" value="{{ old('email')? old('email') :$settings->email }}" required autofocus  />
+                            @if ($errors->has('email'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('appName_ar')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- Phone number -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Phone') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
+                             name="phone"  placeholder="@lang('phone')" value="{{ old('phone')? old('phone') :$settings->phone }}" required autofocus  />
+                            @if ($errors->has('phone'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('phone')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- whatsapp number -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Whatsapp') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}"
+                             name="Whatsapp"  placeholder="@lang('Whatsapp')" value="{{ old('whatsapp')? old('whatsapp') :$settings->whatsapp }}" required autofocus  />
+                            @if ($errors->has('whatsapp'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('whatsapp')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- Facebook number -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Facebook') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}"
+                             name="facebook"  placeholder="@lang('Facebook')" value="{{ old('facebook')? old('facebook') :$settings->facebook }}" required autofocus  />
+                            @if ($errors->has('facebook'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('facebook')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- instgram number -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Instagram') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('instgram') ? 'is-invalid' : '' }}"
+                             name="instgram"  placeholder="@lang('Instagram')" value="{{ old('instgram')? old('instgram') :$settings->instgram }}" required autofocus  />
+                            @if ($errors->has('instgram'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('instgram')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- location number -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Location') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}"
+                             name="location"  placeholder="@lang('Location')" value="{{ old('location')? old('location') :$settings->location }}" required autofocus  />
+                            @if ($errors->has('location'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('facebook')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- andriod number -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Andriod') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('andriod') ? 'is-invalid' : '' }}"
+                             name="andriod"  placeholder="@lang('Andriod')" value="{{ old('andriod')? old('andriod') :$settings->andriod }}" required autofocus  />
+                            @if ($errors->has('andriod'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('andriod')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- ios Ios -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Ios') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('ios') ? 'is-invalid' : '' }}"
+                             name="ios"  placeholder="@lang('Ios')" value="{{ old('ios')? old('ios') :$settings->ios }}" required autofocus  />
+                            @if ($errors->has('ios'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $errors->first('ios')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- End Edit Setting -->
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label>
@@ -84,7 +207,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('update')  </button>
+                <button type="submit" class="mr-2 btn btn-primary">@lang('update')  </button>
             </div>
         </form>
         <!--end::Form-->
