@@ -58,9 +58,9 @@
                     <!-- Email -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Email') <span class="text-danger">*</span></label>
+                            <label>@lang('Email') <span class="text-danger"></span></label>
                             <input type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                             name="email"  placeholder="@lang('Enter Email')" value="{{ old('email')? old('email') :$settings->email }}" required autofocus  />
+                             name="email"  placeholder="@lang('Enter Email')" value="{{ old('email')? old('email') :$settings->email }}"  autofocus  />
                             @if ($errors->has('email'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -73,9 +73,9 @@
                     <!-- Phone number -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Phone') <span class="text-danger">*</span></label>
+                            <label>@lang('Phone') <span class="text-danger"></span></label>
                             <input type="text" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-                             name="phone"  placeholder="@lang('phone')" value="{{ old('phone')? old('phone') :$settings->phone }}" required autofocus  />
+                             name="phone"  placeholder="@lang('phone')" value="{{ old('phone')? old('phone') :$settings->phone }}"  autofocus  />
                             @if ($errors->has('phone'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -88,9 +88,9 @@
                     <!-- whatsapp number -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Whatsapp') <span class="text-danger">*</span></label>
+                            <label>@lang('Whatsapp') <span class="text-danger"></span></label>
                             <input type="text" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}"
-                             name="Whatsapp"  placeholder="@lang('Whatsapp')" value="{{ old('whatsapp')? old('whatsapp') :$settings->whatsapp }}" required autofocus  />
+                             name="Whatsapp"  placeholder="@lang('Whatsapp')" value="{{ old('whatsapp')? old('whatsapp') :$settings->whatsapp }}"  autofocus  />
                             @if ($errors->has('whatsapp'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -103,9 +103,9 @@
                     <!-- Facebook number -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Facebook') <span class="text-danger">*</span></label>
+                            <label>@lang('Facebook') <span class="text-danger"></span></label>
                             <input type="text" class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}"
-                             name="facebook"  placeholder="@lang('Facebook')" value="{{ old('facebook')? old('facebook') :$settings->facebook }}" required autofocus  />
+                             name="facebook"  placeholder="@lang('Facebook')" value="{{ old('facebook')? old('facebook') :$settings->facebook }}"  autofocus  />
                             @if ($errors->has('facebook'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -118,9 +118,9 @@
                     <!-- instgram number -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Instagram') <span class="text-danger">*</span></label>
+                            <label>@lang('Instagram') <span class="text-danger"></span></label>
                             <input type="text" class="form-control {{ $errors->has('instgram') ? 'is-invalid' : '' }}"
-                             name="instgram"  placeholder="@lang('Instagram')" value="{{ old('instgram')? old('instgram') :$settings->instgram }}" required autofocus  />
+                             name="instgram"  placeholder="@lang('Instagram')" value="{{ old('instgram')? old('instgram') :$settings->instgram }}"  autofocus  />
                             @if ($errors->has('instgram'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -133,9 +133,9 @@
                     <!-- location number -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Location') <span class="text-danger">*</span></label>
+                            <label>@lang('Location') <span class="text-danger"></span></label>
                             <input type="text" class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}"
-                             name="location"  placeholder="@lang('Location')" value="{{ old('location')? old('location') :$settings->location }}" required autofocus  />
+                             name="location"  placeholder="@lang('Location')" value="{{ old('location')? old('location') :$settings->location }}"  autofocus  />
                             @if ($errors->has('location'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -148,9 +148,9 @@
                     <!-- andriod number -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Andriod') <span class="text-danger">*</span></label>
+                            <label>@lang('Andriod') <span class="text-danger"></span></label>
                             <input type="text" class="form-control {{ $errors->has('andriod') ? 'is-invalid' : '' }}"
-                             name="andriod"  placeholder="@lang('Andriod')" value="{{ old('andriod')? old('andriod') :$settings->andriod }}" required autofocus  />
+                             name="andriod"  placeholder="@lang('Andriod')" value="{{ old('andriod')? old('andriod') :$settings->andriod }}"  autofocus  />
                             @if ($errors->has('andriod'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -163,9 +163,9 @@
                     <!-- ios Ios -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Ios') <span class="text-danger">*</span></label>
+                            <label>@lang('Ios') <span class="text-danger"></span></label>
                             <input type="text" class="form-control {{ $errors->has('ios') ? 'is-invalid' : '' }}"
-                             name="ios"  placeholder="@lang('Ios')" value="{{ old('ios')? old('ios') :$settings->ios }}" required autofocus  />
+                             name="ios"  placeholder="@lang('Ios')" value="{{ old('ios')? old('ios') :$settings->ios }}"  autofocus  />
                             @if ($errors->has('ios'))
                                 <div class="fv-plugins-message-container">
                                     <div class="fv-help-block">
@@ -175,7 +175,6 @@
                             @endif
                         </div>
                     </div>
-
                     <!-- End Edit Setting -->
                     <div class="col-md-6">
                         <div class="form-group">
