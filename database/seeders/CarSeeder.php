@@ -8,6 +8,7 @@ use App\Models\CarMaker;
 use App\Models\CarModel;
 use App\Models\CarCapacity;
 use App\Models\Image;
+use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,11 +22,12 @@ class CarSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $faker      = Faker::create();
 
-        $images = Image::where('base', '/img/CarMakers/')->get();
-        $carIMGS = Image::where('base', '/img/Cars/')->get();
-        for ($i=0; $i < 10 ; $i++) {
+        $images     = Image::where('base', '/img/CarMakers/')->get();
+        $carIMGS    = Image::where('base', '/img/Cars/')->get();
+        $users      = User::all();
+        for ($i=0; $i < 50 ; $i++) {
             //First insert Car Maker
             $Maker  = DB::table('car_makers')->insertGetId([
                 'name'          => $faker->name,
@@ -53,25 +55,14 @@ class CarSeeder extends Seeder
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);
-            $car    = DB::table('cars')->insertGetId([
+            DB::table('cars')->insert([
+                'user_id'               => $users->random()->id,
                 'CarModel_id'           => $Model,
                 'CarMaker_id'           => $Maker,
                 'CarYear_id'            => $Year,
                 'CarCapacity_id'        => $Cap,
                 'created_at'            => now(),
                 'updated_at'            => now()
-            ]);
-            DB::table('car_imgs')->insert([
-                'car_id'        => $car,
-                'img_id'        => $images->random()->id,
-                'created_at'    => now(),
-                'updated_at'    => now()
-            ]);
-            DB::table('car_imgs')->insert([
-                'car_id'        => $car,
-                'img_id'        => $carIMGS->random()->id,
-                'created_at'    => now(),
-                'updated_at'    => now()
             ]);
         }
     }

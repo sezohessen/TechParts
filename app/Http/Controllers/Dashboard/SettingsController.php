@@ -81,7 +81,7 @@ class SettingsController extends Controller
         $this->validate($request,[
             'appName'       => 'required|string|max:255',
             'appName_ar'    => 'required|string|max:255',
-            'logo'          => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'logo'          => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'email'         => 'nullable|string|max:255|email',
             'phone'         => 'nullable|string|max:55',
             'whatsapp'      => 'nullable|string|max:255',

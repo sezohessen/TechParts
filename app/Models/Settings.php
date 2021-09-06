@@ -12,7 +12,15 @@ class Settings extends Model
     protected $fillable=[
         'appName',
         'appName_ar',
-        'logo_id'
+        'logo',
+        'email',
+        'phone',
+        'whatsapp',
+        'facebook',
+        'instgram',
+        'location',
+        'andriod',
+        'ios',
     ];
     public function logo()
     {

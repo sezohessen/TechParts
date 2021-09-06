@@ -16,6 +16,12 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
 
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            
             $table->bigInteger('CarModel_id')->unsigned();
             $table->foreign('CarModel_id')
             ->references('id')->on('car_models')

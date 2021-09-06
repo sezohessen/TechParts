@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(car_imgSeeder::class); */
         $this->call(CarSeeder::class);
         $this->call(SettingsSeeder::class);
+        $this->call(PartSeeder::class);
 
     }
 }

@@ -27,6 +27,78 @@ class imagesSeeder extends Seeder
                 'created_at'        =>  now()
             ],
             [
+                'name'              =>  "part (1).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (2).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (3).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (4).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (5).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (6).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (7).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (8).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (9).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (10).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (11).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "part (12).jpg",
+                'base'              =>  "/img/PartImgs/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
                 'name'              =>  "volksen",
                 'base'              =>  "/img/CarMakers/",
                 'updated_at'        =>  now(),
@@ -57,108 +129,6 @@ class imagesSeeder extends Seeder
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "alahlybank.png",
-                'base'              =>  "/img/bank/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "alexbank.png",
-                'base'              =>  "/img/bank/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "bank.png",
-                'base'              =>  "/img/bank/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "bankmasr.png",
-                'base'              =>  "/img/bank/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "cib.png",
-                'base'              =>  "/img/bank/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "qnb.png",
-                'base'              =>  "/img/bank/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "bankOffer.png",
-                'base'              =>  "/img/bank-offer/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "dairyland.png",
-                'base'              =>  "/img/insurance/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "general.png",
-                'base'              =>  "/img/insurance/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "plymouth.png",
-                'base'              =>  "/img/insurance/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "travelers.png",
-                'base'              =>  "/img/insurance/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "offer.png",
-                'base'              =>  "/img/insurance/offer/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "elsaba.png",
-                'base'              =>  "/img/agency/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "eltarek.png",
-                'base'              =>  "/img/agency/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "otoshow.png",
-                'base'              =>  "/img/agency/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "car1.png",
-                'base'              =>  "/img/Cars/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "car2.png",
-                'base'              =>  "/img/Cars/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
                 'name'              =>  "avata3.png",
                 'base'              =>  "/img/users/",
                 'updated_at'        =>  now(),
@@ -173,42 +143,6 @@ class imagesSeeder extends Seeder
             [
                 'name'              =>  "avatar2.png",
                 'base'              =>  "/img/users/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "new1.jpg",
-                'base'              =>  "/img/news/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "new2.jpg",
-                'base'              =>  "/img/news/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "new3.jpg",
-                'base'              =>  "/img/news/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "body1.jpg",
-                'base'              =>  "/img/CarBodies/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "body2.jpg",
-                'base'              =>  "/img/CarBodies/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "body3.jpg",
-                'base'              =>  "/img/CarBodies/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
