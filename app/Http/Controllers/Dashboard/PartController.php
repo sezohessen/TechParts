@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Car;
+use App\Models\Part;
+use App\Models\CarYear;
+use App\Models\CarMaker;
+use App\Models\CarModel;
+use App\Models\CarCapacity;
+use Illuminate\Http\Request;
 use App\DataTables\PartDatatable;
 use App\Http\Controllers\Controller;
-use App\Models\Part;
-use Illuminate\Http\Request;
 
 class PartController extends Controller
 {
@@ -26,9 +31,12 @@ class PartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(PartDatatable $part)
     {
-        //
+        $page_title = __("Add part");
+        $page_description =__( "Add New Record");
+        $cars = Car::all();
+        return  $part->render("dashboard.Part.add", compact('page_title', 'page_description','cars'));
     }
 
     /**
@@ -39,7 +47,12 @@ class PartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = Part::rules($request);
+        $request->validate($rules);
+        $credentials = Part::credentials($request);
+        $Part = Part::create($credentials);
+        session()->flash('created',__("Changes has been Created Successfully"));
+        return redirect()->route("dashboard.part.index");
     }
 
     /**

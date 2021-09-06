@@ -37,6 +37,8 @@ class PartDatatable extends DataTable
             ->addColumn('checkbox', 'dashboard.Part.btn.checkbox')
             ->addColumn('action', 'dashboard.Part.btn.action')
             ->rawColumns(['checkbox', 'action']);
+
+            
     }
 
     /**
