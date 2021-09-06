@@ -6,40 +6,86 @@
 {{-- Content --}}
 @section('content')
 
-    <div class="card card-custom">
+<div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.maker.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('dashboard.maker.index') }}" style="margin-top: 16px;" class="mr-2 btn btn-primary">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.maker.update",['maker'=>$maker->id])}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("dashboard.part.update",$part->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PATCH')
+
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
+               <!-- Part English name -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Car Model  Name') <span class="text-danger">*</span></label>
+                            <label>@lang('Part name(ENG)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                             name="name"  placeholder="@lang('Car Make ')" value="{{ old('name') ?? $maker->name}}" required autofocus  />
+                             name="name"  placeholder="@lang('Name(ENG)')" value="{{$part->name}}" required autofocus  />
                             @error('name')
                                  <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @enderror
                         </div>
                     </div>
+                    <!-- Part arabic name -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label><br>
-                            <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{ find_image($maker->logo , 'img/CarMakers/')}})">
+                            <label>@lang('Part name(AR)') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
+                             name="name_ar"  placeholder="@lang('Name(AR)')" value="{{$part->name_ar}}" required autofocus  />
+                            @error('name_ar')
+                                 <div class="invalid-feedback">{{ $errors->first('name_ar') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- Part Number -->
+                       <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Part number') <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control {{ $errors->has('part_number') ? 'is-invalid' : '' }}"
+                             name="part_number"  placeholder="@lang('Part number')" value="{{$part->part_number}}" required autofocus  />
+                            @error('part_number')
+                                 <div class="invalid-feedback">{{ $errors->first('part_number') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- Price Number -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Price') <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}"
+                             name="price"  placeholder="@lang('Price')" value="{{$part->price}}" required autofocus  />
+                            @error('price')
+                                 <div class="invalid-feedback">{{ $errors->first('price') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- in stock -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('In stock') <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control {{ $errors->has('in_stock') ? 'is-invalid' : '' }}"
+                             name="in_stock"  placeholder="@lang('In stock')" value="{{$part->in_stock}}" required autofocus  />
+                            @error('in_stock')
+                                 <div class="invalid-feedback">{{ $errors->first('in_stock') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- Part img -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Image">@lang('Part image') <span class="text-danger">*</span></label><br>
+                            <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('media/svg/logos/Logo.jpg') }})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg"   />
+                                    <input type="file" name="part_img" accept=".png, .jpg, .jpeg ,gif,svg"  required />
                                     <input type="hidden" name="logo_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -54,10 +100,54 @@
                             @enderror
                         </div>
                     </div>
+                    <!-- Select car -->
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-form-label col-sm-12">@lang('Select Car')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-12 col-md-12 col-sm-12">
+                                <select class="form-control selectpicker {{ $errors->has('car_id') ? 'is-invalid' : '' }}" name="car_id" id="car" required>
+                                <option selected value="{{$part->car_id}}">{{$part->car_id}}</option>
+                                @foreach ($cars as $key=>$car)
+                                    <option  value="{{$car->id}}">
+                                        {{ $car->model->name }} - {{$car->make->name}}
+                                    - {{$car->year->year}} - {{$car->capacity->capacity}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            @error('car_id')
+                                <div class="invalid-feedback">{{ $errors->first('car_id') }}</div>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Desc -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="description">@lang('Description(ENG)')<span class="text-danger">*</span></label>
+                            <textarea name="desc" class="form-control {{ $errors->has('desc') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
+                            placeholder="@lang('Write description')" >{{$part->desc}}</textarea>
+                            @error('desc')
+                                <div class="invalid-feedback">{{ $errors->first('desc') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- Arabic Desc -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="description">@lang('Description(AR)')<span class="text-danger">*</span></label>
+                            <textarea name="desc_ar" class="form-control {{ $errors->has('desc_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
+                            placeholder="@lang('Write description')" >{{$part->desc_ar}}</textarea>
+                            @error('desc_ar')
+                                <div class="invalid-feedback">{{ $errors->first('desc_ar') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('Update')  </button>
+                <button type="submit" class="mr-2 btn btn-primary">@lang('Edit')  </button>
             </div>
         </form>
         <!--end::Form-->

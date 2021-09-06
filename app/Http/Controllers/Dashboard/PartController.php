@@ -63,7 +63,7 @@ class PartController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -72,9 +72,12 @@ class PartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(part $part)
     {
-        //
+        $page_title = __("Edit Part");
+        $page_description = __("Edit Part");
+        $cars = Car::all();
+        return view('dashboard.part.edit', compact('page_title', 'page_description','cars','part'));
     }
 
     /**
@@ -84,9 +87,26 @@ class PartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Part $part)
     {
-        //
+
+        $rules      = Part::rules($request,true);
+        $request->validate($rules);
+        $isExist    = Part::where('id','!=',$part->id)
+        ->where('name',$request->name)
+        ->where('name_ar',$request->name_ar)
+        ->where('desc',$request->desc)
+        ->where('desc_ar',$request->desc_ar)
+        ->where('part_number',$request->part_number)->first();
+        if($isExist){
+            session()->flash('exist',__("This car is already exist"));
+            return redirect()->back();
+        }else{
+            $credentials = Part::credentials($request);
+            $part->update($credentials);
+            session()->flash('updated',__("Changes has been Created Successfully"));
+            return redirect()->route("dashboard.part.index");
+        }
     }
 
     /**
