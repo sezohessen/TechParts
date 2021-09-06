@@ -27,73 +27,73 @@ class imagesSeeder extends Seeder
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (1).jpg",
+                'name'              =>  "parts (1).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (2).jpg",
+                'name'              =>  "parts (2).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (3).jpg",
+                'name'              =>  "parts (3).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (4).jpg",
+                'name'              =>  "parts (4).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (5).jpg",
+                'name'              =>  "parts (5).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (6).jpg",
+                'name'              =>  "parts (6).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (7).jpg",
+                'name'              =>  "parts (7).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (8).jpg",
+                'name'              =>  "parts (8).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (9).jpg",
+                'name'              =>  "parts (9).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (10).jpg",
+                'name'              =>  "parts (10).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (11).jpg",
+                'name'              =>  "parts (11).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "part (12).jpg",
+                'name'              =>  "parts (12).jpg",
                 'base'              =>  "/img/PartImgs/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
