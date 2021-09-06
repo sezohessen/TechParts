@@ -99,7 +99,31 @@ class imagesSeeder extends Seeder
                 'created_at'        =>  now()
             ],
             [
-                'name'              =>  "volksen",
+                'name'              =>  "audi.png",
+                'base'              =>  "/img/CarMakers/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "Ferrar.png",
+                'base'              =>  "/img/CarMakers/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "kia.png",
+                'base'              =>  "/img/CarMakers/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bentley.png",
+                'base'              =>  "/img/CarMakers/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "volksen.png",
                 'base'              =>  "/img/CarMakers/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()

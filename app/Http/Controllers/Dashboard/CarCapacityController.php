@@ -112,13 +112,6 @@ class CarCapacityController extends Controller
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
         return redirect()->route("dashboard.capacity.index");
     }
-    public function Activity(Request $request){
-        $capacity = CarCapacity::find($request->id);
-        $capacity->update(["active"=>$request->status]);
-        return response()->json([
-            'status' => true
-        ]);
-    }
     public function multi_delete(){
         if (is_array(request('item'))) {
 			foreach (request('item') as $id) {

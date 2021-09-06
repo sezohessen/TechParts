@@ -37,7 +37,7 @@ class CarSeeder extends Seeder
             ]);
             //Second insert Car Capacity
             $Cap    = DB::table('car_capacities')->insertGetId([
-                'capacity'      => $faker->numberBetween(1000, 5000),
+                'capacity'      => $faker->numberBetween(1000, 5000).'cc',
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);

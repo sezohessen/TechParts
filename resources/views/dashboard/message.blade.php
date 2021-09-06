@@ -19,7 +19,7 @@
     </div>
 @endif
 @if(session()->has('updated'))
-    <div class="alert alert-success  m-4  ">
+    <div class="alert alert-primary  m-4  ">
         <p>{{ session('updated') }}</p>
     </div>
 @endif

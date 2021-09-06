@@ -22,10 +22,10 @@ class Car extends Model
     public static function rules($request)
     {
         $rules = [
-            'CarMaker_id'           => 'required|integer',
-            'CarModel_id'           => 'required|integer',
-            'CarYear_id'            => 'required|integer',
-            'CarCapacity_id'        => 'required|integer',
+            'CarMaker_id'           => 'required|integer|exists:car_makers,id',
+            'CarModel_id'           => 'required|integer|exists:car_models,id',
+            'CarYear_id'            => 'required|integer|exists:car_years,id',
+            'CarCapacity_id'        => 'required|integer|exists:car_capacities,id',
         ];
         return $rules;
     }
@@ -40,7 +40,6 @@ class Car extends Model
         ];
         return $credentials;
     }
-
     public function make()
     {
         return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
@@ -51,11 +50,11 @@ class Car extends Model
     }
     public function model()
     {
-        return $this->belongsTo(CarModel::class,"CarModel_id","id")->where('active','=', 1);
+        return $this->belongsTo(CarModel::class,"CarModel_id","id");
     }
-    public function maker()
+    public function capacity()
     {
-        return $this->belongsTo(CarMaker::class,"CarMaker_id","id")->where('active','=', 1);
+        return $this->belongsTo(CarCapacity::class,"CarCapacity_id","id");
     }
     public function user(){
         return $this->belongsTo(User::class,"user_id","id");

@@ -11,6 +11,9 @@
             <h3 class="card-title">
                 {{$page_title}}
             </h3>
+            <div class="text-right">
+                <a href="{{ route('dashboard.model.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+            </div>
         </div>
         <!--begin::Form-->
         <form action="{{route("dashboard.model.update",['model'=>$model->id])}}" method="POST" enctype="multipart/form-data">

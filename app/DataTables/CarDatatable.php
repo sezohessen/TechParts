@@ -24,28 +24,14 @@ class CarDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('country.name_ar', '{{Str::limit($country["name_ar"] ?? 1, 100)}}')
-            ->editColumn('maker.name', '{{Str::limit($maker["name"] ?? null, 100)}}')
-            ->editColumn('phone', '{{Str::limit($phone, 100)}}')
-            ->editColumn('price', '{{Str::limit($price, 100)}}')
-            ->editColumn('Description', '{!! Str::limit($Description, 100) !!}')
-            ->editColumn('Description_ar', '{!! Str::limit($Description_ar, 100) !!}')
+            ->editColumn('user.email', '{{Str::limit($user["email"], 100)}}')
+            ->editColumn('model.name', '{{Str::limit($model["name"], 100)}}')
+            ->editColumn('make.name', '{{Str::limit($make["name"], 100)}}')
+            ->editColumn('year.year', '{{ Str::limit($year["year"]) }}')
+            ->editColumn('capacity.capacity', '{{ Str::limit($capacity["capacity"], 100) }}')
             ->addColumn('checkbox', 'dashboard.Car.btn.checkbox')
-            ->editColumn('SellerType', function ($car) {
-                if (($car->user->Agency)) {
-                    if ($car->user->Agency->center_type == 0)
-                        return Agency::StyleAgecnyType()[0][$car->user->Agency->agency_type];
-                    elseif ($car->user->Agency->center_type == 1)
-                        return Agency::StyleAgecnyType()[1][$car->user->Agency->agency_type];
-                    else
-                        return Agency::StyleAgecnyType()[2][0];
-                } else {
-                    return Agency::StyleAgecnyType()[0][3];
-                }
-            })
             ->addColumn('action', 'dashboard.Car.btn.action')
-            ->addColumn('status', 'dashboard.Car.btn.status')
-            ->rawColumns(['checkbox', 'action', 'SellerType', "Description", "Description_ar", 'status']);
+            ->rawColumns(['checkbox', 'action']);
     }
 
     /**
@@ -56,21 +42,7 @@ class CarDatatable extends DataTable
      */
     public function query()
     {
-
-        if ($this->request()->has("Customers")) {
-            return Car::query()->with(['maker', 'country'])->doesnthave('agencies')->select("cars.*");
-        } elseif ($this->request()->has("Showrooms")) {
-            return Car::query()->with(['maker', 'country'])->has('agencies')->select("cars.*");
-        }
-        if ($this->request()->has("user_id")) {
-            $user = User::find($this->request()->user_id);
-            return Car::query()->with(['maker', 'country'])->whereIn('id', $user->cars->pluck('id'))->has('List_cars_user')->select("cars.*");
-        }
-        if ($this->request()->has("agency_id")) {
-            $agency = Agency::find($this->request()->agency_id);
-            return Car::query()->with(['maker', 'country'])->whereIn('id', $agency->Car->pluck('id'))->has('List_cars_agency')->select("cars.*");
-        }
-        return Car::query()->with(['maker', 'country'])->select("cars.*");
+        return Car::query()->with(['make', 'model','year','capacity','user'])->select("cars.*");
     }
 
     /**
@@ -137,33 +109,16 @@ class CarDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('country.name_ar')
-                ->title(__("Country")),
-            Column::make('maker.name')
-                ->title(__("Car Make")),
-            Column::make('phone')
-                ->title(__("User Phone")),
-            Column::make('price')->title(__("Price")),
-            Column::make('Description')
-                ->title(__("Description (EN)"))
-                ->width(70),
-            Column::make('Description_ar')
-                ->title(__("Description (AR)"))
-                ->width(70),
-            Column::computed('SellerType')
-                ->title(__('Seller Type'))
-                ->exportable(false)
-                ->printable(false)
-                ->searchable(false)
-                ->width(120)
-                ->addClass('text-center'),
-            Column::computed('status')
-                ->title(__('Status'))
-                ->exportable(false)
-                ->printable(false)
-                ->searchable(false)
-                ->width(120)
-                ->addClass('text-center'),
+            Column::make('user.email')
+                ->title(__("User Email")),
+            Column::make('make.name')
+                ->title(__("Manufacture company")),
+            Column::make('model.name')
+                ->title(__("Car Model")),
+            Column::make('year.year')
+                ->title(__("Year")),
+            Column::make('capacity.capacity')
+                ->title(__("Car Capacity")),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
