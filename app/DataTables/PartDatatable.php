@@ -2,16 +2,15 @@
 
 namespace App\DataTables;
 
-use App\Models\City;
+use App\Models\Part;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Str;
 
-class CityDatatable extends DataTable
+class PartDatatable extends DataTable
 {
 
     /**
@@ -24,16 +23,22 @@ class CityDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-
-            ->editColumn('title', '{{Str::limit($title, 100)}}')
-            ->editColumn('title_ar', '{{Str::limit($title_ar, 100)}}')
-            ->editColumn('governorate.title_ar',function (City $city){
-                return Session::get('app_locale')=='en' ? $city->governorate->title : $city->governorate->title_ar;
+            ->addColumn('images', function(Part $part){
+                $data = $part->images->first()->image->name;
+                return view('dashboard.Part.btn.image', compact('data'));
             })
-            ->addColumn('checkbox', 'dashboard.City.btn.checkbox')
-            ->addColumn('action', 'dashboard.City.btn.action')
+            ->editColumn('user.email', '{{ Str::limit($user["email"]) }}')
+            ->editColumn('name', '{{ Str::limit($name) }}')
+            ->editColumn('name_ar', '{{ Str::limit($name_ar) }}')
+            ->editColumn('car.model.name', function (Part $part) {
+                return $part->car->model->name;
+            })
+            ->editColumn('price', '{{ Str::limit($price) }}')
+            ->addColumn('checkbox', 'dashboard.Part.btn.checkbox')
+            ->addColumn('action', 'dashboard.Part.btn.action')
             ->rawColumns(['checkbox', 'action']);
     }
+
     /**
      * Get query source of dataTable.
      *
@@ -42,7 +47,7 @@ class CityDatatable extends DataTable
      */
     public function query()
     {
-        return City::query()->with("governorate")->select("cities.*");
+        return Part::query()->with(['car','user','images'])->select("parts.*");
     }
 
     /**
@@ -53,7 +58,7 @@ class CityDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('Cities-table')
+            ->setTableId('parts-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -109,12 +114,21 @@ class CityDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('title')
-                ->title(__('City Name(ENG)')),
-            Column::make('title_ar')
-                ->title(__('City Name(AR)')),
-            Column::make('governorate.title_ar')
-                ->title(__("Governorate")),
+            Column::make('images')
+                ->title(__("Image"))
+                ->searchable(false),
+            Column::make('user.email')
+                ->title(__("Email")),
+            Column::make('name')
+                ->title(__("Part name(ENG)")),
+            Column::make('name_ar')
+                ->title(__("Part name(AR)")),
+            Column::make('car.model.name')
+                ->title(__("Car Model"))
+                ->searchable(false),
+            Column::make('price')
+                ->title(__("Price"))
+                ->searchable(false),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
@@ -133,6 +147,6 @@ class CityDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Cities_' . date('YmdHis');
+        return 'Parts_' . date('YmdHis');
     }
 }

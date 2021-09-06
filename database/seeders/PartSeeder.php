@@ -24,7 +24,9 @@ class PartSeeder extends Seeder
         for ($i=0; $i < 30 ; $i++) {
             $partID  = DB::table('parts')->insertGetId([
                 'name'          => $faker->name,
+                'name_ar'       => $faker->name,
                 'desc'          => $faker->text,
+                'desc_ar'       => $faker->text,
                 'part_number'   => $faker->numberBetween(100000,9999999),
                 'price'         => $faker->numberBetween(100,10000),
                 'in_stock'      => $faker->numberBetween(0,10),

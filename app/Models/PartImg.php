@@ -14,4 +14,8 @@ class PartImg extends Model
         'part_id',
         'img_id',
     ];
+    public function image()
+    {
+        return $this->belongsTo(Image::class,'img_id','id');
+    }
 }

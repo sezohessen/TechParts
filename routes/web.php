@@ -25,6 +25,7 @@ Route::get('/lang/{locale}', function ($locale) {
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|administrator']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::resource('/faqs','FaqController');
+    Route::resource('/part','PartController');
     Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');
     Route::resource('/city','CityController');
@@ -54,12 +55,12 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
 
     Route::prefix('car')->group(function () {
         Route::resources([
-            'maker'=>"CarMakerController",
-            'model'=>"CarModelController",
-            'body'=>"CarBodyController",
-            'year'=>"CarYearController",
-            'capacity'=>"CarCapacityController",
-            'color'=>"CarColorController",
+            'maker'     => "CarMakerController",
+            'model'     => "CarModelController",
+            'body'      => "CarBodyController",
+            'year'      => "CarYearController",
+            'capacity'  => "CarCapacityController",
+            'color'     => "CarColorController",
         ]);
         Route::get("available_model/{id}",'CarController@available_model');
         Route::get("available_governorate/{id}",'CarController@available_governorate');
@@ -76,6 +77,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
   //  Route::resource('users', 'UsersController');
     Route::resource('users', 'UserController');
     /* Datatable deleteAll request */
+    Route::delete('/part/destroy/all','PartController@multi_delete');
     Route::delete("faqs/destroy/all","FaqController@multi_delete");
     Route::delete('/country/destroy/all','CountryController@multi_delete');
     Route::delete('/governorate/destroy/all','GovernorateController@multi_delete');
@@ -152,24 +154,5 @@ Route::group(['prefix' => 'seller','as' => 'seller','namespace'=>"Insurance", 'm
     Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
     /* Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete'); */
 });
-/* Route::group(['prefix' => 'agency','as' => 'agency.','namespace'=>"Agency", 'middleware' => ['role:agency']], function () {
-    Route::get('/','AgencyDashController@index')->name('index');
-    Route::resource('/company','AgencyController');
-    Route::resource('/car','AgencyCarController');
-    Route::post('/car/{car}/status',"AgencyCarController@Status")->name('car.Status');
-    Route::get("available_model/{id}",'AgencyCarController@available_model');
-    Route::get("available_governorate/{id}",'AgencyCarController@available_governorate');
-    Route::get("available_city/{id}",'AgencyCarController@available_city');
-    Route::get("available_year/{id}",'AgencyCarController@available_year');
-    Route::delete('destroy/all','AgencyCarController@multi_delete');
-    Route::get('/governorate/{id}','AgencyController@governorate');//Ajax Request
-    Route::get('/country/{id}','AgencyController@country');//Ajax Request
-});
-Route::group(['prefix' => 'bank','as' => 'bank.','namespace'=>"Bank", 'middleware' => ['role:bank']], function () {
-    Route::get('/','BankDashController@index')->name('index');
-    Route::resource('/company','BankController');
-    Route::resource('/bank-offer','BankOfferController');
-    Route::delete('/bank-offer/destroy/all','BankOfferController@multi_delete');
-}); */
-//});
+
 

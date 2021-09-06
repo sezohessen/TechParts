@@ -142,6 +142,7 @@
 "Settings has been updated!":"تم تحديث الإعدادات!",
 "Country Name (ENG)":"اسم البلد (بالانجليزية)",
 "Country Name (AR)":"اسم البلد (بالعربية)",
+"Governorate":"المحافظة",
 "Governorate Name(ENG)":"اسم المحافظة (بالانجليزية)",
 "Governorate Name(AR)":"اسم المحافظة (بالعربية)",
 "City Name(ENG)":"اسم المدينة (بالانجليزية)",
@@ -714,5 +715,13 @@
 "Enter Email":"ادخل الايميل",
 "Andriod":"اندرويد",
 "Ios":"ايفون",
-"This car is already exist":"هذه السيارة موجودة بالفعل"
+"This car is already exist":"هذه السيارة موجودة بالفعل",
+"Parts":"قطع الغيار",
+"View parts":"عرض القطع",
+"Part number":"رقم التصنيع",
+"Car parts":"قطع غيار السيارات",
+"Add part":"اضافة قطعة",
+"Part name":"اسم القطعة",
+"Part name(ENG)":"اسم القطعة(بالانجليزية)",
+"Part name(AR)":"اسم القطعة(بالعربية)"
 }

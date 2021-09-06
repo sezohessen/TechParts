@@ -148,6 +148,22 @@ return [
             ]
         ],
         [
+            'title' => 'Car parts',
+            'icon' => 'fas fa-tools',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Add part',
+                    'page' => "/dashboard/part/create"
+                ],
+                [
+                    'title' => 'View parts',
+                    'page' => '/dashboard/part'
+                ],
+            ]
+        ],
+        [
             'title' => 'Manage Users',
             'icon' => 'media/svg/icons/Communication/Group.svg',
             'bullet' => 'dot',

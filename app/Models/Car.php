@@ -40,6 +40,10 @@ class Car extends Model
         ];
         return $credentials;
     }
+    public function model()
+    {
+        return $this->belongsTo(CarModel::class,"CarModel_id","id");
+    }
     public function make()
     {
         return $this->belongsTo(CarMaker::class,"CarMaker_id","id");
@@ -47,10 +51,6 @@ class Car extends Model
     public function year()
     {
         return $this->belongsTo(CarYear::class,"CarYear_id","id");
-    }
-    public function model()
-    {
-        return $this->belongsTo(CarModel::class,"CarModel_id","id");
     }
     public function capacity()
     {
