@@ -140,9 +140,16 @@ Route::get('/terms', 'Dashboard\TermsController@show');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
 
 
-
+// Start website
 Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
-    Route::get('/contact-us', 'Website\ContactController@index');
+    // Show Data / Index
+    Route::get('/index', 'HomeController@index');
+    Route::get('/parts', 'ListViewController@index');
+    Route::get('/contact-us', 'ContactController@index')->name('ContactUs');
+
+    // Send Data / Store
+    Route::post('/contact-us', 'ContactController@store')->name('SendContact');
+
 });
 
 Auth::routes();
