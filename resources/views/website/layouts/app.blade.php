@@ -49,12 +49,7 @@
 					<nav class="main-nav">
 						<ul class="list-unstyled">
 							<li class="active">
-								<a href="index.html">Home</a>
-								<ul>
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="homepage2.html">Homepage 2</a></li>
-									<li><a href="homepage3.html">Homepage 3</a></li>
-								</ul>
+								<a href="{{url('index')}}">Home</a>
 							</li>
 							<li>
 								<a href="add-car-details.html">Add Car</a>
@@ -96,7 +91,7 @@
 									<li><a href="shortcodes.html">Shortcodes</a></li>
 								</ul>
 							</li>
-							<li><a href="contact-us.html">Contact Us</a></li>
+							<li><a href="{{url('contact-us')}}">Contact Us</a></li>
 						</ul>
 					</nav> <!-- end .main-nav -->
 					<a href="#" class="responsive-menu-open"><i class="fa fa-bars"></i></a>

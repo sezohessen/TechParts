@@ -143,7 +143,8 @@ Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
 // Start website
 Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     Route::get('/index', 'HomeController@index');
-    Route::get('/contact-us', 'Website\ContactController@index');
+    Route::get('/parts', 'ListViewController@index');
+    Route::get('/contact-us', 'ContactController@index');
 });
 
 Auth::routes();
