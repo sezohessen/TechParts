@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Car;
+use App\Models\Part;
+use App\Models\CarYear;
+use App\Models\CarMaker;
+use App\Models\CarModel;
+use App\Models\CarCapacity;
+use Illuminate\Http\Request;
 use App\DataTables\PartDatatable;
 use App\Http\Controllers\Controller;
-use App\Models\Part;
-use Illuminate\Http\Request;
 
 class PartController extends Controller
 {
@@ -26,9 +31,12 @@ class PartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(PartDatatable $part)
     {
-        //
+        $page_title = __("Add part");
+        $page_description =__( "Add New Record");
+        $cars = Car::all();
+        return  $part->render("dashboard.Part.add", compact('page_title', 'page_description','cars'));
     }
 
     /**
@@ -39,7 +47,12 @@ class PartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = Part::rules($request);
+        $request->validate($rules);
+        $credentials = Part::credentials($request);
+        $Part = Part::create($credentials);
+        session()->flash('created',__("Changes has been Created Successfully"));
+        return redirect()->route("dashboard.part.index");
     }
 
     /**
@@ -50,7 +63,7 @@ class PartController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -59,9 +72,12 @@ class PartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(part $part)
     {
-        //
+        $page_title = __("Edit Part");
+        $page_description = __("Edit Part");
+        $cars = Car::all();
+        return view('dashboard.part.edit', compact('page_title', 'page_description','cars','part'));
     }
 
     /**
@@ -71,9 +87,26 @@ class PartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Part $part)
     {
-        //
+
+        $rules      = Part::rules($request,true);
+        $request->validate($rules);
+        $isExist    = Part::where('id','!=',$part->id)
+        ->where('name',$request->name)
+        ->where('name_ar',$request->name_ar)
+        ->where('desc',$request->desc)
+        ->where('desc_ar',$request->desc_ar)
+        ->where('part_number',$request->part_number)->first();
+        if($isExist){
+            session()->flash('exist',__("This car is already exist"));
+            return redirect()->back();
+        }else{
+            $credentials = Part::credentials($request);
+            $part->update($credentials);
+            session()->flash('updated',__("Changes has been Created Successfully"));
+            return redirect()->route("dashboard.part.index");
+        }
     }
 
     /**

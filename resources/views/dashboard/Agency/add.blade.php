@@ -14,7 +14,7 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.agency.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">@lang('Back') ></a>
+                <a href="{{ route('dashboard.agency.index') }}" style="margin-top: 16px;" class="mr-2 btn btn-primary">@lang('Back') ></a>
             </div>
         </div>
         <!--begin::Form-->
@@ -499,7 +499,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('create')</button>
+                <button type="submit" class="mr-2 btn btn-primary">@lang('create')</button>
             </div>
         </form>
         <!--end::Form-->
