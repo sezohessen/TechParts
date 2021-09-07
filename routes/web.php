@@ -138,6 +138,13 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
 });
 Route::get('/terms', 'Dashboard\TermsController@show');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
+
+
+
+Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
+    Route::get('/contact-us', 'Website\ContactController@index');
+});
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function ()

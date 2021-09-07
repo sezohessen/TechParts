@@ -2,6 +2,14 @@
 @extends('layout.master')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
+<style>
+    .content .bootstrap-select .dropdown-menu{
+        max-height: 200px!important;
+    }
+    .select2-container{
+        min-width: 100%!important;
+    }
+</style>
 @endsection
 {{-- Content --}}
 @section('content')
@@ -18,7 +26,7 @@
         <!--begin::Form-->
         <form action="{{route("dashboard.part.update",$part->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
-
+            @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
@@ -85,8 +93,8 @@
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="part_img" accept=".png, .jpg, .jpeg ,gif,svg"  required />
-                                    <input type="hidden" name="logo_remove" />
+                                    <input type="file" name="part_img" accept=".png, .jpg, .jpeg ,gif,svg"  />
+                                    <input type="hidden" name="part_img_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
@@ -95,8 +103,8 @@
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
                             </div>
-                            @error('logo')
-                                <div class="invalid-feedback">{{ $errors->first('logo') }}</div>
+                            @error('part_img')
+                                <div class="invalid-feedback">{{ $errors->first('part_img') }}</div>
                             @enderror
                         </div>
                     </div>
@@ -105,18 +113,22 @@
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Car')<span class="text-danger">*</span></label><br>
                             <div class=" col-lg-12 col-md-12 col-sm-12">
-                                <select class="form-control selectpicker {{ $errors->has('car_id') ? 'is-invalid' : '' }}" name="car_id" id="car" required>
-                                <option selected value="{{$part->car_id}}">{{$part->car_id}}</option>
+                                <select class="form-control selectpicker {{ $errors->has('car_id') ? 'is-invalid' : '' }}"
+                                     name="car_id" id="kt_select2_3" required>
+                                <option selected value="{{$part->car_id}}">
+                                    {{$part->car->make->name}} -  {{ $part->car->model->name }}
+                                    - {{$part->car->year->year}} - {{$part->car->capacity->capacity}}
+                                </option>
                                 @foreach ($cars as $key=>$car)
                                     <option  value="{{$car->id}}">
-                                        {{ $car->model->name }} - {{$car->make->name}}
+                                        {{ $car->make->name }} - {{$car->model->name}}
                                     - {{$car->year->year}} - {{$car->capacity->capacity}}
                                     </option>
                                     @endforeach
                                 </select>
-                            @error('car_id')
-                                <div class="invalid-feedback">{{ $errors->first('car_id') }}</div>
-                            @enderror
+                                @error('car_id')
+                                    <div class="invalid-feedback">{{ $errors->first('car_id') }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>

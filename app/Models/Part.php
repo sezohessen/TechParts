@@ -29,12 +29,11 @@ class Part extends Model
             'name_ar'                  => 'required|max:255',
             'desc'                     => 'required|min:10|max:255',
             'desc_ar'                  => 'required|min:10|max:255|',
-            'part_number'              => 'required|max:255|integer',
+            'part_number'              => 'required|string',
             'price'                    => 'required|min:1|integer',
             'in_stock'                 => 'required|min:1|integer',
-            'part_img'                 => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
-            'car_id'                   => 'required|',
-
+            'part_img'                 => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'car_id'                   => 'required|exists:cars,id',
         ];
         if($id){
             $rules['part_img'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
@@ -52,7 +51,9 @@ class Part extends Model
             'price'             => $request->price,
             'in_stock'          => $request->in_stock,
             'car_id'            => $request->car_id,
-            'user_id'           => Auth()->user()->id
+            'user_id'           => Auth()->user()->id,
+            'active'            => 1,
+            'views'             => 0
         ];
         return $credentials;
     }

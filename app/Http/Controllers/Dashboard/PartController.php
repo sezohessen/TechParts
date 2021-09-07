@@ -4,10 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Car;
 use App\Models\Part;
-use App\Models\CarYear;
-use App\Models\CarMaker;
-use App\Models\CarModel;
-use App\Models\CarCapacity;
 use Illuminate\Http\Request;
 use App\DataTables\PartDatatable;
 use App\Http\Controllers\Controller;
@@ -47,10 +43,10 @@ class PartController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = Part::rules($request);
+        $rules          = Part::rules($request);
         $request->validate($rules);
-        $credentials = Part::credentials($request);
-        $Part = Part::create($credentials);
+        $credentials    = Part::credentials($request);
+        $Part           = Part::create($credentials);
         session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.part.index");
     }
@@ -74,9 +70,9 @@ class PartController extends Controller
      */
     public function edit(part $part)
     {
-        $page_title = __("Edit Part");
-        $page_description = __("Edit Part");
-        $cars = Car::all();
+        $page_title         = __("Edit Part");
+        $page_description   = __("Edit Part");
+        $cars               = Car::all();
         return view('dashboard.part.edit', compact('page_title', 'page_description','cars','part'));
     }
 
@@ -92,21 +88,10 @@ class PartController extends Controller
 
         $rules      = Part::rules($request,true);
         $request->validate($rules);
-        $isExist    = Part::where('id','!=',$part->id)
-        ->where('name',$request->name)
-        ->where('name_ar',$request->name_ar)
-        ->where('desc',$request->desc)
-        ->where('desc_ar',$request->desc_ar)
-        ->where('part_number',$request->part_number)->first();
-        if($isExist){
-            session()->flash('exist',__("This car is already exist"));
-            return redirect()->back();
-        }else{
-            $credentials = Part::credentials($request);
-            $part->update($credentials);
-            session()->flash('updated',__("Changes has been Created Successfully"));
-            return redirect()->route("dashboard.part.index");
-        }
+        $credentials = Part::credentials($request);
+        $part->update($credentials);
+        session()->flash('updated',__("Changes has been Created Successfully"));
+        return redirect()->route("dashboard.part.index");
     }
 
     /**
