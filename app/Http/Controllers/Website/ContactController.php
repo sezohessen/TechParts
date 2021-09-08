@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings;
 use App\Models\website\Contact;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class ContactController extends Controller
 {
     public function index()
     {
-        return view('website.contact');
+     $Settings = Settings::all()->first();
+        return view('website.contact',compact('Settings'));
     }
      public function store(Request $request)
     {

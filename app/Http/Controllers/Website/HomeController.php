@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,6 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $Settings = Settings::all()->first();
         return view('website.index');
     }
 
@@ -46,7 +48,7 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('website.part');
     }
 
     /**

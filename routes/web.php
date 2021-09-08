@@ -143,12 +143,17 @@ Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
 // Start website
 Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Show Data / Index
-    Route::get('/index', 'HomeController@index');
-    Route::get('/parts', 'ListViewController@index');
+    Route::get('/index', 'HomeController@index')->name('Index');
     Route::get('/contact-us', 'ContactController@index')->name('ContactUs');
 
     // Send Data / Store
     Route::post('/contact-us', 'ContactController@store')->name('SendContact');
+
+    // Show Parts Details
+    Route::get('/part/{id}', 'HomeController@show')->name('ShowPart');
+
+    // User
+    Route::get('/user/{id}', 'UserController@show')->name('ShowUser');
 
 });
 
