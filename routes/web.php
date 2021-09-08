@@ -153,7 +153,13 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     Route::get('/part/{id}', 'HomeController@show')->name('ShowPart');
 
     // User
-    Route::get('/user/{id}', 'UserController@show')->name('ShowUser');
+    // Route::group(['middleware' => ['auth']], function() {
+        Route::get('/user', 'UserController@index')->name('ShowUser');
+        Route::get('/edit-user', 'UserController@edit')->name('EditUser');
+        Route::post('/edit-user', 'UserController@store')->name('SendEditUser');
+
+
+    // });
 
 });
 

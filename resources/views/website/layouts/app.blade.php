@@ -44,7 +44,7 @@
 			<div class="container">
 				<div class="clearfix navigation">
 					<div class="logo"><a href="{{ route('Website.Index') }}"><img src="{{ asset('img/website/logo.png') }}" alt="Automan" class="img-responsive"></a></div> <!-- end .logo -->
-					<div class="login"><a href="#"><i class="ion-ios-person"></i></a></div> <!-- end .login -->
+					<div class="login"><a href="{{route('Website.ShowUser')}}"><i class="ion-ios-person"></i></a></div> <!-- end .login -->
 					<div class="contact">
 					</div> <!-- end .contact -->
 					<nav class="main-nav">
