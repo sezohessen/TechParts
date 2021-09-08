@@ -164,6 +164,18 @@ return [
             ]
         ],
         [
+            'title' => 'Sellers',
+            'icon' => 'fas fa-users-cog',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'View sellers',
+                    'page' => '/dashboard/seller'
+                ],
+            ]
+        ],
+        [
             'title' => 'Manage Users',
             'icon' => 'media/svg/icons/Communication/Group.svg',
             'bullet' => 'dot',

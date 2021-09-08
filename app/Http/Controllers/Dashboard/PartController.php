@@ -88,7 +88,7 @@ class PartController extends Controller
 
         $rules      = Part::rules($request,true);
         $request->validate($rules);
-        $credentials = Part::credentials($request);
+        $credentials = Part::credentials($request,true);
         $part->update($credentials);
         session()->flash('updated',__("Changes has been Created Successfully"));
         return redirect()->route("dashboard.part.index");

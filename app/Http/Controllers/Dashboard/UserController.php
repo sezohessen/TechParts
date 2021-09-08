@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\DataTables\UserDatatable;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Models\Seller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -108,8 +110,17 @@ class UserController extends Controller
             else $provider = User::UserRole;
             $user->detachRole($provider);
             $user->attachRole($request->provider);
+            //if admin change user's role to seler , it will be auto created this details
+            if($user->hasRole(User::SellerRole)){
+                /*
+                if the admin change the role of user to be seller -> (if seller has info then create row in seller table else do not create row)
+                if the admin change the role of seller to be user -> keep seller data as it is that.
+                */
+                $isExist    = Seller::where('user_id',$user->id)->first();
+                if(!$isExist)DB::table('sellers')->insert(['user_id' => $user->id]);
+            }
         }
-        $user->update(User::credentials($request));
+        $user->update(User::credentials($request,true));
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("dashboard.users.index");
     }

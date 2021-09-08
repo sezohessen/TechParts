@@ -10,6 +10,13 @@
         min-width: 100%!important;
     }
 </style>
+@if (Session::get('app_locale')!='en')
+    <style>
+        .ck.ck-editor__editable_inline[dir=ltr]{
+            text-align: right!important;
+        }
+    </style>
+@endif
 @endsection
 {{-- Content --}}
 @section('content')

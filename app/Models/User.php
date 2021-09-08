@@ -56,7 +56,7 @@ class User extends Authenticatable
     ];
 
 
-    public static function rules($api=null,$edit_profile=null,$email_not_unique=null)
+    public static function rules($api=null,$edit_profile=null)
     {
 
         $rules = [
@@ -66,16 +66,16 @@ class User extends Authenticatable
         ];
 
         if ($edit_profile) {
-           $rules['email'] = 'required|string|max:255|unique:users,email,'.$edit_profile;
-           //$rules['phone'] = 'required|string|max:255|unique:users,phone,'.$edit_profile;
+           $rules['email']      = 'required|string|max:255|unique:users,email,'.$edit_profile;
+           $rules['password']   = 'nullable|string|min:8';
         }else {
-            $rules['email'] = 'required|string|email|max:255|unique:users';
-            $rules['phone'] = 'required|string|max:255|unique:users';
-            $rules['password'] = 'required|string|min:8';
+            $rules['email']     = 'required|string|email|max:255|unique:users';
+            $rules['phone']     = 'required|string|max:255|unique:users';
+            $rules['password']  = 'required|string|min:8';
         }
         return $rules;
     }
-    public static function credentials($request)
+    public static function credentials($request,$FromEdit = NULL)
     {
         $credentials = [
             'first_name'            => $request->first_name,
@@ -84,6 +84,7 @@ class User extends Authenticatable
             'phone'                 => $request->phone,
             'password'              => Hash::make($request->password)
         ];
+        if($FromEdit)unset($credentials['password']);
         return $credentials;
     }
 

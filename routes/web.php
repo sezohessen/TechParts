@@ -24,8 +24,9 @@ Route::get('/lang/{locale}', function ($locale) {
 
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|administrator']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
-    Route::resource('/faqs','FaqController');
     Route::resource('/part','PartController');
+    Route::resource('/seller','SellerController');
+    Route::resource('/faqs','FaqController');
     Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');
     Route::resource('/city','CityController');
@@ -78,6 +79,7 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('users', 'UserController');
     /* Datatable deleteAll request */
     Route::delete('/part/destroy/all','PartController@multi_delete');
+    Route::delete('/seller/destroy/all','SellerController@multi_delete');
     Route::delete("faqs/destroy/all","FaqController@multi_delete");
     Route::delete('/country/destroy/all','CountryController@multi_delete');
     Route::delete('/governorate/destroy/all','GovernorateController@multi_delete');

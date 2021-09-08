@@ -16,16 +16,18 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        $governorate = Governorate::all();
-        for ($i = 0; $i < 40; $i++) {
-            DB::table('cities')->insert([
-                'title'             =>  $faker->country,
-                'title_ar'          =>  $faker->country,
-                'governorate_id'    =>  $governorate->random()->id,
-                'created_at'        =>  now(),
-                'updated_at'        =>  now(),
-            ]);
+        $faker          = Faker::create();
+        $governorates   = Governorate::all();
+        foreach ($governorates as $governorate) {
+            for($i = 0;$i<3;$i++){
+                DB::table('cities')->insert([
+                    'title'             =>  $faker->city,
+                    'title_ar'          =>  $faker->city,
+                    'governorate_id'    =>  $governorate->id,
+                    'created_at'        =>  now(),
+                    'updated_at'        =>  now(),
+                ]);
+            }
         }
     }
 }

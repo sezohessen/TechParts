@@ -40,7 +40,7 @@ class Part extends Model
         }
         return $rules;
     }
-    public static function credentials($request,$img_id = NULL)
+    public static function credentials($request,$edit = NULL)
     {
         $credentials = [
             'name'              => $request->name,
@@ -52,10 +52,11 @@ class Part extends Model
             'in_stock'          => $request->in_stock,
             'car_id'            => $request->car_id,
             'user_id'           => Auth()->user()->id,
-            'active'            => 1,
-            'views'             => 0
         ];
         return $credentials;
+        if($edit){
+            unset($credentials['user_id']);
+        }
     }
     public function user()
     {

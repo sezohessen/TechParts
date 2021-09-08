@@ -16,7 +16,7 @@
         </svg>
     </span>
 </a>
-<a href="{{ route('dashboard.users.edit', ['user' => $id]) }}" class="btn btn-sm btn-success btn-icon mb-2"
+<a href="{{ route('dashboard.seller.edit', ['seller' => $id]) }}" class="btn btn-sm btn-success btn-icon mb-2"
     title="Edit details">
     <span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -32,10 +32,9 @@
         </svg>
     </span>
 </a>
-<a href="{{route('dashboard.users.show',['user'=>$id,'user_id'=>$id])}}"  target='_blank' class="btn btn-sm btn-primary btn-icon mb-2">
-    <i class=" icon-md text-success-50 ki ki-eye"></i>
+<a href="{{route('dashboard.seller.show',['seller'=>$id])}}"  target='_blank' class="btn btn-sm btn-primary btn-icon mb-2">
+    <i class="icon-md text-success-50 ki ki-eye"></i>
 </a>
-
 
 <!-- Modal -->
 <div id="myModal{{ $id }}" class="modal fade" role="dialog">
@@ -47,7 +46,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">@lang("Delete Record")</h4>
             </div>
-            {!! Form::open(['route' => ['dashboard.users.destroy', $id], 'method' => 'delete']) !!}
+            {!! Form::open(['route' => ['dashboard.seller.destroy', $id], 'method' => 'delete']) !!}
             <div class="modal-body">
                 <p>{{ __('Are you sure you want delete this item  ? ') }}</p>
             </div>
@@ -55,6 +54,7 @@
                 <button type="button" class="btn btn-info" data-dismiss="modal">@lang("Close")</button>
                 {!! Form::submit(__('Yes'), ['class' => 'btn btn-danger']) !!}
             </div>
+
         </div>
 
     </div>

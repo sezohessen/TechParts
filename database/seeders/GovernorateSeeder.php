@@ -16,7 +16,7 @@ class GovernorateSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 40; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             DB::table('governorates')->insert([
                 'title'             =>   $faker->country,
                 'title_ar'          =>   $faker->country,

@@ -23,7 +23,7 @@ class CreatePartsTable extends Migration
             $table->unsignedInteger("price")->nullable();
             $table->unsignedInteger("in_stock")->nullable();
             $table->boolean("active")->default(1);
-            $table->unsignedInteger("views")->nullable();
+            $table->unsignedInteger("views")->default(0);
 
             $table->bigInteger('car_id')->unsigned();
             $table->foreign('car_id')

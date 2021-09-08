@@ -74,7 +74,8 @@
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">
-                <input id="password" type="password"  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
+                <input id="password" type="password"  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror"
+                 name="password" value="{{ old('password') }}" autocomplete="password"  placeholder="@lang('Password')">
                 <label class="checkbox mt-5">
                     <input type="checkbox" onclick="myFunction()"/>
                     <span></span>
@@ -97,11 +98,6 @@
 
                 <select id="provider" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('provider') is-invalid @enderror" name="provider" required>
                     <option value="" >@lang('--Select Acount Type--')</option>
-                    {{--
-                    <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
-                        @lang('new user')
-                    </option>
-                    --}}
                     <option value="seller"
                     @if(old('provider'))
                     {{   old('provider') == 'seller'? 'selected' : ''}}

@@ -48,7 +48,11 @@
                                 <option value="">@lang('--Select governorate first--')</option>
                                 @foreach ($governorates as $governorate)
                                     <option value="{{$governorate->id}}" {{ ($governorate->id==$city->governorate_id) ? 'selected' : '' }}>
-                                        {{$governorate->title}} - {{ $governorate->title_ar }}
+                                        @if (Session::get('app_locale')=='en')
+                                        {{ $governorate->title }}
+                                        @else
+                                            {{ $governorate->title_ar }}
+                                        @endif
                                     </option>
                                 @endforeach
                             </select>

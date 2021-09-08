@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -89,7 +89,9 @@ class LaratrustSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10)
             ]);
-            $user->attachRole('user');
+            $rand = rand(0,1);
+            if($rand)$user->attachRole(User::UserRole);
+            else $user->attachRole(User::SellerRole);
         }
     }
 
