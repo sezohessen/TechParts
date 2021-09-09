@@ -8,7 +8,7 @@
 <div class="container">
     <div class="main-body" style="margin-top: 80px;">
           <div class="row gutters-sm">
-            <div class="col-md-12">
+            <div class="col-md-9">
               <div class="mb-3 card">
                 <div class="card-body">
                 <!-- Form -->
@@ -16,10 +16,12 @@
                     @csrf
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">First Name</h6>
+                      <h6 class="mb-0">@lang('first name')</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
+                        <div class="col-md-6">
                         <input value="{{ $user->first_name }}"  type="text" name="first_name">
+                        </div>
                         @error('first_name')
                         <div class="invalid-feedback">{{ $errors->first('first_name') }}</div>
                        @enderror
@@ -28,10 +30,12 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Last Name</h6>
+                      <h6 class="mb-0">@lang('last name')</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
+                        <div class="col-md-6">
                         <input value="{{ $user->last_name }}" type="text" name="last_name">
+                        </div>
                         @error('last_name')
                             <div class="invalid-feedback">{{ $errors->first('last_name') }}</div>
                         @enderror
@@ -40,20 +44,12 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                      <span style="font-size: 13px;color:#fc5555"> You can't change your email </span>
+                      <h6 class="mb-0">@lang('phone')</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <input disabled value="{{ $user->email }}"  type="text" name="email">
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
+                        <div class="col-md-6">
                         <input value="{{ $user->phone }}"  type="text" name="phone">
+                        </div>
                         @error('phone')
                             <div class="invalid-feedback">{{ $errors->first('phone') }}</div>
                         @enderror
@@ -62,10 +58,12 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Password</h6>
+                      <h6 class="mb-0">@lang('Password')</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
+                        <div class="col-md-6">
                         <input  type="password" name="password">
+                        </div>
                         @error('password')
                             <div class="invalid-feedback">{{ $errors->first('password') }}</div>
                         @enderror
@@ -81,6 +79,9 @@
                 </form>
                 </div>
               </div>
+            </div>
+            <div class="col-md-3">
+                
             </div>
           </div>
         </div>

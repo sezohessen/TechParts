@@ -13,7 +13,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">First Name</h6>
+                      <h6 class="mb-0">@lang('first name')</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         {{ $user->first_name }}
@@ -22,7 +22,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Last Name</h6>
+                      <h6 class="mb-0">@lang('last name')</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                        {{ $user->last_name }}
@@ -31,7 +31,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
+                      <h6 class="mb-0">@lang('Email')</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                     {{ $user->email  }}
@@ -40,7 +40,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
+                      <h6 class="mb-0">@lang('Phone')</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                     {{ $user->phone  }}
