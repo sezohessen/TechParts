@@ -21,7 +21,7 @@ class UserController extends Controller
         }
     }
     public function edit()
-    {   
+    {
         if(Auth::user())
         {
             $user = User::find(Auth::user()->id);
@@ -35,7 +35,7 @@ class UserController extends Controller
         $rules = User::rules($request);
         $request->validate($rules);
         $credentials = User::credentials($request);
-        $credentials = User::create($credentials);
+        $credentials = User::save($credentials);
         session()->flash('created',__("Message Has Been Send successfully"));
         return redirect()->route("Website.Index");
     }

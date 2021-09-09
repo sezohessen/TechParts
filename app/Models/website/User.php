@@ -2,8 +2,9 @@
 
 namespace App\Models\website;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Model
 {
@@ -26,17 +27,19 @@ class User extends Model
             'first_name'       => 'required|min:5|max:15',
             'last_name'        => 'required|min:5|max:15|',
             'Phone'            => 'required|digits:11|',
-            // 'password'         => 'nullable|',
+            'password'         => 'required',
+            'password_confirm' => 'required|same:password'
         ];
         return $rules;
     }
     public static function credentials($request)
     {
+        $hashPassword = Hash::make($request->password);
         $credentials = [
             'first_name'            => $request->first_name,
             'last_name'             => $request->last_name,
             'Phone'                 => $request->Phone,
-            // 'password'              => $request->password,
+            'password'              => $hashPassword,
 
         ];
         return $credentials;
