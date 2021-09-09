@@ -32,7 +32,7 @@
         </svg>
     </span>
 </a>
-<a href="{{route('dashboard.seller.show',['seller'=>$id])}}"  target='_blank' class="btn btn-sm btn-primary btn-icon mb-2">
+<a href="{{route('dashboard.seller.show',['seller'=>$id,'seller_id'=>$id])}}"  target='_blank' class="btn btn-sm btn-primary btn-icon mb-2">
     <i class="icon-md text-success-50 ki ki-eye"></i>
 </a>
 

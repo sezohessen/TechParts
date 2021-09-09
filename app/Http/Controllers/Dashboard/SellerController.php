@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\PartDatatable;
 use App\DataTables\SellerDatatable;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Governorate;
+use App\Models\Part;
 use App\Models\Seller;
 use Illuminate\Http\Request;
 
@@ -34,9 +36,13 @@ class SellerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, PartDatatable $part,Seller $seller)
     {
-        //
+        $page_title         = __("Seller's Parts");
+        $page_description   = __('View details');
+        $seller             = Seller::findOrFail($part->request()->seller_id);
+        $part->request()->all();
+        return  $part->render("dashboard.Seller.show", compact('page_title', 'page_description','seller'));
     }
 
     /**

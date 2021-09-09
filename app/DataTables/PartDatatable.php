@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Part;
+use App\Models\Seller;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -38,7 +39,7 @@ class PartDatatable extends DataTable
             ->addColumn('action', 'dashboard.Part.btn.action')
             ->rawColumns(['checkbox', 'action']);
 
-            
+
     }
 
     /**
@@ -49,6 +50,10 @@ class PartDatatable extends DataTable
      */
     public function query()
     {
+        if ($this->request()->has("seller_id")) {
+            $seller     = Seller::findOrFail($this->request()->seller_id);
+            return Part::query()->with(['car','user','images'])->where('user_id', $seller->user_id)->select("parts.*");
+        }
         return Part::query()->with(['car','user','images'])->select("parts.*");
     }
 

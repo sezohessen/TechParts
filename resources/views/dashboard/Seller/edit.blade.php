@@ -167,7 +167,7 @@
                     $('#city').append(`<option value="${city.id}" ${(old_city==city.id) ? "selected" : "" }>${city.title} - ${city.title_ar}</option>`)
                     )
                 }else{
-                    $('#city').append(`<option value="">No Results</option>`)
+                $('#city').append(`<option value="">@lang('Select Governorate first')</option>`)
                 }
             }
         });

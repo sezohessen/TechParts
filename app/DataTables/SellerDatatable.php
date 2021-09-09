@@ -2,9 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Models\Car;
-use App\Models\User;
-use App\Models\Agency;
 use App\Models\Seller;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -26,7 +23,10 @@ class SellerDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('user.email', '{{Str::limit($user["email"], 100)}}')
-            ->editColumn('user.first_name', '{{Str::limit($user["first_name"], 100) }}')
+            ->editColumn('user.first_name', function(Seller $seller) {
+                $data = $seller->user;
+                return view('dashboard.Seller.btn.name', compact('data'));
+            })
             ->editColumn('city.title', '{{Str::limit($city["title"] ?? "Not edited", 100)}}')
             ->addColumn('checkbox', 'dashboard.Seller.btn.checkbox')
             ->addColumn('action', 'dashboard.Seller.btn.action')

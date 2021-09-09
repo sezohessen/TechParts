@@ -147,6 +147,7 @@
 "Governorate Name(AR)":"اسم المحافظة (بالعربية)",
 "City Name(ENG)":"اسم المدينة (بالانجليزية)",
 "City Name(AR)":"اسم المدينة (بالعربية)",
+"City":"المدينة",
 "Country Code":"كود البلد",
 "create":"انشاء",
 "Name(ENG)":"الاسم (بالانجليزية)",
@@ -466,6 +467,7 @@
 "Phone Number":"رقم الهاتف",
 "First Name":"الأسم",
 "description":"الوصف",
+"Description":"الوصف",
 "properties":"البيانات",
 "Causer ID":"المسبب",
 "Subject ID":"التابع",
@@ -733,5 +735,7 @@
 "View sellers":"عرض التجار",
 "Edit Seller":"تعديل بيانات التاجر",
 "Search ...":"ابحث ...",
-"Address in details":"العنوان بالتفصيل"
+"Address in details":"العنوان بالتفصيل",
+"Seller's details":"تفاصيل التاجر",
+"Seller's Parts":"قطع غيار التاجر"
 }
