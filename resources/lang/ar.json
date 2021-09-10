@@ -730,6 +730,7 @@
 "Message has been send successfully":"تم إرسال الرسالة بنجاح",
 "You cant change your email":"لا يمكنك تغيير بريدك الإلكتروني",
 "password confirm":"يرجي تأكيد كلمة المرور",
-"Whats app":"واتساب"
+"Whats app":"واتساب",
+"Passowrd Not confirmed":"لم يتم تأكيد كلمة المرور"
 
 }
