@@ -19,68 +19,76 @@
     @csrf
     <div class="flex justify-center">
       <div class="flex">
-        <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Edit User ( {{ $user->first_name }} {{ $user->last_name }} )</h1>
+        <h1 class="text-gray-600 font-bold md:text-2xl text-xl">
+            Edit User ( {{ $user->first_name }} {{ $user->last_name }} )
+            @if(session()->has('success'))
+            <div class="m-4 alert alert-success ">
+                <p>{{ session('success') }}</p>
+            </div>
+        @endif
+        </h1>
       </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
+
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">First Name</label>
-        <input name="first_name" value="{{$user->first_name}}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="first name" />
         @if ($errors->has('first_name'))
-            <div class="fv-plugins-message-container">
+            <div class="fv-plugins-message-container py-5 text-red-400">
                 <div class="fv-help-block">
                     <strong>{{ $errors->first('first_name')  }}</strong>
                 </div>
             </div>
         @endif
+        <input name="first_name" value="{{$user->first_name}}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="first name" />
       </div>
       <div class="grid grid-cols-1">
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Last Name</label>
-        <input name="last_name" value="{{$user->last_name}}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="last name" />
         @if ($errors->has('last_name'))
-            <div class="fv-plugins-message-container">
+            <div class="fv-plugins-message-container py-5 text-red-400">
                 <div class="fv-help-block">
                     <strong>{{ $errors->first('last_name')  }}</strong>
                 </div>
             </div>
         @endif
+        <input name="last_name" value="{{$user->last_name}}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="last name" />
       </div>
     </div>
 
     <div class="grid grid-cols-1 mt-5 mx-7">
       <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Phone</label>
-      <input name="phone" value="{{$user->phone}}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="Phone Number" />
       @if ($errors->has('phone'))
-            <div class="fv-plugins-message-container">
+            <div class="fv-plugins-message-container py-5 text-red-400">
                 <div class="fv-help-block">
                     <strong>{{ $errors->first('phone')  }}</strong>
                 </div>
             </div>
         @endif
+      <input name="phone" value="{{$user->phone}}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="Phone Number" />
     </div>
 
     <div class="grid grid-cols-1 mt-5 mx-7">
       <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Password</label>
-      <input name="password"  class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="Password" />
       @if ($errors->has('password'))
-            <div class="fv-plugins-message-container">
+            <div class="fv-plugins-message-container py-5 text-red-400">
                 <div class="fv-help-block">
                     <strong>{{ $errors->first('password')  }}</strong>
                 </div>
             </div>
         @endif
+      <input name="password"  class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="Password" />
     </div>
 
     <div class="grid grid-cols-1 mt-5 mx-7">
       <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Confirm Password</label>
-      <input name="password_confirm"  class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="Confirm Password" />
       @if ($errors->has('password_confirm'))
-            <div class="fv-plugins-message-container">
+            <div class="fv-plugins-message-container py-5 text-red-400">
                 <div class="fv-help-block">
-                    <strong>{{ $errors->first('password confirm')  }}</strong>
+                    <strong>{{ $errors->first('password_confirm')  }}</strong>
                 </div>
             </div>
         @endif
+      <input name="password_confirm"  class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="Confirm Password" />
     </div>
 
     <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>

@@ -156,7 +156,7 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Route::group(['middleware' => ['auth']], function() {
         Route::get('/user', 'UserController@index')->name('ShowUser');
         Route::get('/edit-user', 'UserController@edit')->name('EditUser');
-        Route::post('/edit-user', 'UserController@store')->name('SendEditUser');
+        Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
 
 
     // });
