@@ -142,8 +142,8 @@
 										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
 										<div class="content">
 											<div class="title"><a href=""> s <span>[ Grand ]</span></a></div>
-											<p> {{$part->desc}} </p>
-											<div class="price"> {{ $part->price }}$ <span>/ for sale</span></div>
+											<p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid iusto officia dolore numquam ipsa exercitationem veritatis, commodi libero aut labore! Inventore dolores ipsum mollitia veniam distinctio doloribus id placeat!</p>
+											<div class="price"> 8000$ <span>/ for sale</span></div>
 										</div>
 									</div> <!-- end .listing -->
                                     @endforeach

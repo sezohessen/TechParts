@@ -90,7 +90,7 @@
                             <!-- User component -->
                             <li>
 								<a class="mr-32" href="">
-                                     <i class="px-5 text-gray-900 bg-blue-600 rounded-t-md ion-ios-person fa-3x"></i> </a>
+                                     <i class="px-4 text-gray-100 bg-gray-600 rounded-t-md ion-ios-person fa-2x"></i> </a>
 									<ul>
                                     @auth
                                     <li><a href="#"> {{ $user->first_name }} {{ $user->last_name }} </a></li>
