@@ -28,6 +28,8 @@
 		<link href="{{ asset('css/website/css/style.css') }}" rel="stylesheet">
         <!-- Tailwindcss -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet"><body class="bg-blue-200">
+
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         {{-- CDN --}}
@@ -46,11 +48,11 @@
 			<div class="container">
 				<div class="clearfix navigation">
 					<div class="logo"><a href="{{ route('Website.Index') }}"><img src="{{ asset('img/website/logo.png') }}" alt="Automan" class="img-responsive"></a></div> <!-- end .logo -->
-					<div class="login"><a href="{{route('Website.ShowUser')}}"><i class="ion-ios-person"></i></a></div> <!-- end .login -->
 					<div class="contact">
 					</div> <!-- end .contact -->
 					<nav class="main-nav">
 						<ul class="list-unstyled">
+
 							<li class="active">
 								<a href="{{url('index')}}">Home</a>
 							</li>
@@ -85,6 +87,31 @@
 								</ul>
 							</li>
 							<li><a href="{{url('contact-us')}}">Contact Us</a></li>
+                            <!-- User component -->
+                            <li>
+								<a class="mr-32" href="">
+                                     <i class="px-5 text-gray-900 bg-blue-600 rounded-t-md ion-ios-person fa-3x"></i> </a>
+									<ul>
+                                    @auth
+                                    <li><a href="#"> {{ $user->first_name }} {{ $user->last_name }} </a></li>
+									<li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
+
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+
+                                    @endauth
+                                    @guest
+                                    <li><a href="{{ url('/') }}">Login</a></li>
+                                    @endguest
+								</ul>
+							</li>
 						</ul>
 					</nav> <!-- end .main-nav -->
 					<a href="#" class="responsive-menu-open"><i class="fa fa-bars"></i></a>

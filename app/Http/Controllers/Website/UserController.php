@@ -13,13 +13,13 @@ class UserController extends Controller
 {
     public function index()
     {
-        if(Auth::user())
-        {
-            $user = User::find(Auth::user()->id);
-            return view('website.user',compact('user'));
-        } else {
-            return redirect('/');
-        }
+        // if(Auth::user())
+        // {
+        //     $user = User::find(Auth::user()->id);
+        //     return view('website.user',compact('user'));
+        // } else {
+        //     return redirect('/');
+        // }
     }
     public function edit()
     {

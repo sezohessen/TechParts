@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\website;
 
-use App\Http\Controllers\Controller;
+use App\Models\Part;
 use App\Models\Settings;
+use App\Models\website\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -15,8 +18,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $Settings = Settings::all()->first();
-        return view('website.index');
+        if(Auth::user())
+        {
+            $user = User::find(Auth::user()->id);
+            $parts = Part::orderBy('DESC')->get();
+            return view('website.index',compact('user','parts'));
+        } else {
+            $parts = Part::orderBy('DESC')->get();
+            return view('website.index',compact('parts'));
+        }
     }
 
     /**

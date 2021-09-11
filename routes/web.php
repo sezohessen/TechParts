@@ -149,12 +149,14 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Send Data / Store
     Route::post('/contact-us', 'ContactController@store')->name('SendContact');
 
+
     // Show Parts Details
     Route::get('/part/{id}', 'HomeController@show')->name('ShowPart');
 
     // User
-    // Route::group(['middleware' => ['auth']], function() {
-        Route::get('/user', 'UserController@index')->name('ShowUser');
+    // Route::group(['middleware' => ['auth']], function() {\
+
+        // Route::get('/user', 'UserController@index')->name('ShowUser');
         Route::get('/edit-user', 'UserController@edit')->name('EditUser');
         Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
 

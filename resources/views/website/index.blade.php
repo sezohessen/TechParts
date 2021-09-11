@@ -137,78 +137,16 @@
 									</div> <!-- end .select-wrapper -->
 								</div> <!-- end .heading -->
 								<div class="clearfix listings-grid">
+                                    @foreach ($parts as $part )
 									<div class="listing">
 										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
 										<div class="content">
-											<div class="title"><a href="">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
+											<div class="title"><a href=""> s <span>[ Grand ]</span></a></div>
+											<p> {{$part->desc}} </p>
+											<div class="price"> {{ $part->price }}$ <span>/ for sale</span></div>
 										</div>
 									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price green">$80000 <span>/ for rent</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price green">$80000 <span>/ for rent</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
+                                    @endforeach
 								</div> <!-- end .listing-grid -->
 							</div> <!-- end .listings -->
 							<div class="pagination-wrapper">
