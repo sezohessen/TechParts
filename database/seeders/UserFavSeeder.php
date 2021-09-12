@@ -16,11 +16,15 @@ class UserFavSeeder extends Seeder
      */
     public function run()
     {
+        $users      = User::all();
+        $parts      = Part::all();
         for ($i=0; $i < 30 ; $i++)
         {
            DB::table('users_favorite')->insert([
-           'user_id' => User::all()->random()->id,
-           'part_id' => Part::all()->random()->id,
+           'user_id'        => $users->random()->id,
+           'part_id'        => $parts->random()->id,
+           'created_at'     => now(),
+           'updated_at'     => now(),
            ]);
        }
     }

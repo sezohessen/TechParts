@@ -45,9 +45,7 @@
                         <tr>
                             <td>{{$seller->user->email}}</td>
                             <td>
-                                @php
-                                    Session::get('app_locale')=='en' ? ( ($seller->desc) ? $seller->desc : "Not edited") : ( ($seller->desc_ar) ? $seller->desc_ar : "Not edited")
-                                @endphp
+                                {{ Session::get('app_locale')=='en' ? ( ($seller->desc) ? $seller->desc : "Not edited") : ( ($seller->desc_ar) ? $seller->desc_ar : "Not edited") }}
                             </td>
                             <td>{{ $seller->governorate ? LangDetail($seller->governorate->title,$seller->governorate->title_ar) : "Not edited" }}</td>
                             <td>{{ $seller->city ? LangDetail($seller->city->title,$seller->city->title_ar) : "Not edited" }}</td>
