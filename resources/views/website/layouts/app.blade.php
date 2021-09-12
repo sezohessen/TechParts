@@ -26,6 +26,11 @@
 		<link href="{{ asset('css/website/css/jquery.nouislider.min.css') }}" rel="stylesheet">
 		<!-- Style.css -->
 		<link href="{{ asset('css/website/css/style.css') }}" rel="stylesheet">
+        <!-- Tailwindcss -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet"><body class="bg-blue-200">
+
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         {{-- CDN --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -35,31 +40,21 @@
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+        @yield('css')
 	</head>
 	<body>
 
 		<header class="header">
 			<div class="container">
 				<div class="clearfix navigation">
-					<div class="logo"><a href="index.html"><img src="{{ asset('img/website/logo.png') }}" alt="Automan" class="img-responsive"></a></div> <!-- end .logo -->
-					<div class="login"><a href="#"><i class="ion-ios-person"></i></a></div> <!-- end .login -->
+					<div class="logo"><a href="{{ route('Website.Index') }}"><img src="{{ asset('img/website/logo.png') }}" alt="Automan" class="img-responsive"></a></div> <!-- end .logo -->
 					<div class="contact">
 					</div> <!-- end .contact -->
 					<nav class="main-nav">
 						<ul class="list-unstyled">
+
 							<li class="active">
 								<a href="{{url('index')}}">Home</a>
-							</li>
-							<li>
-								<a href="add-car-details.html">Add Car</a>
-								<ul>
-									<li><a href="add-car-details.html">Add Car Details</a></li>
-									<li><a href="choose-specification.html">Choose Specification</a></li>
-									<li><a href="contact-details.html">Contact Details</a></li>
-									<li><a href="photos-videos.html">Photos Videos</a></li>
-									<li><a href="pay-publish.html">Pay Publish</a></li>
-								</ul>
 							</li>
 							<li>
 								<a href="listing-grid-view.html">Cars</a>
@@ -92,6 +87,31 @@
 								</ul>
 							</li>
 							<li><a href="{{url('contact-us')}}">Contact Us</a></li>
+                            <!-- User component -->
+                            <li>
+								<a class="mr-32" href="">
+                                     <i class="px-4 text-gray-100 bg-gray-600 rounded-t-md ion-ios-person fa-2x"></i> </a>
+									<ul>
+                                    @auth
+                                    <li><a href="#"> {{ $user->first_name }} {{ $user->last_name }} </a></li>
+									<li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
+
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+
+                                    @endauth
+                                    @guest
+                                    <li><a href="{{ url('/') }}">Login</a></li>
+                                    @endguest
+								</ul>
+							</li>
 						</ul>
 					</nav> <!-- end .main-nav -->
 					<a href="#" class="responsive-menu-open"><i class="fa fa-bars"></i></a>
@@ -116,17 +136,22 @@
 							<h5>About Us</h5>
 							<p>Lorem ipsum dolor sit amet, consectetur  some dymm adipiscing elit. Nam turpis quam, sodales in text she ante sagittis, varius efficitur mauris.</p>
 							<hr />
+                            <!-- Call Setting globaly -->
+                            @php
+                              use App\Models\Settings;
+                              $Settings = Settings::all()->first();
+                            @endphp
 							<div class="iconbox-left">
 								<div class="icon"><i class="fa fa-map-marker"></i></div> <!-- end .icon -->
-								<div class="content"><p>3015 Grand Ave, Coconut Grove, Merrick Way, FL 12345</p></div> <!-- end .content -->
+								<div class="content"><p>{{ $Settings->location }}</p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 							<div class="iconbox-left">
 								<div class="icon"><i class="fa fa-envelope"></i></div> <!-- end .icon -->
-								<div class="content"><p>info@wheels-control.com</p></div> <!-- end .content -->
+								<div class="content"><p> {{ $Settings->email }} </p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 							<div class="iconbox-left">
 								<div class="icon"><i class="fa fa-phone"></i></div> <!-- end .icon -->
-								<div class="content"><p>123-456-7890</p></div> <!-- end .content -->
+								<div class="content"><p>{{ $Settings->phone }}</p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 						</div> <!-- end .col-sm-4 -->
 						<div class="col-sm-4">
@@ -200,11 +225,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                 <!-- Instagram -->
-                                <a class="btn btn-primary" style="background-color: #ac2bac;" href="#!" role="button"
+                                <a id="insta" class="btn btn-primary"  href="#!" role="button"
+                                title="Check our Instagram"
                                 ><i class="fab fa-instagram"></i
                                 ></a>
                                 <!-- Whatsapp -->
-                                <a class="btn btn-primary" style="background-color: #25d366;" href="#!" role="button"
+                                <a id="whatsapp" class="btn btn-primary" href="#!" role="button"
+                                title="Contact us on WhatsApp"
                                 ><i class="fab fa-whatsapp"></i
                                 ></a>
                                 </div>
@@ -215,11 +242,15 @@
                                 <div class="col-md-12">
                                 <!-- Ios -->
                                 <a class="btn btn-primary"
-                                style="background-color: #ac2bac;" href="#!" role="button">
+                                id="ios"
+                                title="Download Ios App"
+                                href="#!" role="button">
                                 <i class="fab fa-apple"></i></a>
                                 <!-- Andriod -->
                                     <a class="btn btn-primary"
-                                    style="background-color: #25d366;" href="#!" role="button">
+                                    id="andriod"
+                                    title="Download Andriod App"
+                                    href="#!" role="button">
                                     <i class="fab fa-android"></i></a>
                                 </div>
                             </div>
@@ -257,6 +288,8 @@
 		<script src="{{ asset('js/website/js/jquery.nouislider.all.min.js') }}"></script>
 		<!-- Scripts.js -->
 		<script src="{{ asset('js/website/js/scripts.js') }}"></script>
+
+        @yield('js')
 
 	</body>
 

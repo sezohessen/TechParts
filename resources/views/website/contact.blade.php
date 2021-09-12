@@ -57,23 +57,22 @@
 									<div class="icon"><i class="ion-ios-location-outline"></i></div>
 									<div class="content">
 										<h6>Address</h6>
-										<span>Lorem Ipsum is simply dummy text printing and type setting industry 5562. po alpu</span>
+										<span>{{$Settings->location}}</span>
 									</div> <!-- end .content -->
 								</div> <!-- end .item -->
 								<div class="item">
 									<div class="icon"><i class="ion-ios-telephone-outline"></i></div>
 									<div class="content">
 										<h6>Phone</h6>
-										<span>Office: 0477-8556 55 2</span>
-										<span>Mobile: +91 556 333 245</span>
+										<span>Office: {{$Settings->phone}}</span>
+										<span>WhatsApp: {{$Settings->whatsapp}}</span>
 									</div> <!-- end .content -->
 								</div> <!-- end .item -->
 								<div class="item">
 									<div class="icon"><i class="ion-ios-email-outline"></i></div>
 									<div class="content">
 										<h6>Email</h6>
-										<span>Office: info@automan.com</span>
-										<span>Mobile: +91 556 333 245</span>
+										<span>Office:  {{$Settings->email }}</span>
 									</div> <!-- end .content -->
 								</div> <!-- end .item -->
 							</div> <!-- end .contact-details -->

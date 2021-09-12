@@ -121,12 +121,12 @@
 					<div class="row">
 						<div class="col-sm-9">
 							<div class="listings">
-								<div class="heading clearfix">
+								<div class="clearfix heading">
 									<h5>8 Results Found For Exotic Cars</h5>
-									<div class="view">
+									<!-- <div class="view">
 										<a href="{{url('parts')}}"><i class="fa fa-th-list"></i></a>
 										<a href="{{url('index')}}" class="active"><i class="fa fa-th"></i></a>
-									</div> <!-- end .view -->
+									</div> end .view -->
 									<div class="select-wrapper sort">
 										<select class="selectpicker">
 											<option>Sort By</option>
@@ -136,79 +136,17 @@
 
 									</div> <!-- end .select-wrapper -->
 								</div> <!-- end .heading -->
-								<div class="listings-grid clearfix">
+								<div class="clearfix listings-grid">
+                                    @foreach ($parts as $part )
 									<div class="listing">
 										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
 										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
+											<div class="title"><a href=""> s <span>[ Grand ]</span></a></div>
+											<p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aliquid iusto officia dolore numquam ipsa exercitationem veritatis, commodi libero aut labore! Inventore dolores ipsum mollitia veniam distinctio doloribus id placeat!</p>
+											<div class="price"> 8000$ <span>/ for sale</span></div>
 										</div>
 									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price green">$80000 <span>/ for rent</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price green">$80000 <span>/ for rent</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
-									<div class="listing">
-										<div class="image"><a href="details.html"><img src="img/website/listing01.jpg" alt="listing" class="img-responsive"></a></div>
-										<div class="content">
-											<div class="title"><a href="details.html">Ferrari <span>[ Grand ]</span></a></div>
-											<p>Lorem Ipsum is simply dummy text of the printing and typeset Ipsum has been the Off-road.</p>
-											<div class="price">$80000 <span>/ for sale</span></div>
-										</div>
-									</div> <!-- end .listing -->
+                                    @endforeach
 								</div> <!-- end .listing-grid -->
 							</div> <!-- end .listings -->
 							<div class="pagination-wrapper">
@@ -229,7 +167,7 @@
 						</div> <!-- end .col-sm-9 -->
 						<div class="col-sm-3">
 							<div class="refine-search">
-								<div class="title clearfix">Refine Your Search<i class="fa fa-search pull-right"></i></div>
+								<div class="clearfix title">Refine Your Search<i class="fa fa-search pull-right"></i></div>
 								<form>
 									<div class="form-group">
 										<div class="select-wrapper">
@@ -319,7 +257,7 @@
 											<span class="arrow"><i class="fa fa-caret-down"></i></span>
 										</div> <!-- end .select-wrapper -->
 									</div> <!-- end .form-group -->
-									<button type="submit" class="button solid yellow block">Search</button>
+									<button type="submit" class="block button solid yellow">Search</button>
 								</form>
 							</div> <!-- end .refine-search -->
 						</div> <!-- end .col-sm-3 -->

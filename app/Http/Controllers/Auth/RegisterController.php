@@ -56,11 +56,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        /*return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);*/
+        return Validator::make($data, [
+            'first_name' => ['required', 'string', 'min:4' ,'max:20'],
+            'last_name' => ['required', 'string', 'min:4' ,'max:20'],
+            'email' => ['required', 'string', 'email', 'min:8' , 'max:255', 'unique:users'],
+            'phone' => ['required', 'string','min:8' , 'max:20', 'unique:users'],
+            'whats_app' => ['required', 'string','min:8' , 'max:20', 'unique:users'],
+            'password' => ['required', 'string', 'min:8','max:30'],
+        ]);
         return Validator::make($data, User::rules());
     }
 
@@ -70,7 +73,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    /* protected function create($data)
+     protected function create($data)
     {
 
         if (isset($data['provider'])) {
@@ -90,5 +93,5 @@ class RegisterController extends Controller
         $user = User::create(User::credentials((object)$data));
         $user->attachRole($provider) ;
         return $user;
-    } */
+    }
 }

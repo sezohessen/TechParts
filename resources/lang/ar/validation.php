@@ -117,6 +117,7 @@ return [
     'url'         => 'صيغة الرابط :attribute غير صحيحة.',
     'uuid'        => ':attribute يجب أن يكون بصيغة UUID سليمة.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -183,7 +184,10 @@ return [
         'desc'                  => 'الوصف',
         'desc_ar'               => 'الوصف',
         'part_img'              => 'الصورة',
-        "message"               => 'الرساله'
+        "message"               => 'الرساله',
+        'password confirm'      => 'تأكيد كلمة المرور',
+        'Password Not confirmed'=> 'لم يتم تأكيد كلمة المرور'
+
 
     ],
 ];

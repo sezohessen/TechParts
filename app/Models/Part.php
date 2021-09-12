@@ -71,4 +71,5 @@ class Part extends Model
         return $this->hasMany(PartImg::class,"part_id","id");
     }
 
+
 }

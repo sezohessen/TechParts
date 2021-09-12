@@ -33,6 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingsSeeder::class);
         $this->call(PartSeeder::class);
         $this->call(SellerSeeder::class);
-
+        $this->call(UserFavSeeder::class);
     }
 }
