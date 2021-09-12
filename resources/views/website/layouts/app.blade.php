@@ -93,7 +93,6 @@
                                      <i class="px-4 text-gray-100 bg-gray-600 rounded-t-md ion-ios-person fa-2x"></i> </a>
 									<ul>
                                     @auth
-                                    <li><a href="#"> {{ $user->first_name }} {{ $user->last_name }} </a></li>
 									<li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

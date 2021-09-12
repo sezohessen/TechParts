@@ -7,7 +7,7 @@
 					<div class="row">
 						<div class="col-sm-8">
 							<div class="contact">
-								<h4>Contact Form</h4>
+								<h4 class="mb-10">Contact Form</h4>
 								<form action="{{route("Website.SendContact")}}" method="post" id="contact-form">
                                   @csrf
                                   @if(session()->has('created'))
