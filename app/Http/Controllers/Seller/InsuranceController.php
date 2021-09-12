@@ -20,8 +20,8 @@ class InsuranceController extends Controller
     public function index()
     {
 
-        $page_title = __('Insurance Dashboard');
-        $page_description = __('View insurance record');
-        return  view("insurance.index", compact('page_title', 'page_description'));
+        $page_title = __('Seller Dashboard');
+        $page_description = __('Home');
+        return  view("seller.index", compact('page_title', 'page_description'));
     }
 }

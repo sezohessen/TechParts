@@ -56,7 +56,7 @@ dir="rtl" style="direction: rtl" @endif>
         @include('layout.partials._page-loader')
     @endif
 
-    @include('layout.insurance._layout')
+    @include('layout.seller._layout')
 
 
     {{-- Global Config (global config for global JS scripts)

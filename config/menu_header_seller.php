@@ -5,9 +5,9 @@ return [
     'items' => [
         [],
         [
-            'title' => 'Insurance',
+            'title' => 'Seller',
             'root' => true,
-            'page' => '/insurance',
+            'page' => '/seller',
             'new-tab' => false,
         ],
 

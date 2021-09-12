@@ -15,7 +15,7 @@
     {{-- Brand --}}
     <div class="brand flex-column-auto {{ Metronic::printClasses('brand', false) }}" id="kt_brand">
         <div class="brand-logo">
-            <a href="{{ url('/insurance') }}">
+            <a href="{{ url('/seller') }}">
                 <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
             </a>
         </div>
@@ -46,7 +46,7 @@
             {{ Metronic::printAttrs('aside_menu') }}>
 
             <ul class="menu-nav {{ Metronic::printClasses('aside_menu_nav', false) }}">
-                {{ Menu::renderVerMenu(config('insurance_aside.items')) }}
+                {{ Menu::renderVerMenu(config('seller_aside.items')) }}
             </ul>
         </div>
     </div>

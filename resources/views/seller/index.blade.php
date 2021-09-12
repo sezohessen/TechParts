@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.insurance')
+@extends('layout.seller')
 
 {{-- Content --}}
 @section('content')

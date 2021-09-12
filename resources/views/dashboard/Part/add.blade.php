@@ -2,6 +2,7 @@
 @extends('layout.master')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
+<link href="{{ asset('plugins/custom/uppy/uppy.bundle.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
     .content .bootstrap-select .dropdown-menu{
@@ -60,7 +61,7 @@
                         </div>
                     </div>
                     <!-- Part Number -->
-                       <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Part number') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('part_number') ? 'is-invalid' : '' }}" id="part_number"
@@ -135,19 +136,6 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <label class="col-form-label col-lg-3 col-sm-12 text-lg-right">Multiple File Upload</label>
-                            <div class="col-lg-4 col-md-9 col-sm-12">
-                                <div class="dropzone dropzone-default dropzone-primary" id="kt_dropzone_2">
-                                    <div class="dropzone-msg dz-message needsclick">
-                                        <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
-                                        <span class="dropzone-msg-desc">Upload up to 10 files</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -165,5 +153,6 @@
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src="{{ asset("js/pages/crud/forms/widgets/select2.js") }}"></script>
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
-<script src="{{ asset('js/pages/crud/file-upload/dropzonejs.js') }}"></script>
+<script src="{{ asset('plugins/custom/uppy/uppy.bundle.js') }}"></script>
+<script src="{{ asset('js/pages/crud/file-upload/uppy.js') }}"></script>
 @endsection

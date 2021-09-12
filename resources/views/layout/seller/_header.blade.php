@@ -19,7 +19,7 @@
             <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
                 @if(config('layout.aside.self.display') == false)
                     <div class="header-logo">
-                        <a href="{{ url('/insurance') }}">
+                        <a href="{{ url('/seller') }}">
                             <img alt="Logo" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
                         </a>
                     </div>
@@ -27,7 +27,7 @@
 
                 <div id="kt_header_menu" class="header-menu header-menu-mobile {{ Metronic::printClasses('header_menu', false) }}" {{ Metronic::printAttrs('header_menu') }}>
                     <ul class="menu-nav {{ Metronic::printClasses('header_menu_nav', false) }}">
-                        {{ Menu::renderHorMenu(config('menu_header_insurance.items')) }}
+                        {{ Menu::renderHorMenu(config('menu_header_seller.items')) }}
                     </ul>
                 </div>
             </div>

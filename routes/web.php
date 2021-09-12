@@ -175,13 +175,8 @@ Route::get('/', function ()
     $page_description = __('login page');
     return view('auth.login',  compact('page_title', 'page_description'));
 });
-Route::group(['prefix' => 'seller','as' => 'seller','namespace'=>"Insurance", 'middleware' => ['role:seller']], function () {
-    Route::get('/','InsuranceController@index')->name('index');
-    Route::resource('/company','InsuranceCompanyController');
-    Route::resource('/insurance-offer','InsuranceOfferController');
-    Route::resource('/offer-plan','OfferPlanController');
-    Route::delete('/insurance-offer/destroy/all','InsuranceOfferController@multi_delete');
-    /* Route::delete('/offer-plan/destroy/all','OfferPlanController@multi_delete'); */
+Route::group(['prefix' => 'seller','as' => 'seller','namespace'=>"Seller", 'middleware' => ['role:seller']], function () {
+    Route::get('/','SellerController@index')->name('index');
 });
 
 

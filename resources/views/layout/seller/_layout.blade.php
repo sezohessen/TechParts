@@ -4,18 +4,18 @@
     </div>
 @else
 
-    @include('layout.insurance._header-mobile')
+    @include('layout.seller._header-mobile')
 
     <div class="d-flex flex-column flex-root">
         <div class="d-flex flex-row flex-column-fluid page">
 
             @if(config('layout.aside.self.display'))
-                @include('layout.insurance._aside')
+                @include('layout.seller._aside')
             @endif
 
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-                @include('layout.insurance._header')
+                @include('layout.seller._header')
 
                 <div class="content {{ Metronic::printClasses('content', false) }} d-flex flex-column flex-column-fluid" id="kt_content">
 
@@ -27,10 +27,10 @@
                         @endif
                     @endif
 
-                    @include('layout.insurance._content')
+                    @include('layout.seller._content')
                 </div>
 
-                @include('layout.insurance._footer')
+                @include('layout.seller._footer')
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
         @include('layout.partials.extras.offcanvas._quick-actions')
     @endif
 
-    
+
 
     @if (config('layout.extras.quick-panel.display'))
         @include('layout.partials.extras.offcanvas._quick-panel')
