@@ -142,29 +142,19 @@ Route::get('/terms', 'Dashboard\TermsController@show');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
 
 
-// Start website
+// Start website /////////////////////////////////////////////////////////////////////////////////
 Route::group(['namespace'=>"Website",'as' => 'Website.','middleware' => ['auth']],function () {
     // Show Data / Index
     Route::get('/index', 'HomeController@index')->name('Index');
     Route::get('/contact-us', 'ContactController@index')->name('ContactUs');
-
     // Send Data / Store
     Route::post('/contact-us', 'ContactController@store')->name('SendContact');
-
-
     // Show Parts Details
     Route::get('/part/{id}', 'HomeController@show')->name('ShowPart');
-
     // User
-    // Route::group(['middleware' => ['auth']], function() {\
-
-        // Route::get('/user', 'UserController@index')->name('ShowUser');
+    // Route::get('/user', 'UserController@index')->name('ShowUser');
     Route::get('/edit-user', 'UserController@edit')->name('EditUser');
     Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
-
-
-    // });
-
 });
 
 Auth::routes();

@@ -36,8 +36,7 @@
     </div>
     <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
       <div class="grid grid-cols-1">
-
-        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">@lang('First name')  </label>
+        <label class="text-3xl font-semibold text-gray-500 uppercase md:text-2xl text-light">@lang('First name')  </label>
         @if ($errors->has('first_name'))
             <div class="py-5 text-red-400 fv-plugins-message-container">
                 <div class="fv-help-block">
@@ -48,7 +47,7 @@
         <input name="first_name" value="{{$user->first_name}}" class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="first name" />
       </div>
       <div class="grid grid-cols-1">
-        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">@lang('Last Name')</label>
+        <label class="text-3xl font-semibold text-gray-500 uppercase md:text-2xl text-light">@lang('Last Name')</label>
         @if ($errors->has('last_name'))
             <div class="py-5 text-red-400 fv-plugins-message-container">
                 <div class="fv-help-block">
@@ -61,7 +60,7 @@
     </div>
 
     <div class="grid grid-cols-1 mt-5 mx-7">
-      <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Phone</label>
+      <label class="text-3xl font-semibold text-gray-500 uppercase md:text-2xl text-light">@lang('phone')</label>
       @if ($errors->has('phone'))
             <div class="py-5 text-red-400 fv-plugins-message-container">
                 <div class="fv-help-block">
@@ -73,7 +72,7 @@
     </div>
 
     <div class="grid grid-cols-1 mt-5 mx-7">
-      <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">whatsApp</label>
+      <label class="text-3xl font-semibold text-gray-500 uppercase md:text-2xl text-light">@lang('Whats app')</label>
       @if ($errors->has('whats_app'))
             <div class="py-5 text-red-400 fv-plugins-message-container">
                 <div class="fv-help-block">
@@ -85,7 +84,7 @@
     </div>
 
     <div class="grid grid-cols-1 mt-5 mx-7">
-      <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Password</label>
+      <label class="text-xs font-semibold text-gray-500 uppercase md:text-2xl text-light">@lang('Password')</label>
       @if ($errors->has('password'))
             <div class="py-5 text-red-400 fv-plugins-message-container">
                 <div class="fv-help-block">
@@ -97,7 +96,7 @@
     </div>
 
     <div class="grid grid-cols-1 mt-5 mx-7">
-      <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Confirm Password</label>
+      <label class="text-3xl font-semibold text-gray-500 uppercase md:text-2xl text-light">@lang('Confirm Password')</label>
       @if ($errors->has('password_confirm'))
             <div class="py-5 text-red-400 fv-plugins-message-container">
                 <div class="fv-help-block">
