@@ -143,7 +143,7 @@ Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
 
 
 // Start website
-Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
+Route::group(['namespace'=>"Website",'as' => 'Website.','middleware' => ['auth']],function () {
     // Show Data / Index
     Route::get('/index', 'HomeController@index')->name('Index');
     Route::get('/contact-us', 'ContactController@index')->name('ContactUs');
@@ -159,8 +159,8 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Route::group(['middleware' => ['auth']], function() {\
 
         // Route::get('/user', 'UserController@index')->name('ShowUser');
-        Route::get('/edit-user', 'UserController@edit')->name('EditUser');
-        Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
+    Route::get('/edit-user', 'UserController@edit')->name('EditUser');
+    Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
 
 
     // });

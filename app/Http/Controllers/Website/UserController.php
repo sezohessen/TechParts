@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Models\website\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +42,7 @@ class UserController extends Controller
             'password'         => 'nullable|min:8|max:30',
             'password_confirm' => 'nullable|same:password'
         ]);
-        $hashPassword = Hash::make($request->password);
+        $hashPassword                 = Hash::make($request->password);
         $EditUser->first_name         = $request->first_name;
         $EditUser->last_name          = $request->last_name;
         $EditUser->phone              = $request->phone;

@@ -11,7 +11,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-     $Settings = Settings::all()->first();
+        $Settings = Settings::first();
         return view('website.contact',compact('Settings'));
     }
      public function store(Request $request)
