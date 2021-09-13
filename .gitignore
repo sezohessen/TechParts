@@ -22,7 +22,5 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 composer.lock
-/public/css
-/public/js
 /public/media
 /public/plugins
