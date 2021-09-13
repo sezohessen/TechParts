@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\website;
 
+use App\Models\Car;
 use App\Models\Part;
-use App\Models\Settings;
 use App\Models\User;
+use App\Models\Seller;
+use App\Models\CarModel;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -18,6 +22,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         if(Auth::user())
         {
             $user = User::find(Auth::user()->id);
@@ -58,7 +63,14 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        return view('website.part');
+        $part         = Part::findOrFail($id);
+        $car     = $part->with('Car')->where('id', $id)->get();
+        $user     = $part->with('user')->where('id', $id)->get();
+        $images     = $part->with('images')->where('id', $id)->get();
+
+
+        // dd($images[0]->images);
+        return view('website.part',compact('part','car','user'));
     }
 
     /**
