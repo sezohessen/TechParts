@@ -112,8 +112,10 @@ use Illuminate\Support\Facades\Session;
     }
     if(!function_exists('LangDetail')){
         function LangDetail($eng,$ar){
-            return Session::get('app_locale')=='en' ? $eng : $ar;
+            return Session::get('app_locale')=='en' ? ($eng ? $eng : $ar) : $ar;
         }
+        
     }
+
 
 

@@ -10,6 +10,7 @@ use App\Models\CarModel;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,15 +63,32 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $part         = Part::findOrFail($id);
-        $car     = $part->with('Car')->where('id', $id)->get();
-        $user     = $part->with('user')->where('id', $id)->get();
-        $images     = $part->with('images')->where('id', $id)->get();
+    {   
+        $part         = Part::where('id', $id)
+        ->where('active',1)
+        ->first();        
 
 
-        // dd($images[0]->images);
-        return view('website.part',compact('part','car','user'));
+        if($part)
+        {
+        $hasReview    = Review::where('user_id', Auth()->user()->id)->where('part_id',$id)->first() ? 1:0;
+
+        $RelatedParts = Part::where('car_id',$part->car_id)->limit(8)->get();
+
+
+        $carModelID    = $part->car->model->id;
+
+        $RelatedModelParts = Part::whereHas('car', function($q) use($carModelID) {
+            $q->where('cars.carModel_id',$carModelID);
+        })->limit(4)->get();
+
+        // dd($RelatedParts);
+
+        return view('website.part',compact('part','hasReview','RelatedParts','RelatedModelParts'));
+        }
+        else {
+            return redirect()->route('Website.Index');
+        }
     }
 
     /**

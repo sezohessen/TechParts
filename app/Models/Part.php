@@ -22,6 +22,8 @@ class Part extends Model
         'car_id',
         'user_id',
     ];
+    protected $appends = ['first_image'];
+
     public static function rules($request,$id=NULL)
     {
         $rules = [
@@ -70,6 +72,8 @@ class Part extends Model
     {
         return $this->hasMany(PartImg::class,"part_id","id");
     }
-
+    public function getFirstImageAttribute() {
+        return $this->images->first();
+    }
 
 }
