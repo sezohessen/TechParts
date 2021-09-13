@@ -15,5 +15,6 @@ class Review extends Model
         'review',
         'rating',
         'user_id',
+        'part_id',
     ];
 }

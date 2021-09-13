@@ -25,6 +25,12 @@ class CreateReviewsTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
+            $table->bigInteger('part_id')->unsigned();
+            $table->foreign('part_id')
+            ->references('id')->on('parts')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
