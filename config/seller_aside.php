@@ -101,11 +101,11 @@ return [
             'submenu' => [
                 [
                     'title' => 'Add part',
-                    'page' => "/dashboard/part/create"
+                    'page' => "/seller/part/create"
                 ],
                 [
                     'title' => 'View parts',
-                    'page' => '/dashboard/part'
+                    'page' => '/seller/part'
                 ],
             ]
         ],

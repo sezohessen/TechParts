@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Seller;
 
+use App\DataTables\Seller\PartDatatable as PartTable;
+use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\Part;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\DataTables\PartDatatable;
-use App\Http\Controllers\Controller;
 
 class PartController extends Controller
 {
@@ -15,11 +16,11 @@ class PartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(PartDatatable $part)
+    public function index(PartTable $part)
     {
-        $page_title = __("Parts");
-        $page_description =__( "View parts");
-        return  $part->render("dashboard.Part.index", compact('page_title', 'page_description'));
+        $page_title         = __("Parts");
+        $page_description   =__( "View parts");
+        return  $part->render("seller.Part.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -32,7 +33,7 @@ class PartController extends Controller
         $page_title         = __("Add part");
         $page_description   =__( "Add New Record");
         $cars               = Car::all();
-        return view('dashboard.part.add', compact('page_title', 'page_description','cars'));
+        return view('seller.part.add', compact('page_title', 'page_description','cars'));
     }
 
     /**
@@ -48,7 +49,7 @@ class PartController extends Controller
         $credentials    = Part::credentials($request);
         $Part           = Part::create($credentials);
         session()->flash('created',__("Changes has been Created Successfully"));
-        return redirect()->route("dashboard.part.index");
+        return redirect()->route("seller.part.index");
     }
 
     /**
@@ -59,7 +60,7 @@ class PartController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -70,10 +71,11 @@ class PartController extends Controller
      */
     public function edit(part $part)
     {
+        if($part->user_id != Auth()->user()->id)return redirect()->route('seller.index');
         $page_title         = __("Edit Part");
         $page_description   = __("Edit");
         $cars               = Car::all();
-        return view('dashboard.part.edit', compact('page_title', 'page_description','cars','part'));
+        return view('seller.part.edit', compact('page_title', 'page_description','cars','part'));
     }
 
     /**
@@ -90,7 +92,7 @@ class PartController extends Controller
         $credentials    = Part::credentials($request,true);
         $part->update($credentials);
         session()->flash('updated',__("Changes has been Created Successfully"));
-        return redirect()->route("dashboard.part.index");
+        return redirect()->route("seller.part.index");
     }
 
     /**
@@ -103,7 +105,7 @@ class PartController extends Controller
     {
         $part->delete();
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.part.index");
+        return redirect()->route("seller.part.index");
     }
     public function multi_delete(){
         if (is_array(request('item'))) {
@@ -116,6 +118,6 @@ class PartController extends Controller
 			$part->delete();
 		}
         session()->flash('deleted',__("Changes has been Deleted Successfully"));
-        return redirect()->route("dashboard.part.index");
+        return redirect()->route("seller.part.index");
     }
 }

@@ -143,7 +143,7 @@ Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
 
 
 // Start website /////////////////////////////////////////////////////////////////////////////////
-Route::group(['namespace'=>"Website",'as' => 'Website.','middleware' => ['auth']],function () {
+Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Show Data / Index
     Route::get('/index', 'HomeController@index')->name('Index');
     Route::get('/contact-us', 'ContactController@index')->name('ContactUs');
@@ -165,8 +165,10 @@ Route::get('/', function ()
     $page_description = __('login page');
     return view('auth.login',  compact('page_title', 'page_description'));
 });
-Route::group(['prefix' => 'seller','as' => 'seller','namespace'=>"Seller", 'middleware' => ['role:seller']], function () {
+Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'middleware' => ['role:seller']], function () {
     Route::get('/','SellerController@index')->name('index');
+    Route::resource('/part','PartController');
+    Route::delete('/part/destroy/all','PartController@multi_delete');
 });
 
 

@@ -41,9 +41,9 @@
                <!-- Part English name -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Part name(ENG)') <span class="text-danger">*</span></label>
+                            <label>@lang('Part name(ENG)')</label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                             name="name"  placeholder="@lang('Name(ENG)')" value="{{ old('name')}}" required autofocus  />
+                             name="name"  placeholder="@lang('Name(ENG)')" value="{{ old('name')}}"  autofocus  />
                             @error('name')
                                  <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @enderror
@@ -63,9 +63,9 @@
                     <!-- Part Number -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Part number') <span class="text-danger">*</span></label>
+                            <label>@lang('Part number')</label>
                             <input type="text" class="form-control {{ $errors->has('part_number') ? 'is-invalid' : '' }}" id="part_number"
-                             name="part_number"  placeholder="@lang('Part number')" value="{{ old('part_number')}}" required autofocus  />
+                             name="part_number"  placeholder="@lang('Part number')" value="{{ old('part_number')}}"  autofocus  />
                             @error('part_number')
                                  <div class="invalid-feedback">{{ $errors->first('part_number') }}</div>
                             @enderror
@@ -74,9 +74,9 @@
                     <!-- Price Number -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Price') <span class="text-danger">*</span></label>
+                            <label>@lang('Price')</label>
                             <input type="number" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}"
-                             name="price"  placeholder="@lang('Price')" value="{{ old('price')}}" required autofocus  />
+                             name="price"  placeholder="@lang('Price')" value="{{ old('price')}}"  autofocus  />
                             @error('price')
                                  <div class="invalid-feedback">{{ $errors->first('price') }}</div>
                             @enderror
@@ -85,9 +85,9 @@
                     <!-- in stock -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('In stock') <span class="text-danger">*</span></label>
+                            <label>@lang('In stock')</label>
                             <input type="number" class="form-control {{ $errors->has('in_stock') ? 'is-invalid' : '' }}"
-                             name="in_stock"  placeholder="@lang('In stock')" value="{{ old('in_stock')}}" required autofocus  />
+                             name="in_stock"  placeholder="@lang('In stock')" value="{{ old('in_stock')}}"  autofocus  />
                             @error('in_stock')
                                  <div class="invalid-feedback">{{ $errors->first('in_stock') }}</div>
                             @enderror
@@ -117,7 +117,7 @@
                     <!-- Desc -->
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="description">@lang('Description(ENG)')<span class="text-danger">*</span></label>
+                            <label for="description">@lang('Description(ENG)')</label>
                             <textarea name="desc" class="form-control {{ $errors->has('desc') ? 'is-invalid' : '' }}" id="kt-ckeditor-1" rows="3"
                             placeholder="@lang('Write description')" >{{ old('desc') }}</textarea>
                             @error('desc')
@@ -129,7 +129,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="description">@lang('Description(AR)')<span class="text-danger">*</span></label>
-                            <textarea name="desc_ar" class="form-control {{ $errors->has('desc_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3"
+                            <textarea name="desc_ar" class="form-control {{ $errors->has('desc_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3" required
                             placeholder="@lang('Write description')" >{{ old('desc_ar') }}</textarea>
                             @error('desc_ar')
                                 <div class="invalid-feedback">{{ $errors->first('desc_ar') }}</div>

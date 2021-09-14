@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.master')
+@extends('layout.seller')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
 <style>
@@ -27,11 +27,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.part.index') }}" style="margin-top: 16px;" class="mr-2 btn btn-primary">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('seller.part.index') }}" style="margin-top: 16px;" class="mr-2 btn btn-primary">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.part.update",$part->id)}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("seller.part.update",$part->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="card-body">
