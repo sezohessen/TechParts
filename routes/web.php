@@ -149,6 +149,7 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     Route::get('/contact-us', 'ContactController@index')->name('ContactUs');
     // Send Data / Store
     Route::post('/contact-us', 'ContactController@store')->name('SendContact');
+    Route::post('/part/{id}', 'ReviewController@store')->name('SendReview');
     // Show Parts Details
     Route::get('/part/{id}', 'HomeController@show')->name('ShowPart');
     // User

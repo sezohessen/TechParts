@@ -25,9 +25,43 @@
             -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
         }
+		.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    display: contents;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
     </style>
 @endsection
-    
+
 @section('website')
 <section class="section white">
 			<div class="inner">
@@ -43,12 +77,12 @@
                                 <div class="One_image">
                                   <div class="item"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->images[0]->image->name }}" class="img-responsive"></div>
                                 </div>
-                                @else        
+                                @else
                                 <div id="car-details-slider" class="responsive">
                                     @foreach ($part->images as $image)
                                     <div class="item"><img src="{{find_image($image->image , 'img/PartImgs/')}}" alt="{{ $image->image->name }}" class="img-responsive"></div>
-                                    @endforeach  
-								</div>                         
+                                    @endforeach
+								</div>
                                 @endif
 								<div class="border tabpanel" role="tabpanel">
 									<ul class="nav nav-tabs" role="tablist">
@@ -61,7 +95,7 @@
 									<div class="tab-content">
 										<div role="tabpanel" class="tab-pane fade in active" id="heading-tab4">
 											<p>{{ LangDetail($part->desc,$part->desc_ar) }}</p>
- 
+
 										</div> <!-- show review -->
 										<div role="tabpanel" class="tab-pane fade" id="heading-tab5">
 											<p>
@@ -104,17 +138,36 @@
                                         <div role="tabpanel" class="tab-pane fade" id="heading-tab6">
                                         <!-- component -->
                                         <div class="m-5 text-2xl font-bold text-center text-gray-800 heading">Type your review</div>
+										<h5 class="mb-10">Your rating</h5>
+                                        <!-- Form review -->
+                                        <form action="{{route('Website.SendReview',$part->id)}}" method="POST">
+                                        @csrf
+										<div class="rate">
+											<input type="radio" id="star5" name="rate" value="5" />
+											<label for="star5" title="Very good">5 stars</label>
+											<input type="radio" id="star4" name="rate" value="4" />
+											<label for="star4" title="Good">4 stars</label>
+											<input type="radio" id="star3" name="rate" value="3" />
+											<label for="star3" title="Nice">3 stars</label>
+											<input type="radio" id="star2" name="rate" value="2" />
+											<label for="star2" title="Bad">2 stars</label>
+											<input type="radio" id="star1" name="rate" value="1" />
+											<label for="star1" title="Very bad">1 star</label>
+											</div>
+										</div>
                                         <div class="text-gray-800 border border-gray-100 shadow-sm">
-                                            <input class="p-2 mb-4 bg-gray-100 border border-gray-300 outline-none title" spellcheck="false" placeholder="Title" type="text">
-                                            <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60" spellcheck="false" placeholder="Describe everything about this post here"></textarea>
+                                            <input class="p-2 mb-4 bg-gray-100 border border-gray-300 outline-none title" spellcheck="false" placeholder="Title" name="title" type="text">
+                                            <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60" spellcheck="false" name="review
+                                            " placeholder="Describe everything about this post here"></textarea>
 
                                             <!-- buttons -->
                                             <div class="flex py-2 buttons">
                                             <div class="p-1 px-4 ml-auto font-semibold text-gray-500 border border-gray-300 cursor-pointer btn">Cancel</div>
-                                            <div class="p-1 px-4 ml-2 font-semibold text-gray-200 bg-indigo-500 border border-indigo-500 cursor-pointer btn">Add Review</div>
+                                            <button type="submit" class="p-1 px-4 ml-2 font-semibold text-gray-200 bg-indigo-500 border border-indigo-500 cursor-pointer btn">Add Review</button>
                                             </div>
                                         </div>
 										</div> <!-- end .tab-panel -->
+                                          </form>
                                         @endif
 
 									</div> <!-- end .tab-content -->
@@ -182,7 +235,7 @@
 						</div> <!-- end .featured-car -->
 					</div> <!-- end .item -->
                     @endforeach
-                    
+
                     @foreach ($RelatedModelParts as $RelatedPart )
                     <div class="item">
 						<div class="featured-car">
@@ -205,7 +258,7 @@
 					</div> <!-- end .item -->
                     @endforeach
 
-					
+
 				</div> <!-- end .featured-cars -->
 			</div> <!-- end .inner -->
 		</section> <!-- end .section -->
