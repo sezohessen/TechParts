@@ -10,7 +10,7 @@
     .form-control,
     .select2-selection--single,
     .bootstrap-select>.dropdown-toggle.bs-placeholder.btn{
-        height: 45px;
+        height: 45px!important;
     }
     .invalid-feedback {
         display: block;
@@ -25,7 +25,7 @@
 {{-- Content --}}
 @section('content')
     <div class="container">
-        @include('dashboard/message')
+        @include('SellerDashboard/message')
     </div>
     <div class="card card-custom">
         <div class="card-header">
@@ -33,11 +33,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.car.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('seller.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.store")}}" method="POST">
+        <form action="{{route("seller.car.store")}}" method="POST">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -45,7 +45,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Car Make')<span class="text-danger">*</span></label><br>
-                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                            <div class="col-md-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" id="maker" required>
                                     <option value="">@lang('Select Car Make')</option>
                                     @foreach ($makers as $key=>$maker)
@@ -67,7 +67,7 @@
                         <div class="form-group row ">
                              <label for="model" class="col-form-label  col-sm-12">@lang('Select Car Model')<span class="text-danger">*</span>
                             </label><br>
-                             <div class=" col-lg-9 col-md-9 col-sm-12">
+                             <div class="col-md-12">
                                 <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
                                 name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
                                     <option value=""  >@lang('Select Car Make first')</option>
@@ -81,7 +81,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label  col-sm-12">@lang('Select Car Year')<span class="text-danger">*</span></label><br>
-                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                            <div class="col-md-12">
                              <select class="form-control {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
                                  name="CarYear_id" required id='year'>
                                  <option value="">@lang('Select Car Model First')</option>
@@ -95,7 +95,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-form-label col-sm-12">@lang('Select Car Capacity')<span class="text-danger">*</span></label><br>
-                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                            <div class="col-md-12">
                                 <select class="form-control select2 {{ $errors->has('CarCapacity_id') ? 'is-invalid' : '' }}"
                                     id="kt_select2_3" name="CarCapacity_id" required>
                                    <option value="">@lang('Select Car Capacity')</option>
@@ -134,7 +134,7 @@
         $('#year').empty();
         old_year="<?php echo old('CarYear_id') ?  old('CarYear_id') : ""  ?>";
         $.ajax({
-            url: '/dashboard/car/available_year/'+id,
+            url: '/seller/car/available_year/'+id,
             success: data => {
                 if(data.years){
                     data.years.forEach(years =>
@@ -153,7 +153,7 @@
         $('#year').empty();
         old_model="<?php echo old('CarModel_id') ?  old('CarModel_id') : ""  ?>";
         $.ajax({
-            url: '/dashboard/car/available_model/'+id,
+            url: '/seller/car/available_model/'+id,
             success: data => {
                 if(data.models){
                     $('#models').append(`<option value="" >@lang('Select Car Model')</option>`)

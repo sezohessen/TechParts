@@ -6,6 +6,16 @@
     .bootstrap-select>.dropdown-toggle.btn-light .filter-option, .bootstrap-select>.dropdown-toggle.btn-secondary .filter-option{
         text-align: initial;
     }
+    .form-control,
+    .select2-selection--single,
+    .bootstrap-select>.dropdown-toggle.bs-placeholder.btn{
+        height: 45px;
+    }
+    .img-thumbnail{
+        height: 25px;
+        width: 50px;
+        margin: 0px 5px;
+    }
 </style>
 @endsection
 {{-- Content --}}
@@ -40,13 +50,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group ">
-                            <label for="Image">@lang('Select company name')</label><br>
+                            <label for="Image">@lang('Select company name') <span class="text-danger">*</span></label><br>
                             <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}"
                                      name="CarMaker_id" required data-select2-id="{{old("CarModel_id")}}">
                                     @foreach ($makers as $key=>$maker)
                                         <option value="{{$maker->id}}"
-                                        data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}' width='30' height='20'>{{ $maker->name }}">
+                                        data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}' class='img-thumbnail ml-5 mr-5'  width='30' height='30' >{{ $maker->name }}">
                                         </option>
                                     @endforeach
                                 </select>
@@ -68,6 +78,4 @@
 @endsection
 
 {{-- Scripts Section --}}
-@section('scripts')
-<script src="{{ asset('js/pages/crud/forms/widgets/select2.js') }}"></script>
-@endsection
+

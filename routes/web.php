@@ -169,17 +169,19 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
     Route::get('/','SellerController@index')->name('index');
     Route::resource('/part','PartController');
     Route::delete('/part/destroy/all','PartController@multi_delete');
-    Route::resource('car', 'CarController');
+    Route::get('/car/create','CarController@create')->name('car.create');
+    Route::post('/car/store','CarController@store')->name('car.store');
     Route::prefix('car')->group(function () {
-        Route::resources([
-            'maker'     => "CarMakerController",
-            'model'     => "CarModelController",
-            'year'      => "CarYearController",
-            'capacity'  => "CarCapacityController",
-        ]);
+        Route::get('/capacity/create','CarCapacityController@create')->name('capacity.create');
+        Route::post('/capacity/store','CarCapacityController@store')->name('capacity.store');
+        Route::get('/maker/create','CarMakerController@create')->name('maker.create');
+        Route::post('/maker/store','CarMakerController@store')->name('maker.store');
+        Route::get('/model/create','CarModelController@create')->name('model.create');
+        Route::post('/model/store','CarModelController@store')->name('model.store');
+        Route::get('/year/create','CarYearController@create')->name('year.create');
+        Route::post('/year/store','CarYearController@store')->name('year.store');
+        
         Route::get("available_model/{id}",'CarController@available_model');
-        Route::get("available_governorate/{id}",'CarController@available_governorate');
-        Route::get("available_city/{id}",'CarController@available_city');
         Route::get("available_year/{id}",'CarController@available_year');
 
     });
