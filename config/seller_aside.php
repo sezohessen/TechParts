@@ -16,13 +16,8 @@ return [
                     'submenu' => [
                         [
                             'title' => 'Add A car ',
-                            'page' => "/dashboard/car/create"
+                            'page' => "/seller/car/create"
                         ],
-                        [
-                            'title' => 'View Cars',
-                            'page' => '/dashboard/car'
-                        ],
-
                     ]
                 ],
                 [
@@ -32,13 +27,8 @@ return [
                     'submenu' => [
                         [
                             'title' => 'Add a manufacturer',
-                            'page' => "/dashboard/car/maker/create"
+                            'page' => "/seller/car/maker/create"
                         ],
-                        [
-                            'title' => 'View manufacturing',
-                            'page' => '/dashboard/car/maker'
-                        ],
-
                     ]
 
                 ],
@@ -49,13 +39,8 @@ return [
                     'submenu' => [
                         [
                             'title' => 'Add Car Model',
-                            'page' => "/dashboard/car/model/create"
+                            'page' => "/seller/car/model/create"
                         ],
-                        [
-                            'title' => 'View Car Models',
-                            'page' => '/dashboard/car/model'
-                        ],
-
                     ]
 
                 ],
@@ -66,13 +51,8 @@ return [
                     'submenu' => [
                         [
                             'title' => "Add Year ",
-                            'page' => "/dashboard/car/year/create"
+                            'page' => "/seller/car/year/create"
                         ],
-                        [
-                            'title' => 'View years',
-                            'page' => '/dashboard/car/year'
-                        ],
-
                     ]
                 ],
                 [
@@ -82,13 +62,8 @@ return [
                     'submenu' => [
                         [
                             'title' => "Add Capacity ",
-                            'page' => "/dashboard/car/capacity/create"
+                            'page' => "/seller/car/capacity/create"
                         ],
-                        [
-                            'title' => 'View Capacities',
-                            'page' => '/dashboard/car/capacity'
-                        ],
-
                     ]
                 ],
             ]

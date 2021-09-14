@@ -25,7 +25,8 @@
 
             @endif
 
-            <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
+            <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}"
+            src="{{ find_image(App\Models\Settings::first()->logo,'img/settings/') }}" height="30px" width="40px"/>
         </a>
     </div>
     <div class="d-flex align-items-center">

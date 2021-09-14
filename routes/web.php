@@ -169,6 +169,20 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
     Route::get('/','SellerController@index')->name('index');
     Route::resource('/part','PartController');
     Route::delete('/part/destroy/all','PartController@multi_delete');
+    Route::resource('car', 'CarController');
+    Route::prefix('car')->group(function () {
+        Route::resources([
+            'maker'     => "CarMakerController",
+            'model'     => "CarModelController",
+            'year'      => "CarYearController",
+            'capacity'  => "CarCapacityController",
+        ]);
+        Route::get("available_model/{id}",'CarController@available_model');
+        Route::get("available_governorate/{id}",'CarController@available_governorate');
+        Route::get("available_city/{id}",'CarController@available_city');
+        Route::get("available_year/{id}",'CarController@available_year');
+
+    });
 });
 
 

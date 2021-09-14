@@ -11,6 +11,6 @@ class SellerController extends Controller
     {
         $page_title = __('Seller Dashboard');
         $page_description = __('Home');
-        return  view("seller.index", compact('page_title', 'page_description'));
+        return  view("SellerDashboard.index", compact('page_title', 'page_description'));
     }
 }

@@ -26,8 +26,8 @@ class PartDatatable extends DataTable
                 return view('dashboard.Part.btn.image', compact('data'));
             })
             ->editColumn('user.email', '{{ Str::limit($user["email"]) }}')
-            ->editColumn('name', '{{ Str::limit($name) }}')
-            ->editColumn('name_ar', '{{ Str::limit($name_ar) }}')
+            ->editColumn('name', '{{ Str::limit($name,100) }}')
+            ->editColumn('name_ar', '{{ Str::limit($name_ar,100) }}')
             ->editColumn('car.model.name', function (Part $part) {
                 return $part->car->model->name;
             })

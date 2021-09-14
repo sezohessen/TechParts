@@ -20,7 +20,7 @@ class PartController extends Controller
     {
         $page_title         = __("Parts");
         $page_description   =__( "View parts");
-        return  $part->render("seller.Part.index", compact('page_title', 'page_description'));
+        return  $part->render("SellerDashboard.Part.index", compact('page_title', 'page_description'));
     }
 
     /**
@@ -33,7 +33,7 @@ class PartController extends Controller
         $page_title         = __("Add part");
         $page_description   =__( "Add New Record");
         $cars               = Car::all();
-        return view('seller.part.add', compact('page_title', 'page_description','cars'));
+        return view('SellerDashboard.Part.add', compact('page_title', 'page_description','cars'));
     }
 
     /**
@@ -75,7 +75,7 @@ class PartController extends Controller
         $page_title         = __("Edit Part");
         $page_description   = __("Edit");
         $cars               = Car::all();
-        return view('seller.part.edit', compact('page_title', 'page_description','cars','part'));
+        return view('SellerDashboard.Part.edit', compact('page_title', 'page_description','cars','part'));
     }
 
     /**

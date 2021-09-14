@@ -23,16 +23,16 @@ class PartDatatable extends DataTable
             ->eloquent($query)
             ->addColumn('images', function(Part $part){
                 $data = $part->images->first()->image->name;
-                return view('seller.Part.btn.image', compact('data'));
+                return view('SellerDashboard.Part.btn.image', compact('data'));
             })
-            ->editColumn('name', '{{ Str::limit($name) }}')
-            ->editColumn('name_ar', '{{ Str::limit($name_ar) }}')
+            ->editColumn('name', '{{ Str::limit($name,100) }}')
+            ->editColumn('name_ar', '{{ Str::limit($name_ar,100) }}')
             ->editColumn('car.model.name', function (Part $part) {
                 return $part->car->model->name;
             })
             ->editColumn('price', '{{ Str::limit($price) }}')
-            ->addColumn('checkbox', 'seller.Part.btn.checkbox')
-            ->addColumn('action', 'seller.Part.btn.action')
+            ->addColumn('checkbox', 'SellerDashboard.Part.btn.checkbox')
+            ->addColumn('action', 'SellerDashboard.Part.btn.action')
             ->rawColumns(['checkbox', 'action']);
 
 

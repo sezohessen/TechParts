@@ -1,16 +1,16 @@
 {{-- Extends layout --}}
-@extends('layout.insurance')
+@extends('layout.seller')
 
 {{-- Content --}}
 @section('content')
     <div class="container">
-        @include('dashboard/message')
+        @include('SellerDashboard/message')
     </div>
 
     {{-- Dashboard 1 --}}
     <div class="card card-custom gutter-b">
-        <div class="card-header flex-wrap py-3" style="min-height: 50px">
-            <a href="{{route("insurance.offer-plan.create")}}" class="btn btn-primary font-weight-bolder">
+        <div class="flex-wrap py-3 card-header" style="min-height: 50px">
+            <a href="{{route("seller.part.create")}}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="20px" viewBox="0 0 24 24" version="1.1">
@@ -28,12 +28,13 @@
         <br>
         <div class="container">
             <div class="row">
-                <div class="card-custom" style="width: 100%;">
-                    {!! Form::open(['id'=>'form_data','url'=>"insurance/offer-plan/destroy/all",'method'=>'delete']) !!}
-                        {!! $dataTable->table([
-                            'class'=>'table table-separate table-head-custom table-checkable '
-                        ],true)!!}
-
+                <div class="table-responsive">
+                    <div class="card-custom" style="width: 100%">
+                        {!! Form::open(['id'=>'form_data','url'=>"seller/part/destroy/all",'method'=>'delete']) !!}
+                            {!! $dataTable->table([
+                                'class'=>'table table-separate table-head-custom table-checkable'
+                            ],true)!!}
+                    </div>
                 </div>
             </div>
         </div>
