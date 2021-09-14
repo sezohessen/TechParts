@@ -63,10 +63,13 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         $part         = Part::where('id', $id)
         ->where('active',1)
-        ->first();        
+        ->first();
+
+        // Show reviews
+        $reviews = Review::where('part_id',$id)->get();
 
 
         if($part)
@@ -82,9 +85,9 @@ class HomeController extends Controller
             $q->where('cars.carModel_id',$carModelID);
         })->limit(4)->get();
 
-        // dd($RelatedParts);
+        // dd($reviews);
 
-        return view('website.part',compact('part','hasReview','RelatedParts','RelatedModelParts'));
+        return view('website.part',compact('part','hasReview','RelatedParts','RelatedModelParts','reviews'));
         }
         else {
             return redirect()->route('Website.Index');

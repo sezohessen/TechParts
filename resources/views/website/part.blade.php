@@ -25,7 +25,7 @@
             -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
         }
-		.rate {
+        .rate {
     float: left;
     height: 46px;
     padding: 0 10px;
@@ -99,7 +99,8 @@
 										</div> <!-- show review -->
 										<div role="tabpanel" class="tab-pane fade" id="heading-tab5">
 											<p>
-                                       <!-- component -->
+                                       <!-- Show reviews -->
+                                        @foreach ($reviews as $review)
                                         <div class="flex items-start">
                                         <div class="flex-shrink-0">
                                             <div class="relative inline-block">
@@ -111,55 +112,81 @@
                                         </div>
                                         <div class="ml-6">
                                             <p class="flex items-baseline">
-                                            <span class="font-bold text-gray-600">Mary T.</span>
+                                            <span class="font-bold text-gray-600">{{ $review->user->FullName }}</span>
                                             </p>
                                             <p class="flex items-baseline">
-                                            <span class="text-lg text-gray-900 opacity-50 ">2018-6-4</span>
+                                            <span class="text-lg text-gray-900 opacity-50 ">
+                                                {{\carbon\carbon::parse($review->created_at)->format('M d, Y')  }}</span>
                                             </p>
-                                            <div class="flex items-center mt-1">
-                                            <svg class="w-4 h-4 text-yellow-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                                            <svg class="w-4 h-4 text-yellow-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                                            <svg class="w-4 h-4 text-yellow-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                                            <svg class="w-4 h-4 text-yellow-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                                            <svg class="w-4 h-4 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                                            </div>
+                                                <!-- Rating Stars -->
+                                                <div class="flex items-center mt-1">
+                                                @for ($i = 0; $i < 5; $i++)
+                                                @if ($i < $review->rating)
+                                                <svg class="w-4 h-4 text-yellow-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                                                @else
+                                                <svg class="w-4 h-4 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                                                @endif
+                                                @endfor
+                                                </div>
                                             <div class="flex items-center mt-4 text-gray-600">
                                             </div>
                                             <div class="mt-3">
-                                            <span class="font-bold">Title</span>
-                                            <p class="mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <span class="my-4 font-bold">{{ $review->title }}</span>
+                                            <p class="mt-1">{{ $review->review }}</p>
                                             </div>
                                         </div>
                                         </div>
+                                        <hr class="my-10 bg-gray-200">
+                                        @endforeach
+
                                            </p>
 										</div> <!-- end .tab-panel -->
                                         <!-- Add review -->
                                         @if (!$hasReview)
                                         <div role="tabpanel" class="tab-pane fade" id="heading-tab6">
-                                        <!-- component -->
-                                        <div class="m-5 text-2xl font-bold text-center text-gray-800 heading">Type your review</div>
-										<h5 class="mb-10">Your rating</h5>
-                                        <!-- Form review -->
+                                        <!-- Add review to the part -->
                                         <form action="{{route('Website.SendReview',$part->id)}}" method="POST">
-                                        @csrf
-										<div class="rate">
-											<input type="radio" id="star5" name="rate" value="5" />
-											<label for="star5" title="Very good">5 stars</label>
-											<input type="radio" id="star4" name="rate" value="4" />
-											<label for="star4" title="Good">4 stars</label>
-											<input type="radio" id="star3" name="rate" value="3" />
-											<label for="star3" title="Nice">3 stars</label>
-											<input type="radio" id="star2" name="rate" value="2" />
-											<label for="star2" title="Bad">2 stars</label>
-											<input type="radio" id="star1" name="rate" value="1" />
-											<label for="star1" title="Very bad">1 star</label>
-											</div>
-										</div>
+                                            @csrf
+                                        <div class="m-5 text-2xl font-bold text-center text-gray-800 heading">Type your review</div>
+                                        <div class="comment-form-rating">
+                                            <h5 class="mb-10">Your rating</h5>
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rating" value="5" />
+                                                <label for="star5" title="Very good">5 stars</label>
+                                                <input type="radio" id="star4" name="rating" value="4" />
+                                                <label for="star4" title="Good">4 stars</label>
+                                                <input type="radio" id="star3" name="rating" value="3" />
+                                                <label for="star3" title="Nice">3 stars</label>
+                                                <input type="radio" id="star2" name="rating" value="2" />
+                                                <label for="star2" title="Bad">2 stars</label>
+                                                <input type="radio" id="star1" name="rating" value="1" />
+                                                <label for="star1" title="Very bad">1 star</label>
+                                            </div>
+                                            @if ($errors->has('rating'))
+                                                <div class="py-5 text-red-400 fv-plugins-message-container">
+                                                    <div class="fv-help-block">
+                                                        <strong>{{ $errors->first('rating')  }}</strong>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
                                         <div class="text-gray-800 border border-gray-100 shadow-sm">
                                             <input class="p-2 mb-4 bg-gray-100 border border-gray-300 outline-none title" spellcheck="false" placeholder="Title" name="title" type="text">
-                                            <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60" spellcheck="false" name="review
-                                            " placeholder="Describe everything about this post here"></textarea>
-
+                                            @if ($errors->has('title'))
+                                                <div class="py-5 text-red-400 fv-plugins-message-container">
+                                                    <div class="fv-help-block">
+                                                        <strong>{{ $errors->first('title')  }}</strong>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60" spellcheck="false" name="review" placeholder="Describe everything about this post here"></textarea>
+                                            @if ($errors->has('review'))
+                                                <div class="py-5 text-red-400 fv-plugins-message-container">
+                                                    <div class="fv-help-block">
+                                                        <strong>{{ $errors->first('review')  }}</strong>
+                                                    </div>
+                                                </div>
+                                            @endif
                                             <!-- buttons -->
                                             <div class="flex py-2 buttons">
                                             <div class="p-1 px-4 ml-auto font-semibold text-gray-500 border border-gray-300 cursor-pointer btn">Cancel</div>
@@ -167,7 +194,7 @@
                                             </div>
                                         </div>
 										</div> <!-- end .tab-panel -->
-                                          </form>
+                                        </form>
                                         @endif
 
 									</div> <!-- end .tab-content -->
