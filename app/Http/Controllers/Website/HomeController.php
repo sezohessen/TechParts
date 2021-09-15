@@ -70,20 +70,14 @@ class HomeController extends Controller
 
         // Show reviews
         $reviews = Review::where('part_id',$id)->get();
-
-
         if($part)
         {
-
         $partReview = Review::where('part_id',$id)
         ->get()
         ->first();
-
-        $hasReview    = Review::where('user_id', Auth()->user()->id)->where('part_id',$id)->first() ? 1:0;
-
+        $hasReview = Review::NotLogin;
+        if(Auth::check())$hasReview    = Review::where('user_id', Auth()->user()->id)->where('part_id',$id)->first() ? Review::HasReview:Review::HasNotReview;
         $RelatedParts = Part::where('car_id',$part->car_id)->limit(8)->get();
-
-
         $carModelID    = $part->car->model->id;
 
         $RelatedModelParts = Part::whereHas('car', function($q) use($carModelID) {

@@ -175,11 +175,7 @@ h6 {
 	width: auto;
 	margin-right: 10px;
 }
-hr {
-	border-color: #3b4144;
-	margin-top: 28px;
-	margin-bottom: 28px;
-}
+
 hr.light {
 	border-color: #dae2e6;
 	margin-top: 14px;
