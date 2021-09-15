@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.master')
+@extends('layout.seller')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
 @if (Session::get('app_locale')!='en')
@@ -20,11 +20,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.seller.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('seller.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.seller.update",['seller'=>$seller])}}" method="POST">
+        <form action="{{route("seller.my_account.update",['id'=>$seller->id])}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">
@@ -160,7 +160,7 @@
         old_city    ="<?php echo old('city_id') ?  old('city_id') : $seller->city_id ?>";
         $('#city').empty();
         $.ajax({
-            url: '/dashboard/governorate/'+id,
+            url: '/seller/my-account/governorates/'+id,
             success: data => {
                 if(data.cities){
                     data.cities.forEach(city =>

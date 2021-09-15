@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use App\DataTables\Seller\PartDatatable as PartTable;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\City;
 use App\Models\Part;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -94,7 +95,6 @@ class PartController extends Controller
         session()->flash('updated',__("Changes has been Created Successfully"));
         return redirect()->route("seller.part.index");
     }
-
     /**
      * Remove the specified resource from storage.
      *

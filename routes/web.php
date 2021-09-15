@@ -168,6 +168,7 @@ Route::get('/', function ()
 Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'middleware' => ['role:seller']], function () {
     Route::get('/','SellerController@index')->name('index');
     Route::resource('/part','PartController');
+
     Route::delete('/part/destroy/all','PartController@multi_delete');
     Route::get('/car/create','CarController@create')->name('car.create');
     Route::post('/car/store','CarController@store')->name('car.store');
@@ -180,11 +181,14 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
         Route::post('/model/store','CarModelController@store')->name('model.store');
         Route::get('/year/create','CarYearController@create')->name('year.create');
         Route::post('/year/store','CarYearController@store')->name('year.store');
-        
+
         Route::get("available_model/{id}",'CarController@available_model');
         Route::get("available_year/{id}",'CarController@available_year');
 
     });
+    Route::get('/my-account','AccountController@edit')->name('my_account.edit');
+    Route::patch('/my-account/{id}','AccountController@update')->name('my_account.update');
+    Route::get('/my-account/governorates/{id}','AccountController@show');
 });
 
 

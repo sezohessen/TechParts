@@ -84,6 +84,18 @@ return [
                 ],
             ]
         ],
+        [
+            'title' => 'My information',
+            'icon' => 'fas fa-user-circle',
+            'bullet' => 'dot',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'View',
+                    'page' => "/seller/my-account"
+                ],
+            ]
+        ],
 
     ]
 

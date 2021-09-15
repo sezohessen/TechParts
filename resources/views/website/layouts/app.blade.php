@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @if (App::isLocale('ar')) direction="rtl" dir="rtl" style="direction: rtl" @endif>
 
 <!-- Mirrored from premiumlayers.com/html/automan/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Sep 2021 05:37:39 GMT -->
 <head>
@@ -7,7 +7,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Automan - Advanced Car Dealer HTML Template</title>
+		<title>{{ LangDetail(App\Models\Settings::first()->appName,App\Models\Settings::first()->appName_ar) }} @yield('title',$page_title ?? '')</title>
 
 		<!-- Bootstrap -->
 		<link href="{{ asset('css/website/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -54,7 +54,7 @@
 						<ul class="list-unstyled">
 
 							<li class="active">
-								<a href="{{url('index')}}">Home</a>
+								<a href="{{url('index')}}">@lang('Home')</a>
 							</li>
 							<li>
 								<a href="listing-grid-view.html">Cars</a>
@@ -107,7 +107,7 @@
 
                                     @endauth
                                     @guest
-                                    <li><a href="{{ url('/') }}">Login</a></li>
+                                    <li><a href="{{ url('/') }}">@lang('Login')</a></li>
                                     @endguest
 								</ul>
 							</li>
