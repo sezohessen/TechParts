@@ -1,65 +1,7 @@
 @extends('website.layouts.app')
 
 @section('css')
-    <style>
-        .car-details #car-details-slider img , .One_image img{
-            min-height: 360px;
-            max-height: 360px;
-            margin-top: 36px;
-            margin-bottom: 55px;
-        }
-        .featured-cars .details .fuel , .featured-cars .details .door{
-            width: 50%;
-        }
-        .featured-cars .item img{
-            min-height: 200px;
-            max-height: 200px;
-            border: 1px solid #ccc;
-        }
-        .RelatedPartsDesc {
-            min-height: 100px;
-            max-height: 100px;
-            display: -webkit-box;
-            overflow : hidden;
-            text-overflow: ellipsis;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-        }
-        .rate {
-    float: left;
-    height: 46px;
-    padding: 0 10px;
-}
-.rate:not(:checked) > input {
-    display: contents;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
-    </style>
+    <link href="{{ asset('css/website/css/part.css') }}" rel="stylesheet">
 @endsection
 
 @section('website')
@@ -125,7 +67,7 @@
                                         </div>
                                         <div class="ml-6">
                                             <p class="flex items-baseline">
-                                            <span class="font-bold text-gray-600">{{ $review->user->FullName }}</span>
+                                             <span class="font-bold text-gray-600">{{ $review->user->FullName }}</span>
                                             </p>
                                             <p class="flex items-baseline">
                                             <span class="text-lg text-gray-900 opacity-50 ">
