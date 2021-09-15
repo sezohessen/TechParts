@@ -74,6 +74,11 @@ class HomeController extends Controller
 
         if($part)
         {
+
+        $partReview = Review::where('part_id',$id)
+        ->get()
+        ->first();
+
         $hasReview    = Review::where('user_id', Auth()->user()->id)->where('part_id',$id)->first() ? 1:0;
 
         $RelatedParts = Part::where('car_id',$part->car_id)->limit(8)->get();
@@ -85,9 +90,9 @@ class HomeController extends Controller
             $q->where('cars.carModel_id',$carModelID);
         })->limit(4)->get();
 
-        // dd($reviews);
+        // dd($partReview);
 
-        return view('website.part',compact('part','hasReview','RelatedParts','RelatedModelParts','reviews'));
+        return view('website.part',compact('part','hasReview','RelatedParts','RelatedModelParts','reviews','partReview'));
         }
         else {
             return redirect()->route('Website.Index');

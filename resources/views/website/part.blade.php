@@ -84,23 +84,36 @@
                                     @endforeach
 								</div>
                                 @endif
-								<div class="border tabpanel" role="tabpanel">
+
+								<div class="border tabpanel" role="tabpanel" id="goToReview">
 									<ul class="nav nav-tabs" role="tablist">
-										<li role="presentation" class="active"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
+                                    <li role="presentation" class="active"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
 										<li role="presentation"><a href="#heading-tab5" aria-controls="heading-tab5" role="tab" data-toggle="tab">@lang('Reviews')</a></li>
-                                        @if (!$hasReview)
                                         <li role="presentation"><a href="#heading-tab6" aria-controls="heading-tab6" role="tab" data-toggle="tab">@lang('Add review')</a></li>
-                                        @endif
 									</ul> <!-- end .nav-tabs -->
 									<div class="tab-content">
 										<div role="tabpanel" class="tab-pane fade in active" id="heading-tab4">
 											<p>{{ LangDetail($part->desc,$part->desc_ar) }}</p>
+										</div>
 
-										</div> <!-- show review -->
+                                         <!-- show review -->
 										<div role="tabpanel" class="tab-pane fade" id="heading-tab5">
 											<p>
+                                        <!-- if there no reviews -->
+                                        @if (!$partReview)
+                                            <span>
+                                                @lang('Sorry, No currently reviews to show but you can add your own')
+                                            </span>
+                                        @else
                                        <!-- Show reviews -->
                                         @foreach ($reviews as $review)
+                                                <!-- Review message -->
+                                            @if(session()->has('review'))
+                                                    <div class="m-4 alert alert-success ">
+                                                        <p>{{ session('review') }}</p>
+                                                    </div>
+                                            @endif
+                                            <!-- End message -->
                                         <div class="flex items-start">
                                         <div class="flex-shrink-0">
                                             <div class="relative inline-block">
@@ -138,12 +151,19 @@
                                         </div>
                                         <hr class="my-10 bg-gray-200">
                                         @endforeach
-
+                                        @endif
                                            </p>
 										</div> <!-- end .tab-panel -->
+
+                                        <!-- If user added review -->
                                         <!-- Add review -->
-                                        @if (!$hasReview)
                                         <div role="tabpanel" class="tab-pane fade" id="heading-tab6">
+                                        <p>
+                                        @if ($hasReview)
+                                        <span>
+                                           @lang('You reviewed this part already!')
+                                        </span>
+                                        @else
                                         <!-- Add review to the part -->
                                         <form action="{{route('Website.SendReview',$part->id)}}" method="POST">
                                             @csrf
@@ -193,13 +213,16 @@
                                             <button type="submit" class="p-1 px-4 ml-2 font-semibold text-gray-200 bg-indigo-500 border border-indigo-500 cursor-pointer btn">Add Review</button>
                                             </div>
                                         </div>
-										</div> <!-- end .tab-panel -->
+                                        @endif <!-- End  user reviewed this part -->
                                         </form>
-                                        @endif
+                                        </p>
+										</div> <!-- end .tab-panel -->
 
 									</div> <!-- end .tab-content -->
 								</div> <!-- end .tabpanel -->
-							</div> <!-- end .col-sm-8 -->
+                                </div> <!-- end .col-sm-8 -->
+                             </div> <!-- End of left section -->
+                                <!-- Right section -->
 							<div class="mt-10 col-sm-4">
 								<div class="price"> {{ $part->price }} L.E <span>/ for sale</span></div>
 								<div class="main-car-details">
@@ -234,7 +257,7 @@
 					</div> <!-- end .car-details -->
                     </div> <!-- end .container -->
 			</div> <!-- end .inner -->
-       <!-- Start Featerd Parts Deals -->
+                          <!-- ----------------------    Related Parts  ------------------------------ -->
        <hr>
 		<section class="section white">
 			<div class="py-0 my-0 inner">
