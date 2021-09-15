@@ -1,65 +1,7 @@
 @extends('website.layouts.app')
 
 @section('css')
-    <style>
-.car-details #car-details-slider img , .One_image img{
-    min-height: 360px;
-    max-height: 360px;
-    margin-top: 34px;
-    margin-bottom: 55px;
-}
-.featured-cars .details .fuel , .featured-cars .details .door{
-    width: 50%;
-}
-.featured-cars .item img{
-    min-height: 200px;
-    max-height: 200px;
-    border: 1px solid #ccc;
-}
-.RelatedPartsDesc {
-    min-height: 100px;
-    max-height: 100px;
-    display: -webkit-box;
-    overflow : hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-}
-.rate {
-    float: left;
-    height: 46px;
-}
-.rate:not(:checked) > input {
-    display: contents;
-}
-.rate:not(:checked) > label {
-    float:right;
-    height: 33px;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
-    </style>
+<link href="{{ asset('css/website/css/part.css') }}" rel="stylesheet">
 @endsection
 @section('js')
 @if(session('review'))
@@ -73,7 +15,7 @@
         <div class="inner">
             <div class="container">
                 <div class="car-details">
-                    <div class="row mt-20">
+                    <div class="mt-20 row">
                         <div class="col-sm-8">
                             <div class="clearfix">
                                 <div class="title">{{ $part->name }} <span>[ {{ $part->part_number }} ]</span></div>
@@ -91,7 +33,7 @@
                             </div>
                             @endif
 
-                            <div class="border tabpanel my-20" role="tabpanel" id="goToReview">
+                            <div class="my-20 border tabpanel" role="tabpanel" id="goToReview">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="{{session('review') ? '' : 'active' }}"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
                                     <li role="presentation" class="{{session('review') ? 'active' : '' }}"><a href="#heading-tab5" aria-controls="heading-tab5" role="tab" data-toggle="tab">@lang('Reviews')</a></li>
@@ -167,7 +109,7 @@
                                                 @lang('You reviewed this part already!')
                                             </span>
                                         @elseif($hasReview == App\Models\Review::NotLogin)
-                                            <div class="text-center  my-10">
+                                            <div class="my-10 text-center">
                                                 <span>
                                                     <a href="{{ route('login') }}" class="text-primary">@lang('Please login')</a> @lang('to add your review')
                                                 </span>
