@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\website;
 
+use App\Models\Car;
 use App\Models\Part;
-use App\Models\Settings;
 use App\Models\User;
+use App\Models\Seller;
+use App\Models\CarModel;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Review;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -54,7 +59,34 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        return view('website.part');
+        $part         = Part::where('id', $id)
+        ->where('active',1)
+        ->first();
+
+        // Show reviews
+        $reviews = Review::where('part_id',$id)->get();
+
+
+        if($part)
+        {
+        $hasReview    = Review::where('user_id', Auth()->user()->id)->where('part_id',$id)->first() ? 1:0;
+
+        $RelatedParts = Part::where('car_id',$part->car_id)->limit(8)->get();
+
+
+        $carModelID    = $part->car->model->id;
+
+        $RelatedModelParts = Part::whereHas('car', function($q) use($carModelID) {
+            $q->where('cars.carModel_id',$carModelID);
+        })->limit(4)->get();
+
+        // dd($reviews);
+
+        return view('website.part',compact('part','hasReview','RelatedParts','RelatedModelParts','reviews'));
+        }
+        else {
+            return redirect()->route('Website.Index');
+        }
     }
 
     /**

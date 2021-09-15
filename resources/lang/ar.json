@@ -655,6 +655,8 @@
 "View Activities":"عرض الأنشطة",
 "Agency reviews":"تقييمات الوكالة",
 "View reviews":"عرض الاستعراضات",
+"Reviews":"المراجعات",
+"Add review":"إضافة مراجعة",
 "View":"عرض",
 "Agency Dashboard":"وكالة لوحة القيادة",
 "View agency record":"عرض سجل الوكالة",
@@ -749,6 +751,6 @@
 "Year of Model":"سنة الصنع",
 "My information":"معلوماتي",
 "Edit my account":"تعديل حسابي",
-"My spare parts":"قطع الغيار الخاصة بي"
-
+"My spare parts":"قطع الغيار الخاصة بي",
+"L.E":"جنية"
 }

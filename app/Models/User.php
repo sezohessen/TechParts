@@ -101,5 +101,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Car::class,'list_car_users','user_id','car_id');
     }
 
-
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
 }
