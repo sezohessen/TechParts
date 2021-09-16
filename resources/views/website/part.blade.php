@@ -8,6 +8,7 @@
     <script>
         window.location="#goToReview";
     </script>
+
 @endif
 @endsection
 @section('website')
@@ -19,7 +20,18 @@
                         <div class="col-sm-8">
                             <div class="clearfix">
                                 <div class="title">{{ $part->name }} <span>[ {{ $part->part_number }} ]</span></div>
-                                <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
+                                <!-- IF there is no reviews -->
+                                @if (NoReview($part->id))
+                                <div class="rating">
+                                   <p class="">@lang('No rating yet')</p>
+                                </div>
+                                @else
+                                <!-- Tottal Rating -->
+                                <div class="rating">
+                                    {{  TotalRating($part->id) }}
+                                </div>
+                                @endif
+
                             </div>
                             @if ($part->images->count() == 1 )
                             <div class="One_image">
@@ -106,7 +118,7 @@
                                     <div role="tabpanel" class="tab-pane fade" id="heading-tab6">
                                         @if ($hasReview== App\Models\Review::HasReview)
                                             <span>
-                                                @lang('You reviewed this part already!')
+                                                @lang('You reviewed this part already!')😉
                                             </span>
                                         @elseif($hasReview == App\Models\Review::NotLogin)
                                             <div class="my-10 text-center">
@@ -160,7 +172,7 @@
                                                 @endif
                                                 <!-- buttons -->
                                                 <div class="flex py-2 buttons">
-                                                <div class="p-1 px-4 ml-auto font-semibold text-gray-500 border border-gray-300 cursor-pointer btn">Cancel</div>
+                                                <button type="button" onclick="this.form.reset();" class="p-1 px-4 ml-auto font-semibold text-gray-500 border border-gray-300 cursor-pointer btn">Cancel</button>
                                                 <button type="submit" class="p-1 px-4 ml-2 font-semibold text-gray-200 bg-indigo-500 border border-indigo-500 cursor-pointer btn">Add Review</button>
                                                 </div>
                                             </div>
@@ -176,19 +188,19 @@
                             <div class="price"> {{ $part->price }} L.E <span>/ for sale</span></div>
                             <div class="main-car-details">
                                 <div class="clearfix item">
-                                    <div class="option">Year</div>
+                                    <div class="option"> @lang('Year') </div>
                                     <div class="option-content"> {{ $part->car->year->year }} </div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
-                                    <div class="option">Make</div>
+                                    <div class="option"> @lang("Manufacture") </div>
                                     <div class="option-content">{{ $part->car->make->name }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
-                                    <div class="option">Model</div>
+                                    <div class=""> @lang('Model') </div>
                                     <div class="option-content">{{ $part->car->model->name }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
-                                    <div class="option">Capacities</div>
+                                    <div class="option"> @lang('capacities') </div>
                                     <div class="option-content">{{ $part->car->capacity->capacity }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">

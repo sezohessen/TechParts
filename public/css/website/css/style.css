@@ -3556,7 +3556,6 @@ label .required {
 	width: 50%;
 	float: left;
 	padding-right: 32px;
-	text-transform: uppercase;
 }
 .car-details .main-car-details .item .option:after {
 	content: ':';
