@@ -185,7 +185,7 @@
                         </div> <!-- end .col-sm-8 -->
                             <!-- Right section -->
                         <div class="mt-10 col-sm-4">
-                            <div class="price"> {{ $part->price }} L.E <span>/ for sale</span></div>
+                            <div class="price"> {{ $part->price }} L.E <span></span></div>
                             <div class="main-car-details">
                                 <div class="clearfix item">
                                     <div class="option"> @lang('Year') </div>
@@ -196,7 +196,7 @@
                                     <div class="option-content">{{ $part->car->make->name }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
-                                    <div class=""> @lang('Model') </div>
+                                    <div class="option"> @lang('Model') </div>
                                     <div class="option-content">{{ $part->car->model->name }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">

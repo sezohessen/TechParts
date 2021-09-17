@@ -28,7 +28,7 @@
 		<link href="{{ asset('css/website/css/style.css') }}" rel="stylesheet">
         <!-- Tailwindcss -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet"><body class="bg-blue-200">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -134,7 +134,7 @@
 						<div class="col-sm-4">
 							<h5>About Us</h5>
 							<p>Lorem ipsum dolor sit amet, consectetur  some dymm adipiscing elit. Nam turpis quam, sodales in text she ante sagittis, varius efficitur mauris.</p>
-							<hr />
+                            <hr class="my-10"/>
                             <!-- Call Setting globaly -->
                             @php
                               use App\Models\Settings;
