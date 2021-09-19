@@ -156,6 +156,8 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Route::get('/user', 'UserController@index')->name('ShowUser');
     Route::get('/edit-user', 'UserController@edit')->name('EditUser');
     Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
+    Route::get('/seller/{id}', 'SellerController@show')->name('Seller');
+
 });
 
 Auth::routes();

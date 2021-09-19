@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
-
+    const HasReview = 1;
+    const HasNotReview = 0;
+    const NotLogin = 2;
     protected $table    = 'reviews';
     protected $fillable=[
         'title',

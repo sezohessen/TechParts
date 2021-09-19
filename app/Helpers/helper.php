@@ -1,7 +1,11 @@
 <?php
+use App\Models\Review;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-   if(!function_exists('datatable_lang')){
+use PhpParser\Node\Stmt\Echo_;
+
+if(!function_exists('datatable_lang')){
         function datatable_lang(){
         return [
                 'sProcessing'     => __('Processing...'),
@@ -114,8 +118,129 @@ use Illuminate\Support\Facades\Session;
         function LangDetail($eng,$ar){
             return Session::get('app_locale')=='en' ? ($eng ? $eng : $ar) : $ar;
         }
-        
+    }
+    //  TOTTAL RATING
+    if(!function_exists('TotalRating')){
+        function TotalRating($id){
+            $avr_star               = Review::where('part_id',$id)
+            ->selectRaw('SUM(rating)/COUNT(user_id) AS avg_rating')
+            ->first()
+            ->avg_rating;
+
+            $product_star           = round($avr_star);
+            $ratingAverage          = number_format((float)$avr_star, 1, '.', '');
+            /* dd($avr_star); */
+            if ($ratingAverage == 0.5)
+              echo
+              '<i class="fas fa-star-half-alt"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i> ';
+
+            elseif($ratingAverage == 1)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i> ';
+
+            }
+            elseif($ratingAverage == 1.5)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i> ';
+            }
+            elseif($ratingAverage == 2)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i> ';
+            }
+            elseif($ratingAverage == 2.5)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i> ';
+            }
+            elseif($ratingAverage == 3)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i> ';
+
+            }
+            elseif($ratingAverage == 3.5)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i> ';
+
+            }
+            elseif($ratingAverage == 4)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i> ';
+
+            }
+            elseif($ratingAverage == 4.5)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i> ';
+
+            }
+            elseif($ratingAverage == 5)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i> ';
+
+            }
+
+            // dump($ratingAverage);
+            return $ratingAverage;
+
+        }
+
     }
 
-
+    // if there is no
+    if(!function_exists('NoReview')){
+        function NoReview($id){
+            $Review = Review::where('part_id', $id)->select('rating')->get()->first();
+            $NoReview = null;
+            if (!$Review)
+            $NoReview = true;
+            return$NoReview;
+        }
+    }
 
