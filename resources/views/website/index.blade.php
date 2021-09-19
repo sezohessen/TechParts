@@ -1,4 +1,7 @@
 @extends('website.layouts.app')
+@section('style')
+<link rel="stylesheet" href="{{ asset('css/website/css/home.css') }}">
+@endsection
 @section('website')
 <div class="responsive-menu">
 			<a href="#" class="responsive-menu-close"><i class="ion-android-close"></i></a>
@@ -51,57 +54,8 @@
 		</div> <!-- end .welcome -->
 
         {{-- Search --}}
-<section class="section dark tiny">
-    <div class="inner">
-        <div class="container">
-            <div class="border tabpanel section-tab" role="tabpanel">
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="search-cars">
-                        <form action="#" method="post" class="banner-form">
-                            <div class="item">
-                                <div class="select-wrapper">
-                                    <select class="selectpicker">
-                                        <option>@lang('Select Brand')</option>
-                                        <option>Brand 1</option>
-                                        <option>Brand 2</option>
-                                    </select>
-
-                                </div> <!-- end .select-wrapper -->
-                            </div> <!-- end .item -->
-                            <div class="item">
-                                <div class="select-wrapper">
-                                    <select class="selectpicker">
-                                        <option>@lang('Select Model')</option>
-                                        <option>Model 1</option>
-                                        <option>Model 2</option>
-                                    </select>
-
-                                </div> <!-- end .select-wrapper -->
-                            </div> <!-- end .item -->
-                            <div class="item">
-                                <div class="select-wrapper">
-                                    <select class="selectpicker">
-                                        <option>@lang('Year of Model')</option>
-                                        <option>Year 1</option>
-                                        <option>Year 2</option>
-                                    </select>
-
-                                </div> <!-- end .select-wrapper -->
-                            </div> <!-- end .item -->
-                            <div class="item">
-                                <button type="submit" class="button solid light-blue">Search</button>
-                            </div> <!-- end .item -->
-                        </form> <!-- end .banner-form -->
-                    </div> <!-- end .tab-panel -->
-                </div> <!-- end .tab-content -->
-            </div> <!-- end .tabpanel -->
-        </div> <!-- end .container -->
-    </div> <!-- end .inner -->
-</section>
 
         <!-- Start Page / Under SlideBar -->
-
-
 
         <!--start Parts (List View) -->
 		<div class="page-title" style="background-image: url('images/background01.jpg');">
@@ -163,8 +117,37 @@
 						</div> <!-- end .col-sm-9 -->
 						<div class="col-sm-3">
 							<div class="refine-search">
-								<div class="clearfix title">Refine Your Search<i class="fa fa-search pull-right"></i></div>
+								<div class="clearfix title">@lang('Search:')<i class="fa fa-search pull-right"></i></div>
 								<form>
+                                    <div class="item">
+                                        <div class="select-wrapper">
+                                            <select class="selectpicker">
+                                                <option>@lang('Select Brand')</option>
+                                                <option>Brand 1</option>
+                                                <option>Brand 2</option>
+                                            </select>
+                                        </div> <!-- end .select-wrapper -->
+                                    </div> <!-- end .item -->
+                                    <div class="item">
+                                        <div class="select-wrapper">
+                                            <select class="selectpicker">
+                                                <option>@lang('Select Model')</option>
+                                                <option>Model 1</option>
+                                                <option>Model 2</option>
+                                            </select>
+
+                                        </div> <!-- end .select-wrapper -->
+                                    </div> <!-- end .item -->
+                                    <div class="item">
+                                        <div class="select-wrapper">
+                                            <select class="selectpicker">
+                                                <option>@lang('Year of Model')</option>
+                                                <option>Year 1</option>
+                                                <option>Year 2</option>
+                                            </select>
+
+                                        </div> <!-- end .select-wrapper -->
+                                    </div> <!-- end .item -->
 									<div class="form-group">
 										<div class="select-wrapper">
 											<select class="selectpicker">
