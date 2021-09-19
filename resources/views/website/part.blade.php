@@ -5,7 +5,7 @@
 @endsection
 @section('js')
 
-@if(session('review'))
+@if(session('review') || $errors->any() )
     <script>
         window.location="#goToReview";
     </script>
@@ -17,7 +17,7 @@
         <div class="inner">
             <div class="container">
                 <div class="car-details">
-                    <div class="mt-20 row">
+                    <div class="md:mt-20 sm:mt-96 row">
                         <div class="col-sm-8">
                             <div class="clearfix">
                                 <div class="title">{{ LangDetail($part->name,$part->name_ar) }} <span>[ {{ $part->part_number }} ]</span></div>
@@ -48,12 +48,12 @@
 
                             <div class="my-20 border tabpanel" role="tabpanel" id="goToReview">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="{{session('review') ? '' : 'active' }}"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
+                                    <li role="presentation" class="{{(session('review') || $errors->any()  ) ? '' : 'active' }}"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
                                     <li role="presentation" class="{{session('review') ? 'active' : '' }}"><a href="#heading-tab5" aria-controls="heading-tab5" role="tab" data-toggle="tab">@lang('Reviews')</a></li>
-                                    <li role="presentation"><a href="#heading-tab6" aria-controls="heading-tab6" role="tab" data-toggle="tab">@lang('Add review')</a></li>
+                                    <li class="{{$errors->any() ? 'active' : '' }}" role="presentation"><a href="#heading-tab6" aria-controls="heading-tab6" role="tab" data-toggle="tab">@lang('Add review')  </a></li>
                                 </ul> <!-- end .nav-tabs -->
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in {{session('review') ? '' : 'active in' }}" id="heading-tab4">
+                                    <div role="tabpanel" class="tab-pane fade in {{(session('review') || $errors->any()) ? '' : 'active in' }}" id="heading-tab4">
                                         <p>{!! LangDetail($part->desc,$part->desc_ar) !!}</p>
                                     </div>
 
@@ -116,7 +116,7 @@
 
                                     <!-- If user added review -->
                                     <!-- Add review -->
-                                    <div role="tabpanel" class="tab-pane fade" id="heading-tab6">
+                                    <div role="tabpanel" class="tab-pane fade {{$errors->any() ? 'active in' : '' }}" id="heading-tab6">
                                         @if ($hasReview== App\Models\Review::HasReview)
                                             <span>
                                                 @lang('You reviewed this part already!')😉
@@ -134,7 +134,7 @@
                                             <div class="m-5 text-2xl font-bold text-center text-gray-800 heading">Type your review</div>
                                             <div class="comment-form-rating">
                                                 <h5 class="mb-10">Your rating</h5>
-                                                <div class="rate">
+                                                <div class="block w-full rate">
                                                     <input type="radio" id="star5" name="rating" value="5" />
                                                     <label for="star5" title="Very good">5 stars</label>
                                                     <input type="radio" id="star4" name="rating" value="4" />
@@ -146,8 +146,8 @@
                                                     <input type="radio" id="star1" name="rating" value="1" />
                                                     <label for="star1" title="Very bad">1 star</label>
                                                 </div>
-                                                @if ($errors->has('rating'))
-                                                    <div class="py-5 text-red-400 fv-plugins-message-container">
+                                                @if ($errors->any())
+                                                    <div class="py-5 mt-10 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">
                                                             <strong>{{ $errors->first('rating')  }}</strong>
                                                         </div>

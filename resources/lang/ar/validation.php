@@ -186,7 +186,10 @@ return [
         'part_img'              => 'الصورة',
         "message"               => 'الرساله',
         'password confirm'      => 'تأكيد كلمة المرور',
-        'Password Not confirmed'=> 'لم يتم تأكيد كلمة المرور'
+        'Password Not confirmed'=> 'لم يتم تأكيد كلمة المرور',
+        'rating'                => 'التقييم',
+        'review'               => 'مراجعه'
+
 
 
     ],

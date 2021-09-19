@@ -23,14 +23,12 @@
     -webkit-box-orient: vertical;
 }
 .rate {
-    float: left;
     height: 46px;
 }
 .rate:not(:checked) > input {
     display: contents;
 }
 .rate:not(:checked) > label {
-    float:right;
     height: 33px;
     width:1em;
     overflow:hidden;
