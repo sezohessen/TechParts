@@ -54,3 +54,17 @@
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+/* Phone */
+@media (max-width: 640px) {
+    #Part-Page {
+        margin-top: 30px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    #Part-Page {
+        margin-top: 30px;
+    }
+}
+

@@ -44,7 +44,7 @@
 	</head>
 	<body>
 
-		<header class="header">
+		<header class="header ">
 			<div class="container">
 				<div class="clearfix navigation">
 					<div class="logo"><a href="{{ route('Website.Index') }}"><img src="{{ asset('img/website/logo.png') }}" alt="Automan" class="img-responsive"></a></div> <!-- end .logo -->

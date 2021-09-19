@@ -13,11 +13,11 @@
 
 @endsection
 @section('website')
-<section class="section white">
+<section class="section white" id="Part-Page">
         <div class="inner">
             <div class="container">
                 <div class="car-details">
-                    <div class="md:mt-20 sm:mt-96 row">
+                    <div class="mt-20 row">
                         <div class="col-sm-8">
                             <div class="clearfix">
                                 <div class="title">{{ LangDetail($part->name,$part->name_ar) }} <span>[ {{ $part->part_number }} ]</span></div>
