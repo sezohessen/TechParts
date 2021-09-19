@@ -225,7 +225,7 @@
         <h1 class="main-heading">Related Parts<small>Similar Parts</small></h1>
         <div id="featured-cars" class="owl-carousel featured-cars">
             <!-- Reated Parts -->
-            @foreach ($RelatedParts as $RelatedPart)
+          {{--   @foreach ($RelatedParts as $RelatedPart)
             <div class="item">
                 <div class="featured-car">
                     <div class="image">
@@ -245,7 +245,7 @@
                     </div> <!-- end .details -->
                 </div> <!-- end .featured-car -->
             </div> <!-- end .item -->
-            @endforeach
+            @endforeach --}}
 
             @foreach ($RelatedModelParts as $RelatedPart )
             <div class="item">
