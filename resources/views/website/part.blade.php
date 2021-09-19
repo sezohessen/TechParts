@@ -19,7 +19,7 @@
                     <div class="mt-20 row">
                         <div class="col-sm-8">
                             <div class="clearfix">
-                                <div class="title">{{ $part->name }} <span>[ {{ $part->part_number }} ]</span></div>
+                                <div class="title">{{ LangDetail($part->name,$part->name_ar) }} <span>[ {{ $part->part_number }} ]</span></div>
                                 <!-- IF there is no reviews -->
                                 @if (NoReview($part->id))
                                 <div class="rating">
@@ -35,7 +35,7 @@
                             </div>
                             @if ($part->images->count() == 1 )
                             <div class="One_image">
-                                <div class="item"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->images[0]->image->name }}" class="img-responsive"></div>
+                                <div class="item"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->FirstImage->image->name }}" class="img-responsive"></div>
                             </div>
                             @else
                             <div id="car-details-slider" class="responsive">
