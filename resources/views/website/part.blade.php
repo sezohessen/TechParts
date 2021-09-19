@@ -4,19 +4,20 @@
 <link href="{{ asset('css/website/css/part.css') }}" rel="stylesheet">
 @endsection
 @section('js')
-@if(session('review'))
+
+@if(session('review') || $errors->any() )
     <script>
         window.location="#goToReview";
     </script>
-
 @endif
+
 @endsection
 @section('website')
 <section class="section white">
         <div class="inner">
             <div class="container">
                 <div class="car-details">
-                    <div class="mt-20 row">
+                    <div class="md:mt-20 sm:mt-96 row">
                         <div class="col-sm-8">
                             <div class="clearfix">
                                 <div class="title">{{ LangDetail($part->name,$part->name_ar) }} <span>[ {{ $part->part_number }} ]</span></div>
@@ -47,12 +48,12 @@
 
                             <div class="my-20 border tabpanel" role="tabpanel" id="goToReview">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="{{session('review') ? '' : 'active' }}"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
+                                    <li role="presentation" class="{{(session('review') || $errors->any()  ) ? '' : 'active' }}"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
                                     <li role="presentation" class="{{session('review') ? 'active' : '' }}"><a href="#heading-tab5" aria-controls="heading-tab5" role="tab" data-toggle="tab">@lang('Reviews')</a></li>
-                                    <li role="presentation"><a href="#heading-tab6" aria-controls="heading-tab6" role="tab" data-toggle="tab">@lang('Add review')</a></li>
+                                    <li class="{{$errors->any() ? 'active' : '' }}" role="presentation"><a href="#heading-tab6" aria-controls="heading-tab6" role="tab" data-toggle="tab">@lang('Add review')  </a></li>
                                 </ul> <!-- end .nav-tabs -->
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in {{session('review') ? '' : 'active in' }}" id="heading-tab4">
+                                    <div role="tabpanel" class="tab-pane fade in {{(session('review') || $errors->any()) ? '' : 'active in' }}" id="heading-tab4">
                                         <p>{!! LangDetail($part->desc,$part->desc_ar) !!}</p>
                                     </div>
 
@@ -115,7 +116,7 @@
 
                                     <!-- If user added review -->
                                     <!-- Add review -->
-                                    <div role="tabpanel" class="tab-pane fade" id="heading-tab6">
+                                    <div role="tabpanel" class="tab-pane fade {{$errors->any() ? 'active in' : '' }}" id="heading-tab6">
                                         @if ($hasReview== App\Models\Review::HasReview)
                                             <span>
                                                 @lang('You reviewed this part already!')😉
@@ -133,7 +134,7 @@
                                             <div class="m-5 text-2xl font-bold text-center text-gray-800 heading">Type your review</div>
                                             <div class="comment-form-rating">
                                                 <h5 class="mb-10">Your rating</h5>
-                                                <div class="rate">
+                                                <div class="block w-full rate">
                                                     <input type="radio" id="star5" name="rating" value="5" />
                                                     <label for="star5" title="Very good">5 stars</label>
                                                     <input type="radio" id="star4" name="rating" value="4" />
@@ -145,8 +146,8 @@
                                                     <input type="radio" id="star1" name="rating" value="1" />
                                                     <label for="star1" title="Very bad">1 star</label>
                                                 </div>
-                                                @if ($errors->has('rating'))
-                                                    <div class="py-5 text-red-400 fv-plugins-message-container">
+                                                @if ($errors->any())
+                                                    <div class="py-5 mt-10 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">
                                                             <strong>{{ $errors->first('rating')  }}</strong>
                                                         </div>
@@ -220,58 +221,52 @@
         </div> <!-- end .inner -->
 </section>             <!-- ----------------------    Related Parts  ------------------------------ -->
 <hr>
-<section class="section white">
-    <div class="py-0 my-0 inner">
-        <h1 class="main-heading">Related Parts<small>Similar Parts</small></h1>
-        <div id="featured-cars" class="owl-carousel featured-cars">
-            <!-- Reated Parts -->
-          {{--   @foreach ($RelatedParts as $RelatedPart)
-            <div class="item">
-                <div class="featured-car">
-                    <div class="image">
-                        <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"><img src="{{find_image($RelatedPart->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $RelatedPart->FirstImage->image->name }}" class="img-responsive"></a>
-                    </div> <!-- end .image -->
-                    <div class="content">
-                        <div class="clearfix">
-                            <h5><a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a></h5>
-                            <span class="price">{{ $RelatedPart->price }} @lang('L.E')</span>
-                        </div> <!-- end .clearfix -->
-                        <div class="line"></div>
-                        <p class="RelatedPartsDesc">{{ LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) }}</p>
-                    </div> <!-- end .content -->
-                    <div class="clearfix details">
-                        <div class="fuel"><i class="fas fa-car"></i> {{$RelatedPart->car->make->name }} </div>
-                        <div class="type"><i class="icon-car-door"></i> {{$RelatedPart->car->model->name }} </div>
-                    </div> <!-- end .details -->
-                </div> <!-- end .featured-car -->
-            </div> <!-- end .item -->
-            @endforeach --}}
-
-            @foreach ($RelatedModelParts as $RelatedPart )
-            <div class="item">
-                <div class="featured-car">
-                    <div class="image">
-                        <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"><img src="{{find_image($RelatedPart->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $RelatedPart->FirstImage->image->name }}" class="img-responsive"></a>
-                    </div> <!-- end .image -->
-                    <div class="content">
-                        <div class="clearfix">
-                            <h5><a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a></h5>
-                            <span class="price">{{ $RelatedPart->price }} @lang('L.E')</span>
-                        </div> <!-- end .clearfix -->
-                        <div class="line"></div>
-                        <p class="RelatedPartsDesc">{{ LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) }}</p>
-                    </div> <!-- end .content -->
-                    <div class="clearfix details">
-                        <div class="fuel"><i class="fas fa-car"></i> {{$RelatedPart->car->make->name }} </div>
-                        <div class="type"><i class="icon-car-door"></i> {{$RelatedPart->car->model->name }} </div>
-                    </div> <!-- end .details -->
-                </div> <!-- end .featured-car -->
-            </div> <!-- end .item -->
-            @endforeach
+    @if ($RelatedModelParts->count() == 0)
+    @else
+    <section class="section white">
+        <div class="py-0 my-0 inner">
+            <h1 class="main-heading">Related Parts<small>Similar Parts</small></h1>
+            <div id="featured-cars" class="owl-carousel featured-cars">
+                <!-- Reated Parts -->
+                @foreach ($RelatedModelParts as $RelatedPart )
+                <div class="item">
+                    <div class="featured-car">
+                        <div class="image">
+                            <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"><img src="{{find_image($RelatedPart->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $RelatedPart->FirstImage->image->name }}" class="img-responsive"></a>
+                        </div> <!-- end .image -->
+                        <div class="content">
+                            <div class="clearfix">
+                                <h5>
+                                    <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a>
+                                </h5>
+                                <br>
+                                <div class="float-left car-details">
+                                    <!-- IF there is no reviews -->
+                                    @if (NoReview($part->id))
+                                    @else
+                                    <!-- Tottal Rating -->
+                                    <div class="rating">
+                                        {{  TotalRating($part->id) }}
+                                    </div>
+                                    @endif
+                                </div>
+                            </div> <!-- end .clearfix -->
+                            <span class="block price">{{ $RelatedPart->price }} @lang('L.E')</span>
+                            <div class="line"></div>
+                            <p class="RelatedPartsDesc">{{ LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) }}</p>
+                        </div> <!-- end .content -->
+                        <div class="clearfix details">
+                            <div class="fuel"><i class="fas fa-car"></i> {{$RelatedPart->car->make->name }} </div>
+                            <div class="type"><i class="icon-car-door"></i> {{$RelatedPart->car->model->name }} </div>
+                        </div> <!-- end .details -->
+                    </div> <!-- end .featured-car -->
+                </div> <!-- end .item -->
+                @endforeach
 
 
-        </div> <!-- end .featured-cars -->
-    </div> <!-- end .inner -->
-</section> <!-- end .section -->
+            </div> <!-- end .featured-cars -->
+        </div> <!-- end .inner -->
+    </section> <!-- end .section -->
+    @endif
 @endsection
 
