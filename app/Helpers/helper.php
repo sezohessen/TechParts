@@ -122,12 +122,14 @@ if(!function_exists('datatable_lang')){
     //  TOTTAL RATING
     if(!function_exists('TotalRating')){
         function TotalRating($id){
-            $ratings = Review::where('part_id', $id)->select('rating')->get();
-            foreach ($ratings as $aRating) {
-                $ratingValues[] = $aRating->rating;
-            }
-            $ratingAverage = collect($ratingValues)->sum() / $ratings->count();
+            $avr_star               = Review::where('part_id',$id)
+            ->selectRaw('SUM(rating)/COUNT(user_id) AS avg_rating')
+            ->first()
+            ->avg_rating;
 
+            $product_star           = round($avr_star);
+            $ratingAverage          = number_format((float)$avr_star, 1, '.', '');
+            /* dd($avr_star); */
             if ($ratingAverage == 0.5)
               echo
               '<i class="fas fa-star-half-alt"></i>
