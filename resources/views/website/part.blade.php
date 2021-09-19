@@ -225,28 +225,6 @@
         <h1 class="main-heading">Related Parts<small>Similar Parts</small></h1>
         <div id="featured-cars" class="owl-carousel featured-cars">
             <!-- Reated Parts -->
-          {{--   @foreach ($RelatedParts as $RelatedPart)
-            <div class="item">
-                <div class="featured-car">
-                    <div class="image">
-                        <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"><img src="{{find_image($RelatedPart->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $RelatedPart->FirstImage->image->name }}" class="img-responsive"></a>
-                    </div> <!-- end .image -->
-                    <div class="content">
-                        <div class="clearfix">
-                            <h5><a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a></h5>
-                            <span class="price">{{ $RelatedPart->price }} @lang('L.E')</span>
-                        </div> <!-- end .clearfix -->
-                        <div class="line"></div>
-                        <p class="RelatedPartsDesc">{{ LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) }}</p>
-                    </div> <!-- end .content -->
-                    <div class="clearfix details">
-                        <div class="fuel"><i class="fas fa-car"></i> {{$RelatedPart->car->make->name }} </div>
-                        <div class="type"><i class="icon-car-door"></i> {{$RelatedPart->car->model->name }} </div>
-                    </div> <!-- end .details -->
-                </div> <!-- end .featured-car -->
-            </div> <!-- end .item -->
-            @endforeach --}}
-
             @foreach ($RelatedModelParts as $RelatedPart )
             <div class="item">
                 <div class="featured-car">
@@ -255,9 +233,22 @@
                     </div> <!-- end .image -->
                     <div class="content">
                         <div class="clearfix">
-                            <h5><a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a></h5>
-                            <span class="price">{{ $RelatedPart->price }} @lang('L.E')</span>
+                            <h5>
+                                 <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a>
+                            </h5>
+                            <br>
+                            <div class="float-left car-details">
+                                   <!-- IF there is no reviews -->
+                                @if (NoReview($part->id))
+                                @else
+                                <!-- Tottal Rating -->
+                                <div class="rating">
+                                    {{  TotalRating($part->id) }}
+                                </div>
+                                @endif
+                            </div>
                         </div> <!-- end .clearfix -->
+                          <span class="block price">{{ $RelatedPart->price }} @lang('L.E')</span>
                         <div class="line"></div>
                         <p class="RelatedPartsDesc">{{ LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) }}</p>
                     </div> <!-- end .content -->
