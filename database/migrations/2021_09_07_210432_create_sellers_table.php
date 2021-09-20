@@ -22,6 +22,18 @@ class CreateSellersTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
+            $table->bigInteger('bg')->unsigned();
+            $table->foreign('bg')
+            ->references('id')->on('images')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            
+            $table->bigInteger('avatar')->unsigned();
+            $table->foreign('avatar')
+            ->references('id')->on('images')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            
             $table->text('desc')->nullable();
             $table->text('desc_ar')->nullable();
             $table->string('lat')->nullable();

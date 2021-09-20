@@ -176,6 +176,55 @@ class imagesSeeder extends Seeder
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],
+            // Seller
+            [
+                'name'              =>  "avatar1.jpg",
+                'base'              =>  "/img/avatar/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "avatar2.jpg",
+                'base'              =>  "/img/avatar/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "avatar3.jpg",
+                'base'              =>  "/img/avatar/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "avatar4.jpg",
+                'base'              =>  "/img/avatar/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bg1.jpg",
+                'base'              =>  "/img/background/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bg2.jpg",
+                'base'              =>  "/img/background/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bg3.jpg",
+                'base'              =>  "/img/background/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bg4.jpg",
+                'base'              =>  "/img/background/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
         ];
         foreach ($array as $value){
             DB::table('images')->insert([

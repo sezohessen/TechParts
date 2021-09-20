@@ -206,7 +206,7 @@
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
                                     <div class="option">@lang('Seller')</div>
-                                    <div class="option-content"> {{ $part->user->FullName }} </div>
+                                    <div class="option-content"> <a href="{{ route('Website.SellerProfile',['id'=>$part->user->id,'first'=>$part->user->first_name,'second'=>$part->user->last_name]) }}"> {{ $part->user->FullName }} </a> </div>
                                 </div> <!-- end .item -->
 
                                 <div class="clearfix item">

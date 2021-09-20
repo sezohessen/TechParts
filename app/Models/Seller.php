@@ -61,5 +61,10 @@ class Seller extends Model
     public function city(){
         return $this->belongsTo(City::class,'city_id','id');
     }
-
+    public function background(){
+        return $this->belongsTo(Image::class,'bg','id');
+    }
+    public function sellerAvatar(){
+        return $this->belongsTo(Image::class,'avatar','id');
+    }
 }
