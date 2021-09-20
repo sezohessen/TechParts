@@ -227,43 +227,7 @@
         <div class="py-0 my-0 inner">
             <h1 class="main-heading">Related Parts<small>Similar Parts</small></h1>
             <div id="featured-cars" class="owl-carousel featured-cars">
-                <!-- Reated Parts -->
-                @foreach ($RelatedModelParts as $RelatedPart )
-                <div class="item">
-                    <div class="featured-car">
-                        <div class="image">
-                            <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"><img src="{{find_image($RelatedPart->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $RelatedPart->FirstImage->image->name }}" class="img-responsive"></a>
-                        </div> <!-- end .image -->
-                        <div class="content">
-                            <div class="clearfix">
-                                <h5>
-                                    <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a>
-                                </h5>
-                            </div> <!-- end .clearfix -->
-                            <span class="block price">{{ $RelatedPart->price }} @lang('L.E')</span>
-                            <div class="line"></div>
-                            <div class="car-details">
-                                <!-- IF there is no reviews -->
-                                @if (NoReview($RelatedPart->id))
-                                <div class="white-space">
-                                </div>
-                                @else
-                                <!-- Tottal Rating -->
-                                <div class="rating">
-                                    {{  TotalRating($RelatedPart->id) }}
-                                </div>
-                                @endif
-                            </div>
-                            <p class="RelatedPartsDesc">{!! LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) !!}</p>
-                        </div> <!-- end .content -->
-                        <div class="clearfix details">
-                            <div class="fuel"><i class="fas fa-car"></i> {{$RelatedPart->car->make->name }} </div>
-                            <div class="type"><i class="icon-car-door"></i> {{$RelatedPart->car->model->name }} </div>
-                        </div> <!-- end .details -->
-                    </div> <!-- end .featured-car -->
-                </div> <!-- end .item -->
-                @endforeach
-
+                <x-part :parts="$RelatedModelParts" :makeCol="0"/>
 
             </div> <!-- end .featured-cars -->
         </div> <!-- end .inner -->

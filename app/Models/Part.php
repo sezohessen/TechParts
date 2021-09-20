@@ -64,6 +64,10 @@ class Part extends Model
     {
         return $this->belongsTo(User::class,"user_id","id");
     }
+    public function seller()
+    {
+        return $this->hasOne(Seller::class,'user_id','user_id');
+    }
     public function car()
     {
         return $this->belongsTo(Car::class,"car_id","id");

@@ -11,9 +11,12 @@ class Part extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $parts;
+    public $makeCol = 0;
+    public function __construct($parts,$makeCol)
     {
-        //
+        $this->parts = $parts;
+        $this->makeCol = $makeCol;
     }
 
     /**
