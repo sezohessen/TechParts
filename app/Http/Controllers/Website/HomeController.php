@@ -10,6 +10,7 @@ use App\Models\CarModel;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CarCapacity;
 use App\Models\CarMaker;
 use App\Models\CarYear;
 use App\Models\City;
@@ -31,6 +32,7 @@ class HomeController extends Controller
         $parts          = Part::where('active',1);
         $brands         = CarMaker::all();
         $governorates   = Governorate::all();
+        $capacities     = CarCapacity::all();
         // -----------Search And Sort--------------
 
         if (isset($Request->search)){
@@ -50,20 +52,29 @@ class HomeController extends Controller
                 $q->where('sellers.city_id',$Request->city_id);
             });
         }
-       /*  if(isset($Request->carMaker)){
-            $parts->where('category_id', $Request->carMaker);
+        if(isset($Request->carMaker)){
+            $parts->whereHas('car', function($q) use($Request) {
+                $q->where('cars.CarMaker_id',$Request->carMaker);
+            });
         }
-        if(isset($Request->subcategory_id)){
-            $parts->where('subcategory_id', $Request->subcategory_id);
+        if(isset($Request->carModel)){
+            $parts->whereHas('car', function($q) use($Request) {
+                $q->where('cars.CarModel_id',$Request->carModel);
+            });
         }
-        if(isset($Request->subcategory_id)){
-            $parts->where('subcategory_id', $Request->subcategory_id);
-        } */
+        if(isset($Request->carYear)){
+            $parts->whereHas('car', function($q) use($Request) {
+                $q->where('cars.CarYear_id',$Request->carYear);
+            });
+        }
+        if(isset($Request->carCapacity)){
+            $parts->whereHas('car', function($q) use($Request) {
+                $q->where('cars.CarCapacity_id',$Request->carCapacity);
+            });
+        }
 
-        if(isset($Request->type)){
-            $parts->where('type', $Request->type);
-        }
-        /* if (isset($Request->order) && $Request->order == 'desc') {
+
+        if (isset($Request->order) && $Request->order == 'desc') {
             $parts->orderBy('price','desc');
         }elseif(isset($Request->order) && $Request->order == 'asc'){
             $parts->orderBy('price','asc');
@@ -71,22 +82,30 @@ class HomeController extends Controller
             $parts->orderBy('views','desc');
         }else{
             $parts->orderBy('id', 'desc');
-        } */
+        }
 
         $parts = $parts->paginate(12);
         /* Append Request search to product */
         $parts->appends(
             [
-                /* 'order'             => $Request->order, */
+                'order'             => $Request->order,
                 'from'              => $Request->from,
                 'to'                => $Request->to,
+                'carMaker'          => $Request->carMaker,
+                'carModel'          => $Request->carModel,
+                'carYear'           => $Request->carYear,
+                'carCapacity'       => $Request->carCapacity,
                 'search'            => $Request->search,
                 'governorate_id'    => $Request->governorate_id,
                 'city_id'           => $Request->city_id,
             ]
         );
-        return view('website.index',compact('parts','brands','governorates'));
+        return view('website.index',compact('parts','brands','governorates','capacities'));
 
+    }
+    public function getPosition(Request $request)
+    {
+        return [$request->latitude,$request->longitude];
     }
 
     /**

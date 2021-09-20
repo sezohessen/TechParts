@@ -66,6 +66,15 @@
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane fade in active p-5" id="search-cars">
 								<form method="get" role="search">
+                                    <input type="text" name="order" hidden  value = "{{app('request')->input('order')}}">
+                                    <input type="text" name="governorate_id" hidden value="{{app('request')->input('governorate_id')}}">
+                                    <input type="text" name="city_id" hidden value="{{app('request')->input('city_id')}}">
+                                    <input type="text" name="carMaker" hidden value="{{app('request')->input('carMaker')}}">
+                                    <input type="text" name="carModel" hidden value="{{app('request')->input('carModel')}}">
+                                    <input type="text" name="carYear" hidden value="{{app('request')->input('carYear')}}">
+                                    <input type="text" name="carCapacity" hidden value="{{app('request')->input('carCapacity')}}">
+                                    <input type="text" name="from" hidden  value = "{{app('request')->input('from')}}">
+                                    <input type="text" name="to" hidden  value = "{{app('request')->input('to')}}">
 									<div class="row">
                                         <div class="col-md-2">
                                             <label class="search-label">@lang('Search for best parts')</label>
@@ -107,13 +116,19 @@
 							<div class="refine-search">
 								<div class="clearfix title">@lang('Search:')<i class="fa fa-search pull-right"></i></div>
 								<form method="get" role="select-search">
+                                    <input type="text" name="order" hidden  value = "{{app('request')->input('order')}}">
+                                    <input type="text" name="search" hidden  value = "{{app('request')->input('search')}}">
                                     <label for="car" class="search-label">@lang('By car model')</label>
                                     <div class="item form-group">
                                         <label class="text-white">@lang('Brand')</label>
                                         <select class="form-control" name="carMaker" id="maker" data-live-search="true">
                                             <option value="">@lang('Select Brand')</option>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                <option value="{{ $brand->id }}"
+                                                    @if (request()->get('carMaker')&& $brand->id==request()->get('carMaker'))
+                                                        {{ 'selected' }}
+                                                    @endif
+                                                    >{{ $brand->name }}</option>
                                             @endforeach
                                         </select>
                                     </div> <!-- end .item -->
@@ -128,6 +143,20 @@
                                         <select class="form-control" name="carYear" id="year" data-live-search="true">
                                             <option value="" >@lang('Select Model first')</option>
                                         </select>
+                                    </div> <!-- end .item -->
+                                    <div class="item form-group">
+                                        <label class="text-white">@lang('Car capacity')</label>
+                                        <select class="form-control" id="carCapacity"
+                                            name="carCapacity" >
+                                                @foreach ($capacities as $capacity)
+                                                    <option value="{{$capacity->id}}"
+                                                        @if (request()->get('carCapacity')&& $capacity->id==request()->get('carCapacity'))
+                                                            {{ 'selected' }}
+                                                        @endif>
+                                                        {{$capacity->capacity}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                     </div> <!-- end .item -->
                                     <label for="car" class="search-label">@lang('By address')</label>
                                     <div class="item form-group">
@@ -191,10 +220,13 @@
                                                     <input type="text" name="search" hidden value="{{app('request')->input('search')}}">
                                                     <input type="text" name="governorate_id" hidden value="{{app('request')->input('governorate_id')}}">
                                                     <input type="text" name="city_id" hidden value="{{app('request')->input('city_id')}}">
-                                                    <input type="text" name="category_id" hidden value="{{app('request')->input('category_id')}}">
-                                                    <input type="text" name="subcategory_id" hidden value="{{app('request')->input('subcategory_id')}}">
-                                                    <input type="text" hidden name="type" value = "{{app('request')->input('type')}}">
-                                                    <select name="order" class="selectpicker">
+                                                    <input type="text" name="carMaker" hidden value="{{app('request')->input('carMaker')}}">
+                                                    <input type="text" name="carModel" hidden value="{{app('request')->input('carModel')}}">
+                                                    <input type="text" name="carYear" hidden value="{{app('request')->input('carYear')}}">
+                                                    <input type="text" name="carCapacity" hidden value="{{app('request')->input('carCapacity')}}">
+                                                    <input type="text" name="from" hidden  value = "{{app('request')->input('from')}}">
+                                                    <input type="text" name="to" hidden  value = "{{app('request')->input('to')}}">
+                                                    <select name="order" class="selectpicker" onchange="this.form.submit()">
                                                         <option value="views"
                                                             @if (request()->get('order')=='views')
                                                             {{ 'selected' }}
@@ -219,7 +251,7 @@
                                                             @if (request()->get('order')=='nearest')
                                                             {{ 'selected' }}
                                                             @endif
-                                                        >@lang('Nearest')</option>
+                                                        >@lang('Nearby')</option>
                                                     </select>
                                                 </div>
                                             </div> <!-- end .select-wrapper -->
@@ -236,7 +268,9 @@
                                             <x-part :parts="$parts" makeCol="1"/>
                                         </div>
                                     </div>
-                                    {{ $parts->links("pagination::bootstrap-4") }}
+                                    {{ $parts->appends(Request::only([
+                                        'search','order','from','to','governorate_id','city_id','carMaker','carModel','carYear','carCapacity',
+                                        ]))->links("pagination::bootstrap-4") }}
 								</div> <!-- end .listing-grid -->
 							</div> <!-- end .listings -->
 						</div> <!-- end .col-sm-9 -->
@@ -403,15 +437,29 @@
 @endsection
 @section('js')
 <script>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
 
+            $.ajax({
+                url:'{{ route("Website.Index") }}',
+                type:'GET',
+                data:{latitude:lat,longitude:lng},
+            });
+        });
+    }
+</script>
+<script>
     function year(id){
         $('#year').empty();
+        old_year="<?php echo  request()->get('carYear') ?>";
         $.ajax({
             url: 'available_year/'+id,
             success: data => {
                 if(data.years){
                     data.years.forEach(years =>
-                    $('#year').append(`<option value="${years.id}">${years.year}</option>`))
+                    $('#year').append(`<option value="${years.id}" ${(old_year==years.id) ? "selected" : "" } >${years.year}</option>`))
                 }else{
                     $('#year').append(`<option value="">{{__("No Results")}}</option>`)
                 }
@@ -421,6 +469,7 @@
     function model(id){
         $('#models').empty();
         $('#year').empty();
+        old_model="<?php echo  request()->get('carModel') ?>";
         year();
         $.ajax({
             url: 'available_model/'+id,
@@ -428,7 +477,7 @@
                 if(data.models){
                     $('#models').append(`<option value="" >@lang('Select Model first')</option>`)
                     data.models.forEach(models =>
-                    $('#models').append(`<option value="${models.id}" >${models.name}</option>`))
+                    $('#models').append(`<option value="${models.id}" ${(old_model==models.id) ? "selected" : "" } >${models.name}</option>`))
                 }else{
                     $('#models').append(`<option value="">{{__("No Results")}}</option>`)
                 }
@@ -480,6 +529,16 @@
             en ? governorate(id):governorate_ar(id);
         }
     }
+    function getOldModels(){
+        var id = "<?php echo  request()->get('carModel') ?>";
+        if(id)model(id);
+    }
+    function getOldYears(){
+        var id = "<?php echo  request()->get('carYear') ?>";
+        if(id)year(id);
+    }
+    getOldModels();
+    getOldYears();
     getOldCities();
     $('#governorate').on('change', function() {
         var id = this.value ;
@@ -522,4 +581,5 @@
     })();
 
 </script>
+
 @endsection
