@@ -10,6 +10,10 @@ use App\Models\CarModel;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CarMaker;
+use App\Models\CarYear;
+use App\Models\City;
+use App\Models\Governorate;
 use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $parts  = Part::where('active',1)
+        $parts          = Part::where('active',1)
         ->orderBy('views','DESC')
         ->get();
-        return view('website.index',compact('parts'));
+        $brands         = CarMaker::all();
+        $governorates   = Governorate::all();
+        return view('website.index',compact('parts','brands','governorates'));
 
     }
 
@@ -77,6 +83,7 @@ class HomeController extends Controller
             $q->where('cars.carModel_id',$carModelID);
         })
         ->where('id','!=',$id)
+        ->where('active',1)
         ->limit(12)
         ->get();
         return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview'));
@@ -90,31 +97,39 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function available_cities($id)
     {
-        //
-    }
+        $cities = City::where('governorate_id', $id)->get();
+        if($cities->count() > 0 ){
+            return response()->json([
+                'cities' => $cities
+            ]);
+        }
+        return response()->json([
+            'cities' => null
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function available_model($id){
+        $models = CarModel::where('CarMaker_id', $id)->get();
+        if($models->count() > 0 ){
+            return response()->json([
+                'models' => $models
+            ]);
+        }
+        return response()->json([
+                'models' => null
+        ]);
+    }
+    public function available_year($id){
+        $years = CarYear::where('CarModel_id', $id)->get();
+        if($years->count() > 0 ){
+            return response()->json([
+                'years' => $years
+            ]);
+        }
+        return response()->json([
+                'years' => null
+        ]);
     }
 }

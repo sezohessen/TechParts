@@ -24,7 +24,7 @@
                                 <!-- IF there is no reviews -->
                                 @if (NoReview($part->id))
                                 <div class="rating">
-                                   <p class="">@lang('No rating yet')</p>
+                                   <span class="">@lang('No rating yet')</span>
                                 </div>
                                 @else
                                 <!-- Tottal Rating -->
@@ -239,21 +239,22 @@
                                 <h5>
                                     <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a>
                                 </h5>
-                                <br>
-                                <div class="float-left car-details">
-                                    <!-- IF there is no reviews -->
-                                    @if (NoReview($part->id))
-                                    @else
-                                    <!-- Tottal Rating -->
-                                    <div class="rating">
-                                        {{  TotalRating($part->id) }}
-                                    </div>
-                                    @endif
-                                </div>
                             </div> <!-- end .clearfix -->
                             <span class="block price">{{ $RelatedPart->price }} @lang('L.E')</span>
                             <div class="line"></div>
-                            <p class="RelatedPartsDesc">{{ LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) }}</p>
+                            <div class="car-details">
+                                <!-- IF there is no reviews -->
+                                @if (NoReview($RelatedPart->id))
+                                <div class="white-space">
+                                </div>
+                                @else
+                                <!-- Tottal Rating -->
+                                <div class="rating">
+                                    {{  TotalRating($RelatedPart->id) }}
+                                </div>
+                                @endif
+                            </div>
+                            <p class="RelatedPartsDesc">{!! LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) !!}</p>
                         </div> <!-- end .content -->
                         <div class="clearfix details">
                             <div class="fuel"><i class="fas fa-car"></i> {{$RelatedPart->car->make->name }} </div>

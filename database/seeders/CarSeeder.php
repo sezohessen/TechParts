@@ -27,7 +27,7 @@ class CarSeeder extends Seeder
         $images     = Image::where('base', '/img/CarMakers/')->get();
         $carIMGS    = Image::where('base', '/img/Cars/')->get();
         $users      = User::all();
-        for ($i=0; $i < 50 ; $i++) {
+        for ($i=0; $i < 20 ; $i++) {
             //First insert Car Maker
             $Maker  = DB::table('car_makers')->insertGetId([
                 'name'          => $faker->name,

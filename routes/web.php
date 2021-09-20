@@ -147,6 +147,9 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Show Data / Index
     Route::get('/index', 'HomeController@index')->name('Index');
     Route::get('/contact-us', 'ContactController@index')->name('ContactUs');
+    Route::get('available_model/{id}','HomeController@available_model');
+    Route::get('available_year/{id}','HomeController@available_year');
+    Route::get('available_cities/{id}','HomeController@available_cities');
     // Send Data / Store
     Route::post('/contact-us', 'ContactController@store')->name('SendContact');
     Route::post('/part/{id}', 'ReviewController@store')->name('SendReview');

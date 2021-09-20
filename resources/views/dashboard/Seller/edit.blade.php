@@ -76,7 +76,6 @@
                             <label for="governorate">@lang('Select Governorate') <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('governorate_id') ? 'is-invalid' : '' }}" id="governorate"
                             name="governorate_id" required >
-                                <option value="">@lang('--Select country first--')</option>
                                 @foreach ($governorates as $governorate)
                                 <option value="{{$governorate->id}}"
                                     @if(old('governorate_id') == $governorate->id)
@@ -156,7 +155,6 @@
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 <script>
     function governorate(id){
-        console.log(id);
         old_city    ="<?php echo old('city_id') ?  old('city_id') : $seller->city_id ?>";
         $('#city').empty();
         $.ajax({
@@ -164,7 +162,23 @@
             success: data => {
                 if(data.cities){
                     data.cities.forEach(city =>
-                    $('#city').append(`<option value="${city.id}" ${(old_city==city.id) ? "selected" : "" }>${city.title} - ${city.title_ar}</option>`)
+                    $('#city').append(`<option value="${city.id}" ${(old_city==city.id) ? "selected" : "" }>${city.title}</option>`)
+                    )
+                }else{
+                $('#city').append(`<option value="">@lang('Select Governorate first')</option>`)
+                }
+            }
+        });
+    }
+    function governorate(id){
+        old_city    ="<?php echo old('city_id') ?  old('city_id') : $seller->city_id ?>";
+        $('#city').empty();
+        $.ajax({
+            url: '/dashboard/governorate/'+id,
+            success: data => {
+                if(data.cities){
+                    data.cities.forEach(city =>
+                    $('#city').append(`<option value="${city.id}" ${(old_city==city.id) ? "selected" : "" }>${city.title_ar}</option>`)
                     )
                 }else{
                 $('#city').append(`<option value="">@lang('Select Governorate first')</option>`)
@@ -175,7 +189,8 @@
 
     $('#governorate').on('change', function() {
         var id = this.value ;
-        governorate(id);
+        var en = <?php echo Session::get('app_locale')=='en' ? 1: 0; ?>;
+        en ? governorate(id):governorate_ar(id);
     });
     governorate("<?php echo (old('governorate_id') ?? $seller->governorate_id)?>");
     $('#map').locationpicker({

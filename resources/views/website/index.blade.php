@@ -1,5 +1,5 @@
 @extends('website.layouts.app')
-@section('style')
+@section('css')
 <link rel="stylesheet" href="{{ asset('css/website/css/home.css') }}">
 @endsection
 @section('website')
@@ -61,7 +61,7 @@
 		<div class="page-title" style="background-image: url('images/background01.jpg');">
 			<div class="inner">
 				<div class="container">
-					<div class="title">Parts Listing Grid</div> <!-- end .title -->
+					<div class="title">@lang('Parts Listing')</div> <!-- end .title -->
 				</div> <!-- end .container -->
 			</div> <!-- end .inner -->
 		</div> <!-- end .page-title -->
@@ -69,22 +69,117 @@
 			<div class="inner">
 				<div class="container">
 					<div class="row">
+                        <div class="col-sm-3">
+							<div class="refine-search">
+								<div class="clearfix title">@lang('Search:')<i class="fa fa-search pull-right"></i></div>
+								<form method="get" role="search">
+                                    <label for="car" class="search-label">@lang('By car model')</label>
+                                    <div class="item form-group">
+                                        <label class="text-white">@lang('Brand')</label>
+                                        <select class="form-control" name="carMaker" id="maker" data-live-search="true">
+                                            <option>@lang('Select Brand')</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div> <!-- end .item -->
+                                    <div class="item form-group">
+                                        <label class="text-white">@lang('Model')</label>
+                                        <select class="form-control" name="carModel" id="models" data-live-search="true">
+                                            <option value="" >@lang('Select brand first')</option>
+                                        </select>
+                                    </div> <!-- end .item -->
+                                    <div class="item form-group">
+                                        <label class="text-white">@lang('Year')</label>
+                                        <select class="form-control" name="carYear" id="year" data-live-search="true">
+                                            <option value="" >@lang('Select Model first')</option>
+                                        </select>
+                                    </div> <!-- end .item -->
+                                    <label for="car" class="search-label">@lang('By address')</label>
+                                    <div class="item form-group">
+                                        <label class="text-white">@lang('Governorate')</label>
+                                        <select class="form-control" id="governorate"
+                                            name="governorate_id" >
+                                                <option value="">@lang('Select Governorate')</option>
+                                                @foreach ($governorates as $governorate)
+                                                <option value="{{$governorate->id}}">
+                                                    @if (Session::get('app_locale')=='en')
+                                                        {{ $governorate->title }}
+                                                    @else
+                                                        {{ $governorate->title_ar }}
+                                                    @endif
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                    </div> <!-- end .item -->
+                                    <div class="item form-group">
+                                        <label class="text-white" >@lang('City')</label>
+                                        <select class="form-control" id="city"
+                                            name="city_id" required >
+                                                <option value="">@lang('Select governorate first')</option>
+                                        </select>
+                                    </div> <!-- end .item -->
+									<div class="form-group">
+										<span class="price-slider-value">
+                                            <label class="search-label">
+                                                @lang('By price') :
+                                                <input id="price-min" name="from" disabled/> - <input id="price-max" name="to" disabled />
+                                            </label>
+                                        </span>
+                                        <div class="item">
+                                            <span class="price-slider-value">@lang('Price')<span id="price-min"></span> - <span id="price-max"></span></span>
+                                            <div id="price-slider"></div>
+                                        </div> <!-- end .item -->
+									</div> <!-- end .form-group -->
+
+									<button type="submit" class="block button solid yellow">@lang('Search')</button>
+								</form>
+							</div> <!-- end .refine-search -->
+						</div> <!-- end .col-sm-3 -->
 						<div class="col-sm-9">
 							<div class="listings">
 								<div class="clearfix heading">
-									<h5>8 Results Found For Exotic Cars</h5>
-									<!-- <div class="view">
-										<a href="{{url('parts')}}"><i class="fa fa-th-list"></i></a>
-										<a href="{{url('index')}}" class="active"><i class="fa fa-th"></i></a>
-									</div> end .view -->
-									<div class="select-wrapper sort">
-										<select class="selectpicker">
-											<option>Sort By</option>
-											<option>Option 1</option>
-											<option>Option 2</option>
-										</select>
-
-									</div> <!-- end .select-wrapper -->
+									<h5>8 @lang('Results Found')</h5>
+                                    <form  method="get">
+                                        <div class="select-wrapper sort">
+                                            <div class="form-group">
+                                                <label for="order" class="text-muted font-weight-bolder font-size-lg mx-5">@lang('Sort By')</label>
+                                                <input type="text" name="search" hidden value="{{app('request')->input('search')}}">
+                                                <input type="text" name="governorate_id" hidden value="{{app('request')->input('governorate_id')}}">
+                                                <input type="text" name="city_id" hidden value="{{app('request')->input('city_id')}}">
+                                                <input type="text" name="category_id" hidden value="{{app('request')->input('category_id')}}">
+                                                <input type="text" name="subcategory_id" hidden value="{{app('request')->input('subcategory_id')}}">
+                                                <input type="text" hidden name="type" value = "{{app('request')->input('type')}}">
+                                                <select name="order" class="selectpicker">
+                                                    <option value="views"
+                                                        @if (request()->get('order')=='views')
+                                                        {{ 'selected' }}
+                                                        @endif
+                                                    >@lang('Popularity')</option>
+                                                    <option value="newest"
+                                                        @if (request()->get('order')=='newest')
+                                                        {{ 'selected' }}
+                                                        @endif
+                                                    >@lang('Most recent')</option>
+                                                    <option value="asc"
+                                                        @if (request()->get('order')=='asc')
+                                                        {{ 'selected' }}
+                                                        @endif
+                                                    >@lang('Price: Low to High')</option>
+                                                    <option value="desc"
+                                                        @if (request()->get('order')=='desc')
+                                                        {{ 'selected' }}
+                                                        @endif
+                                                    >@lang('Price: High to Low')</option>
+                                                    <option value="nearest"
+                                                        @if (request()->get('order')=='nearest')
+                                                        {{ 'selected' }}
+                                                        @endif
+                                                    >@lang('Nearest')</option>
+                                                </select>
+                                            </div>
+                                        </div> <!-- end .select-wrapper -->
+                                    </form>
 								</div> <!-- end .heading -->
 								<div class="clearfix listings-grid">
                                     @foreach ($parts as $part )
@@ -115,134 +210,7 @@
 								</nav>
 							</div> <!-- end .pagination-wrapper -->
 						</div> <!-- end .col-sm-9 -->
-						<div class="col-sm-3">
-							<div class="refine-search">
-								<div class="clearfix title">@lang('Search:')<i class="fa fa-search pull-right"></i></div>
-								<form>
-                                    <div class="item">
-                                        <div class="select-wrapper">
-                                            <select class="selectpicker">
-                                                <option>@lang('Select Brand')</option>
-                                                <option>Brand 1</option>
-                                                <option>Brand 2</option>
-                                            </select>
-                                        </div> <!-- end .select-wrapper -->
-                                    </div> <!-- end .item -->
-                                    <div class="item">
-                                        <div class="select-wrapper">
-                                            <select class="selectpicker">
-                                                <option>@lang('Select Model')</option>
-                                                <option>Model 1</option>
-                                                <option>Model 2</option>
-                                            </select>
 
-                                        </div> <!-- end .select-wrapper -->
-                                    </div> <!-- end .item -->
-                                    <div class="item">
-                                        <div class="select-wrapper">
-                                            <select class="selectpicker">
-                                                <option>@lang('Year of Model')</option>
-                                                <option>Year 1</option>
-                                                <option>Year 2</option>
-                                            </select>
-
-                                        </div> <!-- end .select-wrapper -->
-                                    </div> <!-- end .item -->
-									<div class="form-group">
-										<div class="select-wrapper">
-											<select class="selectpicker">
-												<option>Brand</option>
-												<option>Option 1</option>
-												<option>Option 2</option>
-											</select>
-											<span class="arrow"><i class="fa fa-caret-down"></i></span>
-										</div> <!-- end .select-wrapper -->
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<div class="select-wrapper">
-											<select class="selectpicker">
-												<option>Model</option>
-												<option>Option 1</option>
-												<option>Option 2</option>
-											</select>
-											<span class="arrow"><i class="fa fa-caret-down"></i></span>
-										</div> <!-- end .select-wrapper -->
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<div class="select-wrapper">
-											<select class="selectpicker">
-												<option>1st Registration From</option>
-												<option>Option 1</option>
-												<option>Option 2</option>
-											</select>
-											<span class="arrow"><i class="fa fa-caret-down"></i></span>
-										</div> <!-- end .select-wrapper -->
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<span class="price-slider-value">Price: <span id="price-min"></span> - <span id="price-max"></span></span>
-                                        <div class="item">
-                                            <span class="price-slider-value">@lang('Price (Lt)')<span id="price-min"></span> - <span id="price-max"></span></span>
-                                            <div id="price-slider"></div>
-                                        </div> <!-- end .item -->
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<div class="select-wrapper">
-											<select class="selectpicker">
-												<option>Fuel</option>
-												<option>Option 1</option>
-												<option>Option 2</option>
-											</select>
-											<span class="arrow"><i class="fa fa-caret-down"></i></span>
-										</div> <!-- end .select-wrapper -->
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<div class="select-wrapper">
-											<select class="selectpicker">
-												<option>Gear</option>
-												<option>Option 1</option>
-												<option>Option 2</option>
-											</select>
-											<span class="arrow"><i class="fa fa-caret-down"></i></span>
-										</div> <!-- end .select-wrapper -->
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<div class="select-wrapper">
-											<select class="selectpicker">
-												<option>Engine Size</option>
-												<option>Option 1</option>
-												<option>Option 2</option>
-											</select>
-											<span class="arrow"><i class="fa fa-caret-down"></i></span>
-										</div> <!-- end .select-wrapper -->
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<span class="distance-slider-value">Kilometers: <span id="distance-min"></span> - <span id="distance-max"></span> km</span>
-										<div id="distance-slider"></div>
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<div class="select-wrapper">
-											<select class="selectpicker">
-												<option>Car Type</option>
-												<option>Option 1</option>
-												<option>Option 2</option>
-											</select>
-											<span class="arrow"><i class="fa fa-caret-down"></i></span>
-										</div> <!-- end .select-wrapper -->
-									</div> <!-- end .form-group -->
-									<div class="form-group">
-										<div class="select-wrapper">
-											<select class="selectpicker">
-												<option>Car Color</option>
-												<option>Option 1</option>
-												<option>Option 2</option>
-											</select>
-											<span class="arrow"><i class="fa fa-caret-down"></i></span>
-										</div> <!-- end .select-wrapper -->
-									</div> <!-- end .form-group -->
-									<button type="submit" class="block button solid yellow">Search</button>
-								</form>
-							</div> <!-- end .refine-search -->
-						</div> <!-- end .col-sm-3 -->
 					</div> <!-- end .row -->
 				</div> <!-- end .container -->
 			</div> <!-- end .inner -->
@@ -401,4 +369,83 @@
 			</div> <!-- end .inner -->
 		</section> <!-- end .section -->
 
+
+@endsection
+@section('js')
+<script>
+    function year(id){
+        $('#year').empty();
+        $.ajax({
+            url: 'available_year/'+id,
+            success: data => {
+                if(data.years){
+                    data.years.forEach(years =>
+                    $('#year').append(`<option value="${years.id}">${years.year}</option>`))
+                }else{
+                    $('#year').append(`<option value="">{{__("No Results")}}</option>`)
+                }
+            },
+        });
+    }
+    function model(id){
+        $('#models').empty();
+        $('#year').empty();
+        year();
+        $.ajax({
+            url: 'available_model/'+id,
+            success: data => {
+                if(data.models){
+                    $('#models').append(`<option value="" >@lang('Select Model first')</option>`)
+                    data.models.forEach(models =>
+                    $('#models').append(`<option value="${models.id}" >${models.name}</option>`))
+                }else{
+                    $('#models').append(`<option value="">{{__("No Results")}}</option>`)
+                }
+            },
+        });
+    }
+    $('#maker').on('change', function() {
+        var id = this.value ;
+        model(id);
+    });
+    $('#models').on('change', function() {
+        var id = this.value;
+        year(id);
+    });
+    function governorate(id){
+        $('#city').empty();
+
+        $.ajax({
+            url: '/available_cities/'+id,
+            success: data => {
+                if(data.cities){
+                    data.cities.forEach(city =>
+                    $('#city').append(`<option value="${city.id}" >${city.title}</option>`))
+                }else{
+                $('#city').append(`<option value="">@lang('Select Governorate')</option>`)
+                }
+            }
+        });
+    }
+    function governorate_ar(id){
+        $('#city').empty();
+        $.ajax({
+            url: '/available_cities/'+id,
+            success: data => {
+                if(data.cities){
+                    data.cities.forEach(city =>
+                    $('#city').append(`<option value="${city.id}" > ${city.title_ar}</option>`))
+                }else{
+                $('#city').append(`<option value="">@lang('Select governorate first')</option>`)
+                }
+            }
+        });
+    }
+    $('#governorate').on('change', function() {
+        var id = this.value ;
+        var en = <?php echo Session::get('app_locale')=='en' ? 1: 0; ?>;
+        en ? governorate(id):governorate_ar(id);
+    });
+
+</script>
 @endsection

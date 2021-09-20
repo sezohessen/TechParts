@@ -1,0 +1,12 @@
+.item .bootstrap-select{
+    width: 100%!important;
+    margin: 10px 0;
+}
+.refine-search .search-label{
+    color: #f7d809;
+    font-weight: bold;
+}
+.refine-search .price-slider-value input {
+    background-color: #778790;
+    width: 55px;
+}
