@@ -25,7 +25,7 @@ class PartDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('images', function(Part $part){
-                $data = $part->images->first()->image->name;
+                $data = $part->FirstImage->image;
                 return view('dashboard.Part.btn.image', compact('data'));
             })
             ->editColumn('user.email', '{{ Str::limit($user["email"]) }}')

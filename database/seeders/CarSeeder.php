@@ -24,7 +24,7 @@ class CarSeeder extends Seeder
     {
         $faker      = Faker::create();
 
-        $images     = Image::where('base', '/img/CarMakers/')->get();
+        $images     = Image::where('base', CarMaker::base)->get();
         $users      = User::all();
         for ($i=0; $i < 50 ; $i++) {
             //First insert Car Maker
