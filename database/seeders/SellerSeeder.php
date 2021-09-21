@@ -28,8 +28,8 @@ class SellerSeeder extends Seeder
         )->get();
 
         $governorates   = Governorate::all();
-        $background     = Image::where('base', '/img/background/')->get();
-        $avatar         = Image::where('base', '/img/avatar/')->get();
+        $background     = Image::where('base', '\img\background\\')->get();
+        $avatar         = Image::where('base', '\img\avatar\\')->get();
         foreach ($sellers as $seller){
             $governorate = $governorates->random();
             DB::table('sellers')->insert([

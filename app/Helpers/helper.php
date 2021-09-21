@@ -1,9 +1,10 @@
 <?php
+use App\Models\Image;
 use App\Models\Review;
+use PhpParser\Node\Stmt\Echo_;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-use PhpParser\Node\Stmt\Echo_;
 
 if(!function_exists('datatable_lang')){
         function datatable_lang(){
@@ -233,7 +234,7 @@ if(!function_exists('datatable_lang')){
 
     }
 
-    // if there is no
+    // if there is no review
     if(!function_exists('NoReview')){
         function NoReview($id){
             $Review = Review::where('part_id', $id)->select('rating')->get()->first();
@@ -244,3 +245,26 @@ if(!function_exists('datatable_lang')){
         }
     }
 
+
+    // if there is no
+    if(!function_exists('add_Image')){
+         function add_Image($file,$id,)
+        {
+            $Image = Image::find($id);
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . rand(11111, 99999) . '.' . $extension;
+            $destinationPath = public_path() . $Image->base;
+            $file->move($destinationPath, $fileName);
+            //Delete Old image
+            try {
+                $file_old = $Image->name;
+                unlink($file_old);
+                $Image->delete();
+            } catch (Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+            //Update new image
+            $Image = Image::create(['name'=> $fileName, 'base' =>  $Image->base]);
+            return $Image->id;
+        }
+    }

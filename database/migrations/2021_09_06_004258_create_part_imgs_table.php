@@ -22,10 +22,10 @@ class CreatePartImgsTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->bigInteger('img_id')->unsigned();
+            $table->bigInteger('img_id')->unsigned()->nullable();
             $table->foreign('img_id')
             ->references('id')->on('images')
-            ->onDelete('cascade')
+            ->onDelete('set null')
             ->onUpdate('cascade');
 
             $table->timestamps();

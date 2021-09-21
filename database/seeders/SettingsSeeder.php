@@ -18,7 +18,7 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $image = Image::where( 'base', '/img/settings/')->first();
+        $image = Image::where( 'base', '\img\settings\\')->first();
         DB::table('settings')->insert([
             'appName'       => 'Tech Parts',
             'appName_ar'    => 'قطع غيار',
