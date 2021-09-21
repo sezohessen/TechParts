@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Car;
 use App\Models\Image;
+use App\Models\Part;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -20,7 +21,7 @@ class PartSeeder extends Seeder
         $faker      = Faker::create();
         $cars       = Car::all();
         $users      = User::all();
-        $image      = Image::where('base', '\img\PartImgs\\')->get();
+        $image      = Image::where('base', Part::base)->get();
         for ($i=0; $i < 30 ; $i++) {
             $partID  = DB::table('parts')->insertGetId([
                 'name'          => $faker->name,

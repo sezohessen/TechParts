@@ -67,7 +67,7 @@ if(!function_exists('datatable_lang')){
             return $protocol . "://" . $_SERVER['HTTP_HOST'] ;
         }
     }
-    if(!function_exists('find_image')){
+if(!function_exists('find_image')){
         function find_image($img, $base=null){
             $src= '';
             if (@$img->name and @$img->base) {
@@ -246,25 +246,29 @@ if(!function_exists('datatable_lang')){
     }
 
 
-    // if there is no
+    // Add image
     if(!function_exists('add_Image')){
-         function add_Image($file,$id,)
+         function add_Image($file,$id,$base)
         {
             $Image = Image::find($id);
             $extension = $file->getClientOriginalExtension();
             $fileName = time() . rand(11111, 99999) . '.' . $extension;
-            $destinationPath = public_path() . $Image->base;
+            $destinationPath = public_path() . $base;
             $file->move($destinationPath, $fileName);
-            //Delete Old image
-            try {
-                $file_old = $Image->name;
-                unlink($file_old);
-                $Image->delete();
-            } catch (Exception $e) {
-                echo 'Caught exception: ',  $e->getMessage(), "\n";
-            }
-            //Update new image
-            $Image = Image::create(['name'=> $fileName, 'base' =>  $Image->base]);
-            return $Image->id;
+            if($Image)
+            {
+                //Delete Old image
+                try {
+                    $file_old = $destinationPath . $Image->name;
+                    unlink($file_old);
+                    $Image->delete();
+                } catch (Exception $e) {
+                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+                }
+           
+            } 
+             //Update new image
+             $Image = Image::create(['name'=> $fileName, 'base' =>  $base]);
+             return $Image->id;
         }
     }

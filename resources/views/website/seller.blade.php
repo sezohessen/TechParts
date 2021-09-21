@@ -15,7 +15,7 @@
                 @if (!$seller->bg)
                 <img class="background" src="{{asset('img/background/background.jpg')}}" alt="Profile picture">
                 @else
-                <img class="background" src="{{find_image($seller->background , 'img/background/')}}" alt="{{$seller->background}}">
+                <img class="background" src="{{find_image($seller->background , App\Models\Seller::backgroundBase)}}" alt="{{$seller->background->name}}">
                 @endif
                      
                 </div>
@@ -26,7 +26,7 @@
                 src="{{asset('img/avatar/user-profile.png')}}" alt="Profile picture">
                 @else
                 <img style="height: 200px; width: 200px" class="rounded-full"
-                src="{{find_image($seller->sellerAvatar , 'img/avatar/')}}" alt="{{$seller->sellerAvatar}}">
+                src="{{find_image($seller->sellerAvatar , App\Models\Seller::avatarBase)}}" alt="{{$seller->sellerAvatar->name}}">
                 @endif
 
             </div>

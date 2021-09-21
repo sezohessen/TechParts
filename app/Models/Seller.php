@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seller extends Model
 {
+    const avatarBase     = '/img/avatar/';
+    const backgroundBase = '/img/background/';
     use HasFactory;
     protected $table    = 'sellers';
     protected $fillable=[

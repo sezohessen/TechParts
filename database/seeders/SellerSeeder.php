@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
 use App\Models\Image;
-
+use App\Models\Seller;
 
 class SellerSeeder extends Seeder
 {
@@ -28,8 +28,8 @@ class SellerSeeder extends Seeder
         )->get();
 
         $governorates   = Governorate::all();
-        $background     = Image::where('base', '\img\background\\')->get();
-        $avatar         = Image::where('base', '\img\avatar\\')->get();
+        $background     = Image::where('base', Seller::backgroundBase)->get();
+        $avatar         = Image::where('base', Seller::avatarBase)->get();
         foreach ($sellers as $seller){
             $governorate = $governorates->random();
             DB::table('sellers')->insert([

@@ -145,7 +145,7 @@ class SellerController extends Controller
         $fileName = time() . rand(11111, 99999) . '.' . $extension;
         $destinationPath = public_path() . '\img\avatar\\';
         $file->move($destinationPath, $fileName);
-        $Image = Image::create(['name'=> $fileName, 'base' =>  '\img\avatar\\']);
+        $Image = Image::create(['name'=> $fileName, 'base' =>  '\img\background\\']);
         return $Image->id;    
         }
 

@@ -12,7 +12,7 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.maker.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('dashboard.maker.index') }}" style="margin-top: 16px;" class="mr-2 btn btn-primary">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label><br>
-                            <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{ find_image($maker->logo , 'img/CarMakers/')}})">
+                            <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{ find_image($maker->logo , App\Models\CarMaker::base)}})">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('Update')  </button>
+                <button type="submit" class="mr-2 btn btn-primary">@lang('Update')  </button>
             </div>
         </form>
         <!--end::Form-->

@@ -36,12 +36,12 @@
                             </div>
                             @if ($part->images->count() == 1 )
                             <div class="One_image">
-                                <div class="item"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->FirstImage->image->name }}" class="img-responsive"></div>
+                                <div class="item"><img src="{{find_image($part->FirstImage->image , App\Models\Part::base)}}" alt="{{ $part->FirstImage->image->name }}" class="img-responsive"></div>
                             </div>
                             @else
                             <div id="car-details-slider" class="responsive">
                                 @foreach ($part->images as $image)
-                                <div class="item"><img src="{{find_image($image->image , 'img/PartImgs/')}}" alt="{{ $image->image->name }}" class="img-responsive"></div>
+                                <div class="item"><img src="{{find_image($image->image , App\Models\Part::base)}}" alt="{{ $image->image->name }}" class="img-responsive"></div>
                                 @endforeach
                             </div>
                             @endif
@@ -232,7 +232,7 @@
                 <div class="item">
                     <div class="featured-car">
                         <div class="image">
-                            <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"><img src="{{find_image($RelatedPart->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $RelatedPart->FirstImage->image->name }}" class="img-responsive"></a>
+                            <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"><img src="{{find_image($RelatedPart->FirstImage->image , App\Models\Part::base)}}" alt="{{ $RelatedPart->FirstImage->image->name }}" class="img-responsive"></a>
                         </div> <!-- end .image -->
                         <div class="content">
                             <div class="clearfix">
