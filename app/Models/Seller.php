@@ -26,6 +26,8 @@ class Seller extends Model
         $rules = [
             'desc'                     => 'required|min:10|max:255',
             'desc_ar'                  => 'required|min:10|max:255|',
+            'bg'                       => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'avatar'                   => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'governorate_id'           => 'required|integer|exists:governorates,id',
             'city_id'                  => 'required|integer|exists:cities,id',
             'lat'                      => 'required',
@@ -41,6 +43,8 @@ class Seller extends Model
         $credentials = [
             'desc'              => $request->desc,
             'desc_ar'           => $request->desc_ar,
+            'bg'                => $request->background,
+            'avatar'            => $request->avatar,
             'governorate_id'    => $request->governorate_id,
             'city_id'           => $request->city_id,
             'lat'               => $request->lat,
@@ -49,6 +53,7 @@ class Seller extends Model
             'facebook'          => $request->facebook,
             'instagram'         => $request->instagram,
         ];
+
         return $credentials;
     }
     public function user()

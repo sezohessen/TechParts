@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use file;
+use Exception;
+use App\Models\City;
+use App\Models\Part;
+use App\Models\Image;
+use App\Models\Seller;
+use App\Models\Governorate;
+use Illuminate\Http\Request;
 use App\DataTables\PartDatatable;
 use App\DataTables\SellerDatatable;
 use App\Http\Controllers\Controller;
-use App\Models\City;
-use App\Models\Governorate;
-use App\Models\Part;
-use App\Models\Seller;
-use Illuminate\Http\Request;
 
 class SellerController extends Controller
 {
@@ -68,13 +71,91 @@ class SellerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Seller $seller)
+    public function update(Request $request,$id)
     {
-        $rules  =  Seller::rules($request);
-        $request->validate($rules);
-        $seller->update(Seller::credentials($request));
+        // $rules  =  Seller::rules($request);
+        // $request->validate($rules);
+        // $seller->update(Seller::credentials($request));
+        $seller = Seller::find($id);
+        $this->validate($request,[
+            'desc'                     => 'required|min:10|max:255',
+            'desc_ar'                  => 'required|min:10|max:255|',
+            'bg'                       => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'avatar'                   => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'governorate_id'           => 'required|integer|exists:governorates,id',
+            'city_id'                  => 'required|integer|exists:cities,id',
+            'lat'                      => 'required',
+            'long'                     => 'required',
+            'street'                   => 'required|min:5|max:100',
+            'facebook'                 => 'nullable',
+            'instagram'                => 'nullable',
+        ]);
+
+        $seller->desc               = $request->desc;
+        $seller->desc_ar            = $request->desc_ar;
+        $seller->governorate_id     = $request->governorate_id;
+        $seller->city_id            = $request->city_id;
+        $seller->lat                = $request->lat;
+        $seller->long               = $request->long;
+        $seller->street             = $request->street;
+        $seller->facebook           = $request->facebook;
+        $seller->instagram          = $request->instagram;
+        // Store avatar
+    if($request->file('avatar')){
+        $Image_id = self::fileAvatar($request->file('avatar'),$seller->avatar);
+        $seller->avatar = $Image_id;
+    }
+        // Store avatar
+    if($request->file('bg')){
+        $Image_id = self::fileBackground($request->file('bg'),$seller->bg);
+        $seller->bg = $Image_id;
+    }
+        $seller->save();
+
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("dashboard.seller.index");
+    }
+    // store avatar function -------------------------------------------
+    public static function fileAvatar($file,$id)
+    {
+        $Image = Image::find($id);
+        $extension = $file->getClientOriginalExtension();
+        $fileName = time() . rand(11111, 99999) . '.' . $extension;
+        $destinationPath = public_path() . $Image->base;
+        $file->move($destinationPath, $fileName);
+        //Delete Old image
+
+        try {
+            $file_old = $destinationPath.$Image->id;
+            unlink($file_old);
+            $Image->delete();
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        //Update new image
+        $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/avatar/']);
+        return $Image->id;
+    }
+   // store background function -------------------------------------------
+    public static function fileBackground($file,$id)
+    {
+        $Image = Image::find($id);
+        $extension = $file->getClientOriginalExtension();
+        $fileName = time() . rand(11111, 99999) . '.' . $extension;
+        $destinationPath = public_path() . $Image->base;
+        $file->move($destinationPath, $fileName);
+        //Delete Old image
+
+        try {
+            $file_old = $destinationPath.$Image->id;
+            unlink($file_old);
+            $Image->delete();
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        //Update new image
+        $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/background/']);
+        return $Image->id;
     }
 
     /**

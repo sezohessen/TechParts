@@ -78,7 +78,7 @@ class LaratrustSeeder extends Seeder
                 $user->attachRole($role);
             }
         }
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             $user   = \App\Models\User::create([
                 'first_name' => ucwords(str_replace('_', ' ', 'agency')) . $i,
                 'last_name' => ucwords(str_replace('_', ' ', 'agency')) . $i,
