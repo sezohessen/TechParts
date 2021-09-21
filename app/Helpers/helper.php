@@ -244,3 +244,4 @@ if(!function_exists('datatable_lang')){
         }
     }
 
+

@@ -145,9 +145,10 @@
                                         </select>
                                     </div> <!-- end .item -->
                                     <div class="item form-group">
-                                        <label class="text-white">@lang('Car capacity')</label>
+                                        <label class="text-white">@lang('Car Capacity')</label>
                                         <select class="form-control" id="carCapacity"
                                             name="carCapacity" >
+                                            <option value="" >@lang('Select Car Capacity')</option>
                                                 @foreach ($capacities as $capacity)
                                                     <option value="{{$capacity->id}}"
                                                         @if (request()->get('carCapacity')&& $capacity->id==request()->get('carCapacity'))
@@ -213,7 +214,7 @@
 								<div class="clearfix heading">
 									<h5>{{ $parts->count() }} @lang('Results Found')</h5>
                                     @if ($parts->count())
-                                        <form  method="get">
+                                        <form  method="get" id="orderFrom">
                                             <div class="select-wrapper sort">
                                                 <div class="form-group">
                                                     <label for="order" class="text-muted font-weight-bolder font-size-lg mx-5">@lang('Sort By')</label>
@@ -226,7 +227,8 @@
                                                     <input type="text" name="carCapacity" hidden value="{{app('request')->input('carCapacity')}}">
                                                     <input type="text" name="from" hidden  value = "{{app('request')->input('from')}}">
                                                     <input type="text" name="to" hidden  value = "{{app('request')->input('to')}}">
-                                                    <select name="order" class="selectpicker" onchange="this.form.submit()">
+                                                    <input type="text" id="StoreLocation" name="nearby" hidden  value = "" >
+                                                    <select name="order" class="selectpicker"  onchange="getNearBy()">
                                                         <option value="views"
                                                             @if (request()->get('order')=='views')
                                                             {{ 'selected' }}
@@ -437,17 +439,24 @@
 @endsection
 @section('js')
 <script>
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
+   function getLatLong(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log(position);
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
 
-            $.ajax({
-                url:'{{ route("Website.Index") }}',
-                type:'GET',
-                data:{latitude:lat,longitude:lng},
+                var  location = [];
+                location.push(lat);
+                location.push(lng);
+                return location;
             });
-        });
+        }
+    }
+
+    function getNearBy(){
+        document.getElementById("StoreLocation").value = getLatLong();
+        document.getElementById("orderFrom").submit();
     }
 </script>
 <script>

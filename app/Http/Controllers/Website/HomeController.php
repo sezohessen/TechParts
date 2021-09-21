@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\website;
 
-use App\Models\Car;
+
 use App\Models\Part;
-use App\Models\User;
-use App\Models\Seller;
+
 use App\Models\CarModel;
-use App\Models\Settings;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CarCapacity;
@@ -33,8 +32,11 @@ class HomeController extends Controller
         $brands         = CarMaker::all();
         $governorates   = Governorate::all();
         $capacities     = CarCapacity::all();
-        // -----------Search And Sort--------------
 
+        // -----------Search And Sort--------------
+        if($Request->nearby){
+            dd($Request->nearby);
+        }
         if (isset($Request->search)){
             if(Session::get('app_locale')=='en')$parts->where('name','like','%'.request('search').'%');
             else $parts->where('name_ar','like','%'.request('search').'%');
