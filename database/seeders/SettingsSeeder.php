@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Image;
+use App\Models\Settings;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $image = Image::where( 'base', '/img/settings/')->first();
+        $image = Image::where( 'base', Settings::base)->first();
         DB::table('settings')->insert([
             'appName'       => 'Tech Parts',
             'appName_ar'    => 'قطع غيار',

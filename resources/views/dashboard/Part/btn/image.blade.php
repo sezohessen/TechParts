@@ -1,3 +1,3 @@
 <div>
-    <img src="{{asset('img/PartImgs/'.$data) }}" width="100" height="100"  class="img-thumbnail" alt="">
+<img src="{{find_image($data , App\Models\Part::base)}}" width="100" height="100"  class="img-thumbnail" alt="">
 </div>

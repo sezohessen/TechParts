@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Part extends Model
 {
+    // Make a new const value
+    const base = '/img/PartImgs/';
     use HasFactory;
     protected $table    = 'parts';
     protected $fillable=[

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seller extends Model
 {
+    const avatarBase     = '/img/avatar/';
+    const backgroundBase = '/img/background/';
     use HasFactory;
     protected $table    = 'sellers';
     protected $fillable=[
@@ -24,8 +26,15 @@ class Seller extends Model
     public static function rules($request,$id=NULL)
     {
         $rules = [
+<<<<<<< HEAD
             'desc'                     => 'nullable|min:10|max:255',
             'desc_ar'                  => 'required|min:10|max:255',
+=======
+            'desc'                     => 'required|min:10|max:255',
+            'desc_ar'                  => 'required|min:10|max:255|',
+            'bg'                       => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'avatar'                   => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+>>>>>>> FrontEnd
             'governorate_id'           => 'required|integer|exists:governorates,id',
             'city_id'                  => 'required|integer|exists:cities,id',
             'lat'                      => 'required',
@@ -41,6 +50,8 @@ class Seller extends Model
         $credentials = [
             'desc'              => $request->desc,
             'desc_ar'           => $request->desc_ar,
+            'bg'                => $request->background,
+            'avatar'            => $request->avatar,
             'governorate_id'    => $request->governorate_id,
             'city_id'           => $request->city_id,
             'lat'               => $request->lat,
@@ -49,6 +60,7 @@ class Seller extends Model
             'facebook'          => $request->facebook,
             'instagram'         => $request->instagram,
         ];
+
         return $credentials;
     }
     public function user()
@@ -61,5 +73,10 @@ class Seller extends Model
     public function city(){
         return $this->belongsTo(City::class,'city_id','id');
     }
-
+    public function background(){
+        return $this->belongsTo(Image::class,'bg','id');
+    }
+    public function sellerAvatar(){
+        return $this->belongsTo(Image::class,'avatar','id');
+    }
 }

@@ -14,18 +14,7 @@ class imagesSeeder extends Seeder
     public function run()
     {
         $array = [
-            [
-                'name'              =>  "elonmusk.jpg",
-                'base'              =>  "http://arabiat.sydaliyat.com/api_fake/assets/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
-            [
-                'name'              =>  "joebiden.jpg",
-                'base'              =>  "http://arabiat.sydaliyat.com/api_fake/assets/",
-                'updated_at'        =>  now(),
-                'created_at'        =>  now()
-            ],
+
             [
                 'name'              =>  "parts (1).jpg",
                 'base'              =>  "/img/PartImgs/",
@@ -173,6 +162,55 @@ class imagesSeeder extends Seeder
             [
                 'name'              =>  "logo.png",
                 'base'              =>  "/img/settings/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            // Seller
+            [
+                'name'              =>  "avatar1.jpg",
+                'base'              =>  "/img/avatar/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "avatar2.jpg",
+                'base'              =>  "/img/avatar/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "avatar3.jpg",
+                'base'              =>  "/img/avatar/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "avatar4.jpg",
+                'base'              =>  "/img/avatar/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bg1.jpg",
+                'base'              =>  "/img/background/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bg2.jpg",
+                'base'              =>  "/img/background/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bg3.jpg",
+                'base'              =>  "/img/background/",
+                'updated_at'        =>  now(),
+                'created_at'        =>  now()
+            ],
+            [
+                'name'              =>  "bg4.jpg",
+                'base'              =>  "/img/background/",
                 'updated_at'        =>  now(),
                 'created_at'        =>  now()
             ],

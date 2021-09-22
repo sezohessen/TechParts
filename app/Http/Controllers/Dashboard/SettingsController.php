@@ -81,7 +81,7 @@ class SettingsController extends Controller
         $this->validate($request,[
             'appName'       => 'required|string|max:255',
             'appName_ar'    => 'required|string|max:255',
-            'logo'          => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'logo'          => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'email'         => 'nullable|string|max:255|email',
             'phone'         => 'nullable|string|max:55',
             'whatsapp'      => 'nullable|string|max:255',
@@ -103,7 +103,7 @@ class SettingsController extends Controller
         $settings->ios              = $request->ios;
 
         if($request->file('logo')){
-            $Image_id = self::file($request->file('logo'),$settings->logo_id);
+            $Image_id = add_Image($request->file('logo'),$settings->logo_id, Settings::base);
             $settings->logo_id = $Image_id;
         }
         $settings->save();
@@ -115,25 +115,7 @@ class SettingsController extends Controller
         session()->flash('success',__("Settings has been updated!"));
         return redirect()->back();
     }
-    public static function file($file,$id)
-    {
-        $Image = Image::find($id);
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . rand(11111, 99999) . '.' . $extension;
-        $destinationPath = public_path() . $Image->base;
-        $file->move($destinationPath, $fileName);
-        //Delete Old image
-        try {
-            $file_old = $destinationPath.$Image->name;
-            unlink($file_old);
-            $Image->delete();
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        //Update new image
-        $Image = Image::create(['name'=> $fileName, 'base' =>  '/img/settings/']);
-        return $Image->id;
-    }
+
 
     /**
      * Remove the specified resource from storage.

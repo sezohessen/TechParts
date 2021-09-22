@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
+use App\Models\Image;
+use App\Models\Seller;
 
 class SellerSeeder extends Seeder
 {
@@ -26,12 +28,16 @@ class SellerSeeder extends Seeder
         )->get();
 
         $governorates   = Governorate::all();
+        $background     = Image::where('base', Seller::backgroundBase)->get();
+        $avatar         = Image::where('base', Seller::avatarBase)->get();
         foreach ($sellers as $seller){
             $governorate = $governorates->random();
             DB::table('sellers')->insert([
                 'user_id'           => $seller->id,
                 'desc'              => $faker->text,
                 'desc_ar'           => $faker->text,
+                'bg'                => $background->random()->id,
+                'avatar'            => $avatar->random()->id,
                 'governorate_id'    => $governorate->id,
                 'city_id'           => $governorate->cities->random()->id,
                 'lat'               => $faker->latitude,

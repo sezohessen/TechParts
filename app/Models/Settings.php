@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Settings extends Model
 {
     use HasFactory;
+    const base = '/img/settings/';
     protected $table    = 'settings';
     protected $fillable=[
         'appName',
