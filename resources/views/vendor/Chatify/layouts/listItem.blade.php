@@ -36,7 +36,8 @@
                 <td>
                 <p data-id="{{ $type.'_'.$user->id }}">
                     {{ strlen($user->FullName) > 12 ? trim(substr($user->FullName,0,12)).'..' : $user->FullName }}
-                    <span>{{ $lastMessage->created_at->diffForHumans() }}</span></p>
+                    <span>{{ $lastMessage->created_at->diffForHumans() }}</span>
+                </p>
                 <span>
                     {{-- Last Message user indicator --}}
                     {!!
@@ -70,7 +71,7 @@
                         <span class="activeStatus"></span>
                     @endif
                 <div class="avatar av-m"
-                style="background-image: {{ asset(App\Models\User::InitialBase) }} );">
+                style="background-image: url('{{ asset(App\Models\User::InitialBase) }}');">
                 </div>
                 </td>
                 {{-- center side --}}

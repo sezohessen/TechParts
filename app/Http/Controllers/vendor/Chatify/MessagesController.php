@@ -267,7 +267,7 @@ class MessagesController extends Controller
                 if ($user->id != Auth::user()->id) {
                     // Get user data
                     $userCollection = User::where('id', $user->id)->first();
-                    $contacts       = Chatify::getContactItem($request['messenger_id'], $userCollection);
+                    $contacts       .= Chatify::getContactItem($request['messenger_id'], $userCollection);
                 }
             }
         }
