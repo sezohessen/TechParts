@@ -23,6 +23,7 @@
         "laravel/ui": "^3.3",
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.3",
+        "munafio/chatify": "^1.2",
         "santigarcor/laratrust": "^6.3",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
