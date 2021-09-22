@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\ChMessage as Message;
 use App\Models\ChFavorite as Favorite;
+use App\Models\Seller;
 use Chatify\Facades\ChatifyMessenger as Chatify;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -79,14 +80,15 @@ class MessagesController extends Controller
 
         // User data
         if ($request['type'] == 'user') {
-            $fetch = User::where('id', $request['id'])->first();
+            $fetch = Seller::where('user_id', $request['id'])->first();
+            $user  = User::find($request['id']);
         }
 
         // send the response
         return Response::json([
             'favorite' => $favorite,
-            'fetch' => $fetch,
-            'user_avatar' => asset('/storage/' . config('chatify.user_avatar.folder') . '/' . $fetch->avatar),
+            'fetch' => $user,
+            'user_avatar' => find_image($fetch->sellerAvatar, Seller::avatarBase)
         ]);
     }
 
@@ -355,8 +357,12 @@ class MessagesController extends Controller
     {
         $getRecords = null;
         $input = trim(filter_var($request['input'], FILTER_SANITIZE_STRING));
-        $records = User::where('first_name', 'LIKE', "%{$input}%");
-        foreach ($records->get() as $record) {
+
+        $records = Seller::whereHas('user', function ($query) use($input) {
+            $query->where('users.first_name', 'LIKE', "%{$input}%");
+        })->get();
+
+        foreach ($records as $record) {
             $getRecords .= view('Chatify::layouts.listItem', [
                 'get' => 'search_item',
                 'type' => 'user',

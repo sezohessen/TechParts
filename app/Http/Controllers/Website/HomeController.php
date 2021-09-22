@@ -26,6 +26,8 @@ class HomeController extends Controller
         $parts  = Part::where('active',1)
         ->orderBy('views','DESC')
         ->get();
+
+
         return view('website.index',compact('parts'));
 
     }
