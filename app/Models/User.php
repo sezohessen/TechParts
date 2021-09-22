@@ -22,8 +22,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    const SellerRole    = 'seller';
-    const UserRole      = 'user';
+    const SellerRole        = 'seller';
+    const UserRole          = 'user';
+    const InitialBase       = 'img/avatar/user-profile.png';
     protected $fillable = [
         'first_name',
         'last_name',

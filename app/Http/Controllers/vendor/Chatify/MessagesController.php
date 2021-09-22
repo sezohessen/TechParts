@@ -80,15 +80,15 @@ class MessagesController extends Controller
 
         // User data
         if ($request['type'] == 'user') {
-            $fetch = Seller::where('user_id', $request['id'])->first();
-            $user  = User::find($request['id']);
+            $user       = User::find($request['id']);
+            $fetch      = $user->hasRole(User::SellerRole) ? Seller::where('user_id',$user->id)->first(): NULL;
         }
 
         // send the response
         return Response::json([
-            'favorite' => $favorite,
-            'fetch' => $user,
-            'user_avatar' => find_image($fetch->sellerAvatar, Seller::avatarBase)
+            'favorite'      => $favorite,
+            'fetch'         => $user,
+            'user_avatar'   => ($fetch ? find_image($fetch->sellerAvatar, Seller::avatarBase) : User::InitialBase)
         ]);
     }
 
@@ -267,7 +267,7 @@ class MessagesController extends Controller
                 if ($user->id != Auth::user()->id) {
                     // Get user data
                     $userCollection = User::where('id', $user->id)->first();
-                    $contacts .= Chatify::getContactItem($request['messenger_id'], $userCollection);
+                    $contacts       = Chatify::getContactItem($request['messenger_id'], $userCollection);
                 }
             }
         }
