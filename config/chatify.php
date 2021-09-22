@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 return [
 
     /*
@@ -8,7 +10,6 @@ return [
     |-------------------------------------
     */
     'name' => env('CHATIFY_NAME', 'Techparts Messenger'),
-
     /*
     |-------------------------------------
     | Routes configurations
@@ -17,7 +18,7 @@ return [
     'routes' => [
         'prefix' => env('CHATIFY_ROUTES_PREFIX', 'Messenger'),
         'middleware' => env('CHATIFY_ROUTES_MIDDLEWARE', ['web','auth']),
-        'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'Chatify\Http\Controllers'),
+        'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'App\Http\Controllers\vendor\chatify'),
     ],
 
     /*
