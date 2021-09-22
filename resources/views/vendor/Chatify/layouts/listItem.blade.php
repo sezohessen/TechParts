@@ -29,7 +29,7 @@
                         <span class="activeStatus"></span>
                     @endif
                 <div class="avatar av-m"
-                style="background-image: url('{{ find_image($seller->sellerAvatar,App\Models\Seller::avatarBase) }}');">
+                style="background-image: url('{{  $seller->sellerAvatar ? find_image($seller->sellerAvatar,App\Models\Seller::avatarBase) : App\Models\User::InitialBase }}');">
                 </div>
                 </td>
                 {{-- center side --}}
@@ -112,8 +112,9 @@
     <tr data-action="0">
         {{-- Avatar side --}}
         <td>
+
         <div class="avatar av-m"
-        style="background-image: url('{{ find_image($seller->sellerAvatar,App\Models\Seller::avatarBase) }}');">
+        style="background-image: url('{{ $user->sellerAvatar ? find_image($user->sellerAvatar,App\Models\Seller::avatarBase) : App\Models\User::InitialBase }}');">
         </div>
         </td>
         {{-- center side --}}

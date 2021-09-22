@@ -13,7 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Str;
-
+use phpDocumentor\Reflection\Types\Null_;
 
 class MessagesController extends Controller
 {
@@ -81,14 +81,14 @@ class MessagesController extends Controller
         // User data
         if ($request['type'] == 'user') {
             $user       = User::find($request['id']);
-            $fetch      = $user->hasRole(User::SellerRole) ? Seller::where('user_id',$user->id)->first(): NULL;
+            $fetch      = $user->hasRole(User::SellerRole) ? (Seller::where('user_id',$user->id)->first()->avatar ? Seller::where('user_id',$user->id)->first() : NULL ) : NULL;
         }
 
         // send the response
         return Response::json([
             'favorite'      => $favorite,
             'fetch'         => $user,
-            'user_avatar'   => ($fetch ? find_image($fetch->sellerAvatar, Seller::avatarBase) : User::InitialBase)
+            'user_avatar'   => ($fetch ? find_image($fetch->sellerAvatar, Seller::avatarBase) : User::InitialBase )
         ]);
     }
 
