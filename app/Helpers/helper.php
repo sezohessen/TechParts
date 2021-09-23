@@ -139,7 +139,7 @@ if(!function_exists('find_image')){
               <i class="far fa-star"></i>
               <i class="far fa-star"></i> ';
 
-            elseif($ratingAverage == 1)
+            elseif($ratingAverage == 1.0)
             {
                 echo
                 '<i class="fas fa-star"></i>
@@ -158,7 +158,7 @@ if(!function_exists('find_image')){
                 <i class="far fa-star"></i>
                 <i class="far fa-star"></i> ';
             }
-            elseif($ratingAverage == 2)
+            elseif($ratingAverage == 2.0)
             {
                 echo
                 '<i class="fas fa-star"></i>
@@ -176,7 +176,7 @@ if(!function_exists('find_image')){
                 <i class="far fa-star"></i>
                 <i class="far fa-star"></i> ';
             }
-            elseif($ratingAverage == 3)
+            elseif($ratingAverage == 3.0)
             {
                 echo
                 '<i class="fas fa-star"></i>
@@ -196,7 +196,7 @@ if(!function_exists('find_image')){
                 <i class="far fa-star"></i> ';
 
             }
-            elseif($ratingAverage == 4)
+            elseif($ratingAverage == 4.0)
             {
                 echo
                 '<i class="fas fa-star"></i>
@@ -216,7 +216,7 @@ if(!function_exists('find_image')){
                 <i class="fas fa-star-half-alt"></i> ';
 
             }
-            elseif($ratingAverage == 5)
+            elseif($ratingAverage == 5.0)
             {
                 echo
                 '<i class="fas fa-star"></i>
@@ -265,8 +265,8 @@ if(!function_exists('find_image')){
                 } catch (Exception $e) {
                     echo 'Caught exception: ',  $e->getMessage(), "\n";
                 }
-           
-            } 
+
+            }
              //Update new image
              $Image = Image::create(['name'=> $fileName, 'base' =>  $base]);
              return $Image->id;

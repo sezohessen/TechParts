@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers\website;
 
-use App\Models\Car;
+
 use App\Models\Part;
-use App\Models\User;
-use App\Models\Seller;
+
 use App\Models\CarModel;
-use App\Models\Settings;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CarCapacity;
+use App\Models\CarMaker;
+use App\Models\CarYear;
+use App\Models\City;
+use App\Models\Governorate;
 use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -21,13 +26,88 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $Request)
     {
-        $parts  = Part::where('active',1)
-        ->orderBy('views','DESC')
-        ->get();
-        return view('website.index',compact('parts'));
+        $parts          = Part::where('active',1);
+        $brands         = CarMaker::all();
+        $governorates   = Governorate::all();
+        $capacities     = CarCapacity::all();
 
+        // -----------Search And Sort--------------
+        if($Request->nearby){
+            dd($Request->nearby);
+        }
+        if (isset($Request->search)){
+            if(Session::get('app_locale')=='en')$parts->where('name','like','%'.request('search').'%');
+            else $parts->where('name_ar','like','%'.request('search').'%');
+        }
+        if(isset($Request->from) && isset($Request->to)){
+            $parts->whereBetween('price', [$Request->from, $Request->to]);
+        }
+        if(isset($Request->governorate_id)){
+            $parts->whereHas('seller', function($q) use($Request) {
+                $q->where('sellers.governorate_id',$Request->governorate_id);
+            });
+        }
+        if(isset($Request->city_id)){
+            $parts->whereHas('seller', function($q) use($Request) {
+                $q->where('sellers.city_id',$Request->city_id);
+            });
+        }
+        if(isset($Request->carMaker)){
+            $parts->whereHas('car', function($q) use($Request) {
+                $q->where('cars.CarMaker_id',$Request->carMaker);
+            });
+        }
+        if(isset($Request->carModel)){
+            $parts->whereHas('car', function($q) use($Request) {
+                $q->where('cars.CarModel_id',$Request->carModel);
+            });
+        }
+        if(isset($Request->carYear)){
+            $parts->whereHas('car', function($q) use($Request) {
+                $q->where('cars.CarYear_id',$Request->carYear);
+            });
+        }
+        if(isset($Request->carCapacity)){
+            $parts->whereHas('car', function($q) use($Request) {
+                $q->where('cars.CarCapacity_id',$Request->carCapacity);
+            });
+        }
+
+
+        if (isset($Request->order) && $Request->order == 'desc') {
+            $parts->orderBy('price','desc');
+        }elseif(isset($Request->order) && $Request->order == 'asc'){
+            $parts->orderBy('price','asc');
+        }elseif (isset($Request->order) && $Request->order == 'views'){
+            $parts->orderBy('views','desc');
+        }else{
+            $parts->orderBy('id', 'desc');
+        }
+
+        $parts = $parts->paginate(12);
+        /* Append Request search to product */
+        $parts->appends(
+            [
+                'order'             => $Request->order,
+                'from'              => $Request->from,
+                'to'                => $Request->to,
+                'carMaker'          => $Request->carMaker,
+                'carModel'          => $Request->carModel,
+                'carYear'           => $Request->carYear,
+                'carCapacity'       => $Request->carCapacity,
+                'search'            => $Request->search,
+                'governorate_id'    => $Request->governorate_id,
+                'city_id'           => $Request->city_id,
+            ]
+        );
+        return view('website.index',compact('parts','brands','governorates','capacities'));
+
+    }
+    public function getPosition(Request $request)
+    {
+        return [$request->latitude,$request->longitude];
     }
 
     /**
@@ -77,6 +157,7 @@ class HomeController extends Controller
             $q->where('cars.carModel_id',$carModelID);
         })
         ->where('id','!=',$id)
+        ->where('active',1)
         ->limit(12)
         ->get();
         return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview'));
@@ -90,31 +171,39 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function available_cities($id)
     {
-        //
-    }
+        $cities = City::where('governorate_id', $id)->get();
+        if($cities->count() > 0 ){
+            return response()->json([
+                'cities' => $cities
+            ]);
+        }
+        return response()->json([
+            'cities' => null
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function available_model($id){
+        $models = CarModel::where('CarMaker_id', $id)->get();
+        if($models->count() > 0 ){
+            return response()->json([
+                'models' => $models
+            ]);
+        }
+        return response()->json([
+                'models' => null
+        ]);
+    }
+    public function available_year($id){
+        $years = CarYear::where('CarModel_id', $id)->get();
+        if($years->count() > 0 ){
+            return response()->json([
+                'years' => $years
+            ]);
+        }
+        return response()->json([
+                'years' => null
+        ]);
     }
 }

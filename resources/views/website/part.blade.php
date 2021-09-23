@@ -24,7 +24,7 @@
                                 <!-- IF there is no reviews -->
                                 @if (NoReview($part->id))
                                 <div class="rating">
-                                   <p class="">@lang('No rating yet')</p>
+                                   <span class="">@lang('No rating yet')</span>
                                 </div>
                                 @else
                                 <!-- Tottal Rating -->
@@ -227,6 +227,7 @@
         <div class="py-0 my-0 inner">
             <h1 class="main-heading">Related Parts<small>Similar Parts</small></h1>
             <div id="featured-cars" class="owl-carousel featured-cars">
+<<<<<<< HEAD
                 <!-- Reated Parts -->
                 @foreach ($RelatedModelParts as $RelatedPart )
                 <div class="item">
@@ -263,6 +264,9 @@
                 </div> <!-- end .item -->
                 @endforeach
 
+=======
+                <x-part :parts="$RelatedModelParts" :makeCol="0"/>
+>>>>>>> FetchBackToFront
 
             </div> <!-- end .featured-cars -->
         </div> <!-- end .inner -->
