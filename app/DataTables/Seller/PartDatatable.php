@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Seller;
 
 use App\Models\Part;
 use App\Models\Seller;
@@ -22,18 +22,17 @@ class PartDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('images', function(Part $part){
-                $data = $part->FirstImage->image;
-                return view('dashboard.Part.btn.image', compact('data'));
+                $data = $part->images->first()->image->name;
+                return view('SellerDashboard.Part.btn.image', compact('data'));
             })
-            ->editColumn('user.email', '{{ Str::limit($user["email"]) }}')
             ->editColumn('name', '{{ Str::limit($name,100) }}')
             ->editColumn('name_ar', '{{ Str::limit($name_ar,100) }}')
             ->editColumn('car.model.name', function (Part $part) {
                 return $part->car->model->name;
             })
             ->editColumn('price', '{{ Str::limit($price) }}')
-            ->addColumn('checkbox', 'dashboard.Part.btn.checkbox')
-            ->addColumn('action', 'dashboard.Part.btn.action')
+            ->addColumn('checkbox', 'SellerDashboard.Part.btn.checkbox')
+            ->addColumn('action', 'SellerDashboard.Part.btn.action')
             ->rawColumns(['checkbox', 'action']);
 
 
@@ -47,11 +46,7 @@ class PartDatatable extends DataTable
      */
     public function query()
     {
-        $parts  = Part::query()->with(['car','user','images']);
-        if ($this->request()->has("seller_id")) {
-            $seller     = Seller::findOrFail($this->request()->seller_id);
-            return $parts->where('user_id', $seller->user_id)->select("parts.*");
-        }else return $parts->select("parts.*");
+        return Part::query()->with(['car','user','images'])->where('user_id',Auth()->user()->id)->select("parts.*");
     }
 
     /**
@@ -121,8 +116,6 @@ class PartDatatable extends DataTable
             Column::make('images')
                 ->title(__("Image"))
                 ->searchable(false),
-            Column::make('user.email')
-                ->title(__("Email")),
             Column::make('name')
                 ->title(__("Part name(ENG)")),
             Column::make('name_ar')

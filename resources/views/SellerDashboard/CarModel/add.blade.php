@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.master')
+@extends('layout.seller')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
 <style>
@@ -29,11 +29,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.model.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('seller.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.model.store")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("seller.model.store")}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -51,12 +51,12 @@
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label for="Image">@lang('Select company name') <span class="text-danger">*</span></label><br>
-                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                            <div class="col-md-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}"
                                      name="CarMaker_id" required data-select2-id="{{old("CarModel_id")}}">
                                     @foreach ($makers as $key=>$maker)
                                         <option value="{{$maker->id}}"
-                                        data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}' class='img-thumbnail ml-5 mr-5'  width='30' height='30' >{{ $maker->name }}">
+                                        data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}'  class='img-thumbnail ml-5 mr-5'  width='30' height='30'>{{ $maker->name }}">
                                         </option>
                                     @endforeach
                                 </select>
@@ -78,4 +78,3 @@
 @endsection
 
 {{-- Scripts Section --}}
-

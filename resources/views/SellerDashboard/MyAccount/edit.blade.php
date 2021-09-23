@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.master')
+@extends('layout.seller')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
 @if (Session::get('app_locale')!='en')
@@ -20,72 +20,16 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.seller.index') }}" style="margin-top: 16px;" class="mr-2 btn btn-primary">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('seller.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.seller.update",['seller'=>$seller])}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("seller.my_account.update",['id'=>$seller->id])}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
-                    <!-- Avatar -->
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="Image">@lang('Logo image')</label>
-                            <br>
-                            <div class="image-input image-input-empty image-input-outline" id="avatar" style="background-image: url({{ $seller->sellerAvatar ? asset('img/avatar/'.$seller->sellerAvatar->name) : asset('media/users/blank.png') }})">
-                                <div class="image-input-wrapper"></div>
-                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                    <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg ,gif,svg" />
-                                    <input type="hidden" name="avatar_remove" />
-                                </label>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                            </div>
-                             @if ($errors->has('avatar'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                    <strong>{{ $errors->first('avatar')  }}</strong>
-                                 </div>
-                             </div>
-                            @endif
-                        </div>
-                    </div>
-                    <!-- Background  -->
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label for="Image">@lang('Background')</label>
-                            <br>
-                            <div class="image-input image-input-empty image-input-outline" id="background" style="background-image: url({{ $seller->background ? asset('img/background/'.$seller->background->name) : asset('media/users/blank.png') }})">
-                                <div class="image-input-wrapper" style="width: 600px;"></div>
-                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                    <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="bg"  />
-                                    <input type="hidden" name="background_remove" />
-                                </label>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                            </div>
-                             @if ($errors->has('bg'))
-                             <div class="fv-plugins-message-container">
-                                 <div class="fv-help-block">
-                                    <strong>{{ $errors->first('bg')  }}</strong>
-                                 </div>
-                             </div>
-                            @endif
-                        </div>
-                    </div>
                     <!-- Arabic Desc -->
                     <div class="col-md-12">
                         <div class="form-group">
@@ -195,7 +139,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="mr-2 btn btn-primary">@lang('Update')  </button>
+                <button type="submit" class="btn btn-primary mr-2">@lang('Update')  </button>
             </div>
         </form>
         <!--end::Form-->
@@ -216,7 +160,7 @@
         old_city    ="<?php echo old('city_id') ?  old('city_id') : $seller->city_id ?>";
         $('#city').empty();
         $.ajax({
-            url: '/dashboard/governorate/'+id,
+            url: '/seller/my-account/governorates/'+id,
             success: data => {
                 if(data.cities){
                     data.cities.forEach(city =>
@@ -250,19 +194,6 @@
         enableAutocomplete: true
 
     });
-    // Avtart & background show
-    "use strict";
-    var KTUserEdit={
-        init:function(){
-            new KTImageInput("avatar");
-            }
-            };jQuery(document).ready((function(){KTUserEdit.init()}));
-    var background={
-        init:function(){
-            new KTImageInput("background");
-            }
-            };jQuery(document).ready((function(){background.init()}));
-
 </script>
 @endsection
 

@@ -26,15 +26,20 @@ class Seller extends Model
     public static function rules($request,$id=NULL)
     {
         $rules = [
+<<<<<<< HEAD
+            'desc'                     => 'nullable|min:10|max:255',
+            'desc_ar'                  => 'required|min:10|max:255',
+=======
             'desc'                     => 'required|min:10|max:255',
             'desc_ar'                  => 'required|min:10|max:255|',
             'bg'                       => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'avatar'                   => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+>>>>>>> FrontEnd
             'governorate_id'           => 'required|integer|exists:governorates,id',
             'city_id'                  => 'required|integer|exists:cities,id',
             'lat'                      => 'required',
             'long'                     => 'required',
-            'street'                   => 'required|min:5|max:100',
+            'street'                   => 'required|min:3|max:100',
             'facebook'                 => 'nullable',
             'instagram'                => 'nullable',
         ];

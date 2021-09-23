@@ -745,6 +745,13 @@
 "Whats app":"واتساب",
 "Passowrd Not confirmed":"لم يتم تأكيد كلمة المرور",
 "Profile":"الصفحةالشخصية",
+"Seller Dashboard":"لوحة تحكم البائع",
+"Select Brand":"اختر الماركة",
+"Select Model":"اختر الموديل",
+"Year of Model":"سنة الصنع",
+"My information":"معلوماتي",
+"Edit my account":"تعديل حسابي",
+"My spare parts":"قطع الغيار الخاصة بي",
 "L.E":"جنية",
 "You reviewed this part successfully!":"قمت بمراجعة هذه القطعة بنجاح",
 "Sorry, No currently reviews to show but you can add your own":"لا توجد حاليًا أية تعليقات لعرضها ولكن يمكنك إضافة تعليقاتك الخاصة",
@@ -760,4 +767,5 @@
 "Contact me":"تواصل معي",
 "Profile Picture":"الصوره الشخصيه",
 "Background":"الخلفية"
+
 }

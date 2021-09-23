@@ -61,7 +61,7 @@
                             <div class="item">
                                 <div class="select-wrapper">
                                     <select class="selectpicker">
-                                        <option>Select Brand</option>
+                                        <option>@lang('Select Brand')</option>
                                         <option>Brand 1</option>
                                         <option>Brand 2</option>
                                     </select>
@@ -71,7 +71,7 @@
                             <div class="item">
                                 <div class="select-wrapper">
                                     <select class="selectpicker">
-                                        <option>Select Model</option>
+                                        <option>@lang('Select Model')</option>
                                         <option>Model 1</option>
                                         <option>Model 2</option>
                                     </select>
@@ -81,16 +81,12 @@
                             <div class="item">
                                 <div class="select-wrapper">
                                     <select class="selectpicker">
-                                        <option>Year of Model</option>
+                                        <option>@lang('Year of Model')</option>
                                         <option>Year 1</option>
                                         <option>Year 2</option>
                                     </select>
 
                                 </div> <!-- end .select-wrapper -->
-                            </div> <!-- end .item -->
-                            <div class="item">
-                                <span class="price-slider-value">Price (Lt) <span id="price-min"></span> - <span id="price-max"></span></span>
-                                <div id="price-slider"></div>
                             </div> <!-- end .item -->
                             <div class="item">
                                 <button type="submit" class="button solid light-blue">Search</button>
@@ -201,7 +197,10 @@
 									</div> <!-- end .form-group -->
 									<div class="form-group">
 										<span class="price-slider-value">Price: <span id="price-min"></span> - <span id="price-max"></span></span>
-										<div id="price-slider"></div>
+                                        <div class="item">
+                                            <span class="price-slider-value">@lang('Price (Lt)')<span id="price-min"></span> - <span id="price-max"></span></span>
+                                            <div id="price-slider"></div>
+                                        </div> <!-- end .item -->
 									</div> <!-- end .form-group -->
 									<div class="form-group">
 										<div class="select-wrapper">

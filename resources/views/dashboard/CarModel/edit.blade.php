@@ -2,6 +2,21 @@
 @extends('layout.master')
 @section('styles')
 <link href="{{ asset('css/pages/wizard/wizard-4.css') }}"  rel="stylesheet" type="text/css"/>
+<style>
+    .bootstrap-select>.dropdown-toggle.btn-light .filter-option, .bootstrap-select>.dropdown-toggle.btn-secondary .filter-option{
+        text-align: initial;
+    }
+    .form-control,
+    .select2-selection--single,
+    .bootstrap-select>.dropdown-toggle.bs-placeholder.btn{
+        height: 45px;
+    }
+    .img-thumbnail{
+        height: 25px;
+        width: 50px;
+        margin: 0px 5px;
+    }
+</style>
 @endsection
 {{-- Content --}}
 @section('content')
@@ -34,11 +49,12 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group ">
-                            <label for="Image">@lang('Select Car Maker')</label><br>
-                            <div class=" col-lg-9 col-md-9 col-sm-12">
+                            <label for="Image">@lang('Select Car Maker') <span class="text-danger">*</span></label><br>
+                            <div class="col-md-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" required>
                                     @foreach ($makers as $key=>$maker)
-                                        <option value="{{$maker->id}}" {{ ($maker->id==$model->CarMaker_id) ? 'selected' : '' }} data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}'  width='30' height='30'>  {{$maker->name}}</span>">
+                                        <option value="{{$maker->id}}" {{ ($maker->id==$model->CarMaker_id) ? 'selected' : '' }}
+                                            data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}' class='img-thumbnail ml-5 mr-5'  width='30' height='30' >{{$maker->name}}</span>">
                                         </option>
                                     @endforeach
                                 </select>
@@ -59,7 +75,3 @@
 
 @endsection
 
-{{-- Scripts Section --}}
-@section('scripts')
-<script src="{{ asset('js/pages/crud/forms/widgets/bootstrap-select.js?v=7.1.8') }}"></script>
-@endsection

@@ -29,13 +29,13 @@ class Part extends Model
     public static function rules($request,$id=NULL)
     {
         $rules = [
-            'name'                     => 'required|max:255',
+            'name'                     => 'nullable|max:255',
             'name_ar'                  => 'required|max:255',
-            'desc'                     => 'required|min:10|max:255',
+            'desc'                     => 'nullable|min:10|max:255',
             'desc_ar'                  => 'required|min:10|max:255|',
-            'part_number'              => 'required|string',
-            'price'                    => 'required|min:1|integer',
-            'in_stock'                 => 'required|min:1|integer',
+            'part_number'              => 'nullable|string',
+            'price'                    => 'nullable|min:1|integer',
+            'in_stock'                 => 'nullable|min:0|integer',
             'part_img'                 => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'car_id'                   => 'required|exists:cars,id',
         ];

@@ -23,16 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $parts  = Part::where('active',1)
+        ->orderBy('views','DESC')
+        ->get();
+        return view('website.index',compact('parts'));
 
-        if(Auth::user())
-        {
-            $user = User::find(Auth::user()->id);
-            $parts = Part::orderBy('DESC')->get();
-            return view('website.index',compact('user','parts'));
-        } else {
-            $parts = Part::orderBy('DESC')->get();
-            return view('website.index',compact('parts'));
-        }
     }
 
     /**

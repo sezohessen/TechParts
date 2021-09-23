@@ -1,6 +1,6 @@
 
 {{-- Extends layout --}}
-@extends('layout.master')
+@extends('layout.seller')
 @section('styles')
 <link href="{{asset('plugins/custom/uppy/uppy.bundle.css')}}" rel="stylesheet" type="text/css" />
 <style>
@@ -25,7 +25,7 @@
 {{-- Content --}}
 @section('content')
     <div class="container">
-        @include('dashboard/message')
+        @include('SellerDashboard/message')
     </div>
     <div class="card card-custom">
         <div class="card-header">
@@ -33,11 +33,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.car.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('seller.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("dashboard.car.store")}}" method="POST">
+        <form action="{{route("seller.car.store")}}" method="POST">
             @csrf
             <div class="card-body">
                 <!-- EN Form -->
@@ -134,7 +134,7 @@
         $('#year').empty();
         old_year="<?php echo old('CarYear_id') ?  old('CarYear_id') : ""  ?>";
         $.ajax({
-            url: '/dashboard/car/available_year/'+id,
+            url: '/seller/car/available_year/'+id,
             success: data => {
                 if(data.years){
                     data.years.forEach(years =>
@@ -153,7 +153,7 @@
         $('#year').empty();
         old_model="<?php echo old('CarModel_id') ?  old('CarModel_id') : ""  ?>";
         $.ajax({
-            url: '/dashboard/car/available_model/'+id,
+            url: '/seller/car/available_model/'+id,
             success: data => {
                 if(data.models){
                     $('#models').append(`<option value="" >@lang('Select Car Model')</option>`)

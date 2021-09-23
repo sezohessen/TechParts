@@ -19,7 +19,7 @@
             <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
                 @if(config('layout.aside.self.display') == false)
                     <div class="header-logo">
-                        <a href="{{ url('/dashboard') }}">
+                        <a href="{{ url('/seller') }}">
                             <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}"
                             src="{{ find_image(App\Models\Settings::first()->logo,'img/settings/') }}" height="30px" width="40px"/>
                         </a>
@@ -28,15 +28,7 @@
 
                 <div id="kt_header_menu" class="header-menu header-menu-mobile {{ Metronic::printClasses('header_menu', false) }}" {{ Metronic::printAttrs('header_menu') }}>
                     <ul class="menu-nav {{ Metronic::printClasses('header_menu_nav', false) }}">
-                    @php
-                        $array = config('menu_header.items');
-                        try {
-                            $array[0]['title'] = __($array[0]['title']);
-                        } catch (\Throwable $th) {
-                            //throw $th;
-                        }
-                    @endphp
-                        {{ Menu::renderHorMenu($array) }}
+                        {{ Menu::renderHorMenu(config('menu_header_seller.items')) }}
                     </ul>
                 </div>
             </div>
