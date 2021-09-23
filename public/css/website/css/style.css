@@ -265,23 +265,6 @@ blockquote footer {
 	margin: 0;
 	border-radius: 0;
 }
-.pagination>li>a {
-	border: 1px solid #d0dce3;
-	color: #b9c1c1;
-	font-size: 14px;
-	line-height: 45px;
-	padding: 0 13px;
-	background: #fff;
-	font-weight: 400;
-	margin: 0 6px;
-	float: none;
-	display: inline-block;
-}
-.pagination>li>a:focus, .pagination>li>a:hover {
-	background: #fff;
-	color: #b9c1c1;
-	border-color: #d0dce3;
-}
 .pagination>li:last-child>a, .pagination>li:first-child>a {
 	border-radius: 0;
 }
@@ -505,7 +488,7 @@ blockquote footer {
 /* ==========================================================================
    05. Forms
    ========================================================================== */
-input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=radio]), select, textarea {
+/* input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=radio]), select, textarea {
 	display: block;
 	border: 1px solid #e7edf0;
 	background: #fff;
@@ -521,9 +504,8 @@ input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=radio])
 	-o-transition: .25s;
 	-ms-transition: .25s;
 	transition: .25s;
-}
-select {
-}
+} */
+
 .select-wrapper {
 	position: relative;
 }
@@ -542,7 +524,7 @@ select {
 	color: #9ba7ae;
 }
 .form-group {
-	margin-bottom: 22px;
+	margin-bottom: 12px;
 }
 .noUi-background {
 	background: #44728e;
@@ -694,6 +676,24 @@ label .required {
 	color: #616d75;
 	font-weight: 300;
 }
+/* New */
+.RelatedPartsDesc {
+    min-height: 100px;
+    max-height: 100px;
+    display: -webkit-box;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+.featured-cars h5{
+    display: -webkit-box;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 /* Footer
    ========================================================================== */
 .footer input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=radio]), .footer select, .footer textarea {
@@ -717,16 +717,16 @@ label .required {
 	margin-bottom: 1px;
 }
 .footer ::-webkit-input-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer :-moz-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer ::-moz-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer :-ms-input-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 /* Banner Form
    ========================================================================== */
@@ -766,9 +766,6 @@ label .required {
 .banner-form select.selectpicker{
 	background:none;
 	border:1px solid #44728e;
-	width:100%;
-}
-.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){
 	width:100%;
 }
 .banner-form .btn-default{
@@ -853,6 +850,9 @@ label .required {
 	font-weight: 500;
 	text-transform: uppercase;
 	padding: 10px 15px;
+    height: 41px;
+    margin: 5px 0px;
+    color: #ffffff;
 }
 .refine-search .noUi-background {
 	background: #5c6e79;
@@ -1538,7 +1538,7 @@ label .required {
    09. Footer
    ========================================================================== */
 .footer {
-   	color: #88949b;
+   	color: #ffffff;
    	font-size: 15px;
    	line-height: 24px;
 }
@@ -1556,6 +1556,9 @@ label .required {
 	font-weight: 300;
 	color: #fff;
 	margin-bottom: 32px;
+}
+.footer a{
+    color: #09a0f7;
 }
 .footer .top .container {
 	position: relative;
@@ -2063,12 +2066,12 @@ label .required {
 	font-weight: 300;
 }
 .featured-cars h5 {
-	float: left;
 	line-height: 21px;
+    height: 46px;
 	margin: 0;
 }
 .featured-cars h5 a {
-	color: #5a6466;
+	color: #09a0f7;
 }
 .featured-cars .price {
 	color: #91b737;
@@ -2082,8 +2085,7 @@ label .required {
 	width: 48px;
 	height: 4px;
 	background: #09a0f7;
-	margin-top: 12px;
-	margin-bottom: 22px;
+	margin: 12px 0px;
 }
 .featured-cars .content p:last-of-type {
 	margin-bottom: 0;
@@ -2091,10 +2093,18 @@ label .required {
 .featured-cars .details {
 	background: #eff3f5;
 	border: 1px solid #dde2e5;
-	line-height: 40px;
+    height: 50px;
 	text-align: center;
 	font-size: 15px;
+    padding: 3px;
 	font-weight: 400;
+}
+.featured-cars .details div {
+    display: -webkit-box;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 .featured-cars .details i {
 	color: #8c9aa5;
@@ -2107,12 +2117,10 @@ label .required {
 }
 .featured-cars .details .fuel {
 	float: left;
-	width: 37.5%;
 	border-right: 1px solid #dde2e5;
 }
 .featured-cars .details .type {
 	float: left;
-	width: 37.5%;
 }
 .featured-cars.owl-theme .owl-nav [class*='owl-'] {
 	border-radius: 0;
@@ -2777,7 +2785,7 @@ label .required {
 	border: 1px solid #d0dce3;
 }
 .listings .heading .btn{
-	width: 170px ;
+	width: 100% ;
 	padding: 10px 16px;
 	line-height: 20px;
 	border: 1px solid #d0dce3;
@@ -2825,6 +2833,10 @@ label .required {
 }
 .listings .listings-grid {
 	margin: 0 -14px;
+}
+.listings-grid nav{
+    text-align: center;
+    margin: 20px 0;
 }
 .listings .listings-grid .listing {
 	width: 33.33%;
@@ -3480,14 +3492,21 @@ label .required {
 /* ==========================================================================
    24. Car Details
    ========================================================================== */
-.car-details {
-	margin-bottom: 45px;
-}
 .car-details .rating {
 	color: #f7d809;
 	font-size: 14px;
 	line-height: 21px;
-	float: right;
+}
+.car-details .rating-component{
+    position: absolute;
+    left: 10px;
+    top: 15px;
+}
+.car-details .rating span{
+    float: right;
+}
+.car-details .white-space{
+    height: 20px;
 }
 .car-details .title {
 	font-size: 24px;

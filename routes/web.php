@@ -138,8 +138,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
 });
-Route::get('/terms', 'Dashboard\TermsController@show');
-Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
+Route::get('/terms', 'Dashboard\TermsController@show')->name('OurTerms');
+Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show')->name('OurPolicy');
 
 
 // Start website /////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +147,10 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Show Data / Index
     Route::get('/index', 'HomeController@index')->name('Index');
     Route::get('/contact-us', 'ContactController@index')->name('ContactUs');
+    Route::get('available_model/{id}','HomeController@available_model');
+    Route::get('available_year/{id}','HomeController@available_year');
+    Route::get('available_cities/{id}','HomeController@available_cities');
+    Route::get('/getgeo', 'HomeController@getPosition')->name('getgeo');
     // Send Data / Store
     Route::post('/contact-us', 'ContactController@store')->name('SendContact');
     Route::post('/part/{id}', 'ReviewController@store')->name('SendReview');
@@ -158,6 +162,7 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
     Route::get('/seller/{id}/{first}-{second}', 'SellerController@show')->name('SellerProfile');
     Route::get('/favorite', 'UserFavController@index')->name('favorite');
+
 
 
 });

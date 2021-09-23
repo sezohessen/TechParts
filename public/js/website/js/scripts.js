@@ -55,17 +55,7 @@
 		}
 
 		/*==========  Range Sliders  ==========*/
-		$('#price-slider').noUiSlider({
-			connect: true,
-			behaviour: 'tap',
-			margin: 5000,
-			start: [20000, 100000],
-			step: 2000,
-			range: {
-				'min': 0,
-				'max': 150000
-			}
-		});
+		
 		$('#price-slider').Link('lower').to($('#price-min'), null, wNumb({
 			decimals: 0
 		}));
@@ -192,7 +182,7 @@
 		});
 
 	});
-	
+
 	/*==========  File Inputs  ==========*/
 	$(document).on('change', '.file-input :file', function() {
 		var input = $(this),
@@ -206,7 +196,7 @@
 		$(this).parent().next('.file-input-selection').html(log);
 		return false;
 	});
-	
+
 	/*==========  Validate Email  ==========*/
 	function validateEmail($validate_email) {
 		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -217,7 +207,7 @@
 		}
 		return false;
 	}
-	
+
 	/*==========  Contact Form  ==========*/
 	$('#contact-form').on('submit', function() {
 		$('#contact-error').fadeOut();
