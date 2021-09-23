@@ -77,13 +77,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 mb-40">
+            <!-- Seller parts -->
+            <div class="mb-40 col-md-8">
                 <div class="right-section">
                     @if ($parts->count())
                         <div class="featured-cars row">
                             <x-part :parts="$parts" :makeCol="6"></x-part>
                         </div>
-                        <div class="text-center mt-20">
+                        <div class="mt-20 text-center">
                             {{ $parts->links("pagination::bootstrap-4") }}
                         </div>
                     @else

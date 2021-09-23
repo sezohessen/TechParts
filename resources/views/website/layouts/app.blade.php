@@ -90,7 +90,7 @@
 							<li><a href="{{url('contact-us')}}">Contact Us</a></li>
                             <!-- User component -->
                             <li>
-								<a class="mr-32" href="">
+								<a id="user-logo" class="mr-32" href="">
                                      <i class="px-4 text-gray-100 bg-gray-600 rounded-t-md ion-ios-person fa-2x"></i> </a>
 									<ul>
                                     @auth
@@ -142,15 +142,15 @@
                               $Settings = Settings::all()->first();
                             @endphp
 							<div class="iconbox-left">
-								<div class="icon px-5"><i class="fa fa-map-marker"></i></div> <!-- end .icon -->
+								<div class="px-5 icon"><i class="fa fa-map-marker"></i></div> <!-- end .icon -->
 								<div class="content"><p>{{ $Settings->location }}</p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 							<div class="iconbox-left">
-								<div class="icon px-5"><i class="fa fa-envelope"></i></div> <!-- end .icon -->
+								<div class="px-5 icon"><i class="fa fa-envelope"></i></div> <!-- end .icon -->
 								<div class="content"><p> {{ $Settings->email }} </p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 							<div class="iconbox-left">
-								<div class="icon px-5"><i class="fa fa-phone"></i></div> <!-- end .icon -->
+								<div class="px-5 icon"><i class="fa fa-phone"></i></div> <!-- end .icon -->
 								<div class="content"><p>{{ $Settings->phone }}</p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 						</div> <!-- end .col-sm-4 -->
@@ -182,15 +182,15 @@
 							<h3 class="mb-10">@lang('Get in Touch')</h3>
                             <div class="row">
                                 <div class="iconbox-left">
-                                    <div class="icon px-5"><i class="fas fa-envelope-open-text"></i></div> <!-- end .icon -->
+                                    <div class="px-5 icon"><i class="fas fa-envelope-open-text"></i></div> <!-- end .icon -->
                                     <div class="content"><a href="{{ route('Website.ContactUs') }}">@lang('Feel free to contact us')</a> </div> <!-- end .content -->
                                 </div> <!-- end .iconbox-left -->
                                 <div class="iconbox-left">
-                                    <div class="icon px-5"><i class="fas fa-journal-whills"></i></div> <!-- end .icon -->
+                                    <div class="px-5 icon"><i class="fas fa-journal-whills"></i></div> <!-- end .icon -->
                                     <div class="content"><a href="{{ route('OurTerms') }}">@lang('Check Terms and Conditions')</a></div> <!-- end .content -->
                                 </div> <!-- end .iconbox-left -->
                                 <div class="iconbox-left">
-                                    <div class="icon px-5"><i class="fas fa-handshake"></i></div> <!-- end .icon -->
+                                    <div class="px-5 icon"><i class="fas fa-handshake"></i></div> <!-- end .icon -->
                                     <div class="content"><a href="{{ route('OurPolicy') }}">@lang('Check Privacy and Policy')</a></div> <!-- end .content -->
                                 </div> <!-- end .iconbox-left -->
                             </div>
