@@ -61,7 +61,11 @@
 				<div class="container">
 					<div class="tabpanel border section-tab" role="tabpanel">
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#search-cars" aria-controls="search-cars" role="tab" data-toggle="tab">Search Cars</a></li>
+							<li role="presentation" class="active">
+                                <a href="#search-cars" aria-controls="search-cars" role="tab" data-toggle="tab">
+                                    @lang('Search for parts')
+                                </a>
+                            </li>
 						</ul> <!-- end .nav-tabs -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane fade in active p-5" id="search-cars">
@@ -267,7 +271,7 @@
 								<div class="clearfix listings-grid">
                                     <div class="featured-cars">
                                         <div class="row">
-                                            <x-part :parts="$parts" makeCol="1"/>
+                                            <x-part :parts="$parts" makeCol="4"/>
                                         </div>
                                     </div>
                                     {{ $parts->appends(Request::only([

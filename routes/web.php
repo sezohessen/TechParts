@@ -138,8 +138,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
 });
-Route::get('/terms', 'Dashboard\TermsController@show');
-Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
+Route::get('/terms', 'Dashboard\TermsController@show')->name('OurTerms');
+Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show')->name('OurPolicy');
 
 
 // Start website /////////////////////////////////////////////////////////////////////////////////

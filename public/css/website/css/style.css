@@ -717,16 +717,16 @@ label .required {
 	margin-bottom: 1px;
 }
 .footer ::-webkit-input-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer :-moz-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer ::-moz-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer :-ms-input-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 /* Banner Form
    ========================================================================== */
@@ -1538,7 +1538,7 @@ label .required {
    09. Footer
    ========================================================================== */
 .footer {
-   	color: #88949b;
+   	color: #ffffff;
    	font-size: 15px;
    	line-height: 24px;
 }
@@ -1556,6 +1556,9 @@ label .required {
 	font-weight: 300;
 	color: #fff;
 	margin-bottom: 32px;
+}
+.footer a{
+    color: #09a0f7;
 }
 .footer .top .container {
 	position: relative;
