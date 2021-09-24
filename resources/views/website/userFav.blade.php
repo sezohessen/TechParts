@@ -45,12 +45,25 @@
                 <h1 class="py-4 mb-10 text-4xl text-center text-gray-300 bg-blue-900 border-4 rounded-t-full ">
                     @lang('Your Favorite Parts')
                 </h1>
+                    @if(session()->has('deleted'))
+                        <div class="m-4 text-center text-red-300 bg-blue-900 alert">
+                            <p>{{ session('deleted') }}</p>
+                        </div>
+                    @endif
                     <!-- Seller parts -->
                 @foreach ($parts->favorite as $part)
                     <div class="my-10 col-md-4">
-                    <div class="item">
+                    <div class="relative item ">
                         <!-- Remove part from favorite -->
-                        
+                        <div class="text-red-500 close-icon">
+                            <form method="POST" action="{{route('Website.destroyFavorite',$part->id)}}">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit"  href="#">
+                                     <i class="text-3xl fas fa-window-close"></i>
+                                </button>
+                            </form>
+                        </div>
                     <div class="featured-car">
                         <div class="image">
                             <a href="{{ route('Website.ShowPart',$part->id) }}">

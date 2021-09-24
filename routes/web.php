@@ -162,7 +162,7 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
     Route::get('/seller/{id}/{first}-{second}', 'SellerController@show')->name('SellerProfile');
     Route::get('/favorite', 'UserFavController@index')->name('favorite');
-
+    Route::delete('/favorite/{id}', 'UserFavController@destroy')->name('destroyFavorite');
 
 
 });
