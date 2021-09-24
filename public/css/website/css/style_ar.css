@@ -33,7 +33,11 @@
     left: -20px;
     right: auto;
 }
-
+.sort .bootstrap-select.btn-group .btn .filter-option,
+.sort .bootstrap-select.btn-group .dropdown-menu li{
+    text-align: right;
+    padding-right: 8px;
+}
 
 /* Part Page */
 .car-details .main-car-details .item .option-content,.car-details .main-car-details .item .option{
@@ -50,6 +54,19 @@
 }
 .car-details .rating span,.car-details .rating{
     float: left;
+}
+.featured-cars .details i{
+    float: right;
+    line-height: 44px;
+    padding: 0px 2px;
+    float: right;
+}
+.featured-cars .details .fuel, .featured-cars .details .type{
+    float: right;
+}
+.featured-cars .details .fuel{
+    border-left: 1px solid #dde2e5;
+    border-right: 0px;
 }
 /* Footer */
 .footer .iconbox-left .icon{

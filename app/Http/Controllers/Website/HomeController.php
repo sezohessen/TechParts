@@ -17,6 +17,7 @@ use App\Models\Governorate;
 use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -34,8 +35,11 @@ class HomeController extends Controller
         $capacities     = CarCapacity::all();
 
         // -----------Search And Sort--------------
-        if($Request->nearby){
-            dd($Request->nearby);
+        if(isset($Request->order) && $Request->order == 'nearest'){
+            if($Request->lat==NULL||$Request->long==NULL){
+                session()->flash('location',__("Please allow website to access your location"));
+                return redirect()->back();
+            }
         }
         if (isset($Request->search)){
             if(Session::get('app_locale')=='en')$parts->where('name','like','%'.request('search').'%');
@@ -82,15 +86,44 @@ class HomeController extends Controller
             $parts->orderBy('price','asc');
         }elseif (isset($Request->order) && $Request->order == 'views'){
             $parts->orderBy('views','desc');
+        }elseif (isset($Request->order) && $Request->order == 'nearest'){
+            $lat    = $Request->lat;
+            $long   = $Request->long;
+            $parts->join('sellers', 'parts.user_id','=','sellers.user_id')
+            ->select(DB::raw("*,
+                6371 * acos(cos(radians(" . $lat . "))
+                * cos(radians(sellers.lat))
+                * cos(radians(sellers.long) - radians(" . $long . "))
+                + sin(radians(" .$lat. "))
+                * sin(radians(sellers.lat))) AS distance
+            "))
+            ->orderBy('distance');
+            /* $parts->whereHas('seller', function($q) use($lat,$long) {
+                $q->select(DB::raw("
+                    6371 * acos(cos(radians(" . $lat . "))
+                    * cos(radians(sellers.lat))
+                    * cos(radians(sellers.long) - radians(" . $long . "))
+                    + sin(radians(" .$lat. "))
+                    * sin(radians(sellers.lat))) AS distance
+                "));
+            }); */
+            /* Here I faced problem
+                **Summary**
+                I need to order by distance(Aliases in MySql) but distance column not found
+                and you cant use orderBy in whereHas so you need to make it manually by joining two tables
+                and order by the aliase one
+            */
         }else{
             $parts->orderBy('id', 'desc');
         }
-
         $parts = $parts->paginate(12);
+        $totalParts = $parts->total();
         /* Append Request search to product */
         $parts->appends(
             [
                 'order'             => $Request->order,
+                'lat'               => $Request->lat,
+                'long'              => $Request->long,
                 'from'              => $Request->from,
                 'to'                => $Request->to,
                 'carMaker'          => $Request->carMaker,
@@ -102,7 +135,7 @@ class HomeController extends Controller
                 'city_id'           => $Request->city_id,
             ]
         );
-        return view('website.index',compact('parts','brands','governorates','capacities'));
+        return view('website.index',compact('parts','brands','governorates','capacities','totalParts'));
 
     }
     public function getPosition(Request $request)

@@ -83,7 +83,7 @@ if(!function_exists('find_image')){
         }
     }
     if(!function_exists('distance')){
-        function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+        function distance($lat1, $lon1, $lat2, $lon2, $unit=NULL) {
             if (($lat1 == $lat2) && ($lon1 == $lon2)) {
               return 0;
             }

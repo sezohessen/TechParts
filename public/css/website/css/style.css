@@ -3069,6 +3069,24 @@ label .required {
 	color: #fff;
 	margin-bottom: 30px;
 }
+.refine-search ::-webkit-scrollbar{
+    width: 7px;
+}
+.refine-search ::-webkit-scrollbar-track {
+    background: #888;
+}
+
+/* Handle */
+.refine-search ::-webkit-scrollbar-thumb {
+    background: #f7d809;
+    border-radius: 4px;
+}
+
+/* Handle on hover */
+.refine-search ::-webkit-scrollbar-thumb:hover {
+    background: #f7d603;
+}
+
 .refine-search .title {
 	font-size: 18px;
 	line-height: 21px;

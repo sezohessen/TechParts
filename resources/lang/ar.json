@@ -772,7 +772,8 @@
 "Profile Picture":"الصوره الشخصيه",
 "Background":"الخلفية",
 "Parts Listing":"قائمة قطع الغيار",
-"Results Found":"نتائج وُجدت",
+"Showing":"عرض",
+"of":"من",
 "Price: Low to High":"السعر: من الاقل للاعلي",
 "Price: High to Low":"السعر: من الاعلي للاقل",
 "Popularity":"الشعبية",
@@ -796,6 +797,9 @@
 "Check Terms and Conditions":"تحقق من الشروط والأحكام",
 "Check Privacy and Policy":"تحقق من الخصوصية والسياسة",
 "Our Social media links":"روابط وسائل التواصل الاجتماعي الخاصة بنا",
-"Download Our App..":"حمل تطبيقنا .."
+"Download Our App..":"حمل تطبيقنا ..",
+"Please allow website to access your location":"الرجاء السماح للموقع للوصول إلى موقعك",
+"Allow access":"السماح بالوصول",
+"km Away":"علي بعد (كليومتر)"
 
 }

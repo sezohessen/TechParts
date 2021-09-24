@@ -23,6 +23,16 @@
                                 <h5>
                                     <a href="{{ route('Website.ShowPart',$part->id) }}"> {{ LangDetail($part->name,$part->name_ar) }} </a>
                                 </h5>
+                                <span>
+                                    @if (request()->get('order')=='nearest')
+                                    {{-- @php
+                                        $distance = distance(request()->get('lat'),request()->get('long'),$part->seller->lat,$part->seller->long,"K");
+                                    @endphp --}}
+                                        @if (@$part->distance)
+                                            <p class="text-info font-medium">{{ number_format(@$part->distance,2,',','') }} @lang('km Away')</p>
+                                        @endif
+                                    @endif
+                                </span>
                             </div> <!-- end .clearfix -->
 
                         </div>
