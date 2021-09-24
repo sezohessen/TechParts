@@ -23,7 +23,25 @@ class UserFavController extends Controller
             return redirect()->back();
         }
     }
-
+    public function store($id)
+    {
+        if (Auth::check()) {
+            $part              = Part::find($id);
+            $isExist           = UserFav::where('user_id', Auth()->user()->id)
+            ->where('part_id', $part)->first() ? 1 : 0;
+            if ($isExist) {
+                session()->flash('Exist', __("Part Already In Your Favorite List"));
+                return redirect()->route('Website.Index');
+            } else {
+                $addToFavorite     = UserFav::create([
+                'user_id' => Auth()->user()->id,
+                'part_id' => $part->id]);
+                $addToFavorite->save();
+                session()->flash('created', __("Part has been Added Successfully To Your Favorite"));
+                return redirect()->route('Website.favorite');
+            }
+        }
+    }
     public function destroy($id)
     {
       

@@ -17,9 +17,9 @@ class Contact extends Model
     public static function rules()
     {
         $rules = [
-            'email'        => 'required|email|',
+            'email'        => 'required|email:rfc,dns',
             'phone'        => 'required|digits:11|',
-            'message'      => 'required|min:5|',
+            'message'      => 'required|min:5|max:255',
 
         ];
         return $rules;

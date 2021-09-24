@@ -46,21 +46,26 @@
                     @lang('Your Favorite Parts')
                 </h1>
                     @if(session()->has('deleted'))
-                        <div class="m-4 text-center text-red-300 bg-blue-900 alert">
+                        <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
                             <p>{{ session('deleted') }}</p>
+                        </div>
+                    @endif
+                    @if(session()->has('created'))
+                        <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
+                            <p>{{ session('created') }}</p>
                         </div>
                     @endif
                     <!-- Seller parts -->
                 @foreach ($parts->favorite as $part)
                     <div class="my-10 col-md-4">
-                    <div class="relative item ">
+                    <div class="relative item">
                         <!-- Remove part from favorite -->
-                        <div class="text-red-500 close-icon">
+                        <div class="absolute top-0 right-0 z-40 text-red-500 close-icon">
                             <form method="POST" action="{{route('Website.destroyFavorite',$part->id)}}">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit"  href="#">
-                                     <i class="text-3xl fas fa-window-close"></i>
+                                <i class="p-2 text-3xl text-gray-300 bg-red-600 rounded-lg fas fa-times"></i>
                                 </button>
                             </form>
                         </div>
@@ -84,7 +89,7 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="clearfix">
-                                        <h5 class="my-5 text-4xl">
+                                        <h5 class="my-5 text-3xl">
                                             <a href="{{ route('Website.ShowPart',$part->id) }}"> {{ LangDetail($part->name,$part->name_ar) }} </a>
                                         </h5>
                                     </div> <!-- end .clearfix -->

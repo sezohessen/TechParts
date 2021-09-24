@@ -3,7 +3,16 @@
         <div class="col-md-{{ $makeCol }} mb-10">
     @endif
         <div class="item">
-            <div class="featured-car">
+            <div class="relative featured-car">
+                <!-- Add part to favorite -->
+                <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
+                            @csrf   
+                    <div class="absolute top-0 right-0 z-40 p-4 bg-pink-800 rounded-lg text-blue-50">
+                        <button type="submit">
+                          <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </form>
                 <div class="image">
                     <a href="{{ route('Website.ShowPart',$part->id) }}"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->FirstImage->image->name }}" class="img-responsive"></a>
                     <div class="car-details">
