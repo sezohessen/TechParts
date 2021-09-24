@@ -38,13 +38,13 @@ class UserFavController extends Controller
                 'part_id' => $part->id]);
                 $addToFavorite->save();
                 session()->flash('created', __("Part has been Added Successfully To Your Favorite"));
-                return redirect()->route('Website.favorite');
+                return redirect()->back();
             }
         }
     }
     public function destroy($id)
     {
-      
+
         $deleteFav = UserFav::where('part_id',$id)->first();
         // dd($deleteFav);
         $deleteFav->delete();

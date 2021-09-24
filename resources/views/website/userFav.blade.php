@@ -60,7 +60,7 @@
                     <div class="my-10 col-md-4">
                     <div class="relative item">
                         <!-- Remove part from favorite -->
-                        <div class="absolute top-0 right-0 z-40 text-red-500 close-icon">
+                        <div class="absolute top-0 right    -0 z-40 text-red-500 close-icon">
                             <form method="POST" action="{{route('Website.destroyFavorite',$part->id)}}">
                                 @method('DELETE')
                                 @csrf
