@@ -23,7 +23,8 @@
         <div class="item">
             <div class="relative featured-car">
                 <!-- If item in favorite -->
-                @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first())
+            @if (Auth::check())
+               @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first())
                     <form method="POST" action="{{route('Website.destroyFavorite',$part->id)}}">
                     @method('DELETE')
                     @csrf
@@ -44,6 +45,10 @@
                     </div>
                 </form>
                 @endif
+            @else
+                 <!-- If user not logged -->
+            @endif
+
 
                 <div class="image">
                     <a href="{{ route('Website.ShowPart',$part->id) }}"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->FirstImage->image->name }}" class="img-responsive"></a>

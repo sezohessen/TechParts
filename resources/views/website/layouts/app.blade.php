@@ -48,7 +48,7 @@
 		<header class="header ">
 			<div class="container">
 				<div class="clearfix navigation">
-					<div class="logo"><a href="{{ route('Website.Index') }}"><img src="{{ asset('img/website/logo.png') }}" alt="Automan" class="img-responsive"></a></div> <!-- end .logo -->
+					<div class="logo"><a href="{{ route('Website.Index') }}"><img style='height: 55px;' src="{{ asset('img/website/logo1.png') }}" alt="Automan" class="p-4 img-responsive"></a></div> <!-- end .logo -->
 					<div class="contact">
 					</div> <!-- end .contact -->
 					<nav class="main-nav">
@@ -57,40 +57,18 @@
 							<li class="active">
 								<a href="{{url('index')}}">@lang('Home')</a>
 							</li>
-							<li>
-								<a href="listing-grid-view.html">Cars</a>
-								<ul>
-									<li><a href="listing-grid-view.html">Listing Grid View</a></li>
-									<li><a href="listing-list-view.html">Listing List View</a></li>
-									<li><a href="details.html">Details 1</a></li>
-									<li><a href="details-1.html">Details 2</a></li>
-								</ul>
+                            @if (Auth::check())
+							<li class="favorite">
+								<a href="{{url('favorite')}}">@lang('Favorite')
+                                    <span>( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>
+                                </a>
 							</li>
-							<li>
-								<a href="compare.html">Compare</a>
-								<ul>
-									<li><a href="compare.html">Compare</a></li>
-									<li><a href="compare-details.html">Compare Details</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="blog.html">Blog</a>
-								<ul>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="blog-post.html">Blog Post</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Pages</a>
-								<ul>
-									<li><a href="about-us.html">About Us</a></li>
-									<li><a href="shortcodes.html">Shortcodes</a></li>
-								</ul>
-							</li>
-							<li><a href="{{url('contact-us')}}">Contact Us</a></li>
+                            @endif
+							<li><a href="{{url('contact-us')}}">@lang('Contact Us')</a></li>
+
                             <!-- User component -->
                             <li>
-								<a id="user-logo" class="mr-32" href="">
+								<a id="user-logo" href="#">
                                      <i class="px-4 text-gray-100 bg-gray-600 rounded-t-md ion-ios-person fa-2x"></i> </a>
 									<ul>
                                     @auth
@@ -108,7 +86,7 @@
 
                                     @endauth
                                     @guest
-                                    <li><a href="{{ url('/') }}">@lang('Login')</a></li>
+                                    <li class="p-4"><a href="{{ url('/') }}">@lang('Login')</a></li>
                                     @endguest
 								</ul>
 							</li>

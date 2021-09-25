@@ -3936,3 +3936,10 @@ label .required {
     border: 1px solid #72fa72;
 }
 
+/* Navbar */
+.main-nav ul>li ul {
+    right:0;
+    left: auto;
+}
+
+/* End navbar */
