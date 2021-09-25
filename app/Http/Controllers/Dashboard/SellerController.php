@@ -104,13 +104,14 @@ class SellerController extends Controller
 
         // Store avatar
         if($request->file('avatar')){
-        $Image_id = self::fileAvatar($request->file('avatar'),$seller->avatar);
+        $Image_id = add_Image($request->file('avatar'),$seller->avatar,Seller::avatarBase);
         $seller->avatar = $Image_id;
          }
+
         // Store avatar
         if($request->file('bg')){
 
-            $Image_id = self::fileBackground($request->file('bg'),$seller->bg);
+            $Image_id = add_Image($request->file('bg'),$seller->bg,Seller::backgroundBase);
             $seller->bg = $Image_id;
         }
         $seller->save();
@@ -118,72 +119,8 @@ class SellerController extends Controller
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("dashboard.seller.index");
     }
-    // store avatar function -------------------------------------------
-    public static function fileAvatar($file,$id)
-    {
-        if(Image::find($id))
-        {
-        $Image = Image::find($id);
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . rand(11111, 99999) . '.' . $extension;
-        $destinationPath = public_path() . $Image->base;
-        $file->move($destinationPath, $fileName);
-        //Delete Old image
-        try {
-            $file_old = $destinationPath . $Image->name;
-            unlink($file_old);
-            $Image->delete();
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        //Update new image
-        $Image = Image::create(['name'=> $fileName, 'base' =>  $Image->base]);
-        return $Image->id;
 
-        } else {
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . rand(11111, 99999) . '.' . $extension;
-        $destinationPath = public_path() . '\img\avatar\\';
-        $file->move($destinationPath, $fileName);
-        $Image = Image::create(['name'=> $fileName, 'base' =>  '\img\background\\']);
-        return $Image->id;    
-        }
-
-    }
-   // store background function -------------------------------------------
-   public static function fileBackground($file,$id)
-   {
-       if(Image::find($id))
-       {
-        $Image = Image::find($id);
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . rand(11111, 99999) . '.' . $extension;
-        $destinationPath = public_path() . $Image->base;
-        $file->move($destinationPath, $fileName);
-  
-        //Delete Old image
-        try {
-            $file_old = $destinationPath . $Image->name;
-            unlink($file_old);
-            $Image->delete();
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        //Update new image
-        $Image = Image::create(['name'=> $fileName, 'base' =>  $Image->base]);
-        return $Image->id;
-
-       } else {
-
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . rand(11111, 99999) . '.' . $extension;
-        $destinationPath = public_path() . '\img\background\\';
-        $file->move($destinationPath, $fileName);
-        $Image = Image::create(['name'=> $fileName, 'base' =>  '\img\background\\']);
-        return $Image->id;
-       }
-
-   }
+//    }
     /**
      * Remove the specified resource from storage.
      *

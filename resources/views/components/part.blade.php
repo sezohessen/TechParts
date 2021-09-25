@@ -9,7 +9,13 @@
         <p>{{ session('created') }} <br>  <a class="text-yellow-400" href="{{url('favorite')}}">@lang('See Your Favorite Parts')</a></p>
     </div>
 @endif
-<!-- End Seassion Messages -->
+<!-- End Seassion Messages\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\77
+
+
+\\\\\\\\\\\\\\\\\
+
+
+-->
 @foreach ($parts as $part )
     @if ($makeCol)
         <div class="col-md-{{ $makeCol }} mb-10">
