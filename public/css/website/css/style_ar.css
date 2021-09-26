@@ -29,7 +29,10 @@
     float: right;
 }
 .main-nav {
-    float: left;
+	float: left;
+	font-size: 0;
+    margin-left: 30%;
+    margin-right: auto;
 }
 .main-nav ul>li ul{
     left: 0;
@@ -67,3 +70,8 @@
 .footer .iconbox-left .icon{
     float: right;
 }
+/* LOGO */
+#user-logo{
+    margin-right: 30px;
+}
+

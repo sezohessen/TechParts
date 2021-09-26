@@ -1255,6 +1255,8 @@ label .required {
 .main-nav {
 	float: right;
 	font-size: 0;
+    margin-left: auto;
+    margin-right: 30%;
 }
 .main-nav ul>li {
 	display: inline-block;
@@ -3938,13 +3940,16 @@ label .required {
 
 /* Navbar */
 .main-nav ul>li ul {
-    right:0;
-    left: auto;
+    right:auto;
+    left: 0;
 }
 #nav-lang{
     top: 95%;
     left: 0;
     right: auto;
 }
-
+/* LOGO */
+#user-logo{
+    margin-left: 30px;
+}
 /* End navbar */

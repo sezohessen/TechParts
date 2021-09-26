@@ -96,7 +96,7 @@
                             <!-- User component -->
                             <li class="relative">
 								<a id="user-logo" href="#">
-                                     <i class="px-4 text-gray-100 bg-gray-600 rounded-t-md ion-ios-person fa-2x"></i> </a>
+                                     <i class="px-4 text-gray-100 bg-gray-600 rounded-full ion-ios-person fa-2x"></i> </a>
 									<ul class="absolute right-0">
                                     @auth
 									<li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
