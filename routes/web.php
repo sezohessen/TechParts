@@ -26,7 +26,6 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::resource('/part','PartController');
     Route::resource('/seller','SellerController');
-    Route::resource('/country','CountryController');
     Route::resource('/governorate','GovernorateController');
     Route::resource('/city','CityController');
     Route::resource('/terms','TermsController');
@@ -89,7 +88,6 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     Route::get('available_model/{id}','HomeController@available_model');
     Route::get('available_year/{id}','HomeController@available_year');
     Route::get('available_cities/{id}','HomeController@available_cities');
-    Route::get('/getgeo', 'HomeController@getPosition')->name('getgeo');
     // Send Data / Store
     Route::post('/contact-us', 'ContactController@store')->name('SendContact');
     Route::post('/part/{id}', 'ReviewController@store')->name('SendReview');
