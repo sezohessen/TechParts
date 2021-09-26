@@ -88,7 +88,7 @@ class PartController extends Controller
      */
     public function update(Request $request, Part $part)
     {
-        dd($request->all());
+        dd($request->file('part_img'));
         $rules          = Part::rules($request,true);
         $request->validate($rules);
 

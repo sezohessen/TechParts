@@ -15,8 +15,9 @@ use App\Models\CarYear;
 use App\Models\City;
 use App\Models\Governorate;
 use App\Models\Review;
-use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -193,6 +194,12 @@ class HomeController extends Controller
         ->where('active',1)
         ->limit(12)
         ->get();
+        $partId = 'part_'.$part->id;
+        if(!Session::has($partId)){
+            $part->increment('views');
+            Session::put($partId, 1);
+        }
+
         return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview'));
         }
         else return redirect()->route('Website.Index');

@@ -71,6 +71,9 @@
     border-left: 1px solid #dde2e5;
     border-right: 0px;
 }
+#car-details-slider{
+    direction: ltr;
+}
 /* Footer */
 .footer .iconbox-left .icon{
     float: right;
