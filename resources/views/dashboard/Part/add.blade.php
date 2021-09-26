@@ -93,6 +93,25 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-12">@lang('Select User')<span class="text-danger">*</span></label><br>
+                            <div class=" col-lg-12 col-md-12 col-sm-12">
+                                <select class="form-control selectpicker {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
+                                     name="user_id" id="kt_select2_4" required >
+                                    <option value="">@lang('Select Car')</option>
+                                    @foreach ($sellers as $seller)
+                                        <option  value="{{$seller->user->id}}">
+                                            {{ $seller->user->full_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @error('user_id')
+                                <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
                     <!-- Select car -->
                     <div class="col-md-12">
                         <div class="form-group row">
@@ -153,6 +172,4 @@
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src="{{ asset("js/pages/crud/forms/widgets/select2.js") }}"></script>
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
-<script src="{{ asset('plugins/custom/uppy/uppy.bundle.js') }}"></script>
-<script src="{{ asset('js/pages/crud/file-upload/uppy.js') }}"></script>
 @endsection

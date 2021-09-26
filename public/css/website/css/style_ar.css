@@ -28,6 +28,9 @@
 .tabpanel.section-tab .nav-tabs{
     left: auto;
 }
+.page-title .title{
+    left: 0;
+}
 .page-title .title:after{
     border-color: #0074e1 transparent transparent transparent;
     left: -20px;

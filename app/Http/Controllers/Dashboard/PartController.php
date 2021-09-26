@@ -7,6 +7,7 @@ use App\Models\Part;
 use Illuminate\Http\Request;
 use App\DataTables\PartDatatable;
 use App\Http\Controllers\Controller;
+use App\Models\Seller;
 
 class PartController extends Controller
 {
@@ -32,7 +33,8 @@ class PartController extends Controller
         $page_title         = __("Add part");
         $page_description   =__( "Add New Record");
         $cars               = Car::all();
-        return view('dashboard.part.add', compact('page_title', 'page_description','cars'));
+        $sellers            = Seller::all();
+        return view('dashboard.part.add', compact('page_title', 'page_description','cars','sellers'));
     }
 
     /**
@@ -44,6 +46,7 @@ class PartController extends Controller
     public function store(Request $request)
     {
         $rules          = Part::rules($request);
+
         $request->validate($rules);
         $credentials    = Part::credentials($request);
         $Part           = Part::create($credentials);
@@ -85,8 +88,10 @@ class PartController extends Controller
      */
     public function update(Request $request, Part $part)
     {
+        dd($request->all());
         $rules          = Part::rules($request,true);
         $request->validate($rules);
+
         $credentials    = Part::credentials($request,true);
         $part->update($credentials);
         session()->flash('updated',__("Changes has been Created Successfully"));
@@ -99,6 +104,13 @@ class PartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function Activity(Request $request){
+        $country = Part::find($request->id);
+        $country->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
     public function destroy(Part $part)
     {
         $part->delete();

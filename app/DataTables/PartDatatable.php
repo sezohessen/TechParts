@@ -32,9 +32,10 @@ class PartDatatable extends DataTable
                 return $part->car->model->name;
             })
             ->editColumn('price', '{{ Str::limit($price) }}')
+            ->addColumn('active', 'dashboard.Part.btn.active')
             ->addColumn('checkbox', 'dashboard.Part.btn.checkbox')
             ->addColumn('action', 'dashboard.Part.btn.action')
-            ->rawColumns(['checkbox', 'action']);
+            ->rawColumns(['checkbox', 'action','active']);
 
 
     }
@@ -133,6 +134,13 @@ class PartDatatable extends DataTable
             Column::make('price')
                 ->title(__("Price"))
                 ->searchable(false),
+            Column::computed('active')
+            ->title(__('Active'))
+            ->exportable(false)
+            ->printable(false)
+            ->searchable(false)
+            ->width(120)
+            ->addClass('text-center'),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
