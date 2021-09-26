@@ -63,7 +63,7 @@
                                <i class="px-2 text-4xl text-gray-800 fas fa-phone-square"></i>
                                {{ $seller->user->phone }}
                             </a>
-                            <a href="#">
+                            <a href="https://api.whatsapp.com/send?phone={{$seller->user->whats_app}}" target="_blank">
                                <i class="px-2 text-4xl text-green-500 fab fa-whatsapp "></i>
                                {{ $seller->user->whats_app }}
                             </a>

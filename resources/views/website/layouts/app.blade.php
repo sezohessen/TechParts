@@ -64,13 +64,40 @@
                                 </a>
 							</li>
                             @endif
+
 							<li><a href="{{url('contact-us')}}">@lang('Contact Us')</a></li>
 
+                            <!-- Langague -->
+                            <li class="relative nav-lang-container">
+                                <a href="">@lang('language')</a>
+                                <ul class="absolute left-0 nav-lang" id='nav-lang'>
+                                    <li class="py-3 navi-item">
+                                        <a href="{{url('/lang/en')}}" class="navi-link @if (App::isLocale('en'))  active  @endif">
+                                            <div>
+                                                <div class="flex">
+                                                    <span class="leading-10">@lang('English') </span>
+                                                    <img class="w-32 ml-auto mr-auto" style="height: 30px;" src="{{ asset('img/language/united-kingdom.svg') }}" alt=""/>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="py-3 navi-item">
+                                        <a href="{{url('/lang/ar')}}" class="navi-link @if (App::isLocale('ar'))  active  @endif" href="{{url('/ar')}}">
+                                            <div>
+                                                <div class="flex">
+                                                    <span class="leading-10">@lang('Arabic') </span>
+                                                    <img class="w-32 ml-auto mr-auto" style="height: 30px;" src="{{ asset('img/language/saudi-arabia.svg') }}" alt=""/>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <!-- User component -->
-                            <li>
+                            <li class="relative">
 								<a id="user-logo" href="#">
                                      <i class="px-4 text-gray-100 bg-gray-600 rounded-t-md ion-ios-person fa-2x"></i> </a>
-									<ul>
+									<ul class="absolute right-0">
                                     @auth
 									<li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
 
@@ -182,8 +209,10 @@
                                 ><i class="fab fa-instagram"></i
                                 ></a>
                                 <!-- Whatsapp -->
-                                <a id="whatsapp" class="btn btn-primary" href="#!" role="button"
-                                title="Contact us on WhatsApp"
+                                <a id="whatsapp" class="btn btn-primary"
+                                href="https://api.whatsapp.com/send?phone={{$Settings->whatsapp}}" role="button"
+                                target="_blank"
+                                title="{{ $Settings->whatsapp }}"
                                 ><i class="fab fa-whatsapp"></i
                                 ></a>
                                 </div>

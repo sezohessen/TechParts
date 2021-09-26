@@ -802,5 +802,8 @@
 "Part has been Deleted Successfully From Your Favorite":"تم حذف القطعة من المفضلة ",
 "Part has been Added Successfully To Your Favorite":"تمت إضافة القطعة بنجاح إلى المفضلة",
 "See Your Favorite Parts":"القطع المفضلة لديك",
-"Favorite":"المفضلة"
+"Favorite":"المفضلة",
+"language":"اللغة",
+"English":"إنجليزي",
+"Arabic":"عربي"
 }

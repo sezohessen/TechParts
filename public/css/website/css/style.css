@@ -3941,5 +3941,10 @@ label .required {
     right:0;
     left: auto;
 }
+#nav-lang{
+    top: 95%;
+    left: 0;
+    right: auto;
+}
 
 /* End navbar */
