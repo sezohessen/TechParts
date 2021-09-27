@@ -1,9 +1,55 @@
+<!-- Session Messages -->
+@if(session()->has('deleted'))
+    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
+        <p>{{ session('deleted') }} <br> <a class="text-yellow-400" href="{{url('favorite')}}">@lang('See Your Favorite Parts')</a> </p>
+    </div>
+@endif
+@if(session()->has('created'))
+    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
+        <p>{{ session('created') }} <br>  <a class="text-yellow-400" href="{{url('favorite')}}">@lang('See Your Favorite Parts')</a></p>
+    </div>
+@endif
+<!-- End Seassion Messages\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\77
+
+
+\\\\\\\\\\\\\\\\\
+
+
+-->
 @foreach ($parts as $part )
     @if ($makeCol)
-        <div class="col-md-4 mb-10">
+        <div class="col-md-{{ $makeCol }} mb-10">
     @endif
         <div class="item">
-            <div class="featured-car">
+            <div class="relative featured-car">
+                <!-- If item in favorite -->
+            @if (Auth::check())
+               @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first())
+                    <form method="POST" action="{{route('Website.destroyFavorite',$part->id)}}">
+                    @method('DELETE')
+                    @csrf
+                        <div class="absolute top-0 right-0 z-40 p-4 bg-pink-800 rounded-lg text-blue-50">
+                            <button type="submit">
+                                 <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </form>
+                @else
+                    <!-- Add part to favorite -->
+                    <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
+                    @csrf
+                    <div class="absolute top-0 right-0 z-40 p-4 bg-pink-800 rounded-lg text-blue-50">
+                        <button type="submit">
+                          <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </form>
+                @endif
+            @else
+                 <!-- If user not logged -->
+            @endif
+
+
                 <div class="image">
                     <a href="{{ route('Website.ShowPart',$part->id) }}"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->FirstImage->image->name }}" class="img-responsive"></a>
                     <div class="car-details">

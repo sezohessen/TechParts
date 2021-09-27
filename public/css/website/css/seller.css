@@ -1,23 +1,30 @@
+
 .seller-bg {
     position: relative;
 }
-.background{
-    max-height: 400px;
-    min-width: 100%;
+.seller-bg .bg{
+    margin-top: 82px;
+
+}
+.seller-bg .bg,
+.seller-bg .bg img{
+    max-height: 300px;
+    min-height: 300px;
+    width: 100%;
+}
+.seller-avatar img.img-thumbnail{
+    border: none;
 }
 .seller-avatar{
     position: absolute;
-    bottom: -15%;
+    bottom: -10%;
     left: 50%;
     transform: translate(-50%, 0);
-    }
-.seller-avatar img {
-    box-shadow: 0px 4px 3px 0px #888888;
 }
 .left-section{
     max-height: 720px;
-    box-shadow: 0px 0 5px 0 #888888;
-    border-radius: 15px 15px 0 0;
+    box-shadow: 0px 0 3px 0 #888888;
+    border-radius: 10px 10px 0 0;
 }
 
 

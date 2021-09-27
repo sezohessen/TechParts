@@ -41,7 +41,7 @@ class ReviewController extends Controller
             'user_id'    => Auth::id(),
             'part_id'   => $id
         ]);
-        session()->flash('review', 'You reviewed this part successfully!');
+        session()->flash('review', __('You reviewed this part successfully!'));
         return redirect()->back();
     }
 }

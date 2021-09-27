@@ -25,12 +25,25 @@
 		<!-- noUiSlider -->
 		<link href="{{ asset('css/website/css/jquery.nouislider.min.css') }}" rel="stylesheet">
 		<!-- Style.css -->
-		<link href="{{ asset('css/website/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/website/css/style.css') }}" rel="stylesheet">
+        <!-- Metronic css -->
+        <link href="{{ asset('css/pages/login/login-1.css') }}" rel="stylesheet" type="text/css"/>
+
+        @if (App::isLocale('ar')) <link href="{{ asset('css/website/css/style_ar.css') }}" rel="stylesheet"> @endif
         <!-- Tailwindcss -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/pages/error/error-3.css') }}" rel="stylesheet" type="text/css"/>
+
+        {{-- Favicon --}}
+        <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+        {{-- Meta Data --}}
+        <meta name="description" content="@yield('page_description', $page_description ?? '')" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+
 
         {{-- CDN --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -47,7 +60,7 @@
 		<header class="header ">
 			<div class="container">
 				<div class="clearfix navigation">
-					<div class="logo"><a href="{{ route('Website.Index') }}"><img src="{{ asset('img/website/logo.png') }}" alt="Automan" class="img-responsive"></a></div> <!-- end .logo -->
+					<div class="logo"><a href="{{ route('Website.Index') }}"><img style='height: 65px;' src="{{find_image(App\Models\Settings::first()->logo,'img/settings/')}}" alt="Automan" class="p-4 img-responsive"></a></div> <!-- end .logo -->
 					<div class="contact">
 					</div> <!-- end .contact -->
 					<nav class="main-nav">
@@ -56,42 +69,47 @@
 							<li class="active">
 								<a href="{{url('index')}}">@lang('Home')</a>
 							</li>
-							<li>
-								<a href="listing-grid-view.html">Cars</a>
-								<ul>
-									<li><a href="listing-grid-view.html">Listing Grid View</a></li>
-									<li><a href="listing-list-view.html">Listing List View</a></li>
-									<li><a href="details.html">Details 1</a></li>
-									<li><a href="details-1.html">Details 2</a></li>
-								</ul>
+                            @if (Auth::check())
+							<li class="favorite">
+								<a href="{{url('favorite')}}">@lang('Favorite')
+                                    <span>( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>
+                                </a>
 							</li>
-							<li>
-								<a href="compare.html">Compare</a>
-								<ul>
-									<li><a href="compare.html">Compare</a></li>
-									<li><a href="compare-details.html">Compare Details</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="blog.html">Blog</a>
-								<ul>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="blog-post.html">Blog Post</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Pages</a>
-								<ul>
-									<li><a href="about-us.html">About Us</a></li>
-									<li><a href="shortcodes.html">Shortcodes</a></li>
-								</ul>
-							</li>
-							<li><a href="{{url('contact-us')}}">Contact Us</a></li>
+                            @endif
+
+							<li><a href="{{url('contact-us')}}">@lang('Contact Us')</a></li>
+
+                            <!-- Langague -->
+                            <li class="relative nav-lang-container">
+                                <a href="">@lang('language')</a>
+                                <ul class="absolute left-0 nav-lang" id='nav-lang'>
+                                    <li class="py-3 navi-item">
+                                        <a href="{{url('/lang/en')}}" class="navi-link @if (App::isLocale('en'))  active  @endif">
+                                            <div>
+                                                <div class="flex">
+                                                    <span class="leading-10">@lang('English') </span>
+                                                    <img class="w-32 ml-auto mr-auto" style="height: 30px;" src="{{ asset('img/language/united-kingdom.svg') }}" alt=""/>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="py-3 navi-item">
+                                        <a href="{{url('/lang/ar')}}" class="navi-link @if (App::isLocale('ar'))  active  @endif" href="{{url('/ar')}}">
+                                            <div>
+                                                <div class="flex">
+                                                    <span class="leading-10">@lang('Arabic') </span>
+                                                    <img class="w-32 ml-auto mr-auto" style="height: 30px;" src="{{ asset('img/language/saudi-arabia.svg') }}" alt=""/>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <!-- User component -->
-                            <li>
-								<a class="mr-32" href="">
-                                     <i class="px-4 text-gray-100 bg-gray-600 rounded-t-md ion-ios-person fa-2x"></i> </a>
-									<ul>
+                            <li class="relative">
+								<a id="user-logo" href="#">
+                                     <i class="px-4 text-gray-100 bg-gray-600 rounded-full ion-ios-person fa-2x"></i> </a>
+									<ul class="absolute right-0">
                                     @auth
 									<li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
 
@@ -107,7 +125,7 @@
 
                                     @endauth
                                     @guest
-                                    <li><a href="{{ url('/') }}">@lang('Login')</a></li>
+                                    <li class="p-4"><a href="{{ url('/') }}">@lang('Login')</a></li>
                                     @endguest
 								</ul>
 							</li>
@@ -132,8 +150,11 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-4">
-							<h5>About Us</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur  some dymm adipiscing elit. Nam turpis quam, sodales in text she ante sagittis, varius efficitur mauris.</p>
+							<h3 class="mb-10">@lang('About Us')</h3>
+                            @php
+                                $policy  = App\Models\Privacy_Policy::first();
+                            @endphp
+							<p>{{ LangDetail($policy->description,$policy->description_ar) }}</p>
                             <hr class="my-10"/>
                             <!-- Call Setting globaly -->
                             @php
@@ -141,86 +162,60 @@
                               $Settings = Settings::all()->first();
                             @endphp
 							<div class="iconbox-left">
-								<div class="icon"><i class="fa fa-map-marker"></i></div> <!-- end .icon -->
+								<div class="px-5 icon"><i class="fa fa-map-marker"></i></div> <!-- end .icon -->
 								<div class="content"><p>{{ $Settings->location }}</p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 							<div class="iconbox-left">
-								<div class="icon"><i class="fa fa-envelope"></i></div> <!-- end .icon -->
+								<div class="px-5 icon"><i class="fa fa-envelope"></i></div> <!-- end .icon -->
 								<div class="content"><p> {{ $Settings->email }} </p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 							<div class="iconbox-left">
-								<div class="icon"><i class="fa fa-phone"></i></div> <!-- end .icon -->
+								<div class="px-5 icon"><i class="fa fa-phone"></i></div> <!-- end .icon -->
 								<div class="content"><p>{{ $Settings->phone }}</p></div> <!-- end .content -->
 							</div> <!-- end .iconbox-left -->
 						</div> <!-- end .col-sm-4 -->
 						<div class="col-sm-4">
-							<h5>Featured Deals</h5>
-                            <div id="footer-parts" class="part-one">
-                                <div class="row">
-                                    <div class="img col-md-3">
-                                        <img src="{{ asset('img/agency/161282191711464.png') }}" alt="">
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="part-info col-md-3">
-                                        <div>Price</div>
-                                        <div>Name</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="footer-parts" class="part-two">
-                                <div class="row">
-                                    <div class="img col-md-3">
-                                        <img src="{{ asset('img/agency/161282191711464.png') }}" alt="">
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="part-info col-md-3">
-                                        <div>Price</div>
-                                        <div>Name</div>
+							<h3 class="mb-10">@lang('Top parts')</h3>
+                            @php
+                                $footerParts = App\Models\Part::Where('active',1)->orderBy('views','DESC')->limit(3)->get();
+                            @endphp
+                            @foreach ($footerParts as $part)
+                                <div id="footer-parts">
+                                    <div class="row">
+                                        <div class="img col-md-4">
+                                            <a href="{{ route('Website.ShowPart',$part->id) }}">
+                                                <img src="{{ find_image($part->FirstImage->image,App\Models\Part::base) }}" alt="{{ $part->FirstImage->image->name }}">
+                                            </a>
+                                        </div>
+                                        <div class="part-info col-md-8">
+                                            <a href="{{ route('Website.ShowPart',$part->id) }}">
+                                                <div>{{ LangDetail($part->name,$part->name_ar) }}</div>
+                                            </a>
+                                            <div>{{ $part->price }} @lang('L.E')</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="footer-parts" class="part-three">
-                                <div class="row">
-                                    <div class="img col-md-3">
-                                        <img src="{{ asset('img/agency/161282191711464.png') }}" alt="">
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="part-info col-md-3">
-                                        <div>Price</div>
-                                        <div>Name</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="footer-parts" class="part-four">
-                                <div class="row">
-                                    <div class="img col-md-3">
-                                        <img src="{{ asset('img/agency/161282191711464.png') }}" alt="">
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="part-info col-md-3">
-                                        <div>Price</div>
-                                        <div>Name</div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
 
 						</div> <!-- end .col-sm-4 -->
 						<div class="col-sm-4">
-							<h5>Get in Touch</h5>
+							<h3 class="mb-10">@lang('Get in Touch')</h3>
                             <div class="row">
-                                <div class="col-md-12">
-                                   Feel Free To  <a href="{{ url('contact-us') }}">
-                                    Contact us   <i class="fas fa-envelope-open-text"></i></a>
-                                </div>
-                                <div id="in-touch" class="col-md-12">
-                                    Check<a href="#"> Terms <i class="fas fa-journal-whills"></i> </a>
-                                 </div>
-                                 <div id="in-touch" class="col-md-12">
-                                    See Our <a href="#"> Policy <i class="fas fa-handshake"></i> </a>
-                                 </div>
+                                <div class="iconbox-left">
+                                    <div class="px-5 icon"><i class="fas fa-envelope-open-text"></i></div> <!-- end .icon -->
+                                    <div class="content"><a href="{{ route('Website.ContactUs') }}">@lang('Feel free to contact us')</a> </div> <!-- end .content -->
+                                </div> <!-- end .iconbox-left -->
+                                <div class="iconbox-left">
+                                    <div class="px-5 icon"><i class="fas fa-journal-whills"></i></div> <!-- end .icon -->
+                                    <div class="content"><a href="{{ route('OurTerms') }}">@lang('Check Terms and Conditions')</a></div> <!-- end .content -->
+                                </div> <!-- end .iconbox-left -->
+                                <div class="iconbox-left">
+                                    <div class="px-5 icon"><i class="fas fa-handshake"></i></div> <!-- end .icon -->
+                                    <div class="content"><a href="{{ route('OurPolicy') }}">@lang('Check Privacy and Policy')</a></div> <!-- end .content -->
+                                </div> <!-- end .iconbox-left -->
                             </div>
                             {{-- social links --}}
-                            <h5 style="margin-top:15px;margin-bottom:10px;">Social Media</h5>
+                            <h5 style="margin-top:15px;margin-bottom:10px;">@lang('Our Social media links')</h5>
                             <div class="row">
                                 <div class="col-md-12">
                                 <!-- Instagram -->
@@ -229,14 +224,16 @@
                                 ><i class="fab fa-instagram"></i
                                 ></a>
                                 <!-- Whatsapp -->
-                                <a id="whatsapp" class="btn btn-primary" href="#!" role="button"
-                                title="Contact us on WhatsApp"
+                                <a id="whatsapp" class="btn btn-primary"
+                                href="https://api.whatsapp.com/send?phone={{$Settings->whatsapp}}" role="button"
+                                target="_blank"
+                                title="{{ $Settings->whatsapp }}"
                                 ><i class="fab fa-whatsapp"></i
                                 ></a>
                                 </div>
                             </div>
                             {{-- Download IOS/ANDRIOD --}}
-                            <h5 style="margin-top:15px;margin-bottom:10px;">Download Our App..</h5>
+                            <h5 style="margin-top:15px;margin-bottom:10px;">@lang('Download Our App..')</h5>
                             <div class="row">
                                 <div class="col-md-12">
                                 <!-- Ios -->
@@ -287,6 +284,7 @@
 		<script src="{{ asset('js/website/js/jquery.nouislider.all.min.js') }}"></script>
 		<!-- Scripts.js -->
 		<script src="{{ asset('js/website/js/scripts.js') }}"></script>
+        <script src="{{asset("js/pages/custom/login/login-general.js")}}"></script>
 
         @yield('js')
 

@@ -1,0 +1,77 @@
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12{
+    float: right;
+}
+/* Navbar */
+.navigation .logo{
+    float: right;
+}
+.main-nav {
+	float: left;
+	font-size: 0;
+    margin-left: 30%;
+    margin-right: auto;
+}
+.main-nav ul>li ul{
+    left: 0;
+    right: auto;
+}
+/* Index Page */
+
+.tabpanel.section-tab .nav-tabs{
+    left: auto;
+}
+.page-title .title:after{
+    border-color: #0074e1 transparent transparent transparent;
+    left: -20px;
+    right: auto;
+}
+
+
+/* Part Page */
+.car-details .main-car-details .item .option-content,.car-details .main-car-details .item .option{
+    float: right;
+}
+.car-details .main-car-details .item .option:after{
+    float: unset;
+}
+.nav-tabs>li{
+    float: right;
+}
+.car-details .title{
+    float: right;
+}
+.car-details .rating span,.car-details .rating{
+    float: left;
+}
+/* Footer */
+.footer .iconbox-left .icon{
+    float: right;
+}
+/* LOGO */
+#user-logo{
+    margin-right: 30px;
+}
+

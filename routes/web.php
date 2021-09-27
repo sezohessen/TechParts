@@ -138,8 +138,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
 });
-Route::get('/terms', 'Dashboard\TermsController@show');
-Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show');
+Route::get('/terms', 'Dashboard\TermsController@show')->name('OurTerms');
+Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show')->name('OurPolicy');
 
 
 // Start website /////////////////////////////////////////////////////////////////////////////////
@@ -161,6 +161,9 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     Route::get('/edit-user', 'UserController@edit')->name('EditUser');
     Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
     Route::get('/seller/{id}/{first}-{second}', 'SellerController@show')->name('SellerProfile');
+    Route::get('/favorite', 'UserFavController@index')->name('favorite');
+    Route::delete('/favorite/{id}', 'UserFavController@destroy')->name('destroyFavorite');
+    Route::post('/favorite/{id}', 'UserFavController@store')->name('addToFavorite');
 
 
 });

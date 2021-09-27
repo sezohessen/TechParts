@@ -22,7 +22,7 @@ class PartSeeder extends Seeder
         $cars       = Car::all();
         $users      = User::all();
         $image      = Image::where('base', Part::base)->get();
-        for ($i=0; $i < 30 ; $i++) {
+        for ($i=0; $i < 50 ; $i++) {
             $partID  = DB::table('parts')->insertGetId([
                 'name'          => $faker->name,
                 'name_ar'       => $faker->name,

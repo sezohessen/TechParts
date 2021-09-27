@@ -717,16 +717,16 @@ label .required {
 	margin-bottom: 1px;
 }
 .footer ::-webkit-input-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer :-moz-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer ::-moz-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 .footer :-ms-input-placeholder {
-	color: #88949b;
+	color: #ffffff;
 }
 /* Banner Form
    ========================================================================== */
@@ -1255,6 +1255,8 @@ label .required {
 .main-nav {
 	float: right;
 	font-size: 0;
+    margin-left: auto;
+    margin-right: 30%;
 }
 .main-nav ul>li {
 	display: inline-block;
@@ -1538,7 +1540,7 @@ label .required {
    09. Footer
    ========================================================================== */
 .footer {
-   	color: #88949b;
+   	color: #ffffff;
    	font-size: 15px;
    	line-height: 24px;
 }
@@ -1556,6 +1558,9 @@ label .required {
 	font-weight: 300;
 	color: #fff;
 	margin-bottom: 32px;
+}
+.footer a{
+    color: #09a0f7;
 }
 .footer .top .container {
 	position: relative;
@@ -3933,3 +3938,31 @@ label .required {
     border: 1px solid #72fa72;
 }
 
+/* Navbar */
+.main-nav ul>li ul {
+    right:auto;
+    left: 0;
+}
+#nav-lang{
+    top: 95%;
+    left: 0;
+    right: auto;
+}
+/* LOGO */
+#user-logo{
+    margin-left: 30px;
+}
+/* End navbar */
+
+/* Part page */
+#add-review-title{
+    font-size: 14px;
+}
+/* login */
+#Logo-section{
+    display: table-cell;
+    width: 500px;
+    height: 500px;
+    vertical-align: middle;
+    text-align: center;
+}

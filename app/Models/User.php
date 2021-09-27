@@ -106,4 +106,8 @@ class User extends Authenticatable
     {
         return $this->first_name . " " . $this->last_name;
     }
+    public function favorite()
+    {
+      return $this->belongsToMany(Part::class,'users_favorite','user_id','part_id');
+    }
 }

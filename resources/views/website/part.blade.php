@@ -67,9 +67,9 @@
                                         @else
                                         <!-- Show reviews -->
                                             @if(session()->has('review'))
-                                                    <div class="m-4 alert alert-success ">
-                                                        <p>{{ session('review') }}</p>
-                                                    </div>
+                                                <div class="m-4 alert alert-success ">
+                                                    <p>{{ session('review') }}</p>
+                                                </div>
                                             @endif
                                             @foreach ($reviews as $review)
                                                 <!-- Review message -->
@@ -155,7 +155,8 @@
                                                 @endif
                                             </div>
                                             <div class="text-gray-800">
-                                                <input class="p-2 mb-4 bg-gray-100 border border-gray-300 outline-none title" spellcheck="false" placeholder="Title" name="title" type="text">
+                                                <input id="add-review-title" class="p-2 mb-4 text-2xl bg-gray-100 border border-gray-300 outline-none title form-control"
+                                                spellcheck="false" placeholder="Title" name="title" type="text">
                                                 @if ($errors->has('title'))
                                                     <div class="py-5 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">
@@ -163,7 +164,8 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                                <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60" spellcheck="false" name="review" placeholder="Describe everything about this post here"></textarea>
+                                                <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60 form-control"
+                                                 spellcheck="false" name="review" placeholder="Describe everything about this post here" rows="10"></textarea>
                                                 @if ($errors->has('review'))
                                                     <div class="py-5 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">
@@ -186,7 +188,7 @@
                         </div> <!-- end .col-sm-8 -->
                             <!-- Right section -->
                         <div class="mt-10 col-sm-4">
-                            <div class="price"> {{ $part->price }} L.E <span></span></div>
+                            <div class="price"> {{ $part->price }} @lang('L.E') <span></span></div>
                             <div class="main-car-details">
                                 <div class="clearfix item">
                                     <div class="option"> @lang('Year') </div>
@@ -206,7 +208,12 @@
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
                                     <div class="option">@lang('Seller')</div>
-                                    <div class="option-content"> <a href="{{ route('Website.SellerProfile',['id'=>$part->user->id,'first'=>$part->user->first_name,'second'=>$part->user->last_name]) }}"> {{ $part->user->FullName }} </a> </div>
+                                    <div class="option-content">
+
+                                        <a href="{{ route('Website.SellerProfile',['id'=>$part->user_id,'first'=>$part->user->first_name,'second'=>$part->user->last_name]) }}">
+                                             {{ $part->user->FullName }}
+                                        </a>
+                                    </div>
                                 </div> <!-- end .item -->
 
                                 <div class="clearfix item">
@@ -225,48 +232,9 @@
     @else
     <section class="section white">
         <div class="py-0 my-0 inner">
-            <h1 class="main-heading">Related Parts<small>Similar Parts</small></h1>
+            <h1 class="main-heading">@lang('Related Parts')<small>@lang('Similar Parts')</small></h1>
             <div id="featured-cars" class="owl-carousel featured-cars">
-<<<<<<< HEAD
-                <!-- Reated Parts -->
-                @foreach ($RelatedModelParts as $RelatedPart )
-                <div class="item">
-                    <div class="featured-car">
-                        <div class="image">
-                            <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"><img src="{{find_image($RelatedPart->FirstImage->image , App\Models\Part::base)}}" alt="{{ $RelatedPart->FirstImage->image->name }}" class="img-responsive"></a>
-                        </div> <!-- end .image -->
-                        <div class="content">
-                            <div class="clearfix">
-                                <h5>
-                                    <a href="{{ route('Website.ShowPart',$RelatedPart->id) }}"> {{ LangDetail($RelatedPart->name,$RelatedPart->name_ar) }} </a>
-                                </h5>
-                                <br>
-                                <div class="float-left car-details">
-                                    <!-- IF there is no reviews -->
-                                    @if (NoReview($part->id))
-                                    @else
-                                    <!-- Tottal Rating -->
-                                    <div class="rating">
-                                        {{  TotalRating($part->id) }}
-                                    </div>
-                                    @endif
-                                </div>
-                            </div> <!-- end .clearfix -->
-                            <span class="block price">{{ $RelatedPart->price }} @lang('L.E')</span>
-                            <div class="line"></div>
-                            <p class="RelatedPartsDesc">{{ LangDetail($RelatedPart->desc,$RelatedPart->desc_ar) }}</p>
-                        </div> <!-- end .content -->
-                        <div class="clearfix details">
-                            <div class="fuel"><i class="fas fa-car"></i> {{$RelatedPart->car->make->name }} </div>
-                            <div class="type"><i class="icon-car-door"></i> {{$RelatedPart->car->model->name }} </div>
-                        </div> <!-- end .details -->
-                    </div> <!-- end .featured-car -->
-                </div> <!-- end .item -->
-                @endforeach
-
-=======
                 <x-part :parts="$RelatedModelParts" :makeCol="0"/>
->>>>>>> FetchBackToFront
 
             </div> <!-- end .featured-cars -->
         </div> <!-- end .inner -->

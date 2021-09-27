@@ -62,7 +62,7 @@
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg ,gif,svg" />
+                                    <input type="file" name="logo" accept=".png, .jpg, .jpeg, .svg" />
                                     <input type="hidden" name="logo_remove" />
                                 </label>
                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -84,7 +84,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('update')  </button>
+                <button type="submit" class="mr-2 btn btn-primary">@lang('update')  </button>
             </div>
         </form>
         <!--end::Form-->
