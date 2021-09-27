@@ -25,7 +25,10 @@
 		<!-- noUiSlider -->
 		<link href="{{ asset('css/website/css/jquery.nouislider.min.css') }}" rel="stylesheet">
 		<!-- Style.css -->
-		<link href="{{ asset('css/website/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/website/css/style.css') }}" rel="stylesheet">
+        <!-- Metronic css -->
+        <link href="{{ asset('css/pages/login/login-1.css') }}" rel="stylesheet" type="text/css"/>
+
         @if (App::isLocale('ar')) <link href="{{ asset('css/website/css/style_ar.css') }}" rel="stylesheet"> @endif
         <!-- Tailwindcss -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,17 +43,7 @@
         <meta name="description" content="@yield('page_description', $page_description ?? '')" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        @foreach (config('layout.resources.css') as $style)
-        <link href="{{ App::isLocale('ar') ? asset(Metronic::rtlCssPath($style)) : asset($style) }}" rel="stylesheet"
-            type="text/css" />
-        @endforeach
 
-
-        {{-- Layout Themes (used by all pages) --}}
-        @foreach (Metronic::initThemes() as $theme)
-            <link href="{{ App::isLocale('ar') ? asset(Metronic::rtlCssPath($theme)) : asset($theme) }}" rel="stylesheet"
-                type="text/css" />
-        @endforeach
 
         {{-- CDN --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -288,6 +281,7 @@
 		<script src="{{ asset('js/website/js/jquery.nouislider.all.min.js') }}"></script>
 		<!-- Scripts.js -->
 		<script src="{{ asset('js/website/js/scripts.js') }}"></script>
+        <script src="{{asset("js/pages/custom/login/login-general.js")}}"></script>
 
         @yield('js')
 

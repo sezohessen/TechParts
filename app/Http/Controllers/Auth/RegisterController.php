@@ -92,6 +92,7 @@ class RegisterController extends Controller
         }
         $user = User::create(User::credentials((object)$data));
         $user->attachRole($provider) ;
-        return $user;
+        return redirect()->route("Website.Index");
+
     }
 }

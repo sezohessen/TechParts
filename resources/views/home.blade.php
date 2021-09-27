@@ -1,7 +1,7 @@
-@extends('layout.front')
+@extends('website.layouts.app')
 
-@section('content')
-<div class="container">
+@section('website')
+<div class="container py-96">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -15,6 +15,7 @@
                     @endif
                     Now return back to Application to make login
                     {{ __('Now return back to Application to make login') }}
+                    <a class="btn btn-primary" href="{{route('Website.Index')}}">Home</a>
                 </div>
             </div>
         </div>

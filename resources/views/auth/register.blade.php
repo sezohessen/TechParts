@@ -6,9 +6,9 @@
 @section('website')
 <div class="d-flex flex-column flex-root">
     <!--begin::Login-->
-    <div class="bg-white login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
+    <div class="flex bg-white login login-1 login-signin-on flex-column flex-lg-row flex-column-fluid" id="kt_login">
         <!--begin::Aside-->
-        <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
+        <div class="pt-56 login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
             <!--begin::Aside Top-->
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <!--begin::Aside header-->
@@ -17,7 +17,7 @@
                 </a>
                 <!--end::Aside header-->
                 <!--begin::Aside title-->
-                <h3 class="text-center font-weight-bolder font-size-h4 font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
+                <h3 class="mt-10 text-4xl font-bold text-center font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
                 <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
@@ -27,7 +27,7 @@
         </div>
         <!--begin::Aside-->
         <!--begin::Content-->
-        <div class="mx-auto mt-20 overflow-hidden login-content flex-row-fluid d-flex flex-column justify-content-center position-relative p-7">
+        <div class="pt-56 mx-auto overflow-hidden login-content flex-row-fluid d-flex flex-column justify-content-center position-relative p-7">
             <!--begin::Content body-->
             <div class="d-flex flex-column-fluid ">
                 <div class="login-form login-signup pt-11" style="display: block">
@@ -35,8 +35,8 @@
                     <form class="form"  method="POST" action="{{ route('register') }}">
                         @csrf
                         <!--begin::Title-->
-                        <div class="pb-8 ">
-                            <h2 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">@lang('Sign Up')</h2>
+                        <div class="py-10">
+                            <h2 class="text-4xl font-bold text-dark font-size-h2 font-size-h1-lg pb-9">@lang('Sign Up')</h2>
                             <p class="text-muted font-weight-bold font-size-h4">@lang('Enter your details to create your account')</p>
                         </div>
                         <!--end::Title-->
@@ -99,7 +99,7 @@
                         </div>
                         <!--end::Form group-->
                         <!--end::Form group-->
-                        <div class="form-group ">
+                        <div class="form-group">
                             <input id="password" type="password" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
                             <label class="mt-5 checkbox">
                                 <input type="checkbox" onclick="myFunction()"/>
@@ -118,7 +118,7 @@
                         </div>
 
                         <!--begin::Form group-->
-                        <div class="form-group fv-plugins-icon-container">
+                        <div class="mt-20 form-group fv-plugins-icon-container">
                             <label class="mb-0 checkbox">
                                 <input type="checkbox" name="agree" {{ old('agree') == 'on' ? 'checked' : '' }} />
                                 <span></span>
@@ -137,7 +137,7 @@
                         </div>
                         <!--end::Form group-->
                         <!--begin::Form group-->
-                        <div class="flex-wrap pb-3 form-group d-flex flex-center pb-lg-0">
+                        <div class="pt-10 mt-10">
                             <button type="submit"  class="px-8 py-4 mx-4 my-3 btn btn-primary font-weight-bolder font-size-h6">@lang('Submit')</button>
                         </div>
                         <!--end::Form group-->

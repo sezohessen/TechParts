@@ -5,9 +5,9 @@
 @section('website')
 <div class="d-flex flex-column flex-root">
     <!--begin::Login-->
-    <div class="bg-white login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
+    <div class="flex bg-white login login-1 login-signin-on flex-column flex-lg-row flex-column-fluid" id="kt_login">
         <!--begin::Aside-->
-        <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
+        <div class="pt-56 login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
             <!--begin::Aside Top-->
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <!--begin::Aside header-->
@@ -16,7 +16,7 @@
                 </a>
                 <!--end::Aside header-->
                 <!--begin::Aside title-->
-                <h3 class="text-center font-weight-bolder font-size-h4 font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
+                <h3 class="mt-10 text-4xl font-bold text-center font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
                 <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
@@ -26,7 +26,7 @@
         </div>
         <!--begin::Aside-->
         <!--begin::Content-->
-        <div class="mx-auto overflow-hidden login-content flex-row-fluid d-flex flex-column justify-content-center position-relative p-7">
+        <div class="pt-56 mx-auto overflow-hidden login-content flex-row-fluid d-flex flex-column justify-content-center position-relative p-7">
             <!--begin::Content body-->
             <div class="d-flex flex-column-fluid flex-center">
                 @guest
@@ -34,8 +34,8 @@
                 <div class="login-form login-signin" >
                     <!--begin::Form-->
                     <!--begin::Title-->
-                    <div class="pt-5 pb-13 pt-lg-0">
-                        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ __('Welcome to ') }}{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
+                    <div class="pb-5 pb-13 pt-lg-0">
+                        <h3 class="py-10 text-4xl font-bold text-dark font-size-h4 font-size-h1-lg">{{ __('Welcome to ') }}{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
                         <span class="text-muted font-weight-bold font-size-h4">{{ __('New Here?') }}
                         <a href="{{ url('/register') }}" id="kt_login_signup" class="text-primary font-weight-bolder">{{ __('Create an Account') }}</a></span>
                     </div>
@@ -47,7 +47,7 @@
 
                             @error('email')
                                 <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
+                                    <div class="text-red-600 fv-help-block">
                                         <strong>{{ $message }}</strong>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                              name="password" value="{{ old('password') }}" required  >
                             @error('password')
                                 <div class="fv-plugins-message-container">
-                                    <div class="fv-help-block">
+                                    <div class="text-red-600 fv-help-block">
                                         <strong>{{ $message }}</strong>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
             </div>
             <!--end::Content body-->
             <!--begin::Content footer-->
-            <div class="-mt-32 d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
+            <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
                 <div class="mr-10 text-dark-50 font-size-lg font-weight-bolder">
                     <span class="mr-1">2021</span>
                     <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</a>
