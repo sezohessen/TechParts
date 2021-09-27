@@ -8,22 +8,19 @@
     <!--begin::Login-->
     <div class="flex bg-white login login-1 login-signin-on flex-column flex-lg-row flex-column-fluid" id="kt_login">
         <!--begin::Aside-->
-        <div class="pt-56 login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
+        <div class="pt-56 login-aside d-flex flex-column flex-row-auto" style="background-color: #65add8;">
             <!--begin::Aside Top-->
-            <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
+            <div id="Logo-section" class="logo-section">
                 <!--begin::Aside header-->
                 <a href="{{url('/')}}" class="mb-10 text-center">
-                    <img src="{{find_image(App\Models\Settings::first()->logo,'img/settings/')}}"  style="height: 70px;" class="mx-auto" alt="" />
+                    <img src="{{find_image(App\Models\Settings::first()->logo,'img/settings/')}}"  style="height: 40px;" class="mx-auto" alt="" />
                 </a>
                 <!--end::Aside header-->
                 <!--begin::Aside title-->
-                <h3 class="mt-10 text-4xl font-bold text-center font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
+                <h3 class="mt-2 text-4xl font-bold text-center text-gray-200 font-size-h1-lg">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
                 <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
-            <!--begin::Aside Bottom-->
-            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{asset('media/svg/illustrations/login-visual-1.svg')}})"></div>
-            <!--end::Aside Bottom-->
         </div>
         <!--begin::Aside-->
         <!--begin::Content-->

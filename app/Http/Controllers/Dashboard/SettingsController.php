@@ -81,7 +81,7 @@ class SettingsController extends Controller
         $this->validate($request,[
             'appName'       => 'required|string|max:255',
             'appName_ar'    => 'required|string|max:255',
-            'logo'          => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'logo'          => 'nullable|image|mimes:jpeg,jpg,png,svg',
             'email'         => 'nullable|string|max:255|email',
             'phone'         => 'nullable|string|max:55',
             'whatsapp'      => 'nullable|string|max:255',
@@ -103,10 +103,10 @@ class SettingsController extends Controller
         $settings->ios              = $request->ios;
 
         if($request->file('logo')){
-            $Image_id = add_Image($request->file('logo'),$settings->logo_id, Settings::base);
+            $Image_id = add_Image($request->file('logo'),$request->logo_id, Settings::base);
             $settings->logo_id = $Image_id;
         }
-        $settings->save();
+        $settings->update();
         /* if (Session::get('app_locale') == 'ar') {
             session()->flash('success',__("تم تعديل التعديلات"));
         } else {

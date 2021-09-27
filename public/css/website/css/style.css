@@ -3958,3 +3958,11 @@ label .required {
 #add-review-title{
     font-size: 14px;
 }
+/* login */
+#Logo-section{
+    display: table-cell;
+    width: 500px;
+    height: 500px;
+    vertical-align: middle;
+    text-align: center;
+}

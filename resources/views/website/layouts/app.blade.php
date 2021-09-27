@@ -60,7 +60,7 @@
 		<header class="header ">
 			<div class="container">
 				<div class="clearfix navigation">
-					<div class="logo"><a href="{{ route('Website.Index') }}"><img style='height: 65px;' src="{{ asset('img/website/logo.svg') }}" alt="Automan" class="p-4 img-responsive"></a></div> <!-- end .logo -->
+					<div class="logo"><a href="{{ route('Website.Index') }}"><img style='height: 65px;' src="{{find_image(App\Models\Settings::first()->logo,'img/settings/')}}" alt="Automan" class="p-4 img-responsive"></a></div> <!-- end .logo -->
 					<div class="contact">
 					</div> <!-- end .contact -->
 					<nav class="main-nav">
@@ -151,7 +151,10 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<h3 class="mb-10">@lang('About Us')</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur  some dymm adipiscing elit. Nam turpis quam, sodales in text she ante sagittis, varius efficitur mauris.</p>
+                            @php
+                                $policy  = App\Models\Privacy_Policy::first();
+                            @endphp
+							<p>{{ LangDetail($policy->description,$policy->description_ar) }}</p>
                             <hr class="my-10"/>
                             <!-- Call Setting globaly -->
                             @php
