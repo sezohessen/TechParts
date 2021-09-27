@@ -108,25 +108,26 @@
                             <!-- User component -->
                             <li class="relative">
 								<a id="user-logo" href="#">
-                                     <i class="px-4 text-gray-100 bg-gray-600 rounded-full ion-ios-person fa-2x"></i> </a>
-									<ul class="absolute right-0">
-                                    @auth
-									<li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
+                                     <i class="px-4 text-gray-100 bg-gray-600 rounded-full ion-ios-person fa-2x"></i>
+                                </a>
+                                <ul class="absolute right-0">
+                                @auth
+                                <li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
 
-                                    @endauth
-                                    @guest
-                                    <li class="p-4"><a href="{{ url('/') }}">@lang('Login')</a></li>
-                                    @endguest
+                                @endauth
+                                @guest
+                                <li class="p-4"><a href="{{ url('/') }}">@lang('Login')</a></li>
+                                @endguest
 								</ul>
 							</li>
 						</ul>

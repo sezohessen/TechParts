@@ -29,10 +29,12 @@
     float: right;
 }
 .main-nav {
-	float: left;
 	font-size: 0;
     margin-left: 30%;
     margin-right: auto;
+}
+.main-nav ul>li.relative{
+    float: left;
 }
 .main-nav ul>li ul{
     left: 0;

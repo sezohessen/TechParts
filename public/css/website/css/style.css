@@ -1239,6 +1239,7 @@ label .required {
 	float: left;
 	font-size: 0;
 	text-align: center;
+    margin:0px  30px;
 }
 .navigation .logo:before {
 	content: '';
@@ -1253,10 +1254,16 @@ label .required {
 	max-height: 82px;
 }
 .main-nav {
-	float: right;
 	font-size: 0;
+    display: inline;
     margin-left: auto;
     margin-right: 30%;
+}
+.list-unstyled{
+    padding: 0px 20px;
+}
+.main-nav ul>li.relative{
+    float: right;
 }
 .main-nav ul>li {
 	display: inline-block;
@@ -1271,13 +1278,16 @@ label .required {
 	line-height: 74px;
 	height: 82px;
 	display: inline-block;
-	border-top: 4px solid transparent;
+
 }
-.main-nav ul>li a:hover, .main-nav ul>li:hover a {
+.main-nav ul>li>a{
+    border-top: 4px solid transparent;
+}
+.main-nav ul>li> a:hover, .main-nav ul>li:hover>a {
 	text-decoration: none;
 	border-top: 4px solid #09a0f7;
 }
-.main-nav ul>li.active a {
+.main-nav ul>li.active>a {
 	font-weight: 400;
 	border-top: 4px solid #09a0f7;
 }
@@ -1312,6 +1322,7 @@ label .required {
 	padding-left: 10px;
 	border-top: none;
 	border-left: 4px solid transparent;
+
 }
 .main-nav ul>li:hover ul li a {
 	border-top: none;

@@ -37,15 +37,16 @@ class UserFavController extends Controller
                 'user_id' => Auth()->user()->id,
                 'part_id' => $part->id]);
                 $addToFavorite->save();
-                session()->flash('created', __("Part has been Added Successfully To Your Favorite"));
+                session()->flash('added', __("Part has been Added Successfully To Your Favorite"));
                 return redirect()->back();
             }
         }
     }
     public function destroy($id)
     {
-
-        $deleteFav = UserFav::where('part_id',$id)->first();
+        $deleteFav = UserFav::where('user_id',Auth()->user()->id)
+        ->where('part_id',$id)
+        ->first();
         // dd($deleteFav);
         $deleteFav->delete();
         session()->flash('deleted',__("Part has been Deleted Successfully From Your Favorite"));

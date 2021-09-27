@@ -19,7 +19,7 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $image = Image::where( 'base', Settings::base)->first();
+        $image = Image::where('base', Settings::base)->first();
         DB::table('settings')->insert([
             'appName'       => 'Tech Parts',
             'appName_ar'    => 'قطع غيار',
@@ -31,7 +31,9 @@ class SettingsSeeder extends Seeder
             'location'      => $faker->url,
             'andriod'       => $faker->url,
             'ios'           => $faker->url,
-            'logo_id'       => $image->id
+            'logo_id'       => $image->id,
+            'created_at'    => now(),
+            'updated_at'    => now()
         ]);
     }
 }
