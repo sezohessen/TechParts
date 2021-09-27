@@ -53,7 +53,7 @@
                             <div class="col-md-12">
                                 <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" required>
                                     @foreach ($makers as $key=>$maker)
-                                        <option value="{{$maker->id}}" {{ ($maker->id==$model->CarMaker_id) ? 'selected' : '' }}
+                                        <option value="{{$maker->id}}" {{ (old('CarMaker_id')) ? ((old('CarMaker_id') == $maker->id) ? 'selected' : '') : (($maker->id == $model->CarMaker_id) ? 'selected' : '') }}
                                             data-content="<img src='{{url('img/CarMakers/'.$maker->logo->name)}}' class='img-thumbnail ml-5 mr-5'  width='30' height='30' >{{$maker->name}}</span>">
                                         </option>
                                     @endforeach

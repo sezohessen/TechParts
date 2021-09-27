@@ -79,6 +79,8 @@
                                     <input type="text" name="carCapacity" hidden value="{{app('request')->input('carCapacity')}}">
                                     <input type="text" name="from" hidden  value = "{{app('request')->input('from')}}">
                                     <input type="text" name="to" hidden  value = "{{app('request')->input('to')}}">
+                                    <input type="text" name="lat" hidden  value = "{{app('request')->input('lat')}}" >
+                                    <input type="text" name="long" hidden  value = "{{app('request')->input('long')}}" >
 									<div class="row">
                                         <div class="col-md-2">
                                             <label class="search-label">@lang('Search for best parts')</label>
@@ -122,6 +124,8 @@
 								<form method="get" role="select-search">
                                     <input type="text" name="order" hidden  value = "{{app('request')->input('order')}}">
                                     <input type="text" name="search" hidden  value = "{{app('request')->input('search')}}">
+                                    <input type="text" name="lat" hidden  value = "{{app('request')->input('lat')}}" >
+                                    <input type="text" name="long" hidden  value = "{{app('request')->input('long')}}" >
                                     <label for="car" class="search-label">@lang('By car model')</label>
                                     <div class="item form-group">
                                         <label class="text-white">@lang('Brand')</label>
@@ -192,12 +196,12 @@
                                     </div> <!-- end .item -->
 									<div class="form-group">
                                         <div class="range-slider">
-                                            <div class="text-muted font-weight-bolder font-size-lg mb-5 header"><label class="search-label">@lang('Price range') :</label></div>
-                                            <label for="number" class="search-label search-range">
+                                            <div class="text-muted font-weight-bolder font-size-lg mb-5 header"><label class="search-label">@lang('Price') :</label></div>
+                                            <label for="number" class="search-label search-range custom">
                                                 <input type="number" value="{{ request()->get('from')||request()->get('from')=='0' ? request()->get('from') : '0' }}" min="0" max="100000" name="from" />
                                             </label>
                                             <span>-</span>
-                                            <label for="number" class="search-label search-range">
+                                            <label for="number" class="search-label search-range custom">
                                                 <input type="number" value="{{ request()->get('to') ? request()->get('to') : '100000' }}" min="0" max="100000" name="to"/>
                                             </label>
                                             <div class="row">
@@ -215,8 +219,14 @@
 						</div> <!-- end .col-sm-3 -->
 						<div class="col-sm-9">
 							<div class="listings">
+                                @if(session()->has('location'))
+                                    <div class="m-4 alert alert-danger ">
+                                        <p class="inline-block">{{ session('location') }}</p>
+                                        <button class="btn btn-danger" onclick="AllowLocation()">@lang('Allow access')</button>
+                                    </div>
+                                @endif
 								<div class="clearfix heading">
-									<h5>{{ $parts->count() }} @lang('Results Found')</h5>
+									<h5>@lang('Showing') {{ $parts->count() }} @lang('of') {{ $totalParts }} </h5>
                                     @if ($parts->count())
                                         <form  method="get" id="orderFrom">
                                             <div class="select-wrapper sort">
@@ -231,7 +241,8 @@
                                                     <input type="text" name="carCapacity" hidden value="{{app('request')->input('carCapacity')}}">
                                                     <input type="text" name="from" hidden  value = "{{app('request')->input('from')}}">
                                                     <input type="text" name="to" hidden  value = "{{app('request')->input('to')}}">
-                                                    <input type="text" id="StoreLocation" name="nearby" hidden  value = "" >
+                                                    <input type="text" id="lat" name="lat" hidden  value = "" >
+                                                    <input type="text" id="long" name="long" hidden  value = "" >
                                                     <select name="order" class="selectpicker"  onchange="getNearBy()">
                                                         <option value="views"
                                                             @if (request()->get('order')=='views')
@@ -275,7 +286,8 @@
                                         </div>
                                     </div>
                                     {{ $parts->appends(Request::only([
-                                        'search','order','from','to','governorate_id','city_id','carMaker','carModel','carYear','carCapacity',
+                                        'search','order','from','to','governorate_id','city_id',
+                                        'carMaker','carModel','carYear','carCapacity','lat','long'
                                         ]))->links("pagination::bootstrap-4") }}
 								</div> <!-- end .listing-grid -->
 							</div> <!-- end .listings -->
@@ -450,17 +462,17 @@
                 var lat = position.coords.latitude;
                 var lng = position.coords.longitude;
 
-                var  location = [];
-                location.push(lat);
-                location.push(lng);
-                return location;
+                document.getElementById("lat").value = lat;
+                document.getElementById("long").value = lng;
             });
         }
     }
-
+    getLatLong();
     function getNearBy(){
-        document.getElementById("StoreLocation").value = getLatLong();
         document.getElementById("orderFrom").submit();
+    }
+    function AllowLocation(){
+        getLatLong();
     }
 </script>
 <script>

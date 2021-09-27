@@ -9,6 +9,8 @@ class Part extends Model
 {
     // Make a new const value
     const base = '/img/PartImgs/';
+    const ImgSize = 2048;
+    const ImgCount = 4;
     use HasFactory;
     protected $table    = 'parts';
     protected $fillable=[
@@ -36,11 +38,15 @@ class Part extends Model
             'part_number'              => 'nullable|string',
             'price'                    => 'nullable|min:1|integer',
             'in_stock'                 => 'nullable|min:0|integer',
-            'part_img'                 => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'car_id'                   => 'required|exists:cars,id',
+            'user_id'                  => 'required|exists:users,id',
+            'part_img_new.0'           => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize,
+            'part_img_new.*'           => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize
         ];
         if($id){
-            $rules['part_img'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['part_img.*']        = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;//Validate all
+            $rules['part_img_new.*']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;
+            $rules['part_img_new.0']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;
         }
         return $rules;
     }
@@ -55,13 +61,15 @@ class Part extends Model
             'price'             => $request->price,
             'in_stock'          => $request->in_stock,
             'car_id'            => $request->car_id,
-            'user_id'           => Auth()->user()->id,
+            'user_id'           => $request->user_id,
         ];
         return $credentials;
         if($edit){
             unset($credentials['user_id']);
         }
+
     }
+
     public function user()
     {
         return $this->belongsTo(User::class,"user_id","id");

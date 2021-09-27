@@ -55,11 +55,7 @@
                                             <img src='{{url('img/CarMakers/'.$maker->logo->name)}}'  class='img-thumbnail' width='30' height='30'>
                                             <span>{{$maker->name}}</span>
                                             "
-                                            @if(old('CarMaker_id') == $maker->id)
-                                                {{ 'selected' }}
-                                            @elseif($maker->id==$car->CarMaker_id)
-                                                {{ 'selected' }}
-                                            @endif >
+                                            {{ (old('CarMaker_id')) ? ((old('CarMaker_id') == $maker->id) ? 'selected' : '') : (($maker->id == $car->CarMaker_id) ? 'selected' : '') }} >
                                         </option>
                                     @endforeach
                                 </select>
@@ -108,11 +104,7 @@
                                    <option value="">@lang('--Select Car Capacity --')</option>
                                    @foreach ($capacities as $capacity)
                                        <option value="{{$capacity->id}}"
-                                        @if(old('CarCapacity_id') == $capacity->id)
-                                        {{ 'selected' }}
-                                        @elseif($capacity->id==$car->CarCapacity_id)
-                                        {{ 'selected' }}
-                                        @endif
+                                        {{ (old('CarCapacity_id')) ? ((old('CarCapacity_id') == $capacity->id) ? 'selected' : '') : (($capacity->id == $car->CarCapacity_id) ? 'selected' : '') }}
                                        >{{$capacity->capacity}}</option>
                                    @endforeach
                                 </select>
