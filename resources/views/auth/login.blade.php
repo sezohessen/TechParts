@@ -1,22 +1,22 @@
-@extends('layout.front')
-@section('styles')
+@extends('website.layouts.app')
+@section('css')
 <link href="{{ asset('css/pages/login/login-1.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
-@section('content')
+@section('website')
 <div class="d-flex flex-column flex-root">
     <!--begin::Login-->
-    <div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
+    <div class="bg-white login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
         <!--begin::Aside-->
         <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
             <!--begin::Aside Top-->
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <!--begin::Aside header-->
-                <a href="{{url('/')}}" class="text-center mb-10">
-                    <img src="{{find_image(App\Models\Settings::first()->logo,'img/settings/')}}" class="max-h-70px" alt="" />
+                <a href="{{url('/')}}" class="mb-10 text-center">
+                    <img src="{{find_image(App\Models\Settings::first()->logo,'img/settings/')}}" style="height: 70px;" class="mx-auto" alt="" />
                 </a>
                 <!--end::Aside header-->
                 <!--begin::Aside title-->
-                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
+                <h3 class="text-center font-weight-bolder font-size-h4 font-size-h1-lg" style="color: #986923;">@lang('Welcome to') {{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
                 <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
@@ -26,7 +26,7 @@
         </div>
         <!--begin::Aside-->
         <!--begin::Content-->
-        <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+        <div class="mx-auto overflow-hidden login-content flex-row-fluid d-flex flex-column justify-content-center position-relative p-7">
             <!--begin::Content body-->
             <div class="d-flex flex-column-fluid flex-center">
                 @guest
@@ -34,7 +34,7 @@
                 <div class="login-form login-signin" >
                     <!--begin::Form-->
                     <!--begin::Title-->
-                    <div class="pb-13 pt-lg-0 pt-5">
+                    <div class="pt-5 pb-13 pt-lg-0">
                         <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ __('Welcome to ') }}{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</h3>
                         <span class="text-muted font-weight-bold font-size-h4">{{ __('New Here?') }}
                         <a href="{{ url('/register') }}" id="kt_login_signup" class="text-primary font-weight-bolder">{{ __('Create an Account') }}</a></span>
@@ -55,8 +55,8 @@
                         </div>
                         <div class="form-group">
                             <div class="d-flex justify-content-between mt-n5">
-                                <label for="password" class="font-size-h6 font-weight-bolder text-dark pt-5">{{ __('Password') }}</label>
-                                <a href="{{ route('password.request') }}"class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5" id="kt_login_forgot"> {{ __('Forgot Your Password?') }}</a>
+                                <label for="password" class="pt-5 font-size-h6 font-weight-bolder text-dark">{{ __('Password') }}</label>
+                                <a href="{{ route('password.request') }}"class="pt-5 text-primary font-size-h6 font-weight-bolder text-hover-primary" id="kt_login_forgot"> {{ __('Forgot Your Password?') }}</a>
                             </div>
                             <input id="password" type="password" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg @error('password') is-invalid @enderror"
                              name="password" value="{{ old('password') }}" required  >
@@ -68,14 +68,14 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="pb-lg-0 pb-5">
+                        <div class="pb-5 pb-lg-0">
 
-                            <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+                            <button type="submit" id="kt_login_signin_submit" class="px-8 py-4 my-3 mr-3 btn btn-primary font-weight-bolder font-size-h6">
                                 {{ __('Login') }}
                             </button>
                             <div class="form-check" style="display: inline-block;">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember">
+                                <label class="ml-5 form-check-label" for="remember">
                                     {{ __('Remember Me') }}
                                 </label>
                             </div>
@@ -102,8 +102,8 @@
             </div>
             <!--end::Content body-->
             <!--begin::Content footer-->
-            <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
-                <div class="text-dark-50 font-size-lg font-weight-bolder mr-10">
+            <div class="-mt-32 d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
+                <div class="mr-10 text-dark-50 font-size-lg font-weight-bolder">
                     <span class="mr-1">2021</span>
                     <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</a>
                 </div>

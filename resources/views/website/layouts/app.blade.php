@@ -33,6 +33,24 @@
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+        {{-- Favicon --}}
+        <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+        {{-- Meta Data --}}
+        <meta name="description" content="@yield('page_description', $page_description ?? '')" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        @foreach (config('layout.resources.css') as $style)
+        <link href="{{ App::isLocale('ar') ? asset(Metronic::rtlCssPath($style)) : asset($style) }}" rel="stylesheet"
+            type="text/css" />
+        @endforeach
+
+
+        {{-- Layout Themes (used by all pages) --}}
+        @foreach (Metronic::initThemes() as $theme)
+            <link href="{{ App::isLocale('ar') ? asset(Metronic::rtlCssPath($theme)) : asset($theme) }}" rel="stylesheet"
+                type="text/css" />
+        @endforeach
+
         {{-- CDN --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -48,7 +66,7 @@
 		<header class="header ">
 			<div class="container">
 				<div class="clearfix navigation">
-					<div class="logo"><a href="{{ route('Website.Index') }}"><img style='height: 55px;' src="{{ asset('img/website/logo1.png') }}" alt="Automan" class="p-4 img-responsive"></a></div> <!-- end .logo -->
+					<div class="logo"><a href="{{ route('Website.Index') }}"><img style='height: 65px;' src="{{ asset('img/website/logo.svg') }}" alt="Automan" class="p-4 img-responsive"></a></div> <!-- end .logo -->
 					<div class="contact">
 					</div> <!-- end .contact -->
 					<nav class="main-nav">
@@ -269,7 +287,7 @@
 		<script src="{{ asset('js/website/js/jquery.nouislider.all.min.js') }}"></script>
 		<!-- Scripts.js -->
 		<script src="{{ asset('js/website/js/scripts.js') }}"></script>
-
+        
         @yield('js')
 
 	</body>
