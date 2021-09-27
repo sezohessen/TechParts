@@ -32,6 +32,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/pages/error/error-3.css') }}" rel="stylesheet" type="text/css"/>
 
         {{-- Favicon --}}
         <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
@@ -287,7 +288,7 @@
 		<script src="{{ asset('js/website/js/jquery.nouislider.all.min.js') }}"></script>
 		<!-- Scripts.js -->
 		<script src="{{ asset('js/website/js/scripts.js') }}"></script>
-        
+
         @yield('js')
 
 	</body>
