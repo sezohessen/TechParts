@@ -9,6 +9,7 @@ class Part extends Model
 {
     // Make a new const value
     const base = '/img/PartImgs/';
+    const ImgSize = 2048;
     const ImgCount = 4;
     use HasFactory;
     protected $table    = 'parts';
@@ -38,11 +39,14 @@ class Part extends Model
             'price'                    => 'nullable|min:1|integer',
             'in_stock'                 => 'nullable|min:0|integer',
             'car_id'                   => 'required|exists:cars,id',
-            'user_id'                  => 'required|exists:users,id'
+            'user_id'                  => 'required|exists:users,id',
+            'part_img_new.0'           => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize,
+            'part_img_new.*'           => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize
         ];
         if($id){
-            $rules['part_img.*']        = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';//Validate all
-            $rules['part_img_new.*']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
+            $rules['part_img.*']        = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;//Validate all
+            $rules['part_img_new.*']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;
+            $rules['part_img_new.0']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;
         }
         return $rules;
     }
@@ -63,10 +67,9 @@ class Part extends Model
         if($edit){
             unset($credentials['user_id']);
         }
-        if($request->file('part_img')){
 
-        }
     }
+
     public function user()
     {
         return $this->belongsTo(User::class,"user_id","id");

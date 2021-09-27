@@ -248,9 +248,9 @@ if(!function_exists('find_image')){
 
     // Add image
     if(!function_exists('add_Image')){
-         function add_Image($file,$id,$base)
+         function add_Image($file,$id,$base,$update = NULL)
         {
-            $Image = Image::find($id);
+            $Image = $id ? Image::findOrFail($id) : NULL;
             $extension = $file->getClientOriginalExtension();
             $fileName = time() . rand(11111, 99999) . '.' . $extension;
             $destinationPath = public_path() . $base;
@@ -261,14 +261,21 @@ if(!function_exists('find_image')){
                 try {
                     $file_old = $destinationPath . $Image->name;
                     unlink($file_old);
-                    $Image->delete();
+                    if(!$update)$Image->delete();
                 } catch (Exception $e) {
                     echo 'Caught exception: ',  $e->getMessage(), "\n";
                 }
 
             }
              //Update new image
-             $Image = Image::create(['name'=> $fileName, 'base' =>  $base]);
-             return $Image->id;
+            if($update){
+                $Image->name = $fileName;
+                $Image->base = $base;
+                $Image->save();
+            }else{
+                $Image = Image::create(['name'=> $fileName, 'base' =>  $base]);
+            }
+            return $Image->id;
+
         }
     }

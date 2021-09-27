@@ -188,7 +188,15 @@ return [
         'password confirm'      => 'تأكيد كلمة المرور',
         'Password Not confirmed'=> 'لم يتم تأكيد كلمة المرور',
         'rating'                => 'التقييم',
-        'review'               => 'مراجعه'
+        'review'                => 'مراجعه',
+        'part_img.*'            => 'الصور',
+        'part_img_new.*'        => 'الصور',
+        'part_img_new.0'        => 'الصورة الرئيسية',
+        'CarMaker_id'           => 'الشركة المصنعة',
+        'CarModel_id'           => 'موديل السيارة',
+        'CarYear_id'            => 'سنة التصنيع',
+        'CarCapacity_id'        => 'سعة السيارة',
+
 
 
 
