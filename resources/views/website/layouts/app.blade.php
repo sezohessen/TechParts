@@ -76,7 +76,12 @@
                                 </a>
 							</li>
                             @endif
-
+							<li><a
+                            @if (Auth::check())
+                            href="{{url('Messenger')}}"
+                            @else
+                            href="{{url('login')}}"
+                            @endif>@lang('Messenger') <i class="far fa-comments"></i></a></li>
 							<li><a href="{{url('contact-us')}}">@lang('Contact Us')</a></li>
 
                             <!-- Langague -->

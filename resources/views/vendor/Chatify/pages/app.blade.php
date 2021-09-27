@@ -1,5 +1,7 @@
+@extends('website.layouts.app')
 @include('Chatify::layouts.headLinks')
-<div class="messenger">
+@section('website')
+<div class="mt-32 messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView">
         {{-- Header and search bar --}}
@@ -116,3 +118,5 @@
 
 @include('Chatify::layouts.modals')
 @include('Chatify::layouts.footerLinks')
+
+@endsection
