@@ -20,7 +20,11 @@ class PartSeeder extends Seeder
     {
         $faker      = Faker::create();
         $cars       = Car::all();
-        $users      = User::all();
+        $sellers    = User::whereHas(
+            'role', function($q){
+                $q->where('name', User::SellerRole);
+            }
+        )->get();
         $image      = Image::where('base', Part::base)->get();
         for ($i=0; $i < 50 ; $i++) {
             $partID  = DB::table('parts')->insertGetId([
@@ -34,7 +38,7 @@ class PartSeeder extends Seeder
                 'active'        => $faker->boolean,
                 'views'         => $faker->numberBetween(0,1000),
                 'car_id'        => $cars->random()->id,
-                'user_id'       => $users->random()->id,
+                'user_id'       => $sellers->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ]);
