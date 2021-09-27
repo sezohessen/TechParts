@@ -3953,3 +3953,8 @@ label .required {
     margin-left: 30px;
 }
 /* End navbar */
+
+/* Part page */
+#add-review-title{
+    font-size: 14px;
+}

@@ -155,7 +155,8 @@
                                                 @endif
                                             </div>
                                             <div class="text-gray-800">
-                                                <input class="p-2 mb-4 bg-gray-100 border border-gray-300 outline-none title" spellcheck="false" placeholder="Title" name="title" type="text">
+                                                <input id="add-review-title" class="p-2 mb-4 text-2xl bg-gray-100 border border-gray-300 outline-none title form-control"
+                                                spellcheck="false" placeholder="Title" name="title" type="text">
                                                 @if ($errors->has('title'))
                                                     <div class="py-5 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">
@@ -163,7 +164,8 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                                <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60" spellcheck="false" name="review" placeholder="Describe everything about this post here"></textarea>
+                                                <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60 form-control"
+                                                 spellcheck="false" name="review" placeholder="Describe everything about this post here" rows="10"></textarea>
                                                 @if ($errors->has('review'))
                                                     <div class="py-5 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">
