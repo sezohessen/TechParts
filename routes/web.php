@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Seller;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +34,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     Route::resource('/PPolicy','PrivacyPolicyController');
     Route::resource('/settings','SettingsController');
     Route::resource('/contact','ContactController');
+
+
 
     Route::prefix('car')->group(function () {
         Route::resources([
@@ -139,4 +143,4 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
     Route::get('/my-account/governorates/{id}','AccountController@show');
 });
 
-
+Route::get('/download/{id}','FileDownloadController@DownloadFile');

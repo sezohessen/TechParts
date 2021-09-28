@@ -13,7 +13,7 @@ class Seller extends Model
     protected $table    = 'sellers';
     protected $fillable=[
         'user_id',
-        'bg ',
+        'bg',
         'avatar',
         'desc',
         'desc_ar',
@@ -29,8 +29,8 @@ class Seller extends Model
     public static function rules($request,$id=NULL)
     {
         $rules = [
-            'desc'                     => 'required|min:10|max:255',
-            'desc_ar'                  => 'required|min:10|max:255|',
+            'desc'                     => 'nullable|min:10|max:255',
+            'desc_ar'                  => 'required|min:10|max:255',
             'bg'                       => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'avatar'                   => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'governorate_id'           => 'required|integer|exists:governorates,id',
@@ -40,15 +40,13 @@ class Seller extends Model
             'street'                   => 'required|min:3|max:100',
             'facebook'                 => 'nullable',
             'instagram'                => 'nullable',
-            // 'file'                     => 'nullable|max:10000|mimes:doc,docx,pdf',
+
         ];
         return $rules;
     }
     public static function credentials($request)
     {
         $credentials = [
-            'desc'              => $request->desc,
-            'desc_ar'           => $request->desc_ar,
             'bg'                => $request->background,
             'avatar'            => $request->avatar,
             'governorate_id'    => $request->governorate_id,
@@ -58,8 +56,9 @@ class Seller extends Model
             'street'            => $request->street,
             'facebook'          => $request->facebook,
             'instagram'         => $request->instagram,
+            'desc'              => $request->desc,
+            'desc_ar'           => $request->desc_ar,
         ];
-
         return $credentials;
 
     }
