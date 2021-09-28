@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Seller extends Model
 {
@@ -22,6 +22,7 @@ class Seller extends Model
         'street',
         'facebook',
         'instagram',
+        'file',
     ];
     public static function rules($request,$id=NULL)
     {
@@ -37,6 +38,7 @@ class Seller extends Model
             'street'                   => 'required|min:3|max:100',
             'facebook'                 => 'nullable',
             'instagram'                => 'nullable',
+            // 'file'                     => 'nullable|max:10000|mimes:doc,docx,pdf',
         ];
         return $rules;
     }
@@ -57,7 +59,11 @@ class Seller extends Model
         ];
 
         return $credentials;
+
     }
+
+
+
     public function user()
     {
         return $this->belongsTo(User::class,"user_id","id");

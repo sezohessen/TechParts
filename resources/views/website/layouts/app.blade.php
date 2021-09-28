@@ -158,9 +158,9 @@
 						<div class="col-sm-4">
 							<h3 class="mb-10">@lang('About Us')</h3>
                             @php
-                                $policy  = App\Models\Privacy_Policy::first();
+                                $settings  = App\Models\Settings::first();
                             @endphp
-							<p>{{ LangDetail($policy->description,$policy->description_ar) }}</p>
+							<p>{{ LangDetail($settings->about_us,$settings->about_us_ar) }}</p>
                             <hr class="my-10"/>
                             <!-- Call Setting globaly -->
                             @php
