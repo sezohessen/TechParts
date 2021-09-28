@@ -13,6 +13,8 @@ class Seller extends Model
     protected $table    = 'sellers';
     protected $fillable=[
         'user_id',
+        'bg ',
+        'avatar',
         'desc',
         'desc_ar',
         'governorate_id',
