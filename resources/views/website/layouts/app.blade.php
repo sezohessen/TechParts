@@ -215,42 +215,54 @@
                                     <div class="content"><a href="{{ route('OurPolicy') }}">@lang('Check Privacy and Policy')</a></div> <!-- end .content -->
                                 </div> <!-- end .iconbox-left -->
                             </div>
-                            {{-- social links --}}
+                            <!-- {{-- social links --}} -->
+                            @if ($Settings->instgram || $Settings->whatsapp)                                                  
                             <h5 style="margin-top:15px;margin-bottom:10px;">@lang('Our Social media links')</h5>
                             <div class="row">
                                 <div class="col-md-12">
-                                <!-- Instagram -->
-                                <a id="insta" class="btn btn-primary"  href="#!" role="button"
-                                title="Check our Instagram"
-                                ><i class="fab fa-instagram"></i
-                                ></a>
-                                <!-- Whatsapp -->
-                                <a id="whatsapp" class="btn btn-primary"
-                                href="https://api.whatsapp.com/send?phone={{$Settings->whatsapp}}" role="button"
-                                target="_blank"
-                                title="{{ $Settings->whatsapp }}"
-                                ><i class="fab fa-whatsapp"></i
-                                ></a>
+                                @if ($Settings->instgram)
+                                   <!-- Instagram -->
+                                    <a id="insta" class="btn btn-primary"  href="#!" role="button"
+                                    title="Check our Instagram"
+                                    ><i class="fab fa-instagram"></i
+                                    ></a>
+                                @endif
+                                @if ($Settings->whatsapp)
+                                    <!-- Whatsapp -->
+                                    <a id="whatsapp" class="btn btn-primary"
+                                    href="https://api.whatsapp.com/send?phone={{$Settings->whatsapp}}" role="button"
+                                    target="_blank"
+                                    title="{{ $Settings->whatsapp }}"
+                                    ><i class="fab fa-whatsapp"></i
+                                    ></a>
+                                @endif
                                 </div>
-                            </div>
-                            {{-- Download IOS/ANDRIOD --}}
-                            <h5 style="margin-top:15px;margin-bottom:10px;">@lang('Download Our App..')</h5>
-                            <div class="row">
-                                <div class="col-md-12">
-                                <!-- Ios -->
-                                <a class="btn btn-primary"
-                                id="ios"
-                                title="Download Ios App"
-                                href="#!" role="button">
-                                <i class="fab fa-apple"></i></a>
-                                <!-- Andriod -->
-                                    <a class="btn btn-primary"
-                                    id="andriod"
-                                    title="Download Andriod App"
-                                    href="#!" role="button">
-                                    <i class="fab fa-android"></i></a>
+                            </div> 
+                            @endif
+                            <!-- {{-- Download IOS/ANDRIOD --}} -->
+                            @if ($Settings->andriod || $Settings->ios)
+                                <h5 style="margin-top:15px;margin-bottom:10px;">@lang('Download Our App..')</h5>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    @if ($Settings->ios)
+                                        <!-- Ios -->
+                                        <a class="btn btn-primary"
+                                        id="ios"
+                                        title="Download Ios App"
+                                        href="#!" role="button">
+                                        <i class="fab fa-apple"></i></a>
+                                    @endif
+                                    @if ($Settings->andriod)
+                                        <!-- Andriod -->
+                                        <a class="btn btn-primary"
+                                        id="andriod"
+                                        title="Download Andriod App"
+                                        href="#!" role="button">
+                                        <i class="fab fa-android"></i></a>  
+                                    @endif
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             </div>
                             {{-- End Footer --}}
                             </div>

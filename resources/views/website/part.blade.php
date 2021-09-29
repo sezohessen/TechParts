@@ -24,7 +24,8 @@
                                 <!-- IF there is no reviews -->
                                 @if (NoReview($part->id))
                                 <div class="rating">
-                                   <span class="">@lang('No rating yet')</span>
+                                   <span class="p-4 text-gray-100 bg-blue-400 rounded-2xl">@lang('No rating yet')
+                                        <i class="fas fa-circle-notch fa-spin"></i></span>
                                 </div>
                                 @else
                                 <!-- Tottal Rating -->
@@ -188,7 +189,13 @@
                         </div> <!-- end .col-sm-8 -->
                             <!-- Right section -->
                         <div class="mt-10 col-sm-4">
-                            <div class="price"> {{ $part->price }} @lang('L.E') <span></span></div>
+                            @if ($part->price)
+                               <div class="price"> {{ $part->price }} @lang('L.E') <span></span></div>
+                            @else
+                                <div class="price">
+                                <h4 class="text-2xl font-bold text-center"> @lang('Price is negotiable') 
+                                <i class="fas fa-hand-holding-usd"></i></h4> </div>
+                            @endif
                             <div class="main-car-details">
                                 <div class="clearfix item">
                                     <div class="option"> @lang('Year') </div>
@@ -215,7 +222,12 @@
                                         </a>
                                     </div>
                                 </div> <!-- end .item -->
-
+                                @if ($part->in_stock)
+                                <div class="clearfix item">
+                                    <div class="option">@lang('In stock')</div>
+                                          <div class="option-content">{{$part->in_stock}}</div>
+                                </div> <!-- end .item -->
+                                @endif
                                 <div class="clearfix item">
                                     <div class="option">@lang('Part number')</div>
                                     <div class="option-content">{{$part->part_number}}</div>
