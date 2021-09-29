@@ -35,7 +35,7 @@
                         <!--begin::Title-->
                         <div class="pt-5 pb-13 pt-lg-0">
                             <h3 class="py-10 text-4xl font-bold">@lang('Forgotten Password ?')</h3>
-                            <p class="text-muted font-weight-bold font-size-h4">@lang('Enter your email to reset your password')</p>
+                            <p class="py-8 text-muted font-weight-bold font-size-h4">@lang('Enter your email to reset your password')</p>
                             @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -49,7 +49,7 @@
                             <input id="email" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6 @error('email') is-invalid @enderror" type="email"  name="email" value="{{ old('email') }}" required autocomplete="off" placeholder="@lang('Email')">
 
                             @error('email')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-red-700 invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -70,10 +70,11 @@
             <!--begin::Content footer-->
             <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
                 <div class="mr-10 text-dark-50 font-size-lg font-weight-bolder">
-                    <span class="mr-1">2021</span>
+                    <span class="block mr-1">2021</span>
                     <a href="{{ url('/') }}" target="_blank" class="text-dark-75 text-hover-primary">{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}</a>
+                    <a href="{{ url('/terms') }}" class="text-primary font-weight-bolder font-size-lg">@lang('Terms')</a>
+
                 </div>
-                <a href="{{ url('/terms') }}" class="text-primary font-weight-bolder font-size-lg">@lang('Terms')</a>
             </div>
             <!--end::Content footer-->
         </div>

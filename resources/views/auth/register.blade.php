@@ -104,7 +104,7 @@
                                         <strong>{{ $message }}</strong>
                                     </div>
                                 </div>
-                               @enderror
+                            @enderror
                             <label class="mt-5 checkbox">
                                 <input type="checkbox" onclick="myFunction()"/>
                                 <span></span>
