@@ -12,7 +12,7 @@ class SellerController extends Controller
 {
     public function show($id)
     {
-        $seller = Seller::findOrFail($id);
+        $seller = Seller::where('user_id',$id)->first();
         $parts  = Part::where('active',1)
         ->where('user_id',$seller->user_id)
         ->paginate(10);

@@ -7,7 +7,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{{ LangDetail(App\Models\Settings::first()->appName,App\Models\Settings::first()->appName_ar) }} @yield('title',$page_title ?? '')</title>
+		<title>{{ LangDetail(App\Models\Settings::first()->appName,App\Models\Settings::first()->appName_ar) }} @yield('title',@$page_title ? ' | '.@$page_title : '')</title>
 
 		<!-- Bootstrap -->
 		<link href="{{ asset('css/website/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -69,13 +69,11 @@
 							<li class="active">
 								<a href="{{url('index')}}">@lang('Home')</a>
 							</li>
-                            @if (Auth::check())
 							<li class="favorite">
 								<a href="{{url('favorite')}}">@lang('Favorite')
-                                    <span>( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>
+                                    @if (Auth::check())<span>( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
                                 </a>
 							</li>
-                            @endif
 
 							<li><a href="{{url('contact-us')}}">@lang('Contact Us')</a></li>
 
@@ -112,7 +110,7 @@
                                 </a>
                                 <ul class="absolute right-0">
                                 @auth
-                                <li><a href="{{url('/edit-user')}}"> @lang('Profile') </a></li>
+                                <li><a href="{{ route('EditUser') }}"> @lang('Profile') </a></li>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -126,7 +124,7 @@
 
                                 @endauth
                                 @guest
-                                <li class="p-4"><a href="{{ url('/') }}">@lang('Login')</a></li>
+                                <li class="p-4"><a href="{{ route('login') }}">@lang('Login')</a></li>
                                 @endguest
 								</ul>
 							</li>

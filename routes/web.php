@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,14 +69,14 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
     /* Datatable Activity request */
     Route::post('/part/{part}/activity',"PartController@Activity")->name('part.Activity');
 });
-Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator']], function () {
+/* Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator']], function () {
 // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
     // Roles
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
-});
+}); */
 Route::get('/terms', 'Dashboard\TermsController@show')->name('OurTerms');
 Route::get('/PPolicy', 'Dashboard\PrivacyPolicyController@show')->name('OurPolicy');
 
@@ -90,29 +91,33 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     Route::get('available_cities/{id}','HomeController@available_cities');
     // Send Data / Store
     Route::post('/contact-us', 'ContactController@store')->name('SendContact');
-    Route::post('/part/{id}', 'ReviewController@store')->name('SendReview');
+
     // Show Parts Details
     Route::get('/part/{id}', 'HomeController@show')->name('ShowPart');
     // User
     // Route::get('/user', 'UserController@index')->name('ShowUser');
+
+    Route::get('/seller/{id}/{first}-{second}', 'SellerController@show')->name('SellerProfile');
+
+
+
+});
+Route::group(['as' => 'Website.','namespace'=>"Website", 'middleware' => 'auth'], function () {
+
+    Route::post('/part/{id}', 'ReviewController@store')->name('SendReview');
+
     Route::get('/edit-user', 'UserController@edit')->name('EditUser');
     Route::post('/edit-user', 'UserController@update')->name('SendEditUser');
-    Route::get('/seller/{id}/{first}-{second}', 'SellerController@show')->name('SellerProfile');
+
     Route::get('/favorite', 'UserFavController@index')->name('favorite');
     Route::delete('/favorite/{id}', 'UserFavController@destroy')->name('destroyFavorite');
     Route::post('/favorite/{id}', 'UserFavController@store')->name('addToFavorite');
 
-
 });
+Route::get('/Messenger/{id}','vendor\chatify\MessagesController@index')
+->middleware('Authenticate::class')->name('MessengerID');
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', function ()
-{
-    $page_title = __('login');
-    $page_description = __('login page');
-    return view('auth.login',  compact('page_title', 'page_description'));
-});
 Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'middleware' => ['role:seller']], function () {
     Route::get('/','SellerController@index')->name('index');
     Route::resource('/part','PartController');

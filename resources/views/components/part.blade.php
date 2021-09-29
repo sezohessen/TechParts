@@ -18,8 +18,8 @@
                             </div>
                         </form>
                     @else
-                        <!-- Add part to favorite -->
-                        <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
+                    <!-- Add part to favorite -->
+                    <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
                         @csrf
                         <div class="absolute top-0 right-10 z-40 p-4 bg-pink-800 text-blue-50">
                             <button type="submit">
@@ -29,7 +29,15 @@
                     </form>
                     @endif
                 @else
-                    <!-- If user not logged -->
+                     <!-- Add part to favorite -->
+                     <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
+                        @csrf
+                        <div class="absolute top-0 right-10 z-40 p-4 bg-pink-800 text-blue-50">
+                            <button type="submit">
+                            <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </form>
                 @endif
                 <div class="image">
                     <a href="{{ route('Website.ShowPart',$part->id) }}"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->FirstImage->image->name }}" class="img-responsive"></a>

@@ -7,7 +7,6 @@
 @endsection
 
 @section('website')
-
 <div class="Seller">
     <div class="container">
         <div class="mb-20 seller-bg">
@@ -36,7 +35,7 @@
                 <div class="mb-6 text-3xl">{{ $seller->user->FullName }}</div>
         </div>
         <div class="text-center seller-chat">
-                <a class="mb-10 text-3xl btn btn-primary">@lang('Message Me') <i class="fab fa-facebook-messenger"></i></a>
+            <a href="{{ route('MessengerID',$seller->user_id) }}" class="mb-10 text-3xl btn btn-primary">@lang('Message Me') <i class="fab fa-facebook-messenger"></i></a>
         </div>
         <div class="row">
             <div class="col-md-4 left-bar">

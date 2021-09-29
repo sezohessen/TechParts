@@ -34,7 +34,7 @@ class LoginController extends Controller
         if (auth()->user()->hasRole('administrator') or auth()->user()->hasRole('superadministrator')) {
             return '/dashboard';
         }
-        return '/index';
+        return redirect()->back();
     }
 
     /**
@@ -54,8 +54,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $page_title = __('login');
-        $page_description = __('login page');
-        return view('auth.login',  compact('page_title', 'page_description'));
+        $page_title = __('Login');
+        return view('auth.login',  compact('page_title'));
     }
 }

@@ -18,7 +18,6 @@ class UserFavController extends Controller
             $parts = User::find(Auth()->user()->id);
             return view('website.userFav',compact('parts'));
         }
-
         else {
             return redirect()->back();
         }

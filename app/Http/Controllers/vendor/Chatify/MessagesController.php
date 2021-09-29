@@ -50,13 +50,15 @@ class MessagesController extends Controller
      * @param int $id
      * @return void
      */
-    public function index( $id = null)
+    public function index($id = null)
     {
         $routeName= FacadesRequest::route()->getName();
         $route = (in_array($routeName, ['user', config('chatify.routes.prefix')]))
             ? 'user'
             : $routeName;
-
+        $route = $id ? 'user': $route;
+        $isExist   = Seller::where('user_id',$id)->first() ? 1 : 0;
+        if(!$isExist) return redirect()->back();
         // prepare id
         return view('Chatify::pages.app', [
             'id' => ($id == null) ? 0 : $route . '_' . $id,
@@ -76,6 +78,7 @@ class MessagesController extends Controller
     public function idFetchData(Request $request)
     {
         // Favorite
+        /* dd($request['id']); */
         $favorite = Chatify::inFavorite($request['id']);
 
         // User data
