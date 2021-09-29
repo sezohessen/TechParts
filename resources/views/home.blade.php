@@ -13,8 +13,8 @@
                     @endif
                     <div class="p-20 mx-auto text-center bg-blue-200">
                         <span>
-                         @lang('Now return back to Application to make login')
-                         <a class="btn btn-primary" href="{{route('Website.Index')}}">Home</a>
+                         @lang('You are now logged in')
+                         <a class="btn btn-primary" href="{{route('Website.Index')}}">@lang('Back')</a>
                         </span>
                     </div>
                 </div>
