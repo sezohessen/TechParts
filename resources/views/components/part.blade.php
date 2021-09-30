@@ -11,7 +11,7 @@
                         <form method="POST" action="{{route('Website.destroyFavorite',$part->id)}}">
                             @method('DELETE')
                             @csrf
-                            <div class="absolute top-0 right-10 z-40 p-4 bg-pink-800 text-blue-50">
+                            <div class="absolute top-0 z-40 p-4 bg-pink-800 right-10 text-blue-50">
                                 <button type="submit">
                                     <i class="fas fa-heart"></i>
                                 </button>
@@ -21,7 +21,7 @@
                         <!-- Add part to favorite -->
                         <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
                         @csrf
-                        <div class="absolute top-0 right-10 z-40 p-4 bg-pink-800 text-blue-50">
+                        <div class="absolute top-0 z-40 p-4 bg-pink-800 right-10 text-blue-50">
                             <button type="submit">
                             <i class="far fa-heart"></i>
                             </button>
@@ -56,7 +56,7 @@
                                         $distance = distance(request()->get('lat'),request()->get('long'),$part->seller->lat,$part->seller->long,"K");
                                     @endphp --}}
                                         @if (@$part->distance)
-                                            <p class="text-info font-medium">{{ number_format(@$part->distance,2,',','') }} @lang('km Away')</p>
+                                            <p class="font-medium text-info">{{ number_format(@$part->distance,2,',','') }} @lang('km Away')</p>
                                         @endif
                                     @endif
                                 </span>

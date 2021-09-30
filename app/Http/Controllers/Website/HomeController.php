@@ -176,6 +176,9 @@ class HomeController extends Controller
      */
     public function show($id)
     {
+        $page_title = __('Part');
+        $page_description = __('Part Details');
+
         $part         = Part::where('id', $id)
         ->where('active',1)
         ->first();
@@ -203,7 +206,7 @@ class HomeController extends Controller
             Session::put($partId, 1);
         }
 
-        return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview'));
+        return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview','page_title','page_description'));
         }
         else return redirect()->route('Website.Index');
     }
