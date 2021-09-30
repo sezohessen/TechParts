@@ -204,7 +204,7 @@ class HomeController extends Controller
             Session::put($partId, 1);
         }
 
-        return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview','page_title','page_description'));
+        return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview','page_title'));
         }
         else return redirect()->route('Website.Index');
     }
