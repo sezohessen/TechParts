@@ -30,6 +30,8 @@ class HomeController extends Controller
      */
     public function index(Request $Request)
     {
+        $page_title = __('ToPart');
+
         $parts          = Part::where('active',1);
         $brands         = CarMaker::all();
         $governorates   = Governorate::all();
@@ -136,7 +138,7 @@ class HomeController extends Controller
                 'city_id'           => $Request->city_id,
             ]
         );
-        return view('website.index',compact('parts','brands','governorates','capacities','totalParts'));
+        return view('website.index',compact('parts','brands','governorates','capacities','totalParts','page_title'));
 
     }
     public function getPosition(Request $request)
@@ -173,6 +175,8 @@ class HomeController extends Controller
      */
     public function show($id)
     {
+        $page_title = __('Part');
+
         $part         = Part::where('id', $id)
         ->where('active',1)
         ->first();
@@ -200,7 +204,7 @@ class HomeController extends Controller
             Session::put($partId, 1);
         }
 
-        return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview'));
+        return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview','page_title','page_description'));
         }
         else return redirect()->route('Website.Index');
     }

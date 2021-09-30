@@ -59,20 +59,27 @@
                     <div class="seller-icons">
                         <div class="py-10 text-4xl font-bold"> @lang('Contact me') </div>
                         <p class="">
-                        <a href="#">
+                           <a href="#">
                                <i class="px-2 text-4xl text-gray-800 fas fa-phone-square"></i>
                                {{ $seller->user->phone }}
                             </a>
+                            @if ($seller->user->whats_app)
                             <a href="https://api.whatsapp.com/send?phone={{$seller->user->whats_app}}" target="_blank">
                                <i class="px-2 text-4xl text-green-500 fab fa-whatsapp "></i>
                                {{ $seller->user->whats_app }}
                             </a>
+                            @endif
+                            @if ($seller->facebook)
                             <a href="{{$seller->facebook}}" target="_blank">
                                 <i class="px-2 text-4xl text-blue-500 fab fa-facebook"></i>
                             </a>
+                            @endif
+                            @if ($seller->instagram)
                             <a href="{{$seller->instagram}}"  target="_blank">
                                <i class="px-2 text-4xl text-pink-400 fab fa-instagram "></i>
                             </a>
+                            @endif
+
                         </p>
                     </div>
                 </div>

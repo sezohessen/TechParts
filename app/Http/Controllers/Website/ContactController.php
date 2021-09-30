@@ -11,8 +11,9 @@ class ContactController extends Controller
 {
     public function index()
     {
+        $page_title = __('Contact us');
         $Settings = Settings::first();
-        return view('website.contact',compact('Settings'));
+        return view('website.contact',compact('Settings','page_title'));
     }
      public function store(Request $request)
     {

@@ -13,10 +13,12 @@ class UserFavController extends Controller
 {
     public function index()
     {
+        $page_title = __('Favorite');
+
         if(Auth::check())
         {
             $parts = User::find(Auth()->user()->id);
-            return view('website.userFav',compact('parts'));
+            return view('website.userFav',compact('parts','page_title'));
         }
         else {
             return redirect()->back();
