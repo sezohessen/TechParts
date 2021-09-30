@@ -2,6 +2,16 @@
 @extends('website.layouts.app')
 @section('css')
 <link href="{{ asset('css/pages/login/login-1.css') }}" rel="stylesheet" type="text/css"/>
+<style>
+.form-label{
+    width: 100%;
+    margin-top: 10px;
+}
+.form-label >div{
+    display: inline-block;
+    margin: 0px 5px;
+}
+</style>
 @endsection
 @section('website')
 <div class="d-flex flex-column flex-root">
@@ -98,10 +108,10 @@
                         <!--end::Form group-->
                         <div class="form-group">
                             <input id="password" type="password" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
-                            <label class="mt-5 checkbox">
+                            <label class="form-label">
                                 <input type="checkbox" onclick="myFunction()"/>
                                 <span></span>
-                                <div style="width: fit-content;margin-left: 20px;" class="leading-10">
+                                <div class="leading-10">
                                     @lang('Show Password')
                                 </div>
                             </label>
@@ -112,14 +122,10 @@
                                     </div>
                                 </div>
                             @enderror
-                        </div>
-
-                        <!--begin::Form group-->
-                        <div class="mt-20 form-group fv-plugins-icon-container">
-                            <label class="mb-0 checkbox">
+                            <label class="form-label">
                                 <input type="checkbox" name="agree" {{ old('agree') == 'on' ? 'checked' : '' }} />
                                 <span></span>
-                                <div style="width: fit-content;margin-left: 20px;" class="leading-10">
+                                <div class="leading-10">
                                     @lang('I Agree the ')
                                     <a href="{{ url('/terms') }}">@lang('terms and conditions')</a>.
                                 </div>
@@ -135,7 +141,7 @@
                         <!--end::Form group-->
                         <!--begin::Form group-->
                         <div class="pt-10 mt-10">
-                            <button type="submit"  class="px-8 py-4 mx-4 my-3 btn btn-primary font-weight-bolder font-size-h6">@lang('Submit')</button>
+                            <button type="submit"  class="px-8 py-4 mx-4 my-3 btn btn-primary font-weight-bolder font-size-h6">@lang('Sign Up')</button>
                         </div>
                         <!--end::Form group-->
                     </form>

@@ -32,11 +32,7 @@ class RegisterController extends Controller
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
-        if (auth()->user()->hasRole('seller')) {
-            return '/seller';
-        }
-
-        return '/user';
+        return 'index';
     }
     /**
      * Create a new controller instance.
@@ -60,9 +56,10 @@ class RegisterController extends Controller
             'first_name' => ['required', 'string', 'min:4' ,'max:20'],
             'last_name' => ['required', 'string', 'min:4' ,'max:20'],
             'email' => ['required', 'string', 'email', 'min:8' , 'max:255', 'unique:users'],
-            'phone' => ['required', 'string','min:8' , 'max:20', 'unique:users'],
-            'whats_app' => ['required', 'string','min:8' , 'max:20', 'unique:users'],
+            'phone' => ['nullable', 'string','digits:11', 'unique:users'],
+            'whats_app' => ['nullable', 'string','digits:11', 'unique:users'],
             'password' => ['required', 'string', 'min:8','max:30'],
+            'agree' => ['accepted'],
         ]);
         return Validator::make($data, User::rules());
     }
@@ -76,23 +73,10 @@ class RegisterController extends Controller
      protected function create($data)
     {
 
-        if (isset($data['provider'])) {
-            if ($data['provider'] == 'insurance') {
-                $provider = 'insurance';
-            }elseif ($data['provider'] == 'agency') {
-                $provider = 'agency';
-            }elseif ($data['provider'] == 'bank') {
-                $provider = 'bank';
-            }else {
-                $provider = 'user';
-            }
-            unset($data['provider']);
-        }else {
-            $provider = 'user';
-        }
+        $provider = 'user';
         $user = User::create(User::credentials((object)$data));
         $user->attachRole($provider) ;
-        return redirect()->route("Website.Index");
+        return $user;
 
     }
 }

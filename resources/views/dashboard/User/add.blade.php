@@ -63,6 +63,17 @@
                     </div>
                 @enderror
             </div>
+            <div class="form-group">
+                <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('whats_app') is-invalid @enderror"
+                 name="whats_app" value="{{ old('whats_app') }}" required autocomplete="whats_app"  placeholder="@lang('Whatsapp')">
+                @error('whats_app')
+                    <div class="fv-plugins-message-container">
+                        <div class="fv-help-block">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    </div>
+                @enderror
+            </div>
             <!--end::Form group-->
             <!--end::Form group-->
             <div class="form-group">

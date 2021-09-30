@@ -196,6 +196,8 @@ return [
         'CarModel_id'           => 'موديل السيارة',
         'CarYear_id'            => 'سنة التصنيع',
         'CarCapacity_id'        => 'سعة السيارة',
+        'agree'                 => 'الاحكام والشروط',
+        'whats_app'             => 'الواتس اب'
 
 
 

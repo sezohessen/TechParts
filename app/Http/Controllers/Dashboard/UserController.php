@@ -58,6 +58,14 @@ class UserController extends Controller
             if($request->provider == User::SellerRole)$provider = User::SellerRole;
             else $provider = User::UserRole;
             $user->attachRole($provider);
+            if($user->hasRole(User::SellerRole)){
+                /*
+                if the admin change the role of user to be seller -> (if seller has info then create row in seller table else do not create row)
+                if the admin change the role of seller to be user -> keep seller data as it is that.
+                */
+                $isExist    = Seller::where('user_id',$user->id)->first();
+                if(!$isExist)DB::table('sellers')->insert(['user_id' => $user->id]);
+            }
         }
         session()->flash('created',__("Changes has been Created successfully"));
         return redirect()->route("dashboard.users.index");

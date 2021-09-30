@@ -65,6 +65,7 @@ class User extends Authenticatable
             'first_name'        => 'required|string|max:255',
             'last_name'         => 'required|string|max:255',
             'provider'          => 'nullable|string|max:255',
+            'whats_app'         => 'nullable|string|digits:11|unique:users,whats_app,'.$edit_profile,
         ];
 
         if ($edit_profile) {
@@ -72,7 +73,7 @@ class User extends Authenticatable
            $rules['password']   = 'nullable|string|min:8';
         }else {
             $rules['email']     = 'required|string|email|max:255|unique:users';
-            $rules['phone']     = 'required|string|max:255|unique:users';
+            $rules['phone']     = 'required|string|digits:11|unique:users,phone'.$edit_profile;
             $rules['password']  = 'required|string|min:8';
         }
         return $rules;

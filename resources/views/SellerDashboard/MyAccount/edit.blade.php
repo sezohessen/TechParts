@@ -11,8 +11,8 @@
 @endif
 @section('content')
 <?php
-    $lat=!empty(old("lat"))?old("lat"):$seller->lat;
-    $long=!empty(old("long"))?old("long"):$seller->long;
+    $lat=!empty(old("lat"))?old("lat"):($seller->lat ? $seller->lat : 30.033333 );
+    $long=!empty(old("long"))?old("long"):($seller->long ? $seller->long :31.233334 );
 ?>
     <div class="card card-custom">
         <div class="card-header">

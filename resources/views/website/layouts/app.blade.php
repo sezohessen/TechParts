@@ -110,7 +110,7 @@
                                 </a>
                                 <ul class="absolute right-0">
                                 @auth
-                                <li><a href="{{ route('EditUser') }}"> @lang('Profile') </a></li>
+                                <li><a href="{{ route('Website.EditUser') }}"> @lang('Profile') </a></li>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

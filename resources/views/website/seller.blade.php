@@ -47,11 +47,12 @@
                     <div class="seller-location">
                         <div class="py-10 text-4xl font-bold"> @lang('Location') </div>
                           <p>
-                            <i class="text-4xl text-gray-800 fas fa-map-marked"></i>
+                            <i class="text-4xl text-blue-400 fas fa-map-marked"></i>
                             <span class="ml-5">
-                            {{ LangDetail($seller->governorate->title,$seller->governorate->title_ar) }} /
-                            {{ LangDetail($seller->city->title,$seller->city->title_ar) }} /
-                            {{ $seller->street }}
+                                <a class="text-primary" target="_blank" href="http://maps.google.com/?q={{ $seller->lat }},{{ $seller->long }}">
+                                    {{ LangDetail($seller->governorate->title,$seller->governorate->title_ar) }}-
+                                    {{ LangDetail($seller->city->title,$seller->city->title_ar) }}-{{ $seller->street }}
+                                </a>
                             </span>
                          </p>
                     </div>
