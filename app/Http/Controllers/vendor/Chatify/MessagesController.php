@@ -52,6 +52,7 @@ class MessagesController extends Controller
      */
     public function index($id = null)
     {
+        // $Seller = Seller::where('user_id',$id)->first();
         $routeName= FacadesRequest::route()->getName();
         $route = (in_array($routeName, ['user', config('chatify.routes.prefix')]))
             ? 'user'
@@ -61,10 +62,11 @@ class MessagesController extends Controller
         if(!$isExist) return redirect()->back();
         // prepare id
         return view('Chatify::pages.app', [
-            'id' => ($id == null) ? 0 : $route . '_' . $id,
-            'route' => $route,
+            'id'             => ($id == null) ? 0 : $route . '_' . $id,
+            'route'          => $route,
             'messengerColor' => Auth::user()->messenger_color,
-            'dark_mode' => Auth::user()->dark_mode < 1 ? 'light' : 'dark',
+            'dark_mode'      => Auth::user()->dark_mode < 1 ? 'light' : 'dark',
+            'Seller'         => Seller::where('user_id',$id)->first()
         ]);
     }
 
@@ -220,7 +222,8 @@ class MessagesController extends Controller
         // send the response
         return Response::json([
             'count' => $query->count(),
-            'messages' => '<p class="message-hint center-el"><span>Say \'hi\' and start messaging</span></p>',
+            // Shown message after opening the chat if the chat had 0 messages
+            'messages' => Null,
         ]);
     }
 
@@ -376,7 +379,7 @@ class MessagesController extends Controller
         return Response::json([
             'records' => $records->count() > 0
                 ? $getRecords
-                : '<p class="message-hint center-el"><span>Nothing to show.</span></p>',
+                : '<p class="message-hint center-el"><span>Not found <i class="fas fa-blind"></i></span></p>',
             'addData' => 'html'
         ], 200);
     }
@@ -401,7 +404,7 @@ class MessagesController extends Controller
         }
         // send the response
         return Response::json([
-            'shared' => count($shared) > 0 ? $sharedPhotos : '<p class="message-hint"><span>Nothing shared yet</span></p>',
+            'shared' => count($shared) > 0 ? $sharedPhotos : '<p class="message-hint"><span><i class="far fa-images"></i></span></p>',
         ], 200);
     }
 
