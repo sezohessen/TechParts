@@ -20,11 +20,11 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('seller.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('seller.index') }}" style="margin-top: 16px;" class="mr-2 btn btn-primary">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
-        <form action="{{route("seller.my_account.update",['id'=>$seller->id])}}" method="POST">
+        <form action="{{route("seller.my_account.update",['id'=>$seller->id])}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="card-body">
@@ -120,6 +120,18 @@
                             @enderror
                         </div>
                     </div>
+                    <!-- File -->
+                    <!-- <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Upload File')</label>
+                            <input type="file" class="form-control {{ $errors->has('file') ? 'is-invalid' : '' }}"
+                            name="file"  placeholder="@lang('file')"  value="{{old("file") ? old("file") : $seller->file}}"/>
+                            @error('file')
+                                <div class="invalid-feedback">{{ $errors->first('file') }}</div>
+                            @enderror
+                        </div>
+                    </div> -->
+
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>@lang('Location') <span class="text-danger">*</span></label>
@@ -139,7 +151,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('Update')  </button>
+                <button type="submit" class="mr-2 btn btn-primary">@lang('Update')  </button>
             </div>
         </form>
         <!--end::Form-->

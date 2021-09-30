@@ -25,6 +25,8 @@ class CreateSettingsTable extends Migration
             $table->string('location')->nullable();
             $table->string('andriod')->nullable();
             $table->string('ios')->nullable();
+            $table->string('about_us')->nullable();
+            $table->string('about_us_ar')->nullable();
             $table->bigInteger('logo_id')->unsigned();
             $table->foreign('logo_id')
             ->references('id')->on('images')

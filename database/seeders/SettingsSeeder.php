@@ -31,6 +31,8 @@ class SettingsSeeder extends Seeder
             'location'      => $faker->url,
             'andriod'       => $faker->url,
             'ios'           => $faker->url,
+            'about_us'      => $faker->text,
+            'about_us_ar'   => $faker->text,
             'logo_id'       => $image->id,
             'created_at'    => now(),
             'updated_at'    => now()

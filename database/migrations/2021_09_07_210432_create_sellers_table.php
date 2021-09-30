@@ -41,6 +41,7 @@ class CreateSellersTable extends Migration
             $table->text('street')->nullable();
             $table->text('facebook')->nullable();
             $table->text('instagram')->nullable();
+            $table->text('file')->nullable();
 
             $table->bigInteger('governorate_id')->unsigned()->nullable();
             $table->foreign('governorate_id')

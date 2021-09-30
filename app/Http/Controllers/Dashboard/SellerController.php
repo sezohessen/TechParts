@@ -10,9 +10,12 @@ use App\Models\Image;
 use App\Models\Seller;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\DataTables\PartDatatable;
 use App\DataTables\SellerDatatable;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\Types\Null_;
 
 class SellerController extends Controller
 {
@@ -71,6 +74,8 @@ class SellerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request,$id)
     {
         // $rules  =  Seller::rules($request);
@@ -89,6 +94,8 @@ class SellerController extends Controller
             'street'                   => 'required|min:5|max:100',
             'facebook'                 => 'nullable',
             'instagram'                => 'nullable',
+            'file'                     => 'nullable|max:10000|mimes:doc,dot,docm,docx,dotx,pdf,xlxs,xls,xlsm,xlsb,xltx',
+
         ]);
 
         $seller->desc               = $request->desc;
@@ -100,15 +107,36 @@ class SellerController extends Controller
         $seller->street             = $request->street;
         $seller->facebook           = $request->facebook;
         $seller->instagram          = $request->instagram;
+        // Store file
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . rand(11111, 99999) . '.' . $extension;
+            //Delete Old image
+            $path = Storage::putFileAs(
+                'files', $request->file, $fileName
+            );
+            if($file)
+            {
+                try {
+                    $file_old = $seller->file;
+                    unlink(storage_path('app\files\\' . $file_old ));
 
+                } catch (Exception $e) {
+                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+                }
 
+            }
+
+            $seller->file = $fileName;
+        }
         // Store avatar
         if($request->file('avatar')){
         $Image_id = add_Image($request->file('avatar'),$seller->avatar,Seller::avatarBase);
         $seller->avatar = $Image_id;
          }
 
-        // Store avatar
+        // Store background
         if($request->file('bg')){
 
             $Image_id = add_Image($request->file('bg'),$seller->bg,Seller::backgroundBase);

@@ -24,7 +24,10 @@ class AccountController extends Controller
         $seller     = Seller::where('id',$id)->first();
         if($seller->user_id != Auth()->user()->id)return redirect()->route("seller.index");
         $rules      =  Seller::rules($request);
+                // dd($request->all());
+
         $request->validate($rules);
+
         $seller->update(Seller::credentials($request));
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("seller.index");

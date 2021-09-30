@@ -175,6 +175,22 @@
                             @enderror
                         </div>
                     </div>
+                    <!-- File -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Upload File')</label>
+                            <input type="file" class="form-control {{ $errors->has('file') ? 'is-invalid' : '' }}"
+                            name="file"  placeholder="@lang('file')"  value="{{old("file") ? old("file") : $seller->file}}"/>
+                            @error('file')
+                                <div class="invalid-feedback">{{ $errors->first('file') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-primary" href="/download/{{$seller->id}}"> Download File </a>
+                    </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>@lang('Location') <span class="text-danger">*</span></label>

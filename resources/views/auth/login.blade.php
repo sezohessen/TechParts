@@ -41,7 +41,6 @@
                         <div class="form-group">
                             <label for="email" class="font-size-h6 font-weight-bolder text-dark">{{ __('E-Mail Address') }}</label>
                             <input id="email" type="email" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus >
-
                             @error('email')
                                 <div class="fv-plugins-message-container">
                                     <div class="text-red-600 fv-help-block">

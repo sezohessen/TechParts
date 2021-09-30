@@ -74,7 +74,13 @@
                                     @if (Auth::check())<span>( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
                                 </a>
 							</li>
-
+                            @endif
+							<li><a
+                            @if (Auth::check())
+                            href="{{url('Messenger')}}"
+                            @else
+                            href="{{url('login')}}"
+                            @endif>@lang('Messenger') <i class="far fa-comments"></i></a></li>
 							<li><a href="{{url('contact-us')}}">@lang('Contact Us')</a></li>
 
                             <!-- Langague -->
@@ -151,9 +157,9 @@
 						<div class="col-sm-4">
 							<h3 class="mb-10">@lang('About Us')</h3>
                             @php
-                                $policy  = App\Models\Privacy_Policy::first();
+                                $settings  = App\Models\Settings::first();
                             @endphp
-							<p>{{ LangDetail($policy->description,$policy->description_ar) }}</p>
+							<p>{{ LangDetail($settings->about_us,$settings->about_us_ar) }}</p>
                             <hr class="my-10"/>
                             <!-- Call Setting globaly -->
                             @php
