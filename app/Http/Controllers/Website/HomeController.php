@@ -30,6 +30,9 @@ class HomeController extends Controller
      */
     public function index(Request $Request)
     {
+        $page_title = __('ToPart');
+        $page_description = __('Home Page');
+
         $parts          = Part::where('active',1);
         $brands         = CarMaker::all();
         $governorates   = Governorate::all();
@@ -136,7 +139,7 @@ class HomeController extends Controller
                 'city_id'           => $Request->city_id,
             ]
         );
-        return view('website.index',compact('parts','brands','governorates','capacities','totalParts'));
+        return view('website.index',compact('parts','brands','governorates','capacities','totalParts','page_title','page_description'));
 
     }
     public function getPosition(Request $request)

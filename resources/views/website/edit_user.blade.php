@@ -92,7 +92,7 @@
                 </div>
             </div>
         @endif
-      <input name="password"  class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="Password" />
+      <input name="password"  class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="@lang('Password')" />
     </div>
 
     <div class="grid grid-cols-1 mt-5 mx-7">
@@ -104,7 +104,7 @@
                 </div>
             </div>
         @endif
-      <input name="password_confirm"  class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="Confirm Password" />
+      <input name="password_confirm"  class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="@lang('Confirm Password')" />
     </div>
 
     <div class='flex items-center justify-center gap-4 pt-5 pb-5 md:gap-8'>
