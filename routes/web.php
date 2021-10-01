@@ -118,7 +118,7 @@ Route::group(['as' => 'Website.','namespace'=>"Website", 'middleware' => 'auth']
 
 });
 Route::get('/Messenger/{id}','vendor\chatify\MessagesController@index')
-->middleware('Authenticate::class')->name('MessengerID');
+->middleware('auth')->name('MessengerID');
 
 Auth::routes();
 Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'middleware' => ['role:seller']], function () {

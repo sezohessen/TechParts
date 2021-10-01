@@ -71,10 +71,9 @@
 							</li>
 							<li class="favorite">
 								<a href="{{url('favorite')}}">@lang('Favorite')
-                                    @if (Auth::check())<span>( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
+                            @if (Auth::check())<span>( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
                                 </a>
 							</li>
-                            @endif
 							<li><a
                             @if (Auth::check())
                             href="{{url('Messenger')}}"
@@ -220,7 +219,7 @@
                                 </div> <!-- end .iconbox-left -->
                             </div>
                             <!-- {{-- social links --}} -->
-                            @if ($Settings->instgram || $Settings->whatsapp)                                                  
+                            @if ($Settings->instgram || $Settings->whatsapp)
                             <h5 style="margin-top:15px;margin-bottom:10px;">@lang('Our Social media links')</h5>
                             <div class="row">
                                 <div class="col-md-12">
@@ -241,7 +240,7 @@
                                     ></a>
                                 @endif
                                 </div>
-                            </div> 
+                            </div>
                             @endif
                             <!-- {{-- Download IOS/ANDRIOD --}} -->
                             @if ($Settings->andriod || $Settings->ios)
@@ -262,7 +261,7 @@
                                         id="andriod"
                                         title="Download Andriod App"
                                         href="#!" role="button">
-                                        <i class="fab fa-android"></i></a>  
+                                        <i class="fab fa-android"></i></a>
                                     @endif
                                     </div>
                                 </div>

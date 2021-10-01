@@ -24,11 +24,10 @@ class UserController extends Controller
     public function edit()
     {
         $page_title = __('Profile');
-        $page_description = __('Edit profile');
         if(Auth::user())
         {
             $user = User::find(Auth::user()->id);
-            return view('website.edit_user',compact('user','page_title','page_description'));
+            return view('website.edit_user',compact('user','page_title'));
         } else {
             return redirect('/');
         }

@@ -7,7 +7,7 @@
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
-                <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
+                <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">@lang('MESSAGES')</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#"><i class="fas fa-cog settings-btn"></i></a>
@@ -15,22 +15,31 @@
                 </nav>
             </nav>
             {{-- Search input --}}
-            <input type="text" class="messenger-search" placeholder="Search" />
+            <input type="text" class="p-1 messenger-search" placeholder="@lang('Search')" />
             {{-- Tabs --}}
             <div class="messenger-listView-tabs">
                 <a href="#" @if($route == 'user') class="active-tab" @endif data-view="users">
-                    <span class="far fa-user"></span> People</a>
+                 @lang('Your messages') <span class="far fa-user"></span> </a>
+
             </div>
         </div>
         {{-- tabs and lists --}}
         <div class="m-body">
+        {{-- ---------------- [ Search Tab ] ---------------- --}}
+           <div class="- messenger-tab app-scroll" data-view="search">
+                {{-- items --}}
+                <p class="messenger-title">@lang('Search')</p>
+                <div class="search-records">
+                    <p class="message-hint center-el"><span>Type to search..</span></p>
+                </div>
+             </div>
            {{-- Lists [Users/Group] --}}
            {{-- ---------------- [ User Tab ] ---------------- --}}
            <div class="@if($route == 'user') show @endif messenger-tab app-scroll" data-view="users">
 
                {{-- Favorites --}}
                <div class="favorites-section">
-                <p class="messenger-title">Favorites</p>
+                <p class="messenger-title">@lang('Favorites')</p>
                 <div class="messenger-favorites app-scroll-thin"></div>
                </div>
 
@@ -42,25 +51,12 @@
 
            </div>
 
-           {{-- ---------------- [ Group Tab ] ---------------- --}}
-           <div class="@if($route == 'group') show @endif messenger-tab app-scroll" data-view="groups">
-                {{-- items --}}
-                <p style="text-align: center;color:grey;">Soon will be available</p>
-             </div>
 
-             {{-- ---------------- [ Search Tab ] ---------------- --}}
-           <div class="messenger-tab app-scroll" data-view="search">
-                {{-- items --}}
-                <p class="messenger-title">Search</p>
-                <div class="search-records">
-                    <p class="message-hint center-el"><span>Type to search..</span></p>
-                </div>
-             </div>
         </div>
     </div>
 
     {{-- ----------------------Messaging side---------------------- --}}
-    <div class="messenger-messagingView">
+    <div class="messenger-messagingView" style="max-height: 650px;">
         {{-- header title [conversation name] amd buttons --}}
         <div class="m-header m-header-messaging">
             <nav>
@@ -74,21 +70,22 @@
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    <a href="/"><i class="fas fa-home"></i></a>
+                    <!-- Seller page HOME ICON -->
+                    <a href="{{ route('Website.SellerProfile',['id'=>$Seller->user_id,'first'=>$Seller->user->first_name,'second'=>$Seller->user->last_name]) }}"><i class="fas fa-home"></i></a>
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                 </nav>
             </nav>
         </div>
         {{-- Internet connection --}}
         <div class="internet-connection">
-            <span class="ic-connected">Connected</span>
-            <span class="ic-connecting">Connecting...</span>
-            <span class="ic-noInternet">No internet access</span>
+            <span class="ic-connected">@lang('Connected')</span>
+            <span class="ic-connecting">@lang('Connecting')</span>
+            <span class="ic-noInternet">@lang('No internet access')</span>
         </div>
         {{-- Messaging area --}}
         <div class="m-body app-scroll">
             <div class="messages">
-                <p class="message-hint center-el"><span>Please select a chat to start messaging</span></p>
+                <p class="message-hint center-el"><span>@lang('Please select a chat to start messaging')</span></p>
             </div>
             {{-- Typing indicator --}}
             <div class="typing-indicator">

@@ -59,7 +59,7 @@
 		<section class="section dark tiny search-section">
 			<div class="inner">
 				<div class="container">
-					<div class="tabpanel border section-tab" role="tabpanel">
+					<div class="border tabpanel section-tab" role="tabpanel">
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active">
                                 <a href="#search-cars" aria-controls="search-cars" role="tab" data-toggle="tab">
@@ -68,7 +68,7 @@
                             </li>
 						</ul> <!-- end .nav-tabs -->
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane fade in active p-5" id="search-cars">
+							<div role="tabpanel" class="p-5 tab-pane fade in active" id="search-cars">
 								<form method="get" role="search">
                                     <input type="text" name="order" hidden  value = "{{app('request')->input('order')}}">
                                     <input type="text" name="governorate_id" hidden value="{{app('request')->input('governorate_id')}}">
@@ -196,7 +196,7 @@
                                     </div> <!-- end .item -->
 									<div class="form-group">
                                         <div class="range-slider">
-                                            <div class="text-muted font-weight-bolder font-size-lg mb-5 header"><label class="search-label">@lang('Price') :</label></div>
+                                            <div class="mb-5 text-muted font-weight-bolder font-size-lg header"><label class="search-label">@lang('Price') :</label></div>
                                             <label for="number" class="search-label search-range custom">
                                                 <input type="number" value="{{ request()->get('from')||request()->get('from')=='0' ? request()->get('from') : '0' }}" min="0" max="100000" name="from" />
                                             </label>
@@ -231,7 +231,7 @@
                                         <form  method="get" id="orderFrom">
                                             <div class="select-wrapper sort">
                                                 <div class="form-group">
-                                                    <label for="order" class="text-muted font-weight-bolder font-size-lg mx-5">@lang('Sort By')</label>
+                                                    <label for="order" class="mx-5 text-muted font-weight-bolder font-size-lg">@lang('Sort By')</label>
                                                     <input type="text" name="search" hidden value="{{app('request')->input('search')}}">
                                                     <input type="text" name="governorate_id" hidden value="{{app('request')->input('governorate_id')}}">
                                                     <input type="text" name="city_id" hidden value="{{app('request')->input('city_id')}}">
@@ -274,11 +274,12 @@
                                             </div> <!-- end .select-wrapper -->
                                         </form>
                                     @else
-                                    <div class="alert alert-warning mt-32" role="alert">
+                                    <div class="mt-32 alert alert-warning" role="alert">
                                         <i class="fa fa-exclamation-triangle"></i> <span>@lang('There are no results with such options')</span>
                                     </div>
                                     @endif
 								</div> <!-- end .heading -->
+                                <!-- Favorite part session -->
                                 @if(session()->has('deleted'))
                                     <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
                                         <p>{{ session('deleted') }} <br> <a class="text-yellow-400" href="{{url('favorite')}}">@lang('See Your Favorite Parts')</a> </p>
@@ -292,7 +293,7 @@
 								<div class="clearfix listings-grid">
                                     <div class="featured-cars">
                                         <div class="row">
-                                            <x-part :parts="$parts" makeCol="4"/>
+                                            <x-part :parts="$parts" makeCol="6"/>
                                         </div>
                                     </div>
                                     {{ $parts->appends(Request::only([

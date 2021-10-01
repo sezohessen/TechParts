@@ -16,6 +16,16 @@
 <section class="section white" id="Part-Page">
         <div class="inner">
             <div class="container">
+            @if(session()->has('added'))
+                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
+                        <p>{{ session('added') }}</p>
+                    </div>
+            @endif
+            @if(session()->has('deleted'))
+                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
+                        <p>{{ session('deleted') }}</p>
+                    </div>
+            @endif
                 <div class="car-details">
                     <div class="mt-20 row">
                         <div class="col-sm-8">
@@ -136,7 +146,7 @@
                                             <div class="comment-form-rating">
                                                 <h5 class="mb-10">Your rating</h5>
                                                 <div class="rating-holder">
-                                                    <div class="block w-full rate">
+                                                    <div class="w-full rate">
                                                         <input type="radio" id="star5" name="rating" value="5" />
                                                         <label for="star5" title="Very good">5 stars</label>
                                                         <input type="radio" id="star4" name="rating" value="4" />
@@ -235,28 +245,37 @@
                                     <div class="option">@lang('Part number')</div>
                                     <div class="option-content">{{$part->part_number}}</div>
                                 </div> <!-- end .item -->
-                                @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first() == false)
+                                <!-- Add to favorite buttin -->
+                                @if (Auth::check())
+                                    @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first() == false)
+                                    <div class="clearfix mt-10 item">
+                                        <div class="option-content">
+                                        <div class="p-2 font-bold text-center text-gray-100 bg-blue-500 rounded-lg">
+                                            <!-- Add part to favorite -->
+                                                <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
+                                                @csrf
+                                                        <Button class="text-lg uppercase" type="submit">
+                                                            @lang('Add it to your favorite')
+                                                            <i class="fas fa-hand-holding-heart"></i>
+                                                        </Button>
+                                                </form>
+                                        </div>
+                                        </div>
+                                    </div> <!-- end .item -->
+                                    @endif
+                                @else
                                 <div class="clearfix mt-10 item">
-                                    <div class="option-content">
-                                       <div class="p-2 font-bold text-center text-gray-100 bg-blue-500 rounded-lg">
-                                         <!-- Add part to favorite -->
-                                            <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
-                                               @csrf
-                                                    <Button class="text-lg uppercase" type="submit">
-                                                        @lang('Add it to your favorite')
-                                                        <i class="fas fa-hand-holding-heart"></i>
-                                                    </Button>
-                                            </form>
-                                       </div>
-                                    </div>
-                                </div> <!-- end .item -->
+                                        <div class="option-content">
+                                           <div class="p-2 font-bold text-center bg-blue-500 rounded-lg">
+                                                <a id="add-to-favorite-login" href="{{route('login')}}" class="text-lg uppercase">
+                                                    @lang('Add it to your favorite')
+                                                    <i class="fas fa-hand-holding-heart"></i>
+                                                </a>
+                                           </div>
+                                        </div>
+                                    </div> <!-- end .item -->
                                 @endif
 
-                                @if(session()->has('added'))
-                                        <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                                            <p>{{ session('added') }}</p>
-                                        </div>
-                                    @endif
                             </div> <!-- end .main-car-details -->
                         </div> <!-- end .col-sm-4 -->
                     </div> <!-- end .row -->

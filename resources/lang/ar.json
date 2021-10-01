@@ -822,5 +822,21 @@
 "ToPart":"تو بارت",
 "Part Details":"تفاصيل القطعة",
 "Part":"القطعة",
-"Add it to your favorite":"أضفه إلى مفضلتك"
+"Add it to your favorite":"أضفه إلى مفضلتك",
+"MESSAGES":"الرسائل",
+"Your messages":"رسائلك",
+"Favorites":"المفضلة",
+"Connected":"متصل",
+"Connecting":"جاري الاتصال",
+"No internet access":"لا يوجد اتصال بالإنترنت",
+"Shared photos":"الصور المشاركة",
+"Delete Conversation":"مسح المحادثة",
+"Saved Messages":"الرسائل المحفوظة",
+"Your chat":"الشات الخاص بك",
+"Attachments":"المرفقات",
+"Please select a chat to start messaging":"الرجاء تحديد دردشة لبدء المراسلة",
+"Type a message":"اكتب رسالتك",
+"Change chat color":"تغيير لون الدردشة",
+"Dark Mode":"الوضع المظلم",
+"Custom colors":"الوان مخصصه"
 }

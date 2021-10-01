@@ -100,3 +100,13 @@
     margin-right: 30px;
 }
 
+/* Part page */
+.rating{
+    direction: ltr;
+}
+.rating-holder{
+    float: right;
+}
+.rate  {
+    direction: ltr;
+}

@@ -10,8 +10,8 @@
             </td>
             {{-- center side --}}
             <td>
-                <p data-id="{{ 'user_'.Auth::user()->id }}">Saved Messages <span>You</span></p>
-                <span>Save messages secretly</span>
+                <p data-id="{{ 'user_'.Auth::user()->id }}">@lang('Saved Messages')</p>
+                <span>@lang('Your chat')</span>
             </td>
         </tr>
     </table>
@@ -53,7 +53,7 @@
                         : $lastMessage->body
                     }}
                     @else
-                    <span class="fas fa-file"></span> Attachment
+                    <span class="fas fa-file"></span> @lang('Attachments')
                     @endif
                 </span>
                 {{-- New messages counter --}}
