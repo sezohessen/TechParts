@@ -3536,6 +3536,15 @@ label .required {
 .car-details .rating span{
     float: right;
 }
+.rating{
+    float: right;
+}
+.rating-holder{
+    float: left;
+}
+.rate  {
+    direction: rtl;
+}
 .car-details .white-space{
     height: 20px;
 }
@@ -3994,4 +4003,7 @@ label .required {
     height: 500px;
     vertical-align: middle;
     text-align: center;
+}
+#add-to-favorite-login{
+    color: white;
 }
