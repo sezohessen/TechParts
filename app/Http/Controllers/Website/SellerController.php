@@ -17,6 +17,6 @@ class SellerController extends Controller
         ->where('user_id',$seller->user_id)
         ->paginate(10);
         // dd($seller->governorate);
-        return view('website.seller',compact('seller','parts'));
+        return view('website.seller',compact('seller','parts','page_title','page_description'));
     }
 }

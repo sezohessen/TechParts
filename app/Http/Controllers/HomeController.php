@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $page_title = __('Welcome');
+        $page_description = __('Welcome');
+        return view('home',compact('page_title','page_description'));
     }
 }
