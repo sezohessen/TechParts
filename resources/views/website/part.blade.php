@@ -16,6 +16,16 @@
 <section class="section white" id="Part-Page">
         <div class="inner">
             <div class="container">
+            @if(session()->has('added'))
+                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
+                        <p>{{ session('added') }}</p>
+                    </div>
+            @endif
+            @if(session()->has('deleted'))
+                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
+                        <p>{{ session('deleted') }}</p>
+                    </div>
+            @endif
                 <div class="car-details">
                     <div class="mt-20 row">
                         <div class="col-sm-8">
@@ -265,11 +275,7 @@
                                         </div>
                                     </div> <!-- end .item -->
                                 @endif
-                                @if(session()->has('added'))
-                                        <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                                            <p>{{ session('added') }}</p>
-                                        </div>
-                                @endif
+
                             </div> <!-- end .main-car-details -->
                         </div> <!-- end .col-sm-4 -->
                     </div> <!-- end .row -->
