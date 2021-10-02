@@ -91,6 +91,10 @@
 #car-details-slider{
     direction: ltr;
 }
+#Review-avatar{
+    right: 0;
+    margin-left: 10px;
+}
 /* Footer */
 .footer .iconbox-left .icon{
     float: right;
@@ -110,3 +114,4 @@
 .rate  {
     direction: ltr;
 }
+
