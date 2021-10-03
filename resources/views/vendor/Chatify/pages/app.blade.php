@@ -20,7 +20,6 @@
             <div class="messenger-listView-tabs">
                 <a href="#" @if($route == 'user') class="active-tab" @endif data-view="users">
                  @lang('Your messages') <span class="far fa-user"></span> </a>
-
             </div>
         </div>
         {{-- tabs and lists --}}
@@ -65,13 +64,17 @@
                     <a href="#" class="show-listView"><i class="fas fa-arrow-left"></i></a>
                     <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
                     </div>
-                    <a href="#" class="user-name">{{ config('chatify.name') }}</a>
+                    @php
+                        $userId = explode('_',$id);
+                        $user   = App\Models\User::find($userId[1]);
+                    @endphp
+                    <a href="{{ route('Website.SellerProfile',['id'=>$user->id,'first'=>$user->first_name,'second'=>$user->last_name]) }}" class="user-name">{{ config('chatify.name') }}</a>
                 </div>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
                     <!-- Seller page HOME ICON -->
-                    {{-- <a href="#" id="homeLink" class="show-infoSide"><i class="fas fa-home"></i></a> --}}
+                    <a href="{{ route('Website.SellerProfile',['id'=>$user->id,'first'=>$user->first_name,'second'=>$user->last_name]) }}" class="show-infoSide"><i class="fas fa-home"></i></a>
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                 </nav>
             </nav>
