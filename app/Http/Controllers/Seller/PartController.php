@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\City;
 use App\Models\Part;
+use App\Models\PartImg;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -45,10 +46,20 @@ class PartController extends Controller
      */
     public function store(Request $request)
     {
-        $rules          = Part::rules($request);
+        $rules          = Part::rules($request,NULL,$InSellerDashboard = 1);
         $request->validate($rules);
-        $credentials    = Part::credentials($request);
+        $credentials    = Part::credentials($request,$userID = 1);
         $Part           = Part::create($credentials);
+        if($request->file('part_img_new')){
+            $images  = $request->file('part_img_new');
+            foreach($images as $key=>$image){
+                $imageID = add_Image($image,NULL,Part::base);
+                PartImg::create([
+                    'part_id'   => $Part->id,
+                    'img_id'    => $imageID
+                ]);
+            }
+        }
         session()->flash('created',__("Changes has been Created Successfully"));
         return redirect()->route("seller.part.index");
     }
@@ -88,10 +99,26 @@ class PartController extends Controller
      */
     public function update(Request $request, Part $part)
     {
-        $rules          = Part::rules($request,true);
+        $rules          = Part::rules($request,$image = 1,$InSellerDashboard = 1);
         $request->validate($rules);
-        $credentials    = Part::credentials($request,true);
+        $credentials    = Part::credentials($request,$edit = 1);
         $part->update($credentials);
+        if($request->file('part_img')){
+            $images  = $request->file('part_img');
+            foreach($images as $key=>$image){
+                add_Image($image,$key,Part::base,$update = 1);
+            }
+        }
+        if($request->file('part_img_new')){
+            $images  = $request->file('part_img_new');
+            foreach($images as $key=>$image){
+                $imageID = add_Image($image,NULL,Part::base);
+                PartImg::create([
+                    'part_id'   => $part->id,
+                    'img_id'    => $imageID
+                ]);
+            }
+        }
         session()->flash('updated',__("Changes has been Created Successfully"));
         return redirect()->route("seller.part.index");
     }
@@ -101,6 +128,13 @@ class PartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function Activity(Request $request){
+        $country = Part::find($request->id);
+        $country->update(["active"=>$request->status]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
     public function destroy(Part $part)
     {
         $part->delete();

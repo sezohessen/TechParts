@@ -34,7 +34,7 @@ class LoginController extends Controller
         if (auth()->user()->hasRole('administrator') or auth()->user()->hasRole('superadministrator')) {
             return '/dashboard';
         }
-        return 'index';
+        return '/index';
     }
 
     /**

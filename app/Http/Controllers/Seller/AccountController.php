@@ -21,14 +21,10 @@ class AccountController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $seller     = Seller::where('id',$id)->first();
-        if($seller->user_id != Auth()->user()->id)return redirect()->route("seller.index");
+        $seller     = Seller::findOrFail($id);
         $rules      =  Seller::rules($request);
-                // dd($request->all());
-
         $request->validate($rules);
-
-        $seller->update(Seller::credentials($request));
+        $seller->update(Seller::credentials($request,$seller)); 
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("seller.index");
     }

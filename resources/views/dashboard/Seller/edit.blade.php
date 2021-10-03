@@ -189,7 +189,7 @@
                     <div class="col-md-6">
                     </div>
                     <div class="col-md-6">
-                        <a class="btn btn-primary" href="/download/{{$seller->id}}"> Download File </a>
+                        <a class="btn btn-primary" href="/download/{{$seller->id}}"> @lang('Download File') </a>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
@@ -286,13 +286,9 @@
     var KTUserEdit={
         init:function(){
             new KTImageInput("avatar");
-            }
-            };jQuery(document).ready((function(){KTUserEdit.init()}));
-    var background={
-        init:function(){
             new KTImageInput("background");
             }
-            };jQuery(document).ready((function(){background.init()}));
+        };jQuery(document).ready((function(){KTUserEdit.init()}));
 
 </script>
 @endsection

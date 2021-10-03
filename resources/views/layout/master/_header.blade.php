@@ -21,7 +21,7 @@
                     <div class="header-logo">
                         <a href="{{ url('/dashboard') }}">
                             <img alt="{{ Session::get('app_locale')=='en'? App\Models\Settings::first()->appName : App\Models\Settings::first()->appName_ar }}"
-                            src="{{ find_image(App\Models\Settings::first()->logo,'img/settings/') }}" height="30px" width="40px"/>
+                            src="{{ find_image(App\Models\Settings::first()->logo,'img/settings/') }}" />
                         </a>
                     </div>
                 @endif
