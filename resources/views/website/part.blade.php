@@ -30,7 +30,11 @@
                     <div class="mt-20 row">
                         <div class="col-sm-8">
                             <div class="clearfix">
-                                <div class="title">{{ LangDetail($part->name,$part->name_ar) }} <span>[ {{ $part->part_number }} ]</span></div>
+                                <div class="title">{{ LangDetail($part->name,$part->name_ar) }} <span>
+                                    @if ($part->part_number)
+                                      [ {{ $part->part_number }} ]
+                                    @endif
+                                </span></div>
                                 <!-- IF there is no reviews -->
                                 @if (NoReview($part->id))
                                 <div class="rating">
@@ -88,8 +92,8 @@
                                                 <div class="flex items-start">
                                                     <div class="flex-shrink-0">
                                                         <div class="relative inline-block">
-                                                        <div class="relative w-16 h-16 overflow-hidden rounded-full">
-                                                            <img class="absolute top-0 left-0 object-cover w-full h-full bg-cover object-fit" src="https://w7.pngwing.com/pngs/754/2/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png" alt="Profile picture">
+                                                        <div  id="Review-avatar" class="relative w-16 h-16 overflow-hidden rounded-full">
+                                                            <img  class="absolute top-0 left-0 object-cover w-full h-full bg-cover object-fit" src="https://w7.pngwing.com/pngs/754/2/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png" alt="Profile picture">
                                                             <div class="absolute top-0 left-0 w-full h-full rounded-full shadow-inner"></div>
                                                         </div>
                                                         </div>
@@ -142,9 +146,9 @@
                                             <!-- Add review to the part -->
                                             <form action="{{route('Website.SendReview',$part->id)}}" method="POST">
                                                 @csrf
-                                            <div class="m-5 text-2xl font-bold text-center text-gray-800 heading">Type your review</div>
+                                            <div class="m-5 text-2xl font-bold text-center text-gray-800 heading">@lang('Type your review')</div>
                                             <div class="comment-form-rating">
-                                                <h5 class="mb-10">Your rating</h5>
+                                                <h5 class="mb-10">@lang('Your rating')</h5>
                                                 <div class="rating-holder">
                                                     <div class="w-full rate">
                                                         <input type="radio" id="star5" name="rating" value="5" />
@@ -170,7 +174,7 @@
                                             </div>
                                             <div class="text-gray-800">
                                                 <input id="add-review-title" class="p-2 mb-4 text-2xl bg-gray-100 border border-gray-300 outline-none title form-control"
-                                                spellcheck="false" placeholder="Title" name="title" type="text">
+                                                spellcheck="false" placeholder="@lang('Title')" name="title" type="text">
                                                 @if ($errors->has('title'))
                                                     <div class="py-5 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">
@@ -179,7 +183,7 @@
                                                     </div>
                                                 @endif
                                                 <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60 form-control"
-                                                 spellcheck="false" name="review" placeholder="Describe everything about this post here" rows="10"></textarea>
+                                                 spellcheck="false" name="review" placeholder="@lang('Describe what you think about this part')" rows="10"></textarea>
                                                 @if ($errors->has('review'))
                                                     <div class="py-5 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">
@@ -189,8 +193,8 @@
                                                 @endif
                                                 <!-- buttons -->
                                                 <div class="flex py-2 buttons">
-                                                <button type="button" onclick="this.form.reset();" class="p-1 px-4 ml-auto font-semibold text-gray-500 border border-gray-300 cursor-pointer btn">Cancel</button>
-                                                <button type="submit" class="p-1 px-4 ml-2 font-semibold text-gray-200 bg-indigo-500 border border-indigo-500 cursor-pointer btn">Add Review</button>
+                                                <button type="button" onclick="this.form.reset();" class="p-1 px-4 ml-auto font-semibold text-gray-500 border border-gray-300 cursor-pointer btn">@lang('Cancel')</button>
+                                                <button type="submit" class="p-2 px-4 ml-2 font-semibold text-gray-200 bg-indigo-500 border border-indigo-500 cursor-pointer btn">@lang('Add Review')</button>
                                                 </div>
                                             </div>
                                         <!-- End  user reviewed this part -->
@@ -241,10 +245,13 @@
                                           <div class="option-content">{{$part->in_stock}}</div>
                                 </div> <!-- end .item -->
                                 @endif
+                                <!-- if there is a part number  -->
+                                @if ($part->part_number)
                                 <div class="clearfix item">
                                     <div class="option">@lang('Part number')</div>
                                     <div class="option-content">{{$part->part_number}}</div>
                                 </div> <!-- end .item -->
+                                @endif
                                 <!-- Add to favorite buttin -->
                                 @if (Auth::check())
                                     @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first() == false)

@@ -20,17 +20,7 @@
     <div class="flex justify-center">
       <div class="flex">
         <h1 class="text-xl font-bold text-gray-600 md:text-2xl">
-            My Profile
-        @if(session()->has('success'))
-            <div class="m-4 alert alert-success ">
-                <p>{{ session('success') }}</p>
-            </div>
-        @endif
-        @if(session()->has('error'))
-            <div class="m-4 alert alert-danger">
-                <p>{{ session('error') }}</p>
-            </div>
-        @endif
+        My Profile
         </h1>
       </div>
     </div>
@@ -111,6 +101,16 @@
       <a href="{{url('user')}}" class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'>Cancel</a>
       <button type="submit" class='w-auto px-4 py-2 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-blue-700'>Save</button>
     </div>
+    @if(session()->has('success'))
+                <div class="m-4 alert alert-success ">
+                    <p>{{ session('success') }}</p>
+                </div>
+            @endif
+            @if(session()->has('error'))
+                <div class="m-4 alert alert-danger">
+                    <p>{{ session('error') }}</p>
+                </div>
+            @endif
     </form>
   </div>
 </div>
