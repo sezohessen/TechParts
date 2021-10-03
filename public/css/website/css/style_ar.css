@@ -58,7 +58,9 @@
     text-align: right;
     padding-right: 8px;
 }
-
+.owl-carousel.owl-loaded {
+    direction: ltr;
+}
 /* Part Page */
 .car-details .main-car-details .item .option-content,.car-details .main-car-details .item .option{
     float: right;
@@ -91,6 +93,10 @@
 #car-details-slider{
     direction: ltr;
 }
+#Review-avatar{
+    right: 0;
+    margin-left: 10px;
+}
 /* Footer */
 .footer .iconbox-left .icon{
     float: right;
@@ -110,3 +116,4 @@
 .rate  {
     direction: ltr;
 }
+

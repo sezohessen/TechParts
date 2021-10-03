@@ -55,16 +55,7 @@ Improve consistency of default fonts in all browsers. (https://github.com/sindre
 */
 
 body {
-  font-family:
-		system-ui,
-		-apple-system, /* Firefox supports this but not yet `system-ui` */
-		'Segoe UI',
-		Roboto,
-		Helvetica,
-		Arial,
-		sans-serif,
-		'Apple Color Emoji',
-		'Segoe UI Emoji';
+  font-family:'Ubuntu', sans-serif;
 }
 
 /*
@@ -365,10 +356,7 @@ html {
  * a class directly on the `html` element.
  */
 
-body {
-  font-family: inherit;
-  line-height: inherit;
-}
+
 
 /**
  * 1. Prevent padding and border from affecting element width.

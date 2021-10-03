@@ -145,6 +145,7 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
     Route::get('/my-account','AccountController@edit')->name('my_account.edit');
     Route::patch('/my-account/{id}','AccountController@update')->name('my_account.update');
     Route::get('/my-account/governorates/{id}','AccountController@show');
+    Route::post('/part/{part}/activity',"PartController@Activity")->name('part.Activity');
 });
 
 Route::get('/download/{id}','FileDownloadController@DownloadFile');

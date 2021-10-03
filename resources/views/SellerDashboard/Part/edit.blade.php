@@ -92,29 +92,6 @@
                             @enderror
                         </div>
                     </div>
-                    <!-- Part img -->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Image">@lang('Part image') <span class="text-danger">*</span></label><br>
-                            <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('media/svg/logos/Logo.jpg') }})">
-                                <div class="image-input-wrapper"></div>
-                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                    <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="part_img" accept=".png, .jpg, .jpeg ,gif,svg"  />
-                                    <input type="hidden" name="part_img_remove" />
-                                </label>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                </span>
-                            </div>
-                            @error('part_img')
-                                <div class="invalid-feedback">{{ $errors->first('part_img') }}</div>
-                            @enderror
-                        </div>
-                    </div>
                     <!-- Select car -->
                     <div class="col-md-12">
                         <div class="form-group row">
@@ -161,8 +138,59 @@
                             @enderror
                         </div>
                     </div>
-
-
+                    @foreach ($part->images as $key=>$image)
+                    <!-- Part img -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Image">
+                                @if($key==0)@lang('Main Image') @else @lang('Part image') @endif
+                                @if($key==0)<span class="text-danger">*</span> @endif
+                            </label>
+                            <br>
+                            <div class="image-input image-input-empty image-input-outline" id="logo_{{ $key }}" style="background-image: url('{{ find_image($image->image,App\Models\Part::base) }}')">
+                                <div class="image-input-wrapper"></div>
+                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                    <input type="file" name="part_img[{{ $image->image->id }}]" accept=".png, .jpg, .jpeg ,gif,svg"/>
+                                    <input type="hidden" name="part_img[{{ $image->image->id }}]_remove" />
+                                </label>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                            </div>
+                            @error('part_img.*')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    @endforeach
+                    @for ($i = ($part->images->count()); $i < App\Models\Part::ImgCount; $i++)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Image">@lang('Part image')</label><br>
+                                <div class="image-input image-input-empty image-input-outline" id="logo_{{ $i }}" style="background-image: url('')">
+                                    <div class="image-input-wrapper"></div>
+                                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                        <i class="fa fa-pen icon-sm text-muted"></i>
+                                        <input type="file" name="part_img_new[]" accept=".png, .jpg, .jpeg ,gif,svg"  />
+                                        <input type="hidden" name="part_img_new[]_remove" />
+                                    </label>
+                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                    </span>
+                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                    </span>
+                                </div>
+                                @error('part_img_new.*')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    @endfor
                 </div>
             </div>
             <div class="card-footer">
@@ -181,11 +209,14 @@
 <script src="{{ asset("js/pages/crud/forms/widgets/select2.js") }}"></script>
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
 <script>
-"use strict";
-var KTUserEdit={
-    init:function(){
-        new KTImageInput("logo");
-        }
-        };jQuery(document).ready((function(){KTUserEdit.init()}));
+    "use strict";
+    var KTUserEdit={
+        init:function(){
+            new KTImageInput("logo_0");
+            new KTImageInput("logo_1");
+            new KTImageInput("logo_2");
+            new KTImageInput("logo_3");
+            }
+            };jQuery(document).ready((function(){KTUserEdit.init()}));
 </script>
 @endsection

@@ -30,6 +30,62 @@
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
+                    <!-- Avatar -->
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="Image">@lang('Logo image')</label>
+                            <br>
+                            <div class="image-input image-input-empty image-input-outline" id="avatar" style="background-image: url({{ $seller->sellerAvatar ? asset('img/avatar/'.$seller->sellerAvatar->name) : asset('media/users/blank.png') }})">
+                                <div class="image-input-wrapper"></div>
+                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg ,gif,svg" />
+                                    <input type="hidden" name="avatar_remove" />
+                                </label>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                            </div>
+                                @if ($errors->has('avatar'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                    <strong>{{ $errors->first('avatar')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- Background  -->
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="Image">@lang('Background')</label>
+                            <br>
+                            <div class="image-input image-input-empty image-input-outline" id="background" style="background-image: url({{ $seller->background ? asset('img/background/'.$seller->background->name) : asset('media/users/blank.png') }})">
+                                <div class="image-input-wrapper" style="width: 600px;"></div>
+                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                    <input type="file" name="bg"  />
+                                    <input type="hidden" name="background_remove" />
+                                </label>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                            </div>
+                                @if ($errors->has('bg'))
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                    <strong>{{ $errors->first('bg')  }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                     <!-- Arabic Desc -->
                     <div class="col-md-12">
                         <div class="form-group">
@@ -121,7 +177,7 @@
                         </div>
                     </div>
                     <!-- File -->
-                    <!-- <div class="col-md-6">
+                   {{--  <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Upload File')</label>
                             <input type="file" class="form-control {{ $errors->has('file') ? 'is-invalid' : '' }}"
@@ -130,8 +186,30 @@
                                 <div class="invalid-feedback">{{ $errors->first('file') }}</div>
                             @enderror
                         </div>
-                    </div> -->
-
+                    </div> --}}
+                    <!-- File -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@lang('Upload File')</label>
+                            <input type="file" class="form-control {{ $errors->has('file') ? 'is-invalid' : '' }}"
+                            name="file"  placeholder="@lang('file')"  value="{{old("file") ? old("file") : $seller->file}}"/>
+                            @error('file')
+                                <div class="invalid-feedback">{{ $errors->first('file') }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                    @if ($seller->file)
+                        @php
+                            $file       = storage_path('app\files\\') . $seller->file;
+                        @endphp
+                        @if (file_exists($file))
+                        <div class="col-md-6">
+                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> @lang('Download File') {{ $seller->file }}</a>
+                        </div>
+                        @endif
+                    @endif
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>@lang('Location') <span class="text-danger">*</span></label>
@@ -206,6 +284,13 @@
         enableAutocomplete: true
 
     });
+    "use strict";
+    var KTUserEdit={
+    init:function(){
+        new KTImageInput("avatar");
+        new KTImageInput("background");
+        }
+    };jQuery(document).ready((function(){KTUserEdit.init()}));
 </script>
 @endsection
 

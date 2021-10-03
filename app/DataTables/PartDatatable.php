@@ -148,7 +148,6 @@ class PartDatatable extends DataTable
                 ->searchable(false)
                 ->width(120)
                 ->addClass('text-center')
-
         ];
     }
 

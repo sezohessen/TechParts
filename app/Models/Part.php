@@ -28,7 +28,7 @@ class Part extends Model
     ];
     protected $appends = ['first_image'];
 
-    public static function rules($request,$id=NULL)
+    public static function rules($request,$image = NULL,$InSellerDashboard = NULL)
     {
         $rules = [
             'name'                     => 'nullable|max:255',
@@ -43,14 +43,15 @@ class Part extends Model
             'part_img_new.0'           => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize,
             'part_img_new.*'           => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize
         ];
-        if($id){
+        if($image){
             $rules['part_img.*']        = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;//Validate all
             $rules['part_img_new.*']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;
             $rules['part_img_new.0']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;
         }
+        if($InSellerDashboard)unset($rules['user_id']);
         return $rules;
     }
-    public static function credentials($request,$edit = NULL)
+    public static function credentials($request,$userID = NULL)
     {
         $credentials = [
             'name'              => $request->name,
@@ -63,10 +64,8 @@ class Part extends Model
             'car_id'            => $request->car_id,
             'user_id'           => $request->user_id,
         ];
+        if($userID)$credentials['user_id'] = Auth()->user()->id;
         return $credentials;
-        if($edit){
-            unset($credentials['user_id']);
-        }
 
     }
 

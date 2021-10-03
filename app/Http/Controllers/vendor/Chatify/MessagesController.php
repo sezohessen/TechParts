@@ -52,7 +52,6 @@ class MessagesController extends Controller
      */
     public function index($id = null)
     {
-        // $Seller = Seller::where('user_id',$id)->first();
         $routeName= FacadesRequest::route()->getName();
         $route = (in_array($routeName, ['user', config('chatify.routes.prefix')]))
             ? 'user'

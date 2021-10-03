@@ -136,6 +136,34 @@
                             @enderror
                         </div>
                     </div>
+                    @for ($i = 0; $i < App\Models\Part::ImgCount; $i++)
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Image">
+                                @if($i==0)@lang('Main Image') @else @lang('Part image') @endif
+                                @if($i==0)<span class="text-danger">*</span> @endif
+                            </label>
+                            <br>
+                            <div class="image-input image-input-empty image-input-outline" id="logo_{{ $i }}" style="background-image: url('')">
+                                <div class="image-input-wrapper"></div>
+                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                    <input type="file" name="part_img_new[]" accept=".png, .jpg, .jpeg ,gif,svg"  />
+                                    <input type="hidden" name="part_img_new[]_remove" />
+                                </label>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                            </div>
+                            @error('part_img_new.*')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    @endfor
                 </div>
             </div>
             <div class="card-footer">
@@ -153,6 +181,15 @@
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src="{{ asset("js/pages/crud/forms/widgets/select2.js") }}"></script>
 <script src="{{ asset('js/pages/crud/forms/validation/form-controls.js') }}"></script>
-<script src="{{ asset('plugins/custom/uppy/uppy.bundle.js') }}"></script>
-<script src="{{ asset('js/pages/crud/file-upload/uppy.js') }}"></script>
+<script>
+    "use strict";
+    var KTUserEdit={
+        init:function(){
+            new KTImageInput("logo_0");
+            new KTImageInput("logo_1");
+            new KTImageInput("logo_2");
+            new KTImageInput("logo_3");
+            }
+            };jQuery(document).ready((function(){KTUserEdit.init()}));
+</script>
 @endsection
