@@ -19,7 +19,7 @@ class SellerController extends Controller
         if ($seller) {
             $parts  = Part::where('active',1)
             ->where('user_id',$seller->user_id)
-            ->paginate(10);
+            ->paginate(8);
             // dd($seller->governorate);
             return view('website.seller',compact('seller','parts','page_title'));
         // User id or admin id redirect
