@@ -349,7 +349,7 @@
 		</section> <!-- end .section -->
 
         <!-- Start Featerd Parts Deals -->
-        @if ($deals->count() >= 6 )
+        @if ($deals->count() >= 5 )
             <section class="section white">
                 <div class="py-0 my-0 inner">
                     <h1 class="main-heading">@lang('Hot deals')<small>@lang('Best parts based on rating')</small></h1>

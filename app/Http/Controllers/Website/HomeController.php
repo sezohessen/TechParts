@@ -92,8 +92,8 @@ class HomeController extends Controller
         }elseif (isset($Request->order) && $Request->order == 'nearest'){
             $lat    = $Request->lat;
             $long   = $Request->long;
-            $parts->join('sellers', 'parts.user_id','=','sellers.user_id')
-            ->select(DB::raw("*,
+            $parts->join('sellers', 'sellers.user_id','=','parts.user_id')
+            ->select(DB::raw("parts.*,
                 6371 * acos(cos(radians(" . $lat . "))
                 * cos(radians(sellers.lat))
                 * cos(radians(sellers.long) - radians(" . $long . "))
@@ -140,8 +140,13 @@ class HomeController extends Controller
         );
 
         // Featured Parts Deals
-        $deals = Part::where('active', '=', 1)->leftJoin('reviews', 'reviews.part_id', '=', 'parts.id')
-        ->select('parts.*', DB::raw('AVG(rating) as rating_average' ))->groupBy('id')->orderBy('rating_average', 'DESC')->limit('6')->get();
+        $isExistReviews = Review::all();
+        if($isExistReviews->count()>=5){
+            $deals = Part::where('active', 1)->leftJoin('reviews', 'reviews.part_id', '=', 'parts.id')
+            ->select('parts.*', DB::raw('AVG(rating) as rating_average' ))->groupBy('id')->orderBy('rating_average', 'DESC')->limit(6)->get();
+        }else{
+            $deals = $isExistReviews;
+        }
         return view('website.index',compact('parts','brands','governorates','capacities','totalParts','page_title','deals'));
 
     }
@@ -207,8 +212,10 @@ class HomeController extends Controller
             $part->increment('views');
             Session::put($partId, 1);
         }
-
-        return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview','page_title'));
+        $reviewCount    = Review::where('part_id',$id)
+        ->get()
+        ->count();
+        return view('website.part',compact('part','hasReview','RelatedModelParts','reviews','partReview','page_title','reviewCount'));
         }
         else return redirect()->route('Website.Index');
     }

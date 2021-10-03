@@ -64,7 +64,11 @@
                             <div class="my-20 border tabpanel" role="tabpanel" id="goToReview">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="{{(session('review') || $errors->any()  ) ? '' : 'active' }}"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
-                                    <li role="presentation" class="{{session('review') ? 'active' : '' }}"><a href="#heading-tab5" aria-controls="heading-tab5" role="tab" data-toggle="tab">@lang('Reviews')</a></li>
+                                    <li role="presentation" class="{{session('review') ? 'active' : '' }}">
+                                        <a href="#heading-tab5" aria-controls="heading-tab5" role="tab" data-toggle="tab">
+                                            @lang('Reviews') ({{ $reviewCount }})
+                                        </a>
+                                    </li>
                                     <li class="{{$errors->any() ? 'active' : '' }}" role="presentation"><a href="#heading-tab6" aria-controls="heading-tab6" role="tab" data-toggle="tab">@lang('Add review')  </a></li>
                                 </ul> <!-- end .nav-tabs -->
                                 <div class="tab-content">
