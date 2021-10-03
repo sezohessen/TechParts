@@ -138,7 +138,11 @@ class HomeController extends Controller
                 'city_id'           => $Request->city_id,
             ]
         );
-        return view('website.index',compact('parts','brands','governorates','capacities','totalParts','page_title'));
+
+        // Featured Parts Deals
+        $deals = Part::where('active', '=', 1)->leftJoin('reviews', 'reviews.part_id', '=', 'parts.id')
+        ->select('parts.*', DB::raw('AVG(rating) as rating_average' ))->groupBy('id')->orderBy('rating_average', 'DESC')->limit('6')->get();
+        return view('website.index',compact('parts','brands','governorates','capacities','totalParts','page_title','deals'));
 
     }
     public function getPosition(Request $request)

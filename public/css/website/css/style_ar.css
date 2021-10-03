@@ -58,7 +58,9 @@
     text-align: right;
     padding-right: 8px;
 }
-
+.owl-carousel.owl-loaded {
+    direction: ltr;
+}
 /* Part Page */
 .car-details .main-car-details .item .option-content,.car-details .main-car-details .item .option{
     float: right;

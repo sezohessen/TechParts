@@ -21,8 +21,8 @@
     left: 50%;
     transform: translate(-50%, 0);
 }
-.left-section{
-    max-height: 720px;
+.left-bar{
+    max-height: 820px;
     box-shadow: 0px 0 3px 0 #888888;
     border-radius: 10px 10px 0 0;
 }

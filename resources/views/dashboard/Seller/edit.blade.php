@@ -189,6 +189,7 @@
                     <div class="col-md-6">
                     </div>
                     <div class="col-md-6">
+                        
                         <a class="btn btn-primary" href="/download/{{$seller->id}}"> Download File </a>
                     </div>
                     <div class="col-md-12">
