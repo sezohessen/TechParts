@@ -38,7 +38,7 @@
         <link href="{{ asset('css/pages/error/error-3.css') }}" rel="stylesheet" type="text/css"/>
 
         {{-- Favicon --}}
-        <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ asset('img/settings/TO-PART-LOGO.svg') }}" />
         {{-- Meta Data --}}
         <meta name="description" content="@yield('page_description', $page_description ?? '')" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
