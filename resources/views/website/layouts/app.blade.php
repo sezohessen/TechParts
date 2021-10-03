@@ -33,8 +33,12 @@
         <!-- Tailwindcss -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300&display=swap" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @if (App::isLocale('ar')) <link rel="stylesheet" href="{{ asset('css/website/css/fontfamilyAR.css') }}"> @endif
         <link href="{{ asset('css/pages/error/error-3.css') }}" rel="stylesheet" type="text/css"/>
 
         {{-- Favicon --}}
@@ -300,7 +304,7 @@
 		<script src="{{ asset('js/website/js/jquery.nouislider.all.min.js') }}"></script>
 		<!-- Scripts.js -->
 		<script src="{{ asset('js/website/js/scripts.js') }}"></script>
-        <script src="{{asset("js/pages/custom/login/login-general.js")}}"></script>
+        {{-- <script src="{{asset("js/pages/custom/login/login-general.js")}}"></script> --}}
 
         @yield('js')
 

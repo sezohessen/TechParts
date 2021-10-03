@@ -55,7 +55,7 @@
     </div>
 
     {{-- ----------------------Messaging side---------------------- --}}
-    <div class="messenger-messagingView" style="max-height: 650px;">
+    <div class="messenger-messagingView" style="max-height: 550px;">
         {{-- header title [conversation name] amd buttons --}}
         <div class="m-header m-header-messaging">
             <nav>
@@ -64,17 +64,28 @@
                     <a href="#" class="show-listView"><i class="fas fa-arrow-left"></i></a>
                     <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
                     </div>
-                    @php
-                        $userId = explode('_',$id);
-                        $user   = App\Models\User::find($userId[1]);
+                    {{-- @php
+                        if($id){
+                            $userId = explode('_',$id);
+                            $user   = App\Models\User::find($userId[1]);
+                        }
                     @endphp
-                    <a href="{{ route('Website.SellerProfile',['id'=>$user->id,'first'=>$user->first_name,'second'=>$user->last_name]) }}" class="user-name">{{ config('chatify.name') }}</a>
+                    @if ($id)
+                        <a href="{{ route('Website.SellerProfile',['id'=>$user->id,'first'=>$user->first_name,'second'=>$user->last_name]) }}" class="user-name">{{ config('chatify.name') }}</a>
+                    @else
+
+                    @endif --}}
+                    <a href="#" class="user-name">{{ config('chatify.name') }}</a>
                 </div>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
                     <!-- Seller page HOME ICON -->
-                    <a href="{{ route('Website.SellerProfile',['id'=>$user->id,'first'=>$user->first_name,'second'=>$user->last_name]) }}" class="show-infoSide"><i class="fas fa-home"></i></a>
+                    {{-- @if ($id)
+                        <a href="{{ route('Website.SellerProfile',['id'=>$user->id,'first'=>$user->first_name,'second'=>$user->last_name]) }}" class="show-infoSide"><i class="fas fa-home"></i></a>
+                    @else
+                        <a href="#" class="show-infoSide"><i class="fas fa-home"></i></a>
+                    @endif --}}
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                 </nav>
             </nav>
