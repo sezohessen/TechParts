@@ -353,6 +353,8 @@ function IDinfo(id, type) {
         // update info in view
         $(".messenger-infoView .info-name").html(data.fetch.first_name + ' ' + data.fetch.last_name);
         $(".m-header-messaging .user-name").html(data.fetch.first_name + ' ' + data.fetch.last_name);
+        /* document.getElementById("link").href = "seller/"+ data.fetch.id +"/"+data.fetch.first_name+"-"+ data.fetch.last_name;
+        document.getElementById("homeLink").href = "seller/"+ data.fetch.id +"/"+data.fetch.first_name+"-"+ data.fetch.last_name; */
         // Star status
         data.favorite > 0
           ? $(".add-to-favorite").addClass("favorite")

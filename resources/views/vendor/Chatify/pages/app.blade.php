@@ -30,7 +30,7 @@
                 {{-- items --}}
                 <p class="messenger-title">@lang('Search')</p>
                 <div class="search-records">
-                    <p class="message-hint center-el"><span>Type to search..</span></p>
+                    <p class="message-hint center-el"><span>@lang('Type to search..')</span></p>
                 </div>
              </div>
            {{-- Lists [Users/Group] --}}
@@ -71,7 +71,7 @@
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
                     <!-- Seller page HOME ICON -->
-                    <a href="{{ route('Website.SellerProfile',['id'=>$Seller->user_id,'first'=>$Seller->user->first_name,'second'=>$Seller->user->last_name]) }}"><i class="fas fa-home"></i></a>
+                    {{-- <a href="#" id="homeLink" class="show-infoSide"><i class="fas fa-home"></i></a> --}}
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                 </nav>
             </nav>

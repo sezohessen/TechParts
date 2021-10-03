@@ -58,15 +58,16 @@ class MessagesController extends Controller
             ? 'user'
             : $routeName;
         $route = $id ? 'user': $route;
-        $isExist   = Seller::where('user_id',$id)->first() ? 1 : 0;
-        if(!$isExist) return redirect()->back();
+        if($id){
+            $isExist   = Seller::where('user_id',$id)->first() ? 1 : 0;
+            if(!$isExist) return redirect()->back();
+        }
         // prepare id
         return view('Chatify::pages.app', [
             'id'             => ($id == null) ? 0 : $route . '_' . $id,
             'route'          => $route,
             'messengerColor' => Auth::user()->messenger_color,
-            'dark_mode'      => Auth::user()->dark_mode < 1 ? 'light' : 'dark',
-            'Seller'         => Seller::where('user_id',$id)->first()
+            'dark_mode'      => Auth::user()->dark_mode < 1 ? 'light' : 'dark'
         ]);
     }
 
@@ -379,7 +380,7 @@ class MessagesController extends Controller
         return Response::json([
             'records' => $records->count() > 0
                 ? $getRecords
-                : '<p class="message-hint center-el"><span>Not found <i class="fas fa-blind"></i></span></p>',
+                : '<p class="message-hint center-el"><span> '.__("Not found").' <i class="fas fa-blind"></i></span></p>',
             'addData' => 'html'
         ], 200);
     }
