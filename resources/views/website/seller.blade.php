@@ -81,14 +81,23 @@
                             @endif
                         </p>
                     </div>
-                    <div class="download-file">
-                        <div class="my-10">
-                            <div class="">
-                                    <div class="py-10 text-3xl font-bold capitalize">@lang('file with more information about me')</div>
-                                    <a class="btn btn-primary" href="/download/{{$seller->id}}"> Download File </a>
+                       <!-- if file exists in database -->
+                    @if ($seller->file)
+                    @php
+                        $file       = storage_path('app\files\\') . $seller->file;
+                    @endphp
+                        <!-- if file exists in storge -->
+                        @if (file_exists($file))
+                            <div class="download-file">
+                                <div class="my-10">
+                                    <div class="">
+                                            <div class="py-10 text-3xl font-bold capitalize">@lang('file with more information about me')</div>
+                                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> Download File </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endif
                 </div>
             </div>
             <!-- Seller parts -->
