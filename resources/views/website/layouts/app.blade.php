@@ -154,8 +154,8 @@
         <div class="top" style="padding-top:50px;">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4 col-xs-12 my-10">
-                        <h3 class="mb-10">@lang('About Us')</h3>
+                    <div class="my-10 col-sm-4 col-xs-12">
+                        <h3 class="mb-10 sm:font-bold sm:text-6xl">@lang('About Us')</h3>
                         @php
                             $settings  = App\Models\Settings::first();
                         @endphp
@@ -179,8 +179,8 @@
                             <div class="content"><p>{{ $Settings->phone }}</p></div> <!-- end .content -->
                         </div> <!-- end .iconbox-left -->
                     </div> <!-- end .col-sm-4 -->
-                    <div class="col-sm-4 col-xs-12 my-10">
-                        <h3 class="mb-10">@lang('Top parts')</h3>
+                    <div class="my-10 col-sm-4 col-xs-12">
+                        <h3 class="mb-10 sm:font-bold sm:text-6xl sm:mb-16">@lang('Top parts')</h3>
                         @php
                             $footerParts = App\Models\Part::Where('active',1)->orderBy('views','DESC')->limit(3)->get();
                         @endphp
@@ -203,8 +203,8 @@
                         @endforeach
 
                     </div> <!-- end .col-sm-4 -->
-                    <div class="col-sm-4 col-xs-12 my-10">
-                        <h3 class="mb-10">@lang('Get in Touch')</h3>
+                    <div class="my-10 col-sm-4 col-xs-12">
+                        <h3 class="mb-10 sm:font-bold sm:text-6xl">@lang('Get in Touch')</h3>
                         <div class="row">
                             <div class="iconbox-left">
                                 <div class="px-5 icon"><i class="fas fa-envelope-open-text"></i></div> <!-- end .icon -->
@@ -275,7 +275,7 @@
             </div> <!-- end .container -->
         </div> <!-- end .top -->
         <div class="bottom">
-            <span class="copyright">Copyright 2015. All Rights Reserved by Automan. Designed by Theme Designer.</span>
+            <span class="copyright sm:text-lg sm:font-semibold">Copyright 2015. All Rights Reserved by Automan. Designed by Theme Designer.</span>
         </div> <!-- end .bottom -->
     </footer> <!-- end .footer -->
     <!-- jQuery -->

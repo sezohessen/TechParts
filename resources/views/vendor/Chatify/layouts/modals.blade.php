@@ -1,7 +1,7 @@
 {{-- ---------------------- Image modal box ---------------------- --}}
 <div id="imageModalBox" class="imageModal">
     <span class="imageModal-close">&times;</span>
-    <img class="imageModal-content" id="imageModalBoxSrc">
+    <img class="imageModal-content sm:max-w-lg" id="imageModalBoxSrc">
   </div>
 
   {{-- ---------------------- Delete Modal ---------------------- --}}
@@ -44,7 +44,7 @@
                       <!-- <p class="app-modal-header" style="display: inline-block;" id="dark"> @lang('Dark Mode') <span class="
                         {{ Auth::user()->dark_mode > 0 ? 'fas' : 'far' }} fa-moon dark-mode-switch"
                          data-mode="{{ Auth::user()->dark_mode > 0 ? 1 : 0 }} "></span></p> -->
-                         
+
                       {{-- change messenger color  --}}
                       <p class="divider"></p>
                       <p class="app-modal-header">@lang('Custom colors')</p>
