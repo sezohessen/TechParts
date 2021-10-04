@@ -22,7 +22,7 @@
                         <div @if($fav)class="col-md-6"@else class="col-md-8" @endif>
                             <div class="clearfix">
                                 <h5>
-                                    <a href="{{ route('Website.ShowPart',$part->id) }}"> {{ LangDetail($part->name,$part->name_ar) }} </a>
+                                    <a href="{{ route('Website.ShowPart',$part->id) }}"> {{ LangDetail($part->name,$part->name_ar) }}</a>
                                 </h5>
                                 <span>
                                     @if (request()->get('order')=='nearest')

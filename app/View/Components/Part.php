@@ -13,11 +13,12 @@ class Part extends Component
      */
     public $parts;
     public $makeCol = 0;
-    public $fav = 1;
-    public function __construct($parts,$makeCol)
+    public $fav;
+    public function __construct($parts,$makeCol,$fav = 1)
     {
         $this->parts = $parts;
         $this->makeCol = $makeCol;
+        $this->fav = $fav;
     }
 
     /**
