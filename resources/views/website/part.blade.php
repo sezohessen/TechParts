@@ -23,13 +23,15 @@
                 @endif
                 <div class="car-details">
                     <div class="mt-20 row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-8 col-xs-12">
                             <div class="clearfix">
-                                <div class="title">{{ LangDetail($part->name,$part->name_ar) }} <span>
-                                    @if ($part->part_number)
-                                      [ {{ $part->part_number }} ]
-                                    @endif
-                                </span></div>
+                                <div class="title sm:pb-5">{{ LangDetail($part->name,$part->name_ar) }}
+                                    <span class="sm:block sm:py-4">
+                                        @if ($part->part_number)
+                                        [ {{ $part->part_number }} ]
+                                        @endif
+                                    </span>
+                                </div>
                                 <!-- IF there is no reviews -->
                                 @if (NoReview($part->id))
                                 <div class="rating">
@@ -147,7 +149,7 @@
                                                 @csrf
                                             <div class="m-5 text-2xl font-bold text-center text-gray-800 heading">@lang('Type your review')</div>
                                             <div class="comment-form-rating">
-                                                <h5 class="mb-10">@lang('Your rating')</h5>
+                                                <h5 class="mb-10 sm:hidden">@lang('Your rating')</h5>
                                                 <div class="rating-holder">
                                                     <div class="w-full rate">
                                                         <input type="radio" id="star5" name="rating" value="5" />
@@ -204,7 +206,7 @@
                             </div> <!-- end .tabpanel -->
                         </div> <!-- end .col-sm-8 -->
                             <!-- Right section -->
-                        <div class="mt-10 col-sm-4">
+                        <div class="mt-10 col-sm-4 col-xs-12">
                             @if ($part->price)
                                <div class="price"> {{ $part->price }} @lang('L.E') <span></span></div>
                             @else
