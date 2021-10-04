@@ -7,11 +7,10 @@
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
-                <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">@lang('MESSAGES')</span> </a>
+                <a href="#"> <span class="messenger-headTitle">@lang('MESSAGES')</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#"><i class="fas fa-cog settings-btn"></i></a>
-                    <a href="#" class="listView-x"><i class="fas fa-times"></i></a>
                 </nav>
             </nav>
             {{-- Search input --}}
@@ -55,7 +54,7 @@
     </div>
 
     {{-- ----------------------Messaging side---------------------- --}}
-    <div class="messenger-messagingView" style="max-height: 550px;">
+    <div class="messenger-messagingView sm:z-50 sm:h-5/5 sm:relative" style="max-height: 550px;">
         {{-- header title [conversation name] amd buttons --}}
         <div class="m-header m-header-messaging">
             <nav>
@@ -118,7 +117,7 @@
         </div>
     </div>
     {{-- ---------------------- Info side ---------------------- --}}
-    <div class="messenger-infoView app-scroll">
+    <div class="messenger-infoView app-scroll sm:z-50 sm:absolute sm:mt-32 sm:h-full">
         {{-- nav actions --}}
         <nav>
             <a href="#"><i class="fas fa-times"></i></a>

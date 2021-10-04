@@ -38,8 +38,8 @@
             <a href="{{ route('MessengerID',$seller->user_id) }}" class="mb-10 text-3xl btn btn-primary">@lang('Message Me') <i class="fab fa-facebook-messenger"></i></a>
         </div>
         <div class="row">
-            <div class="col-md-4 left-bar">
-                <div class="p-10 mb-20 left-section">
+            <div class="col-md-4 left-bar sm:mb-12">
+                <div class="p-10 mb-20 left-section ">
                     <div class="desc">
                         <div class="pb-10 text-4xl font-bold">@lang('Brief summary')</div>
                         <p> {!! LangDetail($seller->desc,$seller->desc_ar) !!} </p>

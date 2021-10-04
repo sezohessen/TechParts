@@ -4029,8 +4029,14 @@ label .required {
     left: 10px;
 }
 /* PHONE */
-@media (min-width: 425px) {
+@media (max-width: 768px) {
     .section>.inner{
         padding: 96px 0 20px 0;
+    }
+    .messenger {
+        display: block;
+    }
+    #imageModalBox{
+        z-index: 1000;
     }
 }
