@@ -55,7 +55,16 @@ Improve consistency of default fonts in all browsers. (https://github.com/sindre
 */
 
 body {
-  font-family:'Ubuntu', sans-serif;
+  font-family:
+		system-ui,
+		-apple-system, /* Firefox supports this but not yet `system-ui` */
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji';
 }
 
 /*
@@ -356,7 +365,10 @@ html {
  * a class directly on the `html` element.
  */
 
-
+body {
+  font-family: inherit;
+  line-height: inherit;
+}
 
 /**
  * 1. Prevent padding and border from affecting element width.
@@ -563,14 +575,8 @@ video {
   border-color: rgba(229, 231, 235, var(--tw-border-opacity));
 }
 
-/* .container {
+.container {
   width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
 }
 
 @media (min-width: 768px) {
@@ -596,7 +602,7 @@ video {
     max-width: 1536px;
   }
 }
- */
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -6903,10 +6909,6 @@ video {
 
 .max-w-prose {
   max-width: 65ch;
-}
-
-.max-w-screen-sm {
-  max-width: 640px;
 }
 
 .max-w-screen-md {
@@ -31867,14 +31869,14 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 320px) and (max-width: 426px) {
   .sm\:container {
     width: 100%;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 320px) {
     .sm\:container {
-      max-width: 640px;
+      max-width: 320px;
     }
   }
 
@@ -38208,10 +38210,6 @@ video {
 
   .sm\:max-w-prose {
     max-width: 65ch;
-  }
-
-  .sm\:max-w-screen-sm {
-    max-width: 640px;
   }
 
   .sm\:max-w-screen-md {
@@ -63099,9 +63097,9 @@ video {
     width: 100%;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 320px) {
     .md\:container {
-      max-width: 640px;
+      max-width: 320px;
     }
   }
 
@@ -69435,10 +69433,6 @@ video {
 
   .md\:max-w-prose {
     max-width: 65ch;
-  }
-
-  .md\:max-w-screen-sm {
-    max-width: 640px;
   }
 
   .md\:max-w-screen-md {
@@ -94326,9 +94320,9 @@ video {
     width: 100%;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 320px) {
     .lg\:container {
-      max-width: 640px;
+      max-width: 320px;
     }
   }
 
@@ -100662,10 +100656,6 @@ video {
 
   .lg\:max-w-prose {
     max-width: 65ch;
-  }
-
-  .lg\:max-w-screen-sm {
-    max-width: 640px;
   }
 
   .lg\:max-w-screen-md {
@@ -125553,9 +125543,9 @@ video {
     width: 100%;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 320px) {
     .xl\:container {
-      max-width: 640px;
+      max-width: 320px;
     }
   }
 
@@ -131889,10 +131879,6 @@ video {
 
   .xl\:max-w-prose {
     max-width: 65ch;
-  }
-
-  .xl\:max-w-screen-sm {
-    max-width: 640px;
   }
 
   .xl\:max-w-screen-md {
@@ -156780,9 +156766,9 @@ video {
     width: 100%;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 320px) {
     .\32xl\:container {
-      max-width: 640px;
+      max-width: 320px;
     }
   }
 
@@ -163116,10 +163102,6 @@ video {
 
   .\32xl\:max-w-prose {
     max-width: 65ch;
-  }
-
-  .\32xl\:max-w-screen-sm {
-    max-width: 640px;
   }
 
   .\32xl\:max-w-screen-md {
