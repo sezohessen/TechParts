@@ -75,7 +75,7 @@
 							</li>
 							<li class="favorite">
 								<a href="{{url('favorite')}}">@lang('Favorite')
-                            @if (Auth::check())<span>( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
+                            @if (Auth::check())<span id="QtyCount">( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
                                 </a>
 							</li>
 							<li><a

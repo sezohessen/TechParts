@@ -293,7 +293,7 @@
 								<div class="clearfix listings-grid">
                                     <div class="featured-cars">
                                         <div class="row">
-                                            <x-part :parts="$parts" makeCol="6"/>
+                                            <x-part :parts="$parts" :makeCol="6" />
                                         </div>
                                     </div>
                                     {{ $parts->appends(Request::only([

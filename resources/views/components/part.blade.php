@@ -19,7 +19,7 @@
                 </div> <!-- end .image -->
                 <div class="content">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div @if($fav)class="col-md-6"@else class="col-md-8" @endif>
                             <div class="clearfix">
                                 <h5>
                                     <a href="{{ route('Website.ShowPart',$part->id) }}"> {{ LangDetail($part->name,$part->name_ar) }} </a>
@@ -42,43 +42,32 @@
                                 <span class="block price">{{ $part->price }} @lang('L.E')</span>
                             @endif
                         </div>
-                         <!-- start Favorite section -->
-                        <div class="col-md-2">
+                         @if ($fav)
+                            <!-- start Favorite section -->
+                            <div class="col-md-2">
                                 <!-- If item in favorite -->
-                            @if (Auth::check())
-                                @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first())
-                                    <form method="POST" action="{{route('Website.destroyFavorite',$part->id)}}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <div id="add-remove" class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-red-700 rounded-2xl">
-                                            <button type="submit">
-                                            <i class="fa fa-times-circle"></i>
-                                            </button>
-                                        </div>
-                                    </form>
-                                @else
-                                <!-- Add part to favorite -->
-                                <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
+                            @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first())
+                                <form>
                                     @csrf
-                                    <div  id="add-remove" class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-yellow-400 rounded-2xl">
-                                        <button type="submit">
-                                        <i class="far fa-heart"></i>
+                                    <div class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-red-700 rounded-2xl">
+                                        <button type="submit"  data-id="{{ $part->id }}" id="DeleteFromFav_{{ $part->id }}" class="DeleteFromFav">
+                                        <i class="fa fa-times-circle"></i>
                                         </button>
                                     </div>
                                 </form>
-                                @endif
                             @else
-                                <!-- show the heart if user not logged in -->
-                                <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
+                            <!-- Add part to favorite -->
+                            <form>
                                 @csrf
-                                <div  id="add-remove" class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-yellow-700 rounded-2xl">
-                                    <button type="submit">
+                                <div class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-yellow-400 rounded-2xl">
+                                    <button type="submit"  data-id="{{ $part->id }}" id="Fav_{{ $part->id }}" class="AddToFav">
                                     <i class="far fa-heart"></i>
                                     </button>
                                 </div>
                             </form>
                             @endif
-                        </div>
+                            </div>
+                         @endif
                          <!-- end Favorite section -->
                     </div>
                 </div> <!-- end .content -->
@@ -92,3 +81,63 @@
         </div>
     @endif
 @endforeach
+@section('js')
+<script>
+    $('.AddToFav').click(function(e){
+
+        e.preventDefault();
+        $(this).removeClass('AddToFav').addClass('DeleteFromFav');
+        let id = $(this).data('id');
+        var url = '{{ route("Website.addToFavorite", ":id") }}';
+        url = url.replace(':id',id);
+        $.ajax({
+            type:"POST",
+            url: url,
+            data: {
+                    'id': id,
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function (data) {
+                    if(data.success==true){
+                        document.getElementById("QtyCount").innerHTML = "( "+ data.Qty +" )";
+                    }
+                    $('#Fav_' + id + ' i').removeClass('far fa-heart').addClass('fa fa-times-circle');
+
+
+                },
+                error: function (XMLHttpRequest) {
+                    alert('Something went Wrong');
+                }
+        });
+    });
+    $('.DeleteFromFav').click(function(e){
+        e.preventDefault();
+        $(this).removeClass('DeleteFromFav').addClass('AddToFav');
+        let id = $(this).data('id');
+        var $tr = $(this).closest('.col-md-4');
+        var url = '{{ route("Website.destroyFavorite", ":id") }}';
+        url = url.replace(':id',id);
+        $.ajax({
+            type:"DELETE",
+            url: url,
+            data: {
+                    'id': id,
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function (data) {
+                    if(data.success==true){
+                        document.getElementById("QtyCount").innerHTML = "( "+ data.Qty +" )";
+                        $tr.fadeOut(500,function(){
+                            $tr.remove();
+                        });
+                    }
+                    $('#DeleteFromFav_' + id + ' i').removeClass('fa fa-times-circle').addClass('far fa-heart');
+
+                },
+                error: function (XMLHttpRequest) {
+                    alert('Something went Wrong');
+                }
+        });
+    });
+</script>
+@endsection

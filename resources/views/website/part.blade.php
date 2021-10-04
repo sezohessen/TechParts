@@ -301,7 +301,7 @@
         <div class="py-0 my-0 inner">
             <h1 class="main-heading">@lang('Related Parts')<small>@lang('Similar Parts')</small></h1>
             <div id="featured-cars" class="owl-carousel featured-cars">
-                <x-part :parts="$RelatedModelParts" :makeCol="0"/>
+                <x-part :parts="$RelatedModelParts" :makeCol="0" :fav="0"/>
 
             </div> <!-- end .featured-cars -->
         </div> <!-- end .inner -->

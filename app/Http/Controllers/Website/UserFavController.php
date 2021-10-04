@@ -14,32 +14,27 @@ class UserFavController extends Controller
     public function index()
     {
         $page_title = __('Favorite');
-
-        if(Auth::check())
-        {
+        if(Auth::check()){
             $parts = User::find(Auth()->user()->id);
             return view('website.userFav',compact('parts','page_title'));
         }
-        else {
-            return redirect()->back();
-        }
+        else return redirect()->back();
     }
     public function store($id)
     {
         if (Auth::check()) {
-            $part              = Part::find($id);
+            $part              = Part::findOrFail($id);
             $isExist           = UserFav::where('user_id', Auth()->user()->id)
-            ->where('part_id', $part)->first() ? 1 : 0;
+            ->where('part_id', $id)->first() ? 1 : 0;
             if ($isExist) {
-                session()->flash('Exist', __("Part Already In Your Favorite List"));
-                return redirect()->route('Website.Index');
+                return response()->json(['success' => false]);
             } else {
                 $addToFavorite     = UserFav::create([
                 'user_id' => Auth()->user()->id,
                 'part_id' => $part->id]);
                 $addToFavorite->save();
-                session()->flash('added', __("Part has been Added Successfully To Your Favorite"));
-                return redirect()->back();
+                $Qty        = UserFav::where('user_id',Auth()->user()->id)->get()->count();
+                return response()->json(['success' => true,'Qty'=>$Qty]);
             }
         }
     }
@@ -48,9 +43,9 @@ class UserFavController extends Controller
         $deleteFav = UserFav::where('user_id',Auth()->user()->id)
         ->where('part_id',$id)
         ->first();
-        // dd($deleteFav);
+        if(!$deleteFav) return response()->json(['success' => false]);
         $deleteFav->delete();
-        session()->flash('deleted',__("Part has been Deleted Successfully From Your Favorite"));
-        return redirect()->back();
+        $Qty        = UserFav::where('user_id',Auth()->user()->id)->get()->count();
+        return response()->json(['success' => true,'Qty'=>$Qty]);
     }
 }

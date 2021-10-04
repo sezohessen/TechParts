@@ -30,7 +30,6 @@ class HomeController extends Controller
      */
     public function index(Request $Request)
     {
-        $page_title = __('ToPart');
 
         $parts          = Part::where('active',1);
         $brands         = CarMaker::all();
@@ -147,7 +146,7 @@ class HomeController extends Controller
         }else{
             $deals = $isExistReviews;
         }
-        return view('website.index',compact('parts','brands','governorates','capacities','totalParts','page_title','deals'));
+        return view('website.index',compact('parts','brands','governorates','capacities','totalParts','deals'));
 
     }
     public function getPosition(Request $request)
