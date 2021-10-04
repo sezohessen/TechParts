@@ -158,7 +158,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-4">
-							<h3 class="mb-10">@lang('About Us')</h3>
+							<h3 class="mb-10 sm:text-6xl sm:font-bold sm:mt-28 sm:mb-10">@lang('About Us')</h3>
                             @php
                                 $settings  = App\Models\Settings::first();
                             @endphp
@@ -183,7 +183,7 @@
 							</div> <!-- end .iconbox-left -->
 						</div> <!-- end .col-sm-4 -->
 						<div class="col-sm-4">
-							<h3 class="mb-10">@lang('Top parts')</h3>
+							<h3 class="mb-10 sm:text-6xl sm:font-bold sm:mt-28 sm:mb-0">@lang('Top parts')</h3>
                             @php
                                 $footerParts = App\Models\Part::Where('active',1)->orderBy('views','DESC')->limit(3)->get();
                             @endphp
@@ -192,7 +192,7 @@
                                     <div class="row">
                                         <div class="img col-md-4">
                                             <a href="{{ route('Website.ShowPart',$part->id) }}">
-                                                <img src="{{ find_image($part->FirstImage->image,App\Models\Part::base) }}" alt="{{ $part->FirstImage->image->name }}">
+                                            <img src="{{ find_image($part->FirstImage->image,App\Models\Part::base) }}" alt="{{ $part->FirstImage->image->name }}">
                                             </a>
                                         </div>
                                         <div class="part-info col-md-8">
@@ -207,7 +207,7 @@
 
 						</div> <!-- end .col-sm-4 -->
 						<div class="col-sm-4">
-							<h3 class="mb-10">@lang('Get in Touch')</h3>
+							<h3 class="mb-10 sm:text-6xl sm:font-bold sm:mt-28 sm:mb-10">@lang('Get in Touch')</h3>
                             <div class="row">
                                 <div class="iconbox-left">
                                     <div class="px-5 icon"><i class="fas fa-envelope-open-text"></i></div> <!-- end .icon -->
@@ -278,7 +278,7 @@
 				</div> <!-- end .container -->
 			</div> <!-- end .top -->
 			<div class="bottom">
-				<span class="copyright">Copyright 2015. All Rights Reserved by Automan. Designed by Theme Designer.</span>
+				<span class="copyright sm:font-medium sm:text-base">Copyright 2015. All Rights Reserved by Automan. Designed by Theme Designer.</span>
 			</div> <!-- end .bottom -->
 		</footer> <!-- end .footer -->
 
