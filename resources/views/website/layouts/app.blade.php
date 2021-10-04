@@ -69,20 +69,20 @@
                     <ul class="list-unstyled">
 
                         <li class="active">
-                            <a href="{{url('index')}}">@lang('Home')</a>
+                            <a href="{{ route('Website.Index') }}">@lang('Home')</a>
                         </li>
                         <li class="favorite">
-                            <a href="{{url('favorite')}}">@lang('Favorite')
+                            <a href="{{ route('Website.favorite')}}">@lang('Favorite')
                         @if (Auth::check())<span id="QtyCount">( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
                             </a>
                         </li>
                         <li><a
                         @if (Auth::check())
-                        href="{{url('Messenger')}}"
+                        href="{{ route('Messenger') }}"
                         @else
-                        href="{{url('login')}}"
+                        href="{{ route('login') }}"
                         @endif>@lang('Messenger') <i class="far fa-comments"></i></a></li>
-                        <li><a href="{{url('contact-us')}}">@lang('Contact Us')</a></li>
+                        <li><a href="{{ route('Website.ContactUs') }}">@lang('Contact Us')</a></li>
 
                         <!-- Langague -->
                         <li class="relative nav-lang-container">

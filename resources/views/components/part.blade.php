@@ -41,11 +41,11 @@
                                 <span class="block price">{{ $part->price }} @lang('L.E')</span>
                             @endif
                         </div>
-                         @if ($fav && Auth::check())
+                         @if ($fav)
                             <!-- start Favorite section -->
                             <div class="col-md-2 col-xs-2">
                                 <!-- If item in favorite -->
-                                @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first())
+                                @if (App\Models\UserFav::where('user_id', @Auth()->user()->id)->where('part_id', $part->id)->first())
                                     <form>
                                         @csrf
                                         <div class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-red-700 rounded-2xl">
@@ -103,10 +103,13 @@
                     }
                     $('#Fav_' + id + ' i').removeClass('far fa-heart').addClass('fa fa-times-circle',{duration:1000});
 
-                    
+
                 },
                 error: function (XMLHttpRequest) {
-                    alert('Something went Wrong');
+                    if (XMLHttpRequest.status == 401) {
+                        // unauthorized
+                        window.location.href = '/login';
+                    }
                 }
         });
     });
@@ -136,7 +139,10 @@
 
                 },
                 error: function (XMLHttpRequest) {
-                    alert('Something went Wrong');
+                    if (XMLHttpRequest.status == 401) {
+                        // unauthorized
+                        window.location.href = '/login';
+                    }
                 }
         });
     });
