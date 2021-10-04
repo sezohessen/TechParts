@@ -41,7 +41,7 @@
                                 <span class="block price">{{ $part->price }} @lang('L.E')</span>
                             @endif
                         </div>
-                         @if ($fav)
+                         @if ($fav && Auth::check())
                             <!-- start Favorite section -->
                             <div class="col-md-2 col-xs-2">
                                 <!-- If item in favorite -->
@@ -103,7 +103,7 @@
                     }
                     $('#Fav_' + id + ' i').removeClass('far fa-heart').addClass('fa fa-times-circle',{duration:1000});
 
-
+                    
                 },
                 error: function (XMLHttpRequest) {
                     alert('Something went Wrong');

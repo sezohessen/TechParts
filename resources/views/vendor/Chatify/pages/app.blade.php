@@ -3,7 +3,7 @@
 @section('website')
 <div class="mt-32 messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
-    <div class="sm:hidden messenger-listView">
+    <div class="sm:hidden messenger-listView sm:relative">
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
@@ -54,13 +54,14 @@
     </div>
 
     {{-- ----------------------Messaging side---------------------- --}}
-    <div class="max-h-screen bg-gray-100 messenger-messagingView sm:z-50 sm:h-5/5" style="max-height: 680px;">
+    <div class="max-h-screen bg-gray-100 sm:relative messenger-messagingView sm:z-50 sm:h-5/5 sm:mt-36" style="max-height: 680px;">
         {{-- header title [conversation name] amd buttons --}}
         <div class="m-header m-header-messaging">
             <nav>
                 {{-- header back button, avatar and user name --}}
                 <div style="display: inline-flex;">
-                    <a href="#" class="show-listView"><i class="fas fa-arrow-left"></i></a>
+                    <a href="#"
+                    class="show-listView"><i class="fas fa-arrow-left"></i></a>
                     <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
                     </div>
                     {{-- @php
