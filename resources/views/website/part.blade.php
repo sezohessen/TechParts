@@ -16,16 +16,11 @@
 <section class="section white" id="Part-Page">
         <div class="inner">
             <div class="container">
-            @if(session()->has('added'))
-                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                        <p>{{ session('added') }}</p>
-                    </div>
-            @endif
-            @if(session()->has('deleted'))
-                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                        <p>{{ session('deleted') }}</p>
-                    </div>
-            @endif
+                @if(session()->has('Exist'))
+                        <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
+                            <p>{{ session('Exist') }}</p>
+                        </div>
+                @endif
                 <div class="car-details">
                     <div class="mt-20 row">
                         <div class="col-sm-8">
@@ -262,14 +257,14 @@
                                     <div class="clearfix mt-10 item">
                                         <div class="option-content">
                                         <div class="p-2 font-bold text-center text-gray-100 bg-blue-500 rounded-lg">
-                                            <!-- Add part to favorite -->
-                                                <form method="POST" action="{{route('Website.addToFavorite',$part->id)}}">
+                                        <!-- Add part to favorite -->
+                                            <form method="POST" action="{{route('Website.storeFav',$part->id)}}">
                                                 @csrf
-                                                        <Button class="text-lg uppercase" type="submit">
-                                                            @lang('Add it to your favorite')
-                                                            <i class="fas fa-hand-holding-heart"></i>
-                                                        </Button>
-                                                </form>
+                                                <Button class="text-lg uppercase" type="submit">
+                                                    @lang('Add it to your favorite')
+                                                    <i class="fas fa-hand-holding-heart"></i>
+                                                </Button>
+                                            </form>
                                         </div>
                                         </div>
                                     </div> <!-- end .item -->

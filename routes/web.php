@@ -115,6 +115,7 @@ Route::group(['as' => 'Website.','namespace'=>"Website", 'middleware' => 'auth']
     Route::get('/favorite', 'UserFavController@index')->name('favorite');
     Route::delete('/favorite/{id}', 'UserFavController@destroy')->name('destroyFavorite');
     Route::post('/favorite/{id}', 'UserFavController@store')->name('addToFavorite');
+    Route::post('/add-favorite/{id}', 'UserFavController@storeFav')->name('storeFav');
 
 });
 Route::get('/Messenger/{id}','vendor\chatify\MessagesController@index')

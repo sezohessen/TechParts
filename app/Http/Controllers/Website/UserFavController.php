@@ -20,7 +20,7 @@ class UserFavController extends Controller
         }
         else return redirect()->back();
     }
-    public function store($id)
+    public function store($id)//Using Ajax Request
     {
         if (Auth::check()) {
             $part              = Part::findOrFail($id);
@@ -47,5 +47,24 @@ class UserFavController extends Controller
         $deleteFav->delete();
         $Qty        = UserFav::where('user_id',Auth()->user()->id)->get()->count();
         return response()->json(['success' => true,'Qty'=>$Qty]);
+    }
+    public function storeFav($id)//Not using Ajax Request
+    {
+        if (Auth::check()) {
+            $part              = Part::find($id);
+            $isExist           = UserFav::where('user_id', Auth()->user()->id)
+            ->where('part_id', $part)->first() ? 1 : 0;
+            if ($isExist) {
+                session()->flash('Exist', __("Part Already In Your Favorite List"));
+                return redirect()->route('Website.Index');
+            } else {
+                $addToFavorite     = UserFav::create([
+                'user_id' => Auth()->user()->id,
+                'part_id' => $part->id]);
+                $addToFavorite->save();
+                session()->flash('added', __("Part has been Added Successfully To Your Favorite"));
+                return redirect()->route('Website.favorite');
+            }
+        }
     }
 }

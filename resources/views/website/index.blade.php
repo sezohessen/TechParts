@@ -279,17 +279,6 @@
                                     </div>
                                     @endif
 								</div> <!-- end .heading -->
-                                <!-- Favorite part session -->
-                                @if(session()->has('deleted'))
-                                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                                        <p>{{ session('deleted') }} <br> <a class="text-yellow-400" href="{{url('favorite')}}">@lang('See Your Favorite Parts')</a> </p>
-                                    </div>
-                                @endif
-                                @if(session()->has('added'))
-                                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                                        <p>{{ session('added') }} <br>  <a class="text-yellow-400" href="{{url('favorite')}}">@lang('See Your Favorite Parts')</a></p>
-                                    </div>
-                                @endif
 								<div class="clearfix listings-grid">
                                     <div class="featured-cars">
                                         <div class="row">

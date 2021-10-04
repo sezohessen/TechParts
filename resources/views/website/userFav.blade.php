@@ -12,14 +12,9 @@
                 <h1 class="py-4 mb-10 text-4xl text-center text-gray-300 bg-blue-900 border-4 rounded-t-full ">
                     @lang('Your Favorite Parts')
                 </h1>
-                @if(session()->has('deleted'))
+                @if(session()->has('added'))
                     <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                        <p>{{ session('deleted') }}</p>
-                    </div>
-                @endif
-                @if(session()->has('created'))
-                    <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                        <p>{{ session('created') }}</p>
+                        <p>{{ session('added') }}</p>
                     </div>
                 @endif
                 <div>
