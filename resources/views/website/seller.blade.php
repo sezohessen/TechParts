@@ -38,7 +38,7 @@
             <a href="{{ route('MessengerID',$seller->user_id) }}" class="mb-10 text-3xl btn btn-primary">@lang('Message Me') <i class="fab fa-facebook-messenger"></i></a>
         </div>
         <div class="row">
-            <div class="col-md-4 left-bar sm:mb-12">
+            <div class="col-md-4 col-xs-12 left-bar sm:mb-12">
                 <div class="p-10 mb-20 left-section ">
                     <div class="desc">
                         <div class="pb-10 text-4xl font-bold">@lang('Brief summary')</div>
@@ -101,7 +101,7 @@
                 </div>
             </div>
             <!-- Seller parts -->
-            <div class="mb-40 col-md-8">
+            <div class="mb-40 col-md-8 col-xs-12">
                 <!-- Favorite part session -->
                 @if(session()->has('deleted'))
                   <div class="m-4 text-center text-gray-100 bg-blue-900 alert">

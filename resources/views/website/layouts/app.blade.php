@@ -155,7 +155,7 @@
             <div class="container">
                 <div class="row">
                     <div class="my-10 col-sm-6 col-xs-12">
-                        <h3 class="mb-10 sm:font-bold sm:text-6xl">@lang('About Us')</h3>
+                        <h3 class="mb-10 sm:font-bold sm:text-3xl  ">@lang('About Us')</h3>
                         @php
                             $settings  = App\Models\Settings::first();
                         @endphp
@@ -180,7 +180,7 @@
                         </div> <!-- end .iconbox-left -->
                     </div> <!-- end .col-sm-4 -->
                     <div class="my-10 col-sm-6 col-xs-12">
-                        <h3 class="mb-10 sm:font-bold sm:text-6xl sm:mb-16">@lang('Top parts')</h3>
+                        <h3 class="mb-10 sm:font-bold sm:text-3xl sm:mb-16 ">@lang('Top parts')</h3>
                         @php
                             $footerParts = App\Models\Part::Where('active',1)->orderBy('views','DESC')->limit(3)->get();
                         @endphp
@@ -204,7 +204,7 @@
 
                     </div> <!-- end .col-sm-4 -->
                     <div class="my-10 col-sm-12 col-xs-12">
-                        <h3 class="mb-10 sm:font-bold sm:text-6xl">@lang('Get in Touch')</h3>
+                        <h3 class="mb-10 sm:font-bold sm:text-3xl ">@lang('Get in Touch')</h3>
                         <div class="row">
                             <div class="iconbox-left">
                                 <div class="px-5 icon"><i class="fas fa-envelope-open-text"></i></div> <!-- end .icon -->

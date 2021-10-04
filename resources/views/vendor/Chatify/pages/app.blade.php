@@ -54,7 +54,7 @@
     </div>
 
     {{-- ----------------------Messaging side---------------------- --}}
-    <div class="max-h-screen bg-gray-100 sm:relative messenger-messagingView sm:z-50 sm:h-5/5 sm:mt-36" style="max-height: 680px;">
+    <div class="max-h-screen bg-gray-100 sm:relative messenger-messagingView messenger-mob sm:z-50 sm:h-5/5 sm:mt-36" style="max-height: 680px;">
         {{-- header title [conversation name] amd buttons --}}
         <div class="m-header m-header-messaging">
             <nav>
