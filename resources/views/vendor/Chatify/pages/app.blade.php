@@ -3,7 +3,7 @@
 @section('website')
 <div class="mt-32 messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
-    <div class="messenger-listView">
+    <div class="sm:hidden messenger-listView">
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
