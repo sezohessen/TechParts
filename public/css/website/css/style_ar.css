@@ -97,6 +97,12 @@
     right: 0;
     margin-left: 10px;
 }
+@media all and (max-width: 768px) {
+    #nav-lang .navi-item img {
+        left: 0px;
+        right: auto;
+    }
+}
 /* Footer */
 .footer .iconbox-left .icon{
     float: right;

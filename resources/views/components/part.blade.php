@@ -1,10 +1,9 @@
 @foreach ($parts as $part)
     @if ($makeCol)
-        <div class="col-md-{{ $makeCol }} mb-10">
+        <div class="col-md-{{ $makeCol }} mb-10 col-xs-12">
     @endif
         <div class="item">
             <div class="relative featured-car">
-
                 <div class="image">
                     <a href="{{ route('Website.ShowPart',$part->id) }}"><img src="{{find_image($part->FirstImage->image , 'img/PartImgs/')}}" alt="{{ $part->FirstImage->image->name }}" class="img-responsive"></a>
                     <div class="car-details">
@@ -19,7 +18,7 @@
                 </div> <!-- end .image -->
                 <div class="content">
                     <div class="row">
-                        <div @if($fav)class="col-md-6"@else class="col-md-8" @endif>
+                        <div @if($fav)class="col-md-6 col-xs-8"@else class="col-md-8 col-xs-10" @endif>
                             <div class="clearfix">
                                 <h5>
                                     <a href="{{ route('Website.ShowPart',$part->id) }}"> {{ LangDetail($part->name,$part->name_ar) }}</a>
@@ -37,35 +36,35 @@
                             </div> <!-- end .clearfix -->
 
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-xs-2">
                             @if ($part->price)
                                 <span class="block price">{{ $part->price }} @lang('L.E')</span>
                             @endif
                         </div>
                          @if ($fav)
                             <!-- start Favorite section -->
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-xs-2">
                                 <!-- If item in favorite -->
-                            @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first())
-                                <form>
-                                    @csrf
-                                    <div class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-red-700 rounded-2xl">
-                                        <button type="submit"  data-id="{{ $part->id }}" id="DeleteFromFav_{{ $part->id }}" class="DeleteFromFav">
-                                        <i class="fa fa-times-circle"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            @else
-                            <!-- Add part to favorite -->
-                            <form>
-                                @csrf
-                                <div class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-yellow-400 rounded-2xl">
-                                    <button type="submit"  data-id="{{ $part->id }}" id="Fav_{{ $part->id }}" class="AddToFav">
-                                    <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
-                            </form>
-                            @endif
+                                @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first())
+                                    <form>
+                                        @csrf
+                                        <div class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-red-700 rounded-2xl">
+                                            <button type="submit"  data-id="{{ $part->id }}" id="DeleteFromFav_{{ $part->id }}" class="DeleteFromFav">
+                                            <i class="fa fa-times-circle"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                @else
+                                    <!-- Add part to favorite -->
+                                    <form>
+                                        @csrf
+                                        <div class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-yellow-400 rounded-2xl">
+                                            <button type="submit"  data-id="{{ $part->id }}" id="Fav_{{ $part->id }}" class="AddToFav">
+                                            <i class="far fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                @endif
                             </div>
                          @endif
                          <!-- end Favorite section -->
@@ -81,7 +80,7 @@
         </div>
     @endif
 @endforeach
-@section('js')
+@section('jsFav')
 <script>
     $('.AddToFav').click(function(e){
 

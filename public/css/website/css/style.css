@@ -89,6 +89,10 @@ h1 {
 	margin-top: 0;
 	margin-bottom: 18px;
 }
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
 h2 {
 	font-size: 30px;
 	line-height: 36px;
@@ -1474,17 +1478,14 @@ label .required {
 }
 @media all and (max-width: 768px) {
 	.navigation {
-		height: 164px;
 		top: 0;
 	}
+
 	.navigation .logo {
 		display: block;
-		float: none;
 	}
 	.navigation .contact {
 		float: left;
-		height: 82px;
-		padding: 22px 14px;
 	}
 	.navigation .contact a {
 		position: static;
@@ -1632,6 +1633,7 @@ label .required {
 	color: #c3e1f4;
 	margin-top: 6px;
 }
+
 
 /* ==========================================================================
    10. Sections
@@ -3124,6 +3126,15 @@ label .required {
 	.refine-search {
 		margin-top: 24px;
 	}
+    .responsive-nav .list-unstyled{
+        padding-right: 42px;
+    }
+    .responsive-nav ul>li,.responsive-nav li>ul{
+        position: relative;
+    }
+    .responsive-nav a#user-logo{
+        display: none;
+    }
 }
 
 /* ==========================================================================
@@ -3983,8 +3994,15 @@ label .required {
 }
 #nav-lang{
     top: 95%;
+    width: 100%;
     left: 0;
     right: auto;
+}
+#nav-lang .navi-item img {
+    height: 30px;
+    margin: 0;
+    position: absolute;
+    right: 0px;
 }
 /* LOGO */
 #user-logo{
