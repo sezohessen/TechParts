@@ -49,7 +49,7 @@
                                     <form>
                                         @csrf
                                         <div class="absolute top-0 z-40 p-4 leading-5 text-gray-900 transition duration-500 ease-in-out shadow-inner hover:text-red-700 rounded-2xl">
-                                            <button type="submit"  data-id="{{ $part->id }}" id="DeleteFromFav_{{ $part->id }}" class="DeleteFromFav">
+                                            <button type="submit"  data-id="{{ $part->id }}" id="Fav_{{ $part->id }}" class="DeleteFromFav">
                                             <i class="fa fa-times-circle"></i>
                                             </button>
                                         </div>
@@ -82,9 +82,10 @@
 @endforeach
 @section('jsFav')
 <script>
-    $('.AddToFav').click(function(e){
-
+    $("body").on("click", ".AddToFav", function(e) {
+        console.log(11);
         e.preventDefault();
+        console.log($)
         $(this).removeClass('AddToFav').addClass('DeleteFromFav');
         let id = $(this).data('id');
         var url = '{{ route("Website.addToFavorite", ":id") }}';
@@ -100,7 +101,7 @@
                     if(data.success==true){
                         document.getElementById("QtyCount").innerHTML = "( "+ data.Qty +" )";
                     }
-                    $('#Fav_' + id + ' i').removeClass('far fa-heart').addClass('fa fa-times-circle');
+                    $('#Fav_' + id + ' i').removeClass('far fa-heart').addClass('fa fa-times-circle',{duration:1000});
 
 
                 },
@@ -109,8 +110,9 @@
                 }
         });
     });
-    $('.DeleteFromFav').click(function(e){
+    $("body").on("click", ".DeleteFromFav", function(e) {
         e.preventDefault();
+        console.log(22);
         $(this).removeClass('DeleteFromFav').addClass('AddToFav');
         let id = $(this).data('id');
         var $tr = $(this).closest('.col-md-4');
@@ -130,7 +132,7 @@
                             $tr.remove();
                         });
                     }
-                    $('#DeleteFromFav_' + id + ' i').removeClass('fa fa-times-circle').addClass('far fa-heart');
+                    $('#Fav_' + id + ' i').removeClass('fa fa-times-circle').addClass('far fa-heart',{duration:1000});
 
                 },
                 error: function (XMLHttpRequest) {
