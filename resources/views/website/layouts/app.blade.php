@@ -113,18 +113,20 @@
                         <!-- User component -->
                         <li class="relative">
                             <a id="user-logo" href="#">
-                                    <i class="px-4 text-gray-100 bg-gray-600 rounded-lg ion-ios-person fa-2x"></i>
+                                <i class="px-4 text-gray-100 bg-gray-600 rounded-lg ion-ios-person fa-2x"></i>
                             </a>
+                            <a href="#" class="visible-xs visible-sm hidden-lg hidden-md">@lang('Account')</a>
                             <ul class="absolute right-0">
                             @auth
                             <li><a href="{{ route('Website.EditUser') }}"> @lang('Profile') </a></li>
 
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
+                                    {{ __('Logout') }}
+                                </a>
+                            </li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>

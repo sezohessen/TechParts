@@ -101,6 +101,10 @@
     #nav-lang .navi-item img {
         left: 0px;
         right: auto;
+        position: absolute;
+    }
+    .responsive-nav ul.list-unstyled>li ul{
+        padding-right: 30px;
     }
 }
 /* Footer */
