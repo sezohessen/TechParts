@@ -1062,6 +1062,7 @@ $(document).ready(function() {
         .attr("data-action") == "1"
     ) {
       $(".messenger-listView").hide();
+      $('.messenger-mob').show();
     }
     messenger = $(this)
       .find("p[data-id]")
@@ -1092,6 +1093,7 @@ $(document).ready(function() {
   });
   $(".show-listView").on("click", function() {
     $(".messenger-listView").show();
+    $(".messenger-mob").hide();
   });
 
   // click action for [add to favorite] button.

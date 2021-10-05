@@ -23,13 +23,19 @@ class ReviewController extends Controller
 
 
 
-        $review = Review::where('part_id',$id)
+        $review = Review::where('part_id',$id)//If user reviews this part
         ->where('user_id',Auth::id())
         ->get()
         ->first();
-
         if($review){
-            session()->flash('exist', 'You have already review',);
+            session()->flash('Exist', __('You have already review'));
+            return redirect()->back();
+        }
+        $part = Part::where('id',$id)
+        ->where('user_id',Auth::id())
+        ->first();
+        if($part){//If user is the owner of this part
+            session()->flash('Exist', __('You can not review your part'));
             return redirect()->back();
         }
 

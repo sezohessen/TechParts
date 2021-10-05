@@ -47,7 +47,7 @@
                             name="governorate_id" >
                                 <option value="">@lang('--Select governorate first--')</option>
                                 @foreach ($governorates as $governorate)
-                                    <option value="{{$governorate->id}}">{{$governorate->title}} - {{ $governorate->title_ar }}</option>
+                                    <option value="{{$governorate->id}}">{{ Langdetail($governorate->title, $governorate->title_ar) }}</option>
                                 @endforeach
                             </select>
                             @error('governorate_id')

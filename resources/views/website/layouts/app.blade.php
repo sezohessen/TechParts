@@ -69,20 +69,20 @@
                     <ul class="list-unstyled">
 
                         <li class="active">
-                            <a href="{{url('index')}}">@lang('Home')</a>
+                            <a href="{{ route('Website.Index') }}">@lang('Home')</a>
                         </li>
                         <li class="favorite">
-                            <a href="{{url('favorite')}}">@lang('Favorite')
+                            <a href="{{ route('Website.favorite')}}">@lang('Favorite')
                         @if (Auth::check())<span id="QtyCount">( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
                             </a>
                         </li>
                         <li><a
                         @if (Auth::check())
-                        href="{{url('Messenger')}}"
+                        href="{{ route('Messenger') }}"
                         @else
-                        href="{{url('login')}}"
+                        href="{{ route('login') }}"
                         @endif>@lang('Messenger') <i class="far fa-comments"></i></a></li>
-                        <li><a href="{{url('contact-us')}}">@lang('Contact Us')</a></li>
+                        <li><a href="{{ route('Website.ContactUs') }}">@lang('Contact Us')</a></li>
 
                         <!-- Langague -->
                         <li class="relative nav-lang-container">
@@ -113,18 +113,20 @@
                         <!-- User component -->
                         <li class="relative">
                             <a id="user-logo" href="#">
-                                    <i class="px-4 text-gray-100 bg-gray-600 rounded-lg ion-ios-person fa-2x"></i>
+                                <i class="px-4 text-gray-100 bg-gray-600 rounded-lg ion-ios-person fa-2x"></i>
                             </a>
+                            <a href="#" class="visible-xs visible-sm hidden-lg hidden-md">@lang('Account')</a>
                             <ul class="absolute right-0">
                             @auth
                             <li><a href="{{ route('Website.EditUser') }}"> @lang('Profile') </a></li>
 
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
+                                    {{ __('Logout') }}
+                                </a>
+                            </li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -152,8 +154,8 @@
         <div class="top" style="padding-top:50px;">
             <div class="container">
                 <div class="row">
-                    <div class="my-10 col-sm-6 col-xs-12">
-                        <h3 class="mb-10 sm:font-bold sm:text-6xl">@lang('About Us')</h3>
+                    <div class="my-10 col-md-4 col-sm-6 col-xs-12">
+                        <h3 class="mb-10 sm:font-bold sm:text-3xl  ">@lang('About Us')</h3>
                         @php
                             $settings  = App\Models\Settings::first();
                         @endphp
@@ -177,8 +179,8 @@
                             <div class="content"><p>{{ $Settings->phone }}</p></div> <!-- end .content -->
                         </div> <!-- end .iconbox-left -->
                     </div> <!-- end .col-sm-4 -->
-                    <div class="my-10 col-sm-6 col-xs-12">
-                        <h3 class="mb-10 sm:font-bold sm:text-6xl sm:mb-16">@lang('Top parts')</h3>
+                    <div class="my-10 col-md-4 col-sm-6 col-xs-12">
+                        <h3 class="mb-10 sm:font-bold sm:text-3xl sm:mb-16 ">@lang('Top parts')</h3>
                         @php
                             $footerParts = App\Models\Part::Where('active',1)->orderBy('views','DESC')->limit(3)->get();
                         @endphp
@@ -201,8 +203,8 @@
                         @endforeach
 
                     </div> <!-- end .col-sm-4 -->
-                    <div class="my-10 col-sm-12 col-xs-12">
-                        <h3 class="mb-10 sm:font-bold sm:text-6xl">@lang('Get in Touch')</h3>
+                    <div class="my-10 col-md-4 col-sm-12 col-xs-12">
+                        <h3 class="mb-10 sm:font-bold sm:text-3xl ">@lang('Get in Touch')</h3>
                         <div class="row">
                             <div class="iconbox-left">
                                 <div class="px-5 icon"><i class="fas fa-envelope-open-text"></i></div> <!-- end .icon -->

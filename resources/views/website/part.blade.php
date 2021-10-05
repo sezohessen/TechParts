@@ -17,9 +17,9 @@
         <div class="inner">
             <div class="container">
                 @if(session()->has('Exist'))
-                        <div class="m-4 text-center text-gray-100 bg-blue-900 alert">
-                            <p>{{ session('Exist') }}</p>
-                        </div>
+                    <div class="m-4 text-center text-gray-100 bg-red-500 alert show" role="alert">
+                        <p>{{ session('Exist') }}</p>
+                    </div>
                 @endif
                 <div class="car-details">
                     <div class="mt-20 row">
@@ -251,6 +251,12 @@
                                 <div class="clearfix item">
                                     <div class="option">@lang('Part number')</div>
                                     <div class="option-content">{{$part->part_number}}</div>
+                                </div> <!-- end .item -->
+                                @endif
+                                @if ($part->seller->city_id)
+                                <div class="clearfix item">
+                                    <div class="option">@lang('City')</div>
+                                    <div class="option-content">{{ Langdetail($part->seller->city->title,$part->seller->city->title_ar) }}</div>
                                 </div> <!-- end .item -->
                                 @endif
                                 <!-- Add to favorite buttin -->

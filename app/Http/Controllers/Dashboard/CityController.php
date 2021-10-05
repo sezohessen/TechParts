@@ -71,7 +71,7 @@ class CityController extends Controller
     public function edit($id)
     {
 
-        $page_title         =__("Edit city");
+        $page_title         =__("Edit City");
         $page_description   = __("Edit");
         $city               = City::find($id);
         $governorates       = Governorate::all();

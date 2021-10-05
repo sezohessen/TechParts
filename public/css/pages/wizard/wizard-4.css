@@ -1,3 +1,6 @@
+.invalid-feedback{
+    display: block;
+}
 .wizard.wizard-4 {
   flex-direction: column;
 }

@@ -1546,6 +1546,11 @@ label .required {
 	.page-title .inner {
 		padding-top: 200px;
 	}
+    #nav-lang .navi-item img {
+        left: auto;
+        right: 0pxphp ;
+        position: absolute;
+    }
 }
 
 /* ==========================================================================
@@ -3129,6 +3134,13 @@ label .required {
     .responsive-nav .list-unstyled{
         padding-right: 42px;
     }
+    .responsive-nav ul.list-unstyled>li > a{
+        font-weight: bold;
+    }
+    .responsive-nav ul.list-unstyled>li ul{
+        padding-left: 30px;
+        list-style: square;
+    }
     .responsive-nav ul>li,.responsive-nav li>ul{
         position: relative;
     }
@@ -3997,12 +4009,6 @@ label .required {
     width: 100%;
     left: 0;
     right: auto;
-}
-#nav-lang .navi-item img {
-    height: 30px;
-    margin: 0;
-    position: absolute;
-    right: 0px;
 }
 /* LOGO */
 #user-logo{

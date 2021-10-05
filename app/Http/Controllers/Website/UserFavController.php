@@ -36,21 +36,25 @@ class UserFavController extends Controller
                 $Qty        = UserFav::where('user_id',Auth()->user()->id)->get()->count();
                 return response()->json(['success' => true,'Qty'=>$Qty]);
             }
-        }
+        }else return redirect()->route('login');
     }
     public function destroy($id)
     {
-        $deleteFav = UserFav::where('user_id',Auth()->user()->id)
-        ->where('part_id',$id)
-        ->first();
-        if(!$deleteFav) return response()->json(['success' => false]);
-        $deleteFav->delete();
-        $Qty        = UserFav::where('user_id',Auth()->user()->id)->get()->count();
-        return response()->json(['success' => true,'Qty'=>$Qty]);
+        if (Auth::check()) {
+            $deleteFav = UserFav::where('user_id',Auth()->user()->id)
+            ->where('part_id',$id)
+            ->first();
+            if(!$deleteFav) return response()->json(['success' => false]);
+            $deleteFav->delete();
+            $Qty        = UserFav::where('user_id',Auth()->user()->id)->get()->count();
+            return response()->json(['success' => true,'Qty'=>$Qty]);
+        }
+        else return redirect()->route('login');
     }
     public function storeFav($id)//Not using Ajax Request
     {
         if (Auth::check()) {
+            dd($id);
             $part              = Part::find($id);
             $isExist           = UserFav::where('user_id', Auth()->user()->id)
             ->where('part_id', $part)->first() ? 1 : 0;
@@ -65,6 +69,6 @@ class UserFavController extends Controller
                 session()->flash('added', __("Part has been Added Successfully To Your Favorite"));
                 return redirect()->route('Website.favorite');
             }
-        }
+        }else return redirect()->route('login');
     }
 }

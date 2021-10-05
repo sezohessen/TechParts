@@ -13,7 +13,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Str;
-use phpDocumentor\Reflection\Types\Null_;
 
 class MessagesController extends Controller
 {

@@ -17,7 +17,7 @@ class CarYear extends Model
     {
         $rules = [
             'year'             => 'required|integer|digits_between:4,4',
-            'CarModel_id'      => 'required|integer',
+            'CarModel_id'      => 'required|integer|exists:car_models,id',
         ];
         return $rules;
     }
