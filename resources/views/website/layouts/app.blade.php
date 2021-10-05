@@ -76,12 +76,24 @@
                         @if (Auth::check())<span id="QtyCount">( {{  App\Models\UserFav::where('user_id', Auth()->user()->id)->count(); }} )</span>@endif
                             </a>
                         </li>
-                        <li><a
-                        @if (Auth::check())
-                        href="{{ route('Messenger') }}"
-                        @else
-                        href="{{ route('login') }}"
-                        @endif>@lang('Messenger') <i class="far fa-comments"></i></a></li>
+                        <li>
+                            <a href="{{ route('Messenger') }}">
+                                @lang('Messenger') <i class="far fa-comments fa-lg"></i>
+                                @if (Auth::check())
+                                    @php
+                                        $resevedMessages = App\Models\ChMessage::where('to_id',@Auth()->user()->id)
+                                        ->where('seen',0)
+                                        ->groupBy('from_id')
+                                        ->get();
+                                    @endphp
+                                    @if($resevedMessages->count())
+                                        <div class="resMessages">
+                                            <span class="number-of-messages">{{ $resevedMessages->count() }}</span>
+                                        </div>
+                                    @endif
+                                @endif
+                            </a>
+                        </li>
                         <li><a href="{{ route('Website.ContactUs') }}">@lang('Contact Us')</a></li>
 
                         <!-- Langague -->

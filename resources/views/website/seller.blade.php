@@ -48,35 +48,39 @@
                         <div class="py-10 text-4xl font-bold"> @lang('Location') </div>
                           <p>
                             <i class="text-4xl text-blue-400 fas fa-map-marked"></i>
+                            @if ($seller->governorate && $seller->city)
                             <span class="ml-5">
                                 <a class="text-primary" target="_blank" href="http://maps.google.com/?q={{ $seller->lat }},{{ $seller->long }}">
                                     {{ LangDetail($seller->governorate->title,$seller->governorate->title_ar) }}-
                                     {{ LangDetail($seller->city->title,$seller->city->title_ar) }}-{{ $seller->street }}
                                 </a>
                             </span>
+                            @endif
                          </p>
                     </div>
                     <div class="seller-icons">
                         <div class="py-10 text-4xl font-bold"> @lang('Contact me') </div>
                         <p class="">
-                           <a href="#">
+                           <a class="py-2 sm:block" href="#">
                                <i class="px-2 text-4xl text-gray-800 fas fa-phone-square"></i>
                                {{ $seller->user->phone }}
                             </a>
                             @if ($seller->user->whats_app)
-                            <a href="https://api.whatsapp.com/send?phone={{$seller->user->whats_app}}" target="_blank">
+                            <a class="py-2 sm:block" href="https://api.whatsapp.com/send?phone={{$seller->user->whats_app}}" target="_blank">
                                <i class="px-2 text-4xl text-green-500 fab fa-whatsapp "></i>
                                {{ $seller->user->whats_app }}
                             </a>
                             @endif
                             @if ($seller->facebook)
-                            <a href="{{$seller->facebook}}" target="_blank">
+                            <a class="py-2 sm:block md:block" href="{{$seller->facebook}}" target="_blank">
                                 <i class="px-2 text-4xl text-blue-500 fab fa-facebook"></i>
+                                <span class="capitalize">facebook</span>
                             </a>
                             @endif
                             @if ($seller->instagram)
-                            <a href="{{$seller->instagram}}"  target="_blank">
+                            <a class="py-2 sm:block" href="{{$seller->instagram}}"  target="_blank">
                                <i class="px-2 text-4xl text-pink-400 fab fa-instagram "></i>
+                               <span class="capitalize">instagram</span>
                             </a>
                             @endif
                         </p>
@@ -92,7 +96,7 @@
                                 <div class="my-10">
                                     <div class="">
                                             <div class="py-10 text-3xl font-bold capitalize">@lang('file with more information about me')</div>
-                                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> Download File </a>
+                                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> @lang('Download File') </a>
                                     </div>
                                 </div>
                             </div>

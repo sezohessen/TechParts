@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('update')  </button>
+                <button type="submit" class="mr-2 btn btn-primary">@lang('update')  </button>
             </div>
         </form>
         <!--end::Form-->

@@ -1,6 +1,6 @@
 @foreach ($parts as $part)
     @if ($makeCol)
-        <div class="col-md-{{ $makeCol }} mb-10 col-xs-12">
+        <div class="col-md-{{ $makeCol }} mb-10 col-xs-12 col-sm-6">
     @endif
         <div class="item">
             <div class="relative featured-car">

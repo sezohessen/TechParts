@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label>@lang('Part name(ENG)')</label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                             name="name"  placeholder="@lang('Name(ENG)')" value="{{ old('name')}}"  autofocus  />
+                             name="name"  placeholder="@lang('Name(ENG)')" value="{{ old('name')}}" autofocus  />
                             @error('name')
                                  <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @enderror
@@ -159,7 +159,7 @@
                                 </span>
                             </div>
                             @error('part_img_new.*')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>

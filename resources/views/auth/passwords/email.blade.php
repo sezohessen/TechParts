@@ -7,7 +7,7 @@
     <!--begin::Login-->
     <div class="flex bg-white login login-1 login-signin-on flex-column flex-lg-row flex-column-fluid" id="kt_login">
         <!--begin::Aside-->
-        <div class="pt-56 login-aside d-flex flex-column flex-row-auto" style="background-color: #65add8;">
+        <div class="pt-56 login-aside d-flex flex-column flex-row-auto sm:hidden" style="background-color: #65add8;">
             <!--begin::Aside Top-->
             <div id="Logo-section" class="logo-section">
                 <!--begin::Aside header-->

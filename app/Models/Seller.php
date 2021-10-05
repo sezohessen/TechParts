@@ -41,7 +41,7 @@ class Seller extends Model
             'street'                   => 'required|min:3|max:100',
             'facebook'                 => 'nullable',
             'instagram'                => 'nullable',
-            'file'                     => 'nullable|max:4096|mimes:doc,dot,docm,docx,dotx,pdf,xlxs,xls,xlsm,xlsb,xltx',
+            'file'                     => 'nullable|max:4096|mimes:doc,dot,docm,docx,dotx,pdf,xlxs,xls,xlsm,xlsb,xltx,txt,rar,zip',
         ];
         return $rules;
     }

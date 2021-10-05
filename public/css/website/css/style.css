@@ -3155,6 +3155,9 @@ label .required {
     .main-nav {
 		display: none;
 	}
+    .responsive-nav li a{
+        font-size: 17px!important;
+    }
 }
 
 /* ==========================================================================
@@ -4011,6 +4014,23 @@ label .required {
 .main-nav ul>li ul {
     right:auto;
     left: 0;
+}
+.main-nav .list-unstyled li div.resMessages{
+    display: inline;
+    height: 15px;
+    position: relative;
+}
+.main-nav .list-unstyled li span.number-of-messages{
+    position: absolute;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #f02849;
+    line-height: 12px;
+    top: -9px;
+    left: -7px;
+    padding: 3px 4px;
+    border-radius: 100%;
+    font-size: 12px;
 }
 #nav-lang{
     top: 95%;
