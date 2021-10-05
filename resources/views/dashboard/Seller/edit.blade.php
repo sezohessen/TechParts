@@ -186,11 +186,16 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
-                    </div>
-                    <div class="col-md-6">
-                        <a class="btn btn-primary" href="/download/{{$seller->id}}"> @lang('Download File') </a>
-                    </div>
+                    @if ($seller->file)
+                        @php
+                            $file       = storage_path('app\files\\') . $seller->file;
+                        @endphp
+                        @if (file_exists($file))
+                        <div class="col-md-6">
+                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> @lang('Download File') {{ $seller->file }}</a>
+                        </div>
+                        @endif
+                    @endif
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>@lang('Location') <span class="text-danger">*</span></label>

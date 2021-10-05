@@ -154,7 +154,7 @@
         <div class="top" style="padding-top:50px;">
             <div class="container">
                 <div class="row">
-                    <div class="my-10 col-sm-6 col-xs-12">
+                    <div class="my-10 col-md-4 col-sm-6 col-xs-12">
                         <h3 class="mb-10 sm:font-bold sm:text-3xl  ">@lang('About Us')</h3>
                         @php
                             $settings  = App\Models\Settings::first();
@@ -179,7 +179,7 @@
                             <div class="content"><p>{{ $Settings->phone }}</p></div> <!-- end .content -->
                         </div> <!-- end .iconbox-left -->
                     </div> <!-- end .col-sm-4 -->
-                    <div class="my-10 col-sm-6 col-xs-12">
+                    <div class="my-10 col-md-4 col-sm-6 col-xs-12">
                         <h3 class="mb-10 sm:font-bold sm:text-3xl sm:mb-16 ">@lang('Top parts')</h3>
                         @php
                             $footerParts = App\Models\Part::Where('active',1)->orderBy('views','DESC')->limit(3)->get();
@@ -203,7 +203,7 @@
                         @endforeach
 
                     </div> <!-- end .col-sm-4 -->
-                    <div class="my-10 col-sm-12 col-xs-12">
+                    <div class="my-10 col-md-4 col-sm-12 col-xs-12">
                         <h3 class="mb-10 sm:font-bold sm:text-3xl ">@lang('Get in Touch')</h3>
                         <div class="row">
                             <div class="iconbox-left">

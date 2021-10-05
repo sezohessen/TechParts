@@ -16,7 +16,9 @@
         </svg>
     </span>
 </a>
-
+<a href="{{route('dashboard.contact.show',['contact' => $id])}}"  target='_blank' class="btn btn-md btn-primary btn-icon mb-2">
+    <i class="icon-md text-success-50 ki ki-eye"></i>
+</a>
 <!-- Modal -->
 <div id="myModal{{ $id }}" class="modal fade" role="dialog">
     <div class="modal-dialog">

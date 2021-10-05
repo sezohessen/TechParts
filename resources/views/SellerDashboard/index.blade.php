@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="card card-custom bg-danger gutter-b" style="height: 150px">
+            <div class="card card-custom bg-primary gutter-b" style="height: 150px">
                 <div class="card-body">
                     <i class="fas fa-tools fa-3x text-inverse-danger font-weight-bolder"></i>
                     <div class="text-inverse-danger font-weight-bolder font-size-h2 mt-3">{{ $parts->count() }}</div>

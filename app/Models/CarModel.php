@@ -21,7 +21,7 @@ class CarModel extends Model
     {
         $rules = [
             'name'             => 'required|string|max:255',
-            'CarMaker_id'      => 'required'
+            'CarMaker_id'      => 'required|exists:car_makers,id'
         ];
         return $rules;
     }

@@ -9,7 +9,7 @@ return [
     | Messenger display name
     |-------------------------------------
     */
-    'name' => env('CHATIFY_NAME', 'Techparts Messenger'),
+    'name' => env('CHATIFY_NAME', 'ToPart Messenger'),
     /*
     |-------------------------------------
     | Routes configurations
