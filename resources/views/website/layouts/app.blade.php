@@ -275,7 +275,7 @@
             </div> <!-- end .container -->
         </div> <!-- end .top -->
         <div class="bottom">
-            <span class="copyright sm:text-lg sm:font-semibold">Copyright 2015. All Rights Reserved by Automan. Designed by Theme Designer.</span>
+            <span class="copyright sm:text-lg sm:font-semibold">&copy;  ToPart.Services {{ now()->format('Y') }} @lang('Copyright All Rights Reserved.')</span>
         </div> <!-- end .bottom -->
     </footer> <!-- end .footer -->
     <!-- jQuery -->

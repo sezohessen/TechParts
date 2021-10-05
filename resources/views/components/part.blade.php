@@ -18,7 +18,7 @@
                 </div> <!-- end .image -->
                 <div class="content">
                     <div class="row">
-                        <div @if($fav)class="col-md-6 col-xs-8"@else class="col-md-8 col-xs-10" @endif>
+                        <div @if($fav)class="col-sm-8 col-xs-7"@else class="col-md-8 col-xs-10" @endif>
                             <div class="clearfix">
                                 <h5>
                                     <a href="{{ route('Website.ShowPart',$part->id) }}"> {{ LangDetail($part->name,$part->name_ar) }}</a>
@@ -36,14 +36,14 @@
                             </div> <!-- end .clearfix -->
 
                         </div>
-                        <div class="col-md-4 col-xs-2">
+                        <div class="col-sm-2 col-xs-3">
                             @if ($part->price)
                                 <span class="block price">{{ $part->price }} @lang('L.E')</span>
                             @endif
                         </div>
                          @if ($fav)
                             <!-- start Favorite section -->
-                            <div class="col-md-2 col-xs-2">
+                            <div class="col-sm-2 col-xs-1">
                                 <!-- If item in favorite -->
                                 @if (App\Models\UserFav::where('user_id', @Auth()->user()->id)->where('part_id', $part->id)->first())
                                     <form>

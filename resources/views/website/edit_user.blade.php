@@ -98,8 +98,7 @@
     </div>
 
     <div class='flex items-center justify-center gap-4 pt-5 pb-5 md:gap-8'>
-      <a href="{{url('user')}}" class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'>Cancel</a>
-      <button type="submit" class='w-auto px-4 py-2 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-blue-700'>Save</button>
+      <button type="submit" class='w-auto px-4 py-2 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-blue-700'>@lang('Update')</button>
     </div>
     @if(session()->has('success'))
                 <div class="m-4 alert alert-success ">

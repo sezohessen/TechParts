@@ -756,7 +756,7 @@
 "My information":"معلوماتي",
 "Edit my account":"تعديل حسابي",
 "My spare parts":"قطع الغيار الخاصة بي",
-"L.E":"جنية",
+"L.E":"جنيه",
 "You reviewed this part successfully!":"قمت بمراجعة هذه القطعة بنجاح",
 "Sorry, No currently reviews to show but you can add your own":"لا توجد حاليًا أية تعليقات لعرضها ولكن يمكنك إضافة تعليقاتك الخاصة",
 "You reviewed this part already!":"لقد راجعت هذا الجزء بالفعل!",
@@ -864,5 +864,6 @@
 "Date":"التاريخ",
 "Edit City":"تعديل المدينة",
 "You have already review":"لقد قمت بالفعل بمراجعة",
-"You can not review your part":"لا يمكنك مراجعة الجزء الخاص بك"
+"You can not review your part":"لا يمكنك مراجعة الجزء الخاص بكج",
+"Copyright All Rights Reserved.":"حقوق الطبع والنشر  جميع الحقوق محفوظة."
 }

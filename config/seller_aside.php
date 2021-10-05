@@ -21,18 +21,6 @@ return [
                     ]
                 ],
                 [
-                    'title' => 'Car Makers',
-                    'bullet' => 'line',
-                    'root' => true,
-                    'submenu' => [
-                        [
-                            'title' => 'Add a manufacturer',
-                            'page' => "/seller/car/maker/create"
-                        ],
-                    ]
-
-                ],
-                [
                     'title' => 'Car Models',
                     'bullet' => 'line',
                     'root' => true,

@@ -1468,14 +1468,6 @@ label .required {
 .no-scroll {
 	overflow: hidden !important;
 }
-@media all and (max-width: 1200px) {
-	.main-nav {
-		display: none;
-	}
-	.responsive-menu-open {
-		display: inline-block;
-	}
-}
 @media all and (max-width: 768px) {
 	.navigation {
 		top: 0;
@@ -1546,11 +1538,6 @@ label .required {
 	.page-title .inner {
 		padding-top: 200px;
 	}
-    #nav-lang .navi-item img {
-        left: auto;
-        right: 0pxphp ;
-        position: absolute;
-    }
 }
 
 /* ==========================================================================
@@ -1770,6 +1757,12 @@ label .required {
 	.map {
 		height: 240px;
 	}
+    .featured-cars .item{
+        padding: 0;
+    }
+    .featured-cars .row > div{
+        padding: 0;
+    }
 }
 
 /* ==========================================================================
@@ -3131,6 +3124,8 @@ label .required {
 	.refine-search {
 		margin-top: 24px;
 	}
+}
+@media all and (max-width:1000px){
     .responsive-nav .list-unstyled{
         padding-right: 42px;
     }
@@ -3147,6 +3142,19 @@ label .required {
     .responsive-nav a#user-logo{
         display: none;
     }
+    #nav-lang .navi-item img {
+        left: auto;
+        right: 0px;
+        position: absolute;
+    }
+    .responsive-menu-open {
+		display: inline-block;
+        float: right;
+        padding-right: 25px;
+	}
+    .main-nav {
+		display: none;
+	}
 }
 
 /* ==========================================================================

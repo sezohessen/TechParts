@@ -132,8 +132,6 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
     Route::prefix('car')->group(function () {
         Route::get('/capacity/create','CarCapacityController@create')->name('capacity.create');
         Route::post('/capacity/store','CarCapacityController@store')->name('capacity.store');
-        Route::get('/maker/create','CarMakerController@create')->name('maker.create');
-        Route::post('/maker/store','CarMakerController@store')->name('maker.store');
         Route::get('/model/create','CarModelController@create')->name('model.create');
         Route::post('/model/store','CarModelController@store')->name('model.store');
         Route::get('/year/create','CarYearController@create')->name('year.create');
