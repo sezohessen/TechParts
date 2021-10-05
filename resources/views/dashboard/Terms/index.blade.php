@@ -9,7 +9,7 @@
 
     {{-- Dashboard 1 --}}
     <div class="card card-custom gutter-b">
-        <div class="card-header flex-wrap py-3" style="min-height: 50px">
+        <div class="flex-wrap py-3 card-header" style="min-height: 50px">
             <a href="{{ route('faqs.create') }}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Flatten.svg-->
