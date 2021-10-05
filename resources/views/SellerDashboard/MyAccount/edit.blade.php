@@ -10,6 +10,7 @@
     </style>
 @endif
 @section('content')
+
 <?php
     $lat=!empty(old("lat"))?old("lat"):($seller->lat ? $seller->lat : 30.033333 );
     $long=!empty(old("long"))?old("long"):($seller->long ? $seller->long :31.233334 );
@@ -27,6 +28,7 @@
         <form action="{{route("seller.my_account.update",['id'=>$seller->id])}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
+
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
@@ -93,7 +95,7 @@
                             <textarea name="desc_ar" class="form-control {{ $errors->has('desc_ar') ? 'is-invalid' : '' }}" id="kt-ckeditor-2" rows="3" required
                             placeholder="@lang('Write description')" >{{$seller->desc_ar}}</textarea>
                             @error('desc_ar')
-                                <div class="invalid-feedback">{{ $errors->first('desc_ar') }}</div>
+                                <div class="invalid-feedback" style="display: block;">{{ $errors->first('desc_ar') }}</div>
                             @enderror
                         </div>
                     </div>
@@ -170,7 +172,7 @@
                         <div class="form-group">
                             <label>@lang('Address in details') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('street') ? 'is-invalid' : '' }}"
-                            name="street"  placeholder="@lang('Address')"  value="{{old("street") ? old("street") : $seller->street}}"/>
+                            name="street"  placeholder="@lang('Address')"  value="{{old("street") ? old("street") : $seller->street}}" required  />
                             @error('street')
                                 <div class="invalid-feedback">{{ $errors->first('street') }}</div>
                             @enderror
@@ -218,10 +220,10 @@
                             <input type="text" class="form-control" id="address" placeholder="@lang('Search ...')"/>
                             <div id="map" style="height: 300px;">
                                 @error('lat')
-                                <div class="invalid-feedback">{{ $errors->first('lat') }}</div>
+                                  <div class="invalid-feedback" style="display: block;">{{ $errors->first('lat') }}</div>
                                 @enderror
                                 @error('long')
-                                <div class="invalid-feedback">{{ $errors->first('long') }}</div>
+                                 <div class="invalid-feedback" style="display: block;">{{ $errors->first('long') }}</div>
                                 @enderror
                             </div>
                         </div>

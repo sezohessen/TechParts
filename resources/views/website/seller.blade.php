@@ -48,12 +48,14 @@
                         <div class="py-10 text-4xl font-bold"> @lang('Location') </div>
                           <p>
                             <i class="text-4xl text-blue-400 fas fa-map-marked"></i>
+                            @if ($seller->governorate && $seller->city)
                             <span class="ml-5">
                                 <a class="text-primary" target="_blank" href="http://maps.google.com/?q={{ $seller->lat }},{{ $seller->long }}">
                                     {{ LangDetail($seller->governorate->title,$seller->governorate->title_ar) }}-
                                     {{ LangDetail($seller->city->title,$seller->city->title_ar) }}-{{ $seller->street }}
                                 </a>
                             </span>
+                            @endif
                          </p>
                     </div>
                     <div class="seller-icons">
@@ -92,7 +94,7 @@
                                 <div class="my-10">
                                     <div class="">
                                             <div class="py-10 text-3xl font-bold capitalize">@lang('file with more information about me')</div>
-                                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> Download File </a>
+                                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> @lang('Download File') </a>
                                     </div>
                                 </div>
                             </div>

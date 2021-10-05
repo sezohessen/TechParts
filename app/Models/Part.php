@@ -31,13 +31,13 @@ class Part extends Model
     public static function rules($request,$image = NULL,$InSellerDashboard = NULL)
     {
         $rules = [
-            'name'                     => 'nullable|max:255',
-            'name_ar'                  => 'required|max:255',
+            'name'                     => 'nullable|min:4|max:255',
+            'name_ar'                  => 'required|min:4|max:255',
             'desc'                     => 'nullable|min:10|max:255',
             'desc_ar'                  => 'required|min:10|max:255|',
             'part_number'              => 'nullable|string',
-            'price'                    => 'nullable|min:1|integer',
-            'in_stock'                 => 'nullable|min:0|integer',
+            'price'                    => 'nullable|min:1|max:1000000|integer',
+            'in_stock'                 => 'nullable|min:0|max:1000000|integer',
             'car_id'                   => 'required|exists:cars,id',
             'user_id'                  => 'required|exists:users,id',
             'part_img_new.0'           => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize,
