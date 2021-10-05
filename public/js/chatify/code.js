@@ -646,7 +646,12 @@ function makeSeen(status) {
     data: { _token: access_token, id: messenger.split("_")[1] },
     dataType: "JSON",
     success: (data) => {
-      console.log("[seen] Messages seen - " + messenger.split("_")[1]);
+        if(data.totalMessages){
+            document.getElementById("Unseen").innerHTML = data.totalMessages;
+        }else{
+            document.getElementById("TotalMessages").remove();
+        }
+        console.log("[seen] Messages seen - " + messenger.split("_")[1]);
     },
   });
   return channel.trigger("client-seen", {

@@ -87,8 +87,8 @@
                                         ->get();
                                     @endphp
                                     @if($resevedMessages->count())
-                                        <div class="resMessages">
-                                            <span class="number-of-messages">{{ $resevedMessages->count() }}</span>
+                                        <div class="resMessages" id="TotalMessages">
+                                            <span class="number-of-messages" id="Unseen">{{ $resevedMessages->count() }}</span>
                                         </div>
                                     @endif
                                 @endif

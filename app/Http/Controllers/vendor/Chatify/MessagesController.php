@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\ChMessage as Message;
 use App\Models\ChFavorite as Favorite;
+use App\Models\ChMessage;
 use App\Models\Seller;
 use Chatify\Facades\ChatifyMessenger as Chatify;
 use App\Models\User;
@@ -236,9 +237,16 @@ class MessagesController extends Controller
     {
         // make as seen
         $seen = Chatify::makeSeen($request['id']);
+        //Edit total unseend messages
+        $totalMessages = ChMessage::where('to_id',@Auth()->user()->id)
+        ->where('seen',0)
+        ->groupBy('from_id')
+        ->get()
+        ->count();
         // send the response
         return Response::json([
-            'status' => $seen,
+            'status'        => $seen,
+            'totalMessages' => $totalMessages
         ], 200);
     }
 
