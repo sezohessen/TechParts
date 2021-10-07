@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/topart/public_html/TechParts/
-    - /bin/cp -r * $DEPLOYPATH
+    - export DEPLOYPATH=/home/topart/public_html/
+    - /bin/cp -R * $DEPLOYPATH
