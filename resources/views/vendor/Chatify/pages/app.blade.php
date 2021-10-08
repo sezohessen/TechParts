@@ -71,7 +71,7 @@
                         }
                     @endphp
                     @if ($id)
-                        <a href="{{ route('Website.SellerProfile',['id'=>$user->id,'first'=>$user->first_name,'second'=>$user->last_name]) }}" class="user-name">{{ config('chatify.name') }}</a>
+                        <a href= "{{ route('Website.SellerProfile',['id'=>$user->id,'first'=>$user->first_name,'second'=>$user->last_name]) }}" class="user-name">{{ config('chatify.name') }}</a>
                     @else
 
                     @endif --}}
