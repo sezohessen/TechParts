@@ -107,3 +107,11 @@
     padding: 0.5rem 2rem;
   }
 }
+@media (max-width: 500px) {
+    .form-group .col-lg-12,
+    .form-group .col-md-12,
+    .form-group .col-sm-12{
+        max-width: 100%;
+        display: flex;
+    }
+}

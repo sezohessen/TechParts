@@ -6,6 +6,12 @@
     color: #f7d809;
     font-weight: bold;
 }
+.search-section{
+    z-index: 20;
+}
+.section-tab{
+    position: relative;
+}
 .refine-search .range-slider input {
     background-color: #778790;
     width: 65px;

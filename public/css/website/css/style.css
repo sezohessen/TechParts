@@ -1065,6 +1065,8 @@ label .required {
 	border: 1px solid #e8eaed;
 	border-top: none;
 	padding: 36px;
+    border-left: 0;
+    border-right: 0;
 }
 .tabpanel.border .tab-content p:last-of-type {
 	margin-bottom: 0;
@@ -3640,7 +3642,7 @@ label .required {
 }
 .car-details .main-car-details .item {
 	border-bottom: 1px solid #d7dce4;
-	line-height: 48px;
+    line-height: 40px;
 }
 .car-details .main-car-details .item:last-of-type {
 	border-bottom: none;
@@ -4064,11 +4066,9 @@ label .required {
 /* PHONE */
 @media (max-width: 768px) {
     .section>.inner{
-        padding: 96px 0 20px 0;
+        padding: 10px 0 20px 0;
     }
-    .featured-cars .item{
-        padding: 0;
-    }
+
     .messenger {
         display: block;
     }

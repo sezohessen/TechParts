@@ -7,6 +7,10 @@
         .ck.ck-editor__editable_inline[dir=ltr]{
             text-align: right!important;
         }
+        .image-input,
+        .image-input.image-input-outline .image-input-wrapper{
+            width: 100%;
+        }
     </style>
 @endif
 @section('content')
@@ -33,7 +37,7 @@
                 <!-- EN Form -->
                 <div class="row">
                     <!-- Avatar -->
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="Image">@lang('Logo image')</label>
                             <br>
@@ -61,12 +65,12 @@
                         </div>
                     </div>
                     <!-- Background  -->
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label for="Image">@lang('Background')</label>
                             <br>
                             <div class="image-input image-input-empty image-input-outline" id="background" style="background-image: url({{ $seller->background ? asset('img/background/'.$seller->background->name) : asset('media/users/blank.png') }})">
-                                <div class="image-input-wrapper" style="width: 600px;"></div>
+                                <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
                                     <input type="file" name="bg"  />

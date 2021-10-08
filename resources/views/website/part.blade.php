@@ -57,7 +57,97 @@
                                 @endforeach
                             </div>
                             @endif
+                        </div> <!-- end .col-sm-8 -->
+                            <!-- Right section -->
+                        <div class="mt-10 col-sm-4 col-xs-12">
+                            @if ($part->price)
+                               <div class="price"> {{ $part->price }} @lang('L.E') <span></span></div>
+                            @else
+                                <div class="price">
+                                <h4 class="text-2xl font-bold text-center"> @lang('Price is negotiable')
+                                <i class="fas fa-hand-holding-usd"></i></h4> </div>
+                            @endif
+                            <div class="main-car-details">
+                                <div class="clearfix item">
+                                    <div class="option"> @lang('Year') </div>
+                                    <div class="option-content"> {{ $part->car->year->year }} </div>
+                                </div> <!-- end .item -->
+                                <div class="clearfix item">
+                                    <div class="option"> @lang("Manufacture") </div>
+                                    <div class="option-content">{{ $part->car->make->name }}</div>
+                                </div> <!-- end .item -->
+                                <div class="clearfix item">
+                                    <div class="option"> @lang('Model') </div>
+                                    <div class="option-content">{{ $part->car->model->name }}</div>
+                                </div> <!-- end .item -->
+                                <div class="clearfix item">
+                                    <div class="option"> @lang('capacities') </div>
+                                    <div class="option-content">{{ $part->car->capacity->capacity }}</div>
+                                </div> <!-- end .item -->
+                                <div class="clearfix item">
+                                    <div class="option">@lang('Seller')</div>
+                                    <div class="option-content">
 
+                                        <a href="{{ route('Website.SellerProfile',['id'=>$part->user_id,'first'=>$part->user->first_name,'second'=>$part->user->last_name]) }}">
+                                             {{ $part->user->FullName }}
+                                        </a>
+                                    </div>
+                                </div> <!-- end .item -->
+                                @if ($part->in_stock)
+                                <div class="clearfix item">
+                                    <div class="option">@lang('In stock')</div>
+                                          <div class="option-content">{{$part->in_stock}}</div>
+                                </div> <!-- end .item -->
+                                @endif
+                                <!-- if there is a part number  -->
+                                @if ($part->part_number)
+                                <div class="clearfix item">
+                                    <div class="option">@lang('Part number')</div>
+                                    <div class="option-content">{{$part->part_number}}</div>
+                                </div> <!-- end .item -->
+                                @endif
+                                @if ($part->seller->city_id)
+                                <div class="clearfix item">
+                                    <div class="option">@lang('City')</div>
+                                    <div class="option-content">{{ Langdetail($part->seller->city->title,$part->seller->city->title_ar) }}</div>
+                                </div> <!-- end .item -->
+                                @endif
+                                <!-- Add to favorite buttin -->
+                                @if (Auth::check())
+                                    @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first() == false)
+                                    <div class="clearfix mt-10 item">
+                                        <div class="option-content">
+                                        <div class="p-2 font-bold text-center text-gray-100 bg-blue-500 rounded-lg">
+                                        <!-- Add part to favorite -->
+                                            <form method="POST" action="{{route('Website.storeFav',$part->id)}}">
+                                                @csrf
+                                                <Button class="text-lg uppercase" type="submit">
+                                                    @lang('Add it to your favorite')
+                                                    <i class="fas fa-hand-holding-heart"></i>
+                                                </Button>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div> <!-- end .item -->
+                                    @endif
+                                @else
+                                <div class="clearfix mt-10 item">
+                                        <div class="option-content">
+                                           <div class="p-2 font-bold text-center bg-blue-500 rounded-lg">
+                                                <a id="add-to-favorite-login" href="{{route('login')}}" class="text-lg uppercase">
+                                                    @lang('Add it to your favorite')
+                                                    <i class="fas fa-hand-holding-heart"></i>
+                                                </a>
+                                           </div>
+                                        </div>
+                                    </div> <!-- end .item -->
+                                @endif
+
+                            </div> <!-- end .main-car-details -->
+                        </div> <!-- end .col-sm-4 -->
+                    </div> <!-- end .row -->
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="my-20 border tabpanel" role="tabpanel" id="goToReview">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="{{(session('review') || $errors->any()  ) ? '' : 'active' }}"><a href="#heading-tab4" aria-controls="heading-tab4" role="tab" data-toggle="tab">@lang('Description')</a></li>
@@ -204,95 +294,8 @@
                                     </div> <!-- end .tab-panel -->
                                 </div> <!-- end .tab-content -->
                             </div> <!-- end .tabpanel -->
-                        </div> <!-- end .col-sm-8 -->
-                            <!-- Right section -->
-                        <div class="mt-10 col-sm-4 col-xs-12">
-                            @if ($part->price)
-                               <div class="price"> {{ $part->price }} @lang('L.E') <span></span></div>
-                            @else
-                                <div class="price">
-                                <h4 class="text-2xl font-bold text-center"> @lang('Price is negotiable')
-                                <i class="fas fa-hand-holding-usd"></i></h4> </div>
-                            @endif
-                            <div class="main-car-details">
-                                <div class="clearfix item">
-                                    <div class="option"> @lang('Year') </div>
-                                    <div class="option-content"> {{ $part->car->year->year }} </div>
-                                </div> <!-- end .item -->
-                                <div class="clearfix item">
-                                    <div class="option"> @lang("Manufacture") </div>
-                                    <div class="option-content">{{ $part->car->make->name }}</div>
-                                </div> <!-- end .item -->
-                                <div class="clearfix item">
-                                    <div class="option"> @lang('Model') </div>
-                                    <div class="option-content">{{ $part->car->model->name }}</div>
-                                </div> <!-- end .item -->
-                                <div class="clearfix item">
-                                    <div class="option"> @lang('capacities') </div>
-                                    <div class="option-content">{{ $part->car->capacity->capacity }}</div>
-                                </div> <!-- end .item -->
-                                <div class="clearfix item">
-                                    <div class="option">@lang('Seller')</div>
-                                    <div class="option-content">
-
-                                        <a href="{{ route('Website.SellerProfile',['id'=>$part->user_id,'first'=>$part->user->first_name,'second'=>$part->user->last_name]) }}">
-                                             {{ $part->user->FullName }}
-                                        </a>
-                                    </div>
-                                </div> <!-- end .item -->
-                                @if ($part->in_stock)
-                                <div class="clearfix item">
-                                    <div class="option">@lang('In stock')</div>
-                                          <div class="option-content">{{$part->in_stock}}</div>
-                                </div> <!-- end .item -->
-                                @endif
-                                <!-- if there is a part number  -->
-                                @if ($part->part_number)
-                                <div class="clearfix item">
-                                    <div class="option">@lang('Part number')</div>
-                                    <div class="option-content">{{$part->part_number}}</div>
-                                </div> <!-- end .item -->
-                                @endif
-                                @if ($part->seller->city_id)
-                                <div class="clearfix item">
-                                    <div class="option">@lang('City')</div>
-                                    <div class="option-content">{{ Langdetail($part->seller->city->title,$part->seller->city->title_ar) }}</div>
-                                </div> <!-- end .item -->
-                                @endif
-                                <!-- Add to favorite buttin -->
-                                @if (Auth::check())
-                                    @if (App\Models\UserFav::where('user_id', Auth()->user()->id)->where('part_id', $part->id)->first() == false)
-                                    <div class="clearfix mt-10 item">
-                                        <div class="option-content">
-                                        <div class="p-2 font-bold text-center text-gray-100 bg-blue-500 rounded-lg">
-                                        <!-- Add part to favorite -->
-                                            <form method="POST" action="{{route('Website.storeFav',$part->id)}}">
-                                                @csrf
-                                                <Button class="text-lg uppercase" type="submit">
-                                                    @lang('Add it to your favorite')
-                                                    <i class="fas fa-hand-holding-heart"></i>
-                                                </Button>
-                                            </form>
-                                        </div>
-                                        </div>
-                                    </div> <!-- end .item -->
-                                    @endif
-                                @else
-                                <div class="clearfix mt-10 item">
-                                        <div class="option-content">
-                                           <div class="p-2 font-bold text-center bg-blue-500 rounded-lg">
-                                                <a id="add-to-favorite-login" href="{{route('login')}}" class="text-lg uppercase">
-                                                    @lang('Add it to your favorite')
-                                                    <i class="fas fa-hand-holding-heart"></i>
-                                                </a>
-                                           </div>
-                                        </div>
-                                    </div> <!-- end .item -->
-                                @endif
-
-                            </div> <!-- end .main-car-details -->
-                        </div> <!-- end .col-sm-4 -->
-                    </div> <!-- end .row -->
+                        </div>
+                    </div>
                 </div> <!-- end .car-details -->
             </div> <!-- end .container -->
         </div> <!-- end .inner -->
