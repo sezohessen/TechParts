@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\website;
+namespace App\Http\Controllers\Website;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -54,7 +54,6 @@ class UserFavController extends Controller
     public function storeFav($id)//Not using Ajax Request
     {
         if (Auth::check()) {
-            dd($id);
             $part              = Part::find($id);
             $isExist           = UserFav::where('user_id', Auth()->user()->id)
             ->where('part_id', $part)->first() ? 1 : 0;

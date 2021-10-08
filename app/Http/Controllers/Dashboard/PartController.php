@@ -90,7 +90,7 @@ class PartController extends Controller
         $page_description   = __("Edit");
         $cars               = Car::all();
         $sellers            = Seller::all();
-        return view('dashboard.part.edit', compact('page_title', 'page_description','cars','part','sellers'));
+        return view('dashboard.Part.edit', compact('page_title', 'page_description','cars','part','sellers'));
     }
 
     /**

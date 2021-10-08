@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\vendor\chatify;
+namespace App\Http\Controllers\vendor\Chatify;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -371,7 +371,7 @@ class MessagesController extends Controller
         $getRecords = null;
         $input = trim(filter_var($request['input'], FILTER_SANITIZE_STRING));
 
-        $records = Seller::whereHas('user', function ($query) use($input) {
+        $records = Seller::where('user_id','!=',Auth()->user()->id)->whereHas('user', function ($query) use($input) {
             $query->where('users.first_name', 'LIKE', "%{$input}%");
         })->get();
 

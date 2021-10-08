@@ -118,7 +118,7 @@ Route::group(['as' => 'Website.','namespace'=>"Website", 'middleware' => 'auth']
     Route::post('/add-favorite/{id}', 'UserFavController@storeFav')->name('storeFav');
 
 });
-Route::get('/Messenger/{id}','vendor\chatify\MessagesController@index')
+Route::get('/Messenger/{id}','vendor\Chatify\MessagesController@index')
 ->middleware('auth')->name('MessengerID');
 
 Auth::routes();
