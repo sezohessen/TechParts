@@ -37,7 +37,7 @@ class PartController extends Controller
         $page_description   =__( "Add New Record");
         $cars               = Car::all();
         $sellers            = Seller::all();
-        return view('dashboard.part.add', compact('page_title', 'page_description','cars','sellers'));
+        return view('dashboard.Part.add', compact('page_title', 'page_description','cars','sellers'));
     }
 
     /**

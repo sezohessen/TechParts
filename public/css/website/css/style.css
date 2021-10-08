@@ -1429,7 +1429,7 @@ label .required {
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	left: 100%;
+	left: 150%;
 	min-width: 100%;
 	background: #fff;
 	z-index: 999;
