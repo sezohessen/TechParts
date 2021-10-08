@@ -4075,4 +4075,14 @@ label .required {
     #imageModalBox{
         z-index: 1000;
     }
+
+    .inner .container{
+        width: 100%;
+        display: inline;
+    }
+    .responsive-menu-open{
+        position: fixed;
+        left: 30px;
+    }
+
 }

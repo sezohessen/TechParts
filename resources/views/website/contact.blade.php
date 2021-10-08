@@ -5,7 +5,7 @@
 			<div class="inner">
 				<div class="container">
 					<div class="row">
-						<div class="col-sm-8">
+						<div class="col-sm-8 col-xs-12">
 							<div class="contact">
 								<h4 class="mb-10">@lang('Contact us')</h4>
 								<form action="{{route("Website.SendContact")}}" method="post" id="contact-form">
@@ -51,7 +51,7 @@
 								</form>
 							</div> <!-- end .contact -->
 						</div> <!-- end .col-sm-8 -->
-						<div class="col-sm-4">
+						<div class="col-sm-4 col-xs-12">
 							<div class="contact-details">
 								<div class="item">
 									<div class="icon"><i class="ion-ios-location-outline"></i></div>
