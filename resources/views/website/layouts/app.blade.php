@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" @if (App::isLocale('ar')) direction="rtl" dir="rtl" style="direction: rtl" @endif>
 
-<!-- Mirrored from premiumlayers.com/html/automan/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Sep 2021 05:37:39 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -199,12 +198,12 @@
                         @foreach ($footerParts as $part)
                             <div id="footer-parts">
                                 <div class="row">
-                                    <div class="img col-md-4 col-xs-8">
+                                    <div class="img col-md-4 col-xs-6">
                                         <a href="{{ route('Website.ShowPart',$part->id) }}">
                                             <img src="{{ find_image($part->FirstImage->image,App\Models\Part::base) }}" alt="{{ $part->FirstImage->image->name }}">
                                         </a>
                                     </div>
-                                    <div class="part-info col-md-8 col-xs-4">
+                                    <div class="part-info col-md-8 col-xs-6">
                                         <a href="{{ route('Website.ShowPart',$part->id) }}">
                                             <div>{{ LangDetail($part->name,$part->name_ar) }}</div>
                                         </a>

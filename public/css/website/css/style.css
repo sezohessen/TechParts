@@ -4066,6 +4066,9 @@ label .required {
     .section>.inner{
         padding: 96px 0 20px 0;
     }
+    .featured-cars .item{
+        padding: 0;
+    }
     .messenger {
         display: block;
     }
