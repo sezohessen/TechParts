@@ -150,7 +150,6 @@
                                 <label for="star1" title="Very bad">1 star</label>
                             </div>
                         </div>
-
                         <!-- Description review -->
                         <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60 form-control"
                             spellcheck="false" name="review" placeholder="@lang('Describe what you think about this part')" rows="10"></textarea>
@@ -168,6 +167,38 @@
                         <!-- Form End -->
                         </form>
                         @endif
+                    </div>
+                    <!-- Show all review -->
+                    <div class="mt-12 reviews">
+                       <div class="text-4xl font-bold">@lang('Reviews') </div>  
+                       @foreach ($UsersReviews as $review)
+                       <!-- Card Review -->
+                       <div class="my-10">
+                            <hr class="my-5">
+                            <p class="flex items-baseline">
+                            <span class="font-bold text-gray-600"> {{ $review->user->FullName }} </span>
+                            </p>
+                            <p class="flex items-baseline">
+                            <span class="text-lg text-gray-900 opacity-50 ">
+                            {{\carbon\carbon::parse($review->created_at)->format('M d, Y')  }}</span>
+                            </p>
+                                <!-- Rating Stars -->
+                                <div class="flex items-center mt-1">
+                                @for ($i = 0; $i < 5; $i++)
+                                @if ($i < $review->rating)
+                                <svg class="w-4 h-4 text-yellow-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                                @else
+                                <svg class="w-4 h-4 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                                @endif
+                                @endfor
+                                </div>
+                            <div class="flex items-center mt-4 text-gray-600">
+                            </div>
+                            <div class="mt-3">
+                            <p class="mt-1"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex ut quae incidunt numquam non, ad quaerat quis nobis excepturi voluptates autem distinctio tempora eaque libero necessitatibus. Odit iusto voluptatum dolore? </p>
+                            </div>
+                       </div>             
+                    @endforeach
                     </div>
                    <!-- end section -->
                 </div>
