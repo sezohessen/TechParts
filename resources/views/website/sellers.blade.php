@@ -65,11 +65,14 @@
                                 <div class="px-2 my-1 mr-2 text-xs tracking-wider text-indigo-600 uppercase border border-indigo-600 cursor-default hover:bg-indigo-600 hover:text-indigo-100">
                                 Painting
                                 </div>
+                                <div class="seller-rating">
+                                    <!-- Tottal Rating -->
+                                    <div class="flex p-1 mx-10 leading-6 text-yellow-400 rating">
+                                        {{  SellerTotalRating($seller->id) }}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="p-4 text-center bg-blue-300 rounded-b-lg text-gray-50">
-                                   <span class="p-4 text-base text-gray-100 bg-blue-400 rounded-2xl">@lang('No rating yet')
-                                        <i class="fas fa-circle-notch fa-spin"></i></span>
-                            </div>
+
                         </div>
                         <hr>
                 </div>

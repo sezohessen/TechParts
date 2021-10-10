@@ -237,23 +237,16 @@ if(!function_exists('find_image')){
     }
     if(!function_exists('SellerTotalRating')){
         function SellerTotalRating($id){
-            $avr_star               = SellerRating::where('seller_id',$id)
+            $avr_star      = SellerRating::where('seller_id',$id)
             ->selectRaw('SUM(rating)/COUNT(user_id) AS avg_rating')
             ->first()
             ->avg_rating;
 
             $product_star           = round($avr_star);
-            $ratingAverage          = number_format((float)$avr_star, 1, '.', '');
-            /* dd($avr_star); */
-            if ($ratingAverage == 0.5)
-              echo
-              '<i class="fas fa-star-half-alt"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i> ';
-
-            elseif($ratingAverage == 1.0)
+            $ratingAverageFloat          = number_format((float)$avr_star, 1, '.', '');
+            $ratingAverage = round($ratingAverageFloat);
+            // dd($ratingAverage); 
+            if($ratingAverage == 1.0)
             {
                 echo
                 '<i class="fas fa-star"></i>
@@ -262,15 +255,6 @@ if(!function_exists('find_image')){
                 <i class="far fa-star"></i>
                 <i class="far fa-star"></i> ';
 
-            }
-            elseif($ratingAverage == 1.5)
-            {
-                echo
-                '<i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i> ';
             }
             elseif($ratingAverage == 2.0)
             {
@@ -278,15 +262,6 @@ if(!function_exists('find_image')){
                 '<i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i> ';
-            }
-            elseif($ratingAverage == 2.5)
-            {
-                echo
-                '<i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
                 <i class="far fa-star"></i>
                 <i class="far fa-star"></i> ';
             }
@@ -300,16 +275,6 @@ if(!function_exists('find_image')){
                 <i class="far fa-star"></i> ';
 
             }
-            elseif($ratingAverage == 3.5)
-            {
-                echo
-                '<i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i> ';
-
-            }
             elseif($ratingAverage == 4.0)
             {
                 echo
@@ -318,16 +283,6 @@ if(!function_exists('find_image')){
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="far fa-star"></i> ';
-
-            }
-            elseif($ratingAverage == 4.5)
-            {
-                echo
-                '<i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i> ';
 
             }
             elseif($ratingAverage == 5.0)

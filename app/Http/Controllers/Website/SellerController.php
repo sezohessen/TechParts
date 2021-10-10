@@ -15,7 +15,7 @@ class SellerController extends Controller
     public function show($id)
     {
         $page_title = __('Seller');
-
+        
         $seller = Seller::where('user_id',$id)->first();
         $review = SellerRating::where('seller_id',$seller->id)//If user reviews this part
         ->where('user_id',Auth::id())
@@ -26,8 +26,8 @@ class SellerController extends Controller
             $parts  = Part::where('active',1)
             ->where('user_id',$seller->user_id)
             ->paginate(8);
-            // dd($seller->governorate);
-            $rate = SellerRating::where('seller_id',$seller->id)->get();
+            
+            // $rate = SellerRating::where('seller_id',$seller->id)->get();
 
             return view('website.seller',compact('seller','parts','page_title','review'));
         // User id or admin id redirect

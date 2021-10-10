@@ -129,6 +129,13 @@
                             <a href="#" class="visible-xs visible-sm hidden-lg hidden-md">@lang('Account')</a>
                             <ul class="absolute right-0">
                             @auth
+                            <li>
+                                @if (auth()->user()->hasRole('seller'))
+                                    <a href="{{ route('seller.index') }}"> @lang('Dashboard') </a>
+                                @elseif (auth()->user()->hasRole('administrator') || auth()->user()->hasRole('superadministrator'))
+                                    <a href="{{ route('dashboard.dashboard') }}"> @lang('Dashboard') </a>
+                                @endif
+                            </li>
                             <li><a href="{{ route('Website.EditUser') }}"> @lang('Profile') </a></li>
 
                             <li>
