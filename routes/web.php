@@ -101,6 +101,8 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
     // Route::get('/user', 'UserController@index')->name('ShowUser');
 
     Route::get('/seller/{id}/{first}-{second}', 'SellerController@show')->name('SellerProfile');
+    // Adjusments
+    Route::get('/all-sellers', 'SellersController@index')->name('Sellers');
 
 
 
@@ -146,5 +148,8 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
     Route::get('/my-account/governorates/{id}','AccountController@show');
     Route::post('/part/{part}/activity',"PartController@Activity")->name('part.Activity');
 });
+
+
+
 
 Route::get('/download/{id}','FileDownloadController@DownloadFile');

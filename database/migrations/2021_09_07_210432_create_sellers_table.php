@@ -22,6 +22,8 @@ class CreateSellersTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
+
+
             $table->bigInteger('bg')->unsigned()->nullable();
             $table->foreign('bg')
             ->references('id')->on('images')

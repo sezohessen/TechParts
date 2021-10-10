@@ -28,7 +28,6 @@
                 <img style="height: 150px; width: 150px" class="rounded-full img-thumbnail"
                 src="{{find_image($seller->sellerAvatar , App\Models\Seller::avatarBase)}}" alt="{{$seller->sellerAvatar->name}}">
                 @endif
-
             </div>
         </div>
         <div class="text-center seller-name">
@@ -39,9 +38,9 @@
         </div>
         <div class="row">
             <div class="col-md-4 col-xs-12 left-bar sm:mb-12">
-                <div class="p-10 mb-20 left-section ">
+                <div class="p-10 mb-20 left-section">
                     <div class="desc">
-                        <div class="pb-10 text-4xl font-bold">@lang('Brief summary')</div>
+                    <div class="pb-10 text-4xl font-bold">@lang('Brief summary')</div>
                         <p> {!! LangDetail($seller->desc,$seller->desc_ar) !!} </p>
                     </div>
                     <div class="seller-location">
@@ -102,6 +101,46 @@
                             </div>
                         @endif
                     @endif
+                    <!-- Rate Seller -->
+                    <div class="mt-14 rate-me">
+                        <div class="pb-10 text-4xl font-bold">@lang('Rate me') </div>
+                         <div class="rating-holder">
+                            <div class="w-full rate">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label for="star5" title="Very good">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label for="star4" title="Good">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label for="star3" title="Nice">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label for="star2" title="Bad">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label for="star1" title="Very bad">1 star</label>
+                            </div>
+                        </div>
+                        @if ($errors->any())
+                            <div class="py-5 mt-10 text-red-400 fv-plugins-message-container">
+                                <div class="fv-help-block">
+                                    <strong>{{ $errors->first('rating')  }}</strong>
+                                </div>
+                            </div>
+                        @endif
+                        <!-- Description review -->
+                        <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60 form-control"
+                            spellcheck="false" name="review" placeholder="@lang('Describe what you think about this part')" rows="10"></textarea>
+                          @if ($errors->has('review'))
+                            <div class="py-5 text-red-400 fv-plugins-message-container">
+                                <div class="fv-help-block">
+                                    <strong>{{ $errors->first('review')  }}</strong>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="flex py-2 my-4 buttons">
+                            <button type="button" onclick="this.form.reset();" class="p-1 px-4 ml-auto font-semibold text-gray-500 border border-gray-300 cursor-pointer btn">@lang('Cancel')</button>
+                            <button type="submit" class="p-2 px-4 ml-2 font-semibold text-gray-200 bg-indigo-500 border border-indigo-500 cursor-pointer btn">@lang('Add Review')</button>
+                        </div>
+                    </div>
+                                <!-- end section -->
                 </div>
             </div>
             <!-- Seller parts -->
