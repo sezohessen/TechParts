@@ -10,6 +10,7 @@ use App\Models\CarModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CarCapacity;
+use App\Models\CarClassification;
 use App\Models\CarMaker;
 use App\Models\CarYear;
 use App\Models\City;
@@ -35,7 +36,7 @@ class HomeController extends Controller
         $brands         = CarMaker::all();
         $governorates   = Governorate::all();
         $capacities     = CarCapacity::all();
-
+        $Classes        = CarClassification::limit(3)->get();
         // -----------Search And Sort--------------
         if(isset($Request->order) && $Request->order == 'nearest'){
             if($Request->lat==NULL||$Request->long==NULL){
@@ -146,7 +147,8 @@ class HomeController extends Controller
         }else{
             $deals = $isExistReviews;
         }
-        return view('website.index',compact('parts','brands','governorates','capacities','totalParts','deals'));
+        return view('website.index',compact('parts','brands','governorates','capacities','totalParts'
+        ,'deals','Classes'));
 
     }
     public function getPosition(Request $request)

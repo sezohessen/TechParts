@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Stevebauman\Location\LocationServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -230,9 +230,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Chatify' => Chatify\Facades\ChatifyMessenger::class,
-
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         /* Location */
+        'Location' => 'Stevebauman\Location\Facades\Location',
         // Metronic Aliases
         'Metronic' => App\Classes\Theme\Metronic::class,
         'Menu' => App\Classes\Theme\Menu::class,

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CarMaker;
 use App\Models\City;
 use App\Models\Governorate;
 use App\Models\User;
@@ -30,9 +31,10 @@ class SellerSeeder extends Seeder
         $governorates   = Governorate::all();
         $background     = Image::where('base', Seller::backgroundBase)->get();
         $avatar         = Image::where('base', Seller::avatarBase)->get();
+        $brands         = CarMaker::all();
         foreach ($sellers as $seller){
             $governorate = $governorates->random();
-            DB::table('sellers')->insert([
+            $seller      = DB::table('sellers')->insertGetId([
                 'user_id'           => $seller->id,
                 'desc'              => $faker->text,
                 'desc_ar'           => $faker->text,
@@ -48,6 +50,15 @@ class SellerSeeder extends Seeder
                 'created_at'        => now(),
                 'updated_at'        => now(),
             ]);
+            $count = rand(1,7);
+            for($i = 0 ; $i< $count;$i++){
+                DB::table('brand_sellers')->insert([
+                    'brand_id'          => $brands->random()->id,
+                    'seller_id'         => $seller,
+                    'created_at'        => now(),
+                    'updated_at'        => now(),
+                ]);
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ use App\Models\CarYear;
 use App\Models\CarMaker;
 use App\Models\CarModel;
 use App\Models\CarCapacity;
+use App\Models\CarClassification;
 use App\Models\Image;
 use App\Models\User;
 use Faker\Factory as Faker;
@@ -23,13 +24,24 @@ class CarSeeder extends Seeder
     public function run()
     {
         $faker      = Faker::create();
-
         $images     = Image::where('base', CarMaker::base)->get();
         $users      = User::all();
+        for ($i=0; $i < 3 ; $i++) {
+            //First make classification of car company
+            $Maker  = DB::table('car_classifications')->insertGetId([
+                'name'          => $faker->name,
+                'name_ar'       => $faker->name,
+                'created_at'    => now(),
+                'updated_at'    => now()
+            ]);
+        }
+
+        $AllClass   = CarClassification::all();
         for ($i=0; $i < 20 ; $i++) {
             //First insert Car Maker
             $Maker  = DB::table('car_makers')->insertGetId([
                 'name'          => $faker->name,
+                'class_id'      => $AllClass->random()->id,
                 'logo_id'       => $images->random()->id,
                 'created_at'    => now(),
                 'updated_at'    => now()

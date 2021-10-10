@@ -107,6 +107,25 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="specialty_id">@lang('Specialty Brands') <span class="text-danger">*</span></label>
+                            <select class="form-control select2 {{ $errors->has('specialty_id') ? 'is-invalid' : '' }}"
+                                id="kt_select2_2" name="specialty_id[]" multiple="multiple" style="width: 100%" required>
+                                @foreach ($brands as $brand)
+                                    @if (in_array($brand->id, $SelectedCarMakers))
+                                        <option value="{{$brand->id}}" selected>{{ $brand->name }}</option>
+                                    @else
+                                        <option value="{{$brand->id}}">{{ $brand->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('specialty_id')
+                             <div class="invalid-feedback">{{ $errors->first('specialty_id') }}</div>
+                            @enderror
+                            <span class="form-text text-muted">@lang('You can choose more than one brand')</span>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>@lang('Instagram')</label>
@@ -226,6 +245,7 @@
 {{-- Scripts Section --}}
 @section('scripts')
 <script src="{{ asset('js/pages/widgets.js') }}"></script>
+<script src="{{ asset("js/pages/crud/forms/widgets/select2.js") }}"></script>
 <script src="{{asset("js/pages/crud/forms/editors/ckeditor-classic.js")}}"></script>
 <script src="{{asset("plugins/custom/ckeditor/ckeditor-classic.bundle.js")}}"></script>
 <script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>

@@ -84,7 +84,7 @@
                         <!--end::Form group-->
                         <!--end::Form group-->
                         <div class="form-group">
-                            <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone"  placeholder="@lang('phone')">
+                            <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  autocomplete="phone"  placeholder="@lang('phone')">
                             @error('phone')
                                 <div class="fv-plugins-message-container">
                                     <div class="text-red-600 fv-help-block">
@@ -95,7 +95,7 @@
                         </div>
                         <!--end::Form group-->
                         <div class="form-group">
-                            <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('whats_app') is-invalid @enderror" name="whats_app" value="{{ old('whats_app') }}" required autocomplete="whats_app"  placeholder="@lang('Whats app')">
+                            <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('whats_app') is-invalid @enderror" name="whats_app" value="{{ old('whats_app') }}"  autocomplete="whats_app"  placeholder="@lang('Whats app')">
                             @error('whats_app')
                                 <div class="fv-plugins-message-container">
                                     <div class="text-red-600 fv-help-block">
@@ -105,6 +105,25 @@
                             @enderror
                         </div>
                         <!--end::Form group-->
+                    <!--end::Form group-->
+                        <div class="form-group">
+                            <select id="provider" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('provider') is-invalid @enderror" name="provider" required>
+                                <option value="" >@lang('--Select Acount Type--')</option>
+                                <option value="seller" {{ old('provider') == 'seller' ? 'selected' : '' }}>
+                                    @lang('Seller')
+                                </option>
+                                <option value="user" {{ old('provider') == 'user' ? 'selected' : '' }}>
+                                    @lang('User')
+                                </option>
+                            </select>
+                            @error('provider')
+                                <div class="fv-plugins-message-container">
+                                    <div class="fv-help-block">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                </div>
+                            @enderror
+                        </div>
                         <!--end::Form group-->
                         <div class="form-group">
                             <input id="password" type="password" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password"  placeholder="@lang('Password')">
@@ -138,6 +157,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <!--end::Form group-->
                         <!--begin::Form group-->
                         <div class="pt-10 mt-10">

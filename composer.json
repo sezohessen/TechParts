@@ -26,6 +26,7 @@
         "livewire/livewire": "^2.3",
         "munafio/chatify": "^1.2",
         "santigarcor/laratrust": "^6.3",
+        "stevebauman/location": "^6.2",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

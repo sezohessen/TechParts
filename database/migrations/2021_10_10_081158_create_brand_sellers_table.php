@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarMakersTable extends Migration
+class CreateBrandSellersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,20 @@ class CreateCarMakersTable extends Migration
      */
     public function up()
     {
-        Schema::create('car_makers', function (Blueprint $table) {
+        Schema::create('brand_sellers', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
 
-            $table->bigInteger('class_id')->unsigned();
-            $table->foreign('class_id')
-            ->references('id')->on('car_classifications')
+            $table->bigInteger('brand_id')->unsigned();
+            $table->foreign('brand_id')
+            ->references('id')->on('car_makers')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->bigInteger('logo_id')->unsigned();
-            $table->foreign('logo_id')
-            ->references('id')->on('images')
+            $table->bigInteger('seller_id')->unsigned();
+            $table->foreign('seller_id')
+            ->references('id')->on('sellers')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-
             $table->timestamps();
         });
     }
@@ -40,6 +38,6 @@ class CreateCarMakersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_makers');
+        Schema::dropIfExists('brand_sellers');
     }
 }

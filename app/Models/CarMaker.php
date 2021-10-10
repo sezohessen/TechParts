@@ -13,13 +13,16 @@ class CarMaker extends Model
     protected $table    = 'car_makers';
     protected $fillable=[
         'name',
-        'logo_id'
+        'logo_id',
+        'class_id',
     ];
     public function logo()
     {
         return $this->belongsTo(Image::class);
     }
-
+    public function Classification(){
+        return $this->belongsTo(CarClassification::class,'class_id','id');
+    }
     public static function rules($request,$id=NULL)
     {
         $rules = [

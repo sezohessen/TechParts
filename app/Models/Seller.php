@@ -42,6 +42,7 @@ class Seller extends Model
             'facebook'                 => 'nullable',
             'instagram'                => 'nullable',
             'file'                     => 'nullable|max:4096|mimes:doc,dot,docm,docx,dotx,pdf,xlxs,xls,xlsm,xlsb,xltx,txt,rar,zip',
+            'specialty_id.*'           => 'required|exists:car_makers,id'
         ];
         return $rules;
     }

@@ -3,12 +3,18 @@
 
 {{-- Content --}}
 @section('content')
-
     {{-- Dashboard 1 --}}
     <div class="container">
         @include('SellerDashboard/message')
     </div>
     <div class="row">
+        @if ($seller->governorate_id==NULL)
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert">
+               <i class="fa fa-exclamation-triangle text-white px-2"></i>  @lang('In order for you to appear on the site and for people to find you'), <a href="{{ route('seller.my_account.edit') }}">@lang('personal information')</a> @lang('must be updated.')
+              </div>
+        </div>
+        @endif
         <div class="col-md-6">
             <div class="card card-custom bg-primary gutter-b" style="height: 150px">
                 <div class="card-body">

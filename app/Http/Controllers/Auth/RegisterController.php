@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Seller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,6 +34,12 @@ class RegisterController extends Controller
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
+        if (auth()->user()->hasRole('seller')) {
+            return '/seller';
+        }
+        if (auth()->user()->hasRole('administrator') or auth()->user()->hasRole('superadministrator')) {
+            return '/dashboard';
+        }
         return RouteServiceProvider::HOME;
     }
     /**
@@ -73,9 +81,24 @@ class RegisterController extends Controller
      protected function create($data)
     {
 
-        $provider = 'user';
+        if (isset($data['provider'])) {
+            if ($data['provider'] == 'seller') {
+                $provider = 'seller';
+            }
+            unset($data['provider']);
+        }else {
+            $provider = 'user';
+        }
         $user = User::create(User::credentials((object)$data));
-        $user->attachRole($provider) ;
+        $user->attachRole($provider);
+        if($user->hasRole(User::SellerRole)){
+            /*
+            if the admin change the role of user to be seller -> (if seller has info then create row in seller table else do not create row)
+            if the admin change the role of seller to be user -> keep seller data as it is that.
+            */
+            $isExist    = Seller::where('user_id',$user->id)->first();
+            if(!$isExist)DB::table('sellers')->insert(['user_id' => $user->id,'created_at'=>now(),'updated_at'=>now()]);
+        }
         return $user;
 
     }

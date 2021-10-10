@@ -2,9 +2,31 @@
     width: 100%!important;
     margin: 10px 0;
 }
+.form-group select.form-control{
+    height: 40px;
+}
+form  .adv_submit,form .Seller_submit{
+    margin: 5px auto;
+    display: block;
+}
 .search-label{
     color: #f7d809;
     font-weight: bold;
+}
+.brand .search-label{
+    display: block;
+}
+
+.brand .brand-content >div{
+    width: 78px;
+    max-height: 50px;
+    border: 1px solid #09a0f7;
+    padding: 10px;
+    min-height: 50px;
+}
+.brand .brand-content >div img{
+    max-height: 30px;
+    width: 100%;
 }
 .search-section{
     z-index: 20;

@@ -64,7 +64,7 @@ class UserController extends Controller
                 if the admin change the role of seller to be user -> keep seller data as it is that.
                 */
                 $isExist    = Seller::where('user_id',$user->id)->first();
-                if(!$isExist)DB::table('sellers')->insert(['user_id' => $user->id]);
+                if(!$isExist)DB::table('sellers')->insert(['user_id' => $user->id,'created_at'=>now(),'updated_at'=>now()]);
             }
         }
         session()->flash('created',__("Changes has been Created successfully"));

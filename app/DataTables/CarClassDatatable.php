@@ -2,14 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\CarMaker;
-use Yajra\DataTables\Html\Button;
+use App\Models\CarClassification;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CarMakeDatatable extends DataTable
+class CarClassDatatable extends DataTable
 {
 
     /**
@@ -23,11 +20,10 @@ class CarMakeDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
-            ->addColumn('logo.name', 'dashboard.CarMaker.btn.logo')
-            ->editColumn('classification.name', '{{Str::limit($classification["name"], 100)}}')
-            ->addColumn('checkbox', 'dashboard.CarMaker.btn.checkbox')
-            ->addColumn('action', 'dashboard.CarMaker.btn.action')
-            ->rawColumns(['checkbox', 'action','logo.name']);
+            ->editColumn('name_ar', '{{Str::limit($name_ar, 100)}}')
+            ->addColumn('checkbox', 'dashboard.CarClass.btn.checkbox')
+            ->addColumn('action', 'dashboard.CarClass.btn.action')
+            ->rawColumns(['checkbox', 'action']);
     }
 
     /**
@@ -38,7 +34,7 @@ class CarMakeDatatable extends DataTable
      */
     public function query()
     {
-        return CarMaker::query()->with(['logo','classification'])->select("car_makers.*");
+        return CarClassification::query()->select("car_classifications.*");
     }
 
     /**
@@ -49,7 +45,7 @@ class CarMakeDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('CarMakers-table')
+            ->setTableId('CarClass-table')
             ->columns($this->getColumns())
             ->dom('Bfrtip')
             ->parameters([
@@ -105,9 +101,8 @@ class CarMakeDatatable extends DataTable
                 "searchable" => false,
             ],
             Column::make('id'),
-            Column::make('logo.name')->title(__("Logo")),
-            Column::make('name')->title(__('Name')),
-            Column::make('classification.name')->title(__('Brand Class')),
+            Column::make('name')->title(__('Name(ENG)')),
+            Column::make('name_ar')->title(__('Name(AR)')),
             Column::computed('action')
                 ->title(__('Action'))
                 ->exportable(false)
@@ -125,6 +120,6 @@ class CarMakeDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'CarMakers_' . date('YmdHis');
+        return 'CarClass_' . date('YmdHis');
     }
 }

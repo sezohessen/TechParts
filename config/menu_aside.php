@@ -64,6 +64,22 @@ return [
             'root' => true,
             'submenu' => [
                 [
+                    'title' => 'Brand Classification',
+                    'bullet' => 'line',
+                    'root' => true,
+                    'submenu' => [
+                        [
+                            'title' => 'Add Class',
+                            'page' => "/dashboard/car/class/create"
+                        ],
+                        [
+                            'title' => 'View Classes',
+                            'page' => '/dashboard/car/class'
+                        ],
+
+                    ]
+                ],
+                [
                     'title' => 'Car Options',
                     'bullet' => 'line',
                     'root' => true,

@@ -5,58 +5,7 @@
 @endsection
 @section('website')
 
-{{-- <div class="responsive-menu">
-        <a href="#" class="responsive-menu-close"><i class="ion-android-close"></i></a>
-        <nav class="responsive-nav"></nav> <!-- end .responsive-nav -->
-</div> <!-- end .responsive-menu --> --}}
-
-<div class="flexslider welcome">
-    <div class="slides">
-        <div class="slide" style="background-image: url('img/website/background01.jpg');">
-            <div class="inner">
-                <div class="container">
-                    <div class="banner-wrapper">
-                        <div class="banner">
-                            <div class="before">$480000</div>
-                            Top Cars: Mercedes S Class
-                        </div> <!-- end .banner -->
-                    </div> <!-- end .banner-wrapper -->
-                    <a href="details.html" class="border button white xsmall">Know More</a>
-                </div> <!-- end .container -->
-            </div> <!-- end .inner -->
-        </div> <!-- end .slide -->
-        <div class="slide" style="background-image: url('img/website/background02.jpg');">
-            <div class="inner">
-                <div class="container">
-                    <div class="banner-wrapper">
-                        <div class="banner big light">
-                            Top Cars: Mercedes S Class
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem eriam, eaque ipsa quae ab illo inventore veritatis..</p>
-                        </div> <!-- end .banner -->
-                    </div> <!-- end .banner-wrapper -->
-                    <a href="details.html" class="button solid blue xsmall">Know More</a>
-                </div> <!-- end .container -->
-            </div> <!-- end .inner -->
-        </div> <!-- end .slide -->
-        <div class="slide" style="background-image: url('img/website/background01.jpg');">
-            <div class="inner">
-                <div class="container">
-                    <div class="banner-wrapper">
-                        <div class="banner big">
-                            <div class="before">$480000</div>
-                            Top Cars: Mercedes S Class
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem eriam, eaque ipsa quae ab illo inventore veritatis..</p>
-                        </div> <!-- end .banner -->
-                    </div> <!-- end .banner-wrapper -->
-                    <a href="details.html" class="button solid white xsmall">Know More</a>
-                </div> <!-- end .container -->
-            </div> <!-- end .inner -->
-        </div> <!-- end .slide -->
-    </div> <!-- end .slides -->
-</div> <!-- end .welcome -->
-
-{{-- Search --}}
-<section class="section dark tiny search-section">
+<section class="section dark tiny search-section mt-60">
     <div class="inner">
         <div class="container">
             <div class="border tabpanel section-tab" role="tabpanel">
@@ -65,6 +14,9 @@
                         <a href="#search-cars" aria-controls="search-cars" role="tab" data-toggle="tab">
                             @lang('Search for parts')
                         </a>
+                        <li role="presentation">
+                            <a href="#sell-car" aria-controls="sell-car" role="tab" data-toggle="tab">@lang('Search for sellers')</a>
+                        </li>
                     </li>
                 </ul> <!-- end .nav-tabs -->
                 <div class="tab-content">
@@ -85,21 +37,135 @@
                                 <div class="col-md-2">
                                     <label class="search-label">@lang('Search for best parts')</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="search"  value="{{ app('request')->input('search') }}">
+                                        <input type="text" class="form-control" name="search"  value="{{ app('request')->input('search') }}" placeholder="@lang('Search by name or part number')">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="item">
-                                        <button type="submit" class="button solid light-blue"> <i class="fa fa-search"></i> @lang('Search')</button>
+                                        <button type="submit" id="simple-search" class="button solid light-blue"> <i class="fa fa-search"></i> @lang('Search')</button>
                                     </div> <!-- end .item -->
                                 </div>
+                                <div class="col-md-3">
+                                    <button class="button solid light-blue" id="AdvancedSearch"><i class="fa fa-plus px-2"></i> @lang('Advanced Search')</button>
+                                </div>
+                                <div class="col-md-12 hidden" id="Adv">
+                                    <div class="col-xs-12">
+                                        <label for="car" class="search-label">@lang('By car model')</label>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <div class="item form-group">
+                                            <label class="text-white">@lang('Brand')</label>
+                                            <select class="form-control" name="carMaker" id="maker" data-live-search="true">
+                                                <option value="">@lang('Select Brand')</option>
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{ $brand->id }}"
+                                                        @if (request()->get('carMaker')&& $brand->id==request()->get('carMaker'))
+                                                            {{ 'selected' }}
+                                                        @endif
+                                                        >{{ $brand->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div> <!-- end .item -->
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <div class="item form-group">
+                                            <label class="text-white">@lang('Model')</label>
+                                            <select class="form-control" name="carModel" id="models" data-live-search="true">
+                                                <option value="" >@lang('Select brand first')</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <div class="item form-group">
+                                            <label class="text-white">@lang('Year')</label>
+                                            <select class="form-control" name="carYear" id="year" data-live-search="true">
+                                                <option value="" >@lang('Select Model first')</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <div class="item form-group">
+                                            <label class="text-white">@lang('Car Capacity')</label>
+                                            <select class="form-control" id="carCapacity"
+                                                name="carCapacity" >
+                                                <option value="" >@lang('Select Car Capacity')</option>
+                                                @foreach ($capacities as $capacity)
+                                                    <option value="{{$capacity->id}}"
+                                                        @if (request()->get('carCapacity')&& $capacity->id==request()->get('carCapacity'))
+                                                            {{ 'selected' }}
+                                                        @endif>
+                                                        {{$capacity->capacity}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div> <!-- end .item -->
+                                    </div>
+                                </div>
                             </div>
-
+                            <button type="submit" class="hidden adv_submit button solid light-blue text-center"> <i class="fa fa-search"></i> @lang('Search')</button>
+                        </form> <!-- end .banner-form -->
+                    </div> <!-- end .tab-panel -->
+                    <div role="tabpanel" class="tab-pane fade" id="sell-car">
+                        <form action="#" method="post">
+                            <div class="row">
+                                <div class="col-md-4 col-xs-12">
+                                    <label for="car" class="search-label mt-5">@lang('By address')</label>
+                                    <span class="text-white text-sm ">@lang('Not required')</span>
+                                    <div class="item form-group">
+                                        <label class="text-white">@lang('Governorate')</label>
+                                        <select class="form-control" id="governorate"
+                                            name="governorate_id" >
+                                                <option value="">@lang('Select Governorate')</option>
+                                                @foreach ($governorates as $governorate)
+                                                <option value="{{$governorate->id}}"
+                                                    @if (request()->get('governorate_id')&& $governorate->id==request()->get('governorate_id'))
+                                                        {{ 'selected' }}
+                                                    @endif>
+                                                    @if (Session::get('app_locale')=='en')
+                                                        {{ $governorate->title }}
+                                                    @else
+                                                        {{ $governorate->title_ar }}
+                                                    @endif
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                    </div> <!-- end .item -->
+                                    <div class="item form-group">
+                                        <label class="text-white" >@lang('City')</label>
+                                        <select class="form-control" id="city"
+                                            name="city_id" >
+                                                <option value="">@lang('Select governorate first')</option>
+                                        </select>
+                                    </div> <!-- end .item -->
+                                </div>
+                                <div class="col-md-8 col-xs-12">
+                                    <div class="row brand">
+                                        @foreach ($Classes as $Class)
+                                            <div class="col-md-4">
+                                                <label for="car" class="search-label mt-5">{{ LangDetail($Class->name,$Class->name_ar) }}</label>
+                                                @php
+                                                    $brands = App\Models\CarMaker::where('class_id',$Class->id)->get();
+                                                @endphp
+                                                <div class="row brand-content">
+                                                    @foreach ($brands as $brand)
+                                                    <div class="col-md-4 col-xs-6 ">
+                                                        <img class="brand-img brand-info" data-id="{{ $brand->id }}" src="{{ find_image($brand->logo,App\Models\CarMaker::base) }}" alt="{{ $brand->logo->name }}">
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <input type="text" hidden name="brand_id" id="brand_selector">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="Seller_submit button solid light-blue text-center "> <i class="fa fa-search"></i> @lang('Search')</button>
                         </form> <!-- end .banner-form -->
                     </div> <!-- end .tab-panel -->
                 </div> <!-- end .tab-content -->
+
             </div> <!-- end .tabpanel -->
         </div> <!-- end .container -->
     </div> <!-- end .inner -->
@@ -157,15 +223,15 @@
                                 <select class="form-control" id="carCapacity"
                                     name="carCapacity" >
                                     <option value="" >@lang('Select Car Capacity')</option>
-                                        @foreach ($capacities as $capacity)
-                                            <option value="{{$capacity->id}}"
-                                                @if (request()->get('carCapacity')&& $capacity->id==request()->get('carCapacity'))
-                                                    {{ 'selected' }}
-                                                @endif>
-                                                {{$capacity->capacity}}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    @foreach ($capacities as $capacity)
+                                        <option value="{{$capacity->id}}"
+                                            @if (request()->get('carCapacity')&& $capacity->id==request()->get('carCapacity'))
+                                                {{ 'selected' }}
+                                            @endif>
+                                            {{$capacity->capacity}}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div> <!-- end .item -->
                             <label for="car" class="search-label">@lang('By address')</label>
                             <div class="item form-group">
@@ -353,6 +419,15 @@
 @endsection
 @section('js')
 <script>
+    $(".brand-info").each(function(index){
+
+        $(this).on('click',function(){
+            $('.brand-info').parent().css({'border':'1px solid #09a0f7','background-color':'unset'});
+            var id = $(this).data('id');
+            document.getElementById("brand_selector").value = id;
+            $(this).parent().css({'border':'2px solid #ffffff','background-color':'#FFFFFF'});
+        });
+    });
    function getLatLong(){
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -372,6 +447,13 @@
     function AllowLocation(){
         getLatLong();
     }
+    $('#AdvancedSearch').on('click',function(e){
+        e.preventDefault();
+        $('#Adv').toggleClass('hidden');
+        $('.adv_submit').toggleClass('hidden');
+        $('#simple-search').toggleClass('hidden');
+
+    });
 </script>
 <script>
     function year(id){

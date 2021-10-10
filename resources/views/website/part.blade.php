@@ -81,7 +81,7 @@
                                     <div class="option-content">{{ $part->car->model->name }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
-                                    <div class="option"> @lang('capacities') </div>
+                                    <div class="option"> @lang('Engine Capacity') </div>
                                     <div class="option-content">{{ $part->car->capacity->capacity }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
