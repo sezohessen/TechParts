@@ -39,6 +39,11 @@
         <div class="row">
             <div class="col-md-4 col-xs-12 left-bar sm:mb-12">
                 <div class="p-10 mb-20 left-section">
+                    <div class="car-details">
+                        <div class="rating">
+                            {{  SellerTotalRating($seller->id) }}
+                        </div>
+                    </div>
                     <div class="desc">
                     <div class="pb-10 text-4xl font-bold">@lang('Brief summary')</div>
                         <p> {!! LangDetail($seller->desc,$seller->desc_ar) !!} </p>
@@ -95,7 +100,7 @@
                                 <div class="my-10">
                                     <div class="">
                                             <div class="py-10 text-3xl font-bold capitalize">@lang('file with more information about me')</div>
-                                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> @lang('Download File') </a>
+                                            <a class="btn btn-primary" href="/download/{{$seller->user_id}}"> @lang('Download File') </a>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +109,34 @@
                     <!-- Rate Seller -->
                     <div class="mt-14 rate-me">
                         <div class="pb-10 text-4xl font-bold">@lang('Rate me') </div>
+                        <!-- Show reviews -->
+                        @if(session()->has('review'))
+                            <div class="m-4 alert alert-success ">
+                                <p>{{ session('review') }}</p>
+                            </div>
+                        @endif
+                        <!-- Not logged in -->
+                        @if (!auth::check())
+                        <div class="my-10 text-center">
+                            <span>
+                                <a href="{{ route('login') }}" class="text-primary">@lang('Please login')</a> @lang('to add your review')
+                            </span>
+                        </div>
+                        @elseif ($review)
+                            <span>
+                                @lang('You reviewed this part already!')😉
+                            </span>
+                        @else
+                        <form action="{{route('Website.RateSeller',$seller->id)}}" method="POST">
+                        @csrf
                          <div class="rating-holder">
+                         @if ($errors->any())
+                            <div class="py-5 mt-10 text-red-400 fv-plugins-message-container">
+                                <div class="fv-help-block">
+                                    <strong>{{ $errors->first('rating')  }}</strong>
+                                </div>
+                            </div>
+                        @endif
                             <div class="w-full rate">
                                 <input type="radio" id="star5" name="rating" value="5" />
                                 <label for="star5" title="Very good">5 stars</label>
@@ -118,13 +150,7 @@
                                 <label for="star1" title="Very bad">1 star</label>
                             </div>
                         </div>
-                        @if ($errors->any())
-                            <div class="py-5 mt-10 text-red-400 fv-plugins-message-container">
-                                <div class="fv-help-block">
-                                    <strong>{{ $errors->first('rating')  }}</strong>
-                                </div>
-                            </div>
-                        @endif
+
                         <!-- Description review -->
                         <textarea class="p-3 bg-gray-100 border border-gray-300 outline-none description sec h-60 form-control"
                             spellcheck="false" name="review" placeholder="@lang('Describe what you think about this part')" rows="10"></textarea>
@@ -139,8 +165,11 @@
                             <button type="button" onclick="this.form.reset();" class="p-1 px-4 ml-auto font-semibold text-gray-500 border border-gray-300 cursor-pointer btn">@lang('Cancel')</button>
                             <button type="submit" class="p-2 px-4 ml-2 font-semibold text-gray-200 bg-indigo-500 border border-indigo-500 cursor-pointer btn">@lang('Add Review')</button>
                         </div>
+                        <!-- Form End -->
+                        </form>
+                        @endif
                     </div>
-                                <!-- end section -->
+                   <!-- end section -->
                 </div>
             </div>
             <!-- Seller parts -->
