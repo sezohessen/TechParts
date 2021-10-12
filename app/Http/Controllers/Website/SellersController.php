@@ -10,7 +10,7 @@ class SellersController extends Controller
 {
     public function index()
     {
-        $sellers = Seller::where('governorate_id' , '!=' , null)->get();
+        $sellers = Seller::where('governorate_id' , '!=' , null)->paginate(10);
         return view('website.sellers',compact('sellers'));
     }
 }

@@ -241,11 +241,10 @@ if(!function_exists('find_image')){
             ->selectRaw('SUM(rating)/COUNT(user_id) AS avg_rating')
             ->first()
             ->avg_rating;
-
             $product_star           = round($avr_star);
-            $ratingAverageFloat          = number_format((float)$avr_star, 1, '.', '');
+            $ratingAverageFloat     = number_format((float)$avr_star, 1, '.', '');
             $ratingAverage = round($ratingAverageFloat);
-            // dd($ratingAverage); 
+            // dd($ratingAverage);
             if($ratingAverage == 1.0)
             {
                 echo
@@ -296,7 +295,6 @@ if(!function_exists('find_image')){
 
             }
 
-            // dump($ratingAverage);
             return $ratingAverage;
 
         }

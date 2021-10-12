@@ -1,0 +1,38 @@
+hr{
+    margin: 10px 0;
+}
+.seller .all-sellers .bg img{
+    max-height:130px;
+}
+.seller .seller-avatar img{
+    max-height: 150px;
+    max-width: 150px;
+    min-height: 150px;
+    min-width: 150px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.seller .all-sellers .info{
+    margin-top: 70px;
+}
+.seller .all-sellers .info p{
+    font-size: 1.2rem;
+}
+.seller .seller-rating{
+    position: absolute;
+    top: 10px;
+}
+.seller .all-brands{
+    height: 150px;
+}
+.seller .all-brands .brands img{
+    max-height: 4rem;
+    min-height: 4rem;
+    margin: 4px 8px;
+    max-width: 7rem;
+    min-width: 7rem;
+}

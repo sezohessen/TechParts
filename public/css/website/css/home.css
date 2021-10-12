@@ -23,6 +23,7 @@ form  .adv_submit,form .Seller_submit{
     border: 1px solid #09a0f7;
     padding: 10px;
     min-height: 50px;
+    cursor: pointer;
 }
 .brand .brand-content >div img{
     max-height: 30px;

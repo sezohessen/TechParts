@@ -21,4 +21,13 @@ class BrandSeller extends Model
         ];
         return $credentials;
     }
+    /**
+     * Get the carMaker that owns the BrandSeller
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function carMaker()
+    {
+        return $this->belongsTo(CarMaker::class,'brand_id','id');
+    }
 }

@@ -112,4 +112,8 @@ class Seller extends Model
     public function sellerAvatar(){
         return $this->belongsTo(Image::class,'avatar','id');
     }
+    public function brands()
+    {
+        return $this->hasMany(BrandSeller::class);
+    }
 }
