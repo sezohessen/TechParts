@@ -254,7 +254,6 @@
                                                         <label for="star1" title="Very bad">1 star</label>
                                                     </div>
                                                 </div>
-
                                                 @if ($errors->any())
                                                     <div class="py-5 mt-10 text-red-400 fv-plugins-message-container">
                                                         <div class="fv-help-block">

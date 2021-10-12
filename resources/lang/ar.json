@@ -870,7 +870,6 @@
 "Car Model  Name":"اسم موديل السيارة",
 "Edit Car Make":"تعديل موديل السيارة",
 "Edit Make":"تعديل الموديل",
-"Brand Class":"تصنيف الماركة",
 "Brand Classification":"تصنيف الماركة",
 "Add Class":"اضف تصنيف",
 "View Classes":"عرض التصنيفات",
@@ -885,5 +884,6 @@
 "Search by name or part number":"ابحث بالاسم او رقم القطعة",
 "Advanced Search":"بحث متقدم",
 "Search for sellers":"ابحث عن تجار",
-"Not required":"ليس مطلوب"
+"Not required":"ليس مطلوب",
+"Rate me":"قيمني"
 }

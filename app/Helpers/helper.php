@@ -1,6 +1,8 @@
 <?php
 use App\Models\Image;
 use App\Models\Review;
+use App\Models\Seller;
+use App\Models\SellerRating;
 use PhpParser\Node\Stmt\Echo_;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
@@ -233,7 +235,73 @@ if(!function_exists('find_image')){
         }
 
     }
+    if(!function_exists('SellerTotalRating')){
+        function SellerTotalRating($id){
+            $avr_star      = SellerRating::where('seller_id',$id)
+            ->selectRaw('SUM(rating)/COUNT(user_id) AS avg_rating')
+            ->first()
+            ->avg_rating;
 
+            $product_star           = round($avr_star);
+            $ratingAverageFloat          = number_format((float)$avr_star, 1, '.', '');
+            $ratingAverage = round($ratingAverageFloat);
+            // dd($ratingAverage); 
+            if($ratingAverage == 1.0)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i> ';
+
+            }
+            elseif($ratingAverage == 2.0)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i> ';
+            }
+            elseif($ratingAverage == 3.0)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i> ';
+
+            }
+            elseif($ratingAverage == 4.0)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i> ';
+
+            }
+            elseif($ratingAverage == 5.0)
+            {
+                echo
+                '<i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i> ';
+
+            }
+
+            // dump($ratingAverage);
+            return $ratingAverage;
+
+        }
+
+    }
     // if there is no review
     if(!function_exists('NoReview')){
         function NoReview($id){
