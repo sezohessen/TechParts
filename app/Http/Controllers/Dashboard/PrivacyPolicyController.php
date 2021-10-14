@@ -21,8 +21,8 @@ class PrivacyPolicyController extends Controller
             $page_title = 'Privacy Policy';
             $page_description = 'View Privacy Policy';
         } */
-        $page_title = 'Privacy Policy';
-        $page_description = 'View Privacy Policy';
+        $page_title = __("Privcay and policy");
+        $page_description = __("View Privacy Policy");
         $PPolicy = Privacy_Policy::first();
         return view('dashboard.PPolicy.show', compact('page_title', 'page_description','PPolicy'));
     }
@@ -63,8 +63,8 @@ class PrivacyPolicyController extends Controller
             $page_title = "Privacy And Policy";
             $page_description = "View Privacy And Policy";
         } */
-        $page_title = "Privacy And Policy";
-        $page_description = "View Privacy And Policy";
+        $page_title = __("Privcay and policy");
+        $page_description = __("View Privacy Policy");
         $PPolicy = Privacy_Policy::first();
         $PPolicy = $PPolicy->description;
         return view('PPolicy.index',compact('page_title','page_description','PPolicy'));

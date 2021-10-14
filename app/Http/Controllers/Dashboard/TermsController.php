@@ -21,8 +21,8 @@ class TermsController extends Controller
             $page_title = 'Terms';
             $page_description = 'View all terms';
         } */
-        $page_title = 'Terms';
-        $page_description = 'View all terms';
+        $page_title =  __("Terms");
+        $page_description =  __("Terms And Conditions");
         $terms = Terms::first();
         return view('dashboard.Terms.add', compact('page_title', 'page_description','terms'));
     }
@@ -63,8 +63,8 @@ class TermsController extends Controller
             $page_title = "Terms and condition";
             $page_description = "View terms description";
         } */
-        $page_title = "Terms and condition";
-        $page_description = "View terms description";
+        $page_title =  __("Terms");
+        $page_description =  __("Terms And Conditions");
         $terms = Terms::first();
         $term = $terms->description;
         return view('Terms.index',compact('page_title','page_description','term'));
