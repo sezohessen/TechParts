@@ -26,9 +26,9 @@ class SellerController extends Controller
         if ($seller) {
             $parts  = Part::where('active',1)
             ->where('user_id',$seller->user_id)
-            ->paginate(8);
+            ->paginate(10,['*'],'parts');
             // Users Reviewing Seller
-            $UsersReviews = SellerRating::where('seller_id',$seller->id)->take(5)->latest()->get();
+            $UsersReviews = SellerRating::where('seller_id',$seller->id)->orderBy('id','DESC')->paginate(5,['*'],'reviews');
             return view('website.seller',compact('seller','parts','page_title','UsersReviews','review'));
         // User id or admin id redirect
         } else {
