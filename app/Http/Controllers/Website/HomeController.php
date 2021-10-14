@@ -31,7 +31,6 @@ class HomeController extends Controller
      */
     public function index(Request $Request)
     {
-
         $parts          = Part::where('active',1);
         $brands         = CarMaker::all();
         $governorates   = Governorate::all();

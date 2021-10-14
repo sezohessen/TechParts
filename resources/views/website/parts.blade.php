@@ -1,30 +1,39 @@
 @extends('website.layouts.app')
-
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/website/css/part.css') }}">
 <link rel="stylesheet" href="{{ asset('css/website/css/home.css') }}">
-<link rel="stylesheet" href="{{ asset('css/website/css/seller-page.css') }}">
+<link rel="stylesheet" href="{{ asset('css/website/css/part.css') }}">
 @endsection
-<!-- Start page -->
 @section('website')
+
 <section class="section dark tiny search-section mt-60">
     <div class="inner">
         <div class="container">
             <div class="border tabpanel section-tab" role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation">
+                    <li role="presentation" class="active">
                         <a href="#search-cars" aria-controls="search-cars" role="tab" data-toggle="tab">
                             @lang('Search for parts')
                         </a>
-                        <li role="presentation"  class="active">
+                        <li role="presentation">
                             <a href="#sell-car" aria-controls="sell-car" role="tab" data-toggle="tab">@lang('Search for sellers')</a>
                         </li>
                     </li>
                 </ul> <!-- end .nav-tabs -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="p-5 tab-pane fade " id="search-cars">
+                    <div role="tabpanel" class="p-5 tab-pane fade in active" id="search-cars">
                         <form action="{{ route('Website.parts') }}" method="get" role="search">
                             @csrf
+                            <input type="text" name="order" hidden  value = "{{app('request')->input('order')}}">
+                            {{-- <input type="text" name="governorate_id" hidden value="{{app('request')->input('governorate_id')}}">
+                            <input type="text" name="city_id" hidden value="{{app('request')->input('city_id')}}"> --}}
+                            <input type="text" name="carMaker" hidden value="{{app('request')->input('carMaker')}}">
+                            <input type="text" name="carModel" hidden value="{{app('request')->input('carModel')}}">
+                            <input type="text" name="carYear" hidden value="{{app('request')->input('carYear')}}">
+                            <input type="text" name="carCapacity" hidden value="{{app('request')->input('carCapacity')}}">
+                            {{-- <input type="text" name="from" hidden  value = "{{app('request')->input('from')}}">
+                            <input type="text" name="to" hidden  value = "{{app('request')->input('to')}}"> --}}
+                            {{-- <input type="text" name="lat" hidden  value = "{{app('request')->input('lat')}}" >
+                            <input type="text" name="long" hidden  value = "{{app('request')->input('long')}}" > --}}
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="search-label">@lang('Search for best parts')</label>
@@ -46,7 +55,7 @@
                                     <div class="col-xs-12">
                                         <label for="car" class="search-label">@lang('By car model')</label>
                                     </div>
-                                    <div class="col-md-3 col-xs-6">
+                                    <div class="col-md-3 col-xs-12">
                                         <div class="item form-group">
                                             <label class="text-white">@lang('Brand')</label>
                                             <select class="form-control" name="carMaker" id="maker" data-live-search="true">
@@ -61,7 +70,7 @@
                                             </select>
                                         </div> <!-- end .item -->
                                     </div>
-                                    <div class="col-md-3 col-xs-6">
+                                    <div class="col-md-3 col-xs-12">
                                         <div class="item form-group">
                                             <label class="text-white">@lang('Model')</label>
                                             <select class="form-control" name="carModel" id="models" data-live-search="true">
@@ -69,7 +78,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-xs-6">
+                                    <div class="col-md-3 col-xs-12">
                                         <div class="item form-group">
                                             <label class="text-white">@lang('Year')</label>
                                             <select class="form-control" name="carYear" id="year" data-live-search="true">
@@ -77,7 +86,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-xs-6">
+                                    <div class="col-md-3 col-xs-12">
                                         <div class="item form-group">
                                             <label class="text-white">@lang('Car Capacity')</label>
                                             <select class="form-control" id="carCapacity"
@@ -99,7 +108,7 @@
                             <button type="submit" class="hidden adv_submit button solid light-blue text-center"> <i class="fa fa-search"></i> @lang('Search')</button>
                         </form> <!-- end .banner-form -->
                     </div> <!-- end .tab-panel -->
-                    <div role="tabpanel" class="tab-pane fade in active" id="sell-car">
+                    <div role="tabpanel" class="tab-pane fade" id="sell-car">
                         <form action="{{ route('Website.Sellers') }}" method="get">
                             @csrf
                             <input type="text"  name="brand_id" hidden id="brand_selector">
@@ -144,7 +153,7 @@
                                                 @endphp
                                                 <div class="row brand-content">
                                                     @foreach ($brands as $brand)
-                                                    <div class="col-md-4 col-xs-6 @if ($brand->id==request()->get('brand_id')) selected-brand @endif">
+                                                    <div class="col-md-4 col-xs-6 ">
                                                         <img class="brand-img brand-info" data-id="{{ $brand->id }}" src="{{ find_image($brand->logo,App\Models\CarMaker::base) }}" alt="{{ $brand->logo->name }}">
                                                     </div>
                                                     @endforeach
@@ -164,87 +173,109 @@
     </div> <!-- end .inner -->
 </section> <!-- end .section -->
 <!-- Start Page / Under SlideBar -->
- <section class="container seller">
-    <div class="py-20 mt-10">
-            <div class="page-title" style="background-image: url('images/background01.jpg');">
-                <div class="inner">
-                    <div class="container">
-                        <div class="title">@lang('Sellers')</div> <!-- end .title -->
-                    </div> <!-- end .container -->
-                </div> <!-- end .inner -->
-         </div> <!-- end .page-title -->
-            <!-- Row -->
-            @if ($sellers->count())
-                <div class="row all-sellers">
-                    @foreach ($sellers as $seller)
-                    <div class="overflow-hidden col-md-6 col-xs-12 ">
-                        <!-- component -->
-                        <!-- eslint-disable -->
-                        <div class="items-center justify-center w-full pb-6 mx-auto my-4 overflow-hidden bg-white rounded-lg shadow relative">
-                            <div class="seller-rating">
-                                <!-- Tottal Rating -->
-                                <div class="flex p-1 mx-10 leading-6 text-yellow-400 rating">
-                                    @php
-                                        $total = SellerTotalRating($seller->id);
-                                    @endphp
+
+<!--start Parts (List View) -->
+<div class="page-title" style="background-image: url('images/background01.jpg');">
+    <div class="inner">
+        <div class="container">
+            <div class="title">@lang('Parts Listing')</div> <!-- end .title -->
+        </div> <!-- end .container -->
+    </div> <!-- end .inner -->
+</div> <!-- end .page-title -->
+<section class="parts section small-top-padding white">
+    <div class="inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="listings">
+                        @if(session()->has('location'))
+                            <div class="m-4 alert alert-danger ">
+                                <p class="inline-block">{{ session('location') }}</p>
+                                <button class="btn btn-danger" onclick="AllowLocation()">@lang('Allow access')</button>
+                            </div>
+                        @endif
+                        <div class="clearfix heading">
+                            <h5>@lang('Showing') {{ $parts->count() }} @lang('of') {{ $totalParts }} </h5>
+                            @if ($parts->count())
+                                <form  method="get" id="orderFrom">
+                                    <div class="select-wrapper sort">
+                                        <div class="form-group">
+                                            <label for="order" class="mx-5 text-muted font-weight-bolder font-size-lg">@lang('Sort By')</label>
+                                            <input type="text" name="search" hidden value="{{app('request')->input('search')}}">
+                                            <input type="text" name="carMaker" hidden value="{{app('request')->input('carMaker')}}">
+                                            <input type="text" name="carModel" hidden value="{{app('request')->input('carModel')}}">
+                                            <input type="text" name="carYear" hidden value="{{app('request')->input('carYear')}}">
+                                            <input type="text" name="carCapacity" hidden value="{{app('request')->input('carCapacity')}}">
+                                            <input type="text" id="lat" name="lat" hidden  value = "" >
+                                            <input type="text" id="long" name="long" hidden  value = "" >
+                                            <select name="order" class="selectpicker"  onchange="getNearBy()">
+                                                <option value="views"
+                                                    @if (request()->get('order')=='views')
+                                                    {{ 'selected' }}
+                                                    @endif
+                                                >@lang('Popularity')</option>
+                                                <option value="newest"
+                                                    @if (request()->get('order')=='newest')
+                                                    {{ 'selected' }}
+                                                    @endif
+                                                >@lang('Most recent')</option>
+                                                <option value="asc"
+                                                    @if (request()->get('order')=='asc')
+                                                    {{ 'selected' }}
+                                                    @endif
+                                                >@lang('Price: Low to High')</option>
+                                                <option value="desc"
+                                                    @if (request()->get('order')=='desc')
+                                                    {{ 'selected' }}
+                                                    @endif
+                                                >@lang('Price: High to Low')</option>
+                                                <option value="nearest"
+                                                    @if (request()->get('order')=='nearest')
+                                                    {{ 'selected' }}
+                                                    @endif
+                                                >@lang('Nearby')</option>
+                                            </select>
+                                        </div>
+                                    </div> <!-- end .select-wrapper -->
+                                </form>
+                            @else
+                            <div class="mt-32 alert alert-warning" role="alert">
+                                <i class="fa fa-exclamation-triangle"></i> <span>@lang('There are no results with such options')</span>
+                            </div>
+                            @endif
+                        </div> <!-- end .heading -->
+                        <div class="clearfix listings-grid">
+                            <div class="featured-cars">
+                                <div class="row">
+                                    <x-part :parts="$parts" :makeCol="4" />
                                 </div>
                             </div>
-                            <div class="bg">
-                                @if (!$seller->bg)
-                                <img class=" object-cover w-full" src="{{asset('img/background/background.jpg')}}" alt="Profile picture">
-                                @else
-                                <img class=" object-cover w-full" src="{{find_image($seller->background , App\Models\Seller::backgroundBase)}}" alt="{{$seller->background->name}}">
-                                @endif
-                            </div>
-                            <div class="text-center seller-avatar relative">
-                                @if (!$seller->avatar)
-                                <img class="rounded-full img-thumbnail"
-                                src="{{asset('img/avatar/user-profile.png')}}" alt="Profile picture">
-                                @else
-                                <img class="rounded-full img-thumbnail"
-                                src="{{find_image($seller->sellerAvatar , App\Models\Seller::avatarBase)}}" alt="{{$seller->sellerAvatar->name}}">
-                                @endif
-                            </div>
-                            <div class="info">
-                                <h1 class="text-2x font-semibold text-primary text-center">
-                                    <a href="{{ route('Website.SellerProfile',['id'=>$seller->user->id,'first'=>$seller->user->first_name,'second'=>$seller->user->last_name]) }}">
-                                    {{ $seller->user->FullName }}
-                                    </a>
-                                </h1>
-                                <p class="text-muted text-center">
-                                {{ LangDetail($seller->governorate->title,$seller->governorate->title_ar) }} -
-                                {{ LangDetail($seller->city->title,$seller->city->title_ar) }}
-                            </div>
-                            <hr>
-                            <div class="all-brands row">
-                                @foreach ($seller->brands as $brand)
-                                    <div class="col-md-2 brands">
-                                        <img src="{{ find_image($brand->carMaker->logo,App\Models\CarMaker::base) }}" alt="{{ $brand->carMaker->logo->name }}">
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="text-center mt-10">
-                    {{ $sellers->links("pagination::bootstrap-4")}}
-                </div>
-            @else
-                <div class="text-center">
-                    <div class="mt-32 alert alert-warning" role="alert">
-                        <i class="fa fa-exclamation-triangle"></i> <span>@lang('There are no results with such options')</span>
-                    </div>
-                </div>
-            @endif
+                            {{ $parts->appends(Request::only([
+                                'search','order','carMaker','carModel','carYear','carCapacity','lat','long'
+                                ]))->links("pagination::bootstrap-4") }}
+                        </div> <!-- end .listing-grid -->
+                    </div> <!-- end .listings -->
+                </div> <!-- end .col-sm-9 -->
+            </div> <!-- end .row -->
 
-        </div>
-    </div>
- </section>
+        </div> <!-- end .container -->
+    </div> <!-- end .inner -->
+</section> <!-- end .section -->
+
+<!-- Start Featerd Parts Deals -->
+
+<section class="section white">
+    <div class="py-0 my-0 inner">
+        <h1 class="main-heading">@lang('Hot deals')<small>@lang('Best parts based on rating')</small></h1>
+        <div id="featured-cars" class="owl-carousel featured-cars">
+            <x-part :parts="$deals" :makeCol="0" :fav="0"/>
+
+        </div> <!-- end .featured-cars -->
+    </div> <!-- end .inner -->
+</section> <!-- end .section -->
+
 
 @endsection
-
-<!-- Js -->
 @section('js')
 <script>
     $(".brand-info").each(function(index){
@@ -379,5 +410,4 @@
         en ? governorate(id):governorate_ar(id);
     });
 </script>
-
 @endsection

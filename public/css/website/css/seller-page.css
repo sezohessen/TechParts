@@ -30,9 +30,16 @@ hr{
     height: 150px;
 }
 .seller .all-brands .brands img{
-    max-height: 4rem;
-    min-height: 4rem;
-    margin: 4px 8px;
-    max-width: 7rem;
-    min-width: 7rem;
+    max-height: 3rem;
+    min-height: 3rem;
+    margin: 0 auto;
+    max-width: 100%;
+    min-width: 100%;
+}
+.seller .all-brands .brands{
+    margin: 10px 0px;
+}
+.tab-content .selected-brand{
+    border: 2px solid rgb(255, 255, 255) !important;
+    background-color: rgb(255, 255, 255);
 }

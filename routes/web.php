@@ -99,7 +99,7 @@ Route::group(['namespace'=>"Website",'as' => 'Website.'],function () {
 
     // Adjusments
     Route::get('/all-sellers', 'SellersController@index')->name('Sellers');
-
+    Route::get('/parts', 'AllPartController@show')->name('parts');
 
 
 });

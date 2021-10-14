@@ -43,7 +43,9 @@
 *::after {
   box-sizing: border-box;
 }
-
+.aside-minimize:not(.aside-minimize-hover) .brand .brand-logo img{
+    display: none;
+}
 html {
   font-family: sans-serif;
   line-height: 1.15;

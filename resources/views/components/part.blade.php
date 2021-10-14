@@ -118,7 +118,7 @@
         console.log(22);
         $(this).removeClass('DeleteFromFav').addClass('AddToFav');
         let id = $(this).data('id');
-        var $tr = $(this).closest('.col-md-4');
+        var $tr = $(this).closest('.fav .col-md-4');
         var url = '{{ route("Website.destroyFavorite", ":id") }}';
         url = url.replace(':id',id);
         $.ajax({

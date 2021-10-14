@@ -37,7 +37,7 @@
                 </div>
                 {{-- Fav parts --}}
                 <div class="featured-cars">
-                    <div class="row">
+                    <div class="row fav">
                         <x-part :parts="$parts->favorite" makeCol="4"/>
                     </div>
                 </div>

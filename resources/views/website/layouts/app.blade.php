@@ -198,23 +198,28 @@
                         </div> <!-- end .iconbox-left -->
                     </div> <!-- end .col-sm-4 -->
                     <div class="my-10 col-md-4 col-sm-6 col-xs-12">
-                        <h3 class="mb-10 sm:font-bold sm:text-3xl sm:mb-16 ">@lang('Top parts')</h3>
+                        <h3 class="mb-10 sm:font-bold sm:text-3xl sm:mb-16 ">@lang('Top Sellers')</h3>
                         @php
-                            $footerParts = App\Models\Part::Where('active',1)->orderBy('views','DESC')->limit(3)->get();
+                            $footerSellers = App\Models\Seller::leftJoin('sellers_rating', 'sellers_rating.seller_id', '=', 'sellers.id')
+                        ->select('sellers.*', DB::raw('AVG(rating) as rating_average' ))->groupBy('id')->orderBy('rating_average', 'DESC')->limit(3)->get();
                         @endphp
-                        @foreach ($footerParts as $part)
+                        @foreach ($footerSellers as $seller)
                             <div id="footer-parts">
                                 <div class="row">
                                     <div class="img col-md-4 col-xs-6">
-                                        <a href="{{ route('Website.ShowPart',$part->id) }}">
-                                            <img src="{{ find_image($part->FirstImage->image,App\Models\Part::base) }}" alt="{{ $part->FirstImage->image->name }}">
-                                        </a>
+                                        @if (!$seller->avatar)
+                                        <img
+                                            src="{{asset('img/avatar/user-profile.png')}}" alt="Profile picture">
+                                        @else
+                                        <img
+                                            src="{{find_image($seller->sellerAvatar , App\Models\Seller::avatarBase)}}" alt="{{$seller->sellerAvatar->name}}">
+                                        @endif
                                     </div>
                                     <div class="part-info col-md-8 col-xs-6">
-                                        <a href="{{ route('Website.ShowPart',$part->id) }}">
-                                            <div>{{ LangDetail($part->name,$part->name_ar) }}</div>
+                                        <a href="{{ route('Website.SellerProfile',['id'=>$seller->user->id,'first'=>$seller->user->first_name,'second'=>$seller->user->last_name]) }}">
+                                            {{ $seller->user->FullName }}
                                         </a>
-                                        <div>{{ $part->price }} @lang('L.E')</div>
+                                        <p>{{ LangDetail($seller->governorate->title,$seller->governorate->title_ar) }}</p>
                                     </div>
                                 </div>
                             </div>
