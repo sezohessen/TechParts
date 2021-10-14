@@ -37,8 +37,8 @@
             <a href="{{ route('MessengerID',$seller->user_id) }}" class="mb-10 text-3xl btn btn-primary">@lang('Message Me') <i class="fab fa-facebook-messenger"></i></a>
         </div>
         <div class="row">
-            <div class="col-md-4 col-xs-12 left-bar sm:mb-12">
-                <div class="p-10 mb-20 left-section">
+            <div class="col-md-4 col-xs-12 sm:mb-12">
+                <div class="p-10 mb-20 left-section left-bar">
                     <div class="car-details">
                         <div class="rating">
                             {{  SellerTotalRating($seller->id) }}
@@ -168,9 +168,12 @@
                         </form>
                         @endif
                     </div>
-                    <!-- Show all review -->
+                   <!-- end section -->
+                </div>
+                <!-- Show all review -->
+                <div class="my-10 sm:p-4">
                     <div class="mt-12 reviews">
-                       <div class="text-4xl font-bold">@lang('Reviews') </div>  
+                       <div class="text-4xl font-bold">@lang('Reviews') </div>
                        @foreach ($UsersReviews as $review)
                        <!-- Card Review -->
                        <div class="my-10">
@@ -195,14 +198,19 @@
                             <div class="flex items-center mt-4 text-gray-600">
                             </div>
                             <div class="mt-3">
-                            <p class="mt-1"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex ut quae incidunt numquam non, ad quaerat quis nobis excepturi voluptates autem distinctio tempora eaque libero necessitatibus. Odit iusto voluptatum dolore? </p>
+                                <p class="mt-1"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex ut quae incidunt numquam non, ad quaerat quis nobis excepturi voluptates autem distinctio tempora eaque libero necessitatibus. Odit iusto voluptatum dolore? </p>
                             </div>
-                       </div>             
+                       </div>
                     @endforeach
+                        <!-- paginate -->
+                        <div class="mt-20 text-center">
+                                {{ $UsersReviews->links("pagination::bootstrap-4") }}
+                        </div>
                     </div>
                    <!-- end section -->
                 </div>
             </div>
+            <!-- new section -->
             <!-- Seller parts -->
             <div class="mb-40 col-md-8 col-xs-12">
                 <!-- Favorite part session -->
