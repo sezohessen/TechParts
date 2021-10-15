@@ -13,7 +13,7 @@
         <div class="container">
             <div class="card-body">
                 <!--begin: Datatable-->
-                <div class="card-header flex-wrap py-3" style="min-height: 50px">
+                <div class="flex-wrap py-3 card-header" style="min-height: 50px">
                     <a href="{{route("dashboard.users.edit",['user'=>$user->id])}}" class="btn btn-danger font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Flatten.svg-->
@@ -37,8 +37,7 @@
                             <th>@lang('Email')</th>
                             <th>@lang('First Name')</th>
                             <th>@lang('Last Name')</th>
-                            <th>@lang('Country Code')</th>
-                            <th>@lang('Country Phone')</th>
+
                             <th>@lang('Phone')</th>
                             @if($user->whats_app)
                             <th>@lang("What's App")</th>
@@ -49,7 +48,8 @@
                             @if($user->roles)
                             <th>@lang('Role')</th>
                             @endif
-
+                            <th>@lang('Created at')</th>
+                            <th>@lang('Updated at')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,8 +57,6 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->first_name}}</td>
                             <td>{{$user->last_name}}</td>
-                            <td>{{$user->country_code}}</td>
-                            <td>{{$user->country_phone}}</td>
                             <td>{{$user->phone}}</td>
                             @if($user->whats_app)
                                  <td>{{$user->whats_app}}</td>
@@ -76,7 +74,8 @@
                                 {{implode(', ', $user->roles->pluck('name')->toArray()) }}
                             </td>
                             @endif
-
+                            <td>{{\carbon\carbon::parse($user->created_at)->format('M d, Y')}}</td>
+                            <td>{{\carbon\carbon::parse($user->updated_at)->format('M d, Y')}}</td>
 
                             <td nowrap="nowrap"></td>
                         </tr>

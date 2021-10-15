@@ -32,7 +32,6 @@
         <form action="{{route("seller.my_account.update",['id'=>$seller->id])}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
-
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
