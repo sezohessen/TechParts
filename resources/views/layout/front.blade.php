@@ -90,26 +90,6 @@ for your project.
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                @role('superadministrator|administrator')
-                                <a class="dropdown-item" href="{{ route('dashboard.dashboard') }}">
-                                    {{ __('Dashboard') }}
-                                </a>
-                                @endrole
-                                @role('insurance')
-                                <a class="dropdown-item" href="{{ route('insurance.index') }}">
-                                    {{ __('Insurance') }}
-                                </a>
-                                @endrole
-                                @role('agency')
-                                <a class="dropdown-item" href="{{ route('agency.index') }}">
-                                    {{ __('agency') }}
-                                </a>
-                                @endrole
-                                @role('bank')
-                                <a class="dropdown-item" href="{{ route('bank.index') }}">
-                                    {{ __('bank') }}
-                                </a>
-                                @endrole
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">

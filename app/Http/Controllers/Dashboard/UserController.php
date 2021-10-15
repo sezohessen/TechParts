@@ -77,13 +77,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, CarDatatable $car,User $user)
-    {
-        $page_title = __('User');
-        $page_description = __('Manage User');
-        $car->request()->all();
-        return  $car->render("dashboard.User.show", compact('page_title', 'page_description','user'));
-    }
     /**
      * Show the form for editing the specified resource.
      *

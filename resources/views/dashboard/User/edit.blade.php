@@ -62,7 +62,7 @@
             <div class="form-group">
                 <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6
                 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') ?? $user->phone }}"
-                required autocomplete="phone"  placeholder="@lang('phone')">
+                 autocomplete="phone"  placeholder="@lang('phone')">
                 @error('phone')
                     <div class="fv-plugins-message-container">
                         <div class="fv-help-block">
@@ -77,7 +77,7 @@
             <div class="form-group">
                 <input id="text" type="phone" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6
                 @error('whats_app') is-invalid @enderror" name="whats_app" value="{{ old('whats_app') ?? $user->whats_app }}"
-                required autocomplete="whats_app"  placeholder="@lang('Whatsapp')">
+                 autocomplete="whats_app"  placeholder="@lang('Whatsapp')">
                 @error('whats_app')
                     <div class="fv-plugins-message-container">
                         <div class="fv-help-block">

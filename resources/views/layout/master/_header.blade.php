@@ -28,15 +28,21 @@
 
                 <div id="kt_header_menu" class="header-menu header-menu-mobile {{ Metronic::printClasses('header_menu', false) }}" {{ Metronic::printAttrs('header_menu') }}>
                     <ul class="menu-nav {{ Metronic::printClasses('header_menu_nav', false) }}">
-                    @php
-                        $array = config('menu_header.items');
-                        try {
-                            $array[0]['title'] = __($array[0]['title']);
-                        } catch (\Throwable $th) {
-                            //throw $th;
-                        }
-                    @endphp
+                        <li class="menu-item "  aria-haspopup="true">
+                            <a  href="{{ route('Website.Index') }}" class="menu-link " target="_blank">
+                                <span class="menu-text">@lang('Website')</span>
+                            </a>
+                        </li>
+                        @php
+                            $array = config('menu_header.items');
+                            try {
+                                $array[0]['title'] = __($array[0]['title']);
+                            } catch (\Throwable $th) {
+                                //throw $th;
+                            }
+                        @endphp
                         {{ Menu::renderHorMenu($array) }}
+
                     </ul>
                 </div>
             </div>
