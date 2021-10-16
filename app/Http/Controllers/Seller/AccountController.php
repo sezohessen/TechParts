@@ -20,7 +20,7 @@ class AccountController extends Controller
         $governorates       = Governorate::all();
         $brands             = CarMaker::all();
         $car_makers_selected= BrandSeller::where('seller_id',$seller->id)->get();
-        $currentUserInfo    = Location::get('162.159.24.227');
+        $currentUserInfo    = Location::get($request->ip());
         $SelectedCarMakers = [];
         foreach($car_makers_selected as $carMaker)$SelectedCarMakers[] = $carMaker->brand_id;
         return view('SellerDashboard.MyAccount.edit', compact('page_title', 'page_description','seller',
