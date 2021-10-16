@@ -219,7 +219,9 @@
                                         <a href="{{ route('Website.SellerProfile',['id'=>$seller->user->id,'first'=>$seller->user->first_name,'second'=>$seller->user->last_name]) }}">
                                             {{ $seller->user->FullName }}
                                         </a>
-                                        <p>{{ LangDetail($seller->governorate->title,$seller->governorate->title_ar) }}</p>
+                                        @if ($seller->governorate)
+                                            <p>{{ LangDetail($seller->governorate->title,$seller->governorate->title_ar) }}</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
