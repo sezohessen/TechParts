@@ -34,6 +34,24 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                             <label for="model">@lang('Select car classification')<span class="text-danger">*</span></label>
+                             <div class=" col-lg-9 col-md-9 col-sm-12">
+                                <select class="form-control {{ $errors->has('class_id') ? 'is-invalid' : '' }}" id="kt_select2_1"
+                                name="class_id"  data-select2-id="{{old("class_id")}}" >
+                                    @foreach ($Classes as $Class)
+                                        <option value="{{$Class->id}}" {{ old('class_id')==$Class->id ? 'selected':'' }}>
+                                            {{ LangDetail($Class->name,$Class->name_ar) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('class_id')
+                                    <div class="invalid-feedback">{{ $errors->first('class_id') }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label for="Image">@lang('Logo image') <span class="text-danger">*</span></label><br>
                             <div class="image-input image-input-empty image-input-outline" id="logo" style="background-image: url({{asset('media/svg/logos/Logo.jpg') }})">
                                 <div class="image-input-wrapper"></div>

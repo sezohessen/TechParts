@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\CarMaker;
 use Illuminate\Http\Request;
 use App\DataTables\CarMakeDatatable;
+use App\Models\CarClassification;
+
 class CarMakerController extends Controller
 {
     /**
@@ -27,10 +29,10 @@ class CarMakerController extends Controller
      */
     public function create()
     {
-        $page_title = __("Add company name");
-        $page_description = __("Company name");
-
-        return view('dashboard.CarMaker.add', compact('page_title', 'page_description'));
+        $page_title         = __("Add company name");
+        $page_description   = __("Company name");
+        $Classes            = CarClassification::all();
+        return view('dashboard.CarMaker.add', compact('page_title', 'page_description','Classes'));
     }
 
     /**
@@ -68,10 +70,11 @@ class CarMakerController extends Controller
      */
     public function edit(CarMaker $maker)
     {
-        $page_title = __("Edit Car Make");
-        $page_description = __("Edit Make");
+        $page_title         = __("Edit Car Make");
+        $page_description   = __("Edit Make");
+        $Classes            = CarClassification::all();
 
-        return view('dashboard.CarMaker.edit', compact('page_title', 'page_description','maker'));
+        return view('dashboard.CarMaker.edit', compact('page_title', 'page_description','maker','Classes'));
     }
 
     /**

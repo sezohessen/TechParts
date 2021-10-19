@@ -27,7 +27,8 @@ class CarMaker extends Model
     {
         $rules = [
             'name'             => 'required|string|max:255',
-            'logo'             => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
+            'logo'             => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'class_id'         => 'required|integer|exists:car_classifications,id'
         ];
         if($id){
             $rules['logo'] = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048';
@@ -38,6 +39,7 @@ class CarMaker extends Model
     {
         $credentials = [
             'name'              => $request->name,
+            'class_id'          => $request->class_id,
         ];
         if($request->file('logo')){
             if($img_id){

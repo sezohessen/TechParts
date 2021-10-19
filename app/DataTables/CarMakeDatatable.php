@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\CarMaker;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -24,7 +25,9 @@ class CarMakeDatatable extends DataTable
             ->eloquent($query)
             ->editColumn('name', '{{Str::limit($name, 100)}}')
             ->addColumn('logo.name', 'dashboard.CarMaker.btn.logo')
-            ->editColumn('classification.name', '{{Str::limit($classification["name"], 100)}}')
+            ->editColumn('classification.name',function (CarMaker $maker){
+                return Session::get('app_locale')=='en' ? $maker->Classification->name : $maker->Classification->name_ar;
+            })
             ->addColumn('checkbox', 'dashboard.CarMaker.btn.checkbox')
             ->addColumn('action', 'dashboard.CarMaker.btn.action')
             ->rawColumns(['checkbox', 'action','logo.name']);
