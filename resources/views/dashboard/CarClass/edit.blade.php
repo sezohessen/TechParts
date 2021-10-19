@@ -12,7 +12,7 @@
                 {{$page_title}}
             </h3>
             <div class="text-right">
-                <a href="{{ route('dashboard.class.index') }}" style="margin-top: 16px;" class="btn btn-primary mr-2">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
+                <a href="{{ route('dashboard.class.index') }}" style="margin-top: 16px;" class="mr-2 btn btn-primary">  @lang('Back')  <i class="fa fa-arrow-left fa-sm"></i></a>
             </div>
         </div>
         <!--begin::Form-->
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>@lang('Class name(ENG)') <span class="text-danger">*</span></label>
+                            <label>@lang('Class name(AR)') <span class="text-danger">*</span></label>
                             <input type="text" class="form-control {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
                              name="name_ar"  placeholder="@lang('Name(AR)')" value="{{ old('name_ar') ? old('name_ar') : $class->name_ar }}" required   />
                             @error('name_ar')
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2">@lang('Update')  </button>
+                <button type="submit" class="mr-2 btn btn-primary">@lang('Update')  </button>
             </div>
         </form>
         <!--end::Form-->
