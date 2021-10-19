@@ -11,10 +11,10 @@
             <div class="border tabpanel section-tab" role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#search-cars" aria-controls="search-cars" role="tab" data-toggle="tab">
+                        <a class="" href="#search-cars" aria-controls="search-cars" role="tab" data-toggle="tab">
                             @lang('Search for parts')
                         </a>
-                        <li role="presentation">
+                        <li role="presentation" class="sm:mt-3">
                             <a href="#sell-car" aria-controls="sell-car" role="tab" data-toggle="tab">@lang('Search for sellers')</a>
                         </li>
                     </li>
@@ -24,7 +24,7 @@
                         <form action="{{ route('Website.parts') }}" method="get" role="search">
                             @csrf
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-2 sm:mt-5">
                                     <label class="search-label">@lang('Search for best parts')</label>
                                 </div>
                                 <div class="col-md-5">
@@ -33,14 +33,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="item">
+                                    <div class="item sm:mb-5">
                                         <button type="submit" id="simple-search" class="button solid light-blue"> <i class="fa fa-search"></i> @lang('Search')</button>
                                     </div> <!-- end .item -->
                                 </div>
                                 <div class="col-md-3">
-                                    <button class="button solid light-blue" id="AdvancedSearch"><i class="fa fa-plus px-2"></i> @lang('Advanced Search')</button>
+                                    <button class="button solid light-blue" id="AdvancedSearch"><i class="px-2 fa fa-plus"></i> @lang('Advanced Search')</button>
                                 </div>
-                                <div class="col-md-12 hidden" id="Adv">
+                                <div class="hidden col-md-12" id="Adv">
                                     <div class="col-xs-12">
                                         <label for="car" class="search-label">@lang('By car model')</label>
                                     </div>
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="hidden adv_submit button solid light-blue text-center"> <i class="fa fa-search"></i> @lang('Search')</button>
+                            <button type="submit" class="hidden text-center adv_submit button solid light-blue"> <i class="fa fa-search"></i> @lang('Search')</button>
                         </form> <!-- end .banner-form -->
                     </div> <!-- end .tab-panel -->
                     <div role="tabpanel" class="tab-pane fade" id="sell-car">
@@ -103,8 +103,8 @@
                             <input type="text"  name="brand_id" hidden id="brand_selector">
                             <div class="row">
                                 <div class="col-md-4 col-xs-12">
-                                    <label for="car" class="search-label mt-5">@lang('By address')</label>
-                                    <span class="text-white text-sm ">@lang('Not required')</span>
+                                    <label for="car" class="mt-5 search-label sm:mt-10">@lang('By address')</label>
+                                    <span class="text-sm text-white ">@lang('Not required')</span>
                                     <div class="item form-group">
                                         <label class="text-white">@lang('Governorate')</label>
                                         <select class="form-control" id="governorate"
@@ -136,7 +136,7 @@
                                     <div class="row brand">
                                         @foreach ($Classes as $Class)
                                             <div class="col-md-4">
-                                                <label for="car" class="search-label mt-5">{{ LangDetail($Class->name,$Class->name_ar) }}</label>
+                                                <label for="car" class="mt-5 search-label">{{ LangDetail($Class->name,$Class->name_ar) }}</label>
                                                 @php
                                                     $brands = App\Models\CarMaker::where('class_id',$Class->id)->get();
                                                 @endphp
@@ -152,7 +152,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="Seller_submit button solid light-blue text-center "> <i class="fa fa-search"></i> @lang('Search')</button>
+                            <button type="submit" class="text-center Seller_submit button solid light-blue "> <i class="fa fa-search"></i> @lang('Search')</button>
                         </form> <!-- end .banner-form -->
                     </div> <!-- end .tab-panel -->
                 </div> <!-- end .tab-content -->

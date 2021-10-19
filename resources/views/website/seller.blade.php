@@ -100,7 +100,7 @@
                                 <div class="my-10">
                                     <div class="">
                                             <div class="py-10 text-3xl font-bold capitalize">@lang('file with more information about me')</div>
-                                            <a class="btn btn-primary" href="/download/{{$seller->user_id}}"> @lang('Download File') </a>
+                                            <a class="btn btn-primary" href="/download/{{$seller->id}}"> @lang('Download File') </a>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@
                             <div class="flex items-center mt-4 text-gray-600">
                             </div>
                             <div class="mt-3">
-                                <p class="mt-1"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex ut quae incidunt numquam non, ad quaerat quis nobis excepturi voluptates autem distinctio tempora eaque libero necessitatibus. Odit iusto voluptatum dolore? </p>
+                                <p class="mt-1"> {{ $review->review }} </p>
                             </div>
                        </div>
                     @endforeach

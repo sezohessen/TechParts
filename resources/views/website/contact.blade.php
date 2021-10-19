@@ -6,7 +6,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-8 col-xs-12">
-							<div class="contact">
+							<div class="contact sm:mt- mt-14">
 								<h4 class="mb-10">@lang('Contact us')</h4>
 								<form action="{{route("Website.SendContact")}}" method="post" id="contact-form">
                                   @csrf

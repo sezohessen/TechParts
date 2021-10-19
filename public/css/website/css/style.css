@@ -1112,13 +1112,15 @@ label .required {
 	background: #17384d;
 }
 .tabpanel.section-tab .nav-tabs>li.active>a, .tabpanel.section-tab .nav-tabs>li.active>a:focus, .tabpanel.section-tab .nav-tabs>li.active>a:hover {
-	background: #2e566e;
+	background: #071a25;
 	line-height: 34px;
 	border: none;
 	border-top: 4px solid #09a0f7;
 	color: #fff;
 	opacity: 1;
 	position: relative;
+    box-shadow: 1px 1px 1px aqua;
+    margin-bottom: 2px;
 }
 .tabpanel.section-tab .nav-tabs>li.active>a:before {
 	content: none;
@@ -1127,6 +1129,7 @@ label .required {
 	margin-bottom: 0;
 	border: none;
 	padding: 0;
+    text-decoration: none;
 }
 /* Simple
    ========================================================================== */
@@ -1535,7 +1538,7 @@ label .required {
 }
 @media all and (max-width: 768px) {
 	.page-title {
-		margin-top: 164px;
+		margin-top: 0px;
 	}
 	.page-title .inner {
 		padding-top: 200px;
@@ -2109,9 +2112,9 @@ label .required {
 .featured-cars .details {
 	background: #eff3f5;
 	border: 1px solid #dde2e5;
-    height: 57px;
+    min-height: 57px;
 	text-align: center;
-	font-size: 15px;
+	font-size: 13px;
     padding: 3px;
 	font-weight: 400;
 }

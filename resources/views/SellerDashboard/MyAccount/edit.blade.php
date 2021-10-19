@@ -16,8 +16,8 @@
 @section('content')
 
 <?php
-    $lat=!empty(old("lat"))?old("lat"):($seller->lat ? $seller->lat : ((!$currentUserInfo) ? 33.33333: $currentUserInfo->latitude ));
-    $long=!empty(old("long"))?old("long"):($seller->long ? $seller->long : ((!$currentUserInfo) ? 33.3333 : $currentUserInfo->longitude) );
+    $lat=!empty(old("lat"))?old("lat"):($seller->lat ? $seller->lat : ((!$currentUserInfo) ? 30.033333: $currentUserInfo->latitude ));
+    $long=!empty(old("long"))?old("long"):($seller->long ? $seller->long : ((!$currentUserInfo) ? 31.233334m : $currentUserInfo->longitude) );
 ?>
     <div class="card card-custom">
         <div class="card-header">
@@ -32,7 +32,6 @@
         <form action="{{route("seller.my_account.update",['id'=>$seller->id])}}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             @method('PATCH')
-
             <div class="card-body">
                 <!-- EN Form -->
                 <div class="row">
