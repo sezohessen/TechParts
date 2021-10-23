@@ -48,6 +48,9 @@ form  .adv_submit,form .Seller_submit{
     line-height: 30px;
     font-size: 14px;
 }
+.tab-content .models img{
+
+}
 /* began price range style */
 .range-slider {
     margin: auto;
