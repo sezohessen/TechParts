@@ -336,6 +336,7 @@
             url: '/available_cities/'+id,
             success: data => {
                 if(data.cities){
+                    $('#city').append(`<option value="" >@lang('All')</option>`)
                     data.cities.forEach(city =>
                     $('#city').append(`<option value="${city.id}" ${(old_city==city.id) ? "selected" : "" } >${city.title}</option>`))
                 }else{
@@ -351,6 +352,7 @@
             url: '/available_cities/'+id,
             success: data => {
                 if(data.cities){
+                    $('#city').append(`<option value="" >@lang('All')</option>`)
                     data.cities.forEach(city =>
                     $('#city').append(`<option value="${city.id}" ${(old_city==city.id) ? "selected" : "" }> ${city.title_ar}</option>`))
                 }else{
