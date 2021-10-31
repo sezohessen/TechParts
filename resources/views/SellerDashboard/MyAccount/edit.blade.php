@@ -17,7 +17,7 @@
 
 <?php
     $lat=!empty(old("lat"))?old("lat"):($seller->lat ? $seller->lat : ((!$currentUserInfo) ? 30.033333: $currentUserInfo->latitude ));
-    $long=!empty(old("long"))?old("long"):($seller->long ? $seller->long : ((!$currentUserInfo) ? 31.233334m : $currentUserInfo->longitude) );
+    $long=!empty(old("long"))?old("long"):($seller->long ? $seller->long : ((!$currentUserInfo) ? 31.233334 : $currentUserInfo->longitude));
 ?>
     <div class="card card-custom">
         <div class="card-header">
@@ -270,7 +270,26 @@
 <script src='https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key={{MapTOken()}}'></script>
 <script src="{{ asset('js/locationpicker.jquery.js') }}"></script>
 <script>
-
+    let apiKey = '4ed0fff33ceb4ee78cad9cbb3447919d';
+    $.getJSON('https://ipgeolocation.abstractapi.com/v1/?api_key=' + apiKey, function(data) {
+        if(data.latitude&&data.longitude){
+            $('#map').locationpicker({
+                location: {
+                    latitude: data.latitude,
+                    longitude:  data.longitude
+                },
+                radius: 300,
+                zoom:13,
+                markerIcon: "{{url('/media/svg/icons/Map/google-maps.png')}}",
+                inputBinding: {
+                    latitudeInput: $('#lat'),
+                    longitudeInput: $('#long'),
+                    locationNameInput:$("#address")
+                },
+                enableAutocomplete: true
+                });
+            }
+    });
     function governorate(id){
         console.log(id);
         old_city    ="<?php echo old('city_id') ?  old('city_id') : $seller->city_id ?>";
