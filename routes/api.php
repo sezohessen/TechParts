@@ -18,6 +18,8 @@ use App\Http\Controllers\Api\UsersController;
 Route::get('/users',[UsersController::class,'index']);
 // Get One user
 Route::get('/show-user/{User}',[UsersController::class,'show']);
+// Search for a user
+Route::get('/search-user/{name}',[UsersController::class,'search']);
 // Add New User
 Route::post('/add-user',[UsersController::class,'AddUser']);
 // Update User

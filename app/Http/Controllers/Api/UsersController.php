@@ -20,6 +20,11 @@ class UsersController extends Controller
             return $User;
     }
 
+    public function search($name)
+    {
+        return User::where('first_name', 'like', '%'.$name.'%')->get();
+    }
+
     public function AddUser(Request $request)
     {
         // Validation
