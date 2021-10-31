@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\UsersController;
 // Get Users
 Route::get('/users',[UsersController::class,'index']);
 // Get One user
-Route::get('/user/{User}',[UsersController::class,'show']);
+Route::get('/show-user/{User}',[UsersController::class,'show']);
 // Add New User
 Route::post('/add-users',[UsersController::class,'AddUser']);
 // Update User
