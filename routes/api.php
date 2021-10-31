@@ -19,7 +19,7 @@ Route::get('/users',[UsersController::class,'index']);
 // Get One user
 Route::get('/show-user/{User}',[UsersController::class,'show']);
 // Add New User
-Route::post('/add-users',[UsersController::class,'AddUser']);
+Route::post('/add-user',[UsersController::class,'AddUser']);
 // Update User
 Route::put('/update-user/{User}',[UsersController::class,'UpdateUser']);
 // Delete User
