@@ -24,10 +24,10 @@ Route::get('/users',[UsersController::class,'index']);
 Route::get('/show-user/{User}',[UsersController::class,'show']);
 // Search for a user
 Route::get('/search-user/{name}',[UsersController::class,'search']);
-
 // Register to have a token
 Route::post('/register',[AuthController::class,'register']);
-
+// Register to have a token
+Route::post('/login',[AuthController::class,'login']);
 
 // Protected Api Routes
 /////////////////
@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth:sanctum']] , function () {
     Route::put('/update-user/{User}',[UsersController::class,'UpdateUser']);
     // Delete User
     Route::delete('delete-user/{User}',[UsersController::class,'DeleteUser']);
+    // Logout and destroy Token
+    Route::post('/logout',[AuthController::class,'logout']);
+
 });
 
 
