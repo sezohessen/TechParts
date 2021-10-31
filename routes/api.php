@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UsersController;
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/users',[UsersController::class,'index']);
 Route::get('/show-user/{User}',[UsersController::class,'show']);
 // Search for a user
 Route::get('/search-user/{name}',[UsersController::class,'search']);
+
+// Register to have a token
+Route::post('/register',[AuthController::class,'register']);
 
 
 // Protected Api Routes
