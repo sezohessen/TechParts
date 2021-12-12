@@ -66,7 +66,6 @@ class PrivacyPolicyController extends Controller
         $page_title = __("Privcay and policy");
         $page_description = __("View Privacy Policy");
         $PPolicy = Privacy_Policy::first();
-        $PPolicy = $PPolicy->description;
         return view('PPolicy.index',compact('page_title','page_description','PPolicy'));
     }
 
@@ -92,8 +91,8 @@ class PrivacyPolicyController extends Controller
     {
         $PPolicy = Privacy_Policy::find($id);
         $this->validate($request,[
-            'description'       => 'required|min:3|max:1000',
-            'description_ar'    => 'required|min:3|max:1000'
+            'description'       => 'required|min:3',
+            'description_ar'    => 'required|min:3'
         ]);
         $PPolicy->description       = $request->description;
         $PPolicy->description_ar    = $request->description_ar;

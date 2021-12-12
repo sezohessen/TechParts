@@ -104,7 +104,7 @@
                                         <div>
                                             <div class="flex">
                                                 <span class="leading-10">@lang('English') </span>
-                                                <img class="w-32 ml-auto mr-auto" style="height: 30px;" src="{{ asset('img/language/united-kingdom.svg') }}" alt=""/>
+                                                <img class="mr-auto" style="height: 30px;" src="{{ asset('img/language/united-kingdom.svg') }}" alt=""/>
                                             </div>
                                         </div>
                                     </a>
@@ -114,7 +114,7 @@
                                         <div>
                                             <div class="flex">
                                                 <span class="leading-10">@lang('Arabic') </span>
-                                                <img class="w-32 ml-auto mr-auto" style="height: 30px;" src="{{ asset('img/language/saudi-arabia.svg') }}" alt=""/>
+                                                <img class="mr-auto" style="height: 20px;" src="{{ asset('img/language/Flag_of_Egypt.svg') }}" alt=""/>
                                             </div>
                                         </div>
                                     </a>
@@ -177,7 +177,8 @@
                         @php
                             $settings  = App\Models\Settings::first();
                         @endphp
-                        <p>{{ LangDetail($settings->about_us,$settings->about_us_ar) }}</p>
+                        {{-- <p>{{ LangDetail($settings->about_us,$settings->about_us_ar) }}</p> --}}
+                        <p>@lang('A website that provide easy access to auto parts companies and stores.')</p>
                         <hr class="my-10"/>
                         <!-- Call Setting globaly -->
                         @php
