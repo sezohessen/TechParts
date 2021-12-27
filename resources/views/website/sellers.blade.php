@@ -135,6 +135,13 @@
                                                 <option value="">@lang('Select governorate first')</option>
                                         </select>
                                     </div> <!-- end .item -->
+                                    <div class="item form-group">
+                                        <label class="search-label">@lang('Search by name')</label>
+                                        <span class="text-sm text-white ">@lang('Not required')</span>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="sellername"  value="{{ app('request')->input('sellername') }}" placeholder="@lang('Search by name')">
+                                        </div>
+                                    </div> <!-- end .item -->
                                 </div>
                                 <div class="col-md-8 col-xs-12">
                                     <div class="row brand">
