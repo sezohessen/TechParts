@@ -37,6 +37,7 @@ class SellersController extends Controller
                 'brand_id'          => $Request->brand_id,
                 'governorate_id'    => $Request->governorate_id,
                 'city_id'           => $Request->city_id,
+                'sellername'        => $Request->sellername
             ]
         );
         return view('website.sellers',compact('sellers','brands','governorates','capacities','Classes'));
