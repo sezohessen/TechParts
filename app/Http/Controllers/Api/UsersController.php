@@ -35,9 +35,11 @@ class UsersController extends Controller
             'email'             => 'required|string|email|max:255|unique:users',
             'phone'             => 'required|string|digits:11|unique:users',
             'whats_app'         => 'nullable|string|digits:11|unique:users,whats_app',
-            'password'          => 'required|string|min:8'
+            'password'          => 'required|string|min:8',
+            'provider'          => 'required'
         );
         $validate = Validator::make($request->all(), $rules);
+       // Return errors
         if($validate->fails())
         {
             return $validate->errors();
@@ -51,8 +53,16 @@ class UsersController extends Controller
         $User->whats_app  = $request->whats_app;
 
         // Password
-        $UserPassword     = Hash::make($request->password);
-        $User->password   = $UserPassword;
+        $User->password     = Hash::make($request->password);
+        // Account type
+        // if (isset($data['provider'])) {
+        //     if ($data['provider'] == 'seller') {
+        //         $provider = 'seller';
+        //     }
+        //     unset($data['provider']);
+        // }else {
+        //     $provider = 'user';
+        // }
 
         $Result = $User->save();
         if($Result)
