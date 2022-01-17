@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\SellerAccountController;
 use App\Http\Controllers\Api\SellerController;
 use App\Http\Controllers\Api\UsersController;
 /*
@@ -21,6 +22,8 @@ Route::prefix('v1')->group(function() {
     // Public Api Routes
     // Get Users
     Route::get('/users',[UsersController::class,'index']);
+    // Get Sellers
+    Route::get('/sellers',[SellerController::class,'index']);
     // Get One user
     Route::get('/show-user/{User}',[UsersController::class,'show']);
     // Search for a user
@@ -42,7 +45,11 @@ Route::prefix('v1')->group(function() {
         Route::post('/logout',[AuthController::class,'logout']);
 
         // Seller Panel
-        Route::post('/addCarModel',[SellerController::class,'addCarModel']);
+        Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
+        // Route::post('/addCarModel',[SellerController::class,'addCarModel']);
+        Route::get('/getAuth', function () {
+            return auth()->user();
+        });
 
     });
 

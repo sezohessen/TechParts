@@ -17,7 +17,7 @@
 
 <?php
     $lat=!empty(old("lat"))?old("lat"):($seller->lat ? $seller->lat : ((!$currentUserInfo) ? 30.033333: $currentUserInfo->latitude ));
-    $long=!empty(old("long"))?old("long"):($seller->long ? $seller->long : ((!$currentUserInfo) ? 31.233334m : $currentUserInfo->longitude) );
+    $long=!empty(old("long"))?old("long"):($seller->long ? $seller->long : ((!$currentUserInfo) ? 31.233334 : $currentUserInfo->longitude) );
 ?>
     <div class="card card-custom">
         <div class="card-header">
