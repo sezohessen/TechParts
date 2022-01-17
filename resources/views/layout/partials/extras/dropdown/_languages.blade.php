@@ -14,7 +14,7 @@
     <li class="navi-item">
         <a href="{{url('/lang/ar')}}" class="navi-link @if (App::isLocale('ar'))  active  @endif" href="{{url('/ar')}}">
             <span class="mr-3 symbol symbol-20">
-                <img src="{{ asset('media/svg/flags/133-saudi-arabia.svg') }}" alt=""/>
+                <img src="{{ asset('media/svg/flags/158-egypt.svg') }}" alt=""/>
             </span>
             <span class="navi-text">Arabic</span>
         </a>

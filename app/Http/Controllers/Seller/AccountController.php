@@ -20,7 +20,7 @@ class AccountController extends Controller
         $governorates       = Governorate::all();
         $brands             = CarMaker::all();
         $car_makers_selected= BrandSeller::where('seller_id',$seller->id)->get();
-        $currentUserInfo    = Location::get($request->ip());
+        $currentUserInfo    = Location::get(request()->ip());
         $SelectedCarMakers = [];
         foreach($car_makers_selected as $carMaker)$SelectedCarMakers[] = $carMaker->brand_id;
         return view('SellerDashboard.MyAccount.edit', compact('page_title', 'page_description','seller',
@@ -46,19 +46,27 @@ class AccountController extends Controller
         foreach($SellerBrands as $SellerBrand){
             $SelectedCarMaker[] = $SellerBrand->brand_id;
         }
-        $NeedToBeDeleted = array_diff($SelectedCarMaker,$request->specialty_id);
-        $NeedToBeCreated = array_diff($request->specialty_id,$SelectedCarMaker);
-        //Get car_id Array to Agency Car , (Create New)
-        foreach ($NeedToBeCreated as $CarMaker_id){
-            $credentials    = BrandSeller::credentials($CarMaker_id,$id);
-            $Brand          = BrandSeller::create($credentials);
-        }
-        //Delete Removed Selected
-        foreach ($NeedToBeDeleted as $CarMaker_id){
-            $Brand      = BrandSeller::where([
-                ['brand_id',$CarMaker_id],
-                ['seller_id',$id]
-            ])->delete();
+        // Edit
+        // dd($request->specialty_id);
+        if(!$request->specialty_id)
+        {
+            BrandSeller::where('seller_id',$id)->delete();
+        } else {
+            $NeedToBeDeleted = array_diff($SelectedCarMaker,$request->specialty_id);
+                    //Delete Removed Selected
+            foreach ($NeedToBeDeleted as $CarMaker_id){
+                $Brand      = BrandSeller::where([
+                    ['brand_id',$CarMaker_id],
+                    ['seller_id',$id]
+                ])->delete();
+            }
+        
+            $NeedToBeCreated = array_diff($request->specialty_id,$SelectedCarMaker);
+            //Get car_id Array to Agency Car , (Create New)
+            foreach ($NeedToBeCreated as $CarMaker_id){
+                $credentials    = BrandSeller::credentials($CarMaker_id,$id);
+                $Brand          = BrandSeller::create($credentials);
+            }
         }
         session()->flash('updated',__("Changes has been Updated successfully"));
         return redirect()->route("seller.index");

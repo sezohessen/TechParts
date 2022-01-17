@@ -56,16 +56,18 @@
                                         <label for="car" class="search-label">@lang('By car model')</label>
                                     </div>
                                     <div class="col-md-3 col-xs-12">
-                                        <div class="item form-group">
+                                        <div class="item form-group models">
                                             <label class="text-white">@lang('Brand')</label>
-                                            <select class="form-control" name="carMaker" id="maker" data-live-search="true">
+                                            <select class="form-control selectpicker" name="carMaker" id="maker" data-live-search="true">
                                                 <option value="">@lang('Select Brand')</option>
                                                 @foreach ($brands as $brand)
                                                     <option value="{{ $brand->id }}"
                                                         @if (request()->get('carMaker')&& $brand->id==request()->get('carMaker'))
                                                             {{ 'selected' }}
                                                         @endif
-                                                        >{{ $brand->name }}</option>
+                                                        data-content="
+                                                        <span>{{$brand->name}}</span> <img src='{{url('img/CarMakers/'.$brand->logo->name)}}'  class='img-thumbnail' width='35' height='35'>"
+                                                        ></option>
                                                 @endforeach
                                             </select>
                                         </div> <!-- end .item -->
@@ -73,7 +75,7 @@
                                     <div class="col-md-3 col-xs-12">
                                         <div class="item form-group">
                                             <label class="text-white">@lang('Model')</label>
-                                            <select class="form-control" name="carModel" id="models" data-live-search="true">
+                                            <select class="form-control selectpicker" name="carModel" id="models" data-live-search="true">
                                                 <option value="" >@lang('Select brand first')</option>
                                             </select>
                                         </div>
@@ -81,7 +83,7 @@
                                     <div class="col-md-3 col-xs-12">
                                         <div class="item form-group">
                                             <label class="text-white">@lang('Year')</label>
-                                            <select class="form-control" name="carYear" id="year" data-live-search="true">
+                                            <select class="form-control selectpicker" name="carYear" id="year" data-live-search="true">
                                                 <option value="" >@lang('Select Model first')</option>
                                             </select>
                                         </div>
@@ -89,7 +91,7 @@
                                     <div class="col-md-3 col-xs-12">
                                         <div class="item form-group">
                                             <label class="text-white">@lang('Car Capacity')</label>
-                                            <select class="form-control" id="carCapacity"
+                                            <select class="form-control selectpicker" id="carCapacity" data-live-search="true"
                                                 name="carCapacity" >
                                                 <option value="" >@lang('Select Car Capacity')</option>
                                                 @foreach ($capacities as $capacity)
@@ -141,6 +143,13 @@
                                             name="city_id" >
                                                 <option value="">@lang('Select governorate first')</option>
                                         </select>
+                                    </div> <!-- end .item -->
+                                    <div class="item form-group">
+                                        <label class="search-label">@lang('Search by name')</label>
+                                        <span class="text-sm text-white ">@lang('Not required')</span>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="sellername"   placeholder="@lang('Search by name')">
+                                        </div>
                                     </div> <!-- end .item -->
                                 </div>
                                 <div class="col-md-8 col-xs-12">
@@ -327,6 +336,7 @@
                 }else{
                     $('#year').append(`<option value="">{{__("No Results")}}</option>`)
                 }
+                $("#year").selectpicker('refresh');
             },
         });
     }
@@ -345,6 +355,7 @@
                 }else{
                     $('#models').append(`<option value="">{{__("No Results")}}</option>`)
                 }
+                $("#models").selectpicker('refresh');
             },
         });
     }
@@ -363,6 +374,7 @@
             url: '/available_cities/'+id,
             success: data => {
                 if(data.cities){
+                    $('#city').append(`<option value="" >@lang('All')</option>`)
                     data.cities.forEach(city =>
                     $('#city').append(`<option value="${city.id}" ${(old_city==city.id) ? "selected" : "" } >${city.title}</option>`))
                 }else{
@@ -378,6 +390,7 @@
             url: '/available_cities/'+id,
             success: data => {
                 if(data.cities){
+                    $('#city').append(`<option value="" >@lang('All')</option>`)
                     data.cities.forEach(city =>
                     $('#city').append(`<option value="${city.id}" ${(old_city==city.id) ? "selected" : "" }> ${city.title_ar}</option>`))
                 }else{

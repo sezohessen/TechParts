@@ -68,7 +68,7 @@
 "SERVICES": "الخدمات",
 "Our Services": "خدمتنا",
 "See Project": "شاهد",
-"All": "كل المشاريع",
+"All": "الكل",
 "Not Found": "غير متوفر",
 "Oh no": "انتبه",
 "Page Expired": "الصفحة منتهية الصلاحية",
@@ -889,7 +889,11 @@
 "Rate me":"قيمني",
 "Top Sellers":"افضل التجار",
 "Website":"الموقع",
+"Select car classification":"اختر تصنيف السيارة",
+"Brand Class":"تصنيف الشركة",
 "Message Has Been Send successfully":"تم إرسال الرسالة بنجاح",
 "Created at":"أنشئ في",
-"Updated at":"تم التحديث في"
+"Updated at":"تم التحديث في",
+"A website that provide easy access to auto parts companies and stores.":"موقع إلكتروني يوفر وصولاً سهلاً لشركات ومتاجر قطع غيار السيارات.",
+"Search by name":"ابحث بالاسم"
 }
