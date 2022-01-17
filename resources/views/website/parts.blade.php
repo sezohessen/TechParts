@@ -148,7 +148,11 @@
                                         <label class="search-label">@lang('Search by name')</label>
                                         <span class="text-sm text-white ">@lang('Not required')</span>
                                         <div class="form-group">
+<<<<<<< HEAD
                                             <input type="text" class="form-control" name="sellername"   placeholder="@lang('Search by name')">
+=======
+                                            <input type="text" class="form-control" name="sellername"  placeholder="@lang('Search by name')">
+>>>>>>> 2b0e8de09c4e5075dca4dff49917321afc93d3b6
                                         </div>
                                     </div> <!-- end .item -->
                                 </div>
@@ -389,6 +393,7 @@
         $.ajax({
             url: '/available_cities/'+id,
             success: data => {
+                $('#city').append(`<option value="" >@lang('All')</option>`)
                 if(data.cities){
                     $('#city').append(`<option value="" >@lang('All')</option>`)
                     data.cities.forEach(city =>

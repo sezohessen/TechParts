@@ -17,7 +17,11 @@ class SellersController extends Controller
         $governorates   = Governorate::all();
         $capacities     = CarCapacity::all();
         $Classes        = CarClassification::limit(3)->get();
+<<<<<<< HEAD
         $sellers = Seller::where('governorate_id' , '!=' , null);
+=======
+        $sellers        = Seller::where('governorate_id' , '!=' , null);
+>>>>>>> 2b0e8de09c4e5075dca4dff49917321afc93d3b6
         if(isset($Request->sellername)){
             $sellers->whereHas('user',function($q) use($Request){
                 $q->where('users.first_name','like','%'.$Request->sellername.'%')
