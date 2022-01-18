@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UsersResource;
 use App\Http\Requests\UsersStoreRequest;
+use App\Http\Requests\UsersUpdateRequest;
 
 class ToPartUsersController extends Controller
 {
@@ -53,9 +54,9 @@ class ToPartUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $User)
+    public function show(User $user)
     {
-        return new UsersResource($User);
+        return new UsersResource($user);
 
     }
 
@@ -66,9 +67,11 @@ class ToPartUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersUpdateRequest $request,User $user)
     {
-        //
+        $credentials = User::UpdateCredentials($request);
+        $user->update($credentials);
+        return new UsersResource($user);
     }
 
     /**
@@ -77,8 +80,9 @@ class ToPartUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return ['Result' => 'Data Has been deleted'];
     }
 }
