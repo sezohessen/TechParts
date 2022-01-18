@@ -4,21 +4,23 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UsersResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class UsersController extends Controller
+class OldUsersController extends Controller
 {
     public function index()
     {
-        return User::all();
+        $User = User::get();
+        return UsersResource::collection($User);
     }
 
-    public function show(User $User, Request $request)
+    public function show(User $User)
     {
-            return $User;
+        return new UsersResource($User);
     }
 
     public function search($name)
