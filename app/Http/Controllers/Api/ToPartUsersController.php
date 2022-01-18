@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UsersStoreRequest;
-use App\Http\Resources\UsersResource;
 use App\Models\User;
+use App\Models\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UsersResource;
+use App\Http\Requests\UsersStoreRequest;
 
 class ToPartUsersController extends Controller
 {
@@ -27,9 +29,21 @@ class ToPartUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(UsersStoreRequest $request)
     {
-        $User  =   User::create($request->all());
+        $credentials = User::credentials($request);
+        $User = User::create($credentials);
+        // Set Role
+        if (isset($request->provider)) {
+            if($request->provider == User::SellerRole)$provider = User::SellerRole;
+            else $provider = User::UserRole;
+            $User->attachRole($provider);
+            if($User->hasRole(User::SellerRole)){
+                $isExist    = Seller::where('user_id',$User->id)->first();
+                if(!$isExist)DB::table('sellers')->insert(['user_id' => $User->id,'created_at'=>now(),'updated_at'=>now()]);
+            }
+        }
         return new UsersResource($User);
     }
 
@@ -41,7 +55,6 @@ class ToPartUsersController extends Controller
      */
     public function show(User $User)
     {
-        // return UsersResource::collection($User);
         return new UsersResource($User);
 
     }
