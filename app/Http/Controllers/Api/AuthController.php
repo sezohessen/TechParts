@@ -8,26 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRegisterRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(UserRegisterRequest $request)
     {
-         // Validation
-         $rules = array(
-            'first_name'        => 'required|string|min:4|max:255',
-            'last_name'         => 'required|string|min:4|max:255',
-            'email'             => 'required|string|email|max:255|unique:users,email',
-            'password'          => 'required|string|min:4|max:100|',
-            'provider'          => 'required'
-            );
-            $validate = Validator::make($request->all(), $rules);
-            if($validate->fails())
-            {
-                return $validate->errors();
-            }
             // Create user
             $user = User::create([
                 'first_name'     => $request['first_name'],
