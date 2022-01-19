@@ -35,12 +35,12 @@ class AuthController extends Controller
                 'email'          => $request['email'],
                 'password'       => bcrypt($request['password'])
             ]);
-                if ($request['provider'] == 'seller') {
-                    $provider = 'seller';
-                } else {
+            if ($request['provider'] == 'seller') {
+                $provider = 'seller';
+            } else {
                 $provider = 'user';
-                }
-                // Give Role
+            }
+            // Give Role
             $user->attachRole($provider);
             if($user->hasRole(User::SellerRole)){
                 $isExist    = Seller::where('user_id',$user->id)->first();

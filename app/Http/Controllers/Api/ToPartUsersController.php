@@ -34,18 +34,24 @@ class ToPartUsersController extends Controller
     public function store(UsersStoreRequest $request)
     {
         $credentials = User::credentials($request);
-        $User = User::create($credentials);
+        $user = User::create($credentials);
         // Set Role
-        if (isset($request->provider)) {
-            if($request->provider == User::SellerRole)$provider = User::SellerRole;
-            else $provider = User::UserRole;
-            $User->attachRole($provider);
-            if($User->hasRole(User::SellerRole)){
-                $isExist    = Seller::where('user_id',$User->id)->first();
-                if(!$isExist)DB::table('sellers')->insert(['user_id' => $User->id,'created_at'=>now(),'updated_at'=>now()]);
-            }
+        if ($request['provider'] == 'seller') {
+            $provider = 'seller';
+        } else {
+            $provider = 'user';
         }
-        return new UsersResource($User);
+        // Give Role
+        $user->attachRole($provider);
+        if($user->hasRole(User::SellerRole)){
+            $isExist    = Seller::where('user_id',$user->id)->first();
+            if(!$isExist)DB::table('sellers')->insert([
+                'user_id'   => $user->id,
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ]);
+        }
+        return new UsersResource($user);
     }
 
     /**
@@ -59,7 +65,7 @@ class ToPartUsersController extends Controller
         return new UsersResource($user);
 
     }
-    
+
     public function search($name)
     {
         return User::where('first_name', 'like', '%'.$name.'%')->get();
