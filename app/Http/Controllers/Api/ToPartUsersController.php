@@ -59,7 +59,11 @@ class ToPartUsersController extends Controller
         return new UsersResource($user);
 
     }
-
+    
+    public function search($name)
+    {
+        return User::where('first_name', 'like', '%'.$name.'%')->get();
+    }
     /**
      * Update the specified resource in storage.
      *

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\SellerAccountController;
 use App\Http\Controllers\Api\SellerController;
+use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,8 @@ use App\Http\Controllers\Api\SellerController;
 
 Route::namespace('Api')->group(function () {
     Route::apiResource('users', ToPartUsersController::class);
+    // Search for a user
+    Route::get('/search-user/{name}',[SearchForUser::class,'search']);
 });
 
 
