@@ -21,7 +21,6 @@ class SellerResource extends JsonResource
             'background'  => site_base() . $this->background->base    . $this->background->name,
             'avatar'      => site_base() . $this->sellerAvatar->base  . $this->sellerAvatar->name,
             'brands'      => $this->brands
-
         ];
     }
 }

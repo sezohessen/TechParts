@@ -21,18 +21,24 @@ class SellerAccountController extends Controller
         foreach($SellerBrands as $SellerBrand){
             $SelectedCarMaker[] = $SellerBrand->brand_id;
         }
-        // check if the brand ID already exits & check if user send more than one letter 
-        $NeedToBeCreated = array_search(substr($request->brand,0,1),$SelectedCarMaker);
-        if($NeedToBeCreated === false)
+        // check if the brand ID already exits & check if user send more than one letter
+        // $NeedToBeCreated = array_search($request->brand,$SelectedCarMaker);
+        $Brands     = $request->brand;
+        $arrayBrands = explode(',',$Brands);
+        $NeedToBeCreated = array_diff($arrayBrands,$SelectedCarMaker);
+        if($NeedToBeCreated)
         {
-            BrandSeller::where('seller_id',$seller->id)->insert([
-                'brand_id'      => substr($request->brand,0,1),
-                'seller_id'     => $seller->id,
-                'created_at'    => now(),
-                'updated_at'    => now()
-            ]);
+            foreach ($NeedToBeCreated as $brand){
+                BrandSeller::where('seller_id',$seller->id)->insert([
+                    'brand_id'      => $brand,
+                    'seller_id'     => $seller->id,
+                    'created_at'    => now(),
+                    'updated_at'    => now()
+                ]);
+            }
+
         } else {
-            return response()->json(['errors' => 'Brand already exist'],500);
+            return response()->json(['error' => 'Brand/s already exist'],500);
         }
 
         return new SellerResource($seller);
