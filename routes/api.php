@@ -47,13 +47,16 @@ Route::prefix('v1')->group(function() {
     Route::post('/register',[AuthController::class,'register']);
         // Register to have a token
     Route::post('/login',[AuthController::class,'login']);
-        // Protected Api Routes
+        ////////////////////////////
+        // Protected Api Routes////
+        //////////////////////////
     Route::group(['middleware' => ['auth:sanctum']] , function () {
         // Logout and destroy Token
         Route::post('/logout',[AuthController::class,'logout']);
 
         // Seller Panel
         Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
+        Route::delete('/deleteBrand',[SellerAccountController::class,'deleteBrand']);
         // Route::post('/addCarModel',[SellerController::class,'addCarModel']);
         Route::get('/getAuth', function () {
             return auth()->user();

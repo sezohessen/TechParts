@@ -18,8 +18,8 @@ class SellerResource extends JsonResource
         return [
             'Seller name' => $this->user->full_name,
             'Arabic Desc' => $this->desc_ar,
-            'background'  => $this->background->base    . $this->background->name,
-            'avatar'      => $this->sellerAvatar->base  . $this->sellerAvatar->name,
+            'background'  => site_base() . $this->background->base    . $this->background->name,
+            'avatar'      => site_base() . $this->sellerAvatar->base  . $this->sellerAvatar->name,
             'brands'      => $this->brands
 
         ];

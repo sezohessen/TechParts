@@ -24,8 +24,8 @@ class UsersUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'        => 'nullable|string|min:4|max:255',
-            'last_name'         => 'nullable|string|min:4|max:255',
+            'first_name'        => 'required|string|min:4|max:255',
+            'last_name'         => 'required|string|min:4|max:255',
             'phone'             => 'nullable|string|digits:11|unique:users',
             'whats_app'         => 'nullable|string|digits:11|unique:users,whats_app',
             'password'          => 'nullable|string|min:8',

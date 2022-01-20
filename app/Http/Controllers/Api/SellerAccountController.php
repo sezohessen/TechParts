@@ -15,17 +15,18 @@ class SellerAccountController extends Controller
     {
         $seller     = Seller::where('user_id',Auth()->user()->id)->first();
         $seller->update(Seller::credentials($request,$seller));
-        //
+        // Add brand
         $SellerBrands     = BrandSeller::where('seller_id',$seller->id)->get();
         $SelectedCarMaker = [];
         foreach($SellerBrands as $SellerBrand){
             $SelectedCarMaker[] = $SellerBrand->brand_id;
         }
-        $NeedToBeCreated = array_search($request->brand,$SelectedCarMaker);
+        // check if the brand ID already exits & check if user send more than one letter 
+        $NeedToBeCreated = array_search(substr($request->brand,0,1),$SelectedCarMaker);
         if($NeedToBeCreated === false)
         {
             BrandSeller::where('seller_id',$seller->id)->insert([
-                'brand_id'      => $request->brand,
+                'brand_id'      => substr($request->brand,0,1),
                 'seller_id'     => $seller->id,
                 'created_at'    => now(),
                 'updated_at'    => now()
@@ -34,8 +35,17 @@ class SellerAccountController extends Controller
             return response()->json(['errors' => 'Brand already exist'],500);
         }
 
-
         return new SellerResource($seller);
+    }
 
+    public function deleteBrand(Request $request)
+    {
+        $seller     = Seller::where('user_id',Auth()->user()->id)->first();
+        $SellerBrands     = BrandSeller::where('seller_id',$seller->id)->get();
+        foreach($SellerBrands as $SellerBrand){
+            $SelectedCarMaker[] = $SellerBrand->brand_id;
+        }
+        $NeedToBeDeleted = array_search($request->brand,$SelectedCarMaker);
+        dd($NeedToBeDeleted);
     }
 }
