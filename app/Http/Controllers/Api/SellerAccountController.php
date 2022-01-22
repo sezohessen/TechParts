@@ -7,10 +7,17 @@ use App\Models\BrandSeller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SellerResource;
+use App\Http\Resources\AllSellersResource;
 use App\Http\Requests\SellerUpdateRequest;
 
 class SellerAccountController extends Controller
 {
+    public function index()
+    {
+
+        return new AllSellersResource(Seller::all());
+    }
+
     public function saveSellerInfo(SellerUpdateRequest $request)
     {
         $seller     = Seller::where('user_id',Auth()->user()->id)->first();
@@ -48,10 +55,21 @@ class SellerAccountController extends Controller
     {
         $seller     = Seller::where('user_id',Auth()->user()->id)->first();
         $SellerBrands     = BrandSeller::where('seller_id',$seller->id)->get();
+        $SelectedCarMaker = [];
         foreach($SellerBrands as $SellerBrand){
             $SelectedCarMaker[] = $SellerBrand->brand_id;
         }
-        $NeedToBeDeleted = array_search($request->brand,$SelectedCarMaker);
+        $Brands     = $request->brand;
+        $arrayBrands = explode(',',$Brands);
+        $NeedToBeDeleted = array_diff($arrayBrands,$request->specialty_id);
         dd($NeedToBeDeleted);
+        //Delete Removed Selected
+        foreach ($NeedToBeDeleted as $CarMaker_id){
+            $Brand      = BrandSeller::where([
+                ['brand_id',$CarMaker_id],
+                ['seller_id',$seller->id]
+            ])->delete();
+        }
+
     }
 }

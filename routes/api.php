@@ -20,7 +20,7 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
 
 
 // Protected all routes with Api password (in env)
-Route::group(['middleware' => ['apiPass']] , function () {
+// Route::group(['middleware' => ['apiPass']] , function () {
     Route::prefix('v1')->group( function() {
         // Public Api Routes
         Route::namespace('Api')->group(function () {
@@ -39,6 +39,7 @@ Route::group(['middleware' => ['apiPass']] , function () {
             // Logout and destroy Token
             Route::post('/logout',[AuthController::class,'logout']);
             // Seller Panel
+            Route::get('/allSellers',[SellerAccountController::class,'index']);
             Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
             Route::delete('/deleteBrand',[SellerAccountController::class,'deleteBrand']);
             // Route::post('/addCarModel',[SellerController::class,'addCarModel']);
@@ -47,7 +48,7 @@ Route::group(['middleware' => ['apiPass']] , function () {
             });
         });
     });
-});
+// });
 
 
 
