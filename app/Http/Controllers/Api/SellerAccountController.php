@@ -7,15 +7,14 @@ use App\Models\BrandSeller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SellerResource;
-use App\Http\Resources\AllSellersResource;
+use App\Http\Resources\AllSellersCollection;
 use App\Http\Requests\SellerUpdateRequest;
 
 class SellerAccountController extends Controller
 {
     public function index()
     {
-
-        return new AllSellersResource(Seller::all());
+        return new AllSellersCollection(Seller::all());
     }
 
     public function saveSellerInfo(SellerUpdateRequest $request)
