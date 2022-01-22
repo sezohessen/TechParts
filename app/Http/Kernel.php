@@ -73,6 +73,6 @@ class Kernel extends HttpKernel
         'ability' => \Laratrust\Middleware\LaratrustAbility::class,
         // Api auth
         'apiPass' => \App\Http\Middleware\CheckApiPass::class,
-
+        'ChangeLang' => \App\Http\Middleware\ChangeLang::class,
     ];
 }

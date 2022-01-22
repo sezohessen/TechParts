@@ -7,14 +7,15 @@ use App\Models\BrandSeller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SellerResource;
-use App\Http\Resources\AllSellersCollection;
+use App\Http\Resources\AllSellersResource;
 use App\Http\Requests\SellerUpdateRequest;
 
 class SellerAccountController extends Controller
 {
     public function index()
     {
-        return new AllSellersCollection(Seller::all());
+        $seller = Seller::get();
+        return AllSellersResource::collection($seller);
     }
 
     public function saveSellerInfo(SellerUpdateRequest $request)
@@ -42,9 +43,6 @@ class SellerAccountController extends Controller
                     'updated_at'    => now()
                 ]);
             }
-
-        } else {
-            return response()->json(['error' => 'Brand/s already exist'],500);
         }
 
         return new SellerResource($seller);

@@ -37,7 +37,7 @@ class SellerUpdateRequest extends FormRequest
             'instagram'                => 'nullable',
             'file'                     => 'nullable|max:4096|mimes:doc,dot,docm,docx,dotx,pdf,xlxs,xls,xlsm,xlsb,xltx,txt,rar,zip',
             'specialty_id.*'           => 'required|exists:car_makers,id',
-            'brand'                    => 'required'
+            'brand'                    => 'nullable'
         ];
     }
 }
