@@ -42,7 +42,6 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             Route::get('/allSellers',[SellerAccountController::class,'index']);
             Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
             Route::delete('/deleteBrand',[SellerAccountController::class,'deleteBrand']);
-            // Route::post('/addCarModel',[SellerController::class,'addCarModel']);
             Route::get('/getAuth', function () {
                 return auth()->user();
             });

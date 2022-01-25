@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UsersResource;
+use App\Http\Resources\UserCollection;
 use App\Http\Requests\UsersStoreRequest;
 use App\Http\Requests\UsersUpdateRequest;
 
@@ -20,8 +21,7 @@ class ToPartUsersController extends Controller
      */
     public function index()
     {
-        $User = User::get();
-        return UsersResource::collection($User);
+        return new UserCollection(User::all());
     }
 
     /**
@@ -68,7 +68,8 @@ class ToPartUsersController extends Controller
 
     public function search($name)
     {
-        return User::where('first_name', 'like', '%'.$name.'%')->get();
+        $user = User::where('first_name', 'like', '%'.$name.'%')->get();
+        return  UsersResource::collection($user);
     }
     /**
      * Update the specified resource in storage.

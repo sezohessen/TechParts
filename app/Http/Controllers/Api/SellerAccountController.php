@@ -14,8 +14,7 @@ class SellerAccountController extends Controller
 {
     public function index()
     {
-        $seller = Seller::get();
-        return AllSellersResource::collection($seller);
+        return AllSellersResource::collection(Seller::all());
     }
 
     public function saveSellerInfo(SellerUpdateRequest $request)
