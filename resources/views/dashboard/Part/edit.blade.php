@@ -100,7 +100,7 @@
                             <div class=" col-lg-12 col-md-12 col-sm-12">
                                 <select class="form-control selectpicker {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
                                      name="user_id" id="kt_select2_4" required >
-                                    <option value="{{$part->seller->id}}">{{$part->seller->user->full_name}}</option>
+                                    <option value="{{$part->seller->user->id}}">{{$part->seller->user->full_name}}</option>
                                     @foreach ($sellers as $seller)
                                         <option
                                         @if (old('user_id')==$seller->user_id)
