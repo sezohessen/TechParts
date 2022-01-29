@@ -38,20 +38,23 @@ class Part extends Model
             'part_number'              => 'nullable|string',
             'price'                    => 'nullable|min:1|max:1000000|integer',
             'in_stock'                 => 'nullable|min:0|max:1000000|integer',
-            'car_id'                   => 'required|exists:cars,id',
+            'CarMaker_id'              => 'required|integer|exists:car_makers,id',
+            'CarModel_id'              => 'required|integer|exists:car_models,id',
+            'CarYear_id'               => 'nullable|integer|exists:car_years,id',
+            'CarCapacity_id'           => 'nullable|integer|exists:car_capacities,id',
             'user_id'                  => 'required|exists:users,id',
             'part_img_new.0'           => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize,
             'part_img_new.*'           => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize
         ];
         if($image){
-            $rules['part_img.*']        = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;//Validate all
+            $rules['part_img.*']        = 'nullable|image|m imes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;//Validate all
             $rules['part_img_new.*']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;
             $rules['part_img_new.0']    = 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize;
         }
         if($InSellerDashboard)unset($rules['user_id']);
         return $rules;
     }
-    public static function credentials($request,$userID = NULL)
+    public static function credentials($request,$userID,$CarID)
     {
         $credentials = [
             'name'              => $request->name,
@@ -61,10 +64,10 @@ class Part extends Model
             'part_number'       => $request->part_number,
             'price'             => $request->price,
             'in_stock'          => $request->in_stock,
-            'car_id'            => $request->car_id,
-            'user_id'           => $request->user_id,
+            'car_id'            => $CarID,
+            'user_id'           => $userID,
         ];
-        if($userID)$credentials['user_id'] = Auth()->user()->id;
+        // if($userID)$credentials['user_id'] = Auth()->user()->id;
         return $credentials;
 
     }

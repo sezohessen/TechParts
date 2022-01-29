@@ -12,11 +12,7 @@
         "ext-gd": "*",
         "barryvdh/laravel-snappy": "^0.4.8",
         "doctrine/dbal": "^3.0",
-<<<<<<< HEAD
         "fideloper/proxy": "^4.3",
-=======
-        "fideloper/proxy": "4.3",
->>>>>>> 2b0e8de09c4e5075dca4dff49917321afc93d3b6
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "h4cc/wkhtmltoimage-amd64": "0.12.x",

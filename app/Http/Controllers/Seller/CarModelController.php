@@ -13,8 +13,8 @@ class CarModelController extends Controller
 
     public function create()
     {
-        $page_title         = __("Add Car Model");
-        $page_description   = __("Car Model");
+        $page_title         = __("Add Car Type");
+        $page_description   = __("Car Type");
         $makers             = CarMaker::all();
         return view('SellerDashboard.CarModel.add', compact('page_title', 'page_description',"makers"));
     }

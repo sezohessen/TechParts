@@ -10,23 +10,12 @@ return [
             'root' => true,
             'submenu' => [
                 [
-                    'title' => 'Car Options',
+                    'title' => 'Car Types',
                     'bullet' => 'line',
                     'root' => true,
                     'submenu' => [
                         [
-                            'title' => 'Add A car ',
-                            'page' => "/seller/car/create"
-                        ],
-                    ]
-                ],
-                [
-                    'title' => 'Car Models',
-                    'bullet' => 'line',
-                    'root' => true,
-                    'submenu' => [
-                        [
-                            'title' => 'Add Car Model',
+                            'title' => 'Add Car Type',
                             'page' => "/seller/car/model/create"
                         ],
                     ]

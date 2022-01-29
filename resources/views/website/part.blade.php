@@ -70,19 +70,27 @@
                             <div class="main-car-details">
                                 <div class="clearfix item">
                                     <div class="option"> @lang('Year') </div>
-                                    <div class="option-content"> {{ $part->car->year->year }} </div>
+                                    @if ($part->car->year != null)
+                                        <div class="option-content"> {{ $part->car->year->year }} </div>
+                                    @else
+                                        <div class="option-content">@lang('Not available')</div>
+                                    @endif
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
                                     <div class="option"> @lang("Manufacture") </div>
                                     <div class="option-content">{{ $part->car->make->name }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
-                                    <div class="option"> @lang('Model') </div>
+                                    <div class="option"> @lang('Type') </div>
                                     <div class="option-content">{{ $part->car->model->name }}</div>
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
                                     <div class="option"> @lang('Engine Capacity') </div>
-                                    <div class="option-content">{{ $part->car->capacity->capacity }}</div>
+                                    @if ($part->car->capacity != null)
+                                        <div class="option-content">{{ $part->car->capacity->capacity }}</div>
+                                    @else
+                                        <div class="option-content">@lang('Not available')</div>
+                                    @endif
                                 </div> <!-- end .item -->
                                 <div class="clearfix item">
                                     <div class="option">@lang('Seller')</div>
@@ -129,7 +137,7 @@
                                         </div>
                                         </div>
                                     </div> <!-- end .item -->
-                                    @endif
+                                        @endif
                                 @else
                                 <div class="clearfix mt-10 item">
                                         <div class="option-content">

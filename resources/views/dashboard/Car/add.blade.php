@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                             <label for="model" class="col-form-label  col-sm-12">@lang('Select Car Model')<span class="text-danger">*</span>
+                             <label for="model" class="col-form-label  col-sm-12">@lang('By car type')<span class="text-danger">*</span>
                             </label><br>
                              <div class="col-md-12">
                                 <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
@@ -84,7 +84,7 @@
                             <div class="col-md-12">
                              <select class="form-control {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
                                  name="CarYear_id" required id='year'>
-                                 <option value="">@lang('Select Car Model First')</option>
+                                 <option value="">@lang('By car type First')</option>
                              </select>
                             @error('CarYear_id')
                              <div class="invalid-feedback">{{ $errors->first('CarYear_id') }}</div>
@@ -156,7 +156,7 @@
             url: '/dashboard/car/available_model/'+id,
             success: data => {
                 if(data.models){
-                    $('#models').append(`<option value="" >@lang('Select Car Model')</option>`)
+                    $('#models').append(`<option value="" >@lang('By car type')</option>`)
                     data.models.forEach(models =>
                     $('#models').append(`<option value="${models.id}" ${(old_model==models.id) ? "selected" : "" } >${models.name}</option>`)
                     )

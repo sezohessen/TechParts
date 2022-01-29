@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-md-12 hidden" id="Adv">
                                     <div class="col-xs-12">
-                                        <label for="car" class="search-label">@lang('By car model')</label>
+                                        <label for="car" class="search-label">@lang('By car type')</label>
                                     </div>
                                     <div class="col-md-3 col-xs-12">
                                         <div class="item form-group models">
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-md-3 col-xs-12">
                                         <div class="item form-group">
-                                            <label class="text-white">@lang('Model')</label>
+                                            <label class="text-white">@lang('Type')</label>
                                             <select class="form-control selectpicker" name="carModel" id="models" data-live-search="true">
                                                 <option value="" >@lang('Select brand first')</option>
                                             </select>

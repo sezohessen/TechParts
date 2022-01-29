@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                             <label for="model" class="col-form-label  col-sm-12">@lang('Select Car Model')<span class="text-danger">*</span>
+                             <label for="model" class="col-form-label  col-sm-12">@lang('By car type')<span class="text-danger">*</span>
                             </label><br>
                              <div class=" col-lg-9 col-md-9 col-sm-12">
                                 <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="kt_select2_1"

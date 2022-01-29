@@ -39,7 +39,7 @@ class CarYearController extends Controller
             $credentials    = CarYear::credentials($request);
             $Caryear        = CarYear::create($credentials);
             session()->flash('created',__("Changes has been Created Successfully"));
-            return redirect()->route("seller.car.create");
+            return redirect()->route("seller.index");
         }
     }
 
