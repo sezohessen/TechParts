@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Traits;
 use App\Models\User;
 use App\Models\Seller;
+use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -11,9 +13,12 @@ use App\Http\Resources\UsersResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\UsersStoreRequest;
 use App\Http\Requests\UsersUpdateRequest;
+use Exception;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ToPartUsersController extends Controller
 {
+    use GeneralTrait;
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +26,8 @@ class ToPartUsersController extends Controller
      */
     public function index()
     {
-        return new UserCollection(User::all());
+        return $this->returnData('data',new UserCollection(User::all()),'All users');
+
     }
 
     /**
@@ -33,6 +39,7 @@ class ToPartUsersController extends Controller
 
     public function store(UsersStoreRequest $request)
     {
+
         $credentials = User::credentials($request);
         $user = User::create($credentials);
         // Set Role
@@ -51,7 +58,8 @@ class ToPartUsersController extends Controller
                 'updated_at'=>now()
             ]);
         }
-        return new UsersResource($user);
+
+        return $this->returnData('data',new UsersResource($user),'Account has been created');
     }
 
     /**
@@ -60,9 +68,15 @@ class ToPartUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return new UsersResource($user);
+        $user = User::where('id' , $id)->first();
+        if($user)
+        {
+            return $this->returnData('data',new UsersResource($user),'User account');
+        } else {
+            return $this->returnFailData('data',null,'Account not found!');
+        }
 
     }
 
