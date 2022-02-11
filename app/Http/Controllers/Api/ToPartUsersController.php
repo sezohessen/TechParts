@@ -83,7 +83,7 @@ class ToPartUsersController extends Controller
     public function search($name)
     {
         $user = User::where('first_name', 'like', '%'.$name.'%')->get();
-        return  UsersResource::collection($user);
+        return $this->returnData('data', UsersResource::collection($user),'Users account by search');
     }
     /**
      * Update the specified resource in storage.
@@ -96,7 +96,7 @@ class ToPartUsersController extends Controller
     {
         $credentials = User::UpdateCredentials($request);
         $user->update($credentials);
-        return new UsersResource($user);
+        return $this->returnData('data', new UsersResource($user),'Account has been updated');
     }
 
     /**
@@ -105,9 +105,16 @@ class ToPartUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
-        return ['Result' => 'Data Has been deleted'];
+        $user = User::where('id',$id)->first();
+        if($user == true)
+        {
+            $user->delete();
+            return $this->returnSuccess('Account has been deleted');
+        } else {
+            return $this->errorMessage('Account not found with the ID ' . $id);
+        }
+
     }
 }

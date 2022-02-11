@@ -98,6 +98,7 @@ class User extends Authenticatable
         $credentials = [
             'first_name'            => $request->first_name,
             'last_name'             => $request->last_name,
+            'email'                 => $request->email,
             'phone'                 => $request->phone,
             'whats_app'             => $request->whats_app,
             'password'              => Hash::make($request->password)

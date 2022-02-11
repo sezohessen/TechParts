@@ -26,8 +26,9 @@ class UsersUpdateRequest extends FormRequest
         return [
             'first_name'        => 'required|string|min:4|max:255',
             'last_name'         => 'required|string|min:4|max:255',
-            'phone'             => 'nullable|string|digits:11|unique:users',
-            'whats_app'         => 'nullable|string|digits:11|unique:users,whats_app',
+            'email'             => 'required|string|email|max:255',
+            'phone'             => 'nullable|string|digits:11|unique:users,phone,'.$this->user->id,
+            'whats_app'         => 'nullable|string|digits:11|unique:users,whats_app,'.$this->user->id,
             'password'          => 'nullable|string|min:8',
         ];
     }
