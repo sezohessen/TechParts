@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\FavController;
 use App\Http\Controllers\Api\SellerAccountController;
 use App\Http\Controllers\Api\SellerController;
 use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
@@ -42,9 +43,14 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             Route::get('/allSellers',[SellerAccountController::class,'index']);
             Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
             Route::delete('/deleteBrand',[SellerAccountController::class,'deleteBrand']);
+
             Route::get('/getAuth', function () {
                 return auth()->user();
             });
+            // User fav
+            Route::get('/userFav',[FavController::class,'showUserFav']);
+            Route::post('/addToFav',[FavController::class,'AddToFav']);
+            Route::post('/deleteFav',[FavController::class,'deleteFav']);
         });
     });
 // });
