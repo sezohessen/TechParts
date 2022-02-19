@@ -23,6 +23,13 @@ class CarMaker extends Model
     public function Classification(){
         return $this->belongsTo(CarClassification::class,'class_id','id');
     }
+
+    // Api edit
+    public function carMaker()
+    {
+        return $this->hasMany(CarModel::class,'CarMaker_id','id');
+    }
+
     public static function rules($request,$id=NULL)
     {
         $rules = [

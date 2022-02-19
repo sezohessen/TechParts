@@ -29,4 +29,9 @@ class CarClassification extends Model
         ];
         return $credentials;
     }
+
+    // Api edit
+    public function brand(){
+        return $this->hasMany(CarMaker::class,'class_id','id');
+    }
 }

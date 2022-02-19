@@ -58,6 +58,8 @@ class Seller extends Model
             'instagram'         => $request->instagram,
             'desc'              => $request->desc,
             'desc_ar'           => $request->desc_ar,
+
+
         ];
         // Store file
         if ($request->file('file')) {

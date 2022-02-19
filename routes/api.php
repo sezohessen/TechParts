@@ -3,9 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CarController;
+use App\Http\Controllers\Api\CarModlesController;
 use App\Http\Controllers\Api\FavController;
 use App\Http\Controllers\Api\SellerAccountController;
 use App\Http\Controllers\Api\SellerController;
+use App\Http\Controllers\Api\SellersController;
 use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
 
 /*
@@ -33,6 +36,13 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
         Route::post('/register',[AuthController::class,'register']);
             // Register to have a token
         Route::post('/login',[AuthController::class,'login']);
+        // Home page [Website] AKA - Search
+        Route::get('/showCarModels',[CarModlesController::class,'carModles']);
+        Route::get('/partSearch',[CarModlesController::class,'searchForPart']);
+        Route::get('/sellersLocation',[SellersController::class,'SellersLocation']);
+        Route::get('/sellerSearch',[SellersController::class,'searchForSellers']);
+
+
             ////////////////////////////
             // Protected Api Routes////
             //////////////////////////

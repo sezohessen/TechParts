@@ -2,13 +2,12 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserCollection extends ResourceCollection
+class CarYearResource extends JsonResource
 {
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
@@ -17,9 +16,8 @@ class UserCollection extends ResourceCollection
     {
         // return parent::toArray($request);
         return [
-            'users'          => $this->collection,
-            'status'         => true,
-            'msg'            => 'users'
+            'id'        => $this->id,
+            'year'      => $this->year,
         ];
     }
 }

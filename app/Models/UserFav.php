@@ -14,4 +14,9 @@ class UserFav extends Model
         'part_id',
     ];
 
+
+    public function partFav()
+    {
+      return $this->belongsTo(Part::class,'part_id','id');
+    }
 }

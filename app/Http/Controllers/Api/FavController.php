@@ -9,8 +9,9 @@ use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserFavRequest;
-use App\Http\Resources\UserFavCollection;
 use App\Http\Resources\UserFavResource;
+use App\Http\Resources\UserFavCollection;
+use App\Http\Resources\UsersFavCollection;
 
 class FavController extends Controller
 {
@@ -18,8 +19,12 @@ class FavController extends Controller
 
     public function showUserFav()
     {
-        $usersFav = UserFav::where('user_id', auth()->user()->id)->get();
-        return $this->returnData('data', new UserFavCollection($usersFav), 'favorite parts');
+        $usersFav = UserFav::where('user_id', auth()->user()->id)->paginate(10);
+        return UserFavResource::collection($usersFav)
+        ->additional(['status' => [
+            'success' => true,
+            'msg'     => 'user favorite parts'
+        ]]);
     }
 
     public function AddToFav(UserFavRequest $request)
@@ -38,7 +43,9 @@ class FavController extends Controller
                     'user_id' => Auth()->user()->id,
                     'part_id' => $request->part_id]);
                     $addToFavorite->save();
-                return $this->returnData('data',new UserFavResource($addToFavorite),'Part has been added');
+                return (new UserFavResource($addToFavorite))->additional(['status' =>
+                [ 'success' => true , 'msg' => 'part has been added']
+                ]);
             } else {
                 return $this->errorMessage('Part ID ' . $request->part_id . ' Is not found!');
             }

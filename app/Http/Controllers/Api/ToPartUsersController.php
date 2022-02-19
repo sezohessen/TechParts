@@ -26,8 +26,9 @@ class ToPartUsersController extends Controller
      */
     public function index()
     {
-        return $this->returnData('data',new UserCollection(User::all()),'All users');
-
+        return (new UserCollection(User::paginate(10)))->additional(['status' =>
+            [ 'success' => true , 'msg' => 'all users']
+        ]);
     }
 
     /**
@@ -73,7 +74,7 @@ class ToPartUsersController extends Controller
         $user = User::where('id' , $id)->first();
         if($user)
         {
-            return $this->returnData('data',new UsersResource($user),'User account');
+            return $this->returnData('data',new UsersResource($user),'Account has been found');
         } else {
             return $this->returnFailData('data',null,'Account not found!');
         }
@@ -82,8 +83,8 @@ class ToPartUsersController extends Controller
 
     public function search($name)
     {
-        $user = User::where('first_name', 'like', '%'.$name.'%')->get();
-        return $this->returnData('data', UsersResource::collection($user),'Users account by search');
+        $user = User::where('first_name', 'like', '%'.$name.'%')->paginate(10);
+        return  new UserCollection($user);
     }
     /**
      * Update the specified resource in storage.
@@ -113,7 +114,7 @@ class ToPartUsersController extends Controller
             $user->delete();
             return $this->returnSuccess('Account has been deleted');
         } else {
-            return $this->errorMessage('Account not found with the ID ' . $id);
+            return $this->errorMessage('Account not found with the ID of ' . $id);
         }
 
     }

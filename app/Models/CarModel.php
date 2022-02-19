@@ -34,6 +34,11 @@ class CarModel extends Model
 
         return $credentials;
     }
+    // API EDIT
 
+    public function carYear()
+    {
+        return $this->hasMany(CarYear::class,'CarModel_id','id');
+    }
 
 }
