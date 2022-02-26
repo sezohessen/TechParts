@@ -37,9 +37,9 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             // Register to have a token
         Route::post('/login',[AuthController::class,'login']);
         // Home page [Website] AKA - Search
-        Route::get('/showCarModels',[CarModlesController::class,'carModles']);
+        Route::get('/showCarModels',[CarModlesController::class,'carModels']);
         Route::get('/partSearch',[CarModlesController::class,'searchForPart']);
-        Route::get('/sellersLocation',[SellersController::class,'SellersLocation']);
+        Route::get('/sellersLocation',[SellersController::class,'LocationData']);
         Route::get('/sellerSearch',[SellersController::class,'searchForSellers']);
 
 
@@ -53,10 +53,6 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             Route::get('/allSellers',[SellerAccountController::class,'index']);
             Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
             Route::delete('/deleteBrand',[SellerAccountController::class,'deleteBrand']);
-
-            Route::get('/getAuth', function () {
-                return auth()->user();
-            });
             // User fav
             Route::get('/userFav',[FavController::class,'showUserFav']);
             Route::post('/addToFav',[FavController::class,'AddToFav']);

@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Resources\UsersResource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -82,7 +83,7 @@ class AuthController extends Controller
                 'token' => $token
             ];
 
-            return response($response, 201);
+            return new UsersResource($response);
     }
 
     public function logout(Request $request)

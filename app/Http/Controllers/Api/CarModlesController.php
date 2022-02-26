@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PartResource;
 use Illuminate\Support\Facades\Http;
 use App\Http\Resources\CarYearResource;
+use App\Http\Requests\PartSearchRequest;
 use App\Http\Resources\CarMakerResource;
 use App\Http\Resources\CarModelResource;
 use App\Http\Resources\CarCapacityResource;
@@ -24,13 +25,13 @@ class CarModlesController extends Controller
 {
     use GeneralTrait;
 
-    public function carModles()
+    public function carModels()
     {
         return  (CarMakerResource::collection(CarMaker::paginate(10)))->additional(['additional_parameters' =>
         [ 'car_capacity' => CarCapacityResource::collection(CarCapacity::get())  , 'success' => true , 'msg' => 'car_models']]);
     }
 
-    public function searchForPart(Request $request)
+    public function searchForPart(PartSearchRequest $request)
     {
         $parts          = Part::where('active',1);
 
