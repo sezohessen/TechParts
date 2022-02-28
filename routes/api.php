@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\CarModlesController;
+use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\FavController;
 use App\Http\Controllers\Api\SellerAccountController;
 use App\Http\Controllers\Api\SellerController;
@@ -47,6 +48,10 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             // Protected Api Routes////
             //////////////////////////
         Route::group(['middleware' => ['auth:sanctum']] , function () {
+            // get auth
+            Route::get('getAuth', function(){
+                return Auth()->user();
+            });
             // Logout and destroy Token
             Route::post('/logout',[AuthController::class,'logout']);
             // Seller Panel
@@ -57,6 +62,9 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             Route::get('/userFav',[FavController::class,'showUserFav']);
             Route::post('/addToFav',[FavController::class,'AddToFav']);
             Route::post('/deleteFav',[FavController::class,'deleteFav']);
+            // Chat
+            Route::post('/sendMessage',[ChatController::class,'sendMessage']);
+            Route::post('/getMessages',[ChatController::class,'fetchMessages']);
         });
     });
 // });
