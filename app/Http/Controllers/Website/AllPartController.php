@@ -32,7 +32,8 @@ class AllPartController extends Controller
         }
         if (isset($Request->search)){
             $parts->where('name','like','%'.request('search').'%')
-                  ->orWhere('name_ar','like','%'.request('search').'%');
+                  ->orWhere('name_ar','like','%'.request('search').'%')
+                  ->orWhere('part_number', request('search'));
         }
         if(isset($Request->carMaker)){
             $parts->whereHas('car', function($q) use($Request) {

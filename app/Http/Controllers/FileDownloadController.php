@@ -17,6 +17,7 @@ class FileDownloadController extends Controller
         $headers    = array(
             'Content-Type: application/' . $extension[1],
         );
+        
         // dd(1);
         return response()->download($file,$fileName,$headers);
     }

@@ -3994,7 +3994,7 @@ label .required {
 }
 
 .page-title .title {
-    z-index: 40;
+    z-index: 1;
     margin-top: 20px;
 }
 .page-title .inner{

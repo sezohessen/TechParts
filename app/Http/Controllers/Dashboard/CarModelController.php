@@ -16,8 +16,8 @@ class CarModelController extends Controller
      */
     public function index(CarModelDatatable $model)
     {
-        $page_title = __('Car Models');
-        $page_description = __('View Car Models');
+        $page_title = __('Car Types');
+        $page_description = __('View Car Types');
         return  $model->render("dashboard.CarModel.index", compact('page_title', 'page_description'));
     }
 
@@ -28,8 +28,8 @@ class CarModelController extends Controller
      */
     public function create()
     {
-        $page_title         = __("Add Car Model");
-        $page_description   = __("Car Model");
+        $page_title         = __("Add Car Type");
+        $page_description   = __("Car Type");
         $makers             = CarMaker::all();
         return view('dashboard.CarModel.add', compact('page_title', 'page_description',"makers"));
     }
@@ -77,8 +77,8 @@ class CarModelController extends Controller
      */
     public function edit(CarModel $model)
     {
-        $page_title         = __("Edit Car Model");
-        $page_description   = __("Edit Model");
+        $page_title         = __("Edit Car Type");
+        $page_description   = __("Edit Type");
         $makers             = CarMaker::all();
         return view('dashboard.CarModel.edit', compact('page_title', 'page_description','model','makers'));
     }

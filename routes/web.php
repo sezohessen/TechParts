@@ -50,7 +50,8 @@ Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboa
         Route::get("available_year/{id}",'CarController@available_year');
 
     });
-    Route::resource('car', 'CarController');
+    // Remove [Car desgin - mosab edit]
+    // Route::resource('car', 'CarController');
 
     // Users
   //  Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
@@ -125,8 +126,9 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
     Route::resource('/part','PartController');
 
     Route::delete('/part/destroy/all','PartController@multi_delete');
-    Route::get('/car/create','CarController@create')->name('car.create');
-    Route::post('/car/store','CarController@store')->name('car.store');
+    // Disable adding car [Mosa3b Edit]
+    // Route::get('/car/create','CarController@create')->name('car.create');
+    // Route::post('/car/store','CarController@store')->name('car.store');
     Route::prefix('car')->group(function () {
         Route::get('/capacity/create','CarCapacityController@create')->name('capacity.create');
         Route::post('/capacity/store','CarCapacityController@store')->name('capacity.store');

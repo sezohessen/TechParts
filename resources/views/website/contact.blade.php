@@ -1,7 +1,7 @@
 @extends('website.layouts.app')
 
 @section('website')
-<section class="section white" style="margin-top: 40px;">
+<section class="section white" style="margin-top: 70px;">
 			<div class="inner">
 				<div class="container">
 					<div class="row">
