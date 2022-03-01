@@ -47,6 +47,14 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             Route::get('/getAuth', function () {
                 return auth()->user();
             });
+            // Seller Dashboard
+            Route::post('/addCarType',[SellerController::class,'addCarType']);
+            Route::post('/addYear',[SellerController::class,'addYear']);
+            Route::post('/addCapacity',[SellerController::class,'addCapacity']);
+            Route::post('/storePart',[SellerController::class,'addPart']);
+
+
+
             // User fav
             Route::get('/userFav',[FavController::class,'showUserFav']);
             Route::post('/addToFav',[FavController::class,'AddToFav']);
