@@ -8,6 +8,7 @@ use App\Models\CarMaker;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SellerSearchRequest;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\BrandsResource;
 use App\Http\Resources\SellerResource;
@@ -18,13 +19,13 @@ use App\Models\CarClassification;
 
 class SellersController extends Controller
 {
-    public function SellersLocation()
+    public function LocationData()
     {
          return (GovernorateResource::collection(Governorate::all()))->additional(['additional_parameters' =>
          [ 'car_classifications' => CarClassificationResource::collection(CarClassification::all()) , 'success' => true , 'msg' => 'location' ] ]);
     }
 
-    public function searchForSellers(Request $request)
+    public function searchForSellers(SellerSearchRequest $request)
     {
         $sellers = Seller::where('governorate_id' , '!=' , null);
         if($request->governorate_id)$sellers->where('governorate_id',$request->governorate_id);

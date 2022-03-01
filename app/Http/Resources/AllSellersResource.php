@@ -14,24 +14,6 @@ class AllSellersResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
-        if($request->lang == 'en')
-        {
-            return [
-                'first_name'    =>$this->user->first_name,
-                'last_name'     =>$this->user->last_name,
-                'desc'          =>$this->desc,
-                'email'         =>$this->user->email,
-                'created_at'    =>$this->created_at,
-            ];
-        } else {
-            return [
-                'first_name'    =>$this->user->first_name,
-                'last_name'     =>$this->user->last_name,
-                'desc'          =>$this->desc_ar,
-                'email'         =>$this->user->email,
-                'created_at'    =>$this->created_at,
-            ];
-        }
+        return parent::toArray($request);
     }
 }

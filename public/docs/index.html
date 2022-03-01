@@ -1,0 +1,3628 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>ToPart Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var baseUrl = "http:https://topart.services";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-3.23.0.js"></script>
+
+    <script src="../docs/js/theme-default-3.23.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image" />
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                                                                            <ul id="tocify-header-0" class="tocify-header">
+                    <li class="tocify-item level-1" data-unique="introduction">
+                        <a href="#introduction">Introduction</a>
+                    </li>
+                                            
+                                                                    </ul>
+                                                <ul id="tocify-header-1" class="tocify-header">
+                    <li class="tocify-item level-1" data-unique="authenticating-requests">
+                        <a href="#authenticating-requests">Authenticating requests</a>
+                    </li>
+                                            
+                                                </ul>
+                    
+                    <ul id="tocify-header-2" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="endpoints">
+                    <a href="#endpoints">Endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-users">
+                        <a href="#endpoints-GETapi-v1-users">Display a listing of the resource.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-users">
+                        <a href="#endpoints-POSTapi-v1-users">Store a newly created resource in storage.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-users--id-">
+                        <a href="#endpoints-GETapi-v1-users--id-">Display the specified resource.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-users--id-">
+                        <a href="#endpoints-DELETEapi-v1-users--id-">Remove the specified resource from storage.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-search-user--name-">
+                        <a href="#endpoints-GETapi-v1-search-user--name-">GET api/v1/search-user/{name}</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-register">
+                        <a href="#endpoints-POSTapi-v1-register">POST api/v1/register</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-login">
+                        <a href="#endpoints-POSTapi-v1-login">POST api/v1/login</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-showCarModels">
+                        <a href="#endpoints-GETapi-v1-showCarModels">GET api/v1/showCarModels</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-partSearch">
+                        <a href="#endpoints-GETapi-v1-partSearch">GET api/v1/partSearch</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-sellersLocation">
+                        <a href="#endpoints-GETapi-v1-sellersLocation">GET api/v1/sellersLocation</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-sellerSearch">
+                        <a href="#endpoints-GETapi-v1-sellerSearch">GET api/v1/sellerSearch</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-logout">
+                        <a href="#endpoints-POSTapi-v1-logout">POST api/v1/logout</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-allSellers">
+                        <a href="#endpoints-GETapi-v1-allSellers">GET api/v1/allSellers</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-updateSeller">
+                        <a href="#endpoints-POSTapi-v1-updateSeller">POST api/v1/updateSeller</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-deleteBrand">
+                        <a href="#endpoints-DELETEapi-v1-deleteBrand">DELETE api/v1/deleteBrand</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-userFav">
+                        <a href="#endpoints-GETapi-v1-userFav">GET api/v1/userFav</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-addToFav">
+                        <a href="#endpoints-POSTapi-v1-addToFav">POST api/v1/addToFav</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-deleteFav">
+                        <a href="#endpoints-POSTapi-v1-deleteFav">POST api/v1/deleteFav</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+        
+                        
+            </div>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                    </ul>
+        <ul class="toc-footer" id="last-updated">
+        <li>Last updated: February 20 2022</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http:https://topart.services</code></pre>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="endpoints">Endpoints</h1>
+
+    
+
+            <h2 id="endpoints-GETapi-v1-users">Display a listing of the resource.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-users">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/users" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/users"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-users">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;users&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;first_name&quot;: &quot;Superadmin&quot;,
+                &quot;last_name&quot;: &quot;Superadmin&quot;,
+                &quot;email&quot;: &quot;topart383@gmail.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;00000000000&quot;,
+                &quot;whats_app&quot;: &quot;00000000000&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-12-11T18:50:59.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;first_name&quot;: &quot;Seller&quot;,
+                &quot;last_name&quot;: &quot;Seller&quot;,
+                &quot;email&quot;: &quot;seller@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;4849086&quot;,
+                &quot;whats_app&quot;: &quot;0126380291&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            },
+            {
+                &quot;id&quot;: 3,
+                &quot;first_name&quot;: &quot;User&quot;,
+                &quot;last_name&quot;: &quot;User&quot;,
+                &quot;email&quot;: &quot;user@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;5596635&quot;,
+                &quot;whats_app&quot;: &quot;0121795503&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            },
+            {
+                &quot;id&quot;: 4,
+                &quot;first_name&quot;: &quot;Agency0&quot;,
+                &quot;last_name&quot;: &quot;Agency0&quot;,
+                &quot;email&quot;: &quot;agency0@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;28493080&quot;,
+                &quot;whats_app&quot;: &quot;0126073278&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-11-01T07:17:15.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 1
+            },
+            {
+                &quot;id&quot;: 5,
+                &quot;first_name&quot;: &quot;Agency1&quot;,
+                &quot;last_name&quot;: &quot;Agency1&quot;,
+                &quot;email&quot;: &quot;agency1@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;14377621&quot;,
+                &quot;whats_app&quot;: &quot;0123821381&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            },
+            {
+                &quot;id&quot;: 6,
+                &quot;first_name&quot;: &quot;Agency2&quot;,
+                &quot;last_name&quot;: &quot;Agency2&quot;,
+                &quot;email&quot;: &quot;agency2@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;13291362&quot;,
+                &quot;whats_app&quot;: &quot;0127117853&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            },
+            {
+                &quot;id&quot;: 7,
+                &quot;first_name&quot;: &quot;Agency3&quot;,
+                &quot;last_name&quot;: &quot;Agency3&quot;,
+                &quot;email&quot;: &quot;agency3@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;79480533&quot;,
+                &quot;whats_app&quot;: &quot;0127907068&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            },
+            {
+                &quot;id&quot;: 8,
+                &quot;first_name&quot;: &quot;Agency4&quot;,
+                &quot;last_name&quot;: &quot;Agency4&quot;,
+                &quot;email&quot;: &quot;agency4@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;73569564&quot;,
+                &quot;whats_app&quot;: &quot;0127207867&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            },
+            {
+                &quot;id&quot;: 9,
+                &quot;first_name&quot;: &quot;Agency5&quot;,
+                &quot;last_name&quot;: &quot;Agency5&quot;,
+                &quot;email&quot;: &quot;agency5@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;36593635&quot;,
+                &quot;whats_app&quot;: &quot;0125433088&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            },
+            {
+                &quot;id&quot;: 10,
+                &quot;first_name&quot;: &quot;Agency6&quot;,
+                &quot;last_name&quot;: &quot;Agency6&quot;,
+                &quot;email&quot;: &quot;agency6@app.com&quot;,
+                &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;phone&quot;: &quot;51397166&quot;,
+                &quot;whats_app&quot;: &quot;0125976942&quot;,
+                &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+                &quot;avatar&quot;: &quot;avatar.png&quot;,
+                &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+                &quot;dark_mode&quot;: 0,
+                &quot;active_status&quot;: 0
+            }
+        ],
+        &quot;status&quot;: true,
+        &quot;msg&quot;: &quot;users&quot;
+    },
+    &quot;links&quot;: {
+        &quot;first&quot;: &quot;http://localhost/api/v1/users?page=1&quot;,
+        &quot;last&quot;: &quot;http://localhost/api/v1/users?page=7&quot;,
+        &quot;prev&quot;: null,
+        &quot;next&quot;: &quot;http://localhost/api/v1/users?page=2&quot;
+    },
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;from&quot;: 1,
+        &quot;last_page&quot;: 7,
+        &quot;links&quot;: [
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/users?page=1&quot;,
+                &quot;label&quot;: &quot;1&quot;,
+                &quot;active&quot;: true
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/users?page=2&quot;,
+                &quot;label&quot;: &quot;2&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/users?page=3&quot;,
+                &quot;label&quot;: &quot;3&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/users?page=4&quot;,
+                &quot;label&quot;: &quot;4&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/users?page=5&quot;,
+                &quot;label&quot;: &quot;5&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/users?page=6&quot;,
+                &quot;label&quot;: &quot;6&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/users?page=7&quot;,
+                &quot;label&quot;: &quot;7&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/users?page=2&quot;,
+                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
+                &quot;active&quot;: false
+            }
+        ],
+        &quot;path&quot;: &quot;http://localhost/api/v1/users&quot;,
+        &quot;per_page&quot;: 10,
+        &quot;to&quot;: 10,
+        &quot;total&quot;: 66
+    },
+    &quot;status&quot;: {
+        &quot;success&quot;: true,
+        &quot;msg&quot;: &quot;all users&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-users" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-users"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-users"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-users" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-users"></code></pre>
+</span>
+<form id="form-GETapi-v1-users" data-method="GET"
+      data-path="api/v1/users"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-users', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-users"
+                    onclick="tryItOut('GETapi-v1-users');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-users"
+                    onclick="cancelTryOut('GETapi-v1-users');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-users" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/users</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-users">Store a newly created resource in storage.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-users">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/users" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"first_name\": \"eoqnqwnsvhefnimhvqiacldnojokxsxnjjsplorfoymiwsgvlkjljumzsxjpqeosamchskuswjyvfvcsrcsfgabkcttjaefyrohbxlerxcageiwopnllvlzt\",
+    \"last_name\": \"gfusgtjrafpvscmhselqebbhnufasbofclybtlueuf\",
+    \"email\": \"ewtffbueymtwszobobvmqwdmgfvjvvlhpjyhniqsankcuuhdtbvlhyzwyoarvyjclrqkjppgfljalrzvdpbtblqkkspmxgrrjizaumzvpgxxhbtcetsrwoosjeiuajdmpcgniuhfttvdagdmiuypskebwmoniovpdzagwcbrqgkznutrobwbhigyzhszlqfmxqkkvsysthvcrfhhspavzwvgolszjoctyetohci\",
+    \"phone\": \"36348020924\",
+    \"whats_app\": \"88226095231\",
+    \"password\": \"mxgowe\",
+    \"provider\": \"ad\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/users"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "first_name": "eoqnqwnsvhefnimhvqiacldnojokxsxnjjsplorfoymiwsgvlkjljumzsxjpqeosamchskuswjyvfvcsrcsfgabkcttjaefyrohbxlerxcageiwopnllvlzt",
+    "last_name": "gfusgtjrafpvscmhselqebbhnufasbofclybtlueuf",
+    "email": "ewtffbueymtwszobobvmqwdmgfvjvvlhpjyhniqsankcuuhdtbvlhyzwyoarvyjclrqkjppgfljalrzvdpbtblqkkspmxgrrjizaumzvpgxxhbtcetsrwoosjeiuajdmpcgniuhfttvdagdmiuypskebwmoniovpdzagwcbrqgkznutrobwbhigyzhszlqfmxqkkvsysthvcrfhhspavzwvgolszjoctyetohci",
+    "phone": "36348020924",
+    "whats_app": "88226095231",
+    "password": "mxgowe",
+    "provider": "ad"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-users">
+</span>
+<span id="execution-results-POSTapi-v1-users" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-users"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-users"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-users" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-users"></code></pre>
+</span>
+<form id="form-POSTapi-v1-users" data-method="POST"
+      data-path="api/v1/users"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-users', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-users"
+                    onclick="tryItOut('POSTapi-v1-users');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-users"
+                    onclick="cancelTryOut('POSTapi-v1-users');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-users" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/users</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>first_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="first_name"
+               data-endpoint="POSTapi-v1-users"
+               value="eoqnqwnsvhefnimhvqiacldnojokxsxnjjsplorfoymiwsgvlkjljumzsxjpqeosamchskuswjyvfvcsrcsfgabkcttjaefyrohbxlerxcageiwopnllvlzt"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>last_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="last_name"
+               data-endpoint="POSTapi-v1-users"
+               value="gfusgtjrafpvscmhselqebbhnufasbofclybtlueuf"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-v1-users"
+               value="ewtffbueymtwszobobvmqwdmgfvjvvlhpjyhniqsankcuuhdtbvlhyzwyoarvyjclrqkjppgfljalrzvdpbtblqkkspmxgrrjizaumzvpgxxhbtcetsrwoosjeiuajdmpcgniuhfttvdagdmiuypskebwmoniovpdzagwcbrqgkznutrobwbhigyzhszlqfmxqkkvsysthvcrfhhspavzwvgolszjoctyetohci"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid email address. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>phone</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="phone"
+               data-endpoint="POSTapi-v1-users"
+               value="36348020924"
+               data-component="body" hidden>
+    <br>
+<p>Must be 11 digits.</p>
+        </p>
+                <p>
+            <b><code>whats_app</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="whats_app"
+               data-endpoint="POSTapi-v1-users"
+               value="88226095231"
+               data-component="body" hidden>
+    <br>
+<p>Must be 11 digits.</p>
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-v1-users"
+               value="mxgowe"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 8 characters.</p>
+        </p>
+                <p>
+            <b><code>provider</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="provider"
+               data-endpoint="POSTapi-v1-users"
+               value="ad"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="endpoints-GETapi-v1-users--id-">Display the specified resource.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-users--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/users/17" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/users/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-users--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Superadmin&quot;,
+        &quot;last_name&quot;: &quot;Superadmin&quot;,
+        &quot;email&quot;: &quot;topart383@gmail.com&quot;,
+        &quot;email_verified_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+        &quot;phone&quot;: &quot;00000000000&quot;,
+        &quot;whats_app&quot;: &quot;00000000000&quot;,
+        &quot;created_at&quot;: &quot;2021-10-16T12:01:17.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2021-12-11T18:50:59.000000Z&quot;,
+        &quot;avatar&quot;: &quot;avatar.png&quot;,
+        &quot;messenger_color&quot;: &quot;#2180f3&quot;,
+        &quot;dark_mode&quot;: 0,
+        &quot;active_status&quot;: 0
+    },
+    &quot;status&quot;: true,
+    &quot;msg&quot;: &quot;Account has been found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-users--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-users--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-users--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-users--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-users--id-"></code></pre>
+</span>
+<form id="form-GETapi-v1-users--id-" data-method="GET"
+      data-path="api/v1/users/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-users--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-users--id-"
+                    onclick="tryItOut('GETapi-v1-users--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-users--id-"
+                    onclick="cancelTryOut('GETapi-v1-users--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-users--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/users/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="GETapi-v1-users--id-"
+               value="17"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the user.</p>
+            </p>
+                    </form>
+
+            <h2 id="endpoints-DELETEapi-v1-users--id-">Remove the specified resource from storage.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-users--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http:https://topart.services/api/v1/users/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/users/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-users--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-users--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-users--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-users--id-"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-users--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-users--id-"></code></pre>
+</span>
+<form id="form-DELETEapi-v1-users--id-" data-method="DELETE"
+      data-path="api/v1/users/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-users--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-users--id-"
+                    onclick="tryItOut('DELETEapi-v1-users--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-users--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-users--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-users--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/users/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="DELETEapi-v1-users--id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the user.</p>
+            </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-search-user--name-">GET api/v1/search-user/{name}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-search-user--name-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/search-user/quibusdam" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/search-user/quibusdam"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-search-user--name-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;users&quot;: [],
+        &quot;status&quot;: true,
+        &quot;msg&quot;: &quot;users&quot;
+    },
+    &quot;links&quot;: {
+        &quot;first&quot;: &quot;http://localhost/api/v1/search-user/quibusdam?page=1&quot;,
+        &quot;last&quot;: &quot;http://localhost/api/v1/search-user/quibusdam?page=1&quot;,
+        &quot;prev&quot;: null,
+        &quot;next&quot;: null
+    },
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;from&quot;: null,
+        &quot;last_page&quot;: 1,
+        &quot;links&quot;: [
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/v1/search-user/quibusdam?page=1&quot;,
+                &quot;label&quot;: &quot;1&quot;,
+                &quot;active&quot;: true
+            },
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
+                &quot;active&quot;: false
+            }
+        ],
+        &quot;path&quot;: &quot;http://localhost/api/v1/search-user/quibusdam&quot;,
+        &quot;per_page&quot;: 10,
+        &quot;to&quot;: null,
+        &quot;total&quot;: 0
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-search-user--name-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-search-user--name-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-search-user--name-"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-search-user--name-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-search-user--name-"></code></pre>
+</span>
+<form id="form-GETapi-v1-search-user--name-" data-method="GET"
+      data-path="api/v1/search-user/{name}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-search-user--name-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-search-user--name-"
+                    onclick="tryItOut('GETapi-v1-search-user--name-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-search-user--name-"
+                    onclick="cancelTryOut('GETapi-v1-search-user--name-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-search-user--name-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/search-user/{name}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="GETapi-v1-search-user--name-"
+               value="quibusdam"
+               data-component="url" hidden>
+    <br>
+
+            </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-register">POST api/v1/register</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"first_name\": \"mqevfyodysvztmhtoearaswllmmgkfvabepttswdgnbvvuhvjzrotcdyjqsleillvbhwvybouyhwnuemyjayhbjeijepzwlhqlguxekydkckqoipatfifivxllvozjxdigxnsyumslfoomkkumsodovvevfdebdxfk\",
+    \"last_name\": \"ztpgncxogpfewwtwjqdmyorpitxkinwmraiidiwbzgcarnrkiumklzwduxnarfsvkjyhtemdxueputeqgyteajvsrpsmojnczdghealcmzhmtaads\",
+    \"email\": \"otrwrpqlazcmnhzuemjwdidylftbkkbsnhmwrrxwgvpclbqmvpsmsjpqqhlgndtlvedewcyogphcxrwgrnqszunchwacohojuhvvucotrabagiljtmrlksynulzxanpddmkruhagfjaiectvtdbdrhetsyxwckcwfphzbkunjbbjpafvjdwgqigqmkbc\",
+    \"password\": \"ebiyylowqlfigrdeoxjwtveutigolkhcasyjdhvkemjttoihzjzncawazdsydwtmqlxiqcofsyinqtmlgehyuat\",
+    \"provider\": \"ea\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "first_name": "mqevfyodysvztmhtoearaswllmmgkfvabepttswdgnbvvuhvjzrotcdyjqsleillvbhwvybouyhwnuemyjayhbjeijepzwlhqlguxekydkckqoipatfifivxllvozjxdigxnsyumslfoomkkumsodovvevfdebdxfk",
+    "last_name": "ztpgncxogpfewwtwjqdmyorpitxkinwmraiidiwbzgcarnrkiumklzwduxnarfsvkjyhtemdxueputeqgyteajvsrpsmojnczdghealcmzhmtaads",
+    "email": "otrwrpqlazcmnhzuemjwdidylftbkkbsnhmwrrxwgvpclbqmvpsmsjpqqhlgndtlvedewcyogphcxrwgrnqszunchwacohojuhvvucotrabagiljtmrlksynulzxanpddmkruhagfjaiectvtdbdrhetsyxwckcwfphzbkunjbbjpafvjdwgqigqmkbc",
+    "password": "ebiyylowqlfigrdeoxjwtveutigolkhcasyjdhvkemjttoihzjzncawazdsydwtmqlxiqcofsyinqtmlgehyuat",
+    "provider": "ea"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-register">
+</span>
+<span id="execution-results-POSTapi-v1-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-register"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-register"></code></pre>
+</span>
+<form id="form-POSTapi-v1-register" data-method="POST"
+      data-path="api/v1/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-register"
+                    onclick="tryItOut('POSTapi-v1-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-register"
+                    onclick="cancelTryOut('POSTapi-v1-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-register" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/register</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>first_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="first_name"
+               data-endpoint="POSTapi-v1-register"
+               value="mqevfyodysvztmhtoearaswllmmgkfvabepttswdgnbvvuhvjzrotcdyjqsleillvbhwvybouyhwnuemyjayhbjeijepzwlhqlguxekydkckqoipatfifivxllvozjxdigxnsyumslfoomkkumsodovvevfdebdxfk"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>last_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="last_name"
+               data-endpoint="POSTapi-v1-register"
+               value="ztpgncxogpfewwtwjqdmyorpitxkinwmraiidiwbzgcarnrkiumklzwduxnarfsvkjyhtemdxueputeqgyteajvsrpsmojnczdghealcmzhmtaads"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-v1-register"
+               value="otrwrpqlazcmnhzuemjwdidylftbkkbsnhmwrrxwgvpclbqmvpsmsjpqqhlgndtlvedewcyogphcxrwgrnqszunchwacohojuhvvucotrabagiljtmrlksynulzxanpddmkruhagfjaiectvtdbdrhetsyxwckcwfphzbkunjbbjpafvjdwgqigqmkbc"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid email address. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-v1-register"
+               value="ebiyylowqlfigrdeoxjwtveutigolkhcasyjdhvkemjttoihzjzncawazdsydwtmqlxiqcofsyinqtmlgehyuat"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 4 characters. Must not be greater than 100 characters.</p>
+        </p>
+                <p>
+            <b><code>provider</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="provider"
+               data-endpoint="POSTapi-v1-register"
+               value="ea"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="endpoints-POSTapi-v1-login">POST api/v1/login</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/login" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"ghsgiebudgrytlexprrlhlorizgrbmjnlahpjlywbudpbslewnuiigczsaufsdtqomrhkpbymwbzqkovrsnewextpwidqwzuhtauszwvypwxozwtqhbtoetixdfeurvpcxxhrlaeeywjeqwxvmvsedonshsprlttjrrehfchadxkkacflkoyaoicrxacobjlfliysjvzerahg\",
+    \"password\": \"tuzovdacrxmdtoxegjayaiphgjuvsveslhhugfzeaqveftwsisvngnmrzjggiswith\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/login"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "ghsgiebudgrytlexprrlhlorizgrbmjnlahpjlywbudpbslewnuiigczsaufsdtqomrhkpbymwbzqkovrsnewextpwidqwzuhtauszwvypwxozwtqhbtoetixdfeurvpcxxhrlaeeywjeqwxvmvsedonshsprlttjrrehfchadxkkacflkoyaoicrxacobjlfliysjvzerahg",
+    "password": "tuzovdacrxmdtoxegjayaiphgjuvsveslhhugfzeaqveftwsisvngnmrzjggiswith"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-login">
+</span>
+<span id="execution-results-POSTapi-v1-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-login"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-login"></code></pre>
+</span>
+<form id="form-POSTapi-v1-login" data-method="POST"
+      data-path="api/v1/login"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-login"
+                    onclick="tryItOut('POSTapi-v1-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-login"
+                    onclick="cancelTryOut('POSTapi-v1-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-login" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/login</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-v1-login"
+               value="ghsgiebudgrytlexprrlhlorizgrbmjnlahpjlywbudpbslewnuiigczsaufsdtqomrhkpbymwbzqkovrsnewextpwidqwzuhtauszwvypwxozwtqhbtoetixdfeurvpcxxhrlaeeywjeqwxvmvsedonshsprlttjrrehfchadxkkacflkoyaoicrxacobjlfliysjvzerahg"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid email address. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-v1-login"
+               value="tuzovdacrxmdtoxegjayaiphgjuvsveslhhugfzeaqveftwsisvngnmrzjggiswith"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 4 characters. Must not be greater than 100 characters.</p>
+        </p>
+        </form>
+
+            <h2 id="endpoints-GETapi-v1-showCarModels">GET api/v1/showCarModels</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-showCarModels">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/showCarModels" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/showCarModels"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-showCarModels">
+            <blockquote>
+            <p>Example response (500):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Undefined index: HTTP_HOST&quot;,
+    &quot;exception&quot;: &quot;ErrorException&quot;,
+    &quot;file&quot;: &quot;D:\\topart\\app\\Helpers\\helper.php&quot;,
+    &quot;line&quot;: 69,
+    &quot;trace&quot;: [
+        {
+            &quot;file&quot;: &quot;D:\\topart\\app\\Helpers\\helper.php&quot;,
+            &quot;line&quot;: 69,
+            &quot;function&quot;: &quot;handleError&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Bootstrap\\HandleExceptions&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\app\\Http\\Resources\\CarMakerResource.php&quot;,
+            &quot;line&quot;: 26,
+            &quot;function&quot;: &quot;site_base&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\HigherOrderCollectionProxy.php&quot;,
+            &quot;line&quot;: 60,
+            &quot;function&quot;: &quot;toArray&quot;,
+            &quot;class&quot;: &quot;App\\Http\\Resources\\CarMakerResource&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;function&quot;: &quot;Illuminate\\Support\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Support\\HigherOrderCollectionProxy&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Collection.php&quot;,
+            &quot;line&quot;: 695,
+            &quot;function&quot;: &quot;array_map&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\HigherOrderCollectionProxy.php&quot;,
+            &quot;line&quot;: 61,
+            &quot;function&quot;: &quot;map&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Support\\Collection&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\ResourceCollection.php&quot;,
+            &quot;line&quot;: 102,
+            &quot;function&quot;: &quot;__call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Support\\HigherOrderCollectionProxy&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\JsonResource.php&quot;,
+            &quot;line&quot;: 95,
+            &quot;function&quot;: &quot;toArray&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\ResourceCollection&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\PaginatedResourceResponse.php&quot;,
+            &quot;line&quot;: 19,
+            &quot;function&quot;: &quot;resolve&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\JsonResource&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\ResourceCollection.php&quot;,
+            &quot;line&quot;: 134,
+            &quot;function&quot;: &quot;toResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\PaginatedResourceResponse&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\ResourceCollection.php&quot;,
+            &quot;line&quot;: 114,
+            &quot;function&quot;: &quot;preparePaginatedResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\ResourceCollection&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 802,
+            &quot;function&quot;: &quot;toResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\ResourceCollection&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 789,
+            &quot;function&quot;: &quot;toResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 721,
+            &quot;function&quot;: &quot;prepareResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 128,
+            &quot;function&quot;: &quot;Illuminate\\Routing\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php&quot;,
+            &quot;line&quot;: 50,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\SubstituteBindings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 33,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 128,
+            &quot;function&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\{closure}&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 103,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 34,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 103,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 723,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 698,
+            &quot;function&quot;: &quot;runRouteWithinStack&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 662,
+            &quot;function&quot;: &quot;runRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 651,
+            &quot;function&quot;: &quot;dispatchToRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 128,
+            &quot;function&quot;: &quot;Illuminate\\Foundation\\Http\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\livewire\\livewire\\src\\DisableBrowserCache.php&quot;,
+            &quot;line&quot;: 19,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Livewire\\DisableBrowserCache&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php&quot;,
+            &quot;line&quot;: 31,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TrimStrings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php&quot;,
+            &quot;line&quot;: 27,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php&quot;,
+            &quot;line&quot;: 86,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php&quot;,
+            &quot;line&quot;: 52,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Fruitcake\\Cors\\HandleCors&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\fideloper\\proxy\\src\\TrustProxies.php&quot;,
+            &quot;line&quot;: 57,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Fideloper\\Proxy\\TrustProxies&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 103,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 142,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 111,
+            &quot;function&quot;: &quot;sendRequestThroughRouter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 287,
+            &quot;function&quot;: &quot;callLaravelOrLumenRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 89,
+            &quot;function&quot;: &quot;makeApiCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 45,
+            &quot;function&quot;: &quot;makeResponseCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;makeResponseCallIfConditionsPass&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 222,
+            &quot;function&quot;: &quot;__invoke&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 179,
+            &quot;function&quot;: &quot;iterateThroughStrategies&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;fetchResponses&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 117,
+            &quot;function&quot;: &quot;processRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 75,
+            &quot;function&quot;: &quot;extractEndpointsInfoFromLaravelApp&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;extractEndpointsInfoAndWriteToDisk&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php&quot;,
+            &quot;line&quot;: 48,
+            &quot;function&quot;: &quot;get&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 36,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Commands\\GenerateDocumentation&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;Illuminate\\Container\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 93,
+            &quot;function&quot;: &quot;unwrapIfClosure&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Util&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 37,
+            &quot;function&quot;: &quot;callBoundMethod&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php&quot;,
+            &quot;line&quot;: 653,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php&quot;,
+            &quot;line&quot;: 136,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Container&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\console\\Command\\Command.php&quot;,
+            &quot;line&quot;: 298,
+            &quot;function&quot;: &quot;execute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php&quot;,
+            &quot;line&quot;: 121,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Command\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 1015,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;doRunCommand&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 171,
+            &quot;function&quot;: &quot;doRun&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php&quot;,
+            &quot;line&quot;: 94,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php&quot;,
+            &quot;line&quot;: 129,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\artisan&quot;,
+            &quot;line&quot;: 37,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Console\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-showCarModels" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-showCarModels"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-showCarModels"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-showCarModels" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-showCarModels"></code></pre>
+</span>
+<form id="form-GETapi-v1-showCarModels" data-method="GET"
+      data-path="api/v1/showCarModels"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-showCarModels', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-showCarModels"
+                    onclick="tryItOut('GETapi-v1-showCarModels');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-showCarModels"
+                    onclick="cancelTryOut('GETapi-v1-showCarModels');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-showCarModels" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/showCarModels</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-partSearch">GET api/v1/partSearch</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-partSearch">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/partSearch" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"searchOpt\": \"repudiandae\",
+    \"carType\": 20,
+    \"carYear\": 11,
+    \"carCapacity\": 3,
+    \"order\": \"quia\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/partSearch"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "searchOpt": "repudiandae",
+    "carType": 20,
+    "carYear": 11,
+    "carCapacity": 3,
+    "order": "quia"
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-partSearch">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">content-type: text/html; charset=UTF-8
+cache-control: no-cache, private
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json"></code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-partSearch" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-partSearch"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-partSearch"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-partSearch" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-partSearch"></code></pre>
+</span>
+<form id="form-GETapi-v1-partSearch" data-method="GET"
+      data-path="api/v1/partSearch"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-partSearch', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-partSearch"
+                    onclick="tryItOut('GETapi-v1-partSearch');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-partSearch"
+                    onclick="cancelTryOut('GETapi-v1-partSearch');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-partSearch" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/partSearch</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>searchOpt</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="searchOpt"
+               data-endpoint="GETapi-v1-partSearch"
+               value="repudiandae"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>search</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="search"
+               data-endpoint="GETapi-v1-partSearch"
+               value=""
+               data-component="body" hidden>
+    <br>
+<p>This field is required when <code>searchOpt</code> is <code>==</code> or <code>normal</code>.</p>
+        </p>
+                <p>
+            <b><code>carBrand</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="carBrand"
+               data-endpoint="GETapi-v1-partSearch"
+               value=""
+               data-component="body" hidden>
+    <br>
+<p>This field is required when <code>searchOpt</code> is <code>==</code> or <code>adv</code>.</p>
+        </p>
+                <p>
+            <b><code>carType</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="carType"
+               data-endpoint="GETapi-v1-partSearch"
+               value="20"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>carYear</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="carYear"
+               data-endpoint="GETapi-v1-partSearch"
+               value="11"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>carCapacity</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="carCapacity"
+               data-endpoint="GETapi-v1-partSearch"
+               value="3"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>order</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="order"
+               data-endpoint="GETapi-v1-partSearch"
+               value="quia"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="endpoints-GETapi-v1-sellersLocation">GET api/v1/sellersLocation</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-sellersLocation">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/sellersLocation" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/sellersLocation"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-sellersLocation">
+            <blockquote>
+            <p>Example response (500):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Undefined index: HTTP_HOST&quot;,
+    &quot;exception&quot;: &quot;ErrorException&quot;,
+    &quot;file&quot;: &quot;D:\\topart\\app\\Helpers\\helper.php&quot;,
+    &quot;line&quot;: 69,
+    &quot;trace&quot;: [
+        {
+            &quot;file&quot;: &quot;D:\\topart\\app\\Helpers\\helper.php&quot;,
+            &quot;line&quot;: 69,
+            &quot;function&quot;: &quot;handleError&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Bootstrap\\HandleExceptions&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\app\\Http\\Resources\\CarMakerResource.php&quot;,
+            &quot;line&quot;: 26,
+            &quot;function&quot;: &quot;site_base&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\HigherOrderCollectionProxy.php&quot;,
+            &quot;line&quot;: 60,
+            &quot;function&quot;: &quot;toArray&quot;,
+            &quot;class&quot;: &quot;App\\Http\\Resources\\CarMakerResource&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;function&quot;: &quot;Illuminate\\Support\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Support\\HigherOrderCollectionProxy&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Collection.php&quot;,
+            &quot;line&quot;: 695,
+            &quot;function&quot;: &quot;array_map&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\HigherOrderCollectionProxy.php&quot;,
+            &quot;line&quot;: 61,
+            &quot;function&quot;: &quot;map&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Support\\Collection&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\ResourceCollection.php&quot;,
+            &quot;line&quot;: 102,
+            &quot;function&quot;: &quot;__call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Support\\HigherOrderCollectionProxy&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\JsonResource.php&quot;,
+            &quot;line&quot;: 95,
+            &quot;function&quot;: &quot;toArray&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\ResourceCollection&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\JsonResource.php&quot;,
+            &quot;line&quot;: 242,
+            &quot;function&quot;: &quot;resolve&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\JsonResource&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;function&quot;: &quot;jsonSerialize&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\JsonResource&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\JsonResponse.php&quot;,
+            &quot;line&quot;: 84,
+            &quot;function&quot;: &quot;json_encode&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\http-foundation\\JsonResponse.php&quot;,
+            &quot;line&quot;: 54,
+            &quot;function&quot;: &quot;setData&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\JsonResponse&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\JsonResponse.php&quot;,
+            &quot;line&quot;: 32,
+            &quot;function&quot;: &quot;__construct&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\HttpFoundation\\JsonResponse&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php&quot;,
+            &quot;line&quot;: 99,
+            &quot;function&quot;: &quot;__construct&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\JsonResponse&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\ResourceResponse.php&quot;,
+            &quot;line&quot;: 45,
+            &quot;function&quot;: &quot;json&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\ResponseFactory&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\JsonResource.php&quot;,
+            &quot;line&quot;: 231,
+            &quot;function&quot;: &quot;toResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\ResourceResponse&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\ResourceCollection.php&quot;,
+            &quot;line&quot;: 117,
+            &quot;function&quot;: &quot;toResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\JsonResource&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 802,
+            &quot;function&quot;: &quot;toResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Resources\\Json\\ResourceCollection&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 789,
+            &quot;function&quot;: &quot;toResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 721,
+            &quot;function&quot;: &quot;prepareResponse&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 128,
+            &quot;function&quot;: &quot;Illuminate\\Routing\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php&quot;,
+            &quot;line&quot;: 50,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\SubstituteBindings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 33,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 128,
+            &quot;function&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\{closure}&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 103,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php&quot;,
+            &quot;line&quot;: 34,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 103,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 723,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 698,
+            &quot;function&quot;: &quot;runRouteWithinStack&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 662,
+            &quot;function&quot;: &quot;runRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 651,
+            &quot;function&quot;: &quot;dispatchToRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 128,
+            &quot;function&quot;: &quot;Illuminate\\Foundation\\Http\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\livewire\\livewire\\src\\DisableBrowserCache.php&quot;,
+            &quot;line&quot;: 19,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Livewire\\DisableBrowserCache&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php&quot;,
+            &quot;line&quot;: 31,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TrimStrings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php&quot;,
+            &quot;line&quot;: 27,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php&quot;,
+            &quot;line&quot;: 86,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php&quot;,
+            &quot;line&quot;: 52,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Fruitcake\\Cors\\HandleCors&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\fideloper\\proxy\\src\\TrustProxies.php&quot;,
+            &quot;line&quot;: 57,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 167,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Fideloper\\Proxy\\TrustProxies&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 103,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 142,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 111,
+            &quot;function&quot;: &quot;sendRequestThroughRouter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 287,
+            &quot;function&quot;: &quot;callLaravelOrLumenRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 89,
+            &quot;function&quot;: &quot;makeApiCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 45,
+            &quot;function&quot;: &quot;makeResponseCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;makeResponseCallIfConditionsPass&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 222,
+            &quot;function&quot;: &quot;__invoke&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 179,
+            &quot;function&quot;: &quot;iterateThroughStrategies&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;fetchResponses&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 117,
+            &quot;function&quot;: &quot;processRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 75,
+            &quot;function&quot;: &quot;extractEndpointsInfoFromLaravelApp&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;extractEndpointsInfoAndWriteToDisk&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php&quot;,
+            &quot;line&quot;: 48,
+            &quot;function&quot;: &quot;get&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 36,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Commands\\GenerateDocumentation&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;Illuminate\\Container\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 93,
+            &quot;function&quot;: &quot;unwrapIfClosure&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Util&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 37,
+            &quot;function&quot;: &quot;callBoundMethod&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php&quot;,
+            &quot;line&quot;: 653,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php&quot;,
+            &quot;line&quot;: 136,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Container&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\console\\Command\\Command.php&quot;,
+            &quot;line&quot;: 298,
+            &quot;function&quot;: &quot;execute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php&quot;,
+            &quot;line&quot;: 121,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Command\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 1015,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;doRunCommand&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 171,
+            &quot;function&quot;: &quot;doRun&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php&quot;,
+            &quot;line&quot;: 94,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php&quot;,
+            &quot;line&quot;: 129,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\topart\\artisan&quot;,
+            &quot;line&quot;: 37,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Console\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-sellersLocation" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-sellersLocation"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-sellersLocation"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-sellersLocation" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-sellersLocation"></code></pre>
+</span>
+<form id="form-GETapi-v1-sellersLocation" data-method="GET"
+      data-path="api/v1/sellersLocation"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-sellersLocation', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-sellersLocation"
+                    onclick="tryItOut('GETapi-v1-sellersLocation');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-sellersLocation"
+                    onclick="cancelTryOut('GETapi-v1-sellersLocation');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-sellersLocation" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/sellersLocation</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-sellerSearch">GET api/v1/sellerSearch</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-sellerSearch">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/sellerSearch" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"governorate_id\": 4,
+    \"city_id\": 14,
+    \"brand_id\": 4
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/sellerSearch"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "governorate_id": 4,
+    "city_id": 14,
+    "brand_id": 4
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-sellerSearch">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [],
+    &quot;additional_parameters&quot;: {
+        &quot;success&quot;: true,
+        &quot;msg&quot;: &quot;sellers&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-sellerSearch" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-sellerSearch"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-sellerSearch"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-sellerSearch" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-sellerSearch"></code></pre>
+</span>
+<form id="form-GETapi-v1-sellerSearch" data-method="GET"
+      data-path="api/v1/sellerSearch"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-sellerSearch', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-sellerSearch"
+                    onclick="tryItOut('GETapi-v1-sellerSearch');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-sellerSearch"
+                    onclick="cancelTryOut('GETapi-v1-sellerSearch');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-sellerSearch" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/sellerSearch</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>governorate_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="governorate_id"
+               data-endpoint="GETapi-v1-sellerSearch"
+               value="4"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>city_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="city_id"
+               data-endpoint="GETapi-v1-sellerSearch"
+               value="14"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>brand_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="brand_id"
+               data-endpoint="GETapi-v1-sellerSearch"
+               value="4"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="endpoints-POSTapi-v1-logout">POST api/v1/logout</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-logout">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/logout" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/logout"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-logout">
+</span>
+<span id="execution-results-POSTapi-v1-logout" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-logout"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-logout"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-logout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-logout"></code></pre>
+</span>
+<form id="form-POSTapi-v1-logout" data-method="POST"
+      data-path="api/v1/logout"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-logout', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-logout"
+                    onclick="tryItOut('POSTapi-v1-logout');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-logout"
+                    onclick="cancelTryOut('POSTapi-v1-logout');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-logout" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/logout</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-allSellers">GET api/v1/allSellers</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-allSellers">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/allSellers" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/allSellers"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-allSellers">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-allSellers" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-allSellers"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-allSellers"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-allSellers" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-allSellers"></code></pre>
+</span>
+<form id="form-GETapi-v1-allSellers" data-method="GET"
+      data-path="api/v1/allSellers"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-allSellers', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-allSellers"
+                    onclick="tryItOut('GETapi-v1-allSellers');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-allSellers"
+                    onclick="cancelTryOut('GETapi-v1-allSellers');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-allSellers" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/allSellers</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-updateSeller">POST api/v1/updateSeller</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-updateSeller">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/updateSeller" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "desc=iqpwfgbsgvawhiwbvhevppngzwlwsnfxucz" \
+    --form "desc_ar=hmdnagtrwlmtkwjsekqjjvxxzxmdikidtkvqgyufbclmmjhtgruqutynrw" \
+    --form "governorate_id=16" \
+    --form "city_id=6" \
+    --form "lat=non" \
+    --form "long=magni" \
+    --form "street=dybmyblebbqkzkkkspyaaeyiodhrkilcxmymjrkwfu" \
+    --form "file=oeabzcmqjmubqmsxjwqzigbngqkjocaoowugzjnvwfrwvsmuhcdvxtndgjnxkmzyxzczzwajunhgqlpqgdkmzidofbewzhrlpchgslelcnmnwcgovhrzgdlqhlknqwgnhnxpdvtkwxxmtdzmjhejcddupnwnwxvxezmbgtuiinctiicsgeangqmdgxlpzultfwnpcdcdvjekjpkqhhtjripqkebmrleogoxtpmkiotbscldqriskmfwpwgarcbckvrcyytmuzfsdmvltcthohbbtzfsuvkixydldikxxnyywvugeceedgouvpanohbndgkxxlcqtkbxnfunxhqngfdglydsshrewghbmhwpwympdabgrecvqaqkcoechsjtcppnybtjlofwpfgrwqdgsrubktfrbdgskwmtcchhtjxkmnzhxunsfjufvzqmqioejnqnpmvwcnjzapxcyxslvkyqjheflnafpvrvbkbkfxvynebqzpfwyafiagxzbbjbfhcqijtalevztbyjggzislbllsatavnfkfrqeyalqmrwzsypysmwcfdsbxbxpykjbpnkrupxthegdbkqxycbratqephoffbhvozqbswveheijwsayqwqrobtwqmvvhpjdkacpgmmrrmofgbbjbzkzjofzbkvjtimlvkjmfqtmjhzihauukgdiosnkzvyptyoesemmcuibtgixongmcrlfgsprzcghzrwnfrghlvwrmnerbdyyepkvhthovfrddtwrimilcoitxkrcwglrvnofuabncefheqbxzwfqzldbkauxaiekdsqcnvcwjvnpjvnahotnztsdslbooljpbuoelfoyecuzwnsgdzmigtriqoiylgmmmtugclsnggrpmosweyeszpsnvzjgwsuvbsozgptrvejtkpljfiyabfrzgvzgogbvawnildfnlqcbffcyddwjnmlyffelmzkqkvniytlqvrkpekmdrbitxvkldfofuvhnxlxhgmyxlsiegjsquwbllnemrzwtsoniiwlussxyeuipavxgknlttandzvnmuopphyboybylhmhxlieexoamaeaafadxmrubppnxcwputuohqnngkmbwwaxmnjvtrbbdlaxfwmofykuczltctmykpynjzjztbrhfnbecooefddkscoxggpryrxitnwbdpgvwmjfazruqnxcpzvregrumnzigpztzlraufokwnqzjcapjpqstvpuowyixktozmraogvaaqgaaggeianhxestahafmubmjxdvciymtdmrkrksqcezzipjzcnqefqqvmedrumohhnhuxjuleehiobnsyxukjplbfhcgvuqzytqqiqaznlmposwhrvimovxojowvpshsavizneehvclemsjjqsrxbodywruvllvhjuuwcosvlxjgacvosbmkwiowoattfzpcycolsaqyiblhaqdbkvjqzsdlwbgcynzeneuamejqfozjiigxmmuvoxnhtpgyhennzuuuolvnanwwoscgmkvgmbxhljslzgrrcqixyhpvqhtgetqdniajslhxlxhlhqqderjlbileysmjlzxndqkwbjzphxrmzrtsgbnwicleyouvangwqsccawxtmbhzxivvnalifzpychbzhfaodkjletgoogysgqmtjuymonrbtcprmutxvzmupberseantqbphpbnaqdraradhlztvhwgoqyxihcacgwfxdicrqhwijnfmxyjeojcknwhcddmlubqqbaobknmhgcvdpdgziejjlewzcjoygidarpgzajnsuhrclhofspkqdaetlzujntzvopvizjuwmswhwnmcpsbrgitryubojpkohdgimedlhdyftbywtatcyrfdgsaotrgbkgofhemztzvsbesfdcsmlfzikruljrdultgftjgjawwmlqxhoxubmgpookevwwsvzxeflfhrzyonmckerpwnelmyunyfjahpeqcyrqoyrczphukephtijdjvojrycfndeholwqfwftajsljrfdebtslkikxafkbtlhoaxfhsytqjksjyisqehkuvkdgixqyzsytvdmtbyllouypjetwixgnignfexyfrqqptjoklzozlfdighqzdnxvrwqrckxbchjhbdgzkgsthmzwpmvvumajvhxsvrhpxzsklfrbmvkkxarnofqviechypmtliqbztqseligjylllxjvixgqkipxqiryldbwvnyejbbuurkkifytgllzvutbqytiphujldxrzfukquijkhjaevlhjtdgxvrmrlnqkhlydwtutlqexhbyjbkgepwcvynjfurmtprhjjhklbgghhqssqkgndlbeghucqudnrcbtpulxlellilp" \
+    --form "specialty_id[]=rem" \
+    --form "bg=@C:\Users\Eslam\AppData\Local\Temp\php9CD2.tmp" \
+    --form "avatar=@C:\Users\Eslam\AppData\Local\Temp\php9CE3.tmp" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/updateSeller"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('desc', 'iqpwfgbsgvawhiwbvhevppngzwlwsnfxucz');
+body.append('desc_ar', 'hmdnagtrwlmtkwjsekqjjvxxzxmdikidtkvqgyufbclmmjhtgruqutynrw');
+body.append('governorate_id', '16');
+body.append('city_id', '6');
+body.append('lat', 'non');
+body.append('long', 'magni');
+body.append('street', 'dybmyblebbqkzkkkspyaaeyiodhrkilcxmymjrkwfu');
+body.append('file', 'oeabzcmqjmubqmsxjwqzigbngqkjocaoowugzjnvwfrwvsmuhcdvxtndgjnxkmzyxzczzwajunhgqlpqgdkmzidofbewzhrlpchgslelcnmnwcgovhrzgdlqhlknqwgnhnxpdvtkwxxmtdzmjhejcddupnwnwxvxezmbgtuiinctiicsgeangqmdgxlpzultfwnpcdcdvjekjpkqhhtjripqkebmrleogoxtpmkiotbscldqriskmfwpwgarcbckvrcyytmuzfsdmvltcthohbbtzfsuvkixydldikxxnyywvugeceedgouvpanohbndgkxxlcqtkbxnfunxhqngfdglydsshrewghbmhwpwympdabgrecvqaqkcoechsjtcppnybtjlofwpfgrwqdgsrubktfrbdgskwmtcchhtjxkmnzhxunsfjufvzqmqioejnqnpmvwcnjzapxcyxslvkyqjheflnafpvrvbkbkfxvynebqzpfwyafiagxzbbjbfhcqijtalevztbyjggzislbllsatavnfkfrqeyalqmrwzsypysmwcfdsbxbxpykjbpnkrupxthegdbkqxycbratqephoffbhvozqbswveheijwsayqwqrobtwqmvvhpjdkacpgmmrrmofgbbjbzkzjofzbkvjtimlvkjmfqtmjhzihauukgdiosnkzvyptyoesemmcuibtgixongmcrlfgsprzcghzrwnfrghlvwrmnerbdyyepkvhthovfrddtwrimilcoitxkrcwglrvnofuabncefheqbxzwfqzldbkauxaiekdsqcnvcwjvnpjvnahotnztsdslbooljpbuoelfoyecuzwnsgdzmigtriqoiylgmmmtugclsnggrpmosweyeszpsnvzjgwsuvbsozgptrvejtkpljfiyabfrzgvzgogbvawnildfnlqcbffcyddwjnmlyffelmzkqkvniytlqvrkpekmdrbitxvkldfofuvhnxlxhgmyxlsiegjsquwbllnemrzwtsoniiwlussxyeuipavxgknlttandzvnmuopphyboybylhmhxlieexoamaeaafadxmrubppnxcwputuohqnngkmbwwaxmnjvtrbbdlaxfwmofykuczltctmykpynjzjztbrhfnbecooefddkscoxggpryrxitnwbdpgvwmjfazruqnxcpzvregrumnzigpztzlraufokwnqzjcapjpqstvpuowyixktozmraogvaaqgaaggeianhxestahafmubmjxdvciymtdmrkrksqcezzipjzcnqefqqvmedrumohhnhuxjuleehiobnsyxukjplbfhcgvuqzytqqiqaznlmposwhrvimovxojowvpshsavizneehvclemsjjqsrxbodywruvllvhjuuwcosvlxjgacvosbmkwiowoattfzpcycolsaqyiblhaqdbkvjqzsdlwbgcynzeneuamejqfozjiigxmmuvoxnhtpgyhennzuuuolvnanwwoscgmkvgmbxhljslzgrrcqixyhpvqhtgetqdniajslhxlxhlhqqderjlbileysmjlzxndqkwbjzphxrmzrtsgbnwicleyouvangwqsccawxtmbhzxivvnalifzpychbzhfaodkjletgoogysgqmtjuymonrbtcprmutxvzmupberseantqbphpbnaqdraradhlztvhwgoqyxihcacgwfxdicrqhwijnfmxyjeojcknwhcddmlubqqbaobknmhgcvdpdgziejjlewzcjoygidarpgzajnsuhrclhofspkqdaetlzujntzvopvizjuwmswhwnmcpsbrgitryubojpkohdgimedlhdyftbywtatcyrfdgsaotrgbkgofhemztzvsbesfdcsmlfzikruljrdultgftjgjawwmlqxhoxubmgpookevwwsvzxeflfhrzyonmckerpwnelmyunyfjahpeqcyrqoyrczphukephtijdjvojrycfndeholwqfwftajsljrfdebtslkikxafkbtlhoaxfhsytqjksjyisqehkuvkdgixqyzsytvdmtbyllouypjetwixgnignfexyfrqqptjoklzozlfdighqzdnxvrwqrckxbchjhbdgzkgsthmzwpmvvumajvhxsvrhpxzsklfrbmvkkxarnofqviechypmtliqbztqseligjylllxjvixgqkipxqiryldbwvnyejbbuurkkifytgllzvutbqytiphujldxrzfukquijkhjaevlhjtdgxvrmrlnqkhlydwtutlqexhbyjbkgepwcvynjfurmtprhjjhklbgghhqssqkgndlbeghucqudnrcbtpulxlellilp');
+body.append('specialty_id[]', 'rem');
+body.append('bg', document.querySelector('input[name="bg"]').files[0]);
+body.append('avatar', document.querySelector('input[name="avatar"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-updateSeller">
+</span>
+<span id="execution-results-POSTapi-v1-updateSeller" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-updateSeller"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-updateSeller"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-updateSeller" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-updateSeller"></code></pre>
+</span>
+<form id="form-POSTapi-v1-updateSeller" data-method="POST"
+      data-path="api/v1/updateSeller"
+      data-authed="0"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-updateSeller', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-updateSeller"
+                    onclick="tryItOut('POSTapi-v1-updateSeller');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-updateSeller"
+                    onclick="cancelTryOut('POSTapi-v1-updateSeller');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-updateSeller" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/updateSeller</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>desc</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="desc"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value="iqpwfgbsgvawhiwbvhevppngzwlwsnfxucz"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 10 characters. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>desc_ar</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="desc_ar"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value="hmdnagtrwlmtkwjsekqjjvxxzxmdikidtkvqgyufbclmmjhtgruqutynrw"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 10 characters. Must not be greater than 255 characters.</p>
+        </p>
+                <p>
+            <b><code>bg</code></b>&nbsp;&nbsp;<small>file</small>     <i>optional</i> &nbsp;
+                <input type="file"
+               name="bg"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value=""
+               data-component="body" hidden>
+    <br>
+<p>Must be an image. Must not be greater than 2048 kilobytes.</p>
+        </p>
+                <p>
+            <b><code>avatar</code></b>&nbsp;&nbsp;<small>file</small>     <i>optional</i> &nbsp;
+                <input type="file"
+               name="avatar"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value=""
+               data-component="body" hidden>
+    <br>
+<p>Must be an image. Must not be greater than 2048 kilobytes.</p>
+        </p>
+                <p>
+            <b><code>governorate_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="governorate_id"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value="16"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>city_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="city_id"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value="6"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>lat</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="lat"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value="non"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>long</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="long"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value="magni"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>street</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="street"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value="dybmyblebbqkzkkkspyaaeyiodhrkilcxmymjrkwfu"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 3 characters. Must not be greater than 100 characters.</p>
+        </p>
+                <p>
+            <b><code>facebook</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="facebook"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value=""
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>instagram</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="instagram"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value=""
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>file</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="file"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value="oeabzcmqjmubqmsxjwqzigbngqkjocaoowugzjnvwfrwvsmuhcdvxtndgjnxkmzyxzczzwajunhgqlpqgdkmzidofbewzhrlpchgslelcnmnwcgovhrzgdlqhlknqwgnhnxpdvtkwxxmtdzmjhejcddupnwnwxvxezmbgtuiinctiicsgeangqmdgxlpzultfwnpcdcdvjekjpkqhhtjripqkebmrleogoxtpmkiotbscldqriskmfwpwgarcbckvrcyytmuzfsdmvltcthohbbtzfsuvkixydldikxxnyywvugeceedgouvpanohbndgkxxlcqtkbxnfunxhqngfdglydsshrewghbmhwpwympdabgrecvqaqkcoechsjtcppnybtjlofwpfgrwqdgsrubktfrbdgskwmtcchhtjxkmnzhxunsfjufvzqmqioejnqnpmvwcnjzapxcyxslvkyqjheflnafpvrvbkbkfxvynebqzpfwyafiagxzbbjbfhcqijtalevztbyjggzislbllsatavnfkfrqeyalqmrwzsypysmwcfdsbxbxpykjbpnkrupxthegdbkqxycbratqephoffbhvozqbswveheijwsayqwqrobtwqmvvhpjdkacpgmmrrmofgbbjbzkzjofzbkvjtimlvkjmfqtmjhzihauukgdiosnkzvyptyoesemmcuibtgixongmcrlfgsprzcghzrwnfrghlvwrmnerbdyyepkvhthovfrddtwrimilcoitxkrcwglrvnofuabncefheqbxzwfqzldbkauxaiekdsqcnvcwjvnpjvnahotnztsdslbooljpbuoelfoyecuzwnsgdzmigtriqoiylgmmmtugclsnggrpmosweyeszpsnvzjgwsuvbsozgptrvejtkpljfiyabfrzgvzgogbvawnildfnlqcbffcyddwjnmlyffelmzkqkvniytlqvrkpekmdrbitxvkldfofuvhnxlxhgmyxlsiegjsquwbllnemrzwtsoniiwlussxyeuipavxgknlttandzvnmuopphyboybylhmhxlieexoamaeaafadxmrubppnxcwputuohqnngkmbwwaxmnjvtrbbdlaxfwmofykuczltctmykpynjzjztbrhfnbecooefddkscoxggpryrxitnwbdpgvwmjfazruqnxcpzvregrumnzigpztzlraufokwnqzjcapjpqstvpuowyixktozmraogvaaqgaaggeianhxestahafmubmjxdvciymtdmrkrksqcezzipjzcnqefqqvmedrumohhnhuxjuleehiobnsyxukjplbfhcgvuqzytqqiqaznlmposwhrvimovxojowvpshsavizneehvclemsjjqsrxbodywruvllvhjuuwcosvlxjgacvosbmkwiowoattfzpcycolsaqyiblhaqdbkvjqzsdlwbgcynzeneuamejqfozjiigxmmuvoxnhtpgyhennzuuuolvnanwwoscgmkvgmbxhljslzgrrcqixyhpvqhtgetqdniajslhxlxhlhqqderjlbileysmjlzxndqkwbjzphxrmzrtsgbnwicleyouvangwqsccawxtmbhzxivvnalifzpychbzhfaodkjletgoogysgqmtjuymonrbtcprmutxvzmupberseantqbphpbnaqdraradhlztvhwgoqyxihcacgwfxdicrqhwijnfmxyjeojcknwhcddmlubqqbaobknmhgcvdpdgziejjlewzcjoygidarpgzajnsuhrclhofspkqdaetlzujntzvopvizjuwmswhwnmcpsbrgitryubojpkohdgimedlhdyftbywtatcyrfdgsaotrgbkgofhemztzvsbesfdcsmlfzikruljrdultgftjgjawwmlqxhoxubmgpookevwwsvzxeflfhrzyonmckerpwnelmyunyfjahpeqcyrqoyrczphukephtijdjvojrycfndeholwqfwftajsljrfdebtslkikxafkbtlhoaxfhsytqjksjyisqehkuvkdgixqyzsytvdmtbyllouypjetwixgnignfexyfrqqptjoklzozlfdighqzdnxvrwqrckxbchjhbdgzkgsthmzwpmvvumajvhxsvrhpxzsklfrbmvkkxarnofqviechypmtliqbztqseligjylllxjvixgqkipxqiryldbwvnyejbbuurkkifytgllzvutbqytiphujldxrzfukquijkhjaevlhjtdgxvrmrlnqkhlydwtutlqexhbyjbkgepwcvynjfurmtprhjjhklbgghhqssqkgndlbeghucqudnrcbtpulxlellilp"
+               data-component="body" hidden>
+    <br>
+<p>Must not be greater than 4096 characters.</p>
+        </p>
+                <p>
+            <b><code>brand</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="brand"
+               data-endpoint="POSTapi-v1-updateSeller"
+               value=""
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>specialty_id</code></b>&nbsp;&nbsp;<small>string[]</small>  &nbsp;
+                <input type="text"
+               name="specialty_id[0]"
+               data-endpoint="POSTapi-v1-updateSeller"
+               data-component="body" hidden>
+        <input type="text"
+               name="specialty_id[1]"
+               data-endpoint="POSTapi-v1-updateSeller"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="endpoints-DELETEapi-v1-deleteBrand">DELETE api/v1/deleteBrand</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-deleteBrand">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http:https://topart.services/api/v1/deleteBrand" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/deleteBrand"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-deleteBrand">
+</span>
+<span id="execution-results-DELETEapi-v1-deleteBrand" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-deleteBrand"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-deleteBrand"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-deleteBrand" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-deleteBrand"></code></pre>
+</span>
+<form id="form-DELETEapi-v1-deleteBrand" data-method="DELETE"
+      data-path="api/v1/deleteBrand"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-deleteBrand', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-deleteBrand"
+                    onclick="tryItOut('DELETEapi-v1-deleteBrand');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-deleteBrand"
+                    onclick="cancelTryOut('DELETEapi-v1-deleteBrand');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-deleteBrand" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/deleteBrand</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-userFav">GET api/v1/userFav</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-userFav">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/userFav" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/userFav"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-userFav">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-userFav" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-userFav"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-userFav"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-userFav" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-userFav"></code></pre>
+</span>
+<form id="form-GETapi-v1-userFav" data-method="GET"
+      data-path="api/v1/userFav"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-userFav', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-userFav"
+                    onclick="tryItOut('GETapi-v1-userFav');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-userFav"
+                    onclick="cancelTryOut('GETapi-v1-userFav');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-userFav" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/userFav</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-addToFav">POST api/v1/addToFav</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-addToFav">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/addToFav" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"part_id\": \"sequi\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/addToFav"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "part_id": "sequi"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-addToFav">
+</span>
+<span id="execution-results-POSTapi-v1-addToFav" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-addToFav"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-addToFav"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-addToFav" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-addToFav"></code></pre>
+</span>
+<form id="form-POSTapi-v1-addToFav" data-method="POST"
+      data-path="api/v1/addToFav"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-addToFav', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-addToFav"
+                    onclick="tryItOut('POSTapi-v1-addToFav');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-addToFav"
+                    onclick="cancelTryOut('POSTapi-v1-addToFav');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-addToFav" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/addToFav</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>part_id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="part_id"
+               data-endpoint="POSTapi-v1-addToFav"
+               value="sequi"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="endpoints-POSTapi-v1-deleteFav">POST api/v1/deleteFav</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-deleteFav">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/deleteFav" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/deleteFav"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-deleteFav">
+</span>
+<span id="execution-results-POSTapi-v1-deleteFav" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-deleteFav"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-deleteFav"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-deleteFav" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-deleteFav"></code></pre>
+</span>
+<form id="form-POSTapi-v1-deleteFav" data-method="POST"
+      data-path="api/v1/deleteFav"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-deleteFav', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-deleteFav"
+                    onclick="tryItOut('POSTapi-v1-deleteFav');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-deleteFav"
+                    onclick="cancelTryOut('POSTapi-v1-deleteFav');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-deleteFav" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/deleteFav</code></b>
+        </p>
+                    </form>
+
+    
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>
