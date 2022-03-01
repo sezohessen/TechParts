@@ -66,8 +66,7 @@ class TermsController extends Controller
         $page_title =  __("Terms");
         $page_description =  __("Terms And Conditions");
         $terms = Terms::first();
-        $term = $terms->description;
-        return view('Terms.index',compact('page_title','page_description','term'));
+        return view('Terms.index',compact('page_title','page_description','terms'));
     }
 
     /**
@@ -92,8 +91,8 @@ class TermsController extends Controller
     {
         $term = Terms::find($id);
         $this->validate($request,[
-            'description'       => 'required|min:3|max:1000',
-            'description_ar'    => 'required|min:3|max:1000'
+            'description'       => 'required|min:3',
+            'description_ar'    => 'required|min:3'
         ]);
         $term->description       = $request->description;
         $term->description_ar   = $request->description_ar;

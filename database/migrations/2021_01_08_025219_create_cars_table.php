@@ -21,7 +21,7 @@ class CreateCarsTable extends Migration
             ->references('id')->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            
+
             $table->bigInteger('CarModel_id')->unsigned();
             $table->foreign('CarModel_id')
             ->references('id')->on('car_models')
@@ -34,13 +34,13 @@ class CreateCarsTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->bigInteger('CarYear_id')->unsigned();
+            $table->bigInteger('CarYear_id')->unsigned()->nullable();
             $table->foreign('CarYear_id')
             ->references('id')->on('car_years')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->bigInteger('CarCapacity_id')->unsigned();
+            $table->bigInteger('CarCapacity_id')->unsigned()->nullable();
             $table->foreign('CarCapacity_id')
             ->references('id')->on('car_capacities')
             ->onDelete('cascade')

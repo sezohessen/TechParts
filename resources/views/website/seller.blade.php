@@ -95,7 +95,7 @@
                         $file       = storage_path('app\files\\') . $seller->file;
                     @endphp
                         <!-- if file exists in storge -->
-                        @if (file_exists($file))
+                        <!--@if (file_exists($file))-->
                             <div class="download-file">
                                 <div class="my-10">
                                     <div class="">
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        <!--@endif-->
                     @endif
                     <!-- Rate Seller -->
                     <div class="mt-14 rate-me">

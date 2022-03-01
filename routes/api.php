@@ -12,16 +12,6 @@ use App\Http\Controllers\Api\SellerController;
 use App\Http\Controllers\Api\SellersController;
 use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 
 // Protected all routes with Api password (in env)
@@ -58,13 +48,21 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             Route::get('/allSellers',[SellerAccountController::class,'index']);
             Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
             Route::delete('/deleteBrand',[SellerAccountController::class,'deleteBrand']);
+            Route::get('/getAuth', function () {
+                return auth()->user();
+            });
+            // Seller Dashboard
+            Route::post('/addCarType',[SellerController::class,'addCarType']);
+            Route::post('/addYear',[SellerController::class,'addYear']);
+            Route::post('/addCapacity',[SellerController::class,'addCapacity']);
+            Route::post('/storePart',[SellerController::class,'addPart']);
             // User fav
             Route::get('/userFav',[FavController::class,'showUserFav']);
             Route::post('/addToFav',[FavController::class,'AddToFav']);
             Route::post('/deleteFav',[FavController::class,'deleteFav']);
             // Chat
-            Route::post('/sendMessage',[ChatController::class,'sendMessage']);
-            Route::post('/getMessages',[ChatController::class,'fetchMessages']);
+            // Route::post('/sendMessage',[ChatController::class,'sendMessage']);
+            // Route::post('/getMessages',[ChatController::class,'fetchMessages']);
         });
     });
 // });

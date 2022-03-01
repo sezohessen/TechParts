@@ -8,15 +8,31 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
+=======
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\UsersResource;
+>>>>>>> api-doc
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(UserRegisterRequest $request)
+    public function register(Request $request)
     {
+         // Validation
+         $rules = array(
+            'first_name'        => 'required|string|min:4|max:255',
+            'last_name'         => 'required|string|min:4|max:255',
+            'email'             => 'required|string|email|max:255|unique:users,email',
+            'password'          => 'required|string|min:4|max:100|',
+            'provider'          => 'required'
+            );
+            $validate = Validator::make($request->all(), $rules);
+            if($validate->fails())
+            {
+                return $validate->errors();
+            }
             // Create user
             $user = User::create([
                 'first_name'     => $request['first_name'],
@@ -24,12 +40,12 @@ class AuthController extends Controller
                 'email'          => $request['email'],
                 'password'       => bcrypt($request['password'])
             ]);
-            if ($request['provider'] == 'seller') {
-                $provider = 'seller';
-            } else {
+                if ($request['provider'] == 'seller') {
+                    $provider = 'seller';
+                } else {
                 $provider = 'user';
-            }
-            // Give Role
+                }
+                // Give Role
             $user->attachRole($provider);
             if($user->hasRole(User::SellerRole)){
                 $isExist    = Seller::where('user_id',$user->id)->first();

@@ -46,7 +46,7 @@ class CarCapacityController extends Controller
             $credentials = CarCapacity::credentials($request);
             $Carcapacity = CarCapacity::create($credentials);
             session()->flash('created',__("Changes has been Created Successfully"));
-            return redirect()->route("seller.car.create");
+            return redirect()->route("seller.index");
         }
 
     }

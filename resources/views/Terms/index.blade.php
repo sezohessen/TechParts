@@ -17,7 +17,7 @@
                     </div>
                 <div class="card-body">
                     <div class="mt-10 card-scroll">
-                        {!!$term !!}
+                        {!! LangDetail($terms->description,$terms->description_ar) !!}
                     </div>
                 </div>
                     <!--begin::Content footer-->

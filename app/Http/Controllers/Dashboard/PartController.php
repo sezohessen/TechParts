@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Exception;
 use App\Models\Car;
 use App\Models\Part;
+use App\Models\Image;
+use App\Models\Seller;
+use App\Models\CarYear;
+use App\Models\PartImg;
+use App\Models\CarMaker;
+use App\Models\CarModel;
+use App\Models\CarCapacity;
 use Illuminate\Http\Request;
 use App\DataTables\PartDatatable;
 use App\Http\Controllers\Controller;
-use App\Models\Image;
-use App\Models\PartImg;
-use App\Models\Seller;
-use Exception;
 
 class PartController extends Controller
 {
@@ -37,9 +41,36 @@ class PartController extends Controller
         $page_description   =__( "Add New Record");
         $cars               = Car::all();
         $sellers            = Seller::all();
-        return view('dashboard.Part.add', compact('page_title', 'page_description','cars','sellers'));
+        $makers             = CarMaker::all();
+        $capacities         = CarCapacity::all();
+        $models             = CarModel::all();
+        $years              = CarYear::all();
+        return view('dashboard.Part.add', compact('page_title', 'page_description','cars','sellers','makers','capacities','models','years'));
     }
 
+
+    public function available_model($id){
+        $models = CarModel::where('CarMaker_id', $id)->get();
+        if($models->count() > 0 ){
+            return response()->json([
+                'models' => $models
+            ]);
+        }
+        return response()->json([
+                'models' => null
+        ]);
+    }
+    public function available_year($id){
+        $years = CarYear::where('CarModel_id', $id)->get();
+        if($years->count() > 0 ){
+            return response()->json([
+                'years' => $years
+            ]);
+        }
+        return response()->json([
+                'years' => null
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -49,9 +80,17 @@ class PartController extends Controller
     public function store(Request $request)
     {
         $rules          = Part::rules($request);
-
         $request->validate($rules);
-        $credentials    = Part::credentials($request);
+        // Make new car
+
+        $newCar = new Car;
+        $newCar->user_id    = auth()->user()->id;
+        $newCar->CarModel_id = $request->CarModel_id;
+        $newCar->CarMaker_id = $request->CarMaker_id;
+        $newCar->CarYear_id = $request->CarYear_id;
+        $newCar->CarCapacity_id = $request->CarCapacity_id;
+        $newCar->save();
+        $credentials        = Part::credentials($request,$request->user_id,$newCar->id);
         $Part           = Part::create($credentials);
         if($request->file('part_img_new')){
             $images  = $request->file('part_img_new');
@@ -90,7 +129,11 @@ class PartController extends Controller
         $page_description   = __("Edit");
         $cars               = Car::all();
         $sellers            = Seller::all();
-        return view('dashboard.Part.edit', compact('page_title', 'page_description','cars','part','sellers'));
+        $makers             = CarMaker::all();
+        $capacities         = CarCapacity::all();
+        $models             = CarModel::all();
+        $years              = CarYear::all();
+        return view('dashboard.Part.edit', compact('page_title', 'page_description','cars','part','sellers','makers','capacities','years','models'));
     }
 
     /**
@@ -102,11 +145,17 @@ class PartController extends Controller
      */
     public function update(Request $request, Part $part)
     {
-
-        $rules          = Part::rules($request,true);
+        $rules          = Part::rules($request,$image = 1,$InSellerDashboard = 1);
         $request->validate($rules);
-
-        $credentials    = Part::credentials($request,true);
+        // Update Car
+        $CarId = $part->car->id;
+        $updateCar = Car::where('id',$CarId)->get()->first()->update([
+            'CarModel_id'    => $request->CarModel_id,
+            'CarMaker_id'    => $request->CarMaker_id,
+            'CarYear_id'     => $request->CarYear_id,
+            'CarCapacity_id' => $request->CarCapacity_id,
+        ]);
+        $credentials    = Part::credentials($request,$request->user_id,$CarId);
         $part->update($credentials);
         if($request->file('part_img')){
             $images  = $request->file('part_img');

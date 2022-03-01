@@ -114,7 +114,7 @@
             <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
                 <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
                     @if (App::isLocale('ar'))
-                        <img class="h-20px w-20px rounded-sm" src="{{ asset('media/svg/flags/133-saudi-arabia.svg') }}" alt=""/>
+                        <img class="h-20px w-20px rounded-sm" src="{{ asset('media/svg/flags/158-egypt.svg') }}" alt=""/>
                     @else
                         <img class="h-20px w-20px rounded-sm" src="{{ asset('media/svg/flags/226-united-states.svg') }}" alt=""/>
                     @endif

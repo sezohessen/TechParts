@@ -20,7 +20,7 @@
                     </div>
                 <div class="card-body">
                     <div class="mt-10 card-scroll">
-                        {!! $PPolicy !!}
+                        {!! LangDetail($PPolicy->description,$PPolicy->description_ar) !!}
                     </div>
                 </div>
                     <!--begin::Content footer-->

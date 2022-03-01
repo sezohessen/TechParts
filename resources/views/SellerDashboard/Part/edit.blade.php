@@ -93,29 +93,89 @@
                         </div>
                     </div>
                     <!-- Select car -->
-                    <div class="col-md-12">
+                    <div class='col-md-6'></div>
+                    <!-- v2 Edit - add ( car manf , model , year, CC) -->
+                    <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label col-sm-12">@lang('Select Car')<span class="text-danger">*</span></label><br>
-                            <div class=" col-lg-12 col-md-12 col-sm-12">
-                                <select class="form-control selectpicker {{ $errors->has('car_id') ? 'is-invalid' : '' }}"
-                                     name="car_id" id="kt_select2_3" required>
-                                <option selected value="{{$part->car_id}}">
-                                    {{$part->car->make->name}} -  {{ $part->car->model->name }}
-                                    - {{$part->car->year->year}} - {{$part->car->capacity->capacity}}
-                                </option>
-                                @foreach ($cars as $key=>$car)
-                                    <option  value="{{$car->id}}">
-                                        {{ $car->make->name }} - {{$car->model->name}}
-                                    - {{$car->year->year}} - {{$car->capacity->capacity}}
-                                    </option>
+                            <label class="col-form-label col-sm-12">@lang('Select Car Make')<span class="text-danger">*</span></label><br>
+                            <div class="col-md-12">
+                                <select class="form-control selectpicker {{ $errors->has('CarMaker_id') ? 'is-invalid' : '' }}" name="CarMaker_id" id="maker" required>
+                                    <option value="{{$part->car->CarMaker_id}}"
+                                    data-content="
+                                            <img src='{{url('img/CarMakers/'.$part->car->make->logo->name)}}'  class='img-thumbnail' width='30' height='30'>
+                                            <span>{{$part->car->make->name}}</span>
+                                            "></option>
+                                    @foreach ($makers as $key=>$maker)
+                                        <option value="{{$maker->id}}"
+                                            data-content="
+                                            <img src='{{url('img/CarMakers/'.$maker->logo->name)}}'  class='img-thumbnail' width='30' height='30'>
+                                            <span>{{$maker->name}}</span>
+                                            "{{ old('CarMaker_id')==$maker->id ? 'selected':'' }}>
+                                        </option>
                                     @endforeach
                                 </select>
-                                @error('car_id')
-                                    <div class="invalid-feedback">{{ $errors->first('car_id') }}</div>
+                            @error('CarMaker_id')
+                                <div class="invalid-feedback">{{ $errors->first('CarMaker_id') }}</div>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row ">
+                             <label for="model" class="col-form-label  col-sm-12">@lang('By car type')<span class="text-danger">*</span>
+                            </label><br>
+                             <div class="col-md-12">
+                                <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
+                                name="CarModel_id"  data-select2-id="{{old("CarModel_id")}}" >
+                                    <option value="{{$part->car->CarModel_id}}">{{$part->car->model->name}}</option>
+
+                                </select>
+                                @error('CarModel_id')
+                                    <div class="invalid-feedback">{{ $errors->first('CarModel_id') }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-form-label  col-sm-12">@lang('Select Car Year')</label><br>
+                            <div class="col-md-12">
+                             <select class="form-control {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
+                                 name="CarYear_id" id='year'>
+                                    @if ($part->car->CarYear_id != null)
+                                    <option value="{{$part->car->CarYear_id}}">{{$part->car->year->year}}</option>
+                                    @else
+                                        <option value="">@lang('By car type First')</option>
+                                    @endif
+                             </select>
+                            @error('CarYear_id')
+                             <div class="invalid-feedback">{{ $errors->first('CarYear_id') }}</div>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-form-label col-sm-12">@lang('Select Car Capacity')</label><br>
+                            <div class="col-md-12">
+                                <select class="form-control select2 {{ $errors->has('CarCapacity_id') ? 'is-invalid' : '' }}"
+                                    id="kt_select2_3" name="CarCapacity_id">
+                                    @if ($part->car->CarCapacity_id != null)
+                                    <option value="{{$part->car->CarCapacity_id}}">{{$part->car->capacity->capacity}}</option>
+                                    @else
+                                        <option value="">@lang('Select Car Capacity')</option>
+                                    @endif
+                                   @foreach ($capacities as $capacity)
+                                       <option value="{{$capacity->id}}" {{ old('CarCapacity_id')==$capacity->id ? 'selected':'' }}>{{$capacity->capacity}}</option>
+                                   @endforeach
+                                </select>
+                               @error('CarCapacity_id')
+                                <div class="invalid-feedback">{{ $errors->first('CarCapacity_id') }}</div>
+                               @enderror
+                               </div>
+                        </div>
+                    </div>
+                </div>
                     <!-- Desc -->
                     <div class="col-md-12">
                         <div class="form-group">
@@ -198,7 +258,7 @@
             </div>
         </form>
         <!--end::Form-->
-    </div>
+</div>
 
 @endsection
 
@@ -218,5 +278,61 @@
             new KTImageInput("logo_3");
             }
             };jQuery(document).ready((function(){KTUserEdit.init()}));
+</script>
+<script>
+    function year(id ){
+        $('#year').empty();
+        old_year="<?php echo old('CarYear_id') ?  old('CarYear_id') : ""  ?>";
+        $.ajax({
+            url: '/seller/car/available_year/'+id,
+            success: data => {
+                if(data.years){
+                    data.years.forEach(years =>
+                    $('#year').append(`<option value="${years.id}" ${(old_year==years.id) ? "selected" : "" } >${years.year}</option>`)
+                    )
+                }else{
+                    $('#year').append(`<option value="">{{__("No Results")}}</option>`)
+                }
+
+            },
+
+        });
+    }
+    function model(id ){
+        $('#models').empty();
+        $('#year').empty();
+        old_model="<?php echo old('CarModel_id') ?  old('CarModel_id') : ""  ?>";
+        $.ajax({
+            url: '/seller/car/available_model/'+id,
+            success: data => {
+                if(data.models){
+                    $('#models').append(`<option value="" >@lang('By car type')</option>`)
+                    data.models.forEach(models =>
+                    $('#models').append(`<option value="${models.id}" ${(old_model==models.id) ? "selected" : "" } >${models.name}</option>`)
+                    )
+                }else{
+                    $('#models').append(`<option value="">{{__("No Results")}}</option>`)
+                }
+
+            },
+
+        });
+    }
+    $('#maker').on('change', function() {
+        var id = this.value ;
+        model(id);
+    });
+    $('#models').on('change', function() {
+        var id = this.value;
+        year(id);
+    });
+    var old_maker="<?php echo (old('CarMaker_id')) ? old('CarMaker_id') : null; ?>";
+    if (old_maker != ''){
+        model("<?php echo (old('CarMaker_id'))?>");
+    }
+    var old_maker="<?php echo (old('CarModel_id')) ? old('CarModel_id') : null; ?>";
+    if (old_maker != ''){
+        year("<?php echo (old('CarModel_id'))?>");
+    }
 </script>
 @endsection

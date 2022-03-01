@@ -18,6 +18,12 @@ class SellersController extends Controller
         $capacities     = CarCapacity::all();
         $Classes        = CarClassification::limit(3)->get();
         $sellers = Seller::where('governorate_id' , '!=' , null);
+        if(isset($Request->sellername)){
+            $sellers->whereHas('user',function($q) use($Request){
+                $q->where('users.first_name','like','%'.$Request->sellername.'%')
+                  ->orWhere('users.last_name', 'like', '%'.$Request->sellername.'%');
+            });
+        }
         if(isset($Request->governorate_id))$sellers->where('governorate_id',$Request->governorate_id);
         if(isset($Request->city_id))$sellers->where('city_id',$Request->city_id);
         if(isset($Request->brand_id)){
@@ -31,6 +37,7 @@ class SellersController extends Controller
                 'brand_id'          => $Request->brand_id,
                 'governorate_id'    => $Request->governorate_id,
                 'city_id'           => $Request->city_id,
+                'sellername'        => $Request->sellername
             ]
         );
         return view('website.sellers',compact('sellers','brands','governorates','capacities','Classes'));

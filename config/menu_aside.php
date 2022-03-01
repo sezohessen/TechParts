@@ -79,22 +79,22 @@ return [
 
                     ]
                 ],
-                [
-                    'title' => 'Car Options',
-                    'bullet' => 'line',
-                    'root' => true,
-                    'submenu' => [
-                        [
-                            'title' => 'Add A car ',
-                            'page' => "/dashboard/car/create"
-                        ],
-                        [
-                            'title' => 'View Cars',
-                            'page' => '/dashboard/car'
-                        ],
+                // [
+                //     'title' => 'Car Options',
+                //     'bullet' => 'line',
+                //     'root' => true,
+                //     'submenu' => [
+                //         [
+                //             'title' => 'Add A car ',
+                //             'page' => "/dashboard/car/create"
+                //         ],
+                //         [
+                //             'title' => 'View Cars',
+                //             'page' => '/dashboard/car'
+                //         ],
 
-                    ]
-                ],
+                //     ]
+                // ],
                 [
                     'title' => 'Car Makers',
                     'bullet' => 'line',
@@ -113,16 +113,16 @@ return [
 
                 ],
                 [
-                    'title' => 'Car Models',
+                    'title' => 'Car Types',
                     'bullet' => 'line',
                     'root' => true,
                     'submenu' => [
                         [
-                            'title' => 'Add Car Model',
+                            'title' => 'Add Car Type',
                             'page' => "/dashboard/car/model/create"
                         ],
                         [
-                            'title' => 'View Car Models',
+                            'title' => 'View Car Types',
                             'page' => '/dashboard/car/model'
                         ],
 
