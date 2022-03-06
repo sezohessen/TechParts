@@ -93,21 +93,6 @@ class User extends Authenticatable
         return $credentials;
     }
 
-    public static function UpdateCredentials($request,$FromEdit = NULL)
-    {
-        $credentials = [
-            'first_name'            => $request->first_name,
-            'last_name'             => $request->last_name,
-            'email'                 => $request->email,
-            'phone'                 => $request->phone,
-            'whats_app'             => $request->whats_app,
-            'password'              => Hash::make($request->password)
-        ];
-        if($FromEdit)unset($credentials['password']);
-        return $credentials;
-    }
-
-
     public function role()
     {
       return $this->belongsToMany(Role::class);
