@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePartRequest extends FormRequest
+class UpdatePartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,6 +27,7 @@ class StorePartRequest extends FormRequest
     public function rules()
     {
         return [
+            'part_id'                  => 'required|',
             'name'                     => 'nullable|min:4|max:255',
             'name_ar'                  => 'required|min:4|max:255',
             'desc'                     => 'nullable|min:10|max:255',
@@ -38,8 +39,9 @@ class StorePartRequest extends FormRequest
             'CarModel_id'              => 'required|integer|exists:car_models,id',
             'CarYear_id'               => 'nullable|integer|exists:car_years,id',
             'CarCapacity_id'           => 'nullable|integer|exists:car_capacities,id',
-            'part_img_new.0'           => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize,
-            'part_img_new.*'           => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize
+            'part_img_new.0'           => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize,
+            'part_img_new.*'           => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:'.self::ImgSize,
+            'deleted_img'              => 'nullable|'
         ];
     }
 }

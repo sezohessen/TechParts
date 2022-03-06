@@ -23,4 +23,9 @@ class SellerRating extends Model
     {
         return $this->belongsTo(User::class,"user_id","id");
     }
+
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class,"seller_id","id");
+    }
 }

@@ -8,11 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-=======
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\UsersResource;
->>>>>>> api-doc
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 

@@ -19,7 +19,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"users":[{"id":1,"first_name":"Superadmin","last_name":"Superadmin","email":"topart383@gmail.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"00000000000","whats_app":"00000000000","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-12-11T18:50:59.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":2,"first_name":"Seller","last_name":"Seller","email":"seller@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"4849086","whats_app":"0126380291","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":3,"first_name":"User","last_name":"User","email":"user@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"5596635","whats_app":"0121795503","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":4,"first_name":"Agency0","last_name":"Agency0","email":"agency0@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"28493080","whats_app":"0126073278","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-11-01T07:17:15.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":1},{"id":5,"first_name":"Agency1","last_name":"Agency1","email":"agency1@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"14377621","whats_app":"0123821381","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":6,"first_name":"Agency2","last_name":"Agency2","email":"agency2@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"13291362","whats_app":"0127117853","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":7,"first_name":"Agency3","last_name":"Agency3","email":"agency3@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"79480533","whats_app":"0127907068","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":8,"first_name":"Agency4","last_name":"Agency4","email":"agency4@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"73569564","whats_app":"0127207867","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":9,"first_name":"Agency5","last_name":"Agency5","email":"agency5@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"36593635","whats_app":"0125433088","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":10,"first_name":"Agency6","last_name":"Agency6","email":"agency6@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"51397166","whats_app":"0125976942","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0}],"status":true,"msg":"users"},"links":{"first":"http:\/\/localhost\/api\/v1\/users?page=1","last":"http:\/\/localhost\/api\/v1\/users?page=7","prev":null,"next":"http:\/\/localhost\/api\/v1\/users?page=2"},"meta":{"current_page":1,"from":1,"last_page":7,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=1","label":"1","active":true},{"url":"http:\/\/localhost\/api\/v1\/users?page=2","label":"2","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=3","label":"3","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=4","label":"4","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=5","label":"5","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=6","label":"6","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=7","label":"7","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=2","label":"Next &raquo;","active":false}],"path":"http:\/\/localhost\/api\/v1\/users","per_page":10,"to":10,"total":66},"status":{"success":true,"msg":"all users"}}'
+        content: '{"data":{"users":[{"id":1,"first_name":"Superadmin","last_name":"Superadmin","email":"topart383@gmail.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"00000000000","whats_app":"00000000000","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-12-11T18:50:59.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":2,"first_name":"Seller","last_name":"Seller","email":"seller@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"4849086","whats_app":"0126380291","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":3,"first_name":"User","last_name":"User","email":"user@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"5596635","whats_app":"0121795503","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":4,"first_name":"Agency0","last_name":"Agency0","email":"agency0@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"28493080","whats_app":"0126073278","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-11-01T07:17:15.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":1},{"id":5,"first_name":"Agency1","last_name":"Agency1","email":"agency1@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"14377621","whats_app":"0123821381","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":6,"first_name":"Agency2","last_name":"Agency2","email":"agency2@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"13291362","whats_app":"0127117853","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":7,"first_name":"Agency3","last_name":"Agency3","email":"agency3@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"79480533","whats_app":"0127907068","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":8,"first_name":"Agency4","last_name":"Agency4","email":"agency4@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"73569564","whats_app":"0127207867","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":9,"first_name":"Agency5","last_name":"Agency5","email":"agency5@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"36593635","whats_app":"0125433088","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0},{"id":10,"first_name":"Agency6","last_name":"Agency6","email":"agency6@app.com","email_verified_at":"2021-10-16T12:01:17.000000Z","phone":"51397166","whats_app":"0125976942","created_at":"2021-10-16T12:01:17.000000Z","updated_at":"2021-10-16T12:01:17.000000Z","avatar":"avatar.png","messenger_color":"#2180f3","dark_mode":0,"active_status":0}],"status":true,"msg":"users"},"links":{"first":"http:\/\/localhost\/api\/v1\/users?page=1","last":"http:\/\/localhost\/api\/v1\/users?page=7","prev":null,"next":"http:\/\/localhost\/api\/v1\/users?page=2"},"meta":{"current_page":1,"from":1,"last_page":7,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=1","label":"1","active":true},{"url":"http:\/\/localhost\/api\/v1\/users?page=2","label":"2","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=3","label":"3","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=4","label":"4","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=5","label":"5","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=6","label":"6","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=7","label":"7","active":false},{"url":"http:\/\/localhost\/api\/v1\/users?page=2","label":"Next &raquo;","active":false}],"path":"http:\/\/localhost\/api\/v1\/users","per_page":10,"to":10,"total":67},"status":{"success":true,"msg":"all users"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -45,49 +45,49 @@ endpoints:
         name: first_name
         description: 'Must be at least 4 characters. Must not be greater than 255 characters.'
         required: true
-        example: eoqnqwnsvhefnimhvqiacldnojokxsxnjjsplorfoymiwsgvlkjljumzsxjpqeosamchskuswjyvfvcsrcsfgabkcttjaefyrohbxlerxcageiwopnllvlzt
+        example: qqunrohvggifnzzzctfcwgdubtwrtfvyaoytpvgkhawbazgplkkjwwnspznkfomdwmacprclltyeqspldbmperfqexfvtukoshedqiqhzdxdtllimpuflwdoxmigfguqxdflkrohgfhmklftfkembcilviqkiupe
         type: string
         custom: []
       last_name:
         name: last_name
         description: 'Must be at least 4 characters. Must not be greater than 255 characters.'
         required: true
-        example: gfusgtjrafpvscmhselqebbhnufasbofclybtlueuf
+        example: qlyyvuzfchaclafzvymrsypbkpirfmhrzcpvvdowsbqzbrqkohrmlvqolkqiyvs
         type: string
         custom: []
       email:
         name: email
         description: 'Must be a valid email address. Must not be greater than 255 characters.'
         required: true
-        example: ewtffbueymtwszobobvmqwdmgfvjvvlhpjyhniqsankcuuhdtbvlhyzwyoarvyjclrqkjppgfljalrzvdpbtblqkkspmxgrrjizaumzvpgxxhbtcetsrwoosjeiuajdmpcgniuhfttvdagdmiuypskebwmoniovpdzagwcbrqgkznutrobwbhigyzhszlqfmxqkkvsysthvcrfhhspavzwvgolszjoctyetohci
+        example: jvbltaldevdwajsqmtkgsakulhbeltazotfrqnbvblqflihoetstexrlcsmjxfnvjkzbbfgsfeqrliyihaehnqcwuqpsfqmgukklxumgxvyetfbhfymjfgxviiskucgtqwzijy
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be 11 digits.'
         required: false
-        example: '36348020924'
+        example: '30656508307'
         type: string
         custom: []
       whats_app:
         name: whats_app
         description: 'Must be 11 digits.'
         required: false
-        example: '88226095231'
+        example: '79071256221'
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: mxgowe
+        example: ''
         type: string
         custom: []
       provider:
         name: provider
         description: ''
         required: true
-        example: ad
+        example: explicabo
         type: string
         custom: []
     responses: []
@@ -109,7 +109,7 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 17
+        example: 15
         type: integer
         custom: []
     queryParameters: []
@@ -141,7 +141,7 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 1
+        example: 14
         type: integer
         custom: []
     queryParameters: []
@@ -165,7 +165,7 @@ endpoints:
         name: name
         description: ''
         required: true
-        example: quibusdam
+        example: placeat
         type: string
         custom: []
     queryParameters: []
@@ -173,7 +173,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"users":[],"status":true,"msg":"users"},"links":{"first":"http:\/\/localhost\/api\/v1\/search-user\/quibusdam?page=1","last":"http:\/\/localhost\/api\/v1\/search-user\/quibusdam?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost\/api\/v1\/search-user\/quibusdam?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http:\/\/localhost\/api\/v1\/search-user\/quibusdam","per_page":10,"to":null,"total":0}}'
+        content: '{"data":{"users":[],"status":true,"msg":"users"},"links":{"first":"http:\/\/localhost\/api\/v1\/search-user\/placeat?page=1","last":"http:\/\/localhost\/api\/v1\/search-user\/placeat?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost\/api\/v1\/search-user\/placeat?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http:\/\/localhost\/api\/v1\/search-user\/placeat","per_page":10,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -199,35 +199,35 @@ endpoints:
         name: first_name
         description: 'Must be at least 4 characters. Must not be greater than 255 characters.'
         required: true
-        example: mqevfyodysvztmhtoearaswllmmgkfvabepttswdgnbvvuhvjzrotcdyjqsleillvbhwvybouyhwnuemyjayhbjeijepzwlhqlguxekydkckqoipatfifivxllvozjxdigxnsyumslfoomkkumsodovvevfdebdxfk
+        example: bcvufmksgtvlhgtejbawputizngeqwyvoohfefsdkadfzcxgeikzwuyfyqdfozqfslprsrhxvywgtmdqwxrwjjbqitfrybuxehghqjvozlrjcuptnfkyzehlhwhdqfbufetkude
         type: string
         custom: []
       last_name:
         name: last_name
         description: 'Must be at least 4 characters. Must not be greater than 255 characters.'
         required: true
-        example: ztpgncxogpfewwtwjqdmyorpitxkinwmraiidiwbzgcarnrkiumklzwduxnarfsvkjyhtemdxueputeqgyteajvsrpsmojnczdghealcmzhmtaads
+        example: yiswttwoxcjuccovajygldjhhjimdrytqtovltmzeadsdwrtwnatiwuxzzqpjfclqrlducvasnoqnpyxhupntlpemlzimccwatrsbavfwztvidvnhgkyjfjjzxuvtgakhhkgytdnbgmdzxiywhwpsttnxsfvbwllzybkgdrfkblrqiglgwgejuqblbufxohafaregxhxjjnynbahywxe
         type: string
         custom: []
       email:
         name: email
         description: 'Must be a valid email address. Must not be greater than 255 characters.'
         required: true
-        example: otrwrpqlazcmnhzuemjwdidylftbkkbsnhmwrrxwgvpclbqmvpsmsjpqqhlgndtlvedewcyogphcxrwgrnqszunchwacohojuhvvucotrabagiljtmrlksynulzxanpddmkruhagfjaiectvtdbdrhetsyxwckcwfphzbkunjbbjpafvjdwgqigqmkbc
+        example: qpteycirhuytmmwklnkeqgajalnwpgmiocodwtgcuofezufxe
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 4 characters. Must not be greater than 100 characters.'
         required: true
-        example: ebiyylowqlfigrdeoxjwtveutigolkhcasyjdhvkemjttoihzjzncawazdsydwtmqlxiqcofsyinqtmlgehyuat
+        example: idajvdvzwzgtlczjxtng
         type: string
         custom: []
       provider:
         name: provider
         description: ''
         required: true
-        example: ea
+        example: deleniti
         type: string
         custom: []
     responses: []
@@ -251,14 +251,14 @@ endpoints:
         name: email
         description: 'Must be a valid email address. Must not be greater than 255 characters.'
         required: true
-        example: ghsgiebudgrytlexprrlhlorizgrbmjnlahpjlywbudpbslewnuiigczsaufsdtqomrhkpbymwbzqkovrsnewextpwidqwzuhtauszwvypwxozwtqhbtoetixdfeurvpcxxhrlaeeywjeqwxvmvsedonshsprlttjrrehfchadxkkacflkoyaoicrxacobjlfliysjvzerahg
+        example: jw
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 4 characters. Must not be greater than 100 characters.'
         required: true
-        example: tuzovdacrxmdtoxegjayaiphgjuvsveslhhugfzeaqveftwsisvngnmrzjggiswith
+        example: mblxlhghgwuthvgaqofmeeqvzoncrgxwaosebadutvbjgbvzydrrlqzbageijybgwqshkryixmoo
         type: string
         custom: []
     responses: []
@@ -827,7 +827,7 @@ endpoints:
         name: searchOpt
         description: ''
         required: true
-        example: repudiandae
+        example: consequatur
         type: string
         custom: []
       search:
@@ -848,28 +848,28 @@ endpoints:
         name: carType
         description: ''
         required: false
-        example: 20
+        example: 13
         type: integer
         custom: []
       carYear:
         name: carYear
         description: ''
         required: false
-        example: 11
+        example: 9
         type: integer
         custom: []
       carCapacity:
         name: carCapacity
         description: ''
         required: false
-        example: 3
+        example: 1
         type: integer
         custom: []
       order:
         name: order
         description: ''
         required: false
-        example: quia
+        example: repudiandae
         type: string
         custom: []
     responses:
@@ -1484,21 +1484,21 @@ endpoints:
         name: governorate_id
         description: ''
         required: true
-        example: 4
+        example: 5
         type: integer
         custom: []
       city_id:
         name: city_id
         description: ''
         required: false
-        example: 14
+        example: 3
         type: integer
         custom: []
       brand_id:
         name: brand_id
         description: ''
         required: false
-        example: 4
+        example: 1
         type: integer
         custom: []
     responses:
@@ -1572,14 +1572,14 @@ endpoints:
         name: desc
         description: 'Must be at least 10 characters. Must not be greater than 255 characters.'
         required: false
-        example: iqpwfgbsgvawhiwbvhevppngzwlwsnfxucz
+        example: yhgnsbjocjhqpabieahkquxrgabtamvfpnarvzzrfgyhgoscixmzpecyyqxkclrxopbpfmztivpfgsfbkdddrjz
         type: string
         custom: []
       desc_ar:
         name: desc_ar
         description: 'Must be at least 10 characters. Must not be greater than 255 characters.'
         required: true
-        example: hmdnagtrwlmtkwjsekqjjvxxzxmdikidtkvqgyufbclmmjhtgruqutynrw
+        example: eopaljoahckzmlplnhiucbrzboveoilukwkornoxfigrfqtkfvemrhhyrayvwptjfblsbnjmcytprpjazeagrfnuknvhdctandsftngwrnikyseallcmongolomlpnufxkyvhrmsqrkmdwficeolchonaewgbxmhouhzpjufreklbdapbwsinxjfwufccbiyixyolraibeocchqdqofxtelcz
         type: string
         custom: []
       bg:
@@ -1600,35 +1600,35 @@ endpoints:
         name: governorate_id
         description: ''
         required: true
-        example: 16
+        example: 18
         type: integer
         custom: []
       city_id:
         name: city_id
         description: ''
         required: true
-        example: 6
+        example: 3
         type: integer
         custom: []
       lat:
         name: lat
         description: ''
         required: true
-        example: non
+        example: tempora
         type: string
         custom: []
       long:
         name: long
         description: ''
         required: true
-        example: magni
+        example: exercitationem
         type: string
         custom: []
       street:
         name: street
         description: 'Must be at least 3 characters. Must not be greater than 100 characters.'
         required: true
-        example: dybmyblebbqkzkkkspyaaeyiodhrkilcxmymjrkwfu
+        example: vazstxhmycahbneftdbqtuqzwlkxbtbhzks
         type: string
         custom: []
       facebook:
@@ -1649,7 +1649,7 @@ endpoints:
         name: file
         description: 'Must not be greater than 4096 characters.'
         required: false
-        example: oeabzcmqjmubqmsxjwqzigbngqkjocaoowugzjnvwfrwvsmuhcdvxtndgjnxkmzyxzczzwajunhgqlpqgdkmzidofbewzhrlpchgslelcnmnwcgovhrzgdlqhlknqwgnhnxpdvtkwxxmtdzmjhejcddupnwnwxvxezmbgtuiinctiicsgeangqmdgxlpzultfwnpcdcdvjekjpkqhhtjripqkebmrleogoxtpmkiotbscldqriskmfwpwgarcbckvrcyytmuzfsdmvltcthohbbtzfsuvkixydldikxxnyywvugeceedgouvpanohbndgkxxlcqtkbxnfunxhqngfdglydsshrewghbmhwpwympdabgrecvqaqkcoechsjtcppnybtjlofwpfgrwqdgsrubktfrbdgskwmtcchhtjxkmnzhxunsfjufvzqmqioejnqnpmvwcnjzapxcyxslvkyqjheflnafpvrvbkbkfxvynebqzpfwyafiagxzbbjbfhcqijtalevztbyjggzislbllsatavnfkfrqeyalqmrwzsypysmwcfdsbxbxpykjbpnkrupxthegdbkqxycbratqephoffbhvozqbswveheijwsayqwqrobtwqmvvhpjdkacpgmmrrmofgbbjbzkzjofzbkvjtimlvkjmfqtmjhzihauukgdiosnkzvyptyoesemmcuibtgixongmcrlfgsprzcghzrwnfrghlvwrmnerbdyyepkvhthovfrddtwrimilcoitxkrcwglrvnofuabncefheqbxzwfqzldbkauxaiekdsqcnvcwjvnpjvnahotnztsdslbooljpbuoelfoyecuzwnsgdzmigtriqoiylgmmmtugclsnggrpmosweyeszpsnvzjgwsuvbsozgptrvejtkpljfiyabfrzgvzgogbvawnildfnlqcbffcyddwjnmlyffelmzkqkvniytlqvrkpekmdrbitxvkldfofuvhnxlxhgmyxlsiegjsquwbllnemrzwtsoniiwlussxyeuipavxgknlttandzvnmuopphyboybylhmhxlieexoamaeaafadxmrubppnxcwputuohqnngkmbwwaxmnjvtrbbdlaxfwmofykuczltctmykpynjzjztbrhfnbecooefddkscoxggpryrxitnwbdpgvwmjfazruqnxcpzvregrumnzigpztzlraufokwnqzjcapjpqstvpuowyixktozmraogvaaqgaaggeianhxestahafmubmjxdvciymtdmrkrksqcezzipjzcnqefqqvmedrumohhnhuxjuleehiobnsyxukjplbfhcgvuqzytqqiqaznlmposwhrvimovxojowvpshsavizneehvclemsjjqsrxbodywruvllvhjuuwcosvlxjgacvosbmkwiowoattfzpcycolsaqyiblhaqdbkvjqzsdlwbgcynzeneuamejqfozjiigxmmuvoxnhtpgyhennzuuuolvnanwwoscgmkvgmbxhljslzgrrcqixyhpvqhtgetqdniajslhxlxhlhqqderjlbileysmjlzxndqkwbjzphxrmzrtsgbnwicleyouvangwqsccawxtmbhzxivvnalifzpychbzhfaodkjletgoogysgqmtjuymonrbtcprmutxvzmupberseantqbphpbnaqdraradhlztvhwgoqyxihcacgwfxdicrqhwijnfmxyjeojcknwhcddmlubqqbaobknmhgcvdpdgziejjlewzcjoygidarpgzajnsuhrclhofspkqdaetlzujntzvopvizjuwmswhwnmcpsbrgitryubojpkohdgimedlhdyftbywtatcyrfdgsaotrgbkgofhemztzvsbesfdcsmlfzikruljrdultgftjgjawwmlqxhoxubmgpookevwwsvzxeflfhrzyonmckerpwnelmyunyfjahpeqcyrqoyrczphukephtijdjvojrycfndeholwqfwftajsljrfdebtslkikxafkbtlhoaxfhsytqjksjyisqehkuvkdgixqyzsytvdmtbyllouypjetwixgnignfexyfrqqptjoklzozlfdighqzdnxvrwqrckxbchjhbdgzkgsthmzwpmvvumajvhxsvrhpxzsklfrbmvkkxarnofqviechypmtliqbztqseligjylllxjvixgqkipxqiryldbwvnyejbbuurkkifytgllzvutbqytiphujldxrzfukquijkhjaevlhjtdgxvrmrlnqkhlydwtutlqexhbyjbkgepwcvynjfurmtprhjjhklbgghhqssqkgndlbeghucqudnrcbtpulxlellilp
+        example: aywzrirynnusmiwupggwmbyijbprucjwjluhunxfkyzhmokcnhkzvuseggvzjoivuhbbfzihmxewidjlkpmuqrepooukqdejnmxnotkvwxpsaibgwlsefsuedqivitmmfemiptbeqfsiucxdhypxoltvombpsrnqaqsmaqasygylfjctlgconlmyosapirpcsvwlaktgqgbnuawlyiqkhtihhhemiilbzbfbyibhpvwvrrearilhauowpmizcvqrafhmzznhnpeqdgyecdwkdlugxqhgecqkfwfipciizwbfjuuxecxdklfszyofhcpobtunqwmdtepnatowqicjfauiegmhrvhuocityzmfmojxrpylzwizdwwslxaakdgikgwxrlonhnelosywlxunolxdrtfabhgokgogzktheqjivufdlzavbvdoaxclasbxylpqlhujzdcaqaojxubrggwagvetjdfgunkqrylmnycvpapgjtawtfpxgspefqqthcphhwttlebexhzazytrcqhpfswmsamihqbpcmtxlbtscsglwffrphgreytgqpuvoblbkexhrktpgrzucdrrxypusbzbssyxoharfjgiftfvujhkbaaakgtztvifnojeoulylyzcvufrvslnorpnwpovqqdqxouetzmypibmbdjmcuqqyevfmhxvdebuxunyesacxkwnisvfshiiaqlptwljtvlfiuuhirqsnmybghfqlgwuhdacaelcaeydnpfhjqwzosztidcjgwcyysiiwaqihnxheyuxkhzgubfgcbhshryjkhfpxwtspwfqfcfgzmyflvullbufbhhulvvrscibfukgjlomvxepvmfmdryzchejwdysnukhayxslcloqceuiuebitmkeswymlslxigllbissgczrfqsswzyektofvougmiregnecicetebpxiogojuoffulwmnzglwicbrlkqjyqjhctlhjimfncrloqpbzoztdbwhpinjmsmcxxgqnnrjzyyxfbiewuycngneolcrwifpankwprrvwqmebagbfoniuydvbtgberzmunyjvaenkcslxyxtljozsxvhfeqhkngoaybafrzcrewnvavqeqvyzoctcjevxuuxvrcsjclbizgioqrtksahcvywtoqcmetmhmuhnekupnirubzhdgrnarcmprjydeaqwiltbxhbdlxhotfolbetvxdqxdjjxpoivoequbxxbdxvkgubqavvgertctaujzfkgjsevbhrctwwvxrftduamisfyedochfwmwoybkcgevlqhqdepxsfjvgsjdbaanuhlmaotsacdqbigqicghmrfcnovcurcowhbeflvogpgrkotxodvqjyxctoshfrtovtsffklytmyovvimtvaefcmsavadnruvfjcebfpzkizzzfmqyqbpqgxwlltxdcimaaprkgaljeoxufuckoilpoeualuszugqfykrurucwhcnxejldzinsrcqekjttpanqavcufmfnjtdpbplyppgwoyevjgzpohxeeyifoyenefymcabyyslirpna
         type: string
         custom: []
       brand:
@@ -1664,26 +1664,9 @@ endpoints:
         description: ''
         required: true
         example:
-          - rem
+          - qui
         type: 'string[]'
         custom: []
-    responses: []
-    responseFields: []
-  -
-    httpMethods:
-      - DELETE
-    uri: api/v1/deleteBrand
-    metadata:
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    queryParameters: []
-    bodyParameters: []
     responses: []
     responseFields: []
   -
@@ -1730,7 +1713,7 @@ endpoints:
         name: part_id
         description: ''
         required: true
-        example: sequi
+        example: voluptatem
         type: string
         custom: []
     responses: []
@@ -1751,4 +1734,504 @@ endpoints:
     queryParameters: []
     bodyParameters: []
     responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/addCarType
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must be at least 4 characters. Must not be greater than 20 characters.'
+        required: true
+        example: nxrrutolegikgn
+        type: string
+        custom: []
+      CarMaker_id:
+        name: CarMaker_id
+        description: ''
+        required: true
+        example: 18
+        type: integer
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/addYear
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      year:
+        name: year
+        description: 'Must be at least 4 characters. Must not be greater than 20 characters.'
+        required: true
+        example: dcxldtxlqruiaptyomh
+        type: string
+        custom: []
+      CarModel_id:
+        name: CarModel_id
+        description: ''
+        required: true
+        example: 19
+        type: integer
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/addCapacity
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      capacity:
+        name: capacity
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: ddmbbytbefzcosdqbzpqvpzydvpkiqjhplltbjkafzgfteohcbrgbwqzvrrapketcndbftivwolzbwxsnrktfczligkjkbkhnachbowrejpmskjcsgnjubhyafpjcmkgpzlidghfyhndikykwcnywzkjpeswkeezvkxqreynlltxmzrwwvcyybvhxobfbshxwnogibnjwbnnurxuqgknsiinobcmu
+        type: string
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/storePart
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must be at least 4 characters. Must not be greater than 255 characters.'
+        required: false
+        example: jtptukq
+        type: string
+        custom: []
+      name_ar:
+        name: name_ar
+        description: 'Must be at least 4 characters. Must not be greater than 255 characters.'
+        required: true
+        example: anmgqgwfausuuotrooisrpxiuilqvcv
+        type: string
+        custom: []
+      desc:
+        name: desc
+        description: 'Must be at least 10 characters. Must not be greater than 255 characters.'
+        required: false
+        example: qcvrnsujknuhlbtdwdimzleybggvpnohgnshkxrquxtlldqvbfvbfzzhheleohmqhrfgvotjflpdmxokuxbqzixqkavxupyvbcxzquequigkxgcvjsvrztoprkpwqqzlcxvlyxaufzrfnvrblsimjnotfcugksuwitpixcgomwwukswjeizprcwifreehwvktzjznjkmvusplmjdfsebxn
+        type: string
+        custom: []
+      desc_ar:
+        name: desc_ar
+        description: 'Must be at least 10 characters. Must not be greater than 255 characters.'
+        required: true
+        example: qwdgozjunmigdgwqdrucunrjkrpbfgsvbhhmkgsbohmvtykezpbltkorigsvn
+        type: string
+        custom: []
+      part_number:
+        name: part_number
+        description: ''
+        required: false
+        example: aut
+        type: string
+        custom: []
+      price:
+        name: price
+        description: 'Must be at least 1. Must not be greater than 1000000.'
+        required: false
+        example: 124732
+        type: integer
+        custom: []
+      in_stock:
+        name: in_stock
+        description: 'Must be at least 0. Must not be greater than 1000000.'
+        required: false
+        example: 186801
+        type: integer
+        custom: []
+      CarMaker_id:
+        name: CarMaker_id
+        description: ''
+        required: true
+        example: 2
+        type: integer
+        custom: []
+      CarModel_id:
+        name: CarModel_id
+        description: ''
+        required: true
+        example: 5
+        type: integer
+        custom: []
+      CarYear_id:
+        name: CarYear_id
+        description: ''
+        required: false
+        example: 6
+        type: integer
+        custom: []
+      CarCapacity_id:
+        name: CarCapacity_id
+        description: ''
+        required: false
+        example: 2
+        type: integer
+        custom: []
+      part_img_new:
+        name: part_img_new
+        description: 'Must be an image.  Must be an image. Must not be greater than 2048 kilobytes. Must not be greater than 2048 kilobytes.'
+        required: true
+        example:
+          - null
+        type: 'file[]'
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/updatePart
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      part_id:
+        name: part_id
+        description: ''
+        required: true
+        example: ea
+        type: string
+        custom: []
+      name:
+        name: name
+        description: 'Must be at least 4 characters. Must not be greater than 255 characters.'
+        required: false
+        example: grpcbjjwpqmifyguafussxhlikerdbqncdounlcbmgpwrpoheuakbhmkxabweujkfcyuejccgjcjaomuztvgambfswlidqqaqyalmljsauscxplyboagzmddzfxkz
+        type: string
+        custom: []
+      name_ar:
+        name: name_ar
+        description: 'Must be at least 4 characters. Must not be greater than 255 characters.'
+        required: true
+        example: yzyfygvwmdsemyqziweqezdlpvpggyhdyndarloinljnwv
+        type: string
+        custom: []
+      desc:
+        name: desc
+        description: 'Must be at least 10 characters. Must not be greater than 255 characters.'
+        required: false
+        example: cyykvmrevpmsclardqjeanrpgwaaigesvvnxkzrkhdrwaojntpoqazghokmzkdpagumj
+        type: string
+        custom: []
+      desc_ar:
+        name: desc_ar
+        description: 'Must be at least 10 characters. Must not be greater than 255 characters.'
+        required: true
+        example: wydbycexzkciyxmjogydeycspchsuvspjocqwkwliqqjtouloxssdajipgpfoqiipbriyfdfcmxn
+        type: string
+        custom: []
+      part_number:
+        name: part_number
+        description: ''
+        required: false
+        example: ipsam
+        type: string
+        custom: []
+      price:
+        name: price
+        description: 'Must be at least 1. Must not be greater than 1000000.'
+        required: false
+        example: 497729
+        type: integer
+        custom: []
+      in_stock:
+        name: in_stock
+        description: 'Must be at least 0. Must not be greater than 1000000.'
+        required: false
+        example: 370917
+        type: integer
+        custom: []
+      CarMaker_id:
+        name: CarMaker_id
+        description: ''
+        required: true
+        example: 6
+        type: integer
+        custom: []
+      CarModel_id:
+        name: CarModel_id
+        description: ''
+        required: true
+        example: 11
+        type: integer
+        custom: []
+      CarYear_id:
+        name: CarYear_id
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        custom: []
+      CarCapacity_id:
+        name: CarCapacity_id
+        description: ''
+        required: false
+        example: 12
+        type: integer
+        custom: []
+      part_img_new:
+        name: part_img_new
+        description: 'Must be an image.  Must be an image. Must not be greater than 2048 kilobytes. Must not be greater than 2048 kilobytes.'
+        required: false
+        example:
+          - null
+        type: 'file[]'
+        custom: []
+      deleted_img:
+        name: deleted_img
+        description: ''
+        required: false
+        example: null
+        type: string
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/sellerParts
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/deletePart
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      part_id:
+        name: part_id
+        description: ''
+        required: true
+        example: qui
+        type: string
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/ratePart
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      part_id:
+        name: part_id
+        description: ''
+        required: true
+        example: illo
+        type: string
+        custom: []
+      title:
+        name: title
+        description: 'Must be at least 3 characters. Must not be greater than 100 characters.'
+        required: true
+        example: hcobokmryvaczdchbokyydrqvjywitfxxevscwxlysgwvpvlwcwombplgfvhpxqlrqxdbc
+        type: string
+        custom: []
+      review:
+        name: review
+        description: 'Must be at least 3 characters. Must not be greater than 255 characters.'
+        required: true
+        example: mhhktzsaocexykoyazybyztsohxwmciqwdxtgktgyspoxdegkrsxbvhlwhydqhmoctrlnleknjklreskhvtadqa
+        type: string
+        custom: []
+      rating:
+        name: rating
+        description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
+        required: true
+        example: '4'
+        type: string
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/rateSeller
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      seller_id:
+        name: seller_id
+        description: ''
+        required: true
+        example: qui
+        type: string
+        custom: []
+      review:
+        name: review
+        description: 'Must be at least 3 characters. Must not be greater than 255 characters.'
+        required: true
+        example: djtsvtxoarthsttkwdkhbbepbgzycivqczeqcdatkhdgjhlodndfifdcfzqowutboldgmcpoqzvykucjwjpavtwilzbpbntjoztwqzemysggotkdgrjfjmjmgljzjcuhxmajgadzszenkffzguibnlhigcvfcgqhrnkrmdlsvawnfudqbctvsdoztrbcoeuhfgvswyhjitw
+        type: string
+        custom: []
+      rating:
+        name: rating
+        description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
+        required: true
+        example: '2'
+        type: string
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/SellerReviews
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      seller_id:
+        name: seller_id
+        description: ''
+        required: true
+        example: assumenda
+        type: string
+        custom: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[],"links":{"first":"http:\/\/localhost\/api\/v1\/SellerReviews?page=1","last":"http:\/\/localhost\/api\/v1\/SellerReviews?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost\/api\/v1\/SellerReviews?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http:\/\/localhost\/api\/v1\/SellerReviews","per_page":5,"to":null,"total":0},"additional_parameters":{"success":true,"msg":"Part ID assumenda reviews"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/PartReviews
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      part_id:
+        name: part_id
+        description: ''
+        required: true
+        example: et
+        type: string
+        custom: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[],"links":{"first":"http:\/\/localhost\/api\/v1\/PartReviews?page=1","last":"http:\/\/localhost\/api\/v1\/PartReviews?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost\/api\/v1\/PartReviews?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http:\/\/localhost\/api\/v1\/PartReviews","per_page":5,"to":null,"total":0},"additional_parameters":{"success":true,"msg":"Part ID et reviews"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []

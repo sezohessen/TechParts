@@ -122,7 +122,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row ">
-                             <label for="model" class="col-form-label  col-sm-12">@lang('By car type')<span class="text-danger">*</span>
+                             <label for="model" class="col-form-label col-sm-12">@lang('Select Car type')<span class="text-danger">*</span>
                             </label><br>
                              <div class="col-md-12">
                                 <select class="form-control {{ $errors->has('CarModel_id') ? 'is-invalid' : '' }}" id="models"
@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-form-label  col-sm-12">@lang('Select Car Year')</label><br>
+                            <label class="col-form-label col-sm-12">@lang('Select Car Year')</label><br>
                             <div class="col-md-12">
                              <select class="form-control {{ $errors->has('CarYear_id') ? 'is-invalid' : '' }}"
                                  name="CarYear_id" id='year'>

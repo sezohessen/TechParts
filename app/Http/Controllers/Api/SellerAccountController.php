@@ -40,6 +40,7 @@ class SellerAccountController extends Controller
             $carMaker = CarMaker::where('id', $Brands)->first();
             if($carMaker)
             {
+                // Create brand seller
                 $arrayBrands = explode(',',$Brands);
                 $NeedToBeCreated = array_diff($arrayBrands,$SelectedCarMaker);
                 if($NeedToBeCreated)
@@ -53,6 +54,18 @@ class SellerAccountController extends Controller
                         ]);
                     }
                 }
+                $arrayBrands = explode(',',$Brands);
+                $NeedToBeDeleted = array_diff($SelectedCarMaker,$arrayBrands);
+                if($NeedToBeDeleted)
+                {
+                //Delete Removed Selected
+                foreach ($NeedToBeDeleted as $CarMaker_id){
+                    $Brand      = BrandSeller::where([
+                        ['brand_id',$CarMaker_id],
+                        ['seller_id',$seller->id]
+                        ])->delete();
+                    }
+                }
             } else {
                 return $this->returnError($Brands . ' is a wrong ID');
             }
@@ -61,24 +74,4 @@ class SellerAccountController extends Controller
         return new SellerResource($seller);
     }
 
-    public function deleteBrand(Request $request)
-    {
-        $seller     = Seller::where('user_id',Auth()->user()->id)->first();
-        $SellerBrands     = BrandSeller::where('seller_id',$seller->id)->get();
-        $SelectedCarMaker = [];
-        foreach($SellerBrands as $SellerBrand){
-            $SelectedCarMaker[] = $SellerBrand->brand_id;
-        }
-        $Brands     = $request->brand;
-        $arrayBrands = explode(',',$Brands);
-        $NeedToBeDeleted = array_diff($arrayBrands,$request->specialty_id);
-        //Delete Removed Selected
-        foreach ($NeedToBeDeleted as $CarMaker_id){
-            $Brand      = BrandSeller::where([
-                ['brand_id',$CarMaker_id],
-                ['seller_id',$seller->id]
-            ])->delete();
-        }
-
-    }
 }

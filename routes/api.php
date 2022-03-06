@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\CarModlesController;
 use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\FavController;
+use App\Http\Controllers\Api\RateController;
 use App\Http\Controllers\Api\SellerAccountController;
 use App\Http\Controllers\Api\SellerController;
 use App\Http\Controllers\Api\SellersController;
@@ -32,30 +33,33 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
         Route::get('/partSearch',[CarModlesController::class,'searchForPart']);
         Route::get('/sellersLocation',[SellersController::class,'LocationData']);
         Route::get('/sellerSearch',[SellersController::class,'searchForSellers']);
-
+        // Get Reviews [Part - Seller]
+        Route::get('/PartReviews',[RateController::class,'getAllPartRates']);
+        Route::get('/SellerReviews',[RateController::class,'getAllSellerReviews']);
 
             ////////////////////////////
             // Protected Api Routes////
             //////////////////////////
         Route::group(['middleware' => ['auth:sanctum']] , function () {
-            // get auth
-            Route::get('getAuth', function(){
-                return Auth()->user();
-            });
             // Logout and destroy Token
             Route::post('/logout',[AuthController::class,'logout']);
             // Seller Panel
             Route::get('/allSellers',[SellerAccountController::class,'index']);
             Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
-            Route::delete('/deleteBrand',[SellerAccountController::class,'deleteBrand']);
-            Route::get('/getAuth', function () {
-                return auth()->user();
-            });
+            // Route::get('/getAuth', function () {
+            //     return auth()->user();
+            // });
             // Seller Dashboard
             Route::post('/addCarType',[SellerController::class,'addCarType']);
             Route::post('/addYear',[SellerController::class,'addYear']);
             Route::post('/addCapacity',[SellerController::class,'addCapacity']);
             Route::post('/storePart',[SellerController::class,'addPart']);
+            Route::post('/updatePart',[SellerController::class,'editPart']);
+            Route::get('/sellerParts',[SellerController::class,'showSellerPart']);
+            Route::post('/deletePart',[SellerController::class,'deleteSellerPart']);
+            // Rate [Part-Seller]
+            Route::post('/ratePart',[RateController::class,'ratePart']);
+            Route::post('/rateSeller',[RateController::class,'rateSeller']);
             // User fav
             Route::get('/userFav',[FavController::class,'showUserFav']);
             Route::post('/addToFav',[FavController::class,'AddToFav']);

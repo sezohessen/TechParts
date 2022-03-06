@@ -29,8 +29,6 @@ class PartResource extends JsonResource
             'seller'         => new SellerResource($this->seller),
             'first_image'    => new ImagesResource($this->first_image),
             'images'         => ImagesResource::collection($this->images),
-
-
         ];
     }
 }

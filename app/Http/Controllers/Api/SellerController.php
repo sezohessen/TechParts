@@ -12,13 +12,15 @@ use App\Models\CarCapacity;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PartResource;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePartRequest;
 use App\Http\Resources\CarYearResource;
+use App\Http\Requests\UpdatePartRequest;
 use App\Http\Resources\CarMakerResource;
 use App\Http\Resources\CarModelResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\CarCapacityResource;
-use App\Http\Resources\PartResource;
 
 class SellerController extends Controller
 {
@@ -105,46 +107,175 @@ class SellerController extends Controller
         // Make new car
         $newCar = new Car;
         $newCar->user_id     = auth()->user()->id;
-        $newCar->CarModel_id = $request->CarModel_id;
         $newCar->CarMaker_id = $request->CarMaker_id;
+        $newCar->CarModel_id = $request->CarModel_id;
         $newCar->CarYear_id  = $request->CarYear_id;
         $newCar->CarCapacity_id = $request->CarCapacity_id;
-        $newCar->save();
-        $credentials         = Part::credentials($request,auth()->user()->id,$newCar->id);
-        $Part                = Part::create($credentials);
-        if($request->file('part_img_one')){
-            $image = $request->file('part_img_one');
-            $imageID = add_Image($image,NULL,Part::base);
-            PartImg::create([
-                'part_id'   => $Part->id,
-                'img_id'    => $imageID
-            ]);
+        $CarModelInCarMaker = CarModel::where([
+            ['CarMaker_id',$request->CarMaker_id],
+            ['id',$request->CarModel_id]])->first();
+        if($CarModelInCarMaker)
+        {
+            $newCar->save();
+            $credentials         = Part::credentials($request,auth()->user()->id,$newCar->id);
+            $Part                = Part::create($credentials);
+            if($request->part_img_new){
+                $images  = $request->part_img_new;
+                foreach($images as $key=>$image){
+                    $added_images = PartImg::where('part_id',$Part->id)->get()->count();
+                    if($added_images < 4)
+                    {
+                        $imageID = add_Image($image,NULL,Part::base);
+                        PartImg::create([
+                            'part_id'   => $Part->id,
+                            'img_id'    => $imageID
+                        ]);
+                    } else {
+                        return $this->returnError('Images cant be more than 4' );
+                    }
+                }
+            }
+            return $this->returnData('data', new PartResource($Part),'Part has been created.');
+        } else {
+            return $this->returnError('This Car model ' . $request->CarModel_id . ' is not in car Car Maker ' . $request->CarMaker_id );
+
         }
-        if($request->file('part_img_two')){
-            $image = $request->file('part_img_two');
-            $imageID = add_Image($image,NULL,Part::base);
-            PartImg::create([
-                'part_id'   => $Part->id,
-                'img_id'    => $imageID
-            ]);
-        }
-        if($request->file('part_img_three')){
-            $image = $request->file('part_img_three');
-            $imageID = add_Image($image,NULL,Part::base);
-            PartImg::create([
-                'part_id'   => $Part->id,
-                'img_id'    => $imageID
-            ]);
-        }
-        if($request->file('part_img_four')){
-            $image = $request->file('part_img_four');
-            $imageID = add_Image($image,NULL,Part::base);
-            PartImg::create([
-                'part_id'   => $Part->id,
-                'img_id'    => $imageID
-            ]);
-        }
-        return $this->returnData('data', new PartResource($Part),'Part has been created.');
 
     }
+
+    public function editPart(UpdatePartRequest $request)
+    {
+        $Part = Part::where('user_id', auth()->user()->id)->where('id', $request->part_id)->first();
+        if($Part)
+        {   // Update Car
+            $CarId = $Part->car->id;
+            $CarModelInCarMaker = CarModel::where([
+                ['CarMaker_id',$request->CarMaker_id],
+                ['id',$request->CarModel_id]])->first();
+            if($CarModelInCarMaker)
+            {
+                $updateCar = Car::where('id',$CarId)->get()->first()->update([
+                    'CarModel_id'    => $request->CarModel_id,
+                    'CarMaker_id'    => $request->CarMaker_id,
+                    'CarYear_id'     => $request->CarYear_id,
+                    'CarCapacity_id' => $request->CarCapacity_id,
+                ]);
+                $credentials    = Part::credentials($request,auth()->user()->id,$CarId);
+                $Part->update($credentials);
+                // Images
+                $Part_images_count = PartImg::where('part_id',$request->part_id)->get()->count();
+                // Delete images
+                if($request->deleted_img)
+                {
+                    if($Part_images_count > 1)
+                    {
+                        $deleted_images = PartImg::where('part_id',$request->part_id)->get();
+                        $Selected_images  = [];
+                        foreach($deleted_images as $deleted_image){
+                            $Selected_images[] = $deleted_image->id;
+                        }
+                        $arrayImages = array_map('intval', explode(',', $request->deleted_img));
+                        if($arrayImages)
+                        {
+                            foreach ($arrayImages as $deleted){
+                                $image_path    = public_path() . '/' . $deleted_image->image->base . $deleted_image->image->name;
+                                // Delete image
+                                unlink($image_path);
+                                $deleted_image->image->delete();
+                                $deleted_image->delete();
+                                PartImg::where([
+                                    ['part_id',$request->part_id],
+                                    ['id', $deleted]
+                                ])->delete();
+                            }
+                        }
+                    } else {
+                        return $this->returnError('Images cant be less  than 1 you cant delete this image with ID ' . $request->deleted_img );
+                    }
+                }
+                // End Deleting Imgaes
+                if($request->part_img_new)
+                {
+                    // Add imgaes
+                    if($Part_images_count < 4)
+                    {
+                        if($request->part_img_new){
+                            $images  = $request->part_img_new;
+                            foreach($images as $key=>$image){
+                                if($Part_images_count + $key < 4)
+                                {
+                                    $imageID = add_Image($image,NULL,Part::base);
+                                    PartImg::create([
+                                        'part_id'   => $Part->id,
+                                        'img_id'    => $imageID
+                                    ]);
+                                } else {
+                                    return $this->returnError('Images cant be more than 4' );
+                                }
+                            }
+                        }
+                    } else {
+                        return $this->returnError('Images cant be more than ' . $Part_images_count . ' or less than 1' );
+                    }
+                }
+                // End adding images
+                return $this->returnData('data', new PartResource($Part),'Part has been updated.');
+            } else {
+                return $this->returnError('This Car model ' . $request->CarModel_id . ' is not in car Car Maker ' . $request->CarMaker_id );
+            }
+        // If part id doesn't == request id [Error]
+        } else {
+            return $this->returnError('auth user doest have Part with this ID ' . $request->part_id);
+        }
+    }
+
+    public function showSellerPart()
+    {
+        if(Auth::user())
+        {
+            $sellerParts = Part::where('user_id', auth()->user()->id)->paginate(10);
+            return (PartResource::collection($sellerParts))->additional(['additional_parameters' =>
+            ['success' => true , 'msg' => 'seller parts.']
+            ]);
+        }
+    }
+
+    public function deleteSellerPart(Request $request)
+    {
+        // Validation
+        $rules = array(
+            'part_id'             => 'required',
+        );
+        $validate = Validator::make($request->all(), $rules);
+        // Return errors
+        if($validate->fails())
+        {
+            return $validate->errors();
+        }
+        $deleted_part = Part::where([
+            ['id', $request->part_id],
+            ['user_id', auth()->user()->id]
+        ])->first();
+        if($deleted_part)
+        {
+            $deleted_images = PartImg::where('part_id',$request->part_id)->get();
+            foreach ($deleted_images as $deleted_image)
+            {
+                $image_path    = public_path() . '/' . $deleted_image->image->base . $deleted_image->image->name;
+                // Delete image
+                unlink($image_path);
+                $deleted_image->image->delete();
+                $deleted_image->delete();
+            }
+
+            // Delete Part
+            $deleted_part->delete();
+            return $this->SuccessMessage('Part has been deleted.');
+        } else {
+            return $this->returnError('there is no part with the ID ' . $request->part_id );
+
+        }
+    }
+
+
 }

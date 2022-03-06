@@ -22,7 +22,7 @@ Route::get('/lang/{locale}', function ($locale) {
     return view('errors.404');
 });
 //Route::group(['middleware' => 'SetLocale'], function () {
-
+Route::get('/downloadFile/{id}','FileDownloadController@DownloadFile');
 
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.','namespace'=>"Dashboard", 'middleware' => ['role:superadministrator|administrator']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -150,4 +150,3 @@ Route::group(['prefix' => 'seller','as' => 'seller.','namespace'=>"Seller", 'mid
 
 
 
-Route::get('/download/{id}','FileDownloadController@DownloadFile');

@@ -13,12 +13,10 @@ class FileDownloadController extends Controller
         $seller     = Seller::find($id);
         $extension  = explode('.',$seller->file);
         $fileName   = $seller->user->full_name . '.' . $extension[1];
-        $file       = storage_path('app\files\\') . $seller->file;
+        $file       = storage_path('app/files/') . $seller->file;
         $headers    = array(
             'Content-Type: application/' . $extension[1],
         );
-        
-        // dd(1);
         return response()->download($file,$fileName,$headers);
     }
 }
