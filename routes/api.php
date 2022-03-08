@@ -2,15 +2,16 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CarController;
-use App\Http\Controllers\Api\CarModlesController;
-use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\FavController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\RateController;
-use App\Http\Controllers\Api\SellerAccountController;
 use App\Http\Controllers\Api\SellerController;
 use App\Http\Controllers\Api\SellersController;
+use App\Http\Controllers\Api\CarModlesController;
+use Chatify\Http\Controllers\Api\MessagesController;
+use App\Http\Controllers\Api\SellerAccountController;
 use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
 
 
@@ -65,6 +66,12 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             Route::post('/addToFav',[FavController::class,'AddToFav']);
             Route::post('/deleteFav',[FavController::class,'deleteFav']);
             // Chat
+            Route::post('/chatAuth',[MessagesController::class,'pusherAuth']);
+            Route::post('/FetchData',[MessagesController::class,'idFetchData']);
+            Route::post('/downloadImages',[MessagesController::class,'download']);
+            Route::post('/sendMessage',[MessagesController::class,'send']);
+
+
             // Route::post('/sendMessage',[ChatController::class,'sendMessage']);
             // Route::post('/getMessages',[ChatController::class,'fetchMessages']);
         });
