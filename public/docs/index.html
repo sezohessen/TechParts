@@ -45,12 +45,12 @@
     </span>
 </a>
 <div class="tocify-wrapper">
-
+    
             <div class="lang-selector">
                                             <button type="button" class="lang-button" data-language-name="bash">bash</button>
                                             <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
                     </div>
-
+    
     <div class="search">
         <input type="text" class="search" id="input-search" placeholder="Search">
     </div>
@@ -60,15 +60,15 @@
                     <li class="tocify-item level-1" data-unique="introduction">
                         <a href="#introduction">Introduction</a>
                     </li>
-
+                                            
                                                                     </ul>
                                                 <ul id="tocify-header-1" class="tocify-header">
                     <li class="tocify-item level-1" data-unique="authenticating-requests">
                         <a href="#authenticating-requests">Authenticating requests</a>
                     </li>
-
+                                            
                                                 </ul>
-
+                    
                     <ul id="tocify-header-2" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="endpoints">
                     <a href="#endpoints">Endpoints</a>
@@ -158,21 +158,52 @@
                                     <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-PartReviews">
                         <a href="#endpoints-GETapi-v1-PartReviews">GET api/v1/PartReviews</a>
                     </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-seenMessage">
+                        <a href="#endpoints-POSTapi-v1-seenMessage">Make messages as seen</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-getFavorites">
+                        <a href="#endpoints-GETapi-v1-getFavorites">Get favorites list</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-addfavorite">
+                        <a href="#endpoints-POSTapi-v1-addfavorite">Put a user in the favorites list</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-deleteConversation">
+                        <a href="#endpoints-POSTapi-v1-deleteConversation">Delete conversation</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-activeStatus">
+                        <a href="#endpoints-POSTapi-v1-activeStatus">Set user&#039;s active status</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-fetchMessages">
+                        <a href="#endpoints-GETapi-v1-fetchMessages">fetch [user/group] messages from database</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-getContacts">
+                        <a href="#endpoints-GETapi-v1-getContacts">Get contacts list</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-sendMessage">
+                        <a href="#endpoints-POSTapi-v1-sendMessage">Send a message to database</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-FetchData">
+                        <a href="#endpoints-GETapi-v1-FetchData">Fetch data by id for (user/group)</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-chatAuth">
+                        <a href="#endpoints-POSTapi-v1-chatAuth">Authinticate the connection for pusher</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-searchChat">
+                        <a href="#endpoints-POSTapi-v1-searchChat">Search in messenger</a>
+                    </li>
                                                     </ul>
                             </ul>
-
-
+        
+                        
             </div>
 
             <ul class="toc-footer" id="toc-footer">
                             <li><a href="../docs/collection.json">View Postman collection</a></li>
                             <li><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
-                            <li><a target="_blank" href="https://eslamabdallah.hassaneida.com/">Documentation powered
-                            <span style="color: #8fbcd4;"> Eslam Abdallah ✍ </span>
-                            </a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
         <ul class="toc-footer" id="last-updated">
-        <li>Last updated: March 6 2022</li>
+        <li>Last updated: March 11 2022</li>
     </ul>
 </div>
 
@@ -193,7 +224,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
         <h1 id="endpoints">Endpoints</h1>
 
-
+    
 
             <h2 id="endpoints-GETapi-v1-users">Display a listing of the resource.</h2>
 
@@ -461,7 +492,7 @@ access-control-allow-origin: *
         &quot;path&quot;: &quot;http://localhost/api/v1/users&quot;,
         &quot;per_page&quot;: 10,
         &quot;to&quot;: 10,
-        &quot;total&quot;: 67
+        &quot;total&quot;: 68
     },
     &quot;status&quot;: {
         &quot;success&quot;: true,
@@ -528,13 +559,13 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"first_name\": \"qqunrohvggifnzzzctfcwgdubtwrtfvyaoytpvgkhawbazgplkkjwwnspznkfomdwmacprclltyeqspldbmperfqexfvtukoshedqiqhzdxdtllimpuflwdoxmigfguqxdflkrohgfhmklftfkembcilviqkiupe\",
-    \"last_name\": \"qlyyvuzfchaclafzvymrsypbkpirfmhrzcpvvdowsbqzbrqkohrmlvqolkqiyvs\",
-    \"email\": \"jvbltaldevdwajsqmtkgsakulhbeltazotfrqnbvblqflihoetstexrlcsmjxfnvjkzbbfgsfeqrliyihaehnqcwuqpsfqmgukklxumgxvyetfbhfymjfgxviiskucgtqwzijy\",
-    \"phone\": \"30656508307\",
-    \"whats_app\": \"79071256221\",
-    \"password\": \"\",
-    \"provider\": \"explicabo\"
+    \"first_name\": \"xbvgfqawsqurkfxirpeagkmbiegfueavdhlhixfreoaikynxyxlypvarqrhmktifonpaathjqpftpiyncotcujwxdqtkyibrqpezrrmykpwqprdhxpplhwbmdpefmltomqllobnynxp\",
+    \"last_name\": \"pvjls\",
+    \"email\": \"qgkdgkyydcenpxqnzozmsqsugmgfxbkstqvoscilmojbbghroygvjwkwposxtndwxytpigzhnyptjeyvvxfnkaepyaaudswwbedfnuskbjwafmsolpfhxpjjcujgpwcyymoqlhormtnfsnuvdrdjehzmbedxttto\",
+    \"phone\": \"37618722297\",
+    \"whats_app\": \"42958752169\",
+    \"password\": \"nkeii\",
+    \"provider\": \"in\"
 }"
 </code></pre></div>
 
@@ -550,13 +581,13 @@ const headers = {
 };
 
 let body = {
-    "first_name": "qqunrohvggifnzzzctfcwgdubtwrtfvyaoytpvgkhawbazgplkkjwwnspznkfomdwmacprclltyeqspldbmperfqexfvtukoshedqiqhzdxdtllimpuflwdoxmigfguqxdflkrohgfhmklftfkembcilviqkiupe",
-    "last_name": "qlyyvuzfchaclafzvymrsypbkpirfmhrzcpvvdowsbqzbrqkohrmlvqolkqiyvs",
-    "email": "jvbltaldevdwajsqmtkgsakulhbeltazotfrqnbvblqflihoetstexrlcsmjxfnvjkzbbfgsfeqrliyihaehnqcwuqpsfqmgukklxumgxvyetfbhfymjfgxviiskucgtqwzijy",
-    "phone": "30656508307",
-    "whats_app": "79071256221",
-    "password": "",
-    "provider": "explicabo"
+    "first_name": "xbvgfqawsqurkfxirpeagkmbiegfueavdhlhixfreoaikynxyxlypvarqrhmktifonpaathjqpftpiyncotcujwxdqtkyibrqpezrrmykpwqprdhxpplhwbmdpefmltomqllobnynxp",
+    "last_name": "pvjls",
+    "email": "qgkdgkyydcenpxqnzozmsqsugmgfxbkstqvoscilmojbbghroygvjwkwposxtndwxytpigzhnyptjeyvvxfnkaepyaaudswwbedfnuskbjwafmsolpfhxpjjcujgpwcyymoqlhormtnfsnuvdrdjehzmbedxttto",
+    "phone": "37618722297",
+    "whats_app": "42958752169",
+    "password": "nkeii",
+    "provider": "in"
 };
 
 fetch(url, {
@@ -614,7 +645,7 @@ fetch(url, {
                 <input type="text"
                name="first_name"
                data-endpoint="POSTapi-v1-users"
-               value="qqunrohvggifnzzzctfcwgdubtwrtfvyaoytpvgkhawbazgplkkjwwnspznkfomdwmacprclltyeqspldbmperfqexfvtukoshedqiqhzdxdtllimpuflwdoxmigfguqxdflkrohgfhmklftfkembcilviqkiupe"
+               value="xbvgfqawsqurkfxirpeagkmbiegfueavdhlhixfreoaikynxyxlypvarqrhmktifonpaathjqpftpiyncotcujwxdqtkyibrqpezrrmykpwqprdhxpplhwbmdpefmltomqllobnynxp"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
@@ -624,7 +655,7 @@ fetch(url, {
                 <input type="text"
                name="last_name"
                data-endpoint="POSTapi-v1-users"
-               value="qlyyvuzfchaclafzvymrsypbkpirfmhrzcpvvdowsbqzbrqkohrmlvqolkqiyvs"
+               value="pvjls"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
@@ -634,7 +665,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-v1-users"
-               value="jvbltaldevdwajsqmtkgsakulhbeltazotfrqnbvblqflihoetstexrlcsmjxfnvjkzbbfgsfeqrliyihaehnqcwuqpsfqmgukklxumgxvyetfbhfymjfgxviiskucgtqwzijy"
+               value="qgkdgkyydcenpxqnzozmsqsugmgfxbkstqvoscilmojbbghroygvjwkwposxtndwxytpigzhnyptjeyvvxfnkaepyaaudswwbedfnuskbjwafmsolpfhxpjjcujgpwcyymoqlhormtnfsnuvdrdjehzmbedxttto"
                data-component="body" hidden>
     <br>
 <p>Must be a valid email address. Must not be greater than 255 characters.</p>
@@ -644,7 +675,7 @@ fetch(url, {
                 <input type="text"
                name="phone"
                data-endpoint="POSTapi-v1-users"
-               value="30656508307"
+               value="37618722297"
                data-component="body" hidden>
     <br>
 <p>Must be 11 digits.</p>
@@ -654,7 +685,7 @@ fetch(url, {
                 <input type="text"
                name="whats_app"
                data-endpoint="POSTapi-v1-users"
-               value="79071256221"
+               value="42958752169"
                data-component="body" hidden>
     <br>
 <p>Must be 11 digits.</p>
@@ -664,7 +695,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-v1-users"
-               value=""
+               value="nkeii"
                data-component="body" hidden>
     <br>
 <p>Must be at least 8 characters.</p>
@@ -674,7 +705,7 @@ fetch(url, {
                 <input type="text"
                name="provider"
                data-endpoint="POSTapi-v1-users"
-               value="explicabo"
+               value="in"
                data-component="body" hidden>
     <br>
 
@@ -694,14 +725,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http:https://topart.services/api/v1/users/15" \
+    --get "http:https://topart.services/api/v1/users/10" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http:https://topart.services/api/v1/users/15"
+    "http:https://topart.services/api/v1/users/10"
 );
 
 const headers = {
@@ -796,7 +827,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="id"
                data-endpoint="GETapi-v1-users--id-"
-               value="15"
+               value="10"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -816,14 +847,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http:https://topart.services/api/v1/users/14" \
+    "http:https://topart.services/api/v1/users/11" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http:https://topart.services/api/v1/users/14"
+    "http:https://topart.services/api/v1/users/11"
 );
 
 const headers = {
@@ -885,7 +916,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="DELETEapi-v1-users--id-"
-               value="14"
+               value="11"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -905,14 +936,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http:https://topart.services/api/v1/search-user/placeat" \
+    --get "http:https://topart.services/api/v1/search-user/animi" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http:https://topart.services/api/v1/search-user/placeat"
+    "http:https://topart.services/api/v1/search-user/animi"
 );
 
 const headers = {
@@ -948,8 +979,8 @@ access-control-allow-origin: *
         &quot;msg&quot;: &quot;users&quot;
     },
     &quot;links&quot;: {
-        &quot;first&quot;: &quot;http://localhost/api/v1/search-user/placeat?page=1&quot;,
-        &quot;last&quot;: &quot;http://localhost/api/v1/search-user/placeat?page=1&quot;,
+        &quot;first&quot;: &quot;http://localhost/api/v1/search-user/animi?page=1&quot;,
+        &quot;last&quot;: &quot;http://localhost/api/v1/search-user/animi?page=1&quot;,
         &quot;prev&quot;: null,
         &quot;next&quot;: null
     },
@@ -964,7 +995,7 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost/api/v1/search-user/placeat?page=1&quot;,
+                &quot;url&quot;: &quot;http://localhost/api/v1/search-user/animi?page=1&quot;,
                 &quot;label&quot;: &quot;1&quot;,
                 &quot;active&quot;: true
             },
@@ -974,7 +1005,7 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             }
         ],
-        &quot;path&quot;: &quot;http://localhost/api/v1/search-user/placeat&quot;,
+        &quot;path&quot;: &quot;http://localhost/api/v1/search-user/animi&quot;,
         &quot;per_page&quot;: 10,
         &quot;to&quot;: null,
         &quot;total&quot;: 0
@@ -1027,7 +1058,7 @@ access-control-allow-origin: *
                 <input type="text"
                name="name"
                data-endpoint="GETapi-v1-search-user--name-"
-               value="placeat"
+               value="animi"
                data-component="url" hidden>
     <br>
 
@@ -1051,11 +1082,11 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"first_name\": \"bcvufmksgtvlhgtejbawputizngeqwyvoohfefsdkadfzcxgeikzwuyfyqdfozqfslprsrhxvywgtmdqwxrwjjbqitfrybuxehghqjvozlrjcuptnfkyzehlhwhdqfbufetkude\",
-    \"last_name\": \"yiswttwoxcjuccovajygldjhhjimdrytqtovltmzeadsdwrtwnatiwuxzzqpjfclqrlducvasnoqnpyxhupntlpemlzimccwatrsbavfwztvidvnhgkyjfjjzxuvtgakhhkgytdnbgmdzxiywhwpsttnxsfvbwllzybkgdrfkblrqiglgwgejuqblbufxohafaregxhxjjnynbahywxe\",
-    \"email\": \"qpteycirhuytmmwklnkeqgajalnwpgmiocodwtgcuofezufxe\",
-    \"password\": \"idajvdvzwzgtlczjxtng\",
-    \"provider\": \"deleniti\"
+    \"first_name\": \"glkwjtuhbaxjwyhddngphozfzenmcflnhsszarsyvsgvmipuddvihxeribtslzyptiagqkiktbwzbztqxdevbtkqqcpwnwdhlcurllhipmpghxojfvrkmltiyopppexmuygewnadirtyjaeujmklpuyzmnfxxofgiq\",
+    \"last_name\": \"kperzzfgttvxepcuumgwknrffqlnfevcoqdhzzvypzykyoktxwntqueflasovhnwhdklhvhoxskanazu\",
+    \"email\": \"xxnaodnirnyrlzdhxrxicyujnnuizyayolpjgfs\",
+    \"password\": \"mjzjvelfmwsesrfctvgrikgazdhqcvxq\",
+    \"provider\": \"quo\"
 }"
 </code></pre></div>
 
@@ -1071,11 +1102,11 @@ const headers = {
 };
 
 let body = {
-    "first_name": "bcvufmksgtvlhgtejbawputizngeqwyvoohfefsdkadfzcxgeikzwuyfyqdfozqfslprsrhxvywgtmdqwxrwjjbqitfrybuxehghqjvozlrjcuptnfkyzehlhwhdqfbufetkude",
-    "last_name": "yiswttwoxcjuccovajygldjhhjimdrytqtovltmzeadsdwrtwnatiwuxzzqpjfclqrlducvasnoqnpyxhupntlpemlzimccwatrsbavfwztvidvnhgkyjfjjzxuvtgakhhkgytdnbgmdzxiywhwpsttnxsfvbwllzybkgdrfkblrqiglgwgejuqblbufxohafaregxhxjjnynbahywxe",
-    "email": "qpteycirhuytmmwklnkeqgajalnwpgmiocodwtgcuofezufxe",
-    "password": "idajvdvzwzgtlczjxtng",
-    "provider": "deleniti"
+    "first_name": "glkwjtuhbaxjwyhddngphozfzenmcflnhsszarsyvsgvmipuddvihxeribtslzyptiagqkiktbwzbztqxdevbtkqqcpwnwdhlcurllhipmpghxojfvrkmltiyopppexmuygewnadirtyjaeujmklpuyzmnfxxofgiq",
+    "last_name": "kperzzfgttvxepcuumgwknrffqlnfevcoqdhzzvypzykyoktxwntqueflasovhnwhdklhvhoxskanazu",
+    "email": "xxnaodnirnyrlzdhxrxicyujnnuizyayolpjgfs",
+    "password": "mjzjvelfmwsesrfctvgrikgazdhqcvxq",
+    "provider": "quo"
 };
 
 fetch(url, {
@@ -1133,7 +1164,7 @@ fetch(url, {
                 <input type="text"
                name="first_name"
                data-endpoint="POSTapi-v1-register"
-               value="bcvufmksgtvlhgtejbawputizngeqwyvoohfefsdkadfzcxgeikzwuyfyqdfozqfslprsrhxvywgtmdqwxrwjjbqitfrybuxehghqjvozlrjcuptnfkyzehlhwhdqfbufetkude"
+               value="glkwjtuhbaxjwyhddngphozfzenmcflnhsszarsyvsgvmipuddvihxeribtslzyptiagqkiktbwzbztqxdevbtkqqcpwnwdhlcurllhipmpghxojfvrkmltiyopppexmuygewnadirtyjaeujmklpuyzmnfxxofgiq"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
@@ -1143,7 +1174,7 @@ fetch(url, {
                 <input type="text"
                name="last_name"
                data-endpoint="POSTapi-v1-register"
-               value="yiswttwoxcjuccovajygldjhhjimdrytqtovltmzeadsdwrtwnatiwuxzzqpjfclqrlducvasnoqnpyxhupntlpemlzimccwatrsbavfwztvidvnhgkyjfjjzxuvtgakhhkgytdnbgmdzxiywhwpsttnxsfvbwllzybkgdrfkblrqiglgwgejuqblbufxohafaregxhxjjnynbahywxe"
+               value="kperzzfgttvxepcuumgwknrffqlnfevcoqdhzzvypzykyoktxwntqueflasovhnwhdklhvhoxskanazu"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
@@ -1153,7 +1184,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-v1-register"
-               value="qpteycirhuytmmwklnkeqgajalnwpgmiocodwtgcuofezufxe"
+               value="xxnaodnirnyrlzdhxrxicyujnnuizyayolpjgfs"
                data-component="body" hidden>
     <br>
 <p>Must be a valid email address. Must not be greater than 255 characters.</p>
@@ -1163,7 +1194,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-v1-register"
-               value="idajvdvzwzgtlczjxtng"
+               value="mjzjvelfmwsesrfctvgrikgazdhqcvxq"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 100 characters.</p>
@@ -1173,7 +1204,7 @@ fetch(url, {
                 <input type="text"
                name="provider"
                data-endpoint="POSTapi-v1-register"
-               value="deleniti"
+               value="quo"
                data-component="body" hidden>
     <br>
 
@@ -1197,8 +1228,8 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"jw\",
-    \"password\": \"mblxlhghgwuthvgaqofmeeqvzoncrgxwaosebadutvbjgbvzydrrlqzbageijybgwqshkryixmoo\"
+    \"email\": \"rjyyicizowxnrajpcnubltiuyyirrvjknlwteezanmfcviytrjtofgxbsvnnmsivbtxsulpqtwshevjywlrgzlqqsdxrshtrmknmnpbwnbahrbvqzsxltffbbxlawtvsqfpl\",
+    \"password\": \"tyekpgmxtermibmppdfkmdzvlgcozgxmazemooktczk\"
 }"
 </code></pre></div>
 
@@ -1214,8 +1245,8 @@ const headers = {
 };
 
 let body = {
-    "email": "jw",
-    "password": "mblxlhghgwuthvgaqofmeeqvzoncrgxwaosebadutvbjgbvzydrrlqzbageijybgwqshkryixmoo"
+    "email": "rjyyicizowxnrajpcnubltiuyyirrvjknlwteezanmfcviytrjtofgxbsvnnmsivbtxsulpqtwshevjywlrgzlqqsdxrshtrmknmnpbwnbahrbvqzsxltffbbxlawtvsqfpl",
+    "password": "tyekpgmxtermibmppdfkmdzvlgcozgxmazemooktczk"
 };
 
 fetch(url, {
@@ -1273,7 +1304,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-v1-login"
-               value="jw"
+               value="rjyyicizowxnrajpcnubltiuyyirrvjknlwteezanmfcviytrjtofgxbsvnnmsivbtxsulpqtwshevjywlrgzlqqsdxrshtrmknmnpbwnbahrbvqzsxltffbbxlawtvsqfpl"
                data-component="body" hidden>
     <br>
 <p>Must be a valid email address. Must not be greater than 255 characters.</p>
@@ -1283,7 +1314,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-v1-login"
-               value="mblxlhghgwuthvgaqofmeeqvzoncrgxwaosebadutvbjgbvzydrrlqzbageijybgwqshkryixmoo"
+               value="tyekpgmxtermibmppdfkmdzvlgcozgxmazemooktczk"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 100 characters.</p>
@@ -1919,11 +1950,11 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"searchOpt\": \"consequatur\",
-    \"carType\": 13,
-    \"carYear\": 9,
-    \"carCapacity\": 1,
-    \"order\": \"repudiandae\"
+    \"searchOpt\": \"alias\",
+    \"carType\": 11,
+    \"carYear\": 8,
+    \"carCapacity\": 13,
+    \"order\": \"qui\"
 }"
 </code></pre></div>
 
@@ -1939,11 +1970,11 @@ const headers = {
 };
 
 let body = {
-    "searchOpt": "consequatur",
-    "carType": 13,
-    "carYear": 9,
-    "carCapacity": 1,
-    "order": "repudiandae"
+    "searchOpt": "alias",
+    "carType": 11,
+    "carYear": 8,
+    "carCapacity": 13,
+    "order": "qui"
 };
 
 fetch(url, {
@@ -2016,7 +2047,7 @@ access-control-allow-origin: *
                 <input type="text"
                name="searchOpt"
                data-endpoint="GETapi-v1-partSearch"
-               value="consequatur"
+               value="alias"
                data-component="body" hidden>
     <br>
 
@@ -2046,7 +2077,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="carType"
                data-endpoint="GETapi-v1-partSearch"
-               value="13"
+               value="11"
                data-component="body" hidden>
     <br>
 
@@ -2056,7 +2087,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="carYear"
                data-endpoint="GETapi-v1-partSearch"
-               value="9"
+               value="8"
                data-component="body" hidden>
     <br>
 
@@ -2066,7 +2097,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="carCapacity"
                data-endpoint="GETapi-v1-partSearch"
-               value="1"
+               value="13"
                data-component="body" hidden>
     <br>
 
@@ -2076,7 +2107,7 @@ access-control-allow-origin: *
                 <input type="text"
                name="order"
                data-endpoint="GETapi-v1-partSearch"
-               value="repudiandae"
+               value="qui"
                data-component="body" hidden>
     <br>
 
@@ -2750,9 +2781,9 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"governorate_id\": 5,
-    \"city_id\": 3,
-    \"brand_id\": 1
+    \"governorate_id\": 1,
+    \"city_id\": 16,
+    \"brand_id\": 3
 }"
 </code></pre></div>
 
@@ -2768,9 +2799,9 @@ const headers = {
 };
 
 let body = {
-    "governorate_id": 5,
-    "city_id": 3,
-    "brand_id": 1
+    "governorate_id": 1,
+    "city_id": 16,
+    "brand_id": 3
 };
 
 fetch(url, {
@@ -2849,7 +2880,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="governorate_id"
                data-endpoint="GETapi-v1-sellerSearch"
-               value="5"
+               value="1"
                data-component="body" hidden>
     <br>
 
@@ -2859,7 +2890,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="city_id"
                data-endpoint="GETapi-v1-sellerSearch"
-               value="3"
+               value="16"
                data-component="body" hidden>
     <br>
 
@@ -2869,7 +2900,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="brand_id"
                data-endpoint="GETapi-v1-sellerSearch"
-               value="1"
+               value="3"
                data-component="body" hidden>
     <br>
 
@@ -3065,17 +3096,17 @@ access-control-allow-origin: *
     "http:https://topart.services/api/v1/updateSeller" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "desc=yhgnsbjocjhqpabieahkquxrgabtamvfpnarvzzrfgyhgoscixmzpecyyqxkclrxopbpfmztivpfgsfbkdddrjz" \
-    --form "desc_ar=eopaljoahckzmlplnhiucbrzboveoilukwkornoxfigrfqtkfvemrhhyrayvwptjfblsbnjmcytprpjazeagrfnuknvhdctandsftngwrnikyseallcmongolomlpnufxkyvhrmsqrkmdwficeolchonaewgbxmhouhzpjufreklbdapbwsinxjfwufccbiyixyolraibeocchqdqofxtelcz" \
-    --form "governorate_id=18" \
-    --form "city_id=3" \
-    --form "lat=tempora" \
-    --form "long=exercitationem" \
-    --form "street=vazstxhmycahbneftdbqtuqzwlkxbtbhzks" \
-    --form "file=aywzrirynnusmiwupggwmbyijbprucjwjluhunxfkyzhmokcnhkzvuseggvzjoivuhbbfzihmxewidjlkpmuqrepooukqdejnmxnotkvwxpsaibgwlsefsuedqivitmmfemiptbeqfsiucxdhypxoltvombpsrnqaqsmaqasygylfjctlgconlmyosapirpcsvwlaktgqgbnuawlyiqkhtihhhemiilbzbfbyibhpvwvrrearilhauowpmizcvqrafhmzznhnpeqdgyecdwkdlugxqhgecqkfwfipciizwbfjuuxecxdklfszyofhcpobtunqwmdtepnatowqicjfauiegmhrvhuocityzmfmojxrpylzwizdwwslxaakdgikgwxrlonhnelosywlxunolxdrtfabhgokgogzktheqjivufdlzavbvdoaxclasbxylpqlhujzdcaqaojxubrggwagvetjdfgunkqrylmnycvpapgjtawtfpxgspefqqthcphhwttlebexhzazytrcqhpfswmsamihqbpcmtxlbtscsglwffrphgreytgqpuvoblbkexhrktpgrzucdrrxypusbzbssyxoharfjgiftfvujhkbaaakgtztvifnojeoulylyzcvufrvslnorpnwpovqqdqxouetzmypibmbdjmcuqqyevfmhxvdebuxunyesacxkwnisvfshiiaqlptwljtvlfiuuhirqsnmybghfqlgwuhdacaelcaeydnpfhjqwzosztidcjgwcyysiiwaqihnxheyuxkhzgubfgcbhshryjkhfpxwtspwfqfcfgzmyflvullbufbhhulvvrscibfukgjlomvxepvmfmdryzchejwdysnukhayxslcloqceuiuebitmkeswymlslxigllbissgczrfqsswzyektofvougmiregnecicetebpxiogojuoffulwmnzglwicbrlkqjyqjhctlhjimfncrloqpbzoztdbwhpinjmsmcxxgqnnrjzyyxfbiewuycngneolcrwifpankwprrvwqmebagbfoniuydvbtgberzmunyjvaenkcslxyxtljozsxvhfeqhkngoaybafrzcrewnvavqeqvyzoctcjevxuuxvrcsjclbizgioqrtksahcvywtoqcmetmhmuhnekupnirubzhdgrnarcmprjydeaqwiltbxhbdlxhotfolbetvxdqxdjjxpoivoequbxxbdxvkgubqavvgertctaujzfkgjsevbhrctwwvxrftduamisfyedochfwmwoybkcgevlqhqdepxsfjvgsjdbaanuhlmaotsacdqbigqicghmrfcnovcurcowhbeflvogpgrkotxodvqjyxctoshfrtovtsffklytmyovvimtvaefcmsavadnruvfjcebfpzkizzzfmqyqbpqgxwlltxdcimaaprkgaljeoxufuckoilpoeualuszugqfykrurucwhcnxejldzinsrcqekjttpanqavcufmfnjtdpbplyppgwoyevjgzpohxeeyifoyenefymcabyyslirpna" \
-    --form "specialty_id[]=qui" \
-    --form "bg=@C:\Users\Eslam\AppData\Local\Temp\phpEA95.tmp" \
-    --form "avatar=@C:\Users\Eslam\AppData\Local\Temp\phpEA96.tmp" </code></pre></div>
+    --form "desc=pcvxdxgsuyjrdtihghppoeuoyktpxgsbogaxxlgdoczextzwroejwsozagfehfdytuiwvjldktm" \
+    --form "desc_ar=epxrjnfuvlmyxwhlbcjyclcsijsbntvvrobvnxkmnjnfko" \
+    --form "governorate_id=13" \
+    --form "city_id=12" \
+    --form "lat=ipsam" \
+    --form "long=a" \
+    --form "street=jujewznksiefwcwbjaxubgttlfwrmofsdnictrorbmkvcwkahcnbaboulkwwlqyzvduospendt" \
+    --form "file=godnujprgwmdvfqpcmtfukughuyvqlllqsbuudaglwodqyhjvxfelwaxotlanjytchedrwqbgujdbijupnmbstrfcjhgplxgibzrerestlaqfscupzyehwuiraqkyooxbuglmqxdqeueprwcoiswfqncoahkmlcamtzdjdvkgjbwzcqycaoqdpmwxcrupxezgsfkwsxctlsesipmtoqwntbtlgcqbafghrrxcynfzqumpiqjjoehyymqxodftrbkpabelohdkdnflytkclvitidnuiczlfmtsbtzhrgpgngnbcvdeogqilficnntfhxccfpiawapcfxlzvfojcmhbndxzanhizfbtzhrcbxyyjkzeismfkdrlroznbjdluimuuushwhcxbsidlpybrrckrbqvqkmqrvktdscgviepnlbrsvcfikywwcnqgoffelkpzxkrpvlinwzqvdmzygbtrodhjnbnrdplcuhkzdckudcxzoxfmeoazoqyrjrqbvkqldkebhdyzelvamsajyfx" \
+    --form "specialty_id[]=tempore" \
+    --form "bg=@C:\Users\Eslam\AppData\Local\Temp\php9119.tmp" \
+    --form "avatar=@C:\Users\Eslam\AppData\Local\Temp\php912A.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3089,15 +3120,15 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('desc', 'yhgnsbjocjhqpabieahkquxrgabtamvfpnarvzzrfgyhgoscixmzpecyyqxkclrxopbpfmztivpfgsfbkdddrjz');
-body.append('desc_ar', 'eopaljoahckzmlplnhiucbrzboveoilukwkornoxfigrfqtkfvemrhhyrayvwptjfblsbnjmcytprpjazeagrfnuknvhdctandsftngwrnikyseallcmongolomlpnufxkyvhrmsqrkmdwficeolchonaewgbxmhouhzpjufreklbdapbwsinxjfwufccbiyixyolraibeocchqdqofxtelcz');
-body.append('governorate_id', '18');
-body.append('city_id', '3');
-body.append('lat', 'tempora');
-body.append('long', 'exercitationem');
-body.append('street', 'vazstxhmycahbneftdbqtuqzwlkxbtbhzks');
-body.append('file', 'aywzrirynnusmiwupggwmbyijbprucjwjluhunxfkyzhmokcnhkzvuseggvzjoivuhbbfzihmxewidjlkpmuqrepooukqdejnmxnotkvwxpsaibgwlsefsuedqivitmmfemiptbeqfsiucxdhypxoltvombpsrnqaqsmaqasygylfjctlgconlmyosapirpcsvwlaktgqgbnuawlyiqkhtihhhemiilbzbfbyibhpvwvrrearilhauowpmizcvqrafhmzznhnpeqdgyecdwkdlugxqhgecqkfwfipciizwbfjuuxecxdklfszyofhcpobtunqwmdtepnatowqicjfauiegmhrvhuocityzmfmojxrpylzwizdwwslxaakdgikgwxrlonhnelosywlxunolxdrtfabhgokgogzktheqjivufdlzavbvdoaxclasbxylpqlhujzdcaqaojxubrggwagvetjdfgunkqrylmnycvpapgjtawtfpxgspefqqthcphhwttlebexhzazytrcqhpfswmsamihqbpcmtxlbtscsglwffrphgreytgqpuvoblbkexhrktpgrzucdrrxypusbzbssyxoharfjgiftfvujhkbaaakgtztvifnojeoulylyzcvufrvslnorpnwpovqqdqxouetzmypibmbdjmcuqqyevfmhxvdebuxunyesacxkwnisvfshiiaqlptwljtvlfiuuhirqsnmybghfqlgwuhdacaelcaeydnpfhjqwzosztidcjgwcyysiiwaqihnxheyuxkhzgubfgcbhshryjkhfpxwtspwfqfcfgzmyflvullbufbhhulvvrscibfukgjlomvxepvmfmdryzchejwdysnukhayxslcloqceuiuebitmkeswymlslxigllbissgczrfqsswzyektofvougmiregnecicetebpxiogojuoffulwmnzglwicbrlkqjyqjhctlhjimfncrloqpbzoztdbwhpinjmsmcxxgqnnrjzyyxfbiewuycngneolcrwifpankwprrvwqmebagbfoniuydvbtgberzmunyjvaenkcslxyxtljozsxvhfeqhkngoaybafrzcrewnvavqeqvyzoctcjevxuuxvrcsjclbizgioqrtksahcvywtoqcmetmhmuhnekupnirubzhdgrnarcmprjydeaqwiltbxhbdlxhotfolbetvxdqxdjjxpoivoequbxxbdxvkgubqavvgertctaujzfkgjsevbhrctwwvxrftduamisfyedochfwmwoybkcgevlqhqdepxsfjvgsjdbaanuhlmaotsacdqbigqicghmrfcnovcurcowhbeflvogpgrkotxodvqjyxctoshfrtovtsffklytmyovvimtvaefcmsavadnruvfjcebfpzkizzzfmqyqbpqgxwlltxdcimaaprkgaljeoxufuckoilpoeualuszugqfykrurucwhcnxejldzinsrcqekjttpanqavcufmfnjtdpbplyppgwoyevjgzpohxeeyifoyenefymcabyyslirpna');
-body.append('specialty_id[]', 'qui');
+body.append('desc', 'pcvxdxgsuyjrdtihghppoeuoyktpxgsbogaxxlgdoczextzwroejwsozagfehfdytuiwvjldktm');
+body.append('desc_ar', 'epxrjnfuvlmyxwhlbcjyclcsijsbntvvrobvnxkmnjnfko');
+body.append('governorate_id', '13');
+body.append('city_id', '12');
+body.append('lat', 'ipsam');
+body.append('long', 'a');
+body.append('street', 'jujewznksiefwcwbjaxubgttlfwrmofsdnictrorbmkvcwkahcnbaboulkwwlqyzvduospendt');
+body.append('file', 'godnujprgwmdvfqpcmtfukughuyvqlllqsbuudaglwodqyhjvxfelwaxotlanjytchedrwqbgujdbijupnmbstrfcjhgplxgibzrerestlaqfscupzyehwuiraqkyooxbuglmqxdqeueprwcoiswfqncoahkmlcamtzdjdvkgjbwzcqycaoqdpmwxcrupxezgsfkwsxctlsesipmtoqwntbtlgcqbafghrrxcynfzqumpiqjjoehyymqxodftrbkpabelohdkdnflytkclvitidnuiczlfmtsbtzhrgpgngnbcvdeogqilficnntfhxccfpiawapcfxlzvfojcmhbndxzanhizfbtzhrcbxyyjkzeismfkdrlroznbjdluimuuushwhcxbsidlpybrrckrbqvqkmqrvktdscgviepnlbrsvcfikywwcnqgoffelkpzxkrpvlinwzqvdmzygbtrodhjnbnrdplcuhkzdckudcxzoxfmeoazoqyrjrqbvkqldkebhdyzelvamsajyfx');
+body.append('specialty_id[]', 'tempore');
 body.append('bg', document.querySelector('input[name="bg"]').files[0]);
 body.append('avatar', document.querySelector('input[name="avatar"]').files[0]);
 
@@ -3156,7 +3187,7 @@ fetch(url, {
                 <input type="text"
                name="desc"
                data-endpoint="POSTapi-v1-updateSeller"
-               value="yhgnsbjocjhqpabieahkquxrgabtamvfpnarvzzrfgyhgoscixmzpecyyqxkclrxopbpfmztivpfgsfbkdddrjz"
+               value="pcvxdxgsuyjrdtihghppoeuoyktpxgsbogaxxlgdoczextzwroejwsozagfehfdytuiwvjldktm"
                data-component="body" hidden>
     <br>
 <p>Must be at least 10 characters. Must not be greater than 255 characters.</p>
@@ -3166,7 +3197,7 @@ fetch(url, {
                 <input type="text"
                name="desc_ar"
                data-endpoint="POSTapi-v1-updateSeller"
-               value="eopaljoahckzmlplnhiucbrzboveoilukwkornoxfigrfqtkfvemrhhyrayvwptjfblsbnjmcytprpjazeagrfnuknvhdctandsftngwrnikyseallcmongolomlpnufxkyvhrmsqrkmdwficeolchonaewgbxmhouhzpjufreklbdapbwsinxjfwufccbiyixyolraibeocchqdqofxtelcz"
+               value="epxrjnfuvlmyxwhlbcjyclcsijsbntvvrobvnxkmnjnfko"
                data-component="body" hidden>
     <br>
 <p>Must be at least 10 characters. Must not be greater than 255 characters.</p>
@@ -3196,7 +3227,7 @@ fetch(url, {
                 <input type="number"
                name="governorate_id"
                data-endpoint="POSTapi-v1-updateSeller"
-               value="18"
+               value="13"
                data-component="body" hidden>
     <br>
 
@@ -3206,7 +3237,7 @@ fetch(url, {
                 <input type="number"
                name="city_id"
                data-endpoint="POSTapi-v1-updateSeller"
-               value="3"
+               value="12"
                data-component="body" hidden>
     <br>
 
@@ -3216,7 +3247,7 @@ fetch(url, {
                 <input type="text"
                name="lat"
                data-endpoint="POSTapi-v1-updateSeller"
-               value="tempora"
+               value="ipsam"
                data-component="body" hidden>
     <br>
 
@@ -3226,7 +3257,7 @@ fetch(url, {
                 <input type="text"
                name="long"
                data-endpoint="POSTapi-v1-updateSeller"
-               value="exercitationem"
+               value="a"
                data-component="body" hidden>
     <br>
 
@@ -3236,7 +3267,7 @@ fetch(url, {
                 <input type="text"
                name="street"
                data-endpoint="POSTapi-v1-updateSeller"
-               value="vazstxhmycahbneftdbqtuqzwlkxbtbhzks"
+               value="jujewznksiefwcwbjaxubgttlfwrmofsdnictrorbmkvcwkahcnbaboulkwwlqyzvduospendt"
                data-component="body" hidden>
     <br>
 <p>Must be at least 3 characters. Must not be greater than 100 characters.</p>
@@ -3266,7 +3297,7 @@ fetch(url, {
                 <input type="text"
                name="file"
                data-endpoint="POSTapi-v1-updateSeller"
-               value="aywzrirynnusmiwupggwmbyijbprucjwjluhunxfkyzhmokcnhkzvuseggvzjoivuhbbfzihmxewidjlkpmuqrepooukqdejnmxnotkvwxpsaibgwlsefsuedqivitmmfemiptbeqfsiucxdhypxoltvombpsrnqaqsmaqasygylfjctlgconlmyosapirpcsvwlaktgqgbnuawlyiqkhtihhhemiilbzbfbyibhpvwvrrearilhauowpmizcvqrafhmzznhnpeqdgyecdwkdlugxqhgecqkfwfipciizwbfjuuxecxdklfszyofhcpobtunqwmdtepnatowqicjfauiegmhrvhuocityzmfmojxrpylzwizdwwslxaakdgikgwxrlonhnelosywlxunolxdrtfabhgokgogzktheqjivufdlzavbvdoaxclasbxylpqlhujzdcaqaojxubrggwagvetjdfgunkqrylmnycvpapgjtawtfpxgspefqqthcphhwttlebexhzazytrcqhpfswmsamihqbpcmtxlbtscsglwffrphgreytgqpuvoblbkexhrktpgrzucdrrxypusbzbssyxoharfjgiftfvujhkbaaakgtztvifnojeoulylyzcvufrvslnorpnwpovqqdqxouetzmypibmbdjmcuqqyevfmhxvdebuxunyesacxkwnisvfshiiaqlptwljtvlfiuuhirqsnmybghfqlgwuhdacaelcaeydnpfhjqwzosztidcjgwcyysiiwaqihnxheyuxkhzgubfgcbhshryjkhfpxwtspwfqfcfgzmyflvullbufbhhulvvrscibfukgjlomvxepvmfmdryzchejwdysnukhayxslcloqceuiuebitmkeswymlslxigllbissgczrfqsswzyektofvougmiregnecicetebpxiogojuoffulwmnzglwicbrlkqjyqjhctlhjimfncrloqpbzoztdbwhpinjmsmcxxgqnnrjzyyxfbiewuycngneolcrwifpankwprrvwqmebagbfoniuydvbtgberzmunyjvaenkcslxyxtljozsxvhfeqhkngoaybafrzcrewnvavqeqvyzoctcjevxuuxvrcsjclbizgioqrtksahcvywtoqcmetmhmuhnekupnirubzhdgrnarcmprjydeaqwiltbxhbdlxhotfolbetvxdqxdjjxpoivoequbxxbdxvkgubqavvgertctaujzfkgjsevbhrctwwvxrftduamisfyedochfwmwoybkcgevlqhqdepxsfjvgsjdbaanuhlmaotsacdqbigqicghmrfcnovcurcowhbeflvogpgrkotxodvqjyxctoshfrtovtsffklytmyovvimtvaefcmsavadnruvfjcebfpzkizzzfmqyqbpqgxwlltxdcimaaprkgaljeoxufuckoilpoeualuszugqfykrurucwhcnxejldzinsrcqekjttpanqavcufmfnjtdpbplyppgwoyevjgzpohxeeyifoyenefymcabyyslirpna"
+               value="godnujprgwmdvfqpcmtfukughuyvqlllqsbuudaglwodqyhjvxfelwaxotlanjytchedrwqbgujdbijupnmbstrfcjhgplxgibzrerestlaqfscupzyehwuiraqkyooxbuglmqxdqeueprwcoiswfqncoahkmlcamtzdjdvkgjbwzcqycaoqdpmwxcrupxezgsfkwsxctlsesipmtoqwntbtlgcqbafghrrxcynfzqumpiqjjoehyymqxodftrbkpabelohdkdnflytkclvitidnuiczlfmtsbtzhrgpgngnbcvdeogqilficnntfhxccfpiawapcfxlzvfojcmhbndxzanhizfbtzhrcbxyyjkzeismfkdrlroznbjdluimuuushwhcxbsidlpybrrckrbqvqkmqrvktdscgviepnlbrsvcfikywwcnqgoffelkpzxkrpvlinwzqvdmzygbtrodhjnbnrdplcuhkzdckudcxzoxfmeoazoqyrjrqbvkqldkebhdyzelvamsajyfx"
                data-component="body" hidden>
     <br>
 <p>Must not be greater than 4096 characters.</p>
@@ -3408,7 +3439,7 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"part_id\": \"voluptatem\"
+    \"part_id\": \"omnis\"
 }"
 </code></pre></div>
 
@@ -3424,7 +3455,7 @@ const headers = {
 };
 
 let body = {
-    "part_id": "voluptatem"
+    "part_id": "omnis"
 };
 
 fetch(url, {
@@ -3482,7 +3513,7 @@ fetch(url, {
                 <input type="text"
                name="part_id"
                data-endpoint="POSTapi-v1-addToFav"
-               value="voluptatem"
+               value="omnis"
                data-component="body" hidden>
     <br>
 
@@ -3584,8 +3615,8 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"nxrrutolegikgn\",
-    \"CarMaker_id\": 18
+    \"name\": \"arlaslsgyvhgsylceou\",
+    \"CarMaker_id\": 14
 }"
 </code></pre></div>
 
@@ -3601,8 +3632,8 @@ const headers = {
 };
 
 let body = {
-    "name": "nxrrutolegikgn",
-    "CarMaker_id": 18
+    "name": "arlaslsgyvhgsylceou",
+    "CarMaker_id": 14
 };
 
 fetch(url, {
@@ -3660,7 +3691,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-v1-addCarType"
-               value="nxrrutolegikgn"
+               value="arlaslsgyvhgsylceou"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 20 characters.</p>
@@ -3670,7 +3701,7 @@ fetch(url, {
                 <input type="number"
                name="CarMaker_id"
                data-endpoint="POSTapi-v1-addCarType"
-               value="18"
+               value="14"
                data-component="body" hidden>
     <br>
 
@@ -3694,8 +3725,8 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"year\": \"dcxldtxlqruiaptyomh\",
-    \"CarModel_id\": 19
+    \"year\": \"sbddqptm\",
+    \"CarModel_id\": 15
 }"
 </code></pre></div>
 
@@ -3711,8 +3742,8 @@ const headers = {
 };
 
 let body = {
-    "year": "dcxldtxlqruiaptyomh",
-    "CarModel_id": 19
+    "year": "sbddqptm",
+    "CarModel_id": 15
 };
 
 fetch(url, {
@@ -3770,7 +3801,7 @@ fetch(url, {
                 <input type="text"
                name="year"
                data-endpoint="POSTapi-v1-addYear"
-               value="dcxldtxlqruiaptyomh"
+               value="sbddqptm"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 20 characters.</p>
@@ -3780,7 +3811,7 @@ fetch(url, {
                 <input type="number"
                name="CarModel_id"
                data-endpoint="POSTapi-v1-addYear"
-               value="19"
+               value="15"
                data-component="body" hidden>
     <br>
 
@@ -3804,7 +3835,7 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"capacity\": \"ddmbbytbefzcosdqbzpqvpzydvpkiqjhplltbjkafzgfteohcbrgbwqzvrrapketcndbftivwolzbwxsnrktfczligkjkbkhnachbowrejpmskjcsgnjubhyafpjcmkgpzlidghfyhndikykwcnywzkjpeswkeezvkxqreynlltxmzrwwvcyybvhxobfbshxwnogibnjwbnnurxuqgknsiinobcmu\"
+    \"capacity\": \"vs\"
 }"
 </code></pre></div>
 
@@ -3820,7 +3851,7 @@ const headers = {
 };
 
 let body = {
-    "capacity": "ddmbbytbefzcosdqbzpqvpzydvpkiqjhplltbjkafzgfteohcbrgbwqzvrrapketcndbftivwolzbwxsnrktfczligkjkbkhnachbowrejpmskjcsgnjubhyafpjcmkgpzlidghfyhndikykwcnywzkjpeswkeezvkxqreynlltxmzrwwvcyybvhxobfbshxwnogibnjwbnnurxuqgknsiinobcmu"
+    "capacity": "vs"
 };
 
 fetch(url, {
@@ -3878,7 +3909,7 @@ fetch(url, {
                 <input type="text"
                name="capacity"
                data-endpoint="POSTapi-v1-addCapacity"
-               value="ddmbbytbefzcosdqbzpqvpzydvpkiqjhplltbjkafzgfteohcbrgbwqzvrrapketcndbftivwolzbwxsnrktfczligkjkbkhnachbowrejpmskjcsgnjubhyafpjcmkgpzlidghfyhndikykwcnywzkjpeswkeezvkxqreynlltxmzrwwvcyybvhxobfbshxwnogibnjwbnnurxuqgknsiinobcmu"
+               value="vs"
                data-component="body" hidden>
     <br>
 <p>Must not be greater than 255 characters.</p>
@@ -3901,18 +3932,18 @@ fetch(url, {
     "http:https://topart.services/api/v1/storePart" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "name=jtptukq" \
-    --form "name_ar=anmgqgwfausuuotrooisrpxiuilqvcv" \
-    --form "desc=qcvrnsujknuhlbtdwdimzleybggvpnohgnshkxrquxtlldqvbfvbfzzhheleohmqhrfgvotjflpdmxokuxbqzixqkavxupyvbcxzquequigkxgcvjsvrztoprkpwqqzlcxvlyxaufzrfnvrblsimjnotfcugksuwitpixcgomwwukswjeizprcwifreehwvktzjznjkmvusplmjdfsebxn" \
-    --form "desc_ar=qwdgozjunmigdgwqdrucunrjkrpbfgsvbhhmkgsbohmvtykezpbltkorigsvn" \
-    --form "part_number=aut" \
-    --form "price=124732" \
-    --form "in_stock=186801" \
-    --form "CarMaker_id=2" \
-    --form "CarModel_id=5" \
-    --form "CarYear_id=6" \
-    --form "CarCapacity_id=2" \
-    --form "part_img_new[]=@C:\Users\Eslam\AppData\Local\Temp\phpEAC6.tmp" </code></pre></div>
+    --form "name=rspziowtdhdiqldhtivazcfpmpwgydnrjhmuptanqxyaapoixabujsueyewvfjrmnywhfkwyyazfrwaifljgkcxufozuuhdgfisleokqtvjsqbsmb" \
+    --form "name_ar=hiidpammpwdkjyunacvmzfktemrmxwwrkvy" \
+    --form "desc=xxgcqjsdkkclfsusihgswejuxngpaaddypkvodchspjrm" \
+    --form "desc_ar=gtgyntchecqlnsytjmlfqrogr" \
+    --form "part_number=enim" \
+    --form "price=721502" \
+    --form "in_stock=333240" \
+    --form "CarMaker_id=15" \
+    --form "CarModel_id=15" \
+    --form "CarYear_id=7" \
+    --form "CarCapacity_id=18" \
+    --form "part_img_new[]=@C:\Users\Eslam\AppData\Local\Temp\php91E6.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3926,17 +3957,17 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('name', 'jtptukq');
-body.append('name_ar', 'anmgqgwfausuuotrooisrpxiuilqvcv');
-body.append('desc', 'qcvrnsujknuhlbtdwdimzleybggvpnohgnshkxrquxtlldqvbfvbfzzhheleohmqhrfgvotjflpdmxokuxbqzixqkavxupyvbcxzquequigkxgcvjsvrztoprkpwqqzlcxvlyxaufzrfnvrblsimjnotfcugksuwitpixcgomwwukswjeizprcwifreehwvktzjznjkmvusplmjdfsebxn');
-body.append('desc_ar', 'qwdgozjunmigdgwqdrucunrjkrpbfgsvbhhmkgsbohmvtykezpbltkorigsvn');
-body.append('part_number', 'aut');
-body.append('price', '124732');
-body.append('in_stock', '186801');
-body.append('CarMaker_id', '2');
-body.append('CarModel_id', '5');
-body.append('CarYear_id', '6');
-body.append('CarCapacity_id', '2');
+body.append('name', 'rspziowtdhdiqldhtivazcfpmpwgydnrjhmuptanqxyaapoixabujsueyewvfjrmnywhfkwyyazfrwaifljgkcxufozuuhdgfisleokqtvjsqbsmb');
+body.append('name_ar', 'hiidpammpwdkjyunacvmzfktemrmxwwrkvy');
+body.append('desc', 'xxgcqjsdkkclfsusihgswejuxngpaaddypkvodchspjrm');
+body.append('desc_ar', 'gtgyntchecqlnsytjmlfqrogr');
+body.append('part_number', 'enim');
+body.append('price', '721502');
+body.append('in_stock', '333240');
+body.append('CarMaker_id', '15');
+body.append('CarModel_id', '15');
+body.append('CarYear_id', '7');
+body.append('CarCapacity_id', '18');
 body.append('part_img_new[]', document.querySelector('input[name="part_img_new[]"]').files[0]);
 
 fetch(url, {
@@ -3994,7 +4025,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-v1-storePart"
-               value="jtptukq"
+               value="rspziowtdhdiqldhtivazcfpmpwgydnrjhmuptanqxyaapoixabujsueyewvfjrmnywhfkwyyazfrwaifljgkcxufozuuhdgfisleokqtvjsqbsmb"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
@@ -4004,7 +4035,7 @@ fetch(url, {
                 <input type="text"
                name="name_ar"
                data-endpoint="POSTapi-v1-storePart"
-               value="anmgqgwfausuuotrooisrpxiuilqvcv"
+               value="hiidpammpwdkjyunacvmzfktemrmxwwrkvy"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
@@ -4014,7 +4045,7 @@ fetch(url, {
                 <input type="text"
                name="desc"
                data-endpoint="POSTapi-v1-storePart"
-               value="qcvrnsujknuhlbtdwdimzleybggvpnohgnshkxrquxtlldqvbfvbfzzhheleohmqhrfgvotjflpdmxokuxbqzixqkavxupyvbcxzquequigkxgcvjsvrztoprkpwqqzlcxvlyxaufzrfnvrblsimjnotfcugksuwitpixcgomwwukswjeizprcwifreehwvktzjznjkmvusplmjdfsebxn"
+               value="xxgcqjsdkkclfsusihgswejuxngpaaddypkvodchspjrm"
                data-component="body" hidden>
     <br>
 <p>Must be at least 10 characters. Must not be greater than 255 characters.</p>
@@ -4024,7 +4055,7 @@ fetch(url, {
                 <input type="text"
                name="desc_ar"
                data-endpoint="POSTapi-v1-storePart"
-               value="qwdgozjunmigdgwqdrucunrjkrpbfgsvbhhmkgsbohmvtykezpbltkorigsvn"
+               value="gtgyntchecqlnsytjmlfqrogr"
                data-component="body" hidden>
     <br>
 <p>Must be at least 10 characters. Must not be greater than 255 characters.</p>
@@ -4034,7 +4065,7 @@ fetch(url, {
                 <input type="text"
                name="part_number"
                data-endpoint="POSTapi-v1-storePart"
-               value="aut"
+               value="enim"
                data-component="body" hidden>
     <br>
 
@@ -4044,7 +4075,7 @@ fetch(url, {
                 <input type="number"
                name="price"
                data-endpoint="POSTapi-v1-storePart"
-               value="124732"
+               value="721502"
                data-component="body" hidden>
     <br>
 <p>Must be at least 1. Must not be greater than 1000000.</p>
@@ -4054,7 +4085,7 @@ fetch(url, {
                 <input type="number"
                name="in_stock"
                data-endpoint="POSTapi-v1-storePart"
-               value="186801"
+               value="333240"
                data-component="body" hidden>
     <br>
 <p>Must be at least 0. Must not be greater than 1000000.</p>
@@ -4064,7 +4095,7 @@ fetch(url, {
                 <input type="number"
                name="CarMaker_id"
                data-endpoint="POSTapi-v1-storePart"
-               value="2"
+               value="15"
                data-component="body" hidden>
     <br>
 
@@ -4074,7 +4105,7 @@ fetch(url, {
                 <input type="number"
                name="CarModel_id"
                data-endpoint="POSTapi-v1-storePart"
-               value="5"
+               value="15"
                data-component="body" hidden>
     <br>
 
@@ -4084,7 +4115,7 @@ fetch(url, {
                 <input type="number"
                name="CarYear_id"
                data-endpoint="POSTapi-v1-storePart"
-               value="6"
+               value="7"
                data-component="body" hidden>
     <br>
 
@@ -4094,7 +4125,7 @@ fetch(url, {
                 <input type="number"
                name="CarCapacity_id"
                data-endpoint="POSTapi-v1-storePart"
-               value="2"
+               value="18"
                data-component="body" hidden>
     <br>
 
@@ -4130,19 +4161,19 @@ fetch(url, {
     "http:https://topart.services/api/v1/updatePart" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "part_id=ea" \
-    --form "name=grpcbjjwpqmifyguafussxhlikerdbqncdounlcbmgpwrpoheuakbhmkxabweujkfcyuejccgjcjaomuztvgambfswlidqqaqyalmljsauscxplyboagzmddzfxkz" \
-    --form "name_ar=yzyfygvwmdsemyqziweqezdlpvpggyhdyndarloinljnwv" \
-    --form "desc=cyykvmrevpmsclardqjeanrpgwaaigesvvnxkzrkhdrwaojntpoqazghokmzkdpagumj" \
-    --form "desc_ar=wydbycexzkciyxmjogydeycspchsuvspjocqwkwliqqjtouloxssdajipgpfoqiipbriyfdfcmxn" \
-    --form "part_number=ipsam" \
-    --form "price=497729" \
-    --form "in_stock=370917" \
-    --form "CarMaker_id=6" \
-    --form "CarModel_id=11" \
-    --form "CarYear_id=17" \
+    --form "part_id=ullam" \
+    --form "name=eukmjjgkwcdfowargpjcodwdnnorowgqynrbmpkchkgfewjeghbwqwvxjjotdrkjolmlktanwduejtnoblrkiiwgscfjzjfjlbjbafowqanjiyyfsletddfudjmfjlyjnmkeaayju" \
+    --form "name_ar=wcwwympnmlamniclnxlqofxejodcieezvhbidhpyhecjavgrunhuevbfbfcgqjnmgyeuwltloatbuwhoyhyjbetlrdllcjmhmsdkywpupjebssjtcczxpfcdhxbapvqyojghiukgdradjgxrrvrjwdbpexcczqcjfywnyotrlsbzzwgspxrclzvkxcioxzepkrxnhddfpohkyfjhpdemelxbnpobsjnzwzs" \
+    --form "desc=bfueymfdnqwcguppyiaorbayfvphihkezozhqmrfnjcqxratuboijqzkiynwqzhsqdbmxxtpljjacksqphiweetovcmcmaktjiexcadyvfwuhfpwbmdovnpcmsxcabastwpmiamfsdisrcxdznodpevwubipmpjxdinmgkshdmafcblgcahanrbtvodgbozzuiibuwavsyaqhknbljzchalzrlfvjwlp" \
+    --form "desc_ar=bmdrtjeaijxiohpeqlkwookkoiqrnlkfdslwxtflmynhpmocfph" \
+    --form "part_number=dolore" \
+    --form "price=181351" \
+    --form "in_stock=296999" \
+    --form "CarMaker_id=5" \
+    --form "CarModel_id=6" \
+    --form "CarYear_id=6" \
     --form "CarCapacity_id=12" \
-    --form "part_img_new[]=@C:\Users\Eslam\AppData\Local\Temp\phpEAC7.tmp" </code></pre></div>
+    --form "part_img_new[]=@C:\Users\Eslam\AppData\Local\Temp\php9226.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -4156,17 +4187,17 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('part_id', 'ea');
-body.append('name', 'grpcbjjwpqmifyguafussxhlikerdbqncdounlcbmgpwrpoheuakbhmkxabweujkfcyuejccgjcjaomuztvgambfswlidqqaqyalmljsauscxplyboagzmddzfxkz');
-body.append('name_ar', 'yzyfygvwmdsemyqziweqezdlpvpggyhdyndarloinljnwv');
-body.append('desc', 'cyykvmrevpmsclardqjeanrpgwaaigesvvnxkzrkhdrwaojntpoqazghokmzkdpagumj');
-body.append('desc_ar', 'wydbycexzkciyxmjogydeycspchsuvspjocqwkwliqqjtouloxssdajipgpfoqiipbriyfdfcmxn');
-body.append('part_number', 'ipsam');
-body.append('price', '497729');
-body.append('in_stock', '370917');
-body.append('CarMaker_id', '6');
-body.append('CarModel_id', '11');
-body.append('CarYear_id', '17');
+body.append('part_id', 'ullam');
+body.append('name', 'eukmjjgkwcdfowargpjcodwdnnorowgqynrbmpkchkgfewjeghbwqwvxjjotdrkjolmlktanwduejtnoblrkiiwgscfjzjfjlbjbafowqanjiyyfsletddfudjmfjlyjnmkeaayju');
+body.append('name_ar', 'wcwwympnmlamniclnxlqofxejodcieezvhbidhpyhecjavgrunhuevbfbfcgqjnmgyeuwltloatbuwhoyhyjbetlrdllcjmhmsdkywpupjebssjtcczxpfcdhxbapvqyojghiukgdradjgxrrvrjwdbpexcczqcjfywnyotrlsbzzwgspxrclzvkxcioxzepkrxnhddfpohkyfjhpdemelxbnpobsjnzwzs');
+body.append('desc', 'bfueymfdnqwcguppyiaorbayfvphihkezozhqmrfnjcqxratuboijqzkiynwqzhsqdbmxxtpljjacksqphiweetovcmcmaktjiexcadyvfwuhfpwbmdovnpcmsxcabastwpmiamfsdisrcxdznodpevwubipmpjxdinmgkshdmafcblgcahanrbtvodgbozzuiibuwavsyaqhknbljzchalzrlfvjwlp');
+body.append('desc_ar', 'bmdrtjeaijxiohpeqlkwookkoiqrnlkfdslwxtflmynhpmocfph');
+body.append('part_number', 'dolore');
+body.append('price', '181351');
+body.append('in_stock', '296999');
+body.append('CarMaker_id', '5');
+body.append('CarModel_id', '6');
+body.append('CarYear_id', '6');
 body.append('CarCapacity_id', '12');
 body.append('part_img_new[]', document.querySelector('input[name="part_img_new[]"]').files[0]);
 
@@ -4225,7 +4256,7 @@ fetch(url, {
                 <input type="text"
                name="part_id"
                data-endpoint="POSTapi-v1-updatePart"
-               value="ea"
+               value="ullam"
                data-component="body" hidden>
     <br>
 
@@ -4235,7 +4266,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-v1-updatePart"
-               value="grpcbjjwpqmifyguafussxhlikerdbqncdounlcbmgpwrpoheuakbhmkxabweujkfcyuejccgjcjaomuztvgambfswlidqqaqyalmljsauscxplyboagzmddzfxkz"
+               value="eukmjjgkwcdfowargpjcodwdnnorowgqynrbmpkchkgfewjeghbwqwvxjjotdrkjolmlktanwduejtnoblrkiiwgscfjzjfjlbjbafowqanjiyyfsletddfudjmfjlyjnmkeaayju"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
@@ -4245,7 +4276,7 @@ fetch(url, {
                 <input type="text"
                name="name_ar"
                data-endpoint="POSTapi-v1-updatePart"
-               value="yzyfygvwmdsemyqziweqezdlpvpggyhdyndarloinljnwv"
+               value="wcwwympnmlamniclnxlqofxejodcieezvhbidhpyhecjavgrunhuevbfbfcgqjnmgyeuwltloatbuwhoyhyjbetlrdllcjmhmsdkywpupjebssjtcczxpfcdhxbapvqyojghiukgdradjgxrrvrjwdbpexcczqcjfywnyotrlsbzzwgspxrclzvkxcioxzepkrxnhddfpohkyfjhpdemelxbnpobsjnzwzs"
                data-component="body" hidden>
     <br>
 <p>Must be at least 4 characters. Must not be greater than 255 characters.</p>
@@ -4255,7 +4286,7 @@ fetch(url, {
                 <input type="text"
                name="desc"
                data-endpoint="POSTapi-v1-updatePart"
-               value="cyykvmrevpmsclardqjeanrpgwaaigesvvnxkzrkhdrwaojntpoqazghokmzkdpagumj"
+               value="bfueymfdnqwcguppyiaorbayfvphihkezozhqmrfnjcqxratuboijqzkiynwqzhsqdbmxxtpljjacksqphiweetovcmcmaktjiexcadyvfwuhfpwbmdovnpcmsxcabastwpmiamfsdisrcxdznodpevwubipmpjxdinmgkshdmafcblgcahanrbtvodgbozzuiibuwavsyaqhknbljzchalzrlfvjwlp"
                data-component="body" hidden>
     <br>
 <p>Must be at least 10 characters. Must not be greater than 255 characters.</p>
@@ -4265,7 +4296,7 @@ fetch(url, {
                 <input type="text"
                name="desc_ar"
                data-endpoint="POSTapi-v1-updatePart"
-               value="wydbycexzkciyxmjogydeycspchsuvspjocqwkwliqqjtouloxssdajipgpfoqiipbriyfdfcmxn"
+               value="bmdrtjeaijxiohpeqlkwookkoiqrnlkfdslwxtflmynhpmocfph"
                data-component="body" hidden>
     <br>
 <p>Must be at least 10 characters. Must not be greater than 255 characters.</p>
@@ -4275,7 +4306,7 @@ fetch(url, {
                 <input type="text"
                name="part_number"
                data-endpoint="POSTapi-v1-updatePart"
-               value="ipsam"
+               value="dolore"
                data-component="body" hidden>
     <br>
 
@@ -4285,7 +4316,7 @@ fetch(url, {
                 <input type="number"
                name="price"
                data-endpoint="POSTapi-v1-updatePart"
-               value="497729"
+               value="181351"
                data-component="body" hidden>
     <br>
 <p>Must be at least 1. Must not be greater than 1000000.</p>
@@ -4295,7 +4326,7 @@ fetch(url, {
                 <input type="number"
                name="in_stock"
                data-endpoint="POSTapi-v1-updatePart"
-               value="370917"
+               value="296999"
                data-component="body" hidden>
     <br>
 <p>Must be at least 0. Must not be greater than 1000000.</p>
@@ -4305,7 +4336,7 @@ fetch(url, {
                 <input type="number"
                name="CarMaker_id"
                data-endpoint="POSTapi-v1-updatePart"
-               value="6"
+               value="5"
                data-component="body" hidden>
     <br>
 
@@ -4315,7 +4346,7 @@ fetch(url, {
                 <input type="number"
                name="CarModel_id"
                data-endpoint="POSTapi-v1-updatePart"
-               value="11"
+               value="6"
                data-component="body" hidden>
     <br>
 
@@ -4325,7 +4356,7 @@ fetch(url, {
                 <input type="number"
                name="CarYear_id"
                data-endpoint="POSTapi-v1-updatePart"
-               value="17"
+               value="6"
                data-component="body" hidden>
     <br>
 
@@ -4477,7 +4508,7 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"part_id\": \"qui\"
+    \"part_id\": \"rerum\"
 }"
 </code></pre></div>
 
@@ -4493,7 +4524,7 @@ const headers = {
 };
 
 let body = {
-    "part_id": "qui"
+    "part_id": "rerum"
 };
 
 fetch(url, {
@@ -4551,7 +4582,7 @@ fetch(url, {
                 <input type="text"
                name="part_id"
                data-endpoint="POSTapi-v1-deletePart"
-               value="qui"
+               value="rerum"
                data-component="body" hidden>
     <br>
 
@@ -4575,10 +4606,10 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"part_id\": \"illo\",
-    \"title\": \"hcobokmryvaczdchbokyydrqvjywitfxxevscwxlysgwvpvlwcwombplgfvhpxqlrqxdbc\",
-    \"review\": \"mhhktzsaocexykoyazybyztsohxwmciqwdxtgktgyspoxdegkrsxbvhlwhydqhmoctrlnleknjklreskhvtadqa\",
-    \"rating\": \"4\"
+    \"part_id\": \"quaerat\",
+    \"title\": \"yymeslzjmdpmjugmlvnndnlwiiwnhdrhyyptqodtqpqpjibrcldessddwuaycrxtpvangwncjbbnubglaisdflicrytwv\",
+    \"review\": \"bxkkhrgpbfoadcorombkjjxyzukddofofqzsbjlmkbpkislomidcdfylsvxbibgwqkpqqhxedqxidghvqvfvkdyfcbfjkbdhoghvsrjgfsxjkyhpwynnnjpifdkghqtevqhyxluubkiqs\",
+    \"rating\": \"5\"
 }"
 </code></pre></div>
 
@@ -4594,10 +4625,10 @@ const headers = {
 };
 
 let body = {
-    "part_id": "illo",
-    "title": "hcobokmryvaczdchbokyydrqvjywitfxxevscwxlysgwvpvlwcwombplgfvhpxqlrqxdbc",
-    "review": "mhhktzsaocexykoyazybyztsohxwmciqwdxtgktgyspoxdegkrsxbvhlwhydqhmoctrlnleknjklreskhvtadqa",
-    "rating": "4"
+    "part_id": "quaerat",
+    "title": "yymeslzjmdpmjugmlvnndnlwiiwnhdrhyyptqodtqpqpjibrcldessddwuaycrxtpvangwncjbbnubglaisdflicrytwv",
+    "review": "bxkkhrgpbfoadcorombkjjxyzukddofofqzsbjlmkbpkislomidcdfylsvxbibgwqkpqqhxedqxidghvqvfvkdyfcbfjkbdhoghvsrjgfsxjkyhpwynnnjpifdkghqtevqhyxluubkiqs",
+    "rating": "5"
 };
 
 fetch(url, {
@@ -4655,7 +4686,7 @@ fetch(url, {
                 <input type="text"
                name="part_id"
                data-endpoint="POSTapi-v1-ratePart"
-               value="illo"
+               value="quaerat"
                data-component="body" hidden>
     <br>
 
@@ -4665,7 +4696,7 @@ fetch(url, {
                 <input type="text"
                name="title"
                data-endpoint="POSTapi-v1-ratePart"
-               value="hcobokmryvaczdchbokyydrqvjywitfxxevscwxlysgwvpvlwcwombplgfvhpxqlrqxdbc"
+               value="yymeslzjmdpmjugmlvnndnlwiiwnhdrhyyptqodtqpqpjibrcldessddwuaycrxtpvangwncjbbnubglaisdflicrytwv"
                data-component="body" hidden>
     <br>
 <p>Must be at least 3 characters. Must not be greater than 100 characters.</p>
@@ -4675,7 +4706,7 @@ fetch(url, {
                 <input type="text"
                name="review"
                data-endpoint="POSTapi-v1-ratePart"
-               value="mhhktzsaocexykoyazybyztsohxwmciqwdxtgktgyspoxdegkrsxbvhlwhydqhmoctrlnleknjklreskhvtadqa"
+               value="bxkkhrgpbfoadcorombkjjxyzukddofofqzsbjlmkbpkislomidcdfylsvxbibgwqkpqqhxedqxidghvqvfvkdyfcbfjkbdhoghvsrjgfsxjkyhpwynnnjpifdkghqtevqhyxluubkiqs"
                data-component="body" hidden>
     <br>
 <p>Must be at least 3 characters. Must not be greater than 255 characters.</p>
@@ -4685,7 +4716,7 @@ fetch(url, {
                 <input type="text"
                name="rating"
                data-endpoint="POSTapi-v1-ratePart"
-               value="4"
+               value="5"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.</p>
@@ -4709,9 +4740,9 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"seller_id\": \"qui\",
-    \"review\": \"djtsvtxoarthsttkwdkhbbepbgzycivqczeqcdatkhdgjhlodndfifdcfzqowutboldgmcpoqzvykucjwjpavtwilzbpbntjoztwqzemysggotkdgrjfjmjmgljzjcuhxmajgadzszenkffzguibnlhigcvfcgqhrnkrmdlsvawnfudqbctvsdoztrbcoeuhfgvswyhjitw\",
-    \"rating\": \"2\"
+    \"seller_id\": \"at\",
+    \"review\": \"eqnwktvtgojdqeyyfcxehknaeeutwnvmhbgxqtniukyosimibjlcrjaivzooiyxxvovoreybzfvumozdhtgsfnhxpqzhqvselmecvfupuyknvdctvkhfcommcnymukvmjivrlmaitdawzfnijkftnkpamzxrcgpnuimceaoicxbcxzeujurfvakmjjtxtexxwyapmoqzncyzqpcrbdvliytzoikxbilfidkwsdwgvjlelolxpnckfmdvwpzpxuy\",
+    \"rating\": \"4\"
 }"
 </code></pre></div>
 
@@ -4727,9 +4758,9 @@ const headers = {
 };
 
 let body = {
-    "seller_id": "qui",
-    "review": "djtsvtxoarthsttkwdkhbbepbgzycivqczeqcdatkhdgjhlodndfifdcfzqowutboldgmcpoqzvykucjwjpavtwilzbpbntjoztwqzemysggotkdgrjfjmjmgljzjcuhxmajgadzszenkffzguibnlhigcvfcgqhrnkrmdlsvawnfudqbctvsdoztrbcoeuhfgvswyhjitw",
-    "rating": "2"
+    "seller_id": "at",
+    "review": "eqnwktvtgojdqeyyfcxehknaeeutwnvmhbgxqtniukyosimibjlcrjaivzooiyxxvovoreybzfvumozdhtgsfnhxpqzhqvselmecvfupuyknvdctvkhfcommcnymukvmjivrlmaitdawzfnijkftnkpamzxrcgpnuimceaoicxbcxzeujurfvakmjjtxtexxwyapmoqzncyzqpcrbdvliytzoikxbilfidkwsdwgvjlelolxpnckfmdvwpzpxuy",
+    "rating": "4"
 };
 
 fetch(url, {
@@ -4787,7 +4818,7 @@ fetch(url, {
                 <input type="text"
                name="seller_id"
                data-endpoint="POSTapi-v1-rateSeller"
-               value="qui"
+               value="at"
                data-component="body" hidden>
     <br>
 
@@ -4797,7 +4828,7 @@ fetch(url, {
                 <input type="text"
                name="review"
                data-endpoint="POSTapi-v1-rateSeller"
-               value="djtsvtxoarthsttkwdkhbbepbgzycivqczeqcdatkhdgjhlodndfifdcfzqowutboldgmcpoqzvykucjwjpavtwilzbpbntjoztwqzemysggotkdgrjfjmjmgljzjcuhxmajgadzszenkffzguibnlhigcvfcgqhrnkrmdlsvawnfudqbctvsdoztrbcoeuhfgvswyhjitw"
+               value="eqnwktvtgojdqeyyfcxehknaeeutwnvmhbgxqtniukyosimibjlcrjaivzooiyxxvovoreybzfvumozdhtgsfnhxpqzhqvselmecvfupuyknvdctvkhfcommcnymukvmjivrlmaitdawzfnijkftnkpamzxrcgpnuimceaoicxbcxzeujurfvakmjjtxtexxwyapmoqzncyzqpcrbdvliytzoikxbilfidkwsdwgvjlelolxpnckfmdvwpzpxuy"
                data-component="body" hidden>
     <br>
 <p>Must be at least 3 characters. Must not be greater than 255 characters.</p>
@@ -4807,7 +4838,7 @@ fetch(url, {
                 <input type="text"
                name="rating"
                data-endpoint="POSTapi-v1-rateSeller"
-               value="2"
+               value="4"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.</p>
@@ -4831,7 +4862,7 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"seller_id\": \"assumenda\"
+    \"seller_id\": \"distinctio\"
 }"
 </code></pre></div>
 
@@ -4847,7 +4878,7 @@ const headers = {
 };
 
 let body = {
-    "seller_id": "assumenda"
+    "seller_id": "distinctio"
 };
 
 fetch(url, {
@@ -4908,7 +4939,7 @@ access-control-allow-origin: *
     },
     &quot;additional_parameters&quot;: {
         &quot;success&quot;: true,
-        &quot;msg&quot;: &quot;Part ID assumenda reviews&quot;
+        &quot;msg&quot;: &quot;Part ID distinctio reviews&quot;
     }
 }</code>
  </pre>
@@ -4958,7 +4989,7 @@ access-control-allow-origin: *
                 <input type="text"
                name="seller_id"
                data-endpoint="GETapi-v1-SellerReviews"
-               value="assumenda"
+               value="distinctio"
                data-component="body" hidden>
     <br>
 
@@ -4982,7 +5013,7 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"part_id\": \"et\"
+    \"part_id\": \"dolorum\"
 }"
 </code></pre></div>
 
@@ -4998,7 +5029,7 @@ const headers = {
 };
 
 let body = {
-    "part_id": "et"
+    "part_id": "dolorum"
 };
 
 fetch(url, {
@@ -5059,7 +5090,7 @@ access-control-allow-origin: *
     },
     &quot;additional_parameters&quot;: {
         &quot;success&quot;: true,
-        &quot;msg&quot;: &quot;Part ID et reviews&quot;
+        &quot;msg&quot;: &quot;Part ID dolorum reviews&quot;
     }
 }</code>
  </pre>
@@ -5109,16 +5140,942 @@ access-control-allow-origin: *
                 <input type="text"
                name="part_id"
                data-endpoint="GETapi-v1-PartReviews"
-               value="et"
+               value="dolorum"
                data-component="body" hidden>
     <br>
 
         </p>
         </form>
 
+            <h2 id="endpoints-POSTapi-v1-seenMessage">Make messages as seen</h2>
+
+<p>
+</p>
 
 
 
+<span id="example-requests-POSTapi-v1-seenMessage">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/seenMessage" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/seenMessage"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-seenMessage">
+</span>
+<span id="execution-results-POSTapi-v1-seenMessage" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-seenMessage"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-seenMessage"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-seenMessage" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-seenMessage"></code></pre>
+</span>
+<form id="form-POSTapi-v1-seenMessage" data-method="POST"
+      data-path="api/v1/seenMessage"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-seenMessage', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-seenMessage"
+                    onclick="tryItOut('POSTapi-v1-seenMessage');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-seenMessage"
+                    onclick="cancelTryOut('POSTapi-v1-seenMessage');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-seenMessage" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/seenMessage</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-getFavorites">Get favorites list</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-getFavorites">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/getFavorites" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/getFavorites"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-getFavorites">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-getFavorites" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-getFavorites"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-getFavorites"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-getFavorites" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-getFavorites"></code></pre>
+</span>
+<form id="form-GETapi-v1-getFavorites" data-method="GET"
+      data-path="api/v1/getFavorites"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-getFavorites', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-getFavorites"
+                    onclick="tryItOut('GETapi-v1-getFavorites');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-getFavorites"
+                    onclick="cancelTryOut('GETapi-v1-getFavorites');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-getFavorites" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/getFavorites</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-addfavorite">Put a user in the favorites list</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-addfavorite">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/addfavorite" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/addfavorite"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-addfavorite">
+</span>
+<span id="execution-results-POSTapi-v1-addfavorite" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-addfavorite"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-addfavorite"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-addfavorite" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-addfavorite"></code></pre>
+</span>
+<form id="form-POSTapi-v1-addfavorite" data-method="POST"
+      data-path="api/v1/addfavorite"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-addfavorite', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-addfavorite"
+                    onclick="tryItOut('POSTapi-v1-addfavorite');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-addfavorite"
+                    onclick="cancelTryOut('POSTapi-v1-addfavorite');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-addfavorite" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/addfavorite</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-deleteConversation">Delete conversation</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-deleteConversation">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/deleteConversation" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/deleteConversation"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-deleteConversation">
+</span>
+<span id="execution-results-POSTapi-v1-deleteConversation" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-deleteConversation"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-deleteConversation"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-deleteConversation" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-deleteConversation"></code></pre>
+</span>
+<form id="form-POSTapi-v1-deleteConversation" data-method="POST"
+      data-path="api/v1/deleteConversation"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-deleteConversation', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-deleteConversation"
+                    onclick="tryItOut('POSTapi-v1-deleteConversation');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-deleteConversation"
+                    onclick="cancelTryOut('POSTapi-v1-deleteConversation');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-deleteConversation" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/deleteConversation</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-activeStatus">Set user&#039;s active status</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-activeStatus">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/activeStatus" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/activeStatus"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-activeStatus">
+</span>
+<span id="execution-results-POSTapi-v1-activeStatus" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-activeStatus"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-activeStatus"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-activeStatus" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-activeStatus"></code></pre>
+</span>
+<form id="form-POSTapi-v1-activeStatus" data-method="POST"
+      data-path="api/v1/activeStatus"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-activeStatus', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-activeStatus"
+                    onclick="tryItOut('POSTapi-v1-activeStatus');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-activeStatus"
+                    onclick="cancelTryOut('POSTapi-v1-activeStatus');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-activeStatus" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/activeStatus</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-fetchMessages">fetch [user/group] messages from database</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-fetchMessages">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/fetchMessages" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/fetchMessages"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-fetchMessages">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-fetchMessages" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-fetchMessages"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-fetchMessages"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-fetchMessages" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-fetchMessages"></code></pre>
+</span>
+<form id="form-GETapi-v1-fetchMessages" data-method="GET"
+      data-path="api/v1/fetchMessages"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-fetchMessages', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-fetchMessages"
+                    onclick="tryItOut('GETapi-v1-fetchMessages');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-fetchMessages"
+                    onclick="cancelTryOut('GETapi-v1-fetchMessages');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-fetchMessages" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/fetchMessages</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-getContacts">Get contacts list</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-getContacts">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/getContacts" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/getContacts"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-getContacts">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-getContacts" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-getContacts"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-getContacts"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-getContacts" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-getContacts"></code></pre>
+</span>
+<form id="form-GETapi-v1-getContacts" data-method="GET"
+      data-path="api/v1/getContacts"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-getContacts', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-getContacts"
+                    onclick="tryItOut('GETapi-v1-getContacts');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-getContacts"
+                    onclick="cancelTryOut('GETapi-v1-getContacts');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-getContacts" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/getContacts</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-sendMessage">Send a message to database</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-sendMessage">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/sendMessage" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/sendMessage"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-sendMessage">
+</span>
+<span id="execution-results-POSTapi-v1-sendMessage" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-sendMessage"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-sendMessage"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-sendMessage" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-sendMessage"></code></pre>
+</span>
+<form id="form-POSTapi-v1-sendMessage" data-method="POST"
+      data-path="api/v1/sendMessage"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-sendMessage', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-sendMessage"
+                    onclick="tryItOut('POSTapi-v1-sendMessage');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-sendMessage"
+                    onclick="cancelTryOut('POSTapi-v1-sendMessage');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-sendMessage" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/sendMessage</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-GETapi-v1-FetchData">Fetch data by id for (user/group)</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-FetchData">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http:https://topart.services/api/v1/FetchData" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/FetchData"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-FetchData">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-FetchData" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-FetchData"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-FetchData"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-FetchData" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-FetchData"></code></pre>
+</span>
+<form id="form-GETapi-v1-FetchData" data-method="GET"
+      data-path="api/v1/FetchData"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-FetchData', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-FetchData"
+                    onclick="tryItOut('GETapi-v1-FetchData');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-FetchData"
+                    onclick="cancelTryOut('GETapi-v1-FetchData');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-FetchData" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/FetchData</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-chatAuth">Authinticate the connection for pusher</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-chatAuth">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/chatAuth" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/chatAuth"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-chatAuth">
+</span>
+<span id="execution-results-POSTapi-v1-chatAuth" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-chatAuth"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-chatAuth"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-chatAuth" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-chatAuth"></code></pre>
+</span>
+<form id="form-POSTapi-v1-chatAuth" data-method="POST"
+      data-path="api/v1/chatAuth"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-chatAuth', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-chatAuth"
+                    onclick="tryItOut('POSTapi-v1-chatAuth');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-chatAuth"
+                    onclick="cancelTryOut('POSTapi-v1-chatAuth');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-chatAuth" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/chatAuth</code></b>
+        </p>
+                    </form>
+
+            <h2 id="endpoints-POSTapi-v1-searchChat">Search in messenger</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-searchChat">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http:https://topart.services/api/v1/searchChat" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http:https://topart.services/api/v1/searchChat"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-searchChat">
+</span>
+<span id="execution-results-POSTapi-v1-searchChat" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-searchChat"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-searchChat"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-searchChat" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-searchChat"></code></pre>
+</span>
+<form id="form-POSTapi-v1-searchChat" data-method="POST"
+      data-path="api/v1/searchChat"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-searchChat', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-searchChat"
+                    onclick="tryItOut('POSTapi-v1-searchChat');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-searchChat"
+                    onclick="cancelTryOut('POSTapi-v1-searchChat');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-searchChat" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/searchChat</code></b>
+        </p>
+                    </form>
+
+    
+
+        
     </div>
     <div class="dark-box">
                     <div class="lang-selector">

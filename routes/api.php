@@ -47,9 +47,9 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             // Seller Panel
             Route::get('/allSellers',[SellerAccountController::class,'index']);
             Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
-            Route::get('/getAuth', function () {
-                return auth()->user();
-            });
+            // Route::get('/getAuth', function () {
+            //     return auth()->user();
+            // });
             // Seller Dashboard
             Route::post('/addCarType',[SellerController::class,'addCarType']);
             Route::post('/addYear',[SellerController::class,'addYear']);
