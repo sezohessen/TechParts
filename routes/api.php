@@ -47,9 +47,9 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             // Seller Panel
             Route::get('/allSellers',[SellerAccountController::class,'index']);
             Route::post('/updateSeller',[SellerAccountController::class,'saveSellerInfo']);
-            // Route::get('/getAuth', function () {
-            //     return auth()->user();
-            // });
+            Route::get('/getAuth', function () {
+                return auth()->user();
+            });
             // Seller Dashboard
             Route::post('/addCarType',[SellerController::class,'addCarType']);
             Route::post('/addYear',[SellerController::class,'addYear']);
@@ -67,9 +67,16 @@ use App\Http\Controllers\Api\ToPartUsersController AS SearchForUser;
             Route::post('/deleteFav',[FavController::class,'deleteFav']);
             // Chat
             Route::post('/chatAuth',[MessagesController::class,'pusherAuth']);
-            Route::post('/FetchData',[MessagesController::class,'idFetchData']);
-            Route::post('/downloadImages',[MessagesController::class,'download']);
+            Route::get('/FetchData',[MessagesController::class,'idFetchData']);
+            Route::post('/activeStatus',[MessagesController::class,'setActiveStatus']);
             Route::post('/sendMessage',[MessagesController::class,'send']);
+            Route::get('/getContacts',[MessagesController::class,'getContacts']);
+            Route::get('/fetchMessages',[MessagesController::class,'fetch']);
+            Route::post('/seenMessage',[MessagesController::class,'seen']);
+            Route::post('/deleteConversation',[MessagesController::class,'deleteConversation']);
+            Route::post('/addfavorite',[MessagesController::class,'favorite']);
+            Route::get('/getFavorites',[MessagesController::class,'getFavorites']);
+            Route::post('/searchChat',[MessagesController::class,'search']);
 
 
             // Route::post('/sendMessage',[ChatController::class,'sendMessage']);

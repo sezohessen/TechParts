@@ -17,4 +17,14 @@ class ChMessage extends Model
         'attachment',
         'seen',
     ];
+
+    public function FromUser()
+    {
+        return $this->belongsTo(User::class,"from_id","id");
+    }
+
+    public function ToUser()
+    {
+        return $this->belongsTo(User::class,"to_id","id");
+    }
 }
